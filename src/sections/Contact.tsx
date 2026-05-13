@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import './Contact.css';
+import logoFull from '../assets/logo-full.svg';
 
 type FormState = {
   name: string;
@@ -87,7 +88,7 @@ export default function Contact() {
           </dl>
 
           <div className="contact__signature">
-            <img src="/logo-full.png" alt="Reese Roofing — Commercial & Residential" />
+            <img src={ logoFull } alt="Reese Roofing — Commercial & Residential" />
           </div>
         </div>
 

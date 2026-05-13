@@ -1,4 +1,5 @@
 import './Hero.css';
+import logoFull from '../assets/logo-full.svg';
 
 export default function Hero() {
   return (
@@ -28,10 +29,8 @@ export default function Hero() {
 
           <div className="hero__logo">
             <img
-              src="/logo-full.png"
+              src={logoFull}
               alt="Reese Roofing — Commercial & Residential"
-              width="500"
-              height="515"
             />
           </div>
         </div>

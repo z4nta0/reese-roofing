@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import './Nav.css';
+import logoMark from '../assets/logo-mark.svg';
 
 const links = [
   { href: '#services', label: 'Services' },
@@ -22,7 +23,7 @@ export default function Nav() {
     <header className={`nav ${scrolled ? 'nav--scrolled' : ''}`}>
       <div className="nav__inner container">
         <a href="#top" className="nav__brand" aria-label="Reese Roofing, home">
-          <img src="/logo-mark.png" alt="" className="nav__mark" width="40" height="36" />
+          <img src={ logoMark } alt="" className="nav__mark" width="40" height="36" />
           <span className="nav__name">
             Reese <span className="nav__name-light">Roofing</span>
           </span>

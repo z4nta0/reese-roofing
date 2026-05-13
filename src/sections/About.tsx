@@ -1,4 +1,5 @@
 import './About.css';
+import logoFull from '../assets/logo-full.svg';
 
 const principles = [
   {
@@ -31,7 +32,7 @@ export default function About() {
             the work.
           </h2>
           <div className="about__seal" aria-hidden="true">
-            <img src="/logo-full.png" alt="" />
+            <img src={ logoFull } alt="" />
           </div>
         </div>
 

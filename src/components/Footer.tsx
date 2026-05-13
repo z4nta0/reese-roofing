@@ -1,4 +1,5 @@
 import './Footer.css';
+import logoMark from '../assets/logo-mark.svg';
 
 export default function Footer() {
   const year = new Date().getFullYear();
@@ -7,7 +8,7 @@ export default function Footer() {
       <div className="container footer__inner">
         <div className="footer__brand">
           <span className="footer__mark">
-            <img src="/logo-mark.png" alt="" width="28" height="26" />
+            <img src={ logoMark } alt="" width="28" height="26" />
           </span>
           <span className="footer__name">
             Reese <span>Roofing</span>
