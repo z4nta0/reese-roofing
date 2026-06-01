@@ -55,7 +55,7 @@ export default function Contact() {
             <div className="contact__row">
               <dt>Office</dt>
               <dd>
-                Reese Roofing<br />
+                Seal and Shield LLC<br />
                 Lawrence, Kansas 66044
               </dd>
             </div>
@@ -68,7 +68,7 @@ export default function Contact() {
             <div className="contact__row">
               <dt>Email</dt>
               <dd>
-                <a href="mailto:hello@reeseroofing.example">hello@reeseroofing.example</a>
+                <a href="mailto:hello@reeseroofing.example">hello@sealandshield.example</a>
               </dd>
             </div>
             <div className="contact__row">

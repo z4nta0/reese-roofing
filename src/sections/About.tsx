@@ -38,7 +38,7 @@ export default function About() {
 
         <div className="about__right">
           <p className="about__para about__para--lead">
-            Reese Roofing was founded on a simple idea: commercial roofing should be a
+            Seal and Shield LLC was founded on a simple idea: commercial roofing should be a
             straightforward business. A clear scope, a fair price, a roof installed by
             people who care whether it holds up.
           </p>
@@ -61,7 +61,7 @@ export default function About() {
               The roof above your operation is not the place to cut corners — and
               it&apos;s not the place to overspend. Our job is to find the line.
             </p>
-            <footer>— The Reese family</footer>
+            <footer>— The S&S family</footer>
           </blockquote>
         </div>
       </div>

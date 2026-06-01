@@ -25,7 +25,7 @@ export default function Nav() {
         <a href="#top" className="nav__brand" aria-label="Reese Roofing, home">
           <img src={ logoMark } alt="" className="nav__mark" width="40" height="36" />
           <span className="nav__name">
-            Reese <span className="nav__name-light">Roofing</span>
+            Seal <span className="nav__name-light">and</span> Shield
           </span>
         </a>
 

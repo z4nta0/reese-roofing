@@ -11,11 +11,11 @@ export default function Footer() {
             <img src={ logoMark } alt="" width="28" height="26" />
           </span>
           <span className="footer__name">
-            Reese <span>Roofing</span>
+            Seal <span>and</span> Shield
           </span>
         </div>
         <div className="footer__meta">
-          <span>© {year} Reese Roofing, LLC</span>
+          <span>© {year} Seal and Shield, LLC</span>
           <span>Licensed & insured · Lawrence, KS</span>
         </div>
         <a href="#top" className="footer__top" aria-label="Back to top">

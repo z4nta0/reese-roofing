@@ -37,7 +37,7 @@ export default function Hero() {
 
         <div className="hero__bottom">
           <p className="lede hero__lede">
-            Reese Roofing serves businesses, property managers, and homeowners across
+            Seal and Shield LLC serves businesses, property managers, and homeowners across
             Lawrence and the surrounding region — delivering installations and repairs
             that hold up to Kansas wind, sun, and storm.
           </p>
