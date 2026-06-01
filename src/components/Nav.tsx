@@ -42,7 +42,7 @@ export default function Nav() {
             (785) 555-0199
           </a>
           <a href="#contact" className="btn btn-primary nav__btn">
-            Get an estimate
+            Get a FREE estimate
             <span className="arrow">→</span>
           </a>
         </div>

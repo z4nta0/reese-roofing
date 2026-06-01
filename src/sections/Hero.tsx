@@ -18,10 +18,10 @@ export default function Hero() {
       <div className="container hero__inner">
         <div className="hero__top">
           <div className="hero__copy">
-            <span className="eyebrow">Lawrence, Kansas — Est. 2008</span>
+            <span className="eyebrow">Lawrence, Kansas — Est. 2024</span>
 
             <h1 className="display hero__title">
-              Commercial roofing,<br />
+              Roofing,<br />
               built to <em>weather</em><br />
               every season.
             </h1>
@@ -38,13 +38,13 @@ export default function Hero() {
         <div className="hero__bottom">
           <p className="lede hero__lede">
             Seal and Shield LLC serves businesses, property managers, and homeowners across
-            Lawrence and the surrounding region — delivering installations and repairs
-            that hold up to Kansas wind, sun, and storm.
+            Lawrence, Topeka, Kansas City, and the entire surrounding region — delivering installations and repairs
+            that hold up to wind, sun, and storm.
           </p>
 
           <div className="hero__actions">
             <a href="#contact" className="btn btn-primary">
-              Request an estimate
+              Request a FREE estimate
               <span className="arrow">→</span>
             </a>
             <a href="#services" className="btn btn-ghost">
@@ -55,12 +55,12 @@ export default function Hero() {
 
         <div className="hero__stats">
           <div className="stat">
-            <div className="stat__num display">17+</div>
-            <div className="stat__label">Years serving Douglas County</div>
+            <div className="stat__num display">2+</div>
+            <div className="stat__label">Years serving Kansas and Missouri</div>
           </div>
           <div className="stat">
-            <div className="stat__num display">400<span>+</span></div>
-            <div className="stat__label">Commercial roofs completed</div>
+            <div className="stat__num display">100<span>+</span></div>
+            <div className="stat__label">Commercial and residential roofs completed</div>
           </div>
           <div className="stat">
             <div className="stat__num display">24<span>/7</span></div>
