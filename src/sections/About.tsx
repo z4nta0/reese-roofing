@@ -49,6 +49,21 @@ export default function About() {
             we said we would and stood behind the work after the crew packed up.
           </p>
           <p className="about__para">
+            We offer fee roof inspections and free quotes. If you have a roof that is 
+            leaking, and does not need a full replacement, we will come out and take
+            a look to see what needs fixing.
+          </p>
+          <p className="about__para">
+            We focus mostly on Conklin roofing liquid coatings for repairs and restoration, 
+            but we also do TPO and EPDM. If you have a project in mind, we can help you 
+            figure out the best solution for your building and budget.
+          </p>
+          <p className="about__para">
+            While we mostly serve the Kansas and Missouri areas, we don't have a hard radius.
+            If you've got a project anywhere in the United States and need a roof you 
+            can trust to weather the next storm, let's talk.
+          </p>
+          <p className="about__para">
             We're licensed, fully insured, and manufacturer-certified on the systems we
             install. But the most important credential we carry is the trust of the
             businesses and people we've roofed.
