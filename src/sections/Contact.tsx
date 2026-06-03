@@ -62,7 +62,7 @@ export default function Contact() {
             <div className="contact__row">
               <dt>Phone</dt>
               <dd>
-                <a href="tel:+17855550199">(785) 555-0199</a>
+                <a href="tel:+17855550199">(785) 304-1957</a>
               </dd>
             </div>
             <div className="contact__row">
@@ -74,7 +74,7 @@ export default function Contact() {
             <div className="contact__row">
               <dt>Hours</dt>
               <dd>
-                Mon–Fri, 7:00 AM – 5:00 PM<br />
+                Mon–Fri, 8:00 AM – 5:00 PM<br />
                 <span className="muted">24/7 emergency response</span>
               </dd>
             </div>

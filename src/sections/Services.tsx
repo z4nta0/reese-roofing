@@ -60,6 +60,7 @@ export default function Services() {
           <span className="eyebrow">02 — What we do</span>
           <h2 className="display services__title">
             A full range of <br />
+            commercial <br />
             roofing <em>specialties</em>.
           </h2>
           <p className="lede services__lede">

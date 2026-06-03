@@ -21,7 +21,7 @@ export default function Hero() {
             <span className="eyebrow">Lawrence, Kansas — Est. 2024</span>
 
             <h1 className="display hero__title">
-              Roofing,<br />
+              Commercial roofing,<br />
               built to <em>weather</em><br />
               every season.
             </h1>
@@ -37,7 +37,7 @@ export default function Hero() {
 
         <div className="hero__bottom">
           <p className="lede hero__lede">
-            Seal and Shield LLC serves businesses, property managers, and homeowners across
+            Seal and Shield LLC serves businesses across
             Lawrence, Topeka, Kansas City, and the entire surrounding region — delivering installations and repairs
             that hold up to wind, sun, and storm.
           </p>
@@ -60,7 +60,7 @@ export default function Hero() {
           </div>
           <div className="stat">
             <div className="stat__num display">100<span>+</span></div>
-            <div className="stat__label">Commercial and residential roofs completed</div>
+            <div className="stat__label">Commercial roofs completed</div>
           </div>
           <div className="stat">
             <div className="stat__num display">24<span>/7</span></div>

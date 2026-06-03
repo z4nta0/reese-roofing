@@ -38,14 +38,14 @@ export default function About() {
 
         <div className="about__right">
           <p className="about__para about__para--lead">
-            Seal and Shield LLC was founded on a simple idea: roofing should be a
+            Seal and Shield LLC was founded on a simple idea: commercial roofing should be a
             straightforward business. A clear scope, a fair price, a roof installed by
             people who care whether it holds up.
           </p>
           <p className="about__para">
-            We've worked on warehouses, churches, retail centers, and office buildings across Douglas County.
+            We've worked on warehouses, churches, retail centers, and office buildings across Kansas and Missouri.
             Most of our work comes from referrals — from
-            home owners and property managers who appreciated that we showed up when
+            building owners and property managers who appreciated that we showed up when
             we said we would and stood behind the work after the crew packed up.
           </p>
           <p className="about__para">
