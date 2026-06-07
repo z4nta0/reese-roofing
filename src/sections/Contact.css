@@ -82,7 +82,7 @@
   border-radius: 4px;
   padding: 2rem 2.5rem;
   max-width: 280px;
-  display: inline-block;
+  /* display: inline-block; */
 }
 
 .contact__signature img {
