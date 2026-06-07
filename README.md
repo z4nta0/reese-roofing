@@ -43,8 +43,10 @@ src/
 - **Palette:** Warm off-white paper (`#f5f2ec`), deep ink (`#1a1f24`), and a navy accent (`#1f4e7a`) drawn from the logo. Italic display accents and small details (numbered IDs, list bullets, pull quote marks) all use this brand navy so the design feels native to the logo.
 - **Layout:** Editorial grid, generous negative space, hairline dividers, numbered sections (01–04). Hover states are intentional but never showy.
 - **Logo usage:**
-  - The **full logo** (`/public/logo-full.png`) anchors the hero as the primary visual, doubles as a "seal" in the sticky left column of the About section, and appears on a paper-colored signature card in the Contact section.
-  - The **simple mark** (`/public/logo-mark.png`) is used in the nav bar, the footer, and as the favicon (multiple sizes including `.ico`, PNGs at 16/32/192/512, and an Apple touch icon).
+  - The **full logo** (`/public/logo-full.svg`) anchors the hero as the primary visual, doubles as a "seal" in the sticky left column of the About section, and appears on a paper-colored signature card in the Contact section. It's a two-color SVG (navy mark + grey subtext).
+  - The **simple mark** (`/public/logo-mark.svg`) is used in the nav bar and the footer.
+  - The **favicon** uses an SVG (`/public/favicon.svg`) — a centered, padded version of the simple mark — with raster `.ico` and PNG fallbacks (16/32/192/512) plus a 180×180 Apple touch icon on a paper-colored background.
+  - All logos are vector SVG: crisp at any size, tiny payloads, and the brand navy `#1f4e7a` is set as the `fill` attribute so you can edit it directly in the SVG files if you ever want a different color treatment.
 
 ## Customization checklist
 

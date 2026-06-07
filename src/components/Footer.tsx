@@ -8,14 +8,14 @@ export default function Footer() {
       <div className="container footer__inner">
         <div className="footer__brand">
           <span className="footer__mark">
-            <img src={ logoMark } alt="" width="28" height="26" />
+            <img src={logoMark} alt="" width="28" height="26" />
           </span>
           <span className="footer__name">
-            Seal <span>and</span> Shield
+            Reese <span>Roofing</span>
           </span>
         </div>
         <div className="footer__meta">
-          <span>© {year} Seal and Shield, LLC</span>
+          <span>© {year} Reese Roofing, LLC</span>
           <span>Licensed & insured · Lawrence, KS</span>
         </div>
         <a href="#top" className="footer__top" aria-label="Back to top">

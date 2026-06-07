@@ -23,9 +23,9 @@ export default function Nav() {
     <header className={`nav ${scrolled ? 'nav--scrolled' : ''}`}>
       <div className="nav__inner container">
         <a href="#top" className="nav__brand" aria-label="Reese Roofing, home">
-          <img src={ logoMark } alt="" className="nav__mark" width="40" height="36" />
+          <img src={logoMark} alt="" className="nav__mark" width="40" height="36" />
           <span className="nav__name">
-            Seal <span className="nav__name-light">and</span> Shield
+            Reese <span className="nav__name-light">Roofing</span>
           </span>
         </a>
 
@@ -42,7 +42,7 @@ export default function Nav() {
             (785) 555-0199
           </a>
           <a href="#contact" className="btn btn-primary nav__btn">
-            Get a FREE estimate
+            Get an estimate
             <span className="arrow">→</span>
           </a>
         </div>

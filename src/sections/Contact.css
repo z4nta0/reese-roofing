@@ -21,7 +21,7 @@
 
 .contact__title {
   font-size: clamp(2.5rem, 6vw, 5rem);
-  color: var(--paper)!important;
+  color: var(--paper) !important;
   margin-top: 1.5rem;
   margin-bottom: 1.5rem;
 }
@@ -82,6 +82,7 @@
   border-radius: 4px;
   padding: 2rem 2.5rem;
   max-width: 280px;
+  display: inline-block;
 }
 
 .contact__signature img {

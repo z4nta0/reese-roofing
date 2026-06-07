@@ -55,26 +55,26 @@ export default function Contact() {
             <div className="contact__row">
               <dt>Office</dt>
               <dd>
-                Seal and Shield LLC<br />
+                Reese Roofing<br />
                 Lawrence, Kansas 66044
               </dd>
             </div>
             <div className="contact__row">
               <dt>Phone</dt>
               <dd>
-                <a href="tel:+17855550199">(785) 304-1957</a>
+                <a href="tel:+17855550199">(785) 555-0199</a>
               </dd>
             </div>
             <div className="contact__row">
               <dt>Email</dt>
               <dd>
-                <a href="mailto:hello@reeseroofing.example">hello@sealandshield.example</a>
+                <a href="mailto:hello@reeseroofing.example">hello@reeseroofing.example</a>
               </dd>
             </div>
             <div className="contact__row">
               <dt>Hours</dt>
               <dd>
-                Mon–Fri, 8:00 AM – 5:00 PM<br />
+                Mon–Fri, 7:00 AM – 5:00 PM<br />
                 <span className="muted">24/7 emergency response</span>
               </dd>
             </div>
@@ -88,7 +88,7 @@ export default function Contact() {
           </dl>
 
           <div className="contact__signature">
-            <img src={ logoFull } alt="Reese Roofing — Commercial & Residential" />
+            <img src={logoFull} alt="Reese Roofing — Commercial & Residential" />
           </div>
         </div>
 
