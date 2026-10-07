@@ -5,9 +5,12 @@
  * fonts.css = Fonts
  *
  * @summary
- * The site's two self-hosted variable fonts, one @font-face per family,
- * replacing the Google Fonts stylesheet index.html used to load. Each file is
- * Google's own latin subset of the family, which covers every character the
+ * The site's self-hosted variable fonts: Fraunces in upright and italic, and
+ * Inter Tight upright, replacing the Google Fonts stylesheet index.html used
+ * to load. Fraunces has a real italic face, so the italic accents in its
+ * headings, quote, and numbers draw true italic letterforms rather than a
+ * slanted copy of the upright, which is all the browser had before. Each file
+ * is Google's own latin subset of the family, which covers every character the
  * site's copy uses; the one exception, the right arrow, isn't in any file
  * Google serves for either family, so it keeps rendering from a fallback font
  * exactly as it did before. Each face declares its file's full weight range,
@@ -31,6 +34,18 @@
 	font-style   : normal;
 	font-weight  : 100 900;
 	src          : url( '../assets/fonts/Fraunces-VariableFont_opsz,wght.woff2' ) format( 'woff2' );
+
+
+}
+
+@font-face { /* What: Fraunces Italic Font Face. Why: Fraunces sets every italic accent on the site, and a true italic draws different letterforms than a slanted upright. How: This loads its latin italic variable file across its full 100 to 900 weight range, showing fallback text until it arrives. */
+
+
+	font-display : swap;
+	font-family  : 'Fraunces';
+	font-style   : italic;
+	font-weight  : 100 900;
+	src          : url( '../assets/fonts/Fraunces-Italic-VariableFont_opsz,wght.woff2' ) format( 'woff2' );
 
 
 }
