@@ -46,9 +46,10 @@ reorganization, ESLint setup, config rebuild, and dependency upgrades.
       (`not-found/`, then `home/`'s sections and `home.tsx`).
 2. **CSS module pass** (done 2026-10-07): each component's `.css` becomes a
    `.module.css` next to it, per "### CSS modules and JS hooks".
-3. **Design-system pass**: custom properties renamed and moved onto tokens,
-   per "### Custom property naming". Horizontal sizing has to be decided with
-   the user first, per "Width is decided per project".
+3. **Design-system pass** (done 2026-10-07 except horizontal sizes):
+   custom properties renamed and moved onto tokens, per "### Custom property
+   naming". Horizontal sizing is decided with the user after the vertical
+   values are in, per "Width is decided per project".
 4. **404 page**: rebuilt with Nav and Footer from `ui/`, written to the rules
    from its first line.
 
@@ -72,6 +73,16 @@ are through the design-system pass. Once the new vertical design values are in,
 the user compares both options from the user-level "Width is decided per
 project" rule (the vertical rhythm or a viewport-based horizontal rhythm)
 before choosing.
+
+Design system choices (decided 2026-10-07):
+- **Base and body size**: 1rem is the 11px base, and body text is Base Plus 1
+  (about 14.57px), as in ease-my-life.
+- **Font roles**: Inter Tight is `--fon-fam-mai`, and Fraunces (headings,
+  numbers, the brand name, accents) is `--fon-fam-sec`. Inter Tight averages
+  about 2.34 characters per em, so the text width tokens use the same powers
+  as ease-my-life.
+- **Breakpoints**: 500, 540, 600, 640, 880, and 960px, measured against the
+  `app` container on AppRooCom's root element.
 
 Open item: the live Netlify site keeps the Node version it was pinned to
 when it was created, and React Router 8 needs Node 22.22 or newer to build.
