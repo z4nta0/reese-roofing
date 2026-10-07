@@ -48,7 +48,7 @@
 
 
 }
-@media ( max-width : 960px ) { /* What: Narrow About Story Container. Why: Small screens are too narrow for two columns. How: This applies below 960px wide. */
+@container app ( max-width : 960px ) { /* What: Narrow About Story Container. Why: Small screens are too narrow for two columns. How: This applies below 960px wide. */
 
 
 	.about__container { /* What: Stacked About Story Container. Why: The story reads best in one column. How: This turns the grid into one column with a smaller gap and less room below. */
@@ -76,7 +76,7 @@
 
 
 }
-@media ( max-width : 960px ) { /* What: Narrow About Left Column. Why: A stacked column has nothing beside it to scroll past. How: This applies below 960px wide. */
+@container app ( max-width : 960px ) { /* What: Narrow About Left Column. Why: A stacked column has nothing beside it to scroll past. How: This applies below 960px wide. */
 
 
 	.about__left { /* What: Static About Left Column. Why: The heading should scroll away normally once stacked. How: This turns off the sticking. */
@@ -159,7 +159,7 @@
 
 
 }
-@media ( max-width : 960px ) { /* What: Narrow About Seal. Why: The stacked story has no spare column for the seal. How: This applies below 960px wide. */
+@container app ( max-width : 960px ) { /* What: Narrow About Seal. Why: The stacked story has no spare column for the seal. How: This applies below 960px wide. */
 
 
 	.about__seal { /* What: Hidden About Seal. Why: The seal would only push the story down on a small screen. How: This hides it. */
@@ -241,7 +241,7 @@
 
 
 }
-@media ( max-width : 540px ) { /* What: Phone About Quote Mark. Why: A phone has no room to hang the mark beside the quote. How: This applies below 540px wide. */
+@container app ( max-width : 540px ) { /* What: Phone About Quote Mark. Why: A phone has no room to hang the mark beside the quote. How: This applies below 540px wide. */
 
 
 	.about__quote-mark { /* What: Stacked About Quote Mark. Why: The mark should sit above the quote instead. How: This puts it back in the flow as its own line. */
@@ -271,7 +271,7 @@
 
 
 }
-@media ( max-width : 540px ) { /* What: Phone About Quote Paragraph. Why: The mark no longer hangs beside the quote on a phone. How: This applies below 540px wide. */
+@container app ( max-width : 540px ) { /* What: Phone About Quote Paragraph. Why: The mark no longer hangs beside the quote on a phone. How: This applies below 540px wide. */
 
 
 	.aboQuoPar { /* What: Unindented About Quote Paragraph. Why: The quote can use the full width. How: This drops the indent. */
@@ -296,7 +296,7 @@
 
 
 }
-@media ( max-width : 540px ) { /* What: Phone About Quote Footer. Why: The quote is unindented on a phone. How: This applies below 540px wide. */
+@container app ( max-width : 540px ) { /* What: Phone About Quote Footer. Why: The quote is unindented on a phone. How: This applies below 540px wide. */
 
 
 	.aboQuoFoo { /* What: Unindented About Quote Footer. Why: The attribution should line up with the quote. How: This drops the indent. */
@@ -343,7 +343,7 @@
 
 
 }
-@media ( max-width : 960px ) { /* What: Narrow About Principles Row. Why: Four columns don't fit a tablet. How: This applies below 960px wide. */
+@container app ( max-width : 960px ) { /* What: Narrow About Principles Row. Why: Four columns don't fit a tablet. How: This applies below 960px wide. */
 
 
 	.about__principles { /* What: Two Column About Principles Row. Why: The principles fit two to a row. How: This sets two columns with a tighter column gap. */
@@ -357,7 +357,7 @@
 
 
 }
-@media ( max-width : 540px ) { /* What: Phone About Principles Row. Why: Two columns don't fit a phone. How: This applies below 540px wide. */
+@container app ( max-width : 540px ) { /* What: Phone About Principles Row. Why: Two columns don't fit a phone. How: This applies below 540px wide. */
 
 
 	.about__principles { /* What: One Column About Principles Row. Why: The principles stack on a phone. How: This sets one column. */

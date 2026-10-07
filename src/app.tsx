@@ -3,6 +3,9 @@
 
 // #region Imports
 
+import cssModObj from './app.module.css'; // What: CSS Module Object. Why: The root wrapper is styled in its own module. How: The wrapper reads its hashed class name from this object.
+
+
 import { HomPagCom } from './pages/home/home.tsx';           // What: Home Page Component. Why: The home page holds every section of the site. How: This is rendered by the root path's route.
 import { NotFouCom } from './pages/not-found/not-found.tsx'; // What: Not Found Component. Why: An unknown path should show a 404 page rather than nothing. How: This is rendered by the catch-all route.
 import { Route     } from 'react-router';                    // What: Route. Why: Each page is tied to the URL path that shows it. How: This declares the two routes below.
@@ -38,9 +41,10 @@ import { Routes    } from 'react-router';                    // What: Routes. Wh
  * AppRooCom = App Root Component
  *
  * @summary
- * Renders the site's route table, so whichever page matches the current URL
- * path is the one on screen: the home page at the root path, and the 404 page
- * for anything else. main.tsx renders it once, inside BrowserRouter, which
+ * Renders the site's route table inside the app container, so whichever page
+ * matches the current URL path is the one on screen: the home page at the
+ * root path, and the 404 page for anything else. The container wrapper is
+ * what every module's layout queries measure. main.tsx renders it once, inside BrowserRouter, which
  * supplies the URL the routes match against.
  *
  * @author z4nta0 <https://github.com/z4nta0>
@@ -62,23 +66,29 @@ function AppRooCom () : React.JSX.Element {
 	return (
 
 
-		<Routes>{ /* What: Routes. Why: Only one page should render for any path. How: This renders the first route below whose path matches. */ }
+		<div className={ cssModObj.appRooDiv }>{ /* What: App Root Div Element. Why: Every page's layout queries measure one shared container. How: This wraps the routes in the element named the app container. */ }
 
 
-			<Route
-				element={ <HomPagCom /> }
-				path='/'
-			/>{ /* What: Home Route. Why: The site's root address is its home page. How: This renders HomPagCom at the root path. */ }
+			<Routes>{ /* What: Routes. Why: Only one page should render for any path. How: This renders the first route below whose path matches. */ }
+
+
+				<Route
+					element={ <HomPagCom /> }
+					path='/'
+				/>{ /* What: Home Route. Why: The site's root address is its home page. How: This renders HomPagCom at the root path. */ }
 
 
 
-			<Route
-				element={ <NotFouCom /> }
-				path='*' // What: Catch-All Path. Why: Any address the site doesn't have should land on the 404 page. How: The asterisk matches every path no earlier route claimed.
-			/>{ /* What: Not Found Route. Why: Unknown paths need a page of their own. How: This renders NotFouCom for every other path. */ }
+				<Route
+					element={ <NotFouCom /> }
+					path='*' // What: Catch-All Path. Why: Any address the site doesn't have should land on the 404 page. How: The asterisk matches every path no earlier route claimed.
+				/>{ /* What: Not Found Route. Why: Unknown paths need a page of their own. How: This renders NotFouCom for every other path. */ }
 
 
-		</Routes>
+			</Routes>
+
+
+		</div>
 
 
 	);

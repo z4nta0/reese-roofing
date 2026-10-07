@@ -166,7 +166,7 @@
 
 
 }
-@media ( max-width : 880px ) { /* What: Narrow Navigation Links Row. Why: Small screens have no room for the links in the bar. How: This applies below 880px wide. */
+@container app ( max-width : 880px ) { /* What: Narrow Navigation Links Row. Why: Small screens have no room for the links in the bar. How: This applies below 880px wide. */
 
 
 	.nav__links { /* What: Hidden Navigation Links Row. Why: The drawer shows the links instead. How: This hides the row. */
@@ -251,7 +251,7 @@
 
 
 }
-@media ( max-width : 880px ) { /* What: Narrow Navigation Call-To-Action Row. Why: Small screens have no room for the actions in the bar. How: This applies below 880px wide. */
+@container app ( max-width : 880px ) { /* What: Narrow Navigation Call-To-Action Row. Why: Small screens have no room for the actions in the bar. How: This applies below 880px wide. */
 
 
 	.nav__cta { /* What: Hidden Navigation Call-To-Action Row. Why: The drawer carries the phone number instead. How: This hides the row. */
@@ -386,7 +386,7 @@
 
 
 }
-@media ( max-width : 880px ) { /* What: Narrow Navigation Toggle Button. Why: Small screens need the menu button in place of the links. How: This applies below 880px wide. */
+@container app ( max-width : 880px ) { /* What: Narrow Navigation Toggle Button. Why: Small screens need the menu button in place of the links. How: This applies below 880px wide. */
 
 
 	.nav__toggle { /* What: Shown Navigation Toggle Button. Why: The drawer needs a way to open. How: This shows the button. */

@@ -48,7 +48,7 @@
 
 
 }
-@media ( max-width : 600px ) { /* What: Narrow Footer Inner Row. Why: Small screens are too narrow for three items side by side. How: This applies below 600px wide. */
+@container app ( max-width : 600px ) { /* What: Narrow Footer Inner Row. Why: Small screens are too narrow for three items side by side. How: This applies below 600px wide. */
 
 
 	.footer__inner { /* What: Stacked Footer Inner Row. Why: The items read best stacked on a small screen. How: This turns the row into a left-aligned column with a smaller gap. */
@@ -137,7 +137,7 @@
 
 
 }
-@media ( max-width : 600px ) { /* What: Narrow Footer Meta Column. Why: The stacked footer is left-aligned on small screens. How: This applies below 600px wide. */
+@container app ( max-width : 600px ) { /* What: Narrow Footer Meta Column. Why: The stacked footer is left-aligned on small screens. How: This applies below 600px wide. */
 
 
 	.footer__meta { /* What: Left Footer Meta Column. Why: The lines should line up with the stacked brand and link. How: This aligns them to the left. */

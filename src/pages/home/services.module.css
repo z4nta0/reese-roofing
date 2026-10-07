@@ -59,7 +59,7 @@
 
 
 }
-@media ( max-width : 960px ) { /* What: Narrow Services Head Block. Why: Small screens are too narrow for two columns. How: This applies below 960px wide. */
+@container app ( max-width : 960px ) { /* What: Narrow Services Head Block. Why: Small screens are too narrow for two columns. How: This applies below 960px wide. */
 
 
 	.services__head { /* What: Stacked Services Head Block. Why: The lede reads best under the heading. How: This turns the grid into one column with a smaller gap. */
@@ -118,7 +118,7 @@
 
 
 }
-@media ( max-width : 960px ) { /* What: Narrow Services Title. Why: The stacked head has one column. How: This applies below 960px wide. */
+@container app ( max-width : 960px ) { /* What: Narrow Services Title. Why: The stacked head has one column. How: This applies below 960px wide. */
 
 
 	.services__title { /* What: Stacked Services Title. Why: The heading stays in the only column. How: This keeps it in column 1. */
@@ -158,7 +158,7 @@
 
 
 }
-@media ( max-width : 960px ) { /* What: Narrow Services Lede Paragraph. Why: The stacked head has one column. How: This applies below 960px wide. */
+@container app ( max-width : 960px ) { /* What: Narrow Services Lede Paragraph. Why: The stacked head has one column. How: This applies below 960px wide. */
 
 
 	.services__lede { /* What: Stacked Services Lede Paragraph. Why: The lede moves under the heading. How: This puts it in column 1. */
@@ -188,7 +188,7 @@
 
 
 }
-@media ( max-width : 960px ) { /* What: Narrow Services Grid. Why: Three cards don't fit across a tablet. How: This applies below 960px wide. */
+@container app ( max-width : 960px ) { /* What: Narrow Services Grid. Why: Three cards don't fit across a tablet. How: This applies below 960px wide. */
 
 
 	.services__grid { /* What: Two Column Services Grid. Why: The cards fit two to a row. How: This sets two columns. */
@@ -201,7 +201,7 @@
 
 
 }
-@media ( max-width : 640px ) { /* What: Phone Services Grid. Why: Two cards don't fit across a phone. How: This applies below 640px wide. */
+@container app ( max-width : 640px ) { /* What: Phone Services Grid. Why: Two cards don't fit across a phone. How: This applies below 640px wide. */
 
 
 	.services__grid { /* What: One Column Services Grid. Why: The cards stack on a phone. How: This sets one column. */
@@ -265,7 +265,7 @@
 
 
 }
-@media ( max-width : 640px ) { /* What: Phone Service Head Row. Why: Stacked cards don't need matching head heights. How: This applies below 640px wide. */
+@container app ( max-width : 640px ) { /* What: Phone Service Head Row. Why: Stacked cards don't need matching head heights. How: This applies below 640px wide. */
 
 
 	.service__head { /* What: Auto Height Service Head Row. Why: Each head can take only the height it needs. How: This drops the minimum height. */

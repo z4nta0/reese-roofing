@@ -53,7 +53,7 @@
 
 
 }
-@media ( max-width : 960px ) { /* What: Narrow Contact Container. Why: Small screens are too narrow for two columns. How: This applies below 960px wide. */
+@container app ( max-width : 960px ) { /* What: Narrow Contact Container. Why: Small screens are too narrow for two columns. How: This applies below 960px wide. */
 
 
 	.contact__container { /* What: Stacked Contact Container. Why: The form reads best under the details. How: This turns the grid into one column with a smaller gap. */
@@ -165,7 +165,7 @@
 
 
 }
-@media ( max-width : 540px ) { /* What: Phone Contact Row. Why: A phone has no room for the label column. How: This applies below 540px wide. */
+@container app ( max-width : 540px ) { /* What: Phone Contact Row. Why: A phone has no room for the label column. How: This applies below 540px wide. */
 
 
 	.contact__row { /* What: Stacked Contact Row. Why: The label reads best above its value on a phone. How: This turns the row into one column with a small gap. */
@@ -427,7 +427,7 @@
 
 
 }
-@media ( max-width : 540px ) { /* What: Phone Field Row. Why: A phone has no room for two fields side by side. How: This applies below 540px wide. */
+@container app ( max-width : 540px ) { /* What: Phone Field Row. Why: A phone has no room for two fields side by side. How: This applies below 540px wide. */
 
 
 	.field-row { /* What: Stacked Field Row. Why: The fields stack on a phone. How: This turns the row into one column. */

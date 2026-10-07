@@ -34,7 +34,7 @@
 
 
 }
-@media ( max-width : 960px ) { /* What: Narrow Hero Section. Why: A stacked hero on a small screen shouldn't be forced to a full screen's height. How: This applies below 960px wide. */
+@container app ( max-width : 960px ) { /* What: Narrow Hero Section. Why: A stacked hero on a small screen shouldn't be forced to a full screen's height. How: This applies below 960px wide. */
 
 
 	.hero { /* What: Auto Height Hero Section. Why: The content sets the height once it stacks. How: This drops the full-height minimum. */
@@ -113,7 +113,7 @@
 
 
 }
-@media ( max-width : 960px ) { /* What: Narrow Hero Top Row. Why: Small screens are too narrow for two columns. How: This applies below 960px wide. */
+@container app ( max-width : 960px ) { /* What: Narrow Hero Top Row. Why: Small screens are too narrow for two columns. How: This applies below 960px wide. */
 
 
 	.hero__top { /* What: Stacked Hero Top Row. Why: The copy and logo read best stacked. How: This turns the grid into one column with smaller gaps. */
@@ -262,7 +262,7 @@
 
 
 }
-@media ( max-width : 960px ) { /* What: Narrow Hero Logo Frame. Why: The stacked hero puts the logo first. How: This applies below 960px wide. */
+@container app ( max-width : 960px ) { /* What: Narrow Hero Logo Frame. Why: The stacked hero puts the logo first. How: This applies below 960px wide. */
 
 
 	.hero__logo { /* What: Leading Hero Logo Frame. Why: The logo should open the stacked hero. How: This moves it above the copy with a little room below. */
@@ -308,7 +308,7 @@
 
 
 }
-@media ( max-width : 960px ) { /* What: Narrow Hero Logo Image. Why: The stacked logo shouldn't dominate a small screen. How: This applies below 960px wide. */
+@container app ( max-width : 960px ) { /* What: Narrow Hero Logo Image. Why: The stacked logo shouldn't dominate a small screen. How: This applies below 960px wide. */
 
 
 	.herLogIma { /* What: Smaller Hero Logo Image. Why: The logo leads the stacked hero at a modest size. How: This caps it at 280px. */
@@ -321,7 +321,7 @@
 
 
 }
-@media ( max-width : 500px ) { /* What: Phone Hero Logo Image. Why: Phones need the logo smaller still. How: This applies below 500px wide. */
+@container app ( max-width : 500px ) { /* What: Phone Hero Logo Image. Why: Phones need the logo smaller still. How: This applies below 500px wide. */
 
 
 	.herLogIma { /* What: Smallest Hero Logo Image. Why: The logo should leave room for the headline on a phone. How: This caps it at 220px. */
@@ -358,7 +358,7 @@
 
 
 }
-@media ( max-width : 960px ) { /* What: Narrow Hero Bottom Row. Why: Small screens are too narrow for the pitch and buttons side by side. How: This applies below 960px wide. */
+@container app ( max-width : 960px ) { /* What: Narrow Hero Bottom Row. Why: Small screens are too narrow for the pitch and buttons side by side. How: This applies below 960px wide. */
 
 
 	.hero__bottom { /* What: Stacked Hero Bottom Row. Why: The buttons read best under the pitch. How: This turns the grid into one column with a smaller gap. */
@@ -529,7 +529,7 @@
 
 
 }
-@media ( max-width : 960px ) { /* What: Narrow Hero Stats Row. Why: Four columns don't fit a small screen. How: This applies below 960px wide. */
+@container app ( max-width : 960px ) { /* What: Narrow Hero Stats Row. Why: Four columns don't fit a small screen. How: This applies below 960px wide. */
 
 
 	.hero__stats { /* What: Two Column Hero Stats Row. Why: The stats fit two to a row. How: This sets two columns with a tighter column gap. */
@@ -543,7 +543,7 @@
 
 
 }
-@media ( max-width : 500px ) { /* What: Phone Hero Stats Row. Why: Phones keep the two-column layout. How: This applies below 500px wide. */
+@container app ( max-width : 500px ) { /* What: Phone Hero Stats Row. Why: Phones keep the two-column layout. How: This applies below 500px wide. */
 
 
 	.hero__stats { /* What: Phone Two Column Hero Stats Row. Why: The stats still fit two to a row. How: This sets two equal columns. */
