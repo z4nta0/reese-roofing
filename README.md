@@ -4,10 +4,10 @@ A single-page marketing site for Reese Roofing — a commercial roofing contract
 
 ## Stack
 
-- **Node.js** runtime
-- **Vite** dev server / bundler
-- **React 18** + **TypeScript**
-- **React Router v6** (set up for future expansion — currently routes `/` to Home and everything else to a 404)
+- **Node.js** 22.22 or newer (React Router 8 and Vite 8 require it)
+- **Vite 8** dev server / bundler
+- **React 19** + **TypeScript 6**
+- **React Router 8** (set up for future expansion: it currently routes `/` to Home and everything else to a 404)
 
 ## Getting started
 
