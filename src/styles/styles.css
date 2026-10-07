@@ -10,11 +10,9 @@
  * element styles every page relies on. The tokens start from the core design
  * numbers, the plastic ratio and its powers, and every font size, vertical
  * length, duration, and transparency is a step drawn from them, with 1rem set
- * to an 11px base. Colors are named by role. The original tokens stay in a
- * legacy section only until every module has moved onto the new ones. Every
- * component's own styles are in its CSS module, and each transition and
- * animation turns itself off for reduced motion there; only the page's smooth
- * scrolling is handled here.
+ * to an 11px base. Colors are named by role. Every component's own styles are
+ * in its CSS module, and each transition and animation turns itself off for
+ * reduced motion there; only the page's smooth scrolling is handled here.
  *
  * Sections:
  *  - Tokens
@@ -246,43 +244,6 @@
 	--sec-ver-pad : clamp( calc( var( --ver-rhy-p06 ) * 1rem ), 10vw, calc( var( --ver-rhy-p08 ) * 1rem ) ); /* What: Section Vertical Padding. Why: Sections need generous vertical breathing room that scales with the screen. How: Every section pads its top and bottom with it, growing with the viewport between the p06 and p08 rhythm steps, about 78.749px to 138.200px. */
 
 	/* #endregion Layout Tokens */
-
-
-
-	/* #region Legacy Tokens */
-
-	/**
-	 * styles.css = Legacy Tokens
-	 *
-	 * @summary
-	 * The site's original tokens, kept only while the design-system pass moves
-	 * each module onto the scales and roles above. Each is deleted once nothing
-	 * reads it.
-	 *
-	 * @author z4nta0 <https://github.com/z4nta0>
-	 *
-	*/
-
-
-
-	--accent      : #1f4e7a;                                                       /* What: Accent. Why: Actions, emphasis, and numbering share the brand navy from the logo. How: Buttons, italic accents, and numbers read it. */
-	--accent-soft : #5a8ab8;                                                       /* What: Accent Soft. Why: Hover states on the dark band need a lighter navy that stays readable. How: The footer's and contact section's hovered links and focused fields read it. */
-	--brand       : #1f4e7a;                                                       /* What: Brand. Why: This names the logo's navy separately from the accent. How: Nothing reads it yet; the design-system pass decides whether it stays. */
-	--ink         : #1a1f24;                                                       /* What: Ink. Why: Text and dark surfaces share one near-black. How: Body text, headings, dark bands, and primary buttons read it. */
-	--ink-muted   : #6b7079;                                                       /* What: Ink Muted. Why: Labels and secondary text should recede. How: Eyebrows, captions, and quiet links read it. */
-	--ink-soft    : #2a3138;                                                       /* What: Ink Soft. Why: Long paragraphs read more gently than full ink. How: Ledes, descriptions, and links read it. */
-	--line        : rgba( 26, 31, 36, 0.12 );                                      /* What: Line. Why: Dividers should be barely there. How: Section edges and hairline rules read it. */
-	--line-strong : rgba( 26, 31, 36, 0.22 );                                      /* What: Line Strong. Why: A few dividers need to hold up as structure. How: The service grid, principles rule, and logo ring read it. */
-	--paper       : #f5f2ec;                                                       /* What: Paper. Why: The page sits on a warm off-white rather than pure white. How: The page background and text on dark bands read it. */
-	--paper-soft  : #ebe7df;                                                       /* What: Paper Soft. Why: Some bands and hovers need a slightly darker paper. How: The about section and hovered service cards read it. */
-	--paper-warm  : #e4dfd4;                                                       /* What: Paper Warm. Why: This is a third, warmer paper shade. How: Nothing reads it yet; the design-system pass decides whether it stays. */
-	--container     : 1280px;                                                      /* What: Container. Why: Content shouldn't stretch across very wide screens. How: Every section's container caps its width at this. */
-	--gutter        : clamp( 1.8181818182rem, 4vw, 4.3636363636rem );              /* What: Gutter. Why: Content needs side margins that grow with the screen. How: Every container and the drawer pad their sides with it. */
-	--section-pad-y : clamp( 7.2727272727rem, 10vw, 13.0909090909rem );            /* What: Section Padding Y. Why: Sections need generous vertical breathing room that scales with the screen. How: Every section pads its top and bottom with it. */
-	--font-body    : 'Inter Tight', -apple-system, BlinkMacSystemFont, sans-serif; /* What: Font Body. Why: Paragraphs and the interface use one clean sans serif. How: The body and every body-text class read it, falling back to the system font. */
-	--font-display : 'Fraunces', 'Times New Roman', serif;                         /* What: Font Display. Why: Headings and accents use an expressive serif. How: Every display-type class reads it, falling back to a system serif. */
-
-	/* #endregion Legacy Tokens */
 
 
 
