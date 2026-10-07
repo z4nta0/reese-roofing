@@ -33,9 +33,10 @@ import React     from 'react';                   // What: React. Why: The bar tr
 
 // #region Constants
 
-const NAV_LIN_ARR = [ // What: Nav Link Array. Why: The bar and its mobile drawer list the same section links. How: Each row pairs a section's anchor with its label, and both lists map over it.
+const NAV_LIN_ARR = [ // What: Nav Link Array. Why: The bar and its mobile drawer list the same section links. How: Each row pairs a section's anchor with its label, and both lists map over it, the drawer numbering the rows in order to match the sections' own numbered labels.
 
 
+	{ hreStr : '#top',      labStr : 'Home' },     // What: Home Link Row. Why: Not every visitor knows the logo leads home, so the bar spells it out. How: This links to the hero's top anchor.
 	{ hreStr : '#services', labStr : 'Services' }, // What: Services Link Row. Why: The services section is the first stop for most visitors. How: This links to its anchor.
 	{ hreStr : '#about',    labStr : 'About' },    // What: About Link Row. Why: Visitors check who they'd be hiring. How: This links to its anchor.
 	{ hreStr : '#contact',  labStr : 'Contact' }   // What: Contact Link Row. Why: The contact section is where an estimate is requested. How: This links to its anchor.
@@ -59,8 +60,10 @@ const NAV_LIN_ARR = [ // What: Nav Link Array. Why: The bar and its mobile drawe
  * switches the bar to its scrolled style once the page is more than 24px
  * down, checking once on mount so a page reloaded mid-scroll starts in the
  * right style. On small screens a toggle button opens and closes a drawer
- * holding the same section links plus the phone number; picking a link in
- * the drawer closes it again.
+ * holding the same links, numbered like the sections they lead to, then a
+ * contact block with the phone number, the hours, and the estimate button;
+ * picking a link or the button closes it again. While the drawer is open the
+ * bar takes a solid background, so the two read as one panel.
  *
  * @author z4nta0 <https://github.com/z4nta0>
  *
@@ -105,7 +108,11 @@ function NavBarCom () : React.JSX.Element {
 	return (
 
 
-		<header className={` ${ cssModObj.navBarHed }   ${ scrPasBoo ? cssModObj.navBarHedScrolled : '' } `}>{ /* What: Navigation Header Element. Why: This is the site's top bar landmark. How: This takes its scrolled style once scrPasBoo is true. */ }
+		<header
+			className={` ${ cssModObj.navBarHed }   ${ scrPasBoo ? cssModObj.navBarHedScrolled : '' } `}
+
+			data-drawer-menu-open={ draOpeBoo || undefined } // What: Drawer Menu Open Attribute. Why: The bar takes a solid background while the drawer is open, so the two read as one panel. How: This is set only while draOpeBoo is true, and React drops it otherwise.
+		>{ /* What: Navigation Header Element. Why: This is the site's top bar landmark. How: This takes its scrolled style once scrPasBoo is true. */ }
 
 
 			<div className={ cssModObj.navInnDiv }>{ /* What: Navigation Inner Div Element. Why: The bar's contents should line up with the page's content width. How: This holds the brand, links, actions, and toggle in one row. */ }
@@ -216,7 +223,7 @@ function NavBarCom () : React.JSX.Element {
 			>{ /* What: Navigation Drawer Div Element. Why: Small screens show the links in a drawer below the bar. How: This opens while draOpeBoo is true. */ }
 
 
-				{ NAV_LIN_ARR.map( ( navLinObj ) => ( // What: Drawer Link Map. Why: The drawer repeats every section link. How: This renders one anchor per row.
+				{ NAV_LIN_ARR.map( ( navLinObj, linIndNum ) => ( // What: Drawer Link Map. Why: The drawer repeats every section link, numbered like the sections. How: This renders one numbered anchor per row, handing each its position for the staggered entrance.
 
 
 					<a
@@ -224,23 +231,60 @@ function NavBarCom () : React.JSX.Element {
 
 						className={ cssModObj.draLinAnc }
 
+						style={ { '--dra-ite-ind' : linIndNum } as React.CSSProperties } // What: Drawer Item Index Style. Why: Each row enters a beat after the one above it. How: This hands the row its position, which its stylesheet multiplies into an animation delay. // What: Type Assertion Note. Why: React's CSSProperties type has no entry for custom properties. How: The object holds one custom property and nothing else, so reading it as CSSProperties is safe.
+
 						href={ navLinObj.hreStr }
 
 						onClick={ () => setDraOpeBoo( false ) }
 					>{ /* What: Drawer Link Anchor Element. Why: Each link jumps to its section. How: This links to the row's anchor and closes the drawer behind it. */ }
-						{ navLinObj.labStr }
+
+
+						<span className={ cssModObj.draNumSpa }>{ String( linIndNum + 1 ).padStart( 2, '0' ) }</span>{ /* What: Drawer Number Span Element. Why: The rows are numbered like the sections they lead to. How: This shows the row's position, padded to two digits. */ }
+
+						<span className={ cssModObj.draLabSpa }>{ navLinObj.labStr }</span>{ /* What: Drawer Label Span Element. Why: The section's name is the row's main text. How: This prints the row's label. */ }
+
+						<span className={ cssModObj.arrIcoSpa }>→</span>{ /* What: Arrow Span Element. Why: The arrow marks the row as moving the visitor onward. How: This sits at the row's far end and slides when the row is hovered or pressed. */ }
+
+
 					</a>
 
 
 				))}
 
-				<a
-					className={` ${ cssModObj.draLinAnc }   ${ cssModObj.draLinAncMuted } `}
+				<div
+					className={ cssModObj.draConDiv }
 
-					href='tel:+17855550199'
-				>{ /* What: Drawer Phone Anchor Element. Why: The drawer keeps the phone number reachable on small screens. How: This dials the company's number. */ }
-					(785) 555-0199
-				</a>
+					style={ { '--dra-ite-ind' : NAV_LIN_ARR.length } as React.CSSProperties } // What: Drawer Item Index Style. Why: The contact block enters after the last link. How: This hands it the position after the links, which its stylesheet multiplies into an animation delay. // What: Type Assertion Note. Why: React's CSSProperties type has no entry for custom properties. How: The object holds one custom property and nothing else, so reading it as CSSProperties is safe.
+				>{ /* What: Drawer Contact Div Element. Why: The drawer ends with every way to reach the company, since the bar's phone link and estimate button are hidden on small screens. How: This stacks a label, the phone number, the hours, and the estimate button. */ }
+
+
+					<span className={ cssModObj.eyeLabSpa }>Call us</span>{ /* What: Eyebrow Label Span Element. Why: A small label introduces the contact block like the sections' labels. How: This reads in tracked capitals with a leading line. */ }
+
+					<a
+						className={ cssModObj.draPhoAnc }
+
+						href='tel:+17855550199'
+
+						aria-label='Call Reese Roofing'
+					>{ /* What: Drawer Phone Anchor Element. Why: Phone visitors should be able to call in one tap. How: This dials the company's number. */ }
+						(785) 555-0199
+					</a>
+
+					<p className={ cssModObj.draHouPar }>Mon–Fri, 7:00 AM – 5:00 PM · 24/7 emergency response</p>{ /* What: Drawer Hours Paragraph Element. Why: Visitors want to know when someone will answer. How: This repeats the contact section's hours on one line. */ }
+
+					<a
+						className={ cssModObj.draEstAnc }
+
+						href='#contact'
+
+						onClick={ () => setDraOpeBoo( false ) }
+					>{ /* What: Drawer Estimate Anchor Element. Why: Requesting an estimate is the site's main action, and the bar's button is hidden on small screens. How: This links to the contact section as a full-width pill and closes the drawer behind it. */ }
+						Get an estimate
+						<span className={ cssModObj.arrIcoSpa }>→</span>{ /* What: Arrow Span Element. Why: The arrow marks the button as moving the visitor onward. How: This sits right after the label. */ }
+					</a>
+
+
+				</div>
 
 
 			</div>

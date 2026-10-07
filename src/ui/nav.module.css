@@ -46,6 +46,13 @@
 
 
 }
+.navBarHed[data-drawer-menu-open] { /* What: Drawer Open Navigation Bar Header. Why: The bar and the open drawer should read as one solid panel, even at the top of the page where the bar is otherwise transparent. How: This gives the bar the drawer's solid paper background while the drawer is open. */
+
+
+	background : var( --bac-pag-col ); /* Background Page Color = #f5f2ec */
+
+
+}
 @media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Navigation Bar Header. Why: Someone who asked for less motion shouldn't see the bar animate. How: This applies only when the reduced-motion preference is set. */
 
 
@@ -447,16 +454,18 @@
 
 /* #region navDraDiv */
 
-.navDraDiv { /* What: Navigation Drawer Div. Why: Small screens show the links in a panel under the bar. How: This stacks the links on the page color, collapsed to nothing and hidden until opened, growing and shrinking as it opens and closes. */
+.navDraDiv { /* What: Navigation Drawer Div. Why: Small screens show the links in a panel under the bar. How: This stacks the links on the page color, collapsed to nothing and hidden until opened, growing and shrinking as it opens and closes, and casting a large elevation shadow onto the page below it. */
 
 
-	background     : var( --bac-pag-col );         /* Background Page Color = #f5f2ec */
-	border-bottom  : 0 solid var( --bor-mai-col ); /* Border Main Color = rgba( 26, 31, 36, 0.12 ) */
+	background     : var( --bac-pag-col );                             /* Background Page Color = #f5f2ec */
+	border-bottom  : 0 solid var( --bor-mai-col );                     /* Border Main Color = rgba( 26, 31, 36, 0.12 ) */
+	box-shadow     : var( --ele-lar-sha );                             /* Elevation Large Shadow, about 0 19px 45px -15px plus 0 6px 15px -4px */
+	clip-path      : inset( 0 0 calc( var( --spa-ver-p06 ) * -1 ) 0 ); /* Spacing Vertical Base Plus 6 ~= 78.750px */ /* What: Shadow Clip Path. Why: The shadow's upper layer would otherwise bleed a grey line onto the bar above the drawer. How: This clips everything above the drawer's top edge while leaving room below for the shadow's full reach. */
 	display        : flex;
 	flex-direction : column;
 	max-height     : 0;
 	overflow       : hidden;
-	padding        : 0 var( --gut-sid-pad );       /* Gutter Side Padding, about 19.304px to 44.876px */
+	padding        : 0 var( --gut-sid-pad );                           /* Gutter Side Padding, about 19.304px to 44.876px */
 	transition     : border-bottom-width var( --dur-tra-p03 ) var( --mot-dec-eas ), max-height var( --dur-tra-p03 ) var( --mot-dec-eas ), padding-block var( --dur-tra-p03 ) var( --mot-dec-eas ), visibility 0s linear var( --dur-tra-p03 ); /* Duration Transition Base Plus 3 ~= 366.9ms, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ) */ /* What: Drawer Close Transition. Why: The drawer shrinks closed under the bar, then hides from screen readers and the keyboard once it's gone. How: This animates its height and padding, layout properties chosen because the drawer's content has to be revealed rather than scaled, and delays hiding until the shrink ends. */
 	visibility     : hidden;
 
@@ -466,7 +475,7 @@
 
 
 	border-bottom-width : var( --bor-wid-bas );                      /* Border Width Base ~= 1.160px */
-	max-height          : calc( var( --ver-rhy-p12 ) * 1rem );       /* Vertical Rhythm Base Plus 12 ~= 425.596px */
+	max-height          : calc( var( --ver-rhy-p14 ) * 1rem );       /* Vertical Rhythm Base Plus 14 ~= 746.868px */
 	padding-block       : var( --spa-ver-p02 ) var( --spa-ver-p03 ); /* Spacing Vertical Base Plus 2 ~= 25.572px, Spacing Vertical Base Plus 3 ~= 33.876px */
 	transition          : border-bottom-width var( --dur-tra-p03 ) var( --mot-dec-eas ), max-height var( --dur-tra-p03 ) var( --mot-dec-eas ), padding-block var( --dur-tra-p03 ) var( --mot-dec-eas ), visibility 0s linear 0s; /* Duration Transition Base Plus 3 ~= 366.9ms, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ) */ /* What: Drawer Open Transition. Why: The drawer has to be visible for the whole time it grows. How: This animates the same properties as closing, but shows it with no delay. */
 	visibility          : visible;
@@ -488,26 +497,237 @@
 
 }
 
-.draLinAnc { /* What: Drawer Link Anchor. Why: Drawer links should be big enough to tap easily. How: This sets each in the display font with a divider below. */
+/* #region draLinAnc */
+
+.draLinAnc { /* What: Drawer Link Anchor. Why: Drawer links should be big enough to tap easily, numbered like the sections they lead to. How: This lays each out as its number, its name in the display font, and an arrow at the far end, with a divider below. */
 
 
-	border-bottom : var( --bor-wid-bas ) solid var( --bor-mai-col ); /* Border Width Base ~= 1.160px, Border Main Color = rgba( 26, 31, 36, 0.12 ) */
-	font-family   : var( --fon-fam-sec );                            /* Font Family Secondary = 'Fraunces', 'Times New Roman', serif */
-	font-size     : var( --fon-siz-p03 );                            /* Font Size Base Plus 3 ~= 25.572px */
-	padding       : var( --spa-ver-bas ) 0;                          /* Spacing Vertical Base ~= 14.572px */
-
-
-}
-.draLinAnc--muted { /* What: Muted Drawer Link Anchor. Why: The phone number closes the drawer more quietly than the section links. How: This sets it smaller in the body font, muted, with no divider. */
-
-
-	border-bottom : none;
-	color         : var( --tex-mut-col ); /* Text Muted Color = #6b7079 */
-	font-family   : var( --fon-fam-mai ); /* Font Family Main = 'Inter Tight', -apple-system, BlinkMacSystemFont, sans-serif */
-	font-size     : var( --fon-siz-p01 ); /* Font Size Base Plus 1 ~= 14.572px */
+	align-items           : baseline;
+	border-bottom         : var( --bor-wid-bas ) solid var( --bor-mai-col ); /* Border Width Base ~= 1.160px, Border Main Color = rgba( 26, 31, 36, 0.12 ) */
+	display               : grid;
+	gap                   : var( --spa-hor-bas );                            /* Spacing Horizontal Base ~= 14.572px */
+	grid-template-columns : auto 1fr auto;
+	padding               : var( --spa-ver-bas ) 0;                          /* Spacing Vertical Base ~= 14.572px */
 
 
 }
+.navDraDiv[data-drawer-menu-open] .draLinAnc { /* What: Entering Drawer Link Anchor. Why: The rows should arrive one after another as the drawer opens. How: This plays the entrance, delayed by one stagger step per row above it, with one extra step so the drawer has started opening first. */
+
+
+	animation : drawerItemOpenFadeIn var( --dur-ani-p02 ) var( --mot-dec-eas ) calc( var( --dur-ani-m03 ) * ( var( --dra-ite-ind ) + 1 ) ) both; /* Duration Animation Base Plus 2 ~= 277.0ms, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ), Duration Animation Base Minus 3 ~= 67.9ms, Drawer Item Index, set on each row by its own style attribute */
+
+
+}
+@media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Drawer Link Anchor. Why: Someone who asked for less motion shouldn't see the rows slide in. How: This applies only when the reduced-motion preference is set. */
+
+
+	.navDraDiv[data-drawer-menu-open] .draLinAnc { /* What: Motionless Drawer Link Anchor. Why: The rows should simply be there. How: This turns the entrance off, matching the entering rule's own selector so it wins. */
+
+
+		animation : none;
+
+
+	}
+
+
+}
+.draLinAnc:hover .arrIcoSpa,
+.draLinAnc:active .arrIcoSpa,
+.draLinAnc:focus-visible .arrIcoSpa { /* What: Hovered Drawer Arrow Icon Span. Why: The arrow points the visitor onward when its row is hovered, pressed, or focused. How: This nudges it right by a few pixels, kept literal since no spacing step lands within 10% of the 4px nudge. */
+
+
+	transform : translateX( 4px );
+
+
+}
+@keyframes drawerItemOpenFadeIn { /* What: Drawer Item Open Fade In. Why: Each drawer row rises and fades in as the drawer opens. How: This moves from a small rhythm step below and transparent to its place, fully shown. */
+
+
+	from {
+
+
+		opacity   : 0;
+		transform : translateY( var( --spa-ver-m02 ) ); /* Spacing Vertical Base Minus 2 ~= 8.304px */
+
+
+	}
+
+	to {
+
+
+		opacity   : 1;
+		transform : translateY( 0 );
+
+
+	}
+
+
+}
+
+.draNumSpa { /* What: Drawer Number Span. Why: The row's number should read as a quiet index beside its name. How: This sets it small, tracked, and muted in the body font with even-width figures. */
+
+
+	color                : var( --tex-mut-col ); /* Text Muted Color = #6b7079 */
+	font-family          : var( --fon-fam-mai ); /* Font Family Main = 'Inter Tight', -apple-system, BlinkMacSystemFont, sans-serif */
+	font-size            : var( --fon-siz-bas ); /* Font Size Base = 11px */
+	font-variant-numeric : tabular-nums;
+	font-weight          : 500;
+	letter-spacing       : 0.18em;
+
+
+}
+
+.draLabSpa { /* What: Drawer Label Span. Why: The section's name is the row's main text. How: This sets it in the display font at a tappable size. */
+
+
+	color       : var( --tex-mai-col ); /* Text Main Color = #1a1f24 */
+	font-family : var( --fon-fam-sec ); /* Font Family Secondary = 'Fraunces', 'Times New Roman', serif */
+	font-size   : var( --fon-siz-p03 ); /* Font Size Base Plus 3 ~= 25.572px */
+
+
+}
+
+/* #endregion draLinAnc */
+
+
+
+/* #region draConDiv */
+
+.draConDiv { /* What: Drawer Contact Div. Why: The drawer ends with every way to reach the company. How: This stacks its label, number, hours, and button in a column with room above. */
+
+
+	display        : flex;
+	flex-direction : column;
+	gap            : var( --spa-ver-m02 ); /* Spacing Vertical Base Minus 2 ~= 8.304px */
+	margin-top     : var( --spa-ver-p02 ); /* Spacing Vertical Base Plus 2 ~= 25.572px */
+
+
+}
+.navDraDiv[data-drawer-menu-open] .draConDiv { /* What: Entering Drawer Contact Div. Why: The contact block should arrive after the last row. How: This plays the drawer's entrance, delayed by one stagger step per row above it, with one extra step so the drawer has started opening first. */
+
+
+	animation : drawerItemOpenFadeIn var( --dur-ani-p02 ) var( --mot-dec-eas ) calc( var( --dur-ani-m03 ) * ( var( --dra-ite-ind ) + 1 ) ) both; /* Duration Animation Base Plus 2 ~= 277.0ms, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ), Duration Animation Base Minus 3 ~= 67.9ms, Drawer Item Index, set on each row by its own style attribute */
+
+
+}
+@media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Drawer Contact Div. Why: Someone who asked for less motion shouldn't see the block slide in. How: This applies only when the reduced-motion preference is set. */
+
+
+	.navDraDiv[data-drawer-menu-open] .draConDiv { /* What: Motionless Drawer Contact Div. Why: The block should simply be there. How: This turns the entrance off, matching the entering rule's own selector so it wins. */
+
+
+		animation : none;
+
+
+	}
+
+
+}
+
+.eyeLabSpa { /* What: Eyebrow Label Span. Why: A small label with a leading line introduces the contact block like the sections' labels. How: This sets it in tracked, muted capitals. */
+
+
+	align-items    : center;
+	color          : var( --tex-mut-col ); /* Text Muted Color = #6b7079 */
+	display        : inline-flex;
+	font-family    : var( --fon-fam-mai ); /* Font Family Main = 'Inter Tight', -apple-system, BlinkMacSystemFont, sans-serif */
+	font-size      : var( --fon-siz-bas ); /* Font Size Base = 11px */
+	font-weight    : 500;
+	gap            : var( --spa-hor-m01 ); /* Spacing Horizontal Base Minus 1 = 11px */
+	letter-spacing : 0.18em;
+	text-transform : uppercase;
+
+
+}
+.eyeLabSpa::before { /* What: Eyebrow Label Span Leading Line. Why: A short rule leads into the label. How: This draws a short hairline, one rhythm step long, before the text. */
+
+
+	background : var( --tex-mut-col );                /* Text Muted Color = #6b7079 */
+	content    : '';
+	height     : var( --bor-wid-bas );                /* Border Width Base ~= 1.160px */
+	width      : calc( var( --ver-rhy-p02 ) * 1rem ); /* Vertical Rhythm Base Plus 2 ~= 25.572px */
+
+
+}
+
+.draPhoAnc { /* What: Drawer Phone Anchor. Why: The number is the block's headline, easy to read and tap. How: This sets it in the display font, a step below the links. */
+
+
+	color       : var( --tex-mai-col ); /* Text Main Color = #1a1f24 */
+	font-family : var( --fon-fam-sec ); /* Font Family Secondary = 'Fraunces', 'Times New Roman', serif */
+	font-size   : var( --fon-siz-p02 ); /* Font Size Base Plus 2 ~= 19.304px */
+
+
+}
+
+.draHouPar { /* What: Drawer Hours Paragraph. Why: The hours are supporting detail under the number. How: This sets them small and muted. */
+
+
+	color       : var( --tex-mut-col ); /* Text Muted Color = #6b7079 */
+	font-size   : var( --fon-siz-p01 ); /* Font Size Base Plus 1 ~= 14.572px */
+	line-height : var( --ver-rhy-bas ); /* Vertical Rhythm Base ~= 1.325 */
+
+
+}
+
+
+/* #region draEstAnc */
+
+.draEstAnc { /* What: Drawer Estimate Anchor. Why: Requesting an estimate is the site's main action, and the bar's button is hidden on small screens. How: This draws the site's dark pill across the drawer's full width, its height set by its line height alone, centering its label and arrow, lifting and turning accent on hover. */
+
+
+	align-items     : center;
+	background      : var( --bac-inv-col );                                                                                            /* Background Inverse Color = #1a1f24 */
+	border          : var( --bor-wid-bas ) solid transparent;                                                                          /* Border Width Base ~= 1.160px */
+	border-radius   : 999px;
+	color           : var( --bac-pag-col );                                                                                            /* Background Page Color = #f5f2ec */
+	display         : flex;
+	font-size       : var( --fon-siz-p01 );                                                                                            /* Font Size Base Plus 1 ~= 14.572px */
+	font-weight     : 500;
+	gap             : var( --spa-hor-m01 );                                                                                            /* Spacing Horizontal Base Minus 1 = 11px */
+	justify-content : center;
+	letter-spacing  : 0.02em;
+	line-height     : calc( var( --ver-rhy-p04 ) * 1rem );                                                                             /* Vertical Rhythm Base Plus 4 ~= 44.876px */
+	margin-top      : var( --spa-ver-m01 );                                                                                            /* Spacing Vertical Base Minus 1 = 11px */
+	padding         : 0 var( --spa-hor-p01 );                                                                                          /* Spacing Horizontal Base Plus 1 ~= 19.304px */
+	transition      : background-color var( --dur-tra-p02 ) var( --mot-dec-eas ), transform var( --dur-tra-p02 ) var( --mot-dec-eas ); /* Duration Transition Base Plus 2 ~= 277.0ms, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ) */
+	white-space     : nowrap;
+
+
+}
+.draEstAnc:hover { /* What: Hovered Drawer Estimate Anchor. Why: The button should respond to the pointer. How: This turns it accent and lifts it a pixel. */
+
+
+	background : var( --acc-mai-col ); /* Accent Main Color = #1f4e7a */
+	transform  : translateY( -1px );
+
+
+}
+@media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Drawer Estimate Anchor. Why: Someone who asked for less motion shouldn't see the button animate. How: This applies only when the reduced-motion preference is set. */
+
+
+	.draEstAnc { /* What: Motionless Drawer Estimate Anchor. Why: The hover style should appear at once. How: This turns the transition off. */
+
+
+		transition : none;
+
+
+	}
+
+
+}
+
+.draEstAnc:hover .arrIcoSpa { /* What: Hovered Drawer Estimate Arrow Icon Span. Why: The arrow points the visitor onward when the button is hovered. How: This nudges it right by a few pixels, kept literal since no spacing step lands within 10% of the 4px nudge. */
+
+
+	transform : translateX( 4px );
+
+
+}
+
+/* #endregion draEstAnc */
+
+/* #endregion draConDiv */
 
 /* #endregion navDraDiv */
 
