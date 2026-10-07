@@ -44,11 +44,11 @@
 
 	align-items           : start;
 	display               : grid;
-	gap                   : var( --spa-ver-p06 ) var( --hor-rhy-016 ); /* Spacing Vertical Base Plus 6 ~= 78.750px, Horizontal Rhythm 16 ~= 87.085px @ 1920px width */
+	gap                   : var( --spa-ver-p06 ) clamp( var( --spa-hor-p04 ), var( --hor-rhy-016 ), var( --spa-hor-p07 ) ); /* Spacing Vertical Base Plus 6 ~= 78.750px, Spacing Horizontal Base Plus 4 ~= 44.876px, Horizontal Rhythm 16 ~= 87.085px @ 1920px width, Spacing Horizontal Base Plus 7 ~= 104.323px */
 	grid-template-columns : 1fr 1.05fr;
 	margin                : 0 auto;
-	max-width             : var( --con-max-wid );                      /* Container Maximum Width, about 75.5% of the viewport, at most about 1449.4px */
-	padding-inline        : var( --gut-sid-pad );                      /* Gutter Side Padding, about 19.304px to 44.876px */
+	max-width             : var( --con-max-wid );                                                                           /* Container Maximum Width, about 1449.4px */
+	padding-inline        : var( --gut-sid-pad );                                                                           /* Gutter Side Padding, about 19.304px to 44.876px */
 	width                 : 100%;
 
 
@@ -77,19 +77,19 @@
 	font-family    : var( --fon-fam-mai );                           /* Font Family Main = 'Inter Tight', -apple-system, BlinkMacSystemFont, sans-serif */
 	font-size      : var( --fon-siz-bas );                           /* Font Size Base = 11px */
 	font-weight    : 500;
-	gap            : var( --hor-rhy-009 );                           /* Horizontal Rhythm 9 ~= 12.164px @ 1920px width */
+	gap            : var( --spa-hor-m01 );                           /* Spacing Horizontal Base Minus 1 = 11px */
 	letter-spacing : 0.18em;
 	text-transform : uppercase;
 
 
 }
-.eyeLabSpa::before { /* What: Eyebrow Label Span Leading Line. Why: A short rule leads into the label. How: This draws a short hairline, one horizontal step long, before the text, faded for the dark band. */
+.eyeLabSpa::before { /* What: Eyebrow Label Span Leading Line. Why: A short rule leads into the label. How: This draws a short hairline, one rhythm step long, before the text, faded for the dark band. */
 
 
 	background : oklch( from var( --bac-pag-col ) l c h / var( --cdn-pow-003-rec ) ); /* Background Page Color = #f5f2ec, Core-Design-Number to the Power of 3 Reciprocal ~= 0.430 */
 	content    : '';
 	height     : var( --bor-wid-bas );                                                /* Border Width Base ~= 1.160px */
-	width      : var( --hor-rhy-012 );                                                /* Horizontal Rhythm 12 ~= 28.278px @ 1920px width */
+	width      : calc( var( --ver-rhy-p02 ) * 1rem );                                 /* Vertical Rhythm Base Plus 2 ~= 25.572px */
 
 
 }
@@ -157,11 +157,11 @@
 .conRowDiv { /* What: Contact Row Div. Why: Each detail pairs a label with its value under a faint rule. How: This sets a fixed label column beside the value. */
 
 
-	border-bottom         : var( --bor-wid-bas ) solid oklch( from var( --bac-pag-col ) l c h / var( --cdn-pow-007-rec ) ); /* Border Width Base ~= 1.160px, Background Page Color = #f5f2ec, Core-Design-Number to the Power of 7 Reciprocal ~= 0.140 */
+	border-bottom         : var( --bor-wid-bas ) solid oklch( from var( --bac-pag-col ) l c h / var( --cdn-pow-007-rec ) );              /* Border Width Base ~= 1.160px, Background Page Color = #f5f2ec, Core-Design-Number to the Power of 7 Reciprocal ~= 0.140 */
 	display               : grid;
-	gap                   : var( --spa-ver-p02 ) var( --hor-rhy-011 );                                                      /* Spacing Vertical Base Plus 2 ~= 25.572px, Horizontal Rhythm 11 ~= 21.346px @ 1920px width */
-	grid-template-columns : var( --hor-rhy-017 ) 1fr;                                                                       /* Horizontal Rhythm 17 ~= 115.363px @ 1920px width */
-	padding               : var( --spa-ver-p01 ) 0;                                                                         /* Spacing Vertical Base Plus 1 ~= 19.304px */
+	gap                   : var( --spa-ver-p02 ) clamp( var( --spa-hor-bas ), var( --hor-rhy-011 ), var( --spa-hor-p02 ) );              /* Spacing Vertical Base Plus 2 ~= 25.572px, Spacing Horizontal Base ~= 14.572px, Horizontal Rhythm 11 ~= 21.346px @ 1920px width, Spacing Horizontal Base Plus 2 ~= 25.572px */
+	grid-template-columns : clamp( calc( var( --ver-rhy-p07 ) * 1rem ), var( --hor-rhy-017 ), calc( var( --ver-rhy-p08 ) * 1rem ) ) 1fr; /* Vertical Rhythm Base Plus 7 ~= 104.323px, Horizontal Rhythm 17 ~= 115.363px @ 1920px width, Vertical Rhythm Base Plus 8 ~= 138.199px */
+	padding               : var( --spa-ver-p01 ) 0;                                                                                      /* Spacing Vertical Base Plus 1 ~= 19.304px */
 
 
 }
@@ -254,14 +254,14 @@
 
 /* #region conSigDiv */
 
-.conSigDiv { /* What: Contact Signature Div. Why: The full logo signs off the details on a light card. How: This draws a rounded paper card capped at a horizontal step. */
+.conSigDiv { /* What: Contact Signature Div. Why: The full logo signs off the details on a light card. How: This draws a rounded paper card capped at a horizontal step, never narrower than the p09 rhythm step so the logo stays legible on a phone, with side padding clamped between two spacing steps. */
 
 
-	background    : var( --bac-pag-col );                      /* Background Page Color = #f5f2ec */
-	border-radius : var( --rad-bor-xsm );                      /* Radius Border Extra Small ~= 3.571px */
-	margin-top    : var( --spa-ver-p04 );                      /* Spacing Vertical Base Plus 4 ~= 44.876px */
-	max-width     : var( --hor-rhy-020 );                      /* Horizontal Rhythm 20 ~= 268.187px @ 1920px width */
-	padding       : var( --spa-ver-p03 ) var( --hor-rhy-013 ); /* Spacing Vertical Base Plus 3 ~= 33.876px, Horizontal Rhythm 13 ~= 37.460px @ 1920px width */
+	background    : var( --bac-pag-col );                                                                           /* Background Page Color = #f5f2ec */
+	border-radius : var( --rad-bor-xsm );                                                                           /* Radius Border Extra Small ~= 3.571px */
+	margin-top    : var( --spa-ver-p04 );                                                                           /* Spacing Vertical Base Plus 4 ~= 44.876px */
+	max-width     : max( calc( var( --ver-rhy-p09 ) * 1rem ), var( --hor-rhy-020 ) );                               /* Vertical Rhythm Base Plus 9 ~= 183.074px, Horizontal Rhythm 20 ~= 268.187px @ 1920px width */
+	padding       : var( --spa-ver-p03 ) clamp( var( --spa-hor-p01 ), var( --hor-rhy-013 ), var( --spa-hor-p04 ) ); /* Spacing Vertical Base Plus 3 ~= 33.876px, Spacing Horizontal Base Plus 1 ~= 19.304px, Horizontal Rhythm 13 ~= 37.460px @ 1920px width, Spacing Horizontal Base Plus 4 ~= 44.876px */
 
 
 }
@@ -281,13 +281,13 @@
 
 /* #region conForDiv */
 
-.conForDiv { /* What: Contact Form Div. Why: The form sits in a faint frame on the dark band. How: This draws a barely lighter panel with a faint border, padded to the viewport. */
+.conForDiv { /* What: Contact Form Div. Why: The form sits in a faint frame on the dark band. How: This draws a barely lighter panel with a faint border, its side padding scaling with the viewport between two spacing steps. */
 
 
-	background    : oklch( from var( --bac-pag-col ) l c h / 0.04 );                                                /* Background Page Color = #f5f2ec */
-	border        : var( --bor-wid-bas ) solid oklch( from var( --bac-pag-col ) l c h / var( --cdn-pow-008-rec ) ); /* Border Width Base ~= 1.160px, Background Page Color = #f5f2ec, Core-Design-Number to the Power of 8 Reciprocal ~= 0.105 */
-	border-radius : var( --rad-bor-xsm );                                                                           /* Radius Border Extra Small ~= 3.571px */
-	padding       : clamp( var( --spa-ver-p02 ), 3vw, var( --spa-ver-p04 ) ) clamp( calc( var( --ver-rhy-p02 ) * 1rem ), var( --hor-rhy-015 ), calc( var( --ver-rhy-p04 ) * 1rem ) ); /* Spacing Vertical Base Plus 2 ~= 25.572px, Spacing Vertical Base Plus 4 ~= 44.876px, Vertical Rhythm Base Plus 2 ~= 25.572px, Horizontal Rhythm 15 ~= 65.739px @ 1920px width, Vertical Rhythm Base Plus 4 ~= 44.876px */
+	background    : oklch( from var( --bac-pag-col ) l c h / 0.04 );                                                                                    /* Background Page Color = #f5f2ec */
+	border        : var( --bor-wid-bas ) solid oklch( from var( --bac-pag-col ) l c h / var( --cdn-pow-008-rec ) );                                     /* Border Width Base ~= 1.160px, Background Page Color = #f5f2ec, Core-Design-Number to the Power of 8 Reciprocal ~= 0.105 */
+	border-radius : var( --rad-bor-xsm ); /* Radius Border Extra Small ~= 3.571px */
+	padding       : clamp( var( --spa-ver-p02 ), 3vw, var( --spa-ver-p04 ) ) clamp( var( --spa-hor-p02 ), var( --hor-rhy-015 ), var( --spa-hor-p04 ) ); /* Spacing Vertical Base Plus 2 ~= 25.572px, Spacing Vertical Base Plus 4 ~= 44.876px, Spacing Horizontal Base Plus 2 ~= 25.572px, Horizontal Rhythm 15 ~= 65.739px @ 1920px width, Spacing Horizontal Base Plus 4 ~= 44.876px */
 
 
 }
@@ -390,7 +390,7 @@
 	background-position : right 0 center;
 	background-repeat   : no-repeat;
 	background-size     : calc( var( --ver-rhy-p01 ) * 1rem ); /* Vertical Rhythm Base Plus 1 ~= 19.304px */
-	padding-right       : var( --hor-rhy-011 );                /* Horizontal Rhythm 11 ~= 21.346px @ 1920px width */
+	padding-right       : var( --spa-hor-p02 );                /* Spacing Horizontal Base Plus 2 ~= 25.572px */
 
 
 }
@@ -422,7 +422,7 @@
 
 
 	display               : grid;
-	gap                   : var( --spa-ver-p02 ) var( --hor-rhy-011 ); /* Spacing Vertical Base Plus 2 ~= 25.572px, Horizontal Rhythm 11 ~= 21.346px @ 1920px width */
+	gap                   : var( --spa-ver-p02 ) clamp( var( --spa-hor-bas ), var( --hor-rhy-011 ), var( --spa-hor-p02 ) ); /* Spacing Vertical Base Plus 2 ~= 25.572px, Spacing Horizontal Base ~= 14.572px, Horizontal Rhythm 11 ~= 21.346px @ 1920px width, Spacing Horizontal Base Plus 2 ~= 25.572px */
 	grid-template-columns : 1fr 1fr;
 
 
@@ -446,22 +446,23 @@
 
 /* #region forSubBut */
 
-.forSubBut { /* What: Form Submit Button. Why: Sending the request is the form's one action. How: This draws the site's pill button inverted to paper on the dark band, at the start of the row, lifting and turning the soft accent on hover. */
+.forSubBut { /* What: Form Submit Button. Why: Sending the request is the form's one action. How: This draws the site's pill button, its height set by its line height alone, inverted to paper on the dark band, at the start of the row, lifting and turning the soft accent on hover. */
 
 
 	align-items    : center;
 	align-self     : flex-start;
-	background     : var( --bac-pag-col );                      /* Background Page Color = #f5f2ec */
-	border         : var( --bor-wid-bas ) solid transparent;    /* Border Width Base ~= 1.160px */
+	background     : var( --bac-pag-col );                                                        /* Background Page Color = #f5f2ec */
+	border         : var( --bor-wid-bas ) solid transparent;                                      /* Border Width Base ~= 1.160px */
 	border-radius  : 999px;
-	color          : var( --tex-mai-col );                      /* Text Main Color = #1a1f24 */
+	color          : var( --tex-mai-col );                                                        /* Text Main Color = #1a1f24 */
 	display        : inline-flex;
-	font-size      : var( --fon-siz-p01 );                      /* Font Size Base Plus 1 ~= 14.572px */
+	font-size      : var( --fon-siz-p01 );                                                        /* Font Size Base Plus 1 ~= 14.572px */
 	font-weight    : 500;
-	gap            : var( --hor-rhy-009 );                      /* Horizontal Rhythm 9 ~= 12.164px @ 1920px width */
+	gap            : var( --spa-hor-m01 );                                                        /* Spacing Horizontal Base Minus 1 = 11px */
 	letter-spacing : 0.02em;
-	margin-top     : var( --spa-ver-m02 );                      /* Spacing Vertical Base Minus 2 ~= 8.304px */
-	padding        : var( --spa-ver-bas ) var( --hor-rhy-012 ); /* Spacing Vertical Base ~= 14.572px, Horizontal Rhythm 12 ~= 28.278px @ 1920px width */
+	line-height    : var( --ver-rhy-p02 );                                                        /* Vertical Rhythm Base Plus 2 ~= 2.325 */
+	margin-top     : var( --spa-ver-m02 );                                                        /* Spacing Vertical Base Minus 2 ~= 8.304px */
+	padding        : 0 clamp( var( --spa-hor-p01 ), var( --hor-rhy-012 ), var( --spa-hor-p03 ) ); /* Spacing Horizontal Base Plus 1 ~= 19.304px, Horizontal Rhythm 12 ~= 28.278px @ 1920px width, Spacing Horizontal Base Plus 3 ~= 33.876px */
 	transition     : background-color var( --dur-tra-p02 ) var( --mot-dec-eas ), color var( --dur-tra-p02 ) var( --mot-dec-eas ), transform var( --dur-tra-p02 ) var( --mot-dec-eas ); /* Duration Transition Base Plus 2 ~= 277.0ms, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ) */
 	white-space    : nowrap;
 
@@ -497,10 +498,10 @@
 
 
 }
-.forSubBut:hover .arrIcoSpa { /* What: Hovered Arrow Icon Span. Why: The arrow points the visitor onward when the button is hovered. How: This nudges it right by a small horizontal step. */
+.forSubBut:hover .arrIcoSpa { /* What: Hovered Arrow Icon Span. Why: The arrow points the visitor onward when the button is hovered. How: This nudges it right by a few pixels, kept literal since no spacing step lands within 10% of the 4px nudge. */
 
 
-	transform : translateX( var( --hor-rhy-005 ) ); /* Horizontal Rhythm 5 ~= 3.950px @ 1920px width */
+	transform : translateX( 4px );
 
 
 }

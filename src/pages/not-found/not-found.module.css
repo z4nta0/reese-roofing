@@ -25,10 +25,10 @@
 	align-items     : center;
 	display         : flex;
 	flex-direction  : column;
-	gap             : var( --spa-ver-p02 );                      /* Spacing Vertical Base Plus 2 ~= 25.572px */
+	gap             : var( --spa-ver-p02 );                                                                           /* Spacing Vertical Base Plus 2 ~= 25.572px */
 	justify-content : center;
 	min-height      : 100vh;
-	padding         : var( --spa-ver-p03 ) var( --hor-rhy-012 ); /* Spacing Vertical Base Plus 3 ~= 33.876px, Horizontal Rhythm 12 ~= 28.278px @ 1920px width */
+	padding         : var( --spa-ver-p03 ) clamp( var( --spa-hor-p01 ), var( --hor-rhy-012 ), var( --spa-hor-p03 ) ); /* Spacing Vertical Base Plus 3 ~= 33.876px, Spacing Horizontal Base Plus 1 ~= 19.304px, Horizontal Rhythm 12 ~= 28.278px @ 1920px width, Spacing Horizontal Base Plus 3 ~= 33.876px */
 	text-align      : center;
 
 
@@ -43,19 +43,19 @@
 	font-family    : var( --fon-fam-mai ); /* Font Family Main = 'Inter Tight', -apple-system, BlinkMacSystemFont, sans-serif */
 	font-size      : var( --fon-siz-bas ); /* Font Size Base = 11px */
 	font-weight    : 500;
-	gap            : var( --hor-rhy-009 ); /* Horizontal Rhythm 9 ~= 12.164px @ 1920px width */
+	gap            : var( --spa-hor-m01 ); /* Spacing Horizontal Base Minus 1 = 11px */
 	letter-spacing : 0.18em;
 	text-transform : uppercase;
 
 
 }
-.eyeLabSpa::before { /* What: Eyebrow Label Span Leading Line. Why: A short rule leads into the label. How: This draws a short hairline, one horizontal step long, before the text. */
+.eyeLabSpa::before { /* What: Eyebrow Label Span Leading Line. Why: A short rule leads into the label. How: This draws a short hairline, one rhythm step long, before the text. */
 
 
-	background : var( --tex-mut-col ); /* Text Muted Color = #6b7079 */
+	background : var( --tex-mut-col );                /* Text Muted Color = #6b7079 */
 	content    : '';
-	height     : var( --bor-wid-bas ); /* Border Width Base ~= 1.160px */
-	width      : var( --hor-rhy-012 ); /* Horizontal Rhythm 12 ~= 28.278px @ 1920px width */
+	height     : var( --bor-wid-bas );                /* Border Width Base ~= 1.160px */
+	width      : calc( var( --ver-rhy-p02 ) * 1rem ); /* Vertical Rhythm Base Plus 2 ~= 25.572px */
 
 
 }
@@ -105,7 +105,7 @@
 
 /* #region butBasAnc */
 
-.butBasAnc { /* What: Button Base Anchor. Why: The way home uses the site's pill button shape. How: This draws a rounded pill with its label and arrow side by side, easing its colors and lift on hover. */
+.butBasAnc { /* What: Button Base Anchor. Why: The way home uses the site's pill button shape. How: This draws a rounded pill whose height comes from its line height alone, with its label and arrow side by side, easing its colors and lift on hover. */
 
 
 	align-items    : center;
@@ -114,9 +114,10 @@
 	display        : inline-flex;
 	font-size      : var( --fon-siz-p01 );                                                                                            /* Font Size Base Plus 1 ~= 14.572px */
 	font-weight    : 500;
-	gap            : var( --hor-rhy-009 );                                                                                            /* Horizontal Rhythm 9 ~= 12.164px @ 1920px width */
+	gap            : var( --spa-hor-m01 );                                                                                            /* Spacing Horizontal Base Minus 1 = 11px */
 	letter-spacing : 0.02em;
-	padding        : var( --spa-ver-bas ) var( --hor-rhy-012 );                                                                       /* Spacing Vertical Base ~= 14.572px, Horizontal Rhythm 12 ~= 28.278px @ 1920px width */
+	line-height    : var( --ver-rhy-p02 );                                                                                            /* Vertical Rhythm Base Plus 2 ~= 2.325 */
+	padding        : 0 clamp( var( --spa-hor-p01 ), var( --hor-rhy-012 ), var( --spa-hor-p03 ) );                                     /* Spacing Horizontal Base Plus 1 ~= 19.304px, Horizontal Rhythm 12 ~= 28.278px @ 1920px width, Spacing Horizontal Base Plus 3 ~= 33.876px */
 	transition     : background-color var( --dur-tra-p02 ) var( --mot-dec-eas ), transform var( --dur-tra-p02 ) var( --mot-dec-eas ); /* Duration Transition Base Plus 2 ~= 277.0ms, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ) */
 	white-space    : nowrap;
 
@@ -159,10 +160,10 @@
 
 
 }
-.butBasAnc:hover .arrIcoSpa { /* What: Hovered Arrow Icon Span. Why: The arrow points the visitor onward when the button is hovered. How: This nudges it right by a small horizontal step. */
+.butBasAnc:hover .arrIcoSpa { /* What: Hovered Arrow Icon Span. Why: The arrow points the visitor onward when the button is hovered. How: This nudges it right by a few pixels, kept literal since no spacing step lands within 10% of the 4px nudge. */
 
 
-	transform : translateX( var( --hor-rhy-005 ) ); /* Horizontal Rhythm 5 ~= 3.950px @ 1920px width */
+	transform : translateX( 4px );
 
 
 }

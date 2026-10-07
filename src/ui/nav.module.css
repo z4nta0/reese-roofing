@@ -68,10 +68,10 @@
 
 	align-items     : center;
 	display         : flex;
-	gap             : var( --hor-rhy-012 ); /* Horizontal Rhythm 12 ~= 28.278px @ 1920px width */
+	gap             : var( --spa-hor-p03 ); /* Spacing Horizontal Base Plus 3 ~= 33.876px */
 	justify-content : space-between;
 	margin          : 0 auto;
-	max-width       : var( --con-max-wid ); /* Container Maximum Width, about 75.5% of the viewport, at most about 1449.4px */
+	max-width       : var( --con-max-wid ); /* Container Maximum Width, about 1449.4px */
 	padding-inline  : var( --gut-sid-pad ); /* Gutter Side Padding, about 19.304px to 44.876px */
 	width           : 100%;
 
@@ -88,20 +88,20 @@
 	display        : inline-flex;
 	font-family    : var( --fon-fam-sec ); /* Font Family Secondary = 'Fraunces', 'Times New Roman', serif */
 	font-size      : var( --fon-siz-p02 ); /* Font Size Base Plus 2 ~= 19.304px */
-	gap            : var( --hor-rhy-009 ); /* Horizontal Rhythm 9 ~= 12.164px @ 1920px width */
+	gap            : var( --spa-hor-m01 ); /* Spacing Horizontal Base Minus 1 = 11px */
 	letter-spacing : -0.01em;
 
 
 }
 
-.navMarIma { /* What: Navigation Mark Image. Why: The logo mark should keep its shape at a fixed width. How: This sizes it one horizontal step wide and lifts it slightly when the brand is hovered. */
+.navMarIma { /* What: Navigation Mark Image. Why: The logo mark should keep its shape at a fixed width. How: This sizes it one rhythm step wide and lifts it slightly when the brand is hovered. */
 
 
 	display    : block;
 	height     : auto;
 	object-fit : contain;
 	transition : transform var( --dur-tra-p03 ) var( --mot-dec-eas ); /* Duration Transition Base Plus 3 ~= 366.9ms, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ) */
-	width      : var( --hor-rhy-013 );                                /* Horizontal Rhythm 13 ~= 37.460px @ 1920px width */
+	width      : calc( var( --ver-rhy-p03 ) * 1rem );                 /* Vertical Rhythm Base Plus 3 ~= 33.876px */
 
 
 }
@@ -159,7 +159,7 @@
 
 
 	display   : flex;
-	gap       : var( --hor-rhy-012 ); /* Horizontal Rhythm 12 ~= 28.278px @ 1920px width */
+	gap       : var( --spa-hor-p03 ); /* Spacing Horizontal Base Plus 3 ~= 33.876px */
 	left      : 50%;
 	position  : absolute;
 	transform : translateX( -50% );
@@ -247,7 +247,7 @@
 
 	align-items : center;
 	display     : flex;
-	gap         : var( --hor-rhy-011 ); /* Horizontal Rhythm 11 ~= 21.346px @ 1920px width */
+	gap         : var( --spa-hor-p01 ); /* Spacing Horizontal Base Plus 1 ~= 19.304px */
 
 
 }
@@ -299,7 +299,7 @@
 
 /* #region navEstAnc */
 
-.navEstAnc { /* What: Navigation Estimate Anchor. Why: The bar's main action should look like the site's primary button. How: This draws a compact version of the dark pill, with smaller padding and text, its label and arrow side by side, lifting and turning accent on hover. */
+.navEstAnc { /* What: Navigation Estimate Anchor. Why: The bar's main action should look like the site's primary button. How: This draws the dark pill with its height set by its line height alone and its side padding clamped between two spacing steps, its label and arrow side by side, lifting and turning accent on hover. */
 
 
 	align-items    : center;
@@ -310,9 +310,10 @@
 	display        : inline-flex;
 	font-size      : var( --fon-siz-p01 );                                                                                            /* Font Size Base Plus 1 ~= 14.572px */
 	font-weight    : 500;
-	gap            : var( --hor-rhy-009 );                                                                                            /* Horizontal Rhythm 9 ~= 12.164px @ 1920px width */
+	gap            : var( --spa-hor-m01 );                                                                                            /* Spacing Horizontal Base Minus 1 = 11px */
 	letter-spacing : 0.02em;
-	padding        : var( --spa-ver-m01 ) var( --hor-rhy-011 );                                                                       /* Spacing Vertical Base Minus 1 = 11px, Horizontal Rhythm 11 ~= 21.346px @ 1920px width */
+	line-height    : var( --ver-rhy-p02 );                                                                                            /* Vertical Rhythm Base Plus 2 ~= 2.325 */
+	padding        : 0 clamp( var( --spa-hor-bas ), var( --hor-rhy-011 ), var( --spa-hor-p02 ) );                                     /* Spacing Horizontal Base ~= 14.572px, Horizontal Rhythm 11 ~= 21.346px @ 1920px width, Spacing Horizontal Base Plus 2 ~= 25.572px */
 	transition     : background-color var( --dur-tra-p02 ) var( --mot-dec-eas ), transform var( --dur-tra-p02 ) var( --mot-dec-eas ); /* Duration Transition Base Plus 2 ~= 277.0ms, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ) */
 	white-space    : nowrap;
 
@@ -347,10 +348,10 @@
 
 
 }
-.navEstAnc:hover .arrIcoSpa { /* What: Hovered Arrow Icon Span. Why: The arrow points the visitor onward when the button is hovered. How: This nudges it right by a small horizontal step. */
+.navEstAnc:hover .arrIcoSpa { /* What: Hovered Arrow Icon Span. Why: The arrow points the visitor onward when the button is hovered. How: This nudges it right by a few pixels, kept literal since no spacing step lands within 10% of the 4px nudge. */
 
 
-	transform : translateX( var( --hor-rhy-005 ) ); /* Horizontal Rhythm 5 ~= 3.950px @ 1920px width */
+	transform : translateX( 4px );
 
 
 }
@@ -382,7 +383,7 @@
 	display        : none;
 	flex-direction : column;
 	gap            : var( --spa-ver-m04 );                      /* Spacing Vertical Base Minus 4 ~= 4.731px */
-	padding        : var( --spa-ver-m02 ) var( --hor-rhy-008 ); /* Spacing Vertical Base Minus 2 ~= 8.304px, Horizontal Rhythm 8 ~= 9.182px @ 1920px width */
+	padding        : var( --spa-ver-m02 ) var( --spa-hor-m02 ); /* Spacing Vertical Base Minus 2 ~= 8.304px, Spacing Horizontal Base Minus 2 ~= 8.304px */
 
 
 }
@@ -406,7 +407,7 @@
 	background : var( --tex-mai-col );                                                                                   /* Text Main Color = #1a1f24 */
 	height     : var( --spa-ver-m08 );                                                                                   /* Spacing Vertical Base Minus 8 ~= 1.537px */
 	transition : transform var( --dur-tra-p02 ) var( --mot-sta-eas ), opacity var( --dur-tra-p02 ) var( --mot-sta-eas ); /* Duration Transition Base Plus 2 ~= 277.0ms, Motion Standard Easing = ease */
-	width      : var( --hor-rhy-011 );                                                                                   /* Horizontal Rhythm 11 ~= 21.346px @ 1920px width */
+	width      : calc( var( --ver-rhy-p01 ) * 1rem );                                                                    /* Vertical Rhythm Base Plus 1 ~= 19.304px */
 
 
 }

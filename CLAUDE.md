@@ -75,15 +75,24 @@ project" rule (the vertical rhythm or a viewport-based horizontal rhythm)
 before choosing.
 
 Under trial (2026-10-07): the viewport-based horizontal rhythm, ease-my-life's
-`--hor-rhy-*` tokens, is applied to every horizontal value in one commit,
-"Horizontal Rhythm Applied For Review", so `git revert` on that commit alone
-restores the fixed sizes. The content column is capped at `--hor-rhy-max`'s
-value at a 1920px viewport (about 1449.4px), the gutter, the hero's
-headline-to-logo gap, and the contact form's side padding keep their clamps
-with a horizontal step in the middle and rhythm steps at the ends, and every
-other value takes its nearest step with no clamp yet. Known effect: on phones
-the viewport steps shrink small fixed elements (the logo mark, the menu icon,
-the logo caps) to a fraction of their size.
+`--hor-rhy-*` tokens, applied in "Horizontal Rhythm Applied For Review" and
+refined in "Horizontal Sizes Split Between Fixed And Fluid", so reverting those
+two commits restores the fixed sizes. The split:
+- **Fluid (horizontal rhythm)**: layout values only, the gutter, the column
+  gaps between section columns, the contact label column, and the logos. Each
+  is a `clamp()` between two `--spa-hor-*` (or rhythm width) steps, so it never
+  shrinks below a workable size on a phone or grows past its step on a very
+  wide screen. The logos use `max()` with a rhythm step floor instead, since
+  their column already caps them.
+- **Fixed (rem steps)**: everything inside a component, small gaps, card and
+  quote padding, the nav mark and menu lines, the eyebrow lines. Gaps and
+  padding read `--spa-hor-*`, widths a vertical rhythm step times `1rem`. The
+  4px arrow nudge stays literal, since no step lands within 10% of it.
+- **Content column**: capped at a fixed `1920px / ρ` (about 1449.4px), so below
+  that width only the gutter limits it.
+- **Buttons**: height comes from line height alone, one rhythm step above the
+  body's (`--ver-rhy-p02`, about 33.9px at the button's font size), with no
+  top or bottom padding, and side padding clamped between two spacing steps.
 
 Design system choices (decided 2026-10-07):
 - **Base and body size**: 1rem is the 11px base, and body text is Base Plus 1

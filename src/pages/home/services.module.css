@@ -38,7 +38,7 @@
 
 
 	margin         : 0 auto;
-	max-width      : var( --con-max-wid ); /* Container Maximum Width, about 75.5% of the viewport, at most about 1449.4px */
+	max-width      : var( --con-max-wid ); /* Container Maximum Width, about 1449.4px */
 	padding-inline : var( --gut-sid-pad ); /* Gutter Side Padding, about 19.304px to 44.876px */
 	width          : 100%;
 
@@ -53,9 +53,9 @@
 
 	align-items           : end;
 	display               : grid;
-	gap                   : var( --spa-ver-p04 ) var( --hor-rhy-014 ); /* Spacing Vertical Base Plus 4 ~= 44.876px, Horizontal Rhythm 14 ~= 49.625px @ 1920px width */
+	gap                   : var( --spa-ver-p04 ) clamp( var( --spa-hor-p02 ), var( --hor-rhy-014 ), var( --spa-hor-p05 ) ); /* Spacing Vertical Base Plus 4 ~= 44.876px, Spacing Horizontal Base Plus 2 ~= 25.572px, Horizontal Rhythm 14 ~= 49.625px @ 1920px width, Spacing Horizontal Base Plus 5 ~= 59.447px */
 	grid-template-columns : 1fr 1fr;
-	margin-bottom         : var( --spa-ver-p06 );                      /* Spacing Vertical Base Plus 6 ~= 78.750px */
+	margin-bottom         : var( --spa-ver-p06 );                                                                           /* Spacing Vertical Base Plus 6 ~= 78.750px */
 
 
 }
@@ -83,19 +83,19 @@
 	font-family    : var( --fon-fam-mai ); /* Font Family Main = 'Inter Tight', -apple-system, BlinkMacSystemFont, sans-serif */
 	font-size      : var( --fon-siz-bas ); /* Font Size Base = 11px */
 	font-weight    : 500;
-	gap            : var( --hor-rhy-009 ); /* Horizontal Rhythm 9 ~= 12.164px @ 1920px width */
+	gap            : var( --spa-hor-m01 ); /* Spacing Horizontal Base Minus 1 = 11px */
 	letter-spacing : 0.18em;
 	text-transform : uppercase;
 
 
 }
-.eyeLabSpa::before { /* What: Eyebrow Label Span Leading Line. Why: A short rule leads into the label. How: This draws a short hairline, one horizontal step long, before the text. */
+.eyeLabSpa::before { /* What: Eyebrow Label Span Leading Line. Why: A short rule leads into the label. How: This draws a short hairline, one rhythm step long, before the text. */
 
 
-	background : var( --tex-mut-col ); /* Text Muted Color = #6b7079 */
+	background : var( --tex-mut-col );                /* Text Muted Color = #6b7079 */
 	content    : '';
-	height     : var( --bor-wid-bas ); /* Border Width Base ~= 1.160px */
-	width      : var( --hor-rhy-012 ); /* Horizontal Rhythm 12 ~= 28.278px @ 1920px width */
+	height     : var( --bor-wid-bas );                /* Border Width Base ~= 1.160px */
+	width      : calc( var( --ver-rhy-p02 ) * 1rem ); /* Vertical Rhythm Base Plus 2 ~= 25.572px */
 
 
 }
@@ -224,7 +224,7 @@
 	background    : var( --bac-pag-col );                                           /* Background Page Color = #f5f2ec */
 	border-bottom : var( --bor-wid-bas ) solid var( --bor-str-col );                /* Border Width Base ~= 1.160px, Border Strong Color, the main border at 0.22 opacity */
 	border-right  : var( --bor-wid-bas ) solid var( --bor-str-col );                /* Border Width Base ~= 1.160px, Border Strong Color, the main border at 0.22 opacity */
-	padding       : var( --spa-ver-p04 ) var( --hor-rhy-012 ) var( --spa-ver-p04 ); /* Spacing Vertical Base Plus 4 ~= 44.876px, Horizontal Rhythm 12 ~= 28.278px @ 1920px width */
+	padding       : var( --spa-ver-p04 ) var( --spa-hor-p03 ) var( --spa-ver-p04 ); /* Spacing Vertical Base Plus 4 ~= 44.876px, Spacing Horizontal Base Plus 3 ~= 33.876px */
 	position      : relative;
 	transition    : background-color var( --dur-tra-p02 ) var( --mot-sta-eas );     /* Duration Transition Base Plus 2 ~= 277.0ms, Motion Standard Easing = ease */
 
@@ -259,7 +259,7 @@
 
 	align-items   : baseline;
 	display       : flex;
-	gap           : var( --hor-rhy-010 ); /* Horizontal Rhythm 10 ~= 16.114px @ 1920px width */
+	gap           : var( --spa-hor-bas ); /* Spacing Horizontal Base ~= 14.572px */
 	margin-bottom : var( --spa-ver-p02 ); /* Spacing Vertical Base Plus 2 ~= 25.572px */
 	min-height    : var( --spa-ver-p06 ); /* Spacing Vertical Base Plus 6 ~= 78.750px */
 
@@ -339,7 +339,7 @@
 	color       : var( --tex-mut-col );   /* Text Muted Color = #6b7079 */
 	display     : flex;
 	font-size   : var( --fon-siz-p01 );   /* Font Size Base Plus 1 ~= 14.572px */
-	gap         : var( --hor-rhy-008 );   /* Horizontal Rhythm 8 ~= 9.182px @ 1920px width */
+	gap         : var( --spa-hor-m02 );   /* Spacing Horizontal Base Minus 2 ~= 8.304px */
 	padding     : var( --spa-ver-m03 ) 0; /* Spacing Vertical Base Minus 3 ~= 6.268px */
 
 
