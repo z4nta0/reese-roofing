@@ -446,7 +446,7 @@
 
 /* #region nav__drawer */
 
-.nav__drawer { /* What: Navigation Drawer. Why: Small screens show the links in a panel under the bar. How: This stacks the links on the page color, hidden until opened. */
+.nav__drawer { /* What: Navigation Drawer. Why: Small screens show the links in a panel under the bar. How: This stacks the links on the page color, hidden until opened, then grows and shrinks its height as it opens and closes. */
 
 
 	background     : var( --paper );
@@ -456,7 +456,7 @@
 	max-height     : 0;
 	overflow       : hidden;
 	padding        : 1.5rem var( --gutter ) 2rem;
-	transition     : max-height 0.4s cubic-bezier( 0.22, 1, 0.36, 1 ); /* What: Drawer Height Transition. Why: The drawer was meant to grow open. How: This animates its height, a layout property; it never actually plays, since the drawer switches from display none, which has no starting height to animate from. */
+	transition     : display 0.4s allow-discrete, max-height 0.4s cubic-bezier( 0.22, 1, 0.36, 1 ); /* What: Drawer Height Transition. Why: The drawer grows open and shrinks closed under the bar. How: This animates its height, a layout property chosen because the drawer's content has to be revealed rather than scaled, and lets display wait for the closing animation to finish. */
 
 
 }
@@ -465,6 +465,19 @@
 
 	display    : flex;
 	max-height : 400px;
+
+
+}
+@starting-style { /* What: Drawer Starting Style. Why: An element switching from display none has no previous height to animate from. How: This gives the opening drawer a zero height to grow from. */
+
+
+	.nav__drawer[data-drawer-menu-open] { /* What: Opening Navigation Drawer. Why: The drawer should grow from nothing. How: This starts its height cap at zero. */
+
+
+		max-height : 0;
+
+
+	}
 
 
 }
