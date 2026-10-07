@@ -9,10 +9,9 @@
  * scrolls, with the brand, the centered section links, the phone link and
  * estimate button, and on small screens the menu toggle and its drop-down
  * drawer. The shared container, button, and arrow styles the bar used to
- * borrow from the global stylesheet are copied onto its own classes here.
- * The estimate button carries the values that actually rendered: its own
- * smaller padding and font size never applied, because the global button
- * rule came later in the cascade and overrode them.
+ * borrow from the global stylesheet are copied onto its own classes here. The
+ * estimate button is a compact version of the site's primary button, with
+ * smaller padding and text to suit the bar.
  *
  * @author z4nta0 <https://github.com/z4nta0>
  *
@@ -300,7 +299,7 @@
 
 /* #region nav__btn */
 
-.nav__btn { /* What: Navigation Estimate Button. Why: The bar's main action should look like the site's primary button. How: This draws the dark pill with its label and arrow side by side, lifting and turning accent on hover. */
+.nav__btn { /* What: Navigation Estimate Button. Why: The bar's main action should look like the site's primary button. How: This draws a compact version of the dark pill, with smaller padding and text, its label and arrow side by side, lifting and turning accent on hover. */
 
 
 	align-items    : center;
@@ -309,11 +308,11 @@
 	border-radius  : 999px;
 	color          : var( --paper );
 	display        : inline-flex;
-	font-size      : 0.9rem;
+	font-size      : 0.85rem;
 	font-weight    : 500;
 	gap            : 0.75rem;
 	letter-spacing : 0.02em;
-	padding        : 0.95rem 1.6rem;
+	padding        : 0.65rem 1.2rem;
 	transition     : background-color 0.3s cubic-bezier( 0.22, 1, 0.36, 1 ), transform 0.3s cubic-bezier( 0.22, 1, 0.36, 1 );
 	white-space    : nowrap;
 
