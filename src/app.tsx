@@ -3,12 +3,12 @@
 
 // #region Imports
 
-import Home     from './pages/home/home.tsx';           // What: Home. Why: The home page holds every section of the site. How: This is rendered by the root path's route.
-import NotFound from './pages/not-found/not-found.tsx'; // What: Not Found. Why: An unknown path should show a 404 page rather than nothing. How: This is rendered by the catch-all route.
+import Home from './pages/home/home.tsx'; // What: Home. Why: The home page holds every section of the site. How: This is rendered by the root path's route.
 
 
-import { Route  } from 'react-router'; // What: Route. Why: Each page is tied to the URL path that shows it. How: This declares the two routes below.
-import { Routes } from 'react-router'; // What: Routes. Why: Only the first route matching the current path should render. How: This wraps the routes below.
+import { NotFouCom } from './pages/not-found/not-found.tsx'; // What: Not Found Component. Why: An unknown path should show a 404 page rather than nothing. How: This is rendered by the catch-all route.
+import { Route     } from 'react-router';                    // What: Route. Why: Each page is tied to the URL path that shows it. How: This declares the two routes below.
+import { Routes    } from 'react-router';                    // What: Routes. Why: Only the first route matching the current path should render. How: This wraps the routes below.
 
 // #endregion Imports
 
@@ -75,9 +75,9 @@ function AppRooCom () : React.JSX.Element {
 
 
 			<Route
-				element={ <NotFound /> }
+				element={ <NotFouCom /> }
 				path='*' // What: Catch-All Path. Why: Any address the site doesn't have should land on the 404 page. How: The asterisk matches every path no earlier route claimed.
-			/>{ /* What: Not Found Route. Why: Unknown paths need a page of their own. How: This renders NotFound for every other path. */ }
+			/>{ /* What: Not Found Route. Why: Unknown paths need a page of their own. How: This renders NotFouCom for every other path. */ }
 
 
 		</Routes>
