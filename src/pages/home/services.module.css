@@ -23,9 +23,9 @@
 .services { /* What: Services Section. Why: The section opens with a hairline and the standard section padding. How: This sets the page color, the top rule, and the vertical padding. */
 
 
-	background    : var( --paper );
-	border-top    : 1px solid var( --line );
-	padding-block : var( --section-pad-y );
+	background    : var( --bac-pag-col );                            /* Background Page Color = #f5f2ec */
+	border-top    : var( --bor-wid-bas ) solid var( --bor-mai-col ); /* Border Width Base ~= 1.160px, Border Main Color = rgba( 26, 31, 36, 0.12 ) */
+	padding-block : var( --sec-ver-pad );                            /* Section Vertical Padding, about 78.749px to 138.200px */
 	position      : relative;
 
 
@@ -38,8 +38,8 @@
 
 
 	margin         : 0 auto;
-	max-width      : var( --container );
-	padding-inline : var( --gutter );
+	max-width      : var( --con-max-wid ); /* Container Maximum Width = 1280px */
+	padding-inline : var( --gut-sid-pad ); /* Gutter Side Padding, 20px to 48px */
 	width          : 100%;
 
 
@@ -53,9 +53,9 @@
 
 	align-items           : end;
 	display               : grid;
-	gap                   : 4.3636363636rem;
+	gap                   : var( --spa-ver-p04 ) 4.3636363636rem; /* Spacing Vertical Base Plus 4 ~= 44.876px */
 	grid-template-columns : 1fr 1fr;
-	margin-bottom         : 7.2727272727rem;
+	margin-bottom         : var( --spa-ver-p06 );                 /* Spacing Vertical Base Plus 6 ~= 78.750px */
 
 
 }
@@ -65,7 +65,7 @@
 	.services__head { /* What: Stacked Services Head Block. Why: The lede reads best under the heading. How: This turns the grid into one column with a smaller gap. */
 
 
-		gap                   : 2.1818181818rem;
+		gap                   : var( --spa-ver-p02 ); /* Spacing Vertical Base Plus 2 ~= 25.572px */
 		grid-template-columns : 1fr;
 
 
@@ -78,10 +78,10 @@
 
 
 	align-items    : center;
-	color          : var( --ink-muted );
+	color          : var( --tex-mut-col ); /* Text Muted Color = #6b7079 */
 	display        : inline-flex;
-	font-family    : var( --font-body );
-	font-size      : 1.1345454545rem;
+	font-family    : var( --fon-fam-mai ); /* Font Family Main = 'Inter Tight', -apple-system, BlinkMacSystemFont, sans-serif */
+	font-size      : var( --fon-siz-bas ); /* Font Size Base = 11px */
 	font-weight    : 500;
 	gap            : 1.0909090909rem;
 	letter-spacing : 0.18em;
@@ -92,9 +92,9 @@
 .eyebrow::before { /* What: Eyebrow Leading Line. Why: A short rule leads into the label. How: This draws a 28px hairline before the text. */
 
 
-	background : var( --ink-muted );
+	background : var( --tex-mut-col ); /* Text Muted Color = #6b7079 */
 	content    : '';
-	height     : 1px;
+	height     : var( --bor-wid-bas ); /* Border Width Base ~= 1.160px */
 	width      : 28px;
 
 
@@ -106,15 +106,15 @@
 .services__title { /* What: Services Title. Why: The heading names the section in large display type. How: This sets it in the display font at its largest optical size, scaling with the viewport, in the first column. */
 
 
-	color                   : var( --ink );
-	font-family             : var( --font-display );
-	font-size               : clamp( 3.2727272727rem, 5vw, 6.1818181818rem );
+	color                   : var( --tex-mai-col );                                     /* Text Main Color = #1a1f24 */
+	font-family             : var( --fon-fam-sec );                                     /* Font Family Secondary = 'Fraunces', 'Times New Roman', serif */
+	font-size               : clamp( var( --fon-siz-p04 ), 5vw, var( --fon-siz-p06 ) ); /* Font Size Base Plus 4 ~= 33.876px, Font Size Base Plus 6 ~= 59.447px */
 	font-variation-settings : 'opsz' 144;
 	font-weight             : 400;
 	grid-column             : 1;
 	letter-spacing          : -0.025em;
-	line-height             : 1.02;
-	margin-top              : 2.1818181818rem;
+	line-height             : var( --ver-rhy-m01 );                                     /* Vertical Rhythm Base Minus 1 = 1 */
+	margin-top              : var( --spa-ver-p02 );                                     /* Spacing Vertical Base Plus 2 ~= 25.572px */
 
 
 }
@@ -135,7 +135,7 @@
 .titAccEmp { /* What: Title Accent Emphasis. Why: One word in each heading is set apart in color and italic. How: This draws it in the accent, light and italic. */
 
 
-	color       : var( --accent );
+	color       : var( --acc-mai-col ); /* Accent Main Color = #1f4e7a */
 	font-style  : italic;
 	font-weight : 300;
 
@@ -148,13 +148,13 @@
 .services__lede { /* What: Services Lede Paragraph. Why: The lede says how every project starts, beside the heading. How: This sets it in the body font, a little larger than body text, in the second column. */
 
 
-	color          : var( --ink-soft );
-	font-family    : var( --font-body );
-	font-size      : clamp( 1.5272727273rem, 1.4vw, 1.7454545455rem );
+	color          : var( --tex-sec-col );                                       /* Text Secondary Color = #2a3138 */
+	font-family    : var( --fon-fam-mai );                                       /* Font Family Main = 'Inter Tight', -apple-system, BlinkMacSystemFont, sans-serif */
+	font-size      : clamp( var( --fon-siz-p01 ), 1.4vw, var( --fon-siz-p02 ) ); /* Font Size Base Plus 1 ~= 14.572px, Font Size Base Plus 2 ~= 19.304px */
 	grid-column    : 2;
-	line-height    : 1.55;
-	max-width      : 52ch;
-	padding-bottom : 0.7272727273rem;
+	line-height    : var( --ver-rhy-p01 );                                       /* Vertical Rhythm Base Plus 1 ~= 1.755 */
+	max-width      : var( --tex-wid-bas );                                       /* Text Width Base Maximum ~= 29.207em */
+	padding-bottom : var( --spa-ver-m02 );                                       /* Spacing Vertical Base Minus 2 ~= 8.304px */
 
 
 }
@@ -181,8 +181,8 @@
 .services__grid { /* What: Services Grid. Why: The cards share hairline borders, so the grid draws the outer top and left edges. How: This sets three columns with those two edges. */
 
 
-	border-left           : 1px solid var( --line-strong );
-	border-top            : 1px solid var( --line-strong );
+	border-left           : var( --bor-wid-bas ) solid var( --bor-str-col ); /* Border Width Base ~= 1.160px, Border Strong Color, the main border at 0.22 opacity */
+	border-top            : var( --bor-wid-bas ) solid var( --bor-str-col ); /* Border Width Base ~= 1.160px, Border Strong Color, the main border at 0.22 opacity */
 	display               : grid;
 	grid-template-columns : repeat( 3, 1fr );
 
@@ -221,19 +221,19 @@
 .service { /* What: Service Card. Why: Each card draws its own right and bottom edges, completing the shared grid lines, and tints on hover. How: This sets those edges, the card's padding, and a background that fades on hover. */
 
 
-	background    : var( --paper );
-	border-bottom : 1px solid var( --line-strong );
-	border-right  : 1px solid var( --line-strong );
-	padding       : 3.6363636364rem 2.9090909091rem 4rem;
+	background    : var( --bac-pag-col );                                       /* Background Page Color = #f5f2ec */
+	border-bottom : var( --bor-wid-bas ) solid var( --bor-str-col );            /* Border Width Base ~= 1.160px, Border Strong Color, the main border at 0.22 opacity */
+	border-right  : var( --bor-wid-bas ) solid var( --bor-str-col );            /* Border Width Base ~= 1.160px, Border Strong Color, the main border at 0.22 opacity */
+	padding       : var( --spa-ver-p04 ) 2.9090909091rem var( --spa-ver-p04 );  /* Spacing Vertical Base Plus 4 ~= 44.876px */
 	position      : relative;
-	transition    : background-color 0.3s ease;
+	transition    : background-color var( --dur-tra-p02 ) var( --mot-sta-eas ); /* Duration Transition Base Plus 2 ~= 277.0ms, Motion Standard Easing = ease */
 
 
 }
 .service:hover { /* What: Hovered Service Card. Why: The hovered card should stand out from its neighbors. How: This tints it with the soft paper color. */
 
 
-	background : var( --paper-soft );
+	background : var( --bac-sur-col ); /* Background Surface Color = #ebe7df */
 
 
 }
@@ -260,8 +260,8 @@
 	align-items   : baseline;
 	display       : flex;
 	gap           : 1.4545454545rem;
-	margin-bottom : 2.1818181818rem;
-	min-height    : 7.2727272727rem;
+	margin-bottom : var( --spa-ver-p02 ); /* Spacing Vertical Base Plus 2 ~= 25.572px */
+	min-height    : var( --spa-ver-p06 ); /* Spacing Vertical Base Plus 6 ~= 78.750px */
 
 
 }
@@ -282,9 +282,9 @@
 .service__id { /* What: Service Identifier. Why: The card's number reads as a small accent beside the title. How: This sets it in light italic display type in the accent. */
 
 
-	color          : var( --accent );
-	font-family    : var( --font-display );
-	font-size      : 1.7454545455rem;
+	color          : var( --acc-mai-col ); /* Accent Main Color = #1f4e7a */
+	font-family    : var( --fon-fam-sec ); /* Font Family Secondary = 'Fraunces', 'Times New Roman', serif */
+	font-size      : var( --fon-siz-p02 ); /* Font Size Base Plus 2 ~= 19.304px */
 	font-style     : italic;
 	font-weight    : 300;
 	letter-spacing : -0.02em;
@@ -295,12 +295,12 @@
 .service__title { /* What: Service Title. Why: Each card names its service in display type. How: This sets it in the display font, tightly leaded. */
 
 
-	color          : var( --ink );
-	font-family    : var( --font-display );
-	font-size      : 2.2545454545rem;
+	color          : var( --tex-mai-col ); /* Text Main Color = #1a1f24 */
+	font-family    : var( --fon-fam-sec ); /* Font Family Secondary = 'Fraunces', 'Times New Roman', serif */
+	font-size      : var( --fon-siz-p03 ); /* Font Size Base Plus 3 ~= 25.572px */
 	font-weight    : 400;
 	letter-spacing : -0.015em;
-	line-height    : 1.15;
+	line-height    : var( --ver-rhy-m01 ); /* Vertical Rhythm Base Minus 1 = 1 */
 
 
 }
@@ -311,10 +311,10 @@
 .service__desc { /* What: Service Description. Why: The card's sentence sits under its head. How: This sets it in soft body text with room below. */
 
 
-	color         : var( --ink-soft );
-	font-size     : 1.4254545455rem;
-	line-height   : 1.6;
-	margin-bottom : 2.5454545455rem;
+	color         : var( --tex-sec-col ); /* Text Secondary Color = #2a3138 */
+	font-size     : var( --fon-siz-p01 ); /* Font Size Base Plus 1 ~= 14.572px */
+	line-height   : var( --ver-rhy-p01 ); /* Vertical Rhythm Base Plus 1 ~= 1.755 */
+	margin-bottom : var( --spa-ver-p02 ); /* Spacing Vertical Base Plus 2 ~= 25.572px */
 
 
 }
@@ -325,9 +325,9 @@
 .service__list { /* What: Service List. Why: The card's details sit below a hairline. How: This drops the default bullets and draws the rule above. */
 
 
-	border-top  : 1px solid var( --line );
+	border-top  : var( --bor-wid-bas ) solid var( --bor-mai-col ); /* Border Width Base ~= 1.160px, Border Main Color = rgba( 26, 31, 36, 0.12 ) */
 	list-style  : none;
-	padding-top : 1.8181818182rem;
+	padding-top : var( --spa-ver-p01 );                            /* Spacing Vertical Base Plus 1 ~= 19.304px */
 
 
 }
@@ -336,23 +336,23 @@
 
 
 	align-items : center;
-	color       : var( --ink-muted );
+	color       : var( --tex-mut-col );   /* Text Muted Color = #6b7079 */
 	display     : flex;
-	font-size   : 1.2509090909rem;
+	font-size   : var( --fon-siz-p01 );   /* Font Size Base Plus 1 ~= 14.572px */
 	gap         : 0.8727272727rem;
-	padding     : 0.5818181818rem 0;
+	padding     : var( --spa-ver-m03 ) 0; /* Spacing Vertical Base Minus 3 ~= 6.268px */
 
 
 }
-.serDetIte::before { /* What: Service Detail Bullet. Why: A small accent dot marks each detail. How: This draws a 4px accent circle that never shrinks. */
+.serDetIte::before { /* What: Service Detail Bullet. Why: A small accent dot marks each detail. How: This draws a small accent circle, its width matching its rhythm-step height, that never shrinks. */
 
 
-	background    : var( --accent );
+	background    : var( --acc-mai-col ); /* Accent Main Color = #1f4e7a */
 	border-radius : 50%;
 	content       : '';
 	flex-shrink   : 0;
-	height        : 4px;
-	width         : 4px;
+	height        : var( --spa-ver-m05 ); /* Spacing Vertical Base Minus 5 ~= 3.571px */
+	width         : var( --spa-ver-m05 ); /* Spacing Vertical Base Minus 5 ~= 3.571px */
 
 
 }
