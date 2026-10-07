@@ -1,0 +1,187 @@
+
+
+
+/**
+ * not-found.module.css = Not Found Page Module
+ *
+ * @summary
+ * Styles for NotFouCom: one full-height, centered column holding the error
+ * label, the heading, the explanation, and the button home. The layout used
+ * to be inline styles, and the label, heading, paragraph, and button borrowed
+ * the shared eyebrow, display, lede, button, and arrow classes from the
+ * global stylesheet; all of it is copied onto the page's own classes here.
+ *
+ * @author z4nta0 <https://github.com/z4nta0>
+ *
+*/
+
+
+
+/* #region notFouMai */
+
+.notFouMai { /* What: Not Found Main. Why: The page's one message sits in the middle of the screen. How: This centers a spaced column in the full viewport height. */
+
+
+	align-items     : center;
+	display         : flex;
+	flex-direction  : column;
+	gap             : 1.5rem;
+	justify-content : center;
+	min-height      : 100vh;
+	padding         : 2rem;
+	text-align      : center;
+
+
+}
+
+.eyebrow { /* What: Eyebrow Label. Why: A small label with a leading line names the error. How: This sets it in tracked, muted capitals. */
+
+
+	align-items    : center;
+	color          : var( --ink-muted );
+	display        : inline-flex;
+	font-family    : var( --font-body );
+	font-size      : 0.78rem;
+	font-weight    : 500;
+	gap            : 0.75rem;
+	letter-spacing : 0.18em;
+	text-transform : uppercase;
+
+
+}
+.eyebrow::before { /* What: Eyebrow Leading Line. Why: A short rule leads into the label. How: This draws a 28px hairline before the text. */
+
+
+	background : var( --ink-muted );
+	content    : '';
+	height     : 1px;
+	width      : 28px;
+
+
+}
+
+
+/* #region display */
+
+.display { /* What: Display Heading. Why: The heading states the problem in large display type. How: This sets it in the display font at its largest optical size, scaling with the viewport between two bounds. */
+
+
+	color                   : var( --ink );
+	font-family             : var( --font-display );
+	font-size               : clamp( 3rem, 8vw, 6rem );
+	font-variation-settings : 'opsz' 144;
+	font-weight             : 400;
+	letter-spacing          : -0.025em;
+	line-height             : 1.02;
+
+
+}
+
+.titAccEmp { /* What: Title Accent Emphasis. Why: One word in each heading is set apart in color and italic. How: This draws it in the accent, light and italic. */
+
+
+	color       : var( --accent );
+	font-style  : italic;
+	font-weight : 300;
+
+
+}
+
+/* #endregion display */
+
+
+.lede { /* What: Lede Paragraph. Why: The explanation reads as a short lead paragraph. How: This sets it in the body font, a little larger than body text, at a comfortable measure. */
+
+
+	color       : var( --ink-soft );
+	font-family : var( --font-body );
+	font-size   : clamp( 1.05rem, 1.4vw, 1.2rem );
+	line-height : 1.55;
+	max-width   : 52ch;
+
+
+}
+
+
+/* #region btn */
+
+.btn { /* What: Button. Why: The way home uses the site's pill button shape. How: This draws a rounded pill with its label and arrow side by side, easing its colors and lift on hover. */
+
+
+	align-items    : center;
+	border         : 1px solid transparent;
+	border-radius  : 999px;
+	display        : inline-flex;
+	font-size      : 0.9rem;
+	font-weight    : 500;
+	gap            : 0.75rem;
+	letter-spacing : 0.02em;
+	padding        : 0.95rem 1.6rem;
+	transition     : background-color 0.3s cubic-bezier( 0.22, 1, 0.36, 1 ), transform 0.3s cubic-bezier( 0.22, 1, 0.36, 1 );
+	white-space    : nowrap;
+
+
+}
+.btn-primary { /* What: Primary Button. Why: Going home is the page's one action. How: This fills it with ink and paper-colored text. */
+
+
+	background : var( --ink );
+	color      : var( --paper );
+
+
+}
+.btn-primary:hover { /* What: Hovered Primary Button. Why: The button should respond to the pointer. How: This turns it accent and lifts it a pixel. */
+
+
+	background : var( --accent );
+	transform  : translateY( -1px );
+
+
+}
+@media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Button. Why: Someone who asked for less motion shouldn't see the button animate. How: This applies only when the reduced-motion preference is set. */
+
+
+	.btn { /* What: Motionless Button. Why: The hover style should appear at once. How: This turns the transition off. */
+
+
+		transition : none;
+
+
+	}
+
+
+}
+
+.arrow { /* What: Arrow Span. Why: The arrow slides forward as the button is hovered. How: This animates its position. */
+
+
+	transition : transform 0.3s cubic-bezier( 0.22, 1, 0.36, 1 );
+
+
+}
+.btn:hover .arrow { /* What: Hovered Arrow Span. Why: The arrow points the visitor onward when the button is hovered. How: This moves it 4px right. */
+
+
+	transform : translateX( 4px );
+
+
+}
+@media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Arrow. Why: Someone who asked for less motion shouldn't see the arrow slide. How: This applies only when the reduced-motion preference is set. */
+
+
+	.arrow { /* What: Motionless Arrow Span. Why: The arrow should simply shift. How: This turns the transition off. */
+
+
+		transition : none;
+
+
+	}
+
+
+}
+
+/* #endregion btn */
+
+/* #endregion notFouMai */
+
+
