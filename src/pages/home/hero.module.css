@@ -10,11 +10,8 @@
  * buttons between hairlines, and the stats row, each block rising into place
  * in turn. The shared section, container, eyebrow, display, lede, button, and
  * arrow declarations the hero used to borrow from the global stylesheet are
- * copied onto its own classes here with the values that actually rendered: the
- * stats' own line height and letter spacing never applied, because the global
- * rules came later in the cascade and overrode them. The section itself takes
- * extra top padding to clear the fixed bar, and a lighter bottom padding than
- * the other sections.
+ * copied onto its own classes here. The section takes extra top padding to
+ * clear the fixed bar, and a lighter bottom padding than the other sections.
  *
  * @author z4nta0 <https://github.com/z4nta0>
  *
@@ -596,7 +593,7 @@
 
 /* #region stat__num */
 
-.stat__num { /* What: Stat Number. Why: The number leads each stat in large display type. How: This sets it in the display font at its largest optical size, scaling with the viewport. */
+.stat__num { /* What: Stat Number. Why: The number leads each stat in large display type. How: This sets it in the display font at its largest optical size, scaling with the viewport, with its line height trimmed to the glyphs and slightly looser tracking than the headings. */
 
 
 	color                   : var( --ink );
@@ -604,8 +601,8 @@
 	font-size               : clamp( 2.25rem, 4vw, 3.25rem );
 	font-variation-settings : 'opsz' 144;
 	font-weight             : 400;
-	letter-spacing          : -0.025em;
-	line-height             : 1.02;
+	letter-spacing          : -0.02em;
+	line-height             : 1;
 	margin-bottom           : 0.6rem;
 
 
