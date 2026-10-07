@@ -52,23 +52,25 @@ reorganization, ESLint setup, config rebuild, and dependency upgrades.
 4. **404 page**: rebuilt with Nav and Footer from `ui/`, written to the rules
    from its first line.
 
-Open items from the CSS module pass, for the user to decide on: these styles
-were written but never rendered, because a later global rule overrode them,
-and the modules keep what actually rendered:
-- The navigation bar's estimate button was meant to be smaller (`0.65rem
-  1.2rem` padding, `0.85rem` text) than the standard button.
-- The hero was meant to have extra top padding (`calc( section + 3rem )`) and
-  its own bottom padding (`clamp( 4rem, 7vw, 6rem )`).
-- The hero's stat numbers were meant to have `line-height : 1` and
-  `letter-spacing : -0.02em`.
-- The about section's story was meant to have a bottom margin (`6rem`, or
-  `4rem` below 960px) before the principles.
-- The contact heading's italic word was meant to use `--accent-soft`.
-- The contact submit button was meant to be paper on the dark band (hovering
-  to `--accent-soft`); it renders as an ink button on the ink section.
-- The mobile drawer's `max-height` transition never plays, since the drawer
-  switches from `display : none`.
-- The `--brand` and `--paper-warm` tokens aren't read anywhere.
+Under review: the CSS module pass found styles that were written but never
+rendered, because a later global rule overrode them. Each was applied on
+2026-10-07 as its own commit, so any the user rejects can be reverted alone:
+- `c15eee8`: the navigation bar's compact estimate button.
+- `35cc127`: the hero's extra top padding and lighter bottom padding.
+- `72390da`: the hero stat numbers' line height and letter spacing.
+- `6c97153`: the about story's bottom margin before the principles.
+- `a39b331`: the contact heading's soft accent italic word.
+- `281265f`: the paper contact submit button on the dark band.
+- `8a5f993`: the mobile drawer's open and close animation.
+
+The `--brand` and `--paper-warm` tokens aren't read anywhere; the
+design-system pass decides whether they stay.
+
+Horizontal sizes (decided 2026-10-07): horizontal values stay exactly as they
+are through the design-system pass. Once the new vertical design values are in,
+the user compares both options from the user-level "Width is decided per
+project" rule (the vertical rhythm or a viewport-based horizontal rhythm)
+before choosing.
 
 Open item: the live Netlify site keeps the Node version it was pinned to
 when it was created, and React Router 8 needs Node 22.22 or newer to build.
