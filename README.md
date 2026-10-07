@@ -29,12 +29,12 @@ npm run preview
 
 ```
 src/
-├── assets/            Images shared by 2+ pages (logo-mark.svg)
+├── assets/            Images and fonts shared by 2+ pages (logo-mark.svg, fonts/)
 ├── pages/
 │   ├── home/          Home page and its sections (Hero, Services, About, Contact, logo-full.svg)
 │   └── not-found/     404 page
 ├── ui/                Shared components (Nav, Footer)
-├── styles/styles.css  Design tokens + reset + base typography
+├── styles/            fonts.css (@font-face) + styles.css (design tokens, reset, base typography)
 ├── app.tsx            React Router setup
 └── main.tsx           Entry point
 ```

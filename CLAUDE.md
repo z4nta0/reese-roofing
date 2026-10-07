@@ -13,11 +13,11 @@ src/
   main.tsx               entry point
   app.tsx                React Router setup
   vite-env.d.ts          Vite's client type declarations
-  assets/                images used by 2 or more pages
+  assets/                images and fonts used by 2 or more pages
   pages/
     home/  not-found/    one folder per route
   ui/                    components used by 2 or more pages (Nav, Footer)
-  styles/                global CSS only (styles.css)
+  styles/                global CSS only (fonts.css, styles.css)
 ```
 - **`pages/` takes the place of `tabs/`.** Each route gets its own folder,
   and a component only that page uses (Home's Hero, Services, About, and
