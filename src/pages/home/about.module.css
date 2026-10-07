@@ -10,9 +10,7 @@
  * scroll past on the right, then the row of four numbered principles under a
  * rule, stacking on smaller screens. The shared section, container, eyebrow,
  * display, and emphasis declarations the section used to borrow from the
- * global stylesheet are copied onto its own classes here with the values that
- * actually rendered: the story's own bottom margin never applied, because the
- * global container's margin came later in the cascade and overrode it.
+ * global stylesheet are copied onto its own classes here.
  *
  * @author z4nta0 <https://github.com/z4nta0>
  *
@@ -36,13 +34,14 @@
 
 /* #region about__container */
 
-.about__container { /* What: About Story Container. Why: The story splits into a heading column and a text column at the page's content width. How: This centers a two-column grid with the page's side gutter. */
+.about__container { /* What: About Story Container. Why: The story splits into a heading column and a text column at the page's content width. How: This centers a two-column grid with the page's side gutter and room below it before the principles. */
 
 
 	display               : grid;
 	gap                   : 5rem;
 	grid-template-columns : 1fr 1.2fr;
 	margin                : 0 auto;
+	margin-bottom         : 6rem;
 	max-width             : var( --container );
 	padding-inline        : var( --gutter );
 	width                 : 100%;
@@ -52,11 +51,12 @@
 @media ( max-width : 960px ) { /* What: Narrow About Story Container. Why: Small screens are too narrow for two columns. How: This applies below 960px wide. */
 
 
-	.about__container { /* What: Stacked About Story Container. Why: The story reads best in one column. How: This turns the grid into one column with a smaller gap. */
+	.about__container { /* What: Stacked About Story Container. Why: The story reads best in one column. How: This turns the grid into one column with a smaller gap and less room below. */
 
 
 		gap                   : 2.5rem;
 		grid-template-columns : 1fr;
+		margin-bottom         : 4rem;
 
 
 	}
