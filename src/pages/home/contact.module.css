@@ -1,0 +1,543 @@
+
+
+
+/**
+ * contact.module.css = Contact Section Module
+ *
+ * @summary
+ * Styles for ConSecCom: the dark closing section, with the label, heading,
+ * lede, detail rows, and signature card on the left and the framed estimate
+ * form on the right, stacking on smaller screens. The form's fields are
+ * underlined controls in light text that turn the soft accent on focus. The
+ * shared section, container, eyebrow, display, lede, button, and arrow
+ * declarations the section used to borrow from the global stylesheet are
+ * copied onto its own classes here with the values that actually rendered,
+ * so the important flags it needed to beat them are gone. Two of its own
+ * intended styles never applied, because the global rules came later in the
+ * cascade: the heading's softer accent on its italic word, and the submit
+ * button's paper background, which renders in ink like every primary button.
+ *
+ * @author z4nta0 <https://github.com/z4nta0>
+ *
+*/
+
+
+
+/* #region contact */
+
+.contact { /* What: Contact Section. Why: The page closes on a dark band with light text. How: This sets the ink background, the paper text color, the top rule, and the standard section padding. */
+
+
+	background    : var( --ink );
+	border-top    : 1px solid var( --line );
+	color         : var( --paper );
+	padding-block : var( --section-pad-y );
+	position      : relative;
+
+
+}
+
+
+/* #region contact__container */
+
+.contact__container { /* What: Contact Container. Why: The details and the form share a row at the page's content width. How: This centers a two-column grid aligned to the top, with the page's side gutter. */
+
+
+	align-items           : start;
+	display               : grid;
+	gap                   : 5rem;
+	grid-template-columns : 1fr 1.05fr;
+	margin                : 0 auto;
+	max-width             : var( --container );
+	padding-inline        : var( --gutter );
+	width                 : 100%;
+
+
+}
+@media ( max-width : 960px ) { /* What: Narrow Contact Container. Why: Small screens are too narrow for two columns. How: This applies below 960px wide. */
+
+
+	.contact__container { /* What: Stacked Contact Container. Why: The form reads best under the details. How: This turns the grid into one column with a smaller gap. */
+
+
+		gap                   : 3rem;
+		grid-template-columns : 1fr;
+
+
+	}
+
+
+}
+
+.eyebrow { /* What: Eyebrow Label. Why: A small numbered label with a leading line introduces the section, faded for the dark band. How: This sets it in tracked capitals at half-strength paper. */
+
+
+	align-items    : center;
+	color          : rgba( 245, 242, 236, 0.5 );
+	display        : inline-flex;
+	font-family    : var( --font-body );
+	font-size      : 0.78rem;
+	font-weight    : 500;
+	gap            : 0.75rem;
+	letter-spacing : 0.18em;
+	text-transform : uppercase;
+
+
+}
+.eyebrow::before { /* What: Eyebrow Leading Line. Why: A short rule leads into the label. How: This draws a 28px hairline before the text, faded for the dark band. */
+
+
+	background : rgba( 245, 242, 236, 0.4 );
+	content    : '';
+	height     : 1px;
+	width      : 28px;
+
+
+}
+
+
+/* #region contact__title */
+
+.contact__title { /* What: Contact Title. Why: The heading invites the visitor in, in large display type on the dark band. How: This sets it in the display font at its largest optical size in paper, scaling with the viewport. */
+
+
+	color                   : var( --paper );
+	font-family             : var( --font-display );
+	font-size               : clamp( 2.5rem, 6vw, 5rem );
+	font-variation-settings : 'opsz' 144;
+	font-weight             : 400;
+	letter-spacing          : -0.025em;
+	line-height             : 1.02;
+	margin-bottom           : 1.5rem;
+	margin-top              : 1.5rem;
+
+
+}
+
+.titAccEmp { /* What: Title Accent Emphasis. Why: One word in each heading is set apart in color and italic. How: This draws it in the accent, light and italic. */
+
+
+	color       : var( --accent );
+	font-style  : italic;
+	font-weight : 300;
+
+
+}
+
+/* #endregion contact__title */
+
+
+.contact__lede { /* What: Contact Lede Paragraph. Why: The lede says what happens after the visitor reaches out. How: This sets it in the body font, a little larger than body text, in faded paper with room below. */
+
+
+	color         : rgba( 245, 242, 236, 0.7 );
+	font-family   : var( --font-body );
+	font-size     : clamp( 1.05rem, 1.4vw, 1.2rem );
+	line-height   : 1.55;
+	margin-bottom : 3rem;
+	max-width     : 52ch;
+
+
+}
+
+
+
+/* #region contact__details */
+
+.contact__details { /* What: Contact Details List. Why: The detail rows sit under a faint rule. How: This draws the rule above the first row. */
+
+
+	border-top : 1px solid rgba( 245, 242, 236, 0.15 );
+
+
+}
+
+
+/* #region contact__row */
+
+.contact__row { /* What: Contact Row. Why: Each detail pairs a label with its value under a faint rule. How: This sets a fixed label column beside the value. */
+
+
+	border-bottom         : 1px solid rgba( 245, 242, 236, 0.15 );
+	display               : grid;
+	gap                   : 1.5rem;
+	grid-template-columns : 110px 1fr;
+	padding               : 1.1rem 0;
+
+
+}
+@media ( max-width : 540px ) { /* What: Phone Contact Row. Why: A phone has no room for the label column. How: This applies below 540px wide. */
+
+
+	.contact__row { /* What: Stacked Contact Row. Why: The label reads best above its value on a phone. How: This turns the row into one column with a small gap. */
+
+
+		gap                   : 0.3rem;
+		grid-template-columns : 1fr;
+
+
+	}
+
+
+}
+
+.rowLabTer { /* What: Row Label Term. Why: Each row's label reads as a small tracked caption. How: This sets it in faded uppercase, nudged down to line up with the value. */
+
+
+	color          : rgba( 245, 242, 236, 0.5 );
+	font-size      : 0.78rem;
+	letter-spacing : 0.12em;
+	padding-top    : 0.15rem;
+	text-transform : uppercase;
+
+
+}
+
+
+/* #region rowValDet */
+
+.rowValDet { /* What: Row Value Details. Why: Each row's value reads clearly on the dark band. How: This sets it in nearly full paper. */
+
+
+	color       : rgba( 245, 242, 236, 0.9 );
+	font-size   : 0.95rem;
+	line-height : 1.55;
+
+
+}
+
+.rowValAnc { /* What: Row Value Anchor. Why: The phone and email links are marked by a faint underline. How: This draws the underline and fades its color and the text's on hover. */
+
+
+	border-bottom : 1px solid rgba( 245, 242, 236, 0.3 );
+	transition    : border-color 0.2s ease, color 0.2s ease;
+
+
+}
+.rowValAnc:hover { /* What: Hovered Row Value Anchor. Why: The hovered link should stand out. How: This turns its text and underline the soft accent. */
+
+
+	border-color : var( --accent-soft );
+	color        : var( --accent-soft );
+
+
+}
+@media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Row Value Anchor. Why: Someone who asked for less motion shouldn't see the color fade. How: This applies only when the reduced-motion preference is set. */
+
+
+	.rowValAnc { /* What: Motionless Row Value Anchor. Why: The hover colors should appear at once. How: This turns the transition off. */
+
+
+		transition : none;
+
+
+	}
+
+
+}
+
+.muted { /* What: Muted Span. Why: The emergency note is secondary to the office hours. How: This sets it smaller and faded. */
+
+
+	color     : rgba( 245, 242, 236, 0.5 );
+	font-size : 0.85rem;
+
+
+}
+
+/* #endregion rowValDet */
+
+/* #endregion contact__row */
+
+/* #endregion contact__details */
+
+
+
+/* #region contact__signature */
+
+.contact__signature { /* What: Contact Signature Card. Why: The full logo signs off the details on a light card. How: This draws a rounded paper card capped at 280px. */
+
+
+	background    : var( --paper );
+	border-radius : 4px;
+	margin-top    : 3rem;
+	max-width     : 280px;
+	padding       : 2rem 2.5rem;
+
+
+}
+
+.conSigIma { /* What: Contact Signature Image. Why: The logo should fill its card. How: This sizes it to the card's full width, keeping its proportions. */
+
+
+	height : auto;
+	width  : 100%;
+
+
+}
+
+/* #endregion contact__signature */
+
+
+
+/* #region contact__form-wrap */
+
+.contact__form-wrap { /* What: Contact Form Wrap. Why: The form sits in a faint frame on the dark band. How: This draws a barely lighter panel with a faint border, padded to the viewport. */
+
+
+	background    : rgba( 245, 242, 236, 0.04 );
+	border        : 1px solid rgba( 245, 242, 236, 0.1 );
+	border-radius : 4px;
+	padding       : clamp( 1.75rem, 3vw, 2.75rem );
+
+
+}
+
+
+/* #region contact__form */
+
+.contact__form { /* What: Contact Form. Why: The fields, button, and fine print stack evenly. How: This lays them out in a spaced column. */
+
+
+	display        : flex;
+	flex-direction : column;
+	gap            : 1.5rem;
+
+
+}
+
+
+/* #region field */
+
+.field { /* What: Field. Why: Each label sits just above its control. How: This stacks them with a small gap. */
+
+
+	display        : flex;
+	flex-direction : column;
+	gap            : 0.5rem;
+
+
+}
+
+.forFieLab { /* What: Form Field Label. Why: Each control is named by a small tracked caption. How: This sets it in faded uppercase. */
+
+
+	color          : rgba( 245, 242, 236, 0.55 );
+	font-size      : 0.78rem;
+	font-weight    : 500;
+	letter-spacing : 0.1em;
+	text-transform : uppercase;
+
+
+}
+
+.forFieInp,
+.forFieSel,
+.forFieTex { /* What: Form Field Controls. Why: Every control is drawn as an underlined line of light text on the dark band. How: This clears each control's own box, draws its underline, and fades the underline's color on focus. */
+
+
+	background    : transparent;
+	border        : none;
+	border-bottom : 1px solid rgba( 245, 242, 236, 0.2 );
+	border-radius : 0;
+	color         : var( --paper );
+	font-family   : var( --font-body );
+	font-size     : 1rem;
+	padding       : 0.6rem 0;
+	transition    : border-color 0.25s ease;
+	width         : 100%;
+
+
+}
+.forFieInp::placeholder,
+.forFieTex::placeholder { /* What: Form Field Placeholder. Why: Placeholder text should read as a hint, not an answer. How: This fades it well below the typed text. */
+
+
+	color : rgba( 245, 242, 236, 0.35 );
+
+
+}
+.forFieInp:focus,
+.forFieSel:focus,
+.forFieTex:focus { /* What: Focused Form Field Controls. Why: The focused control needs a visible mark in place of the browser's outline. How: This turns its underline the soft accent. */
+
+
+	border-bottom-color : var( --accent-soft );
+	outline             : none;
+
+
+}
+@media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Form Field Controls. Why: Someone who asked for less motion shouldn't see the underline fade. How: This applies only when the reduced-motion preference is set. */
+
+
+	.forFieInp,
+	.forFieSel,
+	.forFieTex { /* What: Motionless Form Field Controls. Why: The focus color should appear at once. How: This turns the transition off. */
+
+
+		transition : none;
+
+
+	}
+
+
+}
+
+.forFieSel { /* What: Form Field Select. Why: The dropdown should match the other controls, with its own arrow in place of the browser's. How: This drops the native styling and draws a thin chevron at the right. */
+
+
+	appearance          : none;
+	background-image    : url( 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="%23a8a39a" stroke-width="1.5"><path d="M6 9l6 6 6-6"/></svg>' );
+	background-position : right 0 center;
+	background-repeat   : no-repeat;
+	background-size     : 18px;
+	padding-right       : 24px;
+
+
+}
+
+.forSelOpt { /* What: Form Select Option. Why: The opened dropdown's options should match the dark band. How: This sets each option in paper on ink. */
+
+
+	background : var( --ink );
+	color      : var( --paper );
+
+
+}
+
+.forFieTex { /* What: Form Field Textarea. Why: The details field needs room to write and should only grow taller. How: This sets a minimum height and allows vertical resizing only. */
+
+
+	font-family : var( --font-body );
+	min-height  : 100px;
+	resize      : vertical;
+
+
+}
+
+/* #endregion field */
+
+
+
+.field-row { /* What: Field Row. Why: Email and phone are short enough to share a row. How: This sets two equal columns. */
+
+
+	display               : grid;
+	gap                   : 1.5rem;
+	grid-template-columns : 1fr 1fr;
+
+
+}
+@media ( max-width : 540px ) { /* What: Phone Field Row. Why: A phone has no room for two fields side by side. How: This applies below 540px wide. */
+
+
+	.field-row { /* What: Stacked Field Row. Why: The fields stack on a phone. How: This turns the row into one column. */
+
+
+		gap                   : 1.5rem;
+		grid-template-columns : 1fr;
+
+
+	}
+
+
+}
+
+
+
+/* #region contact__submit */
+
+.contact__submit { /* What: Contact Submit Button. Why: Sending the request is the form's one action. How: This draws the site's primary pill button at the start of the row, lifting and turning accent on hover. */
+
+
+	align-items    : center;
+	align-self     : flex-start;
+	background     : var( --ink );
+	border         : 1px solid transparent;
+	border-radius  : 999px;
+	color          : var( --paper );
+	display        : inline-flex;
+	font-size      : 0.9rem;
+	font-weight    : 500;
+	gap            : 0.75rem;
+	letter-spacing : 0.02em;
+	margin-top     : 0.5rem;
+	padding        : 0.95rem 1.6rem;
+	transition     : background-color 0.3s cubic-bezier( 0.22, 1, 0.36, 1 ), color 0.3s cubic-bezier( 0.22, 1, 0.36, 1 ), transform 0.3s cubic-bezier( 0.22, 1, 0.36, 1 );
+	white-space    : nowrap;
+
+
+}
+.contact__submit:hover { /* What: Hovered Contact Submit Button. Why: The button should respond to the pointer. How: This turns it accent and lifts it a pixel. */
+
+
+	background : var( --accent );
+	color      : var( --paper );
+	transform  : translateY( -1px );
+
+
+}
+@media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Contact Submit Button. Why: Someone who asked for less motion shouldn't see the button animate. How: This applies only when the reduced-motion preference is set. */
+
+
+	.contact__submit { /* What: Motionless Contact Submit Button. Why: The hover style should appear at once. How: This turns the transition off. */
+
+
+		transition : none;
+
+
+	}
+
+
+}
+
+.arrow { /* What: Arrow Span. Why: The arrow slides forward as the button is hovered. How: This animates its position. */
+
+
+	transition : transform 0.3s cubic-bezier( 0.22, 1, 0.36, 1 );
+
+
+}
+.contact__submit:hover .arrow { /* What: Hovered Arrow Span. Why: The arrow points the visitor onward when the button is hovered. How: This moves it 4px right. */
+
+
+	transform : translateX( 4px );
+
+
+}
+@media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Arrow. Why: Someone who asked for less motion shouldn't see the arrow slide. How: This applies only when the reduced-motion preference is set. */
+
+
+	.arrow { /* What: Motionless Arrow Span. Why: The arrow should simply shift. How: This turns the transition off. */
+
+
+		transition : none;
+
+
+	}
+
+
+}
+
+/* #endregion contact__submit */
+
+
+.contact__fineprint { /* What: Contact Fine Print. Why: The consent note should read as a quiet footnote to the form. How: This sets it small and faded. */
+
+
+	color       : rgba( 245, 242, 236, 0.4 );
+	font-size   : 0.78rem;
+	line-height : 1.5;
+
+
+}
+
+/* #endregion contact__form */
+
+/* #endregion contact__form-wrap */
+
+/* #endregion contact__container */
+
+/* #endregion contact */
+
+
