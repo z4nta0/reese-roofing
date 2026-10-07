@@ -1,0 +1,227 @@
+
+
+
+/**
+ * footer.module.css = Site Footer Module
+ *
+ * @summary
+ * Styles for SitFooCom: the dark footer band with the brand on the left, the
+ * copyright and licensing lines in the middle, and the back-to-top link on
+ * the right, stacking into one left-aligned column on small screens. The
+ * shared container declarations the footer used to borrow from the global
+ * stylesheet are copied onto its own row class here.
+ *
+ * @author z4nta0 <https://github.com/z4nta0>
+ *
+*/
+
+
+
+/* #region footer */
+
+.footer { /* What: Site Footer. Why: The footer closes the page on a dark band. How: This sets the ink background with muted light text and a faint top edge. */
+
+
+	background : var( --ink );
+	border-top : 1px solid rgba( 245, 242, 236, 0.1 );
+	color      : rgba( 245, 242, 236, 0.6 );
+	padding    : 2.5rem 0;
+
+
+}
+
+
+/* #region footer__inner */
+
+.footer__inner { /* What: Footer Inner Row. Why: The footer's contents should line up with the page's content width. How: This spreads the brand, meta lines, and top link across one centered row that can wrap. */
+
+
+	align-items     : center;
+	display         : flex;
+	flex-wrap       : wrap;
+	gap             : 2rem;
+	justify-content : space-between;
+	margin          : 0 auto;
+	max-width       : var( --container );
+	padding-inline  : var( --gutter );
+	width           : 100%;
+
+
+}
+@media ( max-width : 600px ) { /* What: Narrow Footer Inner Row. Why: Small screens are too narrow for three items side by side. How: This applies below 600px wide. */
+
+
+	.footer__inner { /* What: Stacked Footer Inner Row. Why: The items read best stacked on a small screen. How: This turns the row into a left-aligned column with a smaller gap. */
+
+
+		align-items    : flex-start;
+		flex-direction : column;
+		gap            : 1.5rem;
+
+
+	}
+
+
+}
+
+
+/* #region footer__brand */
+
+.footer__brand { /* What: Footer Brand. Why: The footer repeats the company's mark and name. How: This sets them side by side in the display font, on the paper color. */
+
+
+	align-items : center;
+	color       : var( --paper );
+	display     : inline-flex;
+	font-family : var( --font-display );
+	font-size   : 1.1rem;
+	gap         : 0.7rem;
+
+
+}
+
+
+/* #region footer__mark */
+
+.footer__mark { /* What: Footer Mark Box. Why: The dark mark needs a light tile to show against the dark footer. How: This draws a small rounded paper square with the mark centered in it. */
+
+
+	background    : var( --paper );
+	border-radius : 4px;
+	display       : inline-grid;
+	height        : 38px;
+	padding       : 4px;
+	place-items   : center;
+	width         : 38px;
+
+
+}
+
+.fooMarIma { /* What: Footer Mark Image. Why: The mark should fill its tile. How: This sizes it to the tile's full width, keeping its proportions. */
+
+
+	display : block;
+	height  : auto;
+	width   : 100%;
+
+
+}
+
+/* #endregion footer__mark */
+
+
+.namLigSpa { /* What: Name Light Span. Why: The name's second word reads as the softer half. How: This sets it light, italic, and faded. */
+
+
+	color       : rgba( 245, 242, 236, 0.5 );
+	font-style  : italic;
+	font-weight : 300;
+
+
+}
+
+/* #endregion footer__brand */
+
+
+
+/* #region footer__meta */
+
+.footer__meta { /* What: Footer Meta Column. Why: The copyright and licensing lines read as one small block. How: This stacks them centered in a smaller size. */
+
+
+	display        : flex;
+	flex-direction : column;
+	font-size      : 0.82rem;
+	gap            : 0.2rem;
+	text-align     : center;
+
+
+}
+@media ( max-width : 600px ) { /* What: Narrow Footer Meta Column. Why: The stacked footer is left-aligned on small screens. How: This applies below 600px wide. */
+
+
+	.footer__meta { /* What: Left Footer Meta Column. Why: The lines should line up with the stacked brand and link. How: This aligns them to the left. */
+
+
+		align-items : flex-start;
+		text-align  : left;
+
+
+	}
+
+
+}
+
+/* #endregion footer__meta */
+
+
+/* #region footer__top */
+
+.footer__top { /* What: Footer Top Link. Why: The back-to-top link is a quiet secondary action. How: This sets it small with its arrow beside it, brightening on hover. */
+
+
+	align-items : center;
+	color       : rgba( 245, 242, 236, 0.6 );
+	display     : inline-flex;
+	font-size   : 0.85rem;
+	gap         : 0.4rem;
+	transition  : color 0.2s ease;
+
+
+}
+.footer__top:hover { /* What: Hovered Footer Top Link. Why: The hovered link should stand out on the dark band. How: This turns it the soft accent. */
+
+
+	color : var( --accent-soft );
+
+
+}
+@media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Footer Top Link. Why: Someone who asked for less motion shouldn't see the color fade. How: This applies only when the reduced-motion preference is set. */
+
+
+	.footer__top { /* What: Motionless Footer Top Link. Why: The hover color should appear at once. How: This turns the transition off. */
+
+
+		transition : none;
+
+
+	}
+
+
+}
+
+.arrow { /* What: Arrow Span. Why: The arrow lifts as the link is hovered, pointing the way back up. How: This animates its position. */
+
+
+	transition : transform 0.3s cubic-bezier( 0.22, 1, 0.36, 1 );
+
+
+}
+.footer__top:hover .arrow { /* What: Hovered Arrow Span. Why: The arrow reinforces the link's direction on hover. How: This lifts it 3px. */
+
+
+	transform : translateY( -3px );
+
+
+}
+@media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Arrow. Why: Someone who asked for less motion shouldn't see the arrow move. How: This applies only when the reduced-motion preference is set. */
+
+
+	.arrow { /* What: Motionless Arrow Span. Why: The arrow should simply shift. How: This turns the transition off. */
+
+
+		transition : none;
+
+
+	}
+
+
+}
+
+/* #endregion footer__top */
+
+/* #endregion footer__inner */
+
+/* #endregion footer */
+
+

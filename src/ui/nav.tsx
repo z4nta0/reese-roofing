@@ -3,9 +3,9 @@
 
 // #region Imports
 
-import cssModObj from './nav.module.css';         // What: CSS Module Object. Why: The bar's layout, scrolled state, and mobile drawer are styled in its own module. How: Each element reads its hashed class name from this object.
+import cssModObj from './nav.module.css';        // What: CSS Module Object. Why: The bar's layout, scrolled state, and mobile drawer are styled in its own module. How: Each element reads its hashed class name from this object.
 import lomSvgUrl from '../assets/logo-mark.svg'; // What: Logo-Mark Svg Url. Why: The bar's brand link shows the simple logo mark. How: Vite resolves the import to the file's fingerprinted URL, used as the image's src.
-import React     from 'react';                    // What: React. Why: The bar tracks its scroll and drawer state with React's hooks. How: This is read as React.useState and React.useEffect.
+import React     from 'react';                   // What: React. Why: The bar tracks its scroll and drawer state with React's hooks. How: This is read as React.useState and React.useEffect.
 
 // #endregion Imports
 

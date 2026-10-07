@@ -3,10 +3,8 @@
 
 // #region Imports
 
+import cssModObj from './footer.module.css';     // What: CSS Module Object. Why: The footer's layout and type are styled in its own module. How: Each element reads its hashed class name from this object.
 import lomSvgUrl from '../assets/logo-mark.svg'; // What: Logo-Mark Svg Url. Why: The footer's brand shows the simple logo mark. How: Vite resolves the import to the file's fingerprinted URL, used as the image's src.
-
-
-import './footer.css'; // What: Footer Stylesheet Import. Why: The footer's layout and type are styled in its own stylesheet. How: This is imported purely for its side effect.
 
 // #endregion Imports
 
@@ -66,19 +64,21 @@ function SitFooCom () : React.JSX.Element {
 	return (
 
 
-		<footer className='footer'>{ /* What: Site Footer Element. Why: This is the page's footer landmark. How: This holds the footer's single content row. */ }
+		<footer className={ cssModObj.footer }>{ /* What: Site Footer Element. Why: This is the page's footer landmark. How: This holds the footer's single content row. */ }
 
 
-			<div className='container footer__inner'>{ /* What: Footer Inner Div Element. Why: The footer's contents should line up with the page's content width. How: This holds the brand, the meta lines, and the back-to-top link in one row. */ }
+			<div className={ cssModObj.footerInner }>{ /* What: Footer Inner Div Element. Why: The footer's contents should line up with the page's content width. How: This holds the brand, the meta lines, and the back-to-top link in one row. */ }
 
 
-				<div className='footer__brand'>{ /* What: Footer Brand Div Element. Why: The footer repeats the company's mark and name. How: This sets them side by side. */ }
+				<div className={ cssModObj.footerBrand }>{ /* What: Footer Brand Div Element. Why: The footer repeats the company's mark and name. How: This sets them side by side. */ }
 
 
-					<span className='footer__mark'>{ /* What: Footer Mark Span Element. Why: The logo mark sits in its own sized box. How: This holds the mark's image. */ }
+					<span className={ cssModObj.footerMark }>{ /* What: Footer Mark Span Element. Why: The logo mark sits in its own sized box. How: This holds the mark's image. */ }
 
 
 						<img
+							className={ cssModObj.fooMarIma }
+
 							height='26'
 							src={ lomSvgUrl }
 							width='28'
@@ -89,14 +89,14 @@ function SitFooCom () : React.JSX.Element {
 
 					</span>
 
-					<span className='footer__name'>{ /* What: Footer Name Span Element. Why: The company's name sits beside the mark. How: The second word takes its own style. */ }
-						Reese <span>Roofing</span>
+					<span>{ /* What: Footer Name Span Element. Why: The company's name sits beside the mark. How: The second word takes its own style. */ }
+						Reese <span className={ cssModObj.namLigSpa }>Roofing</span>
 					</span>
 
 
 				</div>
 
-				<div className='footer__meta'>{ /* What: Footer Meta Div Element. Why: The legal and location details sit together. How: This stacks the copyright and licensing lines. */ }
+				<div className={ cssModObj.footerMeta }>{ /* What: Footer Meta Div Element. Why: The legal and location details sit together. How: This stacks the copyright and licensing lines. */ }
 
 
 					<span>© { curYeaNum } Reese Roofing, LLC</span>{ /* What: Copyright Span Element. Why: The footer states the company's copyright. How: This pairs the current year with the company's legal name. */ }
@@ -107,13 +107,13 @@ function SitFooCom () : React.JSX.Element {
 				</div>
 
 				<a
-					className='footer__top'
+					className={ cssModObj.footerTop }
 
 					href='#top'
 
 					aria-label='Back to top'
 				>{ /* What: Footer Top Anchor Element. Why: A long page should offer a quick way back up. How: This links to the page's top anchor. */ }
-					Back to top <span className='arrow'>↑</span>
+					Back to top <span className={ cssModObj.arrow }>↑</span>
 				</a>
 
 
