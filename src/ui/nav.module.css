@@ -446,45 +446,37 @@
 
 /* #region nav__drawer */
 
-.nav__drawer { /* What: Navigation Drawer. Why: Small screens show the links in a panel under the bar. How: This stacks the links on the page color, hidden until opened, then grows and shrinks its height as it opens and closes. */
+.nav__drawer { /* What: Navigation Drawer. Why: Small screens show the links in a panel under the bar. How: This stacks the links on the page color, collapsed to nothing and hidden until opened, growing and shrinking as it opens and closes. */
 
 
 	background     : var( --paper );
-	border-bottom  : 1px solid var( --line );
-	display        : none;
+	border-bottom  : 0 solid var( --line );
+	display        : flex;
 	flex-direction : column;
 	max-height     : 0;
 	overflow       : hidden;
-	padding        : 1.5rem var( --gutter ) 2rem;
-	transition     : display 0.4s allow-discrete, max-height 0.4s cubic-bezier( 0.22, 1, 0.36, 1 ); /* What: Drawer Height Transition. Why: The drawer grows open and shrinks closed under the bar. How: This animates its height, a layout property chosen because the drawer's content has to be revealed rather than scaled, and lets display wait for the closing animation to finish. */
+	padding        : 0 var( --gutter );
+	transition     : border-bottom-width 0.4s cubic-bezier( 0.22, 1, 0.36, 1 ), max-height 0.4s cubic-bezier( 0.22, 1, 0.36, 1 ), padding-block 0.4s cubic-bezier( 0.22, 1, 0.36, 1 ), visibility 0s linear 0.4s; /* What: Drawer Close Transition. Why: The drawer shrinks closed under the bar, then hides from screen readers and the keyboard once it's gone. How: This animates its height and padding, layout properties chosen because the drawer's content has to be revealed rather than scaled, and delays hiding until the shrink ends. */
+	visibility     : hidden;
 
 
 }
-.nav__drawer[data-drawer-menu-open] { /* What: Open Navigation Drawer. Why: The drawer shows once the toggle opens it. How: This displays it and lifts its height cap. */
+.nav__drawer[data-drawer-menu-open] { /* What: Open Navigation Drawer. Why: The drawer shows once the toggle opens it. How: This shows it at once, then grows its height, padding, and divider into place. */
 
 
-	display    : flex;
-	max-height : 400px;
-
-
-}
-@starting-style { /* What: Drawer Starting Style. Why: An element switching from display none has no previous height to animate from. How: This gives the opening drawer a zero height to grow from. */
-
-
-	.nav__drawer[data-drawer-menu-open] { /* What: Opening Navigation Drawer. Why: The drawer should grow from nothing. How: This starts its height cap at zero. */
-
-
-		max-height : 0;
-
-
-	}
+	border-bottom-width : 1px;
+	max-height          : 400px;
+	padding-block       : 1.5rem 2rem;
+	transition          : border-bottom-width 0.4s cubic-bezier( 0.22, 1, 0.36, 1 ), max-height 0.4s cubic-bezier( 0.22, 1, 0.36, 1 ), padding-block 0.4s cubic-bezier( 0.22, 1, 0.36, 1 ), visibility 0s linear 0s; /* What: Drawer Open Transition. Why: The drawer has to be visible for the whole time it grows. How: This animates the same properties as closing, but shows it with no delay. */
+	visibility          : visible;
 
 
 }
 @media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Navigation Drawer. Why: Someone who asked for less motion shouldn't see the drawer animate. How: This applies only when the reduced-motion preference is set. */
 
 
-	.nav__drawer { /* What: Motionless Navigation Drawer. Why: The drawer should simply appear. How: This turns the transition off. */
+	.nav__drawer,
+	.nav__drawer[data-drawer-menu-open] { /* What: Motionless Navigation Drawer. Why: The drawer should simply appear and disappear. How: This turns the transitions off in both states, matching the open state's own selector so it wins there too. */
 
 
 		transition : none;
