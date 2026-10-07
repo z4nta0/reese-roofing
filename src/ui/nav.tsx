@@ -80,7 +80,7 @@ const NAV_LIN_ARR = [ // What: Nav Link Array. Why: The bar and its mobile drawe
 function NavBarCom () : React.JSX.Element {
 
 
-	const [ draOpeBoo, setDraOpeBoo ] = React.useState( false ); // What: Drawer Open Boolean And Setter. Why: The mobile drawer opens and closes from the toggle button. How: This starts closed and drives the toggle's and drawer's open classes.
+	const [ draOpeBoo, setDraOpeBoo ] = React.useState( false ); // What: Drawer Open Boolean And Setter. Why: The mobile drawer opens and closes from the toggle button. How: This starts closed and drives the toggle's aria-expanded and the drawer's open attribute.
 	const [ scrPasBoo, setScrPasBoo ] = React.useState( false ); // What: Scroll Past Boolean And Setter. Why: The bar takes its scrolled style once the page moves past the top. How: This starts false and is set by the scroll listener below.
 
 
@@ -195,13 +195,13 @@ function NavBarCom () : React.JSX.Element {
 				</div>
 
 				<button
-					className={ ` nav__toggle   ${ draOpeBoo ? 'is-open' : '' } ` }
+					className='nav__toggle'
 
 					aria-expanded={ draOpeBoo }
 					aria-label='Toggle menu'
 
 					onClick={ () => setDraOpeBoo( ( preOpeBoo ) => !preOpeBoo ) }
-				>{ /* What: Navigation Toggle Button Element. Why: Small screens hide the links behind a menu button. How: This flips the drawer open or closed and reports its state to screen readers. */ }
+				>{ /* What: Navigation Toggle Button Element. Why: Small screens hide the links behind a menu button. How: This flips the drawer open or closed, and its aria-expanded both reports the state to screen readers and styles the open icon. */ }
 
 
 					<span />{ /* What: Toggle Line Span Element. Why: The button draws its icon from two lines. How: Its stylesheet turns the pair into a cross while the drawer is open. */ }
@@ -215,7 +215,11 @@ function NavBarCom () : React.JSX.Element {
 			</div>
 
 
-			<div className={ ` nav__drawer   ${ draOpeBoo ? 'is-open' : '' } ` }>{ /* What: Navigation Drawer Div Element. Why: Small screens show the links in a drawer below the bar. How: This opens while draOpeBoo is true. */ }
+			<div
+				className='nav__drawer'
+
+				data-drawer-menu-open={ draOpeBoo || undefined } // What: Drawer Menu Open Attribute. Why: The drawer's stylesheet opens it while this is present. How: This is set only while draOpeBoo is true, and React drops it otherwise.
+			>{ /* What: Navigation Drawer Div Element. Why: Small screens show the links in a drawer below the bar. How: This opens while draOpeBoo is true. */ }
 
 
 				{ NAV_LIN_ARR.map( ( navLinObj ) => ( // What: Drawer Link Map. Why: The drawer repeats every section link. How: This renders one anchor per row.
