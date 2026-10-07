@@ -35,9 +35,9 @@ src/
 ## Cleanup plan
 Decided 2026-10-07, on the `code-cleanup` branch, after the directory
 reorganization, ESLint setup, config rebuild, and dependency upgrades.
-1. **Formatting pass** (done 2026-10-07), one file per commit, each brought fully in line with
-   the user-level rules (naming, comments, spacing, imports, exports, JSDoc
-   and regions). Order:
+1. **Formatting pass** (done 2026-10-07), one file per commit, each brought
+   fully in line with the user-level rules (naming, comments, spacing,
+   imports, exports, JSDoc and regions). Order:
    1. Config and root files: `vite.config.ts`, then `index.html` (under
       "### HTML"). `eslint.config.ts`, the `tsconfig` files, `package.json`,
       and `public/_redirects` already follow the rules.
