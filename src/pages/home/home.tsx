@@ -1,5 +1,5 @@
 import { NavBarCom } from '../../ui/nav.tsx';
-import Footer from '../../ui/footer';
+import { SitFooCom } from '../../ui/footer.tsx';
 import Hero from './hero';
 import Services from './services';
 import About from './about';
@@ -15,7 +15,7 @@ export default function Home() {
         <About />
         <Contact />
       </main>
-      <Footer />
+      <SitFooCom />
     </>
   );
 }
