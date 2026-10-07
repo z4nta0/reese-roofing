@@ -181,12 +181,8 @@ function NavBarCom () : React.JSX.Element {
 
 						href='#contact'
 					>{ /* What: Navigation Button Anchor Element. Why: The bar's main action is requesting an estimate. How: This links to the contact section. */ }
-
-
 						Get an estimate
 						<span className={ cssModObj.arrow }>→</span>{ /* What: Arrow Span Element. Why: The arrow marks the button as moving the visitor onward. How: This sits right after the label. */ }
-
-
 					</a>
 
 
