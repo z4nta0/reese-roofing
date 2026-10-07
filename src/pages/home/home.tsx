@@ -1,6 +1,6 @@
 import { NavBarCom } from '../../ui/nav.tsx';
 import { SitFooCom } from '../../ui/footer.tsx';
-import Hero from './hero';
+import { HerSecCom } from './hero.tsx';
 import Services from './services';
 import About from './about';
 import Contact from './contact';
@@ -10,7 +10,7 @@ export default function Home() {
     <>
       <NavBarCom />
       <main>
-        <Hero />
+        <HerSecCom />
         <Services />
         <About />
         <Contact />
