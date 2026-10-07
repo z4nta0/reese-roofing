@@ -29,11 +29,13 @@ npm run preview
 
 ```
 src/
-├── components/        Reusable UI (Nav, Footer)
-├── sections/          Page sections (Hero, Services, About, Contact)
-├── pages/             Route-level pages (Home, NotFound)
-├── styles/globals.css Design tokens + reset + base typography
-├── App.tsx            React Router setup
+├── assets/            Images shared by 2+ pages (logo-mark.svg)
+├── pages/
+│   ├── home/          Home page and its sections (Hero, Services, About, Contact, logo-full.svg)
+│   └── not-found/     404 page
+├── ui/                Shared components (Nav, Footer)
+├── styles/styles.css  Design tokens + reset + base typography
+├── app.tsx            React Router setup
 └── main.tsx           Entry point
 ```
 
@@ -43,8 +45,8 @@ src/
 - **Palette:** Warm off-white paper (`#f5f2ec`), deep ink (`#1a1f24`), and a navy accent (`#1f4e7a`) drawn from the logo. Italic display accents and small details (numbered IDs, list bullets, pull quote marks) all use this brand navy so the design feels native to the logo.
 - **Layout:** Editorial grid, generous negative space, hairline dividers, numbered sections (01–04). Hover states are intentional but never showy.
 - **Logo usage:**
-  - The **full logo** (`/public/logo-full.svg`) anchors the hero as the primary visual, doubles as a "seal" in the sticky left column of the About section, and appears on a paper-colored signature card in the Contact section. It's a two-color SVG (navy mark + grey subtext).
-  - The **simple mark** (`/public/logo-mark.svg`) is used in the nav bar and the footer.
+  - The **full logo** (`src/pages/home/logo-full.svg`) anchors the hero as the primary visual, doubles as a "seal" in the sticky left column of the About section, and appears on a paper-colored signature card in the Contact section. It's a two-color SVG (navy mark + grey subtext).
+  - The **simple mark** (`src/assets/logo-mark.svg`) is used in the nav bar and the footer.
   - The **favicon** uses an SVG (`/public/favicon.svg`) — a centered, padded version of the simple mark — with raster `.ico` and PNG fallbacks (16/32/192/512) plus a 180×180 Apple touch icon on a paper-colored background.
   - All logos are vector SVG: crisp at any size, tiny payloads, and the brand navy `#1f4e7a` is set as the `fill` attribute so you can edit it directly in the SVG files if you ever want a different color treatment.
 
@@ -56,10 +58,10 @@ When you're ready to make this real, update:
 - **Email:** `hello@reeseroofing.example` — same; appears in Contact and the mailto form action
 - **Address:** placeholder Lawrence, KS 66044 — Contact section
 - **Stats in Hero:** 17+ years, 400+ roofs, etc. — replace with real numbers
-- **Services list:** edit `services` array in `src/sections/Services.tsx`
-- **About copy & quote:** `src/sections/About.tsx`
-- **Form backend:** the form currently uses `mailto:` as a no-backend fallback. To wire up a real backend, replace the `handleSubmit` handler in `src/sections/Contact.tsx` with a `fetch` POST to your endpoint (Formspree, Netlify Forms, your own API, etc.).
+- **Services list:** edit `services` array in `src/pages/home/services.tsx`
+- **About copy & quote:** `src/pages/home/about.tsx`
+- **Form backend:** the form currently uses `mailto:` as a no-backend fallback. To wire up a real backend, replace the `handleSubmit` handler in `src/pages/home/contact.tsx` with a `fetch` POST to your endpoint (Formspree, Netlify Forms, your own API, etc.).
 
 ## Routing
 
-The router is set up so you can easily add pages later (e.g. `/services/tpo-roofing`, `/projects`, `/blog`) without restructuring. Add a `<Route>` in `src/App.tsx` and a new component under `src/pages/`.
+The router is set up so you can easily add pages later (e.g. `/services/tpo-roofing`, `/projects`, `/blog`) without restructuring. Add a `<Route>` in `src/app.tsx` and a new folder under `src/pages/` holding the page and its own components.

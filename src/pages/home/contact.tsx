@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import './Contact.css';
-import logoFull from '../assets/logo-full.svg';
+import './contact.css';
+import logoFull from './logo-full.svg';
 
 type FormState = {
   name: string;

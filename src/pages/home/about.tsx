@@ -1,5 +1,5 @@
-import './About.css';
-import logoFull from '../assets/logo-full.svg';
+import './about.css';
+import logoFull from './logo-full.svg';
 
 const principles = [
   {

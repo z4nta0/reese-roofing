@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import './Nav.css';
+import './nav.css';
 import logoMark from '../assets/logo-mark.svg';
 
 const links = [

@@ -1,5 +1,5 @@
-import './Hero.css';
-import logoFull from '../assets/logo-full.svg';
+import './hero.css';
+import logoFull from './logo-full.svg';
 
 export default function Hero() {
   return (
