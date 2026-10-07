@@ -22,10 +22,10 @@
 .footer { /* What: Site Footer. Why: The footer closes the page on a dark band. How: This sets the ink background with muted light text and a faint top edge. */
 
 
-	background : var( --ink );
-	border-top : 1px solid rgba( 245, 242, 236, 0.1 );
-	color      : rgba( 245, 242, 236, 0.6 );
-	padding    : 3.6363636364rem 0;
+	background : var( --bac-inv-col );                                                                           /* Background Inverse Color = #1a1f24 */
+	border-top : var( --bor-wid-bas ) solid oklch( from var( --bac-pag-col ) l c h / var( --cdn-pow-008-rec ) ); /* Border Width Base ~= 1.160px, Background Page Color = #f5f2ec, Core-Design-Number to the Power of 8 Reciprocal ~= 0.105 */
+	color      : oklch( from var( --bac-pag-col ) l c h / var( --cdn-pow-002-rec ) );                            /* Background Page Color = #f5f2ec, Core-Design-Number to the Power of 2 Reciprocal ~= 0.570 */
+	padding    : var( --spa-ver-p04 ) 0;                                                                         /* Spacing Vertical Base Plus 4 ~= 44.876px */
 
 
 }
@@ -39,11 +39,11 @@
 	align-items     : center;
 	display         : flex;
 	flex-wrap       : wrap;
-	gap             : 2.9090909091rem;
+	gap             : var( --spa-ver-p03 ) 2.9090909091rem; /* Spacing Vertical Base Plus 3 ~= 33.876px */
 	justify-content : space-between;
 	margin          : 0 auto;
-	max-width       : var( --container );
-	padding-inline  : var( --gutter );
+	max-width       : var( --con-max-wid );                 /* Container Maximum Width = 1280px */
+	padding-inline  : var( --gut-sid-pad );                 /* Gutter Side Padding, 20px to 48px */
 	width           : 100%;
 
 
@@ -56,7 +56,7 @@
 
 		align-items    : flex-start;
 		flex-direction : column;
-		gap            : 2.1818181818rem;
+		gap            : var( --spa-ver-p02 ); /* Spacing Vertical Base Plus 2 ~= 25.572px */
 
 
 	}
@@ -71,10 +71,10 @@
 
 
 	align-items : center;
-	color       : var( --paper );
+	color       : var( --bac-pag-col ); /* Background Page Color = #f5f2ec */
 	display     : inline-flex;
-	font-family : var( --font-display );
-	font-size   : 1.6rem;
+	font-family : var( --fon-fam-sec ); /* Font Family Secondary = 'Fraunces', 'Times New Roman', serif */
+	font-size   : var( --fon-siz-p02 ); /* Font Size Base Plus 2 ~= 19.304px */
 	gap         : 1.0181818182rem;
 
 
@@ -83,16 +83,16 @@
 
 /* #region footer__mark */
 
-.footer__mark { /* What: Footer Mark Box. Why: The dark mark needs a light tile to show against the dark footer. How: This draws a small rounded paper square with the mark centered in it. */
+.footer__mark { /* What: Footer Mark Box. Why: The dark mark needs a light tile to show against the dark footer. How: This draws a small rounded paper square, its width matching its rhythm-step height, with the mark centered in it. */
 
 
-	background    : var( --paper );
-	border-radius : 4px;
+	background    : var( --bac-pag-col );     /* Background Page Color = #f5f2ec */
+	border-radius : var( --rad-bor-xsm );     /* Radius Border Extra Small ~= 3.571px */
 	display       : inline-grid;
-	height        : 38px;
-	padding       : 4px;
+	height        : var( --spa-ver-p03 );     /* Spacing Vertical Base Plus 3 ~= 33.876px */
+	padding       : var( --spa-ver-m05 ) 4px; /* Spacing Vertical Base Minus 5 ~= 3.571px */
 	place-items   : center;
-	width         : 38px;
+	width         : var( --spa-ver-p03 );     /* Spacing Vertical Base Plus 3 ~= 33.876px */
 
 
 }
@@ -113,7 +113,7 @@
 .namLigSpa { /* What: Name Light Span. Why: The name's second word reads as the softer half. How: This sets it light, italic, and faded. */
 
 
-	color       : rgba( 245, 242, 236, 0.5 );
+	color       : oklch( from var( --bac-pag-col ) l c h / 0.5 ); /* Background Page Color = #f5f2ec */
 	font-style  : italic;
 	font-weight : 300;
 
@@ -131,8 +131,8 @@
 
 	display        : flex;
 	flex-direction : column;
-	font-size      : 1.1927272727rem;
-	gap            : 0.2909090909rem;
+	font-size      : var( --fon-siz-p01 ); /* Font Size Base Plus 1 ~= 14.572px */
+	gap            : var( --spa-ver-m05 ); /* Spacing Vertical Base Minus 5 ~= 3.571px */
 	text-align     : center;
 
 
@@ -161,18 +161,18 @@
 
 
 	align-items : center;
-	color       : rgba( 245, 242, 236, 0.6 );
+	color       : oklch( from var( --bac-pag-col ) l c h / var( --cdn-pow-002-rec ) ); /* Background Page Color = #f5f2ec, Core-Design-Number to the Power of 2 Reciprocal ~= 0.570 */
 	display     : inline-flex;
-	font-size   : 1.2363636364rem;
+	font-size   : var( --fon-siz-p01 );                                                /* Font Size Base Plus 1 ~= 14.572px */
 	gap         : 0.5818181818rem;
-	transition  : color 0.2s ease;
+	transition  : color var( --dur-tra-p01 ) var( --mot-sta-eas );                     /* Duration Transition Base Plus 1 ~= 209.1ms, Motion Standard Easing = ease */
 
 
 }
 .footer__top:hover { /* What: Hovered Footer Top Link. Why: The hovered link should stand out on the dark band. How: This turns it the soft accent. */
 
 
-	color : var( --accent-soft );
+	color : var( --acc-lig-col ); /* Accent Light Color, the accent lightened by 0.204 */
 
 
 }
@@ -193,7 +193,7 @@
 .arrow { /* What: Arrow Span. Why: The arrow lifts as the link is hovered, pointing the way back up. How: This animates its position. */
 
 
-	transition : transform 0.3s cubic-bezier( 0.22, 1, 0.36, 1 );
+	transition : transform var( --dur-tra-p02 ) var( --mot-dec-eas ); /* Duration Transition Base Plus 2 ~= 277.0ms, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ) */
 
 
 }
