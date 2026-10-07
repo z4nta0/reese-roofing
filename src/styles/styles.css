@@ -5,14 +5,16 @@
  * styles.css = Global Styles
  *
  * @summary
- * The site's one global stylesheet, holding only what can't belong to a
- * single component: the design tokens every module reads, and the reset and
- * base element styles every page relies on. Every component's own styles,
- * including its copies of the shared container, section, eyebrow, display,
- * lede, button, and arrow classes that used to live here, are in its CSS
- * module. Each transition and animation turns itself off for reduced motion
- * in its own module, so the blanket reduced-motion override this sheet used
- * to carry is gone; only the page's smooth scrolling is handled here.
+ * The site's one global stylesheet, holding only what can't belong to a single
+ * component: the design tokens every module reads, and the reset and base
+ * element styles every page relies on. The tokens start from the core design
+ * numbers, the plastic ratio and its powers, and every font size, vertical
+ * length, duration, and transparency is a step drawn from them, with 1rem set
+ * to an 11px base. Colors are named by role. The original tokens stay in a
+ * legacy section only until every module has moved onto the new ones. Every
+ * component's own styles are in its CSS module, and each transition and
+ * animation turns itself off for reduced motion there; only the page's smooth
+ * scrolling is handled here.
  *
  * Sections:
  *  - Tokens
@@ -29,40 +31,339 @@
 :root { /* What: Root Tokens. Why: Every module reads the site's colors, fonts, and spacing from one place. How: This defines them as custom properties on the root element, grouped into sections. */
 
 
+	/* #region Core Design Numbers */
+
+	/**
+	 * styles.css = Core Design Numbers
+	 *
+	 * @summary
+	 * The core design number, also known as the "plastic ratio" (also commonly
+	 * denoted as ρ (rho) and sometimes called the radiant number or the
+	 * fundamental ratio), is used as a base scaling factor throughout the
+	 * design system. The adjective plastic does not refer to the artificial
+	 * material, but to the formative and sculptural qualities of this ratio,
+	 * as in plastic arts meaning something that can be given a
+	 * three-dimensional shape. This is because the characteristic ratios of
+	 * the number, 3/4 and 1/7, relate to the limits of human perception in
+	 * comparing one physical size to another. It is considered the
+	 * three-dimensional equivalent of the ubiquitous golden ratio. I
+	 * previously used said golden ratio as a base scaling factor, but found
+	 * that, because of its larger number, it did not have enough nuance for
+	 * the many values that a design system needs, i.e., numbers scaled up or
+	 * down too quickly.
+	 *
+	 * I know a lot of what I just said seems abstract, or even silly, but a
+	 * core number is required for a design system. So it might as well be
+	 * based on something perceptually meaningful, or even just fun.
+	 *
+	 * Plastic Ratio = <https://en.wikipedia.org/wiki/Plastic_ratio>
+	 *
+	 * @author z4nta0 <https://github.com/z4nta0>
+	 *
+	*/
+
+	--cor-des-num : calc( ( pow( 108 + 12 * sqrt( 69 ), 1 / 3 ) + pow( 108 - 12 * sqrt( 69 ), 1 / 3 ) ) / 6 ); /* What: Core Design Number ~= 1.325. Why: This is the "plastic ratio" and it is the core design number derived from the stated formula. How: As you can see, this formula is quite a bit more complex than the formula for the golden ratio, but it is still not too difficult once you break it down into its constituent parts. */
+
+
+	--cdn-pow-000 : calc( pow( var( --cor-des-num ), 0 ) );  /* What: Core-Design-Number to the Power of 0 ~= 1. Why: Sometimes the zeroth power of the core design number is needed for scaling, literal number or percentage. How: This takes the core design number to the power of 0, which for any number is always 1. */
+	--cdn-pow-001 : calc( pow( var( --cor-des-num ), 1 ) );  /* What: Core-Design-Number to the Power of 1 ~= 1.325. Why: Sometimes the first power of the core design number is needed for scaling, literal number or percentage. How: This takes the core design number to the power of 1, which for any number is always the number itself. */
+	--cdn-pow-002 : calc( pow( var( --cor-des-num ), 2 ) );  /* What: Core-Design-Number to the Power of 2 ~= 1.755. Why: Sometimes the square of the core design number is needed for scaling, literal number or percentage. How: This takes the core design number to the power of 2. */
+	--cdn-pow-003 : calc( pow( var( --cor-des-num ), 3 ) );  /* What: Core-Design-Number to the Power of 3 ~= 2.325. Why: Sometimes the cube of the core design number is needed for scaling, literal number or percentage. How: This takes the core design number to the power of 3. */
+	--cdn-pow-004 : calc( pow( var( --cor-des-num ), 4 ) );  /* What: Core-Design-Number to the Power of 4 ~= 3.080. Why: Sometimes the fourth power of the core design number is needed for scaling, literal number or percentage. How: This takes the core design number to the power of 4. */
+	--cdn-pow-005 : calc( pow( var( --cor-des-num ), 5 ) );  /* What: Core-Design-Number to the Power of 5 ~= 4.080. Why: Sometimes the fifth power of the core design number is needed for scaling, literal number or percentage. How: This takes the core design number to the power of 5. */
+	--cdn-pow-006 : calc( pow( var( --cor-des-num ), 6 ) );  /* What: Core-Design-Number to the Power of 6 ~= 5.404. Why: Sometimes the sixth power of the core design number is needed for scaling, literal number or percentage. How: This takes the core design number to the power of 6. */
+	--cdn-pow-007 : calc( pow( var( --cor-des-num ), 7 ) );  /* What: Core-Design-Number to the Power of 7 ~= 7.159. Why: Sometimes the seventh power of the core design number is needed for scaling, literal number or percentage. How: This takes the core design number to the power of 7. */
+	--cdn-pow-008 : calc( pow( var( --cor-des-num ), 8 ) );  /* What: Core-Design-Number to the Power of 8 ~= 9.484. Why: Sometimes the eighth power of the core design number is needed for scaling, literal number or percentage. How: This takes the core design number to the power of 8. */
+	--cdn-pow-009 : calc( pow( var( --cor-des-num ), 9 ) );  /* What: Core-Design-Number to the Power of 9 ~= 12.564. Why: Sometimes the ninth power of the core design number is needed for scaling, literal number or percentage. How: This takes the core design number to the power of 9. */
+	--cdn-pow-010 : calc( pow( var( --cor-des-num ), 10 ) ); /* What: Core-Design-Number to the Power of 10 ~= 16.643. Why: Sometimes the tenth power of the core design number is needed for scaling, literal number or percentage. How: This takes the core design number to the power of 10. */
+	--cdn-pow-011 : calc( pow( var( --cor-des-num ), 11 ) ); /* What: Core-Design-Number to the Power of 11 ~= 22.047. Why: Sometimes the eleventh power of the core design number is needed for scaling, literal number or percentage. How: This takes the core design number to the power of 11. */
+	--cdn-pow-012 : calc( pow( var( --cor-des-num ), 12 ) ); /* What: Core-Design-Number to the Power of 12 ~= 29.207. Why: Sometimes the twelfth power of the core design number is needed for scaling, literal number or percentage. How: This takes the core design number to the power of 12. */
+	--cdn-pow-013 : calc( pow( var( --cor-des-num ), 13 ) ); /* What: Core-Design-Number to the Power of 13 ~= 38.691. Why: Sometimes the thirteenth power of the core design number is needed for scaling, literal number or percentage. How: This takes the core design number to the power of 13. */
+	--cdn-pow-014 : calc( pow( var( --cor-des-num ), 14 ) ); /* What: Core-Design-Number to the Power of 14 ~= 51.254. Why: Sometimes the fourteenth power of the core design number is needed for scaling, literal number or percentage. How: This takes the core design number to the power of 14. */
+	--cdn-pow-015 : calc( pow( var( --cor-des-num ), 15 ) ); /* What: Core-Design-Number to the Power of 15 ~= 67.897. Why: Sometimes the fifteenth power of the core design number is needed for scaling, literal number or percentage. How: This takes the core design number to the power of 15. */
+	--cdn-pow-016 : calc( pow( var( --cor-des-num ), 16 ) ); /* What: Core-Design-Number to the Power of 16 ~= 89.945. Why: Sometimes the sixteenth power of the core design number is needed for scaling, literal number or percentage. How: This takes the core design number to the power of 16. */
+	--cdn-pow-017 : calc( pow( var( --cor-des-num ), 17 ) ); /* What: Core-Design-Number to the Power of 17 ~= 119.151. Why: Sometimes the seventeenth power of the core design number is needed for scaling, literal number or percentage. How: This takes the core design number to the power of 17. */
+	--cdn-pow-018 : calc( pow( var( --cor-des-num ), 18 ) ); /* What: Core-Design-Number to the Power of 18 ~= 157.842. Why: Sometimes the eighteenth power of the core design number is needed for scaling, literal number or percentage. How: This takes the core design number to the power of 18. */
+	--cdn-pow-019 : calc( pow( var( --cor-des-num ), 19 ) ); /* What: Core-Design-Number to the Power of 19 ~= 209.096. Why: Sometimes the nineteenth power of the core design number is needed for scaling, literal number or percentage. How: This takes the core design number to the power of 19. */
+	--cdn-pow-020 : calc( pow( var( --cor-des-num ), 20 ) ); /* What: Core-Design-Number to the Power of 20 ~= 276.993. Why: Sometimes the twentieth power of the core design number is needed for scaling, literal number or percentage. How: This takes the core design number to the power of 20. */
+	--cdn-pow-021 : calc( pow( var( --cor-des-num ), 21 ) ); /* What: Core-Design-Number to the Power of 21 ~= 366.937. Why: Sometimes the twenty-first power of the core design number is needed for scaling, literal number or percentage. How: This takes the core design number to the power of 21. */
+	--cdn-pow-022 : calc( pow( var( --cor-des-num ), 22 ) ); /* What: Core-Design-Number to the Power of 22 ~= 486.088. Why: Sometimes the twenty-second power of the core design number is needed for scaling, literal number or percentage. How: This takes the core design number to the power of 22. */
+	--cdn-pow-023 : calc( pow( var( --cor-des-num ), 23 ) ); /* What: Core-Design-Number to the Power of 23 ~= 643.930. Why: Sometimes the twenty-third power of the core design number is needed for scaling, literal number or percentage. How: This takes the core design number to the power of 23. */
+	--cdn-pow-024 : calc( pow( var( --cor-des-num ), 24 ) ); /* What: Core-Design-Number to the Power of 24 ~= 853.026. Why: Sometimes the twenty-fourth power of the core design number is needed for scaling, literal number or percentage. How: This takes the core design number to the power of 24. */
+	--cdn-pow-025 : calc( pow( var( --cor-des-num ), 25 ) ); /* What: Core-Design-Number to the Power of 25 ~= 1,130.019. Why: Sometimes the twenty-fifth power of the core design number is needed for scaling, literal number or percentage. How: This takes the core design number to the power of 25. */
+	--cdn-pow-026 : calc( pow( var( --cor-des-num ), 26 ) ); /* What: Core-Design-Number to the Power of 26 ~= 1,496.956. Why: Sometimes the twenty-sixth power of the core design number is needed for scaling, literal number or percentage. How: This takes the core design number to the power of 26. */
+	--cdn-pow-027 : calc( pow( var( --cor-des-num ), 27 ) ); /* What: Core-Design-Number to the Power of 27 ~= 1,983.044. Why: Sometimes the twenty-seventh power of the core design number is needed for scaling, literal number or percentage. How: This takes the core design number to the power of 27. */
+
+
+	--cdn-pow-001-neg : calc( var( --cdn-pow-001 ) * -1 ); /* What: Core-Design-Number to the Power of 1 Negative ~= -1.325. Why: Sometimes the negative (additive inverse) of the core design number is needed for scaling, literal number or percentage. How: This takes the core design number to the power of 1, which for any number is always the number itself, and then multiplies said number by negative 1. */
+	--cdn-pow-002-neg : calc( var( --cdn-pow-002 ) * -1 ); /* What: Core-Design-Number to the Power of 2 Negative ~= -1.755. Why: Sometimes the negative (additive inverse) of the square of the core design number is needed for scaling, literal number or percentage. How: This takes the core design number to the power of 2, and then multiplies said number by negative 1. */
+	--cdn-pow-003-neg : calc( var( --cdn-pow-003 ) * -1 ); /* What: Core-Design-Number to the Power of 3 Negative ~= -2.325. Why: Sometimes the negative (additive inverse) of the cube of the core design number is needed for scaling, literal number or percentage. How: This takes the core design number to the power of 3, and then multiplies said number by negative 1. */
+	--cdn-pow-004-neg : calc( var( --cdn-pow-004 ) * -1 ); /* What: Core-Design-Number to the Power of 4 Negative ~= -3.080. Why: Sometimes the negative (additive inverse) of the fourth power of the core design number is needed for scaling, literal number or percentage. How: This takes the core design number to the power of 4, and then multiplies said number by negative 1. */
+	--cdn-pow-005-neg : calc( var( --cdn-pow-005 ) * -1 ); /* What: Core-Design-Number to the Power of 5 Negative ~= -4.080. Why: Sometimes the negative (additive inverse) of the fifth power of the core design number is needed for scaling, literal number or percentage. How: This takes the core design number to the power of 5, and then multiplies said number by negative 1. */
+	--cdn-pow-006-neg : calc( var( --cdn-pow-006 ) * -1 ); /* What: Core-Design-Number to the Power of 6 Negative ~= -5.404. Why: Sometimes the negative (additive inverse) of the sixth power of the core design number is needed for scaling, literal number or percentage. How: This takes the core design number to the power of 6, and then multiplies said number by negative 1. */
+	--cdn-pow-007-neg : calc( var( --cdn-pow-007 ) * -1 ); /* What: Core-Design-Number to the Power of 7 Negative ~= -7.159. Why: Sometimes the negative (additive inverse) of the seventh power of the core design number is needed for scaling, literal number or percentage. How: This takes the core design number to the power of 7, and then multiplies said number by negative 1. */
+	--cdn-pow-008-neg : calc( var( --cdn-pow-008 ) * -1 ); /* What: Core-Design-Number to the Power of 8 Negative ~= -9.484. Why: Sometimes the negative (additive inverse) of the eighth power of the core design number is needed for scaling, literal number or percentage. How: This takes the core design number to the power of 8, and then multiplies said number by negative 1. */
+	--cdn-pow-009-neg : calc( var( --cdn-pow-009 ) * -1 ); /* What: Core-Design-Number to the Power of 9 Negative ~= -12.564. Why: Sometimes the negative (additive inverse) of the ninth power of the core design number is needed for scaling, literal number or percentage. How: This takes the core design number to the power of 9, and then multiplies said number by negative 1. */
+	--cdn-pow-010-neg : calc( var( --cdn-pow-010 ) * -1 ); /* What: Core-Design-Number to the Power of 10 Negative ~= -16.643. Why: Sometimes the negative (additive inverse) of the tenth power of the core design number is needed for scaling, literal number or percentage. How: This takes the core design number to the power of 10, and then multiplies said number by negative 1. */
+
+
+	--cdn-pow-001-rec : calc( 1 / var( --cdn-pow-001 ) ); /* What: Core-Design-Number to the Power of 1 Reciprocal ~= 0.755. Why: Sometimes the reciprocal of the core design number is needed for scaling, literal number or percentage. How: This divides one by the core design number to the power of 1, which for any number is always the number itself. */
+	--cdn-pow-002-rec : calc( 1 / var( --cdn-pow-002 ) ); /* What: Core-Design-Number to the Power of 2 Reciprocal ~= 0.570. Why: Sometimes the reciprocal of the square of the core design number is needed for scaling, literal number or percentage. How: This divides one by the core design number to the power of 2. */
+	--cdn-pow-003-rec : calc( 1 / var( --cdn-pow-003 ) ); /* What: Core-Design-Number to the Power of 3 Reciprocal ~= 0.430. Why: Sometimes the reciprocal of the cube of the core design number is needed for scaling, literal number or percentage. How: This divides one by the core design number to the power of 3. */
+	--cdn-pow-004-rec : calc( 1 / var( --cdn-pow-004 ) ); /* What: Core-Design-Number to the Power of 4 Reciprocal ~= 0.325. Why: Sometimes the reciprocal of the fourth power of the core design number is needed for scaling, literal number or percentage. How: This divides one by the core design number to the power of 4. */
+	--cdn-pow-005-rec : calc( 1 / var( --cdn-pow-005 ) ); /* What: Core-Design-Number to the Power of 5 Reciprocal ~= 0.245. Why: Sometimes the reciprocal of the fifth power of the core design number is needed for scaling, literal number or percentage. How: This divides one by the core design number to the power of 5. */
+	--cdn-pow-006-rec : calc( 1 / var( --cdn-pow-006 ) ); /* What: Core-Design-Number to the Power of 6 Reciprocal ~= 0.185. Why: Sometimes the reciprocal of the sixth power of the core design number is needed for scaling, literal number or percentage. How: This divides one by the core design number to the power of 6. */
+	--cdn-pow-007-rec : calc( 1 / var( --cdn-pow-007 ) ); /* What: Core-Design-Number to the Power of 7 Reciprocal ~= 0.140. Why: Sometimes the reciprocal of the seventh power of the core design number is needed for scaling, literal number or percentage. How: This divides one by the core design number to the power of 7. */
+	--cdn-pow-008-rec : calc( 1 / var( --cdn-pow-008 ) ); /* What: Core-Design-Number to the Power of 8 Reciprocal ~= 0.105. Why: Sometimes the reciprocal of the eighth power of the core design number is needed for scaling, literal number or percentage. How: This divides one by the core design number to the power of 8. */
+	--cdn-pow-009-rec : calc( 1 / var( --cdn-pow-009 ) ); /* What: Core-Design-Number to the Power of 9 Reciprocal ~= 0.080. Why: Sometimes the reciprocal of the ninth power of the core design number is needed for scaling, literal number or percentage. How: This divides one by the core design number to the power of 9. */
+	--cdn-pow-010-rec : calc( 1 / var( --cdn-pow-010 ) ); /* What: Core-Design-Number to the Power of 10 Reciprocal ~= 0.060. Why: Sometimes the reciprocal of the tenth power of the core design number is needed for scaling, literal number or percentage. How: This divides one by the core design number to the power of 10. */
+	--cdn-pow-011-rec : calc( 1 / var( --cdn-pow-011 ) ); /* What: Core-Design-Number to the Power of 11 Reciprocal ~= 0.045. Why: Sometimes the reciprocal of the eleventh power of the core design number is needed for scaling, literal number or percentage. How: This divides one by the core design number to the power of 11. */
+
+	/* #endregion Core Design Numbers */
+
+
+
+	/* #region Border Width Tokens */
+
+	--bor-wid-sma : calc( var( --ver-rhy-m12 ) * 1rem ); /* What: Border Width Small ~= 0.499px. Why: This is the border width for the hairline most borders use. How: This multiplies the m12 rhythm step by 1rem, which browsers snap to whole pixels. */
+	--bor-wid-bas : calc( var( --ver-rhy-m09 ) * 1rem ); /* What: Border Width Base ~= 1.160px. Why: This is the border width for stronger borders and controls. How: This multiplies the m09 rhythm step by 1rem, which browsers snap to whole pixels. */
+	--bor-wid-lar : calc( var( --ver-rhy-m07 ) * 1rem ); /* What: Border Width Large ~= 2.035px. Why: This is the border width for focus outlines and spotlight borders. How: This multiplies the m07 rhythm step by 1rem, which browsers snap to whole pixels. */
+	--bor-wid-xla : calc( var( --ver-rhy-m05 ) * 1rem ); /* What: Border Width Extra Large ~= 3.571px. Why: This is the border width for the heaviest ring. How: This multiplies the m05 rhythm step by 1rem, which browsers snap to whole pixels. */
+
+	/* #endregion Border Width Tokens */
+
+
+
 	/* #region Color Tokens */
 
-	--accent      : #1f4e7a;                  /* What: Accent. Why: Actions, emphasis, and numbering share the brand navy from the logo. How: Buttons, italic accents, and numbers read it. */
-	--accent-soft : #5a8ab8;                  /* What: Accent Soft. Why: Hover states on the dark band need a lighter navy that stays readable. How: The footer's and contact section's hovered links and focused fields read it. */
-	--brand       : #1f4e7a;                  /* What: Brand. Why: This names the logo's navy separately from the accent. How: Nothing reads it yet; the design-system pass decides whether it stays. */
-	--ink         : #1a1f24;                  /* What: Ink. Why: Text and dark surfaces share one near-black. How: Body text, headings, dark bands, and primary buttons read it. */
-	--ink-muted   : #6b7079;                  /* What: Ink Muted. Why: Labels and secondary text should recede. How: Eyebrows, captions, and quiet links read it. */
-	--ink-soft    : #2a3138;                  /* What: Ink Soft. Why: Long paragraphs read more gently than full ink. How: Ledes, descriptions, and links read it. */
-	--line        : rgba( 26, 31, 36, 0.12 ); /* What: Line. Why: Dividers should be barely there. How: Section edges and hairline rules read it. */
-	--line-strong : rgba( 26, 31, 36, 0.22 ); /* What: Line Strong. Why: A few dividers need to hold up as structure. How: The service grid, principles rule, and logo ring read it. */
-	--paper       : #f5f2ec;                  /* What: Paper. Why: The page sits on a warm off-white rather than pure white. How: The page background and text on dark bands read it. */
-	--paper-soft  : #ebe7df;                  /* What: Paper Soft. Why: Some bands and hovers need a slightly darker paper. How: The about section and hovered service cards read it. */
-	--paper-warm  : #e4dfd4;                  /* What: Paper Warm. Why: This is a third, warmer paper shade. How: Nothing reads it yet; the design-system pass decides whether it stays. */
+	--acc-lig-col : oklch( from var( --acc-mai-col ) calc( l + 0.204 ) c h ); /* What: Accent Light Color. Why: Hover text and focus lines on the dark band need a lighter accent that stays readable there. How: This lightens the main accent, so it follows the accent if it changes. */
+	--acc-mai-col : #1f4e7a;                                                  /* What: Accent Main Color. Why: Actions, emphasis, and numbering share the navy from the logo. How: Buttons, italic accents, and numbers read it. */
+	--acc-sec-col : ;                                                         /* What: Accent Secondary Color. Why: The standard role set includes a second accent. How: This site has no second accent, so it stays empty. */
+	--acc-tin-col : ;                                                         /* What: Accent Tint Color. Why: The standard role set includes a pale accent tint. How: This site doesn't use one, so it stays empty. */
+	--att-rin-col : ;                                                         /* What: Attention Ring Color. Why: The standard role set includes an attention ring. How: This site doesn't use one, so it stays empty. */
+	--bac-hov-col : ;                                                         /* What: Background Hover Color. Why: The standard role set includes a hover overlay. How: This site's hovers use their own colors, so it stays empty. */
+	--bac-inv-col : #1a1f24;                                                  /* What: Background Inverse Color. Why: Dark bands, the footer, and primary buttons need one dark surface color. How: Those surfaces read it, with paper-colored text on top. */
+	--bac-pag-col : #f5f2ec;                                                  /* What: Background Page Color. Why: The page sits on a warm off-white rather than pure white. How: The page background reads it, and text on dark surfaces reads it, at full strength or faded. */
+	--bac-sur-col : #ebe7df;                                                  /* What: Background Surface Color. Why: Some bands and hovers need a slightly darker paper. How: The about section and hovered service cards read it. */
+	--bor-mai-col : rgba( 26, 31, 36, 0.12 );                                 /* What: Border Main Color. Why: Dividers should be barely there. How: Section edges and hairline rules read it. */
+	--bor-str-col : oklch( from var( --bor-mai-col ) l c h / 0.22 );          /* What: Border Strong Color. Why: A few dividers need to hold up as structure. How: This raises the main border's opacity to 0.22 for the service grid, principles rule, and logo ring. */
+	--err-dar-col : ;                                                         /* What: Error Dark Color. Why: The standard role set includes the error family. How: This site has no errors to show, so it stays empty. */
+	--err-mai-col : ;                                                         /* What: Error Main Color. Why: The standard role set includes the error family. How: This site has no errors to show, so it stays empty. */
+	--err-tin-col : ;                                                         /* What: Error Tint Color. Why: The standard role set includes the error family. How: This site has no errors to show, so it stays empty. */
+	--scr-mai-col : ;                                                         /* What: Scrim Main Color. Why: The standard role set includes a scrim behind overlays. How: This site has no overlays, so it stays empty. */
+	--sha-mai-col : ;                                                         /* What: Shadow Main Color. Why: The standard role set includes a shadow color for elevation. How: This site has no elevation shadows, so it stays empty. */
+	--suc-dar-col : ;                                                         /* What: Success Dark Color. Why: The standard role set includes the success family. How: This site has no success states, so it stays empty. */
+	--suc-mai-col : ;                                                         /* What: Success Main Color. Why: The standard role set includes the success family. How: This site has no success states, so it stays empty. */
+	--suc-tin-col : ;                                                         /* What: Success Tint Color. Why: The standard role set includes the success family. How: This site has no success states, so it stays empty. */
+	--tex-acc-col : var( --bac-pag-col );                                     /* What: Text Accent Color. Why: Text on an accent background needs to stay readable. How: This reads the page color, as on the hovered primary button. */
+	--tex-mai-col : #1a1f24;                                                  /* What: Text Main Color. Why: Body text and headings share one near-black. How: The body and every heading read it. */
+	--tex-mut-col : #6b7079;                                                  /* What: Text Muted Color. Why: Labels and secondary details should recede. How: Eyebrows, captions, and quiet links read it. */
+	--tex-sec-col : #2a3138;                                                  /* What: Text Secondary Color. Why: Long paragraphs read more gently than full ink. How: Ledes, descriptions, and links read it. */
+	--war-dar-col : ;                                                         /* What: Warning Dark Color. Why: The standard role set includes the warning family. How: This site has no warnings to show, so it stays empty. */
+	--war-mai-col : ;                                                         /* What: Warning Main Color. Why: The standard role set includes the warning family. How: This site has no warnings to show, so it stays empty. */
+	--war-tin-col : ;                                                         /* What: Warning Tint Color. Why: The standard role set includes the warning family. How: This site has no warnings to show, so it stays empty. */
 
 	/* #endregion Color Tokens */
 
 
 
+	/* #region Duration Tokens */
+
+	--dur-ani-m03 : calc( var( --dur-ani-bas ) * var( --cdn-pow-003-rec ) ); /* What: Duration Animation Base Minus 3 ~= 67.9ms. Why: Animations share one duration scale drawn from the core design number. How: This multiplies the base step by the reciprocal of the core design number to the power of 3. */
+	--dur-ani-m02 : calc( var( --dur-ani-bas ) * var( --cdn-pow-002-rec ) ); /* What: Duration Animation Base Minus 2 ~= 89.9ms. Why: Animations share one duration scale drawn from the core design number. How: This multiplies the base step by the reciprocal of the core design number to the power of 2. */
+	--dur-ani-m01 : calc( var( --dur-ani-bas ) * var( --cdn-pow-001-rec ) ); /* What: Duration Animation Base Minus 1 ~= 119.2ms. Why: Animations share one duration scale drawn from the core design number. How: This multiplies the base step by the reciprocal of the core design number to the power of 1. */
+	--dur-ani-bas : calc( var( --cdn-pow-018 ) * 1ms );                      /* What: Duration Animation Base ~= 157.8ms. Why: Animations share one duration scale drawn from the core design number. How: This is the eighteenth power of the core design number in milliseconds, the base step every other step multiplies. */
+	--dur-ani-p01 : calc( var( --dur-ani-bas ) * var( --cdn-pow-001 ) );     /* What: Duration Animation Base Plus 1 ~= 209.1ms. Why: Animations share one duration scale drawn from the core design number. How: This multiplies the base step by the core design number to the power of 1. */
+	--dur-ani-p02 : calc( var( --dur-ani-bas ) * var( --cdn-pow-002 ) );     /* What: Duration Animation Base Plus 2 ~= 277.0ms. Why: Animations share one duration scale drawn from the core design number. How: This multiplies the base step by the core design number to the power of 2. */
+	--dur-ani-p03 : calc( var( --dur-ani-bas ) * var( --cdn-pow-003 ) );     /* What: Duration Animation Base Plus 3 ~= 366.9ms. Why: Animations share one duration scale drawn from the core design number. How: This multiplies the base step by the core design number to the power of 3. */
+	--dur-ani-p04 : calc( var( --dur-ani-bas ) * var( --cdn-pow-004 ) );     /* What: Duration Animation Base Plus 4 ~= 486.1ms. Why: Animations share one duration scale drawn from the core design number. How: This multiplies the base step by the core design number to the power of 4. */
+	--dur-ani-p05 : calc( var( --dur-ani-bas ) * var( --cdn-pow-005 ) );     /* What: Duration Animation Base Plus 5 ~= 643.9ms. Why: Animations share one duration scale drawn from the core design number. How: This multiplies the base step by the core design number to the power of 5. */
+	--dur-ani-p06 : calc( var( --dur-ani-bas ) * var( --cdn-pow-006 ) );     /* What: Duration Animation Base Plus 6 ~= 853.0ms. Why: Animations share one duration scale drawn from the core design number. How: This multiplies the base step by the core design number to the power of 6. */
+	--dur-ani-p07 : calc( var( --dur-ani-bas ) * var( --cdn-pow-007 ) );     /* What: Duration Animation Base Plus 7 ~= 1130.0ms. Why: Animations share one duration scale drawn from the core design number. How: This multiplies the base step by the core design number to the power of 7. */
+	--dur-ani-p08 : calc( var( --dur-ani-bas ) * var( --cdn-pow-008 ) );     /* What: Duration Animation Base Plus 8 ~= 1497.0ms. Why: Animations share one duration scale drawn from the core design number. How: This multiplies the base step by the core design number to the power of 8. */
+	--dur-ani-p09 : calc( var( --dur-ani-bas ) * var( --cdn-pow-009 ) );     /* What: Duration Animation Base Plus 9 ~= 1983.0ms. Why: Animations share one duration scale drawn from the core design number. How: This multiplies the base step by the core design number to the power of 9. */
+
+
+	--dur-tra-m03 : calc( var( --dur-tra-bas ) * var( --cdn-pow-003-rec ) ); /* What: Duration Transition Base Minus 3 ~= 67.9ms. Why: Transitions share one duration scale drawn from the core design number. How: This multiplies the base step by the reciprocal of the core design number to the power of 3. */
+	--dur-tra-m02 : calc( var( --dur-tra-bas ) * var( --cdn-pow-002-rec ) ); /* What: Duration Transition Base Minus 2 ~= 89.9ms. Why: Transitions share one duration scale drawn from the core design number. How: This multiplies the base step by the reciprocal of the core design number to the power of 2. */
+	--dur-tra-m01 : calc( var( --dur-tra-bas ) * var( --cdn-pow-001-rec ) ); /* What: Duration Transition Base Minus 1 ~= 119.2ms. Why: Transitions share one duration scale drawn from the core design number. How: This multiplies the base step by the reciprocal of the core design number to the power of 1. */
+	--dur-tra-bas : calc( var( --cdn-pow-018 ) * 1ms );                      /* What: Duration Transition Base ~= 157.8ms. Why: Transitions share one duration scale drawn from the core design number. How: This is the eighteenth power of the core design number in milliseconds, the base step every other step multiplies. */
+	--dur-tra-p01 : calc( var( --dur-tra-bas ) * var( --cdn-pow-001 ) );     /* What: Duration Transition Base Plus 1 ~= 209.1ms. Why: Transitions share one duration scale drawn from the core design number. How: This multiplies the base step by the core design number to the power of 1. */
+	--dur-tra-p02 : calc( var( --dur-tra-bas ) * var( --cdn-pow-002 ) );     /* What: Duration Transition Base Plus 2 ~= 277.0ms. Why: Transitions share one duration scale drawn from the core design number. How: This multiplies the base step by the core design number to the power of 2. */
+	--dur-tra-p03 : calc( var( --dur-tra-bas ) * var( --cdn-pow-003 ) );     /* What: Duration Transition Base Plus 3 ~= 366.9ms. Why: Transitions share one duration scale drawn from the core design number. How: This multiplies the base step by the core design number to the power of 3. */
+	--dur-tra-p04 : calc( var( --dur-tra-bas ) * var( --cdn-pow-004 ) );     /* What: Duration Transition Base Plus 4 ~= 486.1ms. Why: Transitions share one duration scale drawn from the core design number. How: This multiplies the base step by the core design number to the power of 4. */
+	--dur-tra-p05 : calc( var( --dur-tra-bas ) * var( --cdn-pow-005 ) );     /* What: Duration Transition Base Plus 5 ~= 643.9ms. Why: Transitions share one duration scale drawn from the core design number. How: This multiplies the base step by the core design number to the power of 5. */
+	--dur-tra-p06 : calc( var( --dur-tra-bas ) * var( --cdn-pow-006 ) );     /* What: Duration Transition Base Plus 6 ~= 853.0ms. Why: Transitions share one duration scale drawn from the core design number. How: This multiplies the base step by the core design number to the power of 6. */
+	--dur-tra-p07 : calc( var( --dur-tra-bas ) * var( --cdn-pow-007 ) );     /* What: Duration Transition Base Plus 7 ~= 1130.0ms. Why: Transitions share one duration scale drawn from the core design number. How: This multiplies the base step by the core design number to the power of 7. */
+	--dur-tra-p08 : calc( var( --dur-tra-bas ) * var( --cdn-pow-008 ) );     /* What: Duration Transition Base Plus 8 ~= 1497.0ms. Why: Transitions share one duration scale drawn from the core design number. How: This multiplies the base step by the core design number to the power of 8. */
+	--dur-tra-p09 : calc( var( --dur-tra-bas ) * var( --cdn-pow-009 ) );     /* What: Duration Transition Base Plus 9 ~= 1983.0ms. Why: Transitions share one duration scale drawn from the core design number. How: This multiplies the base step by the core design number to the power of 9. */
+
+	/* #endregion Duration Tokens */
+
+
+
+	/* #region Easing Tokens */
+
+	--mot-acc-eas : cubic-bezier( .4, 0, 1, 1 );      /* What: Motion Accelerate Easing. Why: Things leaving the screen should speed up as they go. How: Transitions and animations read it as their timing function. */
+	--mot-bou-eas : cubic-bezier( .34, 1.56, .5, 1 ); /* What: Motion Bounce Easing. Why: Celebratory pops and check marks should spring past their target before settling. How: Transitions and animations read it as their timing function. */
+	--mot-dec-eas : cubic-bezier( .2, .7, .3, 1 );    /* What: Motion Decelerate Easing. Why: Things arriving should start fast and land softly. How: Transitions and animations read it as their timing function. */
+	--mot-ove-eas : cubic-bezier( .34, 1.2, .5, 1 );  /* What: Motion Overshoot Easing. Why: Inserted rows and fills should ease slightly past their target before settling. How: Transitions and animations read it as their timing function. */
+	--mot-sta-eas : ease;                             /* What: Motion Standard Easing. Why: Most hovers, toggles, and fades need one ordinary, smooth curve. How: Transitions and animations read it as their timing function. */
+
+	/* #endregion Easing Tokens */
+
+
+
+	/* #region Font Family Tokens */
+
+	--fon-fam-mai : 'Inter Tight', -apple-system, BlinkMacSystemFont, sans-serif; /* What: Font Family Main. Why: Paragraphs and the interface share one clean sans serif. How: This names Inter Tight, falling back to the system sans-serif. */
+	--fon-fam-sec : 'Fraunces', 'Times New Roman', serif;                         /* What: Font Family Secondary. Why: Headings, numbers, the brand name, and accents read in an expressive serif. How: This names Fraunces, falling back to a system serif. */
+
+	/* #endregion Font Family Tokens */
+
+
+
+	/* #region Font Size Tokens */
+
+	--fon-siz-bas : 1rem;                                                /* What: Font Size Base = 11px. Why: This is the smallest font size accessibility tools accept, and every other step multiplies it; html sets 1rem to 11px by default. How: Each step above reads it as its starting point. */
+	--fon-siz-p01 : calc( var( --fon-siz-bas ) * var( --cdn-pow-001 ) ); /* What: Font Size Base Plus 1 ~= 14.572px. Why: This is one step up the scale from the base. How: This multiplies the base by the first power of the core design number. */
+	--fon-siz-p02 : calc( var( --fon-siz-bas ) * var( --cdn-pow-002 ) ); /* What: Font Size Base Plus 2 ~= 19.304px. Why: This is two steps up the scale from the base. How: This multiplies the base by the second power of the core design number. */
+	--fon-siz-p03 : calc( var( --fon-siz-bas ) * var( --cdn-pow-003 ) ); /* What: Font Size Base Plus 3 ~= 25.572px. Why: This is three steps up the scale from the base. How: This multiplies the base by the third power of the core design number. */
+	--fon-siz-p04 : calc( var( --fon-siz-bas ) * var( --cdn-pow-004 ) ); /* What: Font Size Base Plus 4 ~= 33.876px. Why: This is four steps up the scale from the base. How: This multiplies the base by the fourth power of the core design number. */
+	--fon-siz-p05 : calc( var( --fon-siz-bas ) * var( --cdn-pow-005 ) ); /* What: Font Size Base Plus 5 ~= 44.876px. Why: This is five steps up the scale from the base. How: This multiplies the base by the fifth power of the core design number. */
+	--fon-siz-p06 : calc( var( --fon-siz-bas ) * var( --cdn-pow-006 ) ); /* What: Font Size Base Plus 6 ~= 59.447px. Why: This is six steps up the scale from the base. How: This multiplies the base by the sixth power of the core design number. */
+	--fon-siz-p07 : calc( var( --fon-siz-bas ) * var( --cdn-pow-007 ) ); /* What: Font Size Base Plus 7 ~= 78.749px. Why: This is seven steps up the scale from the base. How: This multiplies the base by the seventh power of the core design number. */
+	--fon-siz-p08 : calc( var( --fon-siz-bas ) * var( --cdn-pow-008 ) ); /* What: Font Size Base Plus 8 ~= 104.323px. Why: This is eight steps up the scale from the base, for the largest display headings. How: This multiplies the base by the eighth power of the core design number. */
+
+	/* #endregion Font Size Tokens */
+
+
+
+	/* #region Layout Tokens */
+
+	--con-max-wid : 1280px;                                                                                  /* What: Container Maximum Width. Why: Content shouldn't stretch across very wide screens. How: Every section's container caps its width at this; horizontal values hold their size until the project's horizontal system is chosen. */
+	--gut-sid-pad : clamp( 1.8181818182rem, 4vw, 4.3636363636rem );                                          /* What: Gutter Side Padding. Why: Content needs side margins that grow with the screen. How: Every container and the drawer pad their sides with it, 20px to 48px as before, until the project's horizontal system is chosen. */
+	--sec-ver-pad : clamp( calc( var( --ver-rhy-p06 ) * 1rem ), 10vw, calc( var( --ver-rhy-p08 ) * 1rem ) ); /* What: Section Vertical Padding. Why: Sections need generous vertical breathing room that scales with the screen. How: Every section pads its top and bottom with it, growing with the viewport between the p06 and p08 rhythm steps, about 78.749px to 138.200px. */
+
+	/* #endregion Layout Tokens */
+
+
+
+	/* #region Legacy Tokens */
+
+	/**
+	 * styles.css = Legacy Tokens
+	 *
+	 * @summary
+	 * The site's original tokens, kept only while the design-system pass moves
+	 * each module onto the scales and roles above. Each is deleted once nothing
+	 * reads it.
+	 *
+	 * @author z4nta0 <https://github.com/z4nta0>
+	 *
+	*/
+
+
+
+	--accent      : #1f4e7a;                                                       /* What: Accent. Why: Actions, emphasis, and numbering share the brand navy from the logo. How: Buttons, italic accents, and numbers read it. */
+	--accent-soft : #5a8ab8;                                                       /* What: Accent Soft. Why: Hover states on the dark band need a lighter navy that stays readable. How: The footer's and contact section's hovered links and focused fields read it. */
+	--brand       : #1f4e7a;                                                       /* What: Brand. Why: This names the logo's navy separately from the accent. How: Nothing reads it yet; the design-system pass decides whether it stays. */
+	--ink         : #1a1f24;                                                       /* What: Ink. Why: Text and dark surfaces share one near-black. How: Body text, headings, dark bands, and primary buttons read it. */
+	--ink-muted   : #6b7079;                                                       /* What: Ink Muted. Why: Labels and secondary text should recede. How: Eyebrows, captions, and quiet links read it. */
+	--ink-soft    : #2a3138;                                                       /* What: Ink Soft. Why: Long paragraphs read more gently than full ink. How: Ledes, descriptions, and links read it. */
+	--line        : rgba( 26, 31, 36, 0.12 );                                      /* What: Line. Why: Dividers should be barely there. How: Section edges and hairline rules read it. */
+	--line-strong : rgba( 26, 31, 36, 0.22 );                                      /* What: Line Strong. Why: A few dividers need to hold up as structure. How: The service grid, principles rule, and logo ring read it. */
+	--paper       : #f5f2ec;                                                       /* What: Paper. Why: The page sits on a warm off-white rather than pure white. How: The page background and text on dark bands read it. */
+	--paper-soft  : #ebe7df;                                                       /* What: Paper Soft. Why: Some bands and hovers need a slightly darker paper. How: The about section and hovered service cards read it. */
+	--paper-warm  : #e4dfd4;                                                       /* What: Paper Warm. Why: This is a third, warmer paper shade. How: Nothing reads it yet; the design-system pass decides whether it stays. */
+	--container     : 1280px;                                                      /* What: Container. Why: Content shouldn't stretch across very wide screens. How: Every section's container caps its width at this. */
+	--gutter        : clamp( 1.8181818182rem, 4vw, 4.3636363636rem );              /* What: Gutter. Why: Content needs side margins that grow with the screen. How: Every container and the drawer pad their sides with it. */
+	--section-pad-y : clamp( 7.2727272727rem, 10vw, 13.0909090909rem );            /* What: Section Padding Y. Why: Sections need generous vertical breathing room that scales with the screen. How: Every section pads its top and bottom with it. */
+	--font-body    : 'Inter Tight', -apple-system, BlinkMacSystemFont, sans-serif; /* What: Font Body. Why: Paragraphs and the interface use one clean sans serif. How: The body and every body-text class read it, falling back to the system font. */
+	--font-display : 'Fraunces', 'Times New Roman', serif;                         /* What: Font Display. Why: Headings and accents use an expressive serif. How: Every display-type class reads it, falling back to a system serif. */
+
+	/* #endregion Legacy Tokens */
+
+
+
+	/* #region Radius Tokens */
+
+	--rad-bor-xsm : calc( var( --ver-rhy-m05 ) * 1rem ); /* What: Radius Border Extra Small ~= 3.571px. Why: Tiny pieces, swatches, and focus rings get the subtlest rounding. How: This multiplies the m05 rhythm step by 1rem. */
+	--rad-bor-sma : calc( var( --ver-rhy-m02 ) * 1rem ); /* What: Radius Border Small ~= 8.304px. Why: Inputs, small buttons, and grips share one small corner. How: This multiplies the m02 rhythm step by 1rem. */
+	--rad-bor-med : calc( var( --ver-rhy-m01 ) * 1rem ); /* What: Radius Border Medium = 11px. Why: Rows, tabs, list cards, and inner blocks share one corner. How: This multiplies the m01 rhythm step by 1rem. */
+	--rad-bor-lar : calc( var( --ver-rhy-bas ) * 1rem ); /* What: Radius Border Large ~= 14.572px. Why: Cards, panels, and modals share one larger corner. How: This multiplies the bas rhythm step by 1rem. */
+	--rad-bor-xla : calc( var( --ver-rhy-p01 ) * 1rem ); /* What: Radius Border Extra Large ~= 19.304px. Why: The largest surfaces and tracks get the softest corners. How: This multiplies the p01 rhythm step by 1rem. */
+
+	/* #endregion Radius Tokens */
+
+
+
 	/* #region Spacing Tokens */
 
-	--container     : 1280px;                                           /* What: Container. Why: Content shouldn't stretch across very wide screens. How: Every section's container caps its width at this. */
-	--gutter        : clamp( 1.8181818182rem, 4vw, 4.3636363636rem );   /* What: Gutter. Why: Content needs side margins that grow with the screen. How: Every container and the drawer pad their sides with it. */
-	--section-pad-y : clamp( 7.2727272727rem, 10vw, 13.0909090909rem ); /* What: Section Padding Y. Why: Sections need generous vertical breathing room that scales with the screen. How: Every section pads its top and bottom with it. */
+	--spa-ver-m09 : calc( var( --ver-rhy-m09 ) * 1rem ); /* What: Spacing Vertical Base Minus 9 ~= 1.160px. Why: Vertical margins, padding, and row gaps share the vertical rhythm. How: This multiplies the m09 rhythm step by 1rem. */
+	--spa-ver-m08 : calc( var( --ver-rhy-m08 ) * 1rem ); /* What: Spacing Vertical Base Minus 8 ~= 1.537px. Why: Vertical margins, padding, and row gaps share the vertical rhythm. How: This multiplies the m08 rhythm step by 1rem. */
+	--spa-ver-m07 : calc( var( --ver-rhy-m07 ) * 1rem ); /* What: Spacing Vertical Base Minus 7 ~= 2.035px. Why: Vertical margins, padding, and row gaps share the vertical rhythm. How: This multiplies the m07 rhythm step by 1rem. */
+	--spa-ver-m06 : calc( var( --ver-rhy-m06 ) * 1rem ); /* What: Spacing Vertical Base Minus 6 ~= 2.696px. Why: Vertical margins, padding, and row gaps share the vertical rhythm. How: This multiplies the m06 rhythm step by 1rem. */
+	--spa-ver-m05 : calc( var( --ver-rhy-m05 ) * 1rem ); /* What: Spacing Vertical Base Minus 5 ~= 3.571px. Why: Vertical margins, padding, and row gaps share the vertical rhythm. How: This multiplies the m05 rhythm step by 1rem. */
+	--spa-ver-m04 : calc( var( --ver-rhy-m04 ) * 1rem ); /* What: Spacing Vertical Base Minus 4 ~= 4.731px. Why: Vertical margins, padding, and row gaps share the vertical rhythm. How: This multiplies the m04 rhythm step by 1rem. */
+	--spa-ver-m03 : calc( var( --ver-rhy-m03 ) * 1rem ); /* What: Spacing Vertical Base Minus 3 ~= 6.268px. Why: Vertical margins, padding, and row gaps share the vertical rhythm. How: This multiplies the m03 rhythm step by 1rem. */
+	--spa-ver-m02 : calc( var( --ver-rhy-m02 ) * 1rem ); /* What: Spacing Vertical Base Minus 2 ~= 8.304px. Why: Vertical margins, padding, and row gaps share the vertical rhythm. How: This multiplies the m02 rhythm step by 1rem. */
+	--spa-ver-m01 : calc( var( --ver-rhy-m01 ) * 1rem ); /* What: Spacing Vertical Base Minus 1 = 11px. Why: Vertical margins, padding, and row gaps share the vertical rhythm. How: This multiplies the m01 rhythm step by 1rem. */
+	--spa-ver-bas : calc( var( --ver-rhy-bas ) * 1rem ); /* What: Spacing Vertical Base ~= 14.572px. Why: Vertical margins, padding, and row gaps share the vertical rhythm. How: This multiplies the bas rhythm step by 1rem. */
+	--spa-ver-p01 : calc( var( --ver-rhy-p01 ) * 1rem ); /* What: Spacing Vertical Base Plus 1 ~= 19.304px. Why: Vertical margins, padding, and row gaps share the vertical rhythm. How: This multiplies the p01 rhythm step by 1rem. */
+	--spa-ver-p02 : calc( var( --ver-rhy-p02 ) * 1rem ); /* What: Spacing Vertical Base Plus 2 ~= 25.572px. Why: Vertical margins, padding, and row gaps share the vertical rhythm. How: This multiplies the p02 rhythm step by 1rem. */
+	--spa-ver-p03 : calc( var( --ver-rhy-p03 ) * 1rem ); /* What: Spacing Vertical Base Plus 3 ~= 33.876px. Why: Vertical margins, padding, and row gaps share the vertical rhythm. How: This multiplies the p03 rhythm step by 1rem. */
+	--spa-ver-p04 : calc( var( --ver-rhy-p04 ) * 1rem ); /* What: Spacing Vertical Base Plus 4 ~= 44.876px. Why: Vertical margins, padding, and row gaps share the vertical rhythm. How: This multiplies the p04 rhythm step by 1rem. */
+	--spa-ver-p05 : calc( var( --ver-rhy-p05 ) * 1rem ); /* What: Spacing Vertical Base Plus 5 ~= 59.447px. Why: Vertical margins, padding, and row gaps share the vertical rhythm. How: This multiplies the p05 rhythm step by 1rem. */
+	--spa-ver-p06 : calc( var( --ver-rhy-p06 ) * 1rem ); /* What: Spacing Vertical Base Plus 6 ~= 78.750px. Why: Vertical margins, padding, and row gaps share the vertical rhythm. How: This multiplies the p06 rhythm step by 1rem. */
+	--spa-ver-p07 : calc( var( --ver-rhy-p07 ) * 1rem ); /* What: Spacing Vertical Base Plus 7 ~= 104.323px. Why: Vertical margins, padding, and row gaps share the vertical rhythm. How: This multiplies the p07 rhythm step by 1rem. */
+	--spa-ver-p08 : calc( var( --ver-rhy-p08 ) * 1rem ); /* What: Spacing Vertical Base Plus 8 ~= 138.200px. Why: Vertical margins, padding, and row gaps share the vertical rhythm. How: This multiplies the p08 rhythm step by 1rem. */
 
 	/* #endregion Spacing Tokens */
 
 
 
-	/* #region Type Tokens */
+	/* #region Text Width Tokens */
 
-	--font-body    : 'Inter Tight', -apple-system, BlinkMacSystemFont, sans-serif; /* What: Font Body. Why: Paragraphs and the interface use one clean sans serif. How: The body and every body-text class read it, falling back to the system font. */
-	--font-display : 'Fraunces', 'Times New Roman', serif;                         /* What: Font Display. Why: Headings and accents use an expressive serif. How: Every display-type class reads it, falling back to a system serif. */
+	--tex-wid-bas : calc( var( --cdn-pow-012 ) * 1em ); /* What: Text Width Base Maximum ~= 29.207em. Why: Paragraph text reads best near 66 characters per line. How: Inter Tight averages about 2.34 characters per em, so this caps a line at about 68 characters at any font size. */
+	--tex-wid-sma : calc( var( --cdn-pow-011 ) * 1em ); /* What: Text Width Small Maximum ~= 22.047em. Why: Small or secondary text (hints, captions, subtitles) reads best near 50 characters per line. How: Inter Tight averages about 2.34 characters per em, so this caps a line at about 52 characters at any font size. */
 
-	/* #endregion Type Tokens */
+	/* #endregion Text Width Tokens */
+
+
+
+	/* #region Vertical Rhythm Tokens */
+
+	--ver-rhy-m12 : var( --cdn-pow-011-rec ); /* What: Vertical Rhythm Base Minus 12 ~= 0.045. Why: This is 12 steps below the base step, for hairline widths. How: This is the reciprocal of the eleventh power of the core design number, multiplied by 1rem where a length is needed. */
+	--ver-rhy-m11 : var( --cdn-pow-010-rec ); /* What: Vertical Rhythm Base Minus 11 ~= 0.060. Why: This is 11 steps below the base step, for hairline widths. How: This is the reciprocal of the tenth power of the core design number, multiplied by 1rem where a length is needed. */
+	--ver-rhy-m10 : var( --cdn-pow-009-rec ); /* What: Vertical Rhythm Base Minus 10 ~= 0.080. Why: This is 10 steps below the base step, for hairline widths. How: This is the reciprocal of the ninth power of the core design number, multiplied by 1rem where a length is needed. */
+	--ver-rhy-m09 : var( --cdn-pow-008-rec ); /* What: Vertical Rhythm Base Minus 9 ~= 0.105. Why: This is 9 steps below the base step, for the finest vertical spacing. How: This is the reciprocal of the eighth power of the core design number, multiplied by 1rem where a length is needed. */
+	--ver-rhy-m08 : var( --cdn-pow-007-rec ); /* What: Vertical Rhythm Base Minus 8 ~= 0.140. Why: This is 8 steps below the base step, for the finest vertical spacing. How: This is the reciprocal of the seventh power of the core design number, multiplied by 1rem where a length is needed. */
+	--ver-rhy-m07 : var( --cdn-pow-006-rec ); /* What: Vertical Rhythm Base Minus 7 ~= 0.185. Why: This is 7 steps below the base step, for the finest vertical spacing. How: This is the reciprocal of the sixth power of the core design number, multiplied by 1rem where a length is needed. */
+	--ver-rhy-m06 : var( --cdn-pow-005-rec ); /* What: Vertical Rhythm Base Minus 6 ~= 0.245. Why: This is 6 steps below the base step, for the finest vertical spacing. How: This is the reciprocal of the fifth power of the core design number, multiplied by 1rem where a length is needed. */
+	--ver-rhy-m05 : var( --cdn-pow-004-rec ); /* What: Vertical Rhythm Base Minus 5 ~= 0.325. Why: This is 5 steps below the base step, for the finest vertical spacing. How: This is the reciprocal of the fourth power of the core design number, multiplied by 1rem where a length is needed. */
+	--ver-rhy-m04 : var( --cdn-pow-003-rec ); /* What: Vertical Rhythm Base Minus 4 ~= 0.430. Why: This is 4 steps below the base step, for the finest vertical spacing. How: This is the reciprocal of the third power of the core design number, multiplied by 1rem where a length is needed. */
+	--ver-rhy-m03 : var( --cdn-pow-002-rec ); /* What: Vertical Rhythm Base Minus 3 ~= 0.570. Why: This is 3 steps below the base step, for the finest vertical spacing. How: This is the reciprocal of the second power of the core design number, multiplied by 1rem where a length is needed. */
+	--ver-rhy-m02 : var( --cdn-pow-001-rec ); /* What: Vertical Rhythm Base Minus 2 ~= 0.755. Why: This is 2 steps below the base step, for tight vertical spacing. How: This is the reciprocal of the first power of the core design number, multiplied by 1rem where a length is needed. */
+	--ver-rhy-m01 : var( --cdn-pow-000 );     /* What: Vertical Rhythm Base Minus 1 = 1. Why: Headings and single-line elements need no breathing room between lines. How: This is read unitless as line-height, so each line is exactly its own font size tall. */
+	--ver-rhy-bas : var( --cdn-pow-001 );     /* What: Vertical Rhythm Base ~= 1.325. Why: Line height and every other height-related value share one base rhythm drawn from the core design number. How: This is read unitless as line-height, so each element multiplies it by its own font size, and other vertical values can build on it. */
+	--ver-rhy-p01 : var( --cdn-pow-002 );     /* What: Vertical Rhythm Base Plus 1 ~= 1.755. Why: Small labels that share a row with a taller control, like the page kickers, need a roomier line. How: This is read unitless as line-height (about 19.3px on base-size text), or multiplied by 1rem where a fixed height is needed. */
+	--ver-rhy-p02 : var( --cdn-pow-003 );     /* What: Vertical Rhythm Base Plus 2 ~= 2.325. Why: This is 2 steps above the base step, for roomy vertical spacing. How: This is the third power of the core design number, multiplied by 1rem where a length is needed. */
+	--ver-rhy-p03 : var( --cdn-pow-004 );     /* What: Vertical Rhythm Base Plus 3 ~= 3.080. Why: This is 3 steps above the base step, for the roomiest vertical spacing. How: This is the fourth power of the core design number, multiplied by 1rem where a length is needed. */
+	--ver-rhy-p04 : var( --cdn-pow-005 );     /* What: Vertical Rhythm Base Plus 4 ~= 4.080. Why: This is 4 steps above the base step, for the roomiest vertical spacing. How: This is the fifth power of the core design number, multiplied by 1rem where a length is needed. */
+	--ver-rhy-p05 : var( --cdn-pow-006 );     /* What: Vertical Rhythm Base Plus 5 ~= 5.404. Why: This is 5 steps above the base step, for the roomiest vertical spacing. How: This is the sixth power of the core design number, multiplied by 1rem where a length is needed. */
+	--ver-rhy-p06 : var( --cdn-pow-007 );     /* What: Vertical Rhythm Base Plus 6 ~= 7.159. Why: This is 6 steps above the base step, for the roomiest vertical spacing. How: This is the seventh power of the core design number, multiplied by 1rem where a length is needed. */
+	--ver-rhy-p07 : var( --cdn-pow-008 );     /* What: Vertical Rhythm Base Plus 7 ~= 9.484. Why: This is 7 steps above the base step, for the roomiest vertical spacing. How: This is the eighth power of the core design number, multiplied by 1rem where a length is needed. */
+	--ver-rhy-p08 : var( --cdn-pow-009 );     /* What: Vertical Rhythm Base Plus 8 ~= 12.564. Why: This is 8 steps above the base step, for large fixed areas. How: This is the ninth power of the core design number, multiplied by 1rem where a length is needed. */
+	--ver-rhy-p09 : var( --cdn-pow-010 );     /* What: Vertical Rhythm Base Plus 9 ~= 16.643. Why: This is 9 steps above the base step, for large fixed areas. How: This is the tenth power of the core design number, multiplied by 1rem where a length is needed. */
+	--ver-rhy-p10 : var( --cdn-pow-011 );     /* What: Vertical Rhythm Base Plus 10 ~= 22.047. Why: This is 10 steps above the base step, for maximum widths. How: This is the eleventh power of the core design number, multiplied by 1rem where a length is needed. */
+	--ver-rhy-p11 : var( --cdn-pow-012 );     /* What: Vertical Rhythm Base Plus 11 ~= 29.207. Why: This is 11 steps above the base step, for maximum widths. How: This is the twelfth power of the core design number, multiplied by 1rem where a length is needed. */
+	--ver-rhy-p12 : var( --cdn-pow-013 );     /* What: Vertical Rhythm Base Plus 12 ~= 38.691. Why: This is 12 steps above the base step, for maximum widths. How: This is the thirteenth power of the core design number, multiplied by 1rem where a length is needed. */
+	--ver-rhy-p13 : var( --cdn-pow-014 );     /* What: Vertical Rhythm Base Plus 13 ~= 51.254. Why: This is 13 steps above the base step, for maximum widths. How: This is the fourteenth power of the core design number, multiplied by 1rem where a length is needed. */
+	--ver-rhy-p14 : var( --cdn-pow-015 );     /* What: Vertical Rhythm Base Plus 14 ~= 67.897. Why: This is 14 steps above the base step, for maximum widths. How: This is the fifteenth power of the core design number, multiplied by 1rem where a length is needed. */
+	--ver-rhy-p15 : var( --cdn-pow-016 );     /* What: Vertical Rhythm Base Plus 15 ~= 89.945. Why: This is 15 steps above the base step, for maximum widths. How: This is the sixteenth power of the core design number, multiplied by 1rem where a length is needed. */
+
+	/* #endregion Vertical Rhythm Tokens */
 
 
 }
