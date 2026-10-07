@@ -38,12 +38,12 @@
 
 
 	display               : grid;
-	gap                   : var( --spa-ver-p06 ) 7.2727272727rem; /* Spacing Vertical Base Plus 6 ~= 78.750px */
+	gap                   : var( --spa-ver-p06 ) var( --hor-rhy-016 ); /* Spacing Vertical Base Plus 6 ~= 78.750px, Horizontal Rhythm 16 ~= 87.085px @ 1920px width */
 	grid-template-columns : 1fr 1.2fr;
 	margin                : 0 auto;
-	margin-bottom         : var( --spa-ver-p07 );                 /* Spacing Vertical Base Plus 7 ~= 104.323px */
-	max-width             : var( --con-max-wid );                 /* Container Maximum Width = 1280px */
-	padding-inline        : var( --gut-sid-pad );                 /* Gutter Side Padding, 20px to 48px */
+	margin-bottom         : var( --spa-ver-p07 );                      /* Spacing Vertical Base Plus 7 ~= 104.323px */
+	max-width             : var( --con-max-wid );                      /* Container Maximum Width, about 75.5% of the viewport, at most about 1449.4px */
+	padding-inline        : var( --gut-sid-pad );                      /* Gutter Side Padding, about 19.304px to 44.876px */
 	width                 : 100%;
 
 
@@ -99,19 +99,19 @@
 	font-family    : var( --fon-fam-mai ); /* Font Family Main = 'Inter Tight', -apple-system, BlinkMacSystemFont, sans-serif */
 	font-size      : var( --fon-siz-bas ); /* Font Size Base = 11px */
 	font-weight    : 500;
-	gap            : 1.0909090909rem;
+	gap            : var( --hor-rhy-009 ); /* Horizontal Rhythm 9 ~= 12.164px @ 1920px width */
 	letter-spacing : 0.18em;
 	text-transform : uppercase;
 
 
 }
-.eyeLabSpa::before { /* What: Eyebrow Label Span Leading Line. Why: A short rule leads into the label. How: This draws a 28px hairline before the text. */
+.eyeLabSpa::before { /* What: Eyebrow Label Span Leading Line. Why: A short rule leads into the label. How: This draws a short hairline, one horizontal step long, before the text. */
 
 
 	background : var( --tex-mut-col ); /* Text Muted Color = #6b7079 */
 	content    : '';
 	height     : var( --bor-wid-bas ); /* Border Width Base ~= 1.160px */
-	width      : 28px;
+	width      : var( --hor-rhy-012 ); /* Horizontal Rhythm 12 ~= 28.278px @ 1920px width */
 
 
 }
@@ -150,11 +150,11 @@
 
 /* #region aboSeaDiv */
 
-.aboSeaDiv { /* What: About Seal Div. Why: The full logo sits under the heading as a faded seal. How: This caps it at 200px with room above and below, slightly faded. */
+.aboSeaDiv { /* What: About Seal Div. Why: The full logo sits under the heading as a faded seal. How: This caps it at a horizontal step with room above and below, slightly faded. */
 
 
 	margin    : var( --spa-ver-p04 ) 0; /* Spacing Vertical Base Plus 4 ~= 44.876px */
-	max-width : 200px;
+	max-width : var( --hor-rhy-019 );   /* Horizontal Rhythm 19 ~= 202.448px @ 1920px width */
 	opacity   : 0.85;
 
 
@@ -218,10 +218,10 @@
 .aboQuoBlo { /* What: About Quote Blockquote. Why: The family's quote is set apart between rules. How: This pads it with hairlines above and below and positions it for its quote mark. */
 
 
-	border-bottom : var( --bor-wid-bas ) solid var( --bor-mai-col );           /* Border Width Base ~= 1.160px, Border Main Color = rgba( 26, 31, 36, 0.12 ) */
-	border-top    : var( --bor-wid-bas ) solid var( --bor-mai-col );           /* Border Width Base ~= 1.160px, Border Main Color = rgba( 26, 31, 36, 0.12 ) */
-	margin-top    : var( --spa-ver-p04 );                                      /* Spacing Vertical Base Plus 4 ~= 44.876px */
-	padding       : var( --spa-ver-p04 ) 2.9090909091rem var( --spa-ver-p03 ); /* Spacing Vertical Base Plus 4 ~= 44.876px, Spacing Vertical Base Plus 3 ~= 33.876px */
+	border-bottom : var( --bor-wid-bas ) solid var( --bor-mai-col );                /* Border Width Base ~= 1.160px, Border Main Color = rgba( 26, 31, 36, 0.12 ) */
+	border-top    : var( --bor-wid-bas ) solid var( --bor-mai-col );                /* Border Width Base ~= 1.160px, Border Main Color = rgba( 26, 31, 36, 0.12 ) */
+	margin-top    : var( --spa-ver-p04 );                                           /* Spacing Vertical Base Plus 4 ~= 44.876px */
+	padding       : var( --spa-ver-p04 ) var( --hor-rhy-012 ) var( --spa-ver-p03 ); /* Spacing Vertical Base Plus 4 ~= 44.876px, Horizontal Rhythm 12 ~= 28.278px @ 1920px width, Spacing Vertical Base Plus 3 ~= 33.876px */
 	position      : relative;
 
 
@@ -267,7 +267,7 @@
 	font-weight   : 400;
 	line-height   : var( --ver-rhy-bas ); /* Vertical Rhythm Base ~= 1.325 */
 	margin-bottom : var( --spa-ver-bas ); /* Spacing Vertical Base ~= 14.572px */
-	padding-left  : 3.6363636364rem;
+	padding-left  : var( --hor-rhy-013 ); /* Horizontal Rhythm 13 ~= 37.460px @ 1920px width */
 
 
 }
@@ -291,7 +291,7 @@
 	color          : var( --tex-mut-col ); /* Text Muted Color = #6b7079 */
 	font-size      : var( --fon-siz-p01 ); /* Font Size Base Plus 1 ~= 14.572px */
 	letter-spacing : 0.05em;
-	padding-left   : 3.6363636364rem;
+	padding-left   : var( --hor-rhy-013 ); /* Horizontal Rhythm 13 ~= 37.460px @ 1920px width */
 	text-transform : uppercase;
 
 
@@ -322,8 +322,8 @@
 
 
 	margin         : 0 auto;
-	max-width      : var( --con-max-wid ); /* Container Maximum Width = 1280px */
-	padding-inline : var( --gut-sid-pad ); /* Gutter Side Padding, 20px to 48px */
+	max-width      : var( --con-max-wid ); /* Container Maximum Width, about 75.5% of the viewport, at most about 1449.4px */
+	padding-inline : var( --gut-sid-pad ); /* Gutter Side Padding, about 19.304px to 44.876px */
 	width          : 100%;
 
 
@@ -337,7 +337,7 @@
 
 	border-top            : var( --bor-wid-bas ) solid var( --bor-str-col ); /* Border Width Base ~= 1.160px, Border Strong Color, the main border at 0.22 opacity */
 	display               : grid;
-	gap                   : var( --spa-ver-p04 ) 3.6363636364rem;            /* Spacing Vertical Base Plus 4 ~= 44.876px */
+	gap                   : var( --spa-ver-p04 ) var( --hor-rhy-013 );       /* Spacing Vertical Base Plus 4 ~= 44.876px, Horizontal Rhythm 13 ~= 37.460px @ 1920px width */
 	grid-template-columns : repeat( 4, 1fr );
 	padding-top           : var( --spa-ver-p05 );                            /* Spacing Vertical Base Plus 5 ~= 59.447px */
 
@@ -349,7 +349,7 @@
 	.aboPriDiv { /* What: Two Column About Principles Div. Why: The principles fit two to a row. How: This sets two columns with a tighter column gap. */
 
 
-		gap                   : var( --spa-ver-p04 ) 2.9090909091rem; /* Spacing Vertical Base Plus 4 ~= 44.876px */
+		gap                   : var( --spa-ver-p04 ) var( --hor-rhy-012 ); /* Spacing Vertical Base Plus 4 ~= 44.876px, Horizontal Rhythm 12 ~= 28.278px @ 1920px width */
 		grid-template-columns : 1fr 1fr;
 
 
@@ -377,7 +377,7 @@
 .priIteDiv { /* What: Principle Item Div. Why: Each principle needs a little room on its right before the next. How: This pads its right side. */
 
 
-	padding-right : 1.4545454545rem;
+	padding-right : var( --hor-rhy-010 ); /* Horizontal Rhythm 10 ~= 16.114px @ 1920px width */
 
 
 }

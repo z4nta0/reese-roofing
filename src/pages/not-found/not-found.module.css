@@ -25,10 +25,10 @@
 	align-items     : center;
 	display         : flex;
 	flex-direction  : column;
-	gap             : var( --spa-ver-p02 );                 /* Spacing Vertical Base Plus 2 ~= 25.572px */
+	gap             : var( --spa-ver-p02 );                      /* Spacing Vertical Base Plus 2 ~= 25.572px */
 	justify-content : center;
 	min-height      : 100vh;
-	padding         : var( --spa-ver-p03 ) 2.9090909091rem; /* Spacing Vertical Base Plus 3 ~= 33.876px */
+	padding         : var( --spa-ver-p03 ) var( --hor-rhy-012 ); /* Spacing Vertical Base Plus 3 ~= 33.876px, Horizontal Rhythm 12 ~= 28.278px @ 1920px width */
 	text-align      : center;
 
 
@@ -43,19 +43,19 @@
 	font-family    : var( --fon-fam-mai ); /* Font Family Main = 'Inter Tight', -apple-system, BlinkMacSystemFont, sans-serif */
 	font-size      : var( --fon-siz-bas ); /* Font Size Base = 11px */
 	font-weight    : 500;
-	gap            : 1.0909090909rem;
+	gap            : var( --hor-rhy-009 ); /* Horizontal Rhythm 9 ~= 12.164px @ 1920px width */
 	letter-spacing : 0.18em;
 	text-transform : uppercase;
 
 
 }
-.eyeLabSpa::before { /* What: Eyebrow Label Span Leading Line. Why: A short rule leads into the label. How: This draws a 28px hairline before the text. */
+.eyeLabSpa::before { /* What: Eyebrow Label Span Leading Line. Why: A short rule leads into the label. How: This draws a short hairline, one horizontal step long, before the text. */
 
 
 	background : var( --tex-mut-col ); /* Text Muted Color = #6b7079 */
 	content    : '';
 	height     : var( --bor-wid-bas ); /* Border Width Base ~= 1.160px */
-	width      : 28px;
+	width      : var( --hor-rhy-012 ); /* Horizontal Rhythm 12 ~= 28.278px @ 1920px width */
 
 
 }
@@ -114,9 +114,9 @@
 	display        : inline-flex;
 	font-size      : var( --fon-siz-p01 );                                                                                            /* Font Size Base Plus 1 ~= 14.572px */
 	font-weight    : 500;
-	gap            : 1.0909090909rem;
+	gap            : var( --hor-rhy-009 );                                                                                            /* Horizontal Rhythm 9 ~= 12.164px @ 1920px width */
 	letter-spacing : 0.02em;
-	padding        : var( --spa-ver-bas ) 2.3272727273rem;                                                                            /* Spacing Vertical Base ~= 14.572px */
+	padding        : var( --spa-ver-bas ) var( --hor-rhy-012 );                                                                       /* Spacing Vertical Base ~= 14.572px, Horizontal Rhythm 12 ~= 28.278px @ 1920px width */
 	transition     : background-color var( --dur-tra-p02 ) var( --mot-dec-eas ), transform var( --dur-tra-p02 ) var( --mot-dec-eas ); /* Duration Transition Base Plus 2 ~= 277.0ms, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ) */
 	white-space    : nowrap;
 
@@ -159,10 +159,10 @@
 
 
 }
-.butBasAnc:hover .arrIcoSpa { /* What: Hovered Arrow Icon Span. Why: The arrow points the visitor onward when the button is hovered. How: This moves it 4px right. */
+.butBasAnc:hover .arrIcoSpa { /* What: Hovered Arrow Icon Span. Why: The arrow points the visitor onward when the button is hovered. How: This nudges it right by a small horizontal step. */
 
 
-	transform : translateX( 4px );
+	transform : translateX( var( --hor-rhy-005 ) ); /* Horizontal Rhythm 5 ~= 3.950px @ 1920px width */
 
 
 }

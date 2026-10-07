@@ -38,8 +38,8 @@
 
 
 	margin         : 0 auto;
-	max-width      : var( --con-max-wid ); /* Container Maximum Width = 1280px */
-	padding-inline : var( --gut-sid-pad ); /* Gutter Side Padding, 20px to 48px */
+	max-width      : var( --con-max-wid ); /* Container Maximum Width, about 75.5% of the viewport, at most about 1449.4px */
+	padding-inline : var( --gut-sid-pad ); /* Gutter Side Padding, about 19.304px to 44.876px */
 	width          : 100%;
 
 
@@ -53,9 +53,9 @@
 
 	align-items           : end;
 	display               : grid;
-	gap                   : var( --spa-ver-p04 ) 4.3636363636rem; /* Spacing Vertical Base Plus 4 ~= 44.876px */
+	gap                   : var( --spa-ver-p04 ) var( --hor-rhy-014 ); /* Spacing Vertical Base Plus 4 ~= 44.876px, Horizontal Rhythm 14 ~= 49.625px @ 1920px width */
 	grid-template-columns : 1fr 1fr;
-	margin-bottom         : var( --spa-ver-p06 );                 /* Spacing Vertical Base Plus 6 ~= 78.750px */
+	margin-bottom         : var( --spa-ver-p06 );                      /* Spacing Vertical Base Plus 6 ~= 78.750px */
 
 
 }
@@ -83,19 +83,19 @@
 	font-family    : var( --fon-fam-mai ); /* Font Family Main = 'Inter Tight', -apple-system, BlinkMacSystemFont, sans-serif */
 	font-size      : var( --fon-siz-bas ); /* Font Size Base = 11px */
 	font-weight    : 500;
-	gap            : 1.0909090909rem;
+	gap            : var( --hor-rhy-009 ); /* Horizontal Rhythm 9 ~= 12.164px @ 1920px width */
 	letter-spacing : 0.18em;
 	text-transform : uppercase;
 
 
 }
-.eyeLabSpa::before { /* What: Eyebrow Label Span Leading Line. Why: A short rule leads into the label. How: This draws a 28px hairline before the text. */
+.eyeLabSpa::before { /* What: Eyebrow Label Span Leading Line. Why: A short rule leads into the label. How: This draws a short hairline, one horizontal step long, before the text. */
 
 
 	background : var( --tex-mut-col ); /* Text Muted Color = #6b7079 */
 	content    : '';
 	height     : var( --bor-wid-bas ); /* Border Width Base ~= 1.160px */
-	width      : 28px;
+	width      : var( --hor-rhy-012 ); /* Horizontal Rhythm 12 ~= 28.278px @ 1920px width */
 
 
 }
@@ -221,12 +221,12 @@
 .serCarArt { /* What: Service Card Article. Why: Each card draws its own right and bottom edges, completing the shared grid lines, and tints on hover. How: This sets those edges, the card's padding, and a background that fades on hover. */
 
 
-	background    : var( --bac-pag-col );                                       /* Background Page Color = #f5f2ec */
-	border-bottom : var( --bor-wid-bas ) solid var( --bor-str-col );            /* Border Width Base ~= 1.160px, Border Strong Color, the main border at 0.22 opacity */
-	border-right  : var( --bor-wid-bas ) solid var( --bor-str-col );            /* Border Width Base ~= 1.160px, Border Strong Color, the main border at 0.22 opacity */
-	padding       : var( --spa-ver-p04 ) 2.9090909091rem var( --spa-ver-p04 );  /* Spacing Vertical Base Plus 4 ~= 44.876px */
+	background    : var( --bac-pag-col );                                           /* Background Page Color = #f5f2ec */
+	border-bottom : var( --bor-wid-bas ) solid var( --bor-str-col );                /* Border Width Base ~= 1.160px, Border Strong Color, the main border at 0.22 opacity */
+	border-right  : var( --bor-wid-bas ) solid var( --bor-str-col );                /* Border Width Base ~= 1.160px, Border Strong Color, the main border at 0.22 opacity */
+	padding       : var( --spa-ver-p04 ) var( --hor-rhy-012 ) var( --spa-ver-p04 ); /* Spacing Vertical Base Plus 4 ~= 44.876px, Horizontal Rhythm 12 ~= 28.278px @ 1920px width */
 	position      : relative;
-	transition    : background-color var( --dur-tra-p02 ) var( --mot-sta-eas ); /* Duration Transition Base Plus 2 ~= 277.0ms, Motion Standard Easing = ease */
+	transition    : background-color var( --dur-tra-p02 ) var( --mot-sta-eas );     /* Duration Transition Base Plus 2 ~= 277.0ms, Motion Standard Easing = ease */
 
 
 }
@@ -259,7 +259,7 @@
 
 	align-items   : baseline;
 	display       : flex;
-	gap           : 1.4545454545rem;
+	gap           : var( --hor-rhy-010 ); /* Horizontal Rhythm 10 ~= 16.114px @ 1920px width */
 	margin-bottom : var( --spa-ver-p02 ); /* Spacing Vertical Base Plus 2 ~= 25.572px */
 	min-height    : var( --spa-ver-p06 ); /* Spacing Vertical Base Plus 6 ~= 78.750px */
 
@@ -339,7 +339,7 @@
 	color       : var( --tex-mut-col );   /* Text Muted Color = #6b7079 */
 	display     : flex;
 	font-size   : var( --fon-siz-p01 );   /* Font Size Base Plus 1 ~= 14.572px */
-	gap         : 0.8727272727rem;
+	gap         : var( --hor-rhy-008 );   /* Horizontal Rhythm 8 ~= 9.182px @ 1920px width */
 	padding     : var( --spa-ver-m03 ) 0; /* Spacing Vertical Base Minus 3 ~= 6.268px */
 
 

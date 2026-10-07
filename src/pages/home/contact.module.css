@@ -44,11 +44,11 @@
 
 	align-items           : start;
 	display               : grid;
-	gap                   : var( --spa-ver-p06 ) 7.2727272727rem; /* Spacing Vertical Base Plus 6 ~= 78.750px */
+	gap                   : var( --spa-ver-p06 ) var( --hor-rhy-016 ); /* Spacing Vertical Base Plus 6 ~= 78.750px, Horizontal Rhythm 16 ~= 87.085px @ 1920px width */
 	grid-template-columns : 1fr 1.05fr;
 	margin                : 0 auto;
-	max-width             : var( --con-max-wid );                 /* Container Maximum Width = 1280px */
-	padding-inline        : var( --gut-sid-pad );                 /* Gutter Side Padding, 20px to 48px */
+	max-width             : var( --con-max-wid );                      /* Container Maximum Width, about 75.5% of the viewport, at most about 1449.4px */
+	padding-inline        : var( --gut-sid-pad );                      /* Gutter Side Padding, about 19.304px to 44.876px */
 	width                 : 100%;
 
 
@@ -77,19 +77,19 @@
 	font-family    : var( --fon-fam-mai );                           /* Font Family Main = 'Inter Tight', -apple-system, BlinkMacSystemFont, sans-serif */
 	font-size      : var( --fon-siz-bas );                           /* Font Size Base = 11px */
 	font-weight    : 500;
-	gap            : 1.0909090909rem;
+	gap            : var( --hor-rhy-009 );                           /* Horizontal Rhythm 9 ~= 12.164px @ 1920px width */
 	letter-spacing : 0.18em;
 	text-transform : uppercase;
 
 
 }
-.eyeLabSpa::before { /* What: Eyebrow Label Span Leading Line. Why: A short rule leads into the label. How: This draws a 28px hairline before the text, faded for the dark band. */
+.eyeLabSpa::before { /* What: Eyebrow Label Span Leading Line. Why: A short rule leads into the label. How: This draws a short hairline, one horizontal step long, before the text, faded for the dark band. */
 
 
 	background : oklch( from var( --bac-pag-col ) l c h / var( --cdn-pow-003-rec ) ); /* Background Page Color = #f5f2ec, Core-Design-Number to the Power of 3 Reciprocal ~= 0.430 */
 	content    : '';
 	height     : var( --bor-wid-bas );                                                /* Border Width Base ~= 1.160px */
-	width      : 28px;
+	width      : var( --hor-rhy-012 );                                                /* Horizontal Rhythm 12 ~= 28.278px @ 1920px width */
 
 
 }
@@ -159,8 +159,8 @@
 
 	border-bottom         : var( --bor-wid-bas ) solid oklch( from var( --bac-pag-col ) l c h / var( --cdn-pow-007-rec ) ); /* Border Width Base ~= 1.160px, Background Page Color = #f5f2ec, Core-Design-Number to the Power of 7 Reciprocal ~= 0.140 */
 	display               : grid;
-	gap                   : var( --spa-ver-p02 ) 2.1818181818rem;                                                           /* Spacing Vertical Base Plus 2 ~= 25.572px */
-	grid-template-columns : 110px 1fr;
+	gap                   : var( --spa-ver-p02 ) var( --hor-rhy-011 );                                                      /* Spacing Vertical Base Plus 2 ~= 25.572px, Horizontal Rhythm 11 ~= 21.346px @ 1920px width */
+	grid-template-columns : var( --hor-rhy-017 ) 1fr;                                                                       /* Horizontal Rhythm 17 ~= 115.363px @ 1920px width */
 	padding               : var( --spa-ver-p01 ) 0;                                                                         /* Spacing Vertical Base Plus 1 ~= 19.304px */
 
 
@@ -254,14 +254,14 @@
 
 /* #region conSigDiv */
 
-.conSigDiv { /* What: Contact Signature Div. Why: The full logo signs off the details on a light card. How: This draws a rounded paper card capped at 280px. */
+.conSigDiv { /* What: Contact Signature Div. Why: The full logo signs off the details on a light card. How: This draws a rounded paper card capped at a horizontal step. */
 
 
-	background    : var( --bac-pag-col );                 /* Background Page Color = #f5f2ec */
-	border-radius : var( --rad-bor-xsm );                 /* Radius Border Extra Small ~= 3.571px */
-	margin-top    : var( --spa-ver-p04 );                 /* Spacing Vertical Base Plus 4 ~= 44.876px */
-	max-width     : 280px;
-	padding       : var( --spa-ver-p03 ) 3.6363636364rem; /* Spacing Vertical Base Plus 3 ~= 33.876px */
+	background    : var( --bac-pag-col );                      /* Background Page Color = #f5f2ec */
+	border-radius : var( --rad-bor-xsm );                      /* Radius Border Extra Small ~= 3.571px */
+	margin-top    : var( --spa-ver-p04 );                      /* Spacing Vertical Base Plus 4 ~= 44.876px */
+	max-width     : var( --hor-rhy-020 );                      /* Horizontal Rhythm 20 ~= 268.187px @ 1920px width */
+	padding       : var( --spa-ver-p03 ) var( --hor-rhy-013 ); /* Spacing Vertical Base Plus 3 ~= 33.876px, Horizontal Rhythm 13 ~= 37.460px @ 1920px width */
 
 
 }
@@ -287,7 +287,7 @@
 	background    : oklch( from var( --bac-pag-col ) l c h / 0.04 );                                                /* Background Page Color = #f5f2ec */
 	border        : var( --bor-wid-bas ) solid oklch( from var( --bac-pag-col ) l c h / var( --cdn-pow-008-rec ) ); /* Border Width Base ~= 1.160px, Background Page Color = #f5f2ec, Core-Design-Number to the Power of 8 Reciprocal ~= 0.105 */
 	border-radius : var( --rad-bor-xsm );                                                                           /* Radius Border Extra Small ~= 3.571px */
-	padding       : clamp( var( --spa-ver-p02 ), 3vw, var( --spa-ver-p04 ) ) clamp( 2.5454545455rem, 3vw, 4rem );   /* Spacing Vertical Base Plus 2 ~= 25.572px, Spacing Vertical Base Plus 4 ~= 44.876px */
+	padding       : clamp( var( --spa-ver-p02 ), 3vw, var( --spa-ver-p04 ) ) clamp( calc( var( --ver-rhy-p02 ) * 1rem ), var( --hor-rhy-015 ), calc( var( --ver-rhy-p04 ) * 1rem ) ); /* Spacing Vertical Base Plus 2 ~= 25.572px, Spacing Vertical Base Plus 4 ~= 44.876px, Vertical Rhythm Base Plus 2 ~= 25.572px, Horizontal Rhythm 15 ~= 65.739px @ 1920px width, Vertical Rhythm Base Plus 4 ~= 44.876px */
 
 
 }
@@ -390,7 +390,7 @@
 	background-position : right 0 center;
 	background-repeat   : no-repeat;
 	background-size     : calc( var( --ver-rhy-p01 ) * 1rem ); /* Vertical Rhythm Base Plus 1 ~= 19.304px */
-	padding-right       : 24px;
+	padding-right       : var( --hor-rhy-011 );                /* Horizontal Rhythm 11 ~= 21.346px @ 1920px width */
 
 
 }
@@ -422,7 +422,7 @@
 
 
 	display               : grid;
-	gap                   : var( --spa-ver-p02 ) 2.1818181818rem; /* Spacing Vertical Base Plus 2 ~= 25.572px */
+	gap                   : var( --spa-ver-p02 ) var( --hor-rhy-011 ); /* Spacing Vertical Base Plus 2 ~= 25.572px, Horizontal Rhythm 11 ~= 21.346px @ 1920px width */
 	grid-template-columns : 1fr 1fr;
 
 
@@ -451,17 +451,17 @@
 
 	align-items    : center;
 	align-self     : flex-start;
-	background     : var( --bac-pag-col );                   /* Background Page Color = #f5f2ec */
-	border         : var( --bor-wid-bas ) solid transparent; /* Border Width Base ~= 1.160px */
+	background     : var( --bac-pag-col );                      /* Background Page Color = #f5f2ec */
+	border         : var( --bor-wid-bas ) solid transparent;    /* Border Width Base ~= 1.160px */
 	border-radius  : 999px;
-	color          : var( --tex-mai-col );                   /* Text Main Color = #1a1f24 */
+	color          : var( --tex-mai-col );                      /* Text Main Color = #1a1f24 */
 	display        : inline-flex;
-	font-size      : var( --fon-siz-p01 );                   /* Font Size Base Plus 1 ~= 14.572px */
+	font-size      : var( --fon-siz-p01 );                      /* Font Size Base Plus 1 ~= 14.572px */
 	font-weight    : 500;
-	gap            : 1.0909090909rem;
+	gap            : var( --hor-rhy-009 );                      /* Horizontal Rhythm 9 ~= 12.164px @ 1920px width */
 	letter-spacing : 0.02em;
-	margin-top     : var( --spa-ver-m02 );                   /* Spacing Vertical Base Minus 2 ~= 8.304px */
-	padding        : var( --spa-ver-bas ) 2.3272727273rem;   /* Spacing Vertical Base ~= 14.572px */
+	margin-top     : var( --spa-ver-m02 );                      /* Spacing Vertical Base Minus 2 ~= 8.304px */
+	padding        : var( --spa-ver-bas ) var( --hor-rhy-012 ); /* Spacing Vertical Base ~= 14.572px, Horizontal Rhythm 12 ~= 28.278px @ 1920px width */
 	transition     : background-color var( --dur-tra-p02 ) var( --mot-dec-eas ), color var( --dur-tra-p02 ) var( --mot-dec-eas ), transform var( --dur-tra-p02 ) var( --mot-dec-eas ); /* Duration Transition Base Plus 2 ~= 277.0ms, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ) */
 	white-space    : nowrap;
 
@@ -497,10 +497,10 @@
 
 
 }
-.forSubBut:hover .arrIcoSpa { /* What: Hovered Arrow Icon Span. Why: The arrow points the visitor onward when the button is hovered. How: This moves it 4px right. */
+.forSubBut:hover .arrIcoSpa { /* What: Hovered Arrow Icon Span. Why: The arrow points the visitor onward when the button is hovered. How: This nudges it right by a small horizontal step. */
 
 
-	transform : translateX( 4px );
+	transform : translateX( var( --hor-rhy-005 ) ); /* Horizontal Rhythm 5 ~= 3.950px @ 1920px width */
 
 
 }

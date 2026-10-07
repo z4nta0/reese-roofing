@@ -74,6 +74,17 @@ the user compares both options from the user-level "Width is decided per
 project" rule (the vertical rhythm or a viewport-based horizontal rhythm)
 before choosing.
 
+Under trial (2026-10-07): the viewport-based horizontal rhythm, ease-my-life's
+`--hor-rhy-*` tokens, is applied to every horizontal value in one commit,
+"Horizontal Rhythm Applied For Review", so `git revert` on that commit alone
+restores the fixed sizes. The content column is capped at `--hor-rhy-max`'s
+value at a 1920px viewport (about 1449.4px), the gutter, the hero's
+headline-to-logo gap, and the contact form's side padding keep their clamps
+with a horizontal step in the middle and rhythm steps at the ends, and every
+other value takes its nearest step with no clamp yet. Known effect: on phones
+the viewport steps shrink small fixed elements (the logo mark, the menu icon,
+the logo caps) to a fraction of their size.
+
 Design system choices (decided 2026-10-07):
 - **Base and body size**: 1rem is the 11px base, and body text is Base Plus 1
   (about 14.57px), as in ease-my-life.

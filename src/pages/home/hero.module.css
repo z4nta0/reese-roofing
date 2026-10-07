@@ -90,8 +90,8 @@
 
 
 	margin         : 0 auto;
-	max-width      : var( --con-max-wid ); /* Container Maximum Width = 1280px */
-	padding-inline : var( --gut-sid-pad ); /* Gutter Side Padding, 20px to 48px */
+	max-width      : var( --con-max-wid ); /* Container Maximum Width, about 75.5% of the viewport, at most about 1449.4px */
+	padding-inline : var( --gut-sid-pad ); /* Gutter Side Padding, about 19.304px to 44.876px */
 	position       : relative;
 	width          : 100%;
 	z-index        : 1;                    /* What: Content Stack Level. Why: The content has to sit over the grid at 0. How: This is the lowest level that clears it, and the navigation bar sits at 2 above it. */
@@ -107,9 +107,9 @@
 
 	align-items           : center;
 	display               : grid;
-	gap                   : var( --spa-ver-p04 ) clamp( 2.9090909091rem, 6vw, 7.2727272727rem ); /* Spacing Vertical Base Plus 4 ~= 44.876px */
+	gap                   : var( --spa-ver-p04 ) clamp( calc( var( --ver-rhy-p03 ) * 1rem ), var( --hor-rhy-017 ), calc( var( --ver-rhy-p06 ) * 1rem ) ); /* Spacing Vertical Base Plus 4 ~= 44.876px, Vertical Rhythm Base Plus 3 ~= 33.876px, Horizontal Rhythm 17 ~= 115.363px @ 1920px width, Vertical Rhythm Base Plus 6 ~= 78.751px */
 	grid-template-columns : 1.15fr 1fr;
-	margin-bottom         : var( --spa-ver-p05 );                                                /* Spacing Vertical Base Plus 5 ~= 59.447px */
+	margin-bottom         : var( --spa-ver-p05 ); /* Spacing Vertical Base Plus 5 ~= 59.447px */
 
 
 }
@@ -152,7 +152,7 @@
 
 
 }
-@keyframes divEnterFadeIn { /* What: Div Enter Fade In. Why: Each hero block slides up and fades in as the page opens. How: This moves from 24px below and transparent to its place, fully shown. */
+@keyframes divEnterFadeIn { /* What: Div Enter Fade In. Why: Each hero block slides up and fades in as the page opens. How: This moves from a rhythm step below and transparent to its place, fully shown. */
 
 
 	from {
@@ -185,20 +185,20 @@
 	font-family    : var( --fon-fam-mai ); /* Font Family Main = 'Inter Tight', -apple-system, BlinkMacSystemFont, sans-serif */
 	font-size      : var( --fon-siz-bas ); /* Font Size Base = 11px */
 	font-weight    : 500;
-	gap            : 1.0909090909rem;
+	gap            : var( --hor-rhy-009 ); /* Horizontal Rhythm 9 ~= 12.164px @ 1920px width */
 	letter-spacing : 0.18em;
 	margin-bottom  : var( --spa-ver-p04 ); /* Spacing Vertical Base Plus 4 ~= 44.876px */
 	text-transform : uppercase;
 
 
 }
-.eyeLabSpa::before { /* What: Eyebrow Label Span Leading Line. Why: A short rule leads into the label. How: This draws a 28px hairline before the text. */
+.eyeLabSpa::before { /* What: Eyebrow Label Span Leading Line. Why: A short rule leads into the label. How: This draws a short hairline, one horizontal step long, before the text. */
 
 
 	background : var( --tex-mut-col ); /* Text Muted Color = #6b7079 */
 	content    : '';
 	height     : var( --bor-wid-bas ); /* Border Width Base ~= 1.160px */
-	width      : 28px;
+	width      : var( --hor-rhy-012 ); /* Horizontal Rhythm 12 ~= 28.278px @ 1920px width */
 
 
 }
@@ -303,7 +303,7 @@
 
 	filter    : drop-shadow( 0 calc( var( --ver-rhy-m01 ) * 1rem ) calc( var( --ver-rhy-p03 ) * 1rem ) oklch( from var( --acc-mai-col ) l c h / 0.12 ) ); /* Vertical Rhythm Base Minus 1 ~= 11.000px, Vertical Rhythm Base Plus 3 ~= 33.876px, Accent Main Color = #1f4e7a */
 	height    : auto;
-	max-width : 460px;
+	max-width : var( --hor-rhy-022 ); /* Horizontal Rhythm 22 ~= 470.635px @ 1920px width */
 	width     : 100%;
 
 
@@ -311,10 +311,10 @@
 @container app ( max-width : 960px ) { /* What: Narrow Hero Logo Image. Why: The stacked logo shouldn't dominate a small screen. How: This applies below 960px wide. */
 
 
-	.herLogIma { /* What: Smaller Hero Logo Image. Why: The logo leads the stacked hero at a modest size. How: This caps it at 280px. */
+	.herLogIma { /* What: Smaller Hero Logo Image. Why: The logo leads the stacked hero at a modest size. How: This caps it at a smaller horizontal step. */
 
 
-		max-width : 280px;
+		max-width : var( --hor-rhy-020 ); /* Horizontal Rhythm 20 ~= 268.187px @ 1920px width */
 
 
 	}
@@ -324,10 +324,10 @@
 @container app ( max-width : 500px ) { /* What: Phone Hero Logo Image. Why: Phones need the logo smaller still. How: This applies below 500px wide. */
 
 
-	.herLogIma { /* What: Smallest Hero Logo Image. Why: The logo should leave room for the headline on a phone. How: This caps it at 220px. */
+	.herLogIma { /* What: Smallest Hero Logo Image. Why: The logo should leave room for the headline on a phone. How: This caps it at a smaller horizontal step still. */
 
 
-		max-width : 220px;
+		max-width : var( --hor-rhy-019 ); /* Horizontal Rhythm 19 ~= 202.448px @ 1920px width */
 
 
 	}
@@ -348,13 +348,13 @@
 
 	align-items           : end;
 	animation             : divEnterFadeIn var( --dur-ani-p06 ) var( --mot-dec-eas ) var( --dur-ani-p02 ) both; /* Duration Animation Base Plus 6 ~= 853.0ms, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ), Duration Animation Base Plus 2 ~= 277.0ms */
-	border-bottom         : var( --bor-wid-bas ) solid var( --bor-mai-col );                          /* Border Width Base ~= 1.160px, Border Main Color = rgba( 26, 31, 36, 0.12 ) */
-	border-top            : var( --bor-wid-bas ) solid var( --bor-mai-col );                          /* Border Width Base ~= 1.160px, Border Main Color = rgba( 26, 31, 36, 0.12 ) */
+	border-bottom         : var( --bor-wid-bas ) solid var( --bor-mai-col );                                    /* Border Width Base ~= 1.160px, Border Main Color = rgba( 26, 31, 36, 0.12 ) */
+	border-top            : var( --bor-wid-bas ) solid var( --bor-mai-col );                                    /* Border Width Base ~= 1.160px, Border Main Color = rgba( 26, 31, 36, 0.12 ) */
 	display               : grid;
-	gap                   : var( --spa-ver-p03 ) 4.3636363636rem;                                     /* Spacing Vertical Base Plus 3 ~= 33.876px */
+	gap                   : var( --spa-ver-p03 ) var( --hor-rhy-014 );                                          /* Spacing Vertical Base Plus 3 ~= 33.876px, Horizontal Rhythm 14 ~= 49.625px @ 1920px width */
 	grid-template-columns : 1fr auto;
-	padding-bottom        : var( --spa-ver-p05 );                                                     /* Spacing Vertical Base Plus 5 ~= 59.447px */
-	padding-top           : var( --spa-ver-p04 );                                                     /* Spacing Vertical Base Plus 4 ~= 44.876px */
+	padding-bottom        : var( --spa-ver-p05 );                                                               /* Spacing Vertical Base Plus 5 ~= 59.447px */
+	padding-top           : var( --spa-ver-p04 );                                                               /* Spacing Vertical Base Plus 4 ~= 44.876px */
 
 
 }
@@ -408,7 +408,7 @@
 
 	display   : flex;
 	flex-wrap : wrap;
-	gap       : var( --spa-ver-m01 ) 1.0909090909rem; /* Spacing Vertical Base Minus 1 = 11px */
+	gap       : var( --spa-ver-m01 ) var( --hor-rhy-009 ); /* Spacing Vertical Base Minus 1 = 11px, Horizontal Rhythm 9 ~= 12.164px @ 1920px width */
 
 
 }
@@ -420,14 +420,14 @@
 
 
 	align-items    : center;
-	border         : var( --bor-wid-bas ) solid transparent; /* Border Width Base ~= 1.160px */
+	border         : var( --bor-wid-bas ) solid transparent;    /* Border Width Base ~= 1.160px */
 	border-radius  : 999px;
 	display        : inline-flex;
-	font-size      : var( --fon-siz-p01 );                   /* Font Size Base Plus 1 ~= 14.572px */
+	font-size      : var( --fon-siz-p01 );                      /* Font Size Base Plus 1 ~= 14.572px */
 	font-weight    : 500;
-	gap            : 1.0909090909rem;
+	gap            : var( --hor-rhy-009 );                      /* Horizontal Rhythm 9 ~= 12.164px @ 1920px width */
 	letter-spacing : 0.02em;
-	padding        : var( --spa-ver-bas ) 2.3272727273rem;   /* Spacing Vertical Base ~= 14.572px */
+	padding        : var( --spa-ver-bas ) var( --hor-rhy-012 ); /* Spacing Vertical Base ~= 14.572px, Horizontal Rhythm 12 ~= 28.278px @ 1920px width */
 	transition     : background-color var( --dur-tra-p02 ) var( --mot-dec-eas ), border-color var( --dur-tra-p02 ) var( --mot-dec-eas ), color var( --dur-tra-p02 ) var( --mot-dec-eas ), transform var( --dur-tra-p02 ) var( --mot-dec-eas ); /* Duration Transition Base Plus 2 ~= 277.0ms, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ) */
 	white-space    : nowrap;
 
@@ -487,10 +487,10 @@
 
 
 }
-.butBasAnc:hover .arrIcoSpa { /* What: Hovered Arrow Icon Span. Why: The arrow points the visitor onward when its button is hovered. How: This moves it 4px right. */
+.butBasAnc:hover .arrIcoSpa { /* What: Hovered Arrow Icon Span. Why: The arrow points the visitor onward when its button is hovered. How: This nudges it right by a small horizontal step. */
 
 
-	transform : translateX( 4px );
+	transform : translateX( var( --hor-rhy-005 ) ); /* Horizontal Rhythm 5 ~= 3.950px @ 1920px width */
 
 
 }
@@ -523,9 +523,9 @@
 
 	animation             : divEnterFadeIn var( --dur-ani-p06 ) var( --mot-dec-eas ) var( --dur-ani-p04 ) both; /* Duration Animation Base Plus 6 ~= 853.0ms, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ), Duration Animation Base Plus 4 ~= 486.1ms */
 	display               : grid;
-	gap                   : var( --spa-ver-p03 ) 2.9090909091rem;                                     /* Spacing Vertical Base Plus 3 ~= 33.876px */
+	gap                   : var( --spa-ver-p03 ) var( --hor-rhy-012 );                                          /* Spacing Vertical Base Plus 3 ~= 33.876px, Horizontal Rhythm 12 ~= 28.278px @ 1920px width */
 	grid-template-columns : repeat( 4, 1fr );
-	margin-top            : var( --spa-ver-p04 );                                                     /* Spacing Vertical Base Plus 4 ~= 44.876px */
+	margin-top            : var( --spa-ver-p04 );                                                               /* Spacing Vertical Base Plus 4 ~= 44.876px */
 
 
 }
@@ -535,7 +535,7 @@
 	.herStaDiv { /* What: Two Column Hero Stats Div. Why: The stats fit two to a row. How: This sets two columns with a tighter column gap. */
 
 
-		gap                   : var( --spa-ver-p03 ) 2.1818181818rem; /* Spacing Vertical Base Plus 3 ~= 33.876px */
+		gap                   : var( --spa-ver-p03 ) var( --hor-rhy-011 ); /* Spacing Vertical Base Plus 3 ~= 33.876px, Horizontal Rhythm 11 ~= 21.346px @ 1920px width */
 		grid-template-columns : repeat( 2, 1fr );
 
 
@@ -577,7 +577,7 @@
 
 
 	border-left  : var( --bor-wid-bas ) solid var( --bor-mai-col ); /* Border Width Base ~= 1.160px, Border Main Color = rgba( 26, 31, 36, 0.12 ) */
-	padding-left : 1.8181818182rem;
+	padding-left : var( --hor-rhy-011 );                            /* Horizontal Rhythm 11 ~= 21.346px @ 1920px width */
 
 
 }

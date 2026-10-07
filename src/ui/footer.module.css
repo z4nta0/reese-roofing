@@ -39,11 +39,11 @@
 	align-items     : center;
 	display         : flex;
 	flex-wrap       : wrap;
-	gap             : var( --spa-ver-p03 ) 2.9090909091rem; /* Spacing Vertical Base Plus 3 ~= 33.876px */
+	gap             : var( --spa-ver-p03 ) var( --hor-rhy-012 ); /* Spacing Vertical Base Plus 3 ~= 33.876px, Horizontal Rhythm 12 ~= 28.278px @ 1920px width */
 	justify-content : space-between;
 	margin          : 0 auto;
-	max-width       : var( --con-max-wid );                 /* Container Maximum Width = 1280px */
-	padding-inline  : var( --gut-sid-pad );                 /* Gutter Side Padding, 20px to 48px */
+	max-width       : var( --con-max-wid );                      /* Container Maximum Width, about 75.5% of the viewport, at most about 1449.4px */
+	padding-inline  : var( --gut-sid-pad );                      /* Gutter Side Padding, about 19.304px to 44.876px */
 	width           : 100%;
 
 
@@ -75,7 +75,7 @@
 	display     : inline-flex;
 	font-family : var( --fon-fam-sec ); /* Font Family Secondary = 'Fraunces', 'Times New Roman', serif */
 	font-size   : var( --fon-siz-p02 ); /* Font Size Base Plus 2 ~= 19.304px */
-	gap         : 1.0181818182rem;
+	gap         : var( --hor-rhy-009 ); /* Horizontal Rhythm 9 ~= 12.164px @ 1920px width */
 
 
 }
@@ -86,13 +86,13 @@
 .fooMarSpa { /* What: Footer Mark Span. Why: The dark mark needs a light tile to show against the dark footer. How: This draws a small rounded paper square, its width matching its rhythm-step height, with the mark centered in it. */
 
 
-	background    : var( --bac-pag-col );     /* Background Page Color = #f5f2ec */
-	border-radius : var( --rad-bor-xsm );     /* Radius Border Extra Small ~= 3.571px */
+	background    : var( --bac-pag-col );                      /* Background Page Color = #f5f2ec */
+	border-radius : var( --rad-bor-xsm );                      /* Radius Border Extra Small ~= 3.571px */
 	display       : inline-grid;
-	height        : var( --spa-ver-p03 );     /* Spacing Vertical Base Plus 3 ~= 33.876px */
-	padding       : var( --spa-ver-m05 ) 4px; /* Spacing Vertical Base Minus 5 ~= 3.571px */
+	height        : var( --spa-ver-p03 );                      /* Spacing Vertical Base Plus 3 ~= 33.876px */
+	padding       : var( --spa-ver-m05 ) var( --hor-rhy-005 ); /* Spacing Vertical Base Minus 5 ~= 3.571px, Horizontal Rhythm 5 ~= 3.950px @ 1920px width */
 	place-items   : center;
-	width         : var( --spa-ver-p03 );     /* Spacing Vertical Base Plus 3 ~= 33.876px */
+	width         : var( --spa-ver-p03 );                      /* Spacing Vertical Base Plus 3 ~= 33.876px */
 
 
 }
@@ -164,7 +164,7 @@
 	color       : oklch( from var( --bac-pag-col ) l c h / var( --cdn-pow-002-rec ) ); /* Background Page Color = #f5f2ec, Core-Design-Number to the Power of 2 Reciprocal ~= 0.570 */
 	display     : inline-flex;
 	font-size   : var( --fon-siz-p01 );                                                /* Font Size Base Plus 1 ~= 14.572px */
-	gap         : 0.5818181818rem;
+	gap         : var( --hor-rhy-007 );                                                /* Horizontal Rhythm 7 ~= 6.932px @ 1920px width */
 	transition  : color var( --dur-tra-p01 ) var( --mot-sta-eas );                     /* Duration Transition Base Plus 1 ~= 209.1ms, Motion Standard Easing = ease */
 
 
