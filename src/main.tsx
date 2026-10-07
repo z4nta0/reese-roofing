@@ -5,7 +5,7 @@ import App from './app';
 import './styles/fonts.css';
 import './styles/styles.css';
 
-createRoot(document.getElementById('root')!).render(
+createRoot(document.getElementById('appMouDiv')!).render(
   <StrictMode>
     <BrowserRouter>
       <App />
