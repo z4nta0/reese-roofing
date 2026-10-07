@@ -12,11 +12,9 @@
  * heading's italic word takes the soft accent, so it stays readable on the
  * dark band. The shared section, container, eyebrow, display, lede, button,
  * and arrow declarations the section used to borrow from the global stylesheet
- * are copied onto its own classes here with the values that actually rendered,
- * so the important flags it needed to beat them are gone. One of its own
- * intended styles never applied, because the global rules came later in the
- * cascade: the submit button's paper background, which renders in ink like
- * every primary button.
+ * are copied onto its own classes here, so the important flags it needed to
+ * beat them are gone. The submit button inverts the primary button to paper,
+ * so it stands out on the dark band.
  *
  * @author z4nta0 <https://github.com/z4nta0>
  *
@@ -448,15 +446,15 @@
 
 /* #region contact__submit */
 
-.contact__submit { /* What: Contact Submit Button. Why: Sending the request is the form's one action. How: This draws the site's primary pill button at the start of the row, lifting and turning accent on hover. */
+.contact__submit { /* What: Contact Submit Button. Why: Sending the request is the form's one action. How: This draws the site's pill button inverted to paper on the dark band, at the start of the row, lifting and turning the soft accent on hover. */
 
 
 	align-items    : center;
 	align-self     : flex-start;
-	background     : var( --ink );
+	background     : var( --paper );
 	border         : 1px solid transparent;
 	border-radius  : 999px;
-	color          : var( --paper );
+	color          : var( --ink );
 	display        : inline-flex;
 	font-size      : 0.9rem;
 	font-weight    : 500;
@@ -469,10 +467,10 @@
 
 
 }
-.contact__submit:hover { /* What: Hovered Contact Submit Button. Why: The button should respond to the pointer. How: This turns it accent and lifts it a pixel. */
+.contact__submit:hover { /* What: Hovered Contact Submit Button. Why: The button should respond to the pointer. How: This turns it the soft accent with paper text and lifts it a pixel. */
 
 
-	background : var( --accent );
+	background : var( --accent-soft );
 	color      : var( --paper );
 	transform  : translateY( -1px );
 
