@@ -249,12 +249,12 @@
 
 
 }
-.herLogDiv::before { /* What: Hero Logo Div Ring. Why: A faint circular ring frames the logo. How: This draws a hairline circle centered on the logo, sized from the logo's height plus a rhythm step on each side, so it stays round at every width instead of following the column's width. */
+.herLogDiv::before { /* What: Hero Logo Div Ring. Why: A faint oval ring frames the logo, a little wider than it is tall, as originally designed. How: This draws a hairline oval centered on the logo, its height the logo's plus a rhythm step on each side and its width set from that height, so it follows the logo's size instead of the column's width and never runs off a phone's screen. */
 
 
-	--her-rin-off : var( --spa-ver-p03 ); /* Spacing Vertical Base Plus 3 ~= 33.876px */ /* What: Hero Ring Offset. Why: The ring needs a gap between it and the logo. How: This is how far the circle reaches past the logo's top and bottom, read by the height below and narrowed by the stacked variant. */
+	--her-rin-off : var( --spa-ver-p03 ); /* Spacing Vertical Base Plus 3 ~= 33.876px */ /* What: Hero Ring Offset. Why: The ring needs a gap between it and the logo. How: This is how far the oval reaches past the logo's top and bottom, read by the height below and narrowed by the stacked variant. */
 
-	aspect-ratio   : 1;
+	aspect-ratio   : 1.14;                                            /* What: Ring Aspect Ratio. Why: The original oval measured about 1.14 times as wide as tall on a desktop screen. How: This keeps that shape at every size, a literal since no rhythm power lands within 10% of it. */
 	border         : var( --bor-wid-bas ) solid var( --bor-str-col ); /* Border Width Base ~= 1.160px, Border Strong Color, the main border at 0.22 opacity */
 	border-radius  : 50%;
 	content        : '';
@@ -317,10 +317,10 @@
 @container app ( max-width : 960px ) { /* What: Narrow Hero Logo Image. Why: The stacked logo shouldn't dominate a small screen. How: This applies below 960px wide. */
 
 
-	.herLogIma { /* What: Smaller Hero Logo Image. Why: The logo leads the stacked hero at a modest size. How: This caps it at a smaller horizontal step, never narrower than the p08 rhythm step. */
+	.herLogIma { /* What: Smaller Hero Logo Image. Why: The logo leads the stacked hero at a modest size. How: This caps it at a smaller horizontal step, never narrower than the p10 rhythm step. */
 
 
-		max-width : max( calc( var( --ver-rhy-p08 ) * 1rem ), var( --hor-rhy-020 ) ); /* Vertical Rhythm Base Plus 8 ~= 138.199px, Horizontal Rhythm 20 ~= 268.187px @ 1920px width */
+		max-width : max( calc( var( --ver-rhy-p10 ) * 1rem ), var( --hor-rhy-020 ) ); /* Vertical Rhythm Base Plus 10 ~= 242.522px, Horizontal Rhythm 20 ~= 268.187px @ 1920px width */
 
 
 	}
@@ -330,10 +330,10 @@
 @container app ( max-width : 500px ) { /* What: Phone Hero Logo Image. Why: Phones need the logo smaller still. How: This applies below 500px wide. */
 
 
-	.herLogIma { /* What: Smallest Hero Logo Image. Why: The logo should leave room for the headline on a phone. How: This caps it at a smaller horizontal step still, never narrower than the p08 rhythm step. */
+	.herLogIma { /* What: Smallest Hero Logo Image. Why: The logo should leave room for the headline on a phone. How: This caps it at a smaller horizontal step still, never narrower than the p09 rhythm step. */
 
 
-		max-width : max( calc( var( --ver-rhy-p08 ) * 1rem ), var( --hor-rhy-019 ) ); /* Vertical Rhythm Base Plus 8 ~= 138.199px, Horizontal Rhythm 19 ~= 202.448px @ 1920px width */
+		max-width : max( calc( var( --ver-rhy-p09 ) * 1rem ), var( --hor-rhy-019 ) ); /* Vertical Rhythm Base Plus 9 ~= 183.074px, Horizontal Rhythm 19 ~= 202.448px @ 1920px width */
 
 
 	}
