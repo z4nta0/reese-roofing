@@ -90,9 +90,10 @@ two commits restores the fixed sizes. The split:
   4px arrow nudge stays literal, since no step lands within 10% of it.
 - **Content column**: capped at a fixed `1920px / ρ` (about 1449.4px), so below
   that width only the gutter limits it.
-- **Buttons**: height comes from line height alone, one rhythm step above the
-  body's (`--ver-rhy-p02`, about 33.9px at the button's font size), with no
-  top or bottom padding, and side padding clamped between two spacing steps.
+- **Buttons**: height comes from line height alone, the p04 rhythm step times
+  `1rem` (about 44.9px), with no top or bottom padding, and side padding
+  clamped between two spacing steps. The user chose it over Ease My Life's
+  33.9px, which read too short here.
 
 Design system choices (decided 2026-10-07):
 - **Base and body size**: 1rem is the 11px base, and body text is Base Plus 1
