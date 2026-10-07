@@ -1,0 +1,657 @@
+
+
+
+/**
+ * hero.module.css = Hero Section Module
+ *
+ * @summary
+ * Styles for HerSecCom: the full-height opening section over a faint, masked
+ * grid, with the headline beside the ringed logo, the pitch and its two
+ * buttons between hairlines, and the stats row, each block rising into place
+ * in turn. The shared section, container, eyebrow, display, lede, button, and
+ * arrow declarations the hero used to borrow from the global stylesheet are
+ * copied onto its own classes here with the values that actually rendered:
+ * the section's own taller top padding and the stats' own line height and
+ * letter spacing never applied, because the global rules came later in the
+ * cascade and overrode them.
+ *
+ * @author z4nta0 <https://github.com/z4nta0>
+ *
+*/
+
+
+
+/* #region hero */
+
+.hero { /* What: Hero Section. Why: The hero fills the first screen and centers its content in it. How: This sets a full-height flex column with the standard section padding, clipping the grid at its edges. */
+
+
+	align-items   : center;
+	display       : flex;
+	min-height    : 100vh;
+	overflow      : hidden;
+	padding-block : var( --section-pad-y );
+	position      : relative;
+
+
+}
+@media ( max-width : 960px ) { /* What: Narrow Hero Section. Why: A stacked hero on a small screen shouldn't be forced to a full screen's height. How: This applies below 960px wide. */
+
+
+	.hero { /* What: Auto Height Hero Section. Why: The content sets the height once it stacks. How: This drops the full-height minimum. */
+
+
+		min-height : auto;
+
+
+	}
+
+
+}
+
+
+/* #region hero__bg */
+
+.hero__bg { /* What: Hero Background. Why: A faint architectural grid sits behind the hero, fading out away from the logo. How: This covers the section at 5% opacity, masked to a soft ellipse, behind everything and ignoring the pointer. */
+
+
+	-webkit-mask-image : radial-gradient( ellipse at 70% 30%, black 0%, transparent 75% );
+	color              : var( --ink );
+	inset              : 0;
+	mask-image         : radial-gradient( ellipse at 70% 30%, black 0%, transparent 75% );
+	opacity            : 0.05;
+	pointer-events     : none;
+	position           : absolute;
+	z-index            : 0; /* What: Background Stack Level. Why: The grid has to sit under the hero's content, which is at 1. How: This keeps it at the bottom. */
+
+
+}
+
+
+/* #region herGriSvg */
+
+.herGriSvg { /* What: Hero Grid Svg. Why: The grid drawing should fill the whole background. How: This stretches it to the background's full size. */
+
+
+	height : 100%;
+	width  : 100%;
+
+
+}
+
+/* #endregion herGriSvg */
+
+/* #endregion hero__bg */
+
+
+
+/* #region hero__inner */
+
+.hero__inner { /* What: Hero Inner Column. Why: The hero's content should line up with the page's content width, above the grid. How: This centers a full-width column and lifts it over the background. */
+
+
+	margin         : 0 auto;
+	max-width      : var( --container );
+	padding-inline : var( --gutter );
+	position       : relative;
+	width          : 100%;
+	z-index        : 1; /* What: Content Stack Level. Why: The content has to sit over the grid at 0. How: This is the lowest level that clears it, and the navigation bar sits at 2 above it. */
+
+
+}
+
+
+/* #region hero__top */
+
+.hero__top { /* What: Hero Top Row. Why: The headline and logo share the first row. How: This sets a two-column grid with the copy slightly wider. */
+
+
+	align-items           : center;
+	display               : grid;
+	gap                   : clamp( 2rem, 6vw, 5rem );
+	grid-template-columns : 1.15fr 1fr;
+	margin-bottom         : 4rem;
+
+
+}
+@media ( max-width : 960px ) { /* What: Narrow Hero Top Row. Why: Small screens are too narrow for two columns. How: This applies below 960px wide. */
+
+
+	.hero__top { /* What: Stacked Hero Top Row. Why: The copy and logo read best stacked. How: This turns the grid into one column with smaller gaps. */
+
+
+		gap                   : 2.5rem;
+		grid-template-columns : 1fr;
+		margin-bottom         : 3rem;
+
+
+	}
+
+
+}
+
+
+/* #region hero__copy */
+
+.hero__copy { /* What: Hero Copy Column. Why: The label and headline enter first. How: This plays the rise animation with no delay. */
+
+
+	animation : rise 0.9s cubic-bezier( 0.22, 1, 0.36, 1 ) both;
+
+
+}
+@media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Hero Copy. Why: Someone who asked for less motion shouldn't see the copy rise. How: This applies only when the reduced-motion preference is set. */
+
+
+	.hero__copy { /* What: Motionless Hero Copy Column. Why: The copy should simply be there. How: This turns the animation off. */
+
+
+		animation : none;
+
+
+	}
+
+
+}
+@keyframes rise { /* What: Rise. Why: Each hero block slides up and fades in as the page opens. How: This moves from 24px below and transparent to its place, fully shown. */
+
+
+	from {
+
+
+		opacity   : 0;
+		transform : translateY( 24px );
+
+
+	}
+
+	to {
+
+
+		opacity   : 1;
+		transform : translateY( 0 );
+
+
+	}
+
+
+}
+
+.eyebrow { /* What: Eyebrow Label. Why: A small uppercase label with a leading line introduces the headline. How: This sets it in tracked, muted capitals with room below. */
+
+
+	align-items    : center;
+	color          : var( --ink-muted );
+	display        : inline-flex;
+	font-family    : var( --font-body );
+	font-size      : 0.78rem;
+	font-weight    : 500;
+	gap            : 0.75rem;
+	letter-spacing : 0.18em;
+	margin-bottom  : 2.5rem;
+	text-transform : uppercase;
+
+
+}
+.eyebrow::before { /* What: Eyebrow Leading Line. Why: A short rule leads into the label. How: This draws a 28px hairline before the text. */
+
+
+	background : var( --ink-muted );
+	content    : '';
+	height     : 1px;
+	width      : 28px;
+
+
+}
+
+
+/* #region hero__title */
+
+.hero__title { /* What: Hero Title. Why: The headline is the page's largest type. How: This sets it in the display font at its largest optical size, scaling with the viewport and capped to a short measure. */
+
+
+	color                   : var( --ink );
+	font-family             : var( --font-display );
+	font-size               : clamp( 2.75rem, 6.5vw, 6rem );
+	font-variation-settings : 'opsz' 144;
+	font-weight             : 400;
+	letter-spacing          : -0.025em;
+	line-height             : 1.02;
+	max-width               : 14ch;
+
+
+}
+
+.titAccEmp { /* What: Title Accent Emphasis. Why: One word in each heading is set apart in color and italic. How: This draws it in the accent, light and italic. */
+
+
+	color       : var( --accent );
+	font-style  : italic;
+	font-weight : 300;
+
+
+}
+
+/* #endregion hero__title */
+
+/* #endregion hero__copy */
+
+
+
+/* #region hero__logo */
+
+.hero__logo { /* What: Hero Logo Frame. Why: The logo is the hero's main visual, ringed and rising in just after the copy. How: This centers the logo and plays the rise animation after a short delay. */
+
+
+	align-items     : center;
+	animation       : rise 1s cubic-bezier( 0.22, 1, 0.36, 1 ) 0.15s both;
+	display         : flex;
+	justify-content : center;
+	position        : relative;
+
+
+}
+.hero__logo::before { /* What: Hero Logo Ring. Why: A faint oval ring frames the logo. How: This draws a rounded hairline just outside the frame. */
+
+
+	border         : 1px solid var( --line-strong );
+	border-radius  : 50%;
+	content        : '';
+	inset          : -8% -4%;
+	opacity        : 0.4;
+	pointer-events : none;
+	position       : absolute;
+
+
+}
+@media ( max-width : 960px ) { /* What: Narrow Hero Logo Frame. Why: The stacked hero puts the logo first. How: This applies below 960px wide. */
+
+
+	.hero__logo { /* What: Leading Hero Logo Frame. Why: The logo should open the stacked hero. How: This moves it above the copy with a little room below. */
+
+
+		margin-bottom : 0.5rem;
+		order         : -1;
+
+
+	}
+
+	.hero__logo::before { /* What: Narrow Hero Logo Ring. Why: The ring needs more room around the smaller logo. How: This widens its inset. */
+
+
+		inset : -10% -6%;
+
+
+	}
+
+
+}
+@media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Hero Logo. Why: Someone who asked for less motion shouldn't see the logo rise. How: This applies only when the reduced-motion preference is set. */
+
+
+	.hero__logo { /* What: Motionless Hero Logo Frame. Why: The logo should simply be there. How: This turns the animation off. */
+
+
+		animation : none;
+
+
+	}
+
+
+}
+
+.herLogIma { /* What: Hero Logo Image. Why: The logo should fill its column up to a set size, with a soft shadow lifting it off the page. How: This caps its width and adds a blue-tinted drop shadow. */
+
+
+	filter    : drop-shadow( 0 12px 32px rgba( 31, 78, 122, 0.12 ) );
+	height    : auto;
+	max-width : 460px;
+	width     : 100%;
+
+
+}
+@media ( max-width : 960px ) { /* What: Narrow Hero Logo Image. Why: The stacked logo shouldn't dominate a small screen. How: This applies below 960px wide. */
+
+
+	.herLogIma { /* What: Smaller Hero Logo Image. Why: The logo leads the stacked hero at a modest size. How: This caps it at 280px. */
+
+
+		max-width : 280px;
+
+
+	}
+
+
+}
+@media ( max-width : 500px ) { /* What: Phone Hero Logo Image. Why: Phones need the logo smaller still. How: This applies below 500px wide. */
+
+
+	.herLogIma { /* What: Smallest Hero Logo Image. Why: The logo should leave room for the headline on a phone. How: This caps it at 220px. */
+
+
+		max-width : 220px;
+
+
+	}
+
+
+}
+
+/* #endregion hero__logo */
+
+/* #endregion hero__top */
+
+
+
+/* #region hero__bottom */
+
+.hero__bottom { /* What: Hero Bottom Row. Why: The pitch and the buttons share a row between hairlines, rising in after the top row. How: This sets a two-column grid with rules above and below and plays the rise animation after a delay. */
+
+
+	align-items           : end;
+	animation             : rise 0.9s cubic-bezier( 0.22, 1, 0.36, 1 ) 0.3s both;
+	border-bottom         : 1px solid var( --line );
+	border-top            : 1px solid var( --line );
+	display               : grid;
+	gap                   : 3rem;
+	grid-template-columns : 1fr auto;
+	padding-bottom        : 4rem;
+	padding-top           : 3rem;
+
+
+}
+@media ( max-width : 960px ) { /* What: Narrow Hero Bottom Row. Why: Small screens are too narrow for the pitch and buttons side by side. How: This applies below 960px wide. */
+
+
+	.hero__bottom { /* What: Stacked Hero Bottom Row. Why: The buttons read best under the pitch. How: This turns the grid into one column with a smaller gap. */
+
+
+		gap                   : 2rem;
+		grid-template-columns : 1fr;
+
+
+	}
+
+
+}
+@media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Hero Bottom. Why: Someone who asked for less motion shouldn't see the row rise. How: This applies only when the reduced-motion preference is set. */
+
+
+	.hero__bottom { /* What: Motionless Hero Bottom Row. Why: The row should simply be there. How: This turns the animation off. */
+
+
+		animation : none;
+
+
+	}
+
+
+}
+
+.hero__lede { /* What: Hero Lede Paragraph. Why: The pitch reads as the hero's lead paragraph. How: This sets it in the body font, a little larger than body text, at a comfortable measure. */
+
+
+	color       : var( --ink-soft );
+	font-family : var( --font-body );
+	font-size   : clamp( 1.05rem, 1.4vw, 1.2rem );
+	line-height : 1.55;
+	margin      : 0;
+	max-width   : 52ch;
+
+
+}
+
+
+
+/* #region hero__actions */
+
+.hero__actions { /* What: Hero Actions Row. Why: The hero's two next steps sit together. How: This sets the buttons side by side, wrapping if needed. */
+
+
+	display   : flex;
+	flex-wrap : wrap;
+	gap       : 0.75rem;
+
+
+}
+
+
+/* #region btn */
+
+.btn { /* What: Button. Why: The hero's actions share the site's pill button shape. How: This draws a rounded pill with its label and arrow side by side, easing its colors and lift on hover. */
+
+
+	align-items    : center;
+	border         : 1px solid transparent;
+	border-radius  : 999px;
+	display        : inline-flex;
+	font-size      : 0.9rem;
+	font-weight    : 500;
+	gap            : 0.75rem;
+	letter-spacing : 0.02em;
+	padding        : 0.95rem 1.6rem;
+	transition     : background-color 0.3s cubic-bezier( 0.22, 1, 0.36, 1 ), border-color 0.3s cubic-bezier( 0.22, 1, 0.36, 1 ), color 0.3s cubic-bezier( 0.22, 1, 0.36, 1 ), transform 0.3s cubic-bezier( 0.22, 1, 0.36, 1 );
+	white-space    : nowrap;
+
+
+}
+.btn-primary { /* What: Primary Button. Why: The estimate button is the hero's main action. How: This fills it with ink and paper-colored text. */
+
+
+	background : var( --ink );
+	color      : var( --paper );
+
+
+}
+.btn-primary:hover { /* What: Hovered Primary Button. Why: The button should respond to the pointer. How: This turns it accent and lifts it a pixel. */
+
+
+	background : var( --accent );
+	transform  : translateY( -1px );
+
+
+}
+.btn-ghost { /* What: Ghost Button. Why: The services button is a secondary action. How: This outlines it with no fill. */
+
+
+	border-color : var( --line-strong );
+	color        : var( --ink );
+
+
+}
+.btn-ghost:hover { /* What: Hovered Ghost Button. Why: The button should respond to the pointer. How: This fills it with ink and turns its text paper-colored. */
+
+
+	background   : var( --ink );
+	border-color : var( --ink );
+	color        : var( --paper );
+
+
+}
+@media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Button. Why: Someone who asked for less motion shouldn't see the buttons animate. How: This applies only when the reduced-motion preference is set. */
+
+
+	.btn { /* What: Motionless Button. Why: The hover styles should appear at once. How: This turns the transition off. */
+
+
+		transition : none;
+
+
+	}
+
+
+}
+
+.arrow { /* What: Arrow Span. Why: The arrow slides forward as its button is hovered. How: This animates its position. */
+
+
+	transition : transform 0.3s cubic-bezier( 0.22, 1, 0.36, 1 );
+
+
+}
+.btn:hover .arrow { /* What: Hovered Arrow Span. Why: The arrow points the visitor onward when its button is hovered. How: This moves it 4px right. */
+
+
+	transform : translateX( 4px );
+
+
+}
+@media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Arrow. Why: Someone who asked for less motion shouldn't see the arrow slide. How: This applies only when the reduced-motion preference is set. */
+
+
+	.arrow { /* What: Motionless Arrow Span. Why: The arrow should simply shift. How: This turns the transition off. */
+
+
+		transition : none;
+
+
+	}
+
+
+}
+
+/* #endregion btn */
+
+/* #endregion hero__actions */
+
+/* #endregion hero__bottom */
+
+
+
+/* #region hero__stats */
+
+.hero__stats { /* What: Hero Stats Row. Why: The four numbers read as one row, rising in last. How: This sets a four-column grid and plays the rise animation after the longest delay. */
+
+
+	animation             : rise 0.9s cubic-bezier( 0.22, 1, 0.36, 1 ) 0.45s both;
+	display               : grid;
+	gap                   : 2rem;
+	grid-template-columns : repeat( 4, 1fr );
+	margin-top            : 3rem;
+
+
+}
+@media ( max-width : 960px ) { /* What: Narrow Hero Stats Row. Why: Four columns don't fit a small screen. How: This applies below 960px wide. */
+
+
+	.hero__stats { /* What: Two Column Hero Stats Row. Why: The stats fit two to a row. How: This sets two columns with a tighter column gap. */
+
+
+		gap                   : 2rem 1.5rem;
+		grid-template-columns : repeat( 2, 1fr );
+
+
+	}
+
+
+}
+@media ( max-width : 500px ) { /* What: Phone Hero Stats Row. Why: Phones keep the two-column layout. How: This applies below 500px wide. */
+
+
+	.hero__stats { /* What: Phone Two Column Hero Stats Row. Why: The stats still fit two to a row. How: This sets two equal columns. */
+
+
+		grid-template-columns : 1fr 1fr;
+
+
+	}
+
+
+}
+@media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Hero Stats. Why: Someone who asked for less motion shouldn't see the stats rise. How: This applies only when the reduced-motion preference is set. */
+
+
+	.hero__stats { /* What: Motionless Hero Stats Row. Why: The stats should simply be there. How: This turns the animation off. */
+
+
+		animation : none;
+
+
+	}
+
+
+}
+
+
+/* #region stat */
+
+.stat { /* What: Stat. Why: Each stat is set off by a thin rule on its left. How: This draws the rule and pads the content away from it. */
+
+
+	border-left  : 1px solid var( --line );
+	padding-left : 1.25rem;
+
+
+}
+.stat:first-child { /* What: First Stat. Why: The first stat anchors the row with a stronger rule. How: This draws its rule in full ink. */
+
+
+	border-left : 1px solid var( --ink );
+
+
+}
+
+
+/* #region stat__num */
+
+.stat__num { /* What: Stat Number. Why: The number leads each stat in large display type. How: This sets it in the display font at its largest optical size, scaling with the viewport. */
+
+
+	color                   : var( --ink );
+	font-family             : var( --font-display );
+	font-size               : clamp( 2.25rem, 4vw, 3.25rem );
+	font-variation-settings : 'opsz' 144;
+	font-weight             : 400;
+	letter-spacing          : -0.025em;
+	line-height             : 1.02;
+	margin-bottom           : 0.6rem;
+
+
+}
+
+.staSufSpa { /* What: Stat Suffix Span. Why: A number's plus sign or unit reads as secondary to the number. How: This sets it smaller, raised, and muted. */
+
+
+	color          : var( --ink-muted );
+	font-size      : 0.55em;
+	margin-left    : 0.1em;
+	vertical-align : 0.4em;
+
+
+}
+
+.stat__plus { /* What: Stat Plus Span. Why: The rating's plus sign is set apart in the accent. How: This raises it like the other suffixes, but in accent italic. */
+
+
+	color          : var( --accent );
+	font-size      : 0.55em;
+	font-style     : italic;
+	margin-left    : 0.1em;
+	vertical-align : 0.4em;
+
+
+}
+
+/* #endregion stat__num */
+
+
+.stat__label { /* What: Stat Label. Why: Each number needs a short line saying what it counts. How: This sets it small and muted at a narrow measure. */
+
+
+	color       : var( --ink-muted );
+	font-size   : 0.82rem;
+	line-height : 1.4;
+	max-width   : 22ch;
+
+
+}
+
+/* #endregion stat */
+
+/* #endregion hero__stats */
+
+/* #endregion hero__inner */
+
+/* #endregion hero */
+
+

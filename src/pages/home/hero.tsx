@@ -3,10 +3,8 @@
 
 // #region Imports
 
-import lofSvgUrl from './logo-full.svg'; // What: Logo-Full Svg Url. Why: The hero's main visual is the full logo. How: Vite resolves the import to the file's fingerprinted URL, used as the image's src.
-
-
-import './hero.css'; // What: Hero Stylesheet Import. Why: The hero's grid background, two-row layout, and stats are styled in its own stylesheet. How: This is imported purely for its side effect.
+import cssModObj from './hero.module.css'; // What: CSS Module Object. Why: The hero's grid background, two-row layout, and stats are styled in its own module. How: Each element reads its hashed class name from this object.
+import lofSvgUrl from './logo-full.svg';   // What: Logo-Full Svg Url. Why: The hero's main visual is the full logo. How: Vite resolves the import to the file's fingerprinted URL, used as the image's src.
 
 // #endregion Imports
 
@@ -67,18 +65,20 @@ function HerSecCom () : React.JSX.Element {
 		<section
 			id='top'
 
-			className='hero section'
+			className={ cssModObj.hero }
 		>{ /* What: Hero Section Element. Why: This opens the home page. How: Its top id is the anchor every back-to-top link targets, kept as is since it appears in the page's URL. */ }
 
 
 			<div
-				className='hero__bg'
+				className={ cssModObj.heroBg }
 
 				aria-hidden='true'
 			>{ /* What: Hero Background Div Element. Why: The hero sits over a faint architectural grid. How: This holds the grid's SVG and hides it from screen readers, since it's decorative. */ }
 
 
 				<svg
+					className={ cssModObj.herGriSvg }
+
 					preserveAspectRatio='xMidYMid slice'
 					viewBox='0 0 1440 800'
 				>{ /* What: Hero Grid Svg Element. Why: The grid is drawn as a vector so it stays crisp at any size. How: Its slice aspect ratio fills the section, cropping rather than letterboxing. */ }
@@ -123,20 +123,20 @@ function HerSecCom () : React.JSX.Element {
 
 
 
-			<div className='container hero__inner'>{ /* What: Hero Inner Div Element. Why: The hero's content should line up with the page's content width. How: This stacks the top row, the bottom row, and the stats. */ }
+			<div className={ cssModObj.heroInner }>{ /* What: Hero Inner Div Element. Why: The hero's content should line up with the page's content width. How: This stacks the top row, the bottom row, and the stats. */ }
 
 
-				<div className='hero__top'>{ /* What: Hero Top Div Element. Why: The headline and logo share the first row. How: This sets the copy on the left and the logo on the right. */ }
+				<div className={ cssModObj.heroTop }>{ /* What: Hero Top Div Element. Why: The headline and logo share the first row. How: This sets the copy on the left and the logo on the right. */ }
 
 
-					<div className='hero__copy'>{ /* What: Hero Copy Div Element. Why: The location label sits directly above the headline. How: This stacks the two. */ }
+					<div className={ cssModObj.heroCopy }>{ /* What: Hero Copy Div Element. Why: The location label sits directly above the headline. How: This stacks the two. */ }
 
 
-						<span className='eyebrow'>Lawrence, Kansas · Est. 2008</span>{ /* What: Location Label Span Element. Why: Visitors should see where the company works and how long it's been there. How: This uses the site's eyebrow style. */ }
+						<span className={ cssModObj.eyebrow }>Lawrence, Kansas · Est. 2008</span>{ /* What: Location Label Span Element. Why: Visitors should see where the company works and how long it's been there. How: This uses the site's eyebrow style. */ }
 
-						<h1 className='display hero__title'>{ /* What: Hero Title Heading Element. Why: The headline is the page's main heading. How: Its line breaks set the three-line shape, with one word in italic. */ }
+						<h1 className={ cssModObj.heroTitle }>{ /* What: Hero Title Heading Element. Why: The headline is the page's main heading. How: Its line breaks set the three-line shape, with one word in italic. */ }
 							Commercial roofing,<br />
-							built to <em>weather</em><br />
+							built to <em className={ cssModObj.titAccEmp }>weather</em><br />
 							every season.
 						</h1>
 
@@ -144,10 +144,12 @@ function HerSecCom () : React.JSX.Element {
 					</div>
 
 
-					<div className='hero__logo'>{ /* What: Hero Logo Div Element. Why: The full logo is the hero's main visual. How: This frames it with its decorative ring. */ }
+					<div className={ cssModObj.heroLogo }>{ /* What: Hero Logo Div Element. Why: The full logo is the hero's main visual. How: This frames it with its decorative ring. */ }
 
 
 						<img
+							className={ cssModObj.herLogIma }
+
 							height='515'
 							src={ lofSvgUrl }
 							width='500'
@@ -163,33 +165,33 @@ function HerSecCom () : React.JSX.Element {
 
 
 
-				<div className='hero__bottom'>{ /* What: Hero Bottom Div Element. Why: The pitch and the calls to action share the second row. How: This sets them side by side. */ }
+				<div className={ cssModObj.heroBottom }>{ /* What: Hero Bottom Div Element. Why: The pitch and the calls to action share the second row. How: This sets them side by side. */ }
 
 
-					<p className='lede hero__lede'>{ /* What: Hero Lede Paragraph Element. Why: The pitch says who the company serves and what it promises. How: This uses the site's lede style. */ }
+					<p className={ cssModObj.heroLede }>{ /* What: Hero Lede Paragraph Element. Why: The pitch says who the company serves and what it promises. How: This uses the site's lede style. */ }
 						Reese Roofing serves businesses, property managers, and homeowners across
 						Lawrence and the surrounding region, delivering installations and repairs
 						that hold up to Kansas wind, sun, and storm.
 					</p>
 
-					<div className='hero__actions'>{ /* What: Hero Actions Div Element. Why: The hero's two next steps sit together. How: This holds the estimate and services buttons. */ }
+					<div className={ cssModObj.heroActions }>{ /* What: Hero Actions Div Element. Why: The hero's two next steps sit together. How: This holds the estimate and services buttons. */ }
 
 
 						<a
-							className='btn btn-primary'
+							className={` ${ cssModObj.btn }   ${ cssModObj.btnPrimary } `}
 
 							href='#contact'
 						>{ /* What: Estimate Button Anchor Element. Why: The page's main action is requesting an estimate. How: This links to the contact section. */ }
 
 
 							Request an estimate
-							<span className='arrow'>→</span>{ /* What: Arrow Span Element. Why: The arrow marks the button as moving the visitor onward. How: This sits right after the label. */ }
+							<span className={ cssModObj.arrow }>→</span>{ /* What: Arrow Span Element. Why: The arrow marks the button as moving the visitor onward. How: This sits right after the label. */ }
 
 
 						</a>
 
 						<a
-							className='btn btn-ghost'
+							className={` ${ cssModObj.btn }   ${ cssModObj.btnGhost } `}
 
 							href='#services'
 						>{ /* What: Services Button Anchor Element. Why: Visitors not ready for an estimate can browse first. How: This links to the services section. */ }
@@ -204,50 +206,50 @@ function HerSecCom () : React.JSX.Element {
 
 
 
-				<div className='hero__stats'>{ /* What: Hero Stats Div Element. Why: A few numbers make the company's track record concrete. How: This lays out four stats in a row. */ }
+				<div className={ cssModObj.heroStats }>{ /* What: Hero Stats Div Element. Why: A few numbers make the company's track record concrete. How: This lays out four stats in a row. */ }
 
 
-					<div className='stat'>{ /* What: Years Stat Div Element. Why: Longevity is a reason to trust a roofer. How: This pairs the number with its label. */ }
+					<div className={ cssModObj.stat }>{ /* What: Years Stat Div Element. Why: Longevity is a reason to trust a roofer. How: This pairs the number with its label. */ }
 
 
-						<div className='stat__num display'>17+</div>{ /* What: Stat Number Div Element. Why: The number leads each stat. How: This sets it in the display style. */ }
+						<div className={ cssModObj.statNum }>17+</div>{ /* What: Stat Number Div Element. Why: The number leads each stat. How: This sets it in the display style. */ }
 
-						<div className='stat__label'>Years serving Douglas County</div>{ /* What: Stat Label Div Element. Why: Each number needs to say what it counts. How: This sits below the number. */ }
-
-
-					</div>
-
-
-					<div className='stat'>{ /* What: Roofs Stat Div Element. Why: Volume of finished work shows experience. How: This pairs the number with its label. */ }
-
-
-						<div className='stat__num display'>400<span>+</span></div>{ /* What: Stat Number Div Element. Why: The number leads each stat. How: Its plus sign takes a separate style. */ }
-
-						<div className='stat__label'>Commercial roofs completed</div>{ /* What: Stat Label Div Element. Why: Each number needs to say what it counts. How: This sits below the number. */ }
+						<div className={ cssModObj.statLabel }>Years serving Douglas County</div>{ /* What: Stat Label Div Element. Why: Each number needs to say what it counts. How: This sits below the number. */ }
 
 
 					</div>
 
 
-					<div className='stat'>{ /* What: Emergency Stat Div Element. Why: Storm damage can't wait for business hours. How: This pairs the number with its label. */ }
+					<div className={ cssModObj.stat }>{ /* What: Roofs Stat Div Element. Why: Volume of finished work shows experience. How: This pairs the number with its label. */ }
 
 
-						<div className='stat__num display'>24<span>/7</span></div>{ /* What: Stat Number Div Element. Why: The number leads each stat. How: Its suffix takes a separate style. */ }
+						<div className={ cssModObj.statNum }>400<span className={ cssModObj.staSufSpa }>+</span></div>{ /* What: Stat Number Div Element. Why: The number leads each stat. How: Its plus sign takes a separate style. */ }
 
-						<div className='stat__label'>Emergency response available</div>{ /* What: Stat Label Div Element. Why: Each number needs to say what it counts. How: This sits below the number. */ }
+						<div className={ cssModObj.statLabel }>Commercial roofs completed</div>{ /* What: Stat Label Div Element. Why: Each number needs to say what it counts. How: This sits below the number. */ }
 
 
 					</div>
 
 
-					<div className='stat'>{ /* What: Rating Stat Div Element. Why: Accreditation and insurance are the usual checks before hiring. How: This pairs the rating with its label. */ }
+					<div className={ cssModObj.stat }>{ /* What: Emergency Stat Div Element. Why: Storm damage can't wait for business hours. How: This pairs the number with its label. */ }
 
 
-						<div className='stat__num display'>{ /* What: Stat Number Div Element. Why: The rating leads this stat. How: Its plus sign takes its own class. */ }
-							A<span className='stat__plus'>+</span>
+						<div className={ cssModObj.statNum }>24<span className={ cssModObj.staSufSpa }>/7</span></div>{ /* What: Stat Number Div Element. Why: The number leads each stat. How: Its suffix takes a separate style. */ }
+
+						<div className={ cssModObj.statLabel }>Emergency response available</div>{ /* What: Stat Label Div Element. Why: Each number needs to say what it counts. How: This sits below the number. */ }
+
+
+					</div>
+
+
+					<div className={ cssModObj.stat }>{ /* What: Rating Stat Div Element. Why: Accreditation and insurance are the usual checks before hiring. How: This pairs the rating with its label. */ }
+
+
+						<div className={ cssModObj.statNum }>{ /* What: Stat Number Div Element. Why: The rating leads this stat. How: Its plus sign takes its own class. */ }
+							A<span className={ cssModObj.statPlus }>+</span>
 						</div>
 
-						<div className='stat__label'>BBB accredited & fully insured</div>{ /* What: Stat Label Div Element. Why: Each number needs to say what it counts. How: This sits below the number. */ }
+						<div className={ cssModObj.statLabel }>BBB accredited & fully insured</div>{ /* What: Stat Label Div Element. Why: Each number needs to say what it counts. How: This sits below the number. */ }
 
 
 					</div>
