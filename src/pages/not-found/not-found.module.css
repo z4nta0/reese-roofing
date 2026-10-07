@@ -25,10 +25,10 @@
 	align-items     : center;
 	display         : flex;
 	flex-direction  : column;
-	gap             : 2.1818181818rem;
+	gap             : var( --spa-ver-p02 );                 /* Spacing Vertical Base Plus 2 ~= 25.572px */
 	justify-content : center;
 	min-height      : 100vh;
-	padding         : 2.9090909091rem;
+	padding         : var( --spa-ver-p03 ) 2.9090909091rem; /* Spacing Vertical Base Plus 3 ~= 33.876px */
 	text-align      : center;
 
 
@@ -38,10 +38,10 @@
 
 
 	align-items    : center;
-	color          : var( --ink-muted );
+	color          : var( --tex-mut-col ); /* Text Muted Color = #6b7079 */
 	display        : inline-flex;
-	font-family    : var( --font-body );
-	font-size      : 1.1345454545rem;
+	font-family    : var( --fon-fam-mai ); /* Font Family Main = 'Inter Tight', -apple-system, BlinkMacSystemFont, sans-serif */
+	font-size      : var( --fon-siz-bas ); /* Font Size Base = 11px */
 	font-weight    : 500;
 	gap            : 1.0909090909rem;
 	letter-spacing : 0.18em;
@@ -52,9 +52,9 @@
 .eyebrow::before { /* What: Eyebrow Leading Line. Why: A short rule leads into the label. How: This draws a 28px hairline before the text. */
 
 
-	background : var( --ink-muted );
+	background : var( --tex-mut-col ); /* Text Muted Color = #6b7079 */
 	content    : '';
-	height     : 1px;
+	height     : var( --bor-wid-bas ); /* Border Width Base ~= 1.160px */
 	width      : 28px;
 
 
@@ -66,13 +66,13 @@
 .display { /* What: Display Heading. Why: The heading states the problem in large display type. How: This sets it in the display font at its largest optical size, scaling with the viewport between two bounds. */
 
 
-	color                   : var( --ink );
-	font-family             : var( --font-display );
-	font-size               : clamp( 4.3636363636rem, 8vw, 8.7272727273rem );
+	color                   : var( --tex-mai-col );                                     /* Text Main Color = #1a1f24 */
+	font-family             : var( --fon-fam-sec );                                     /* Font Family Secondary = 'Fraunces', 'Times New Roman', serif */
+	font-size               : clamp( var( --fon-siz-p05 ), 8vw, var( --fon-siz-p08 ) ); /* Font Size Base Plus 5 ~= 44.876px, Font Size Base Plus 8 ~= 104.323px */
 	font-variation-settings : 'opsz' 144;
 	font-weight             : 400;
 	letter-spacing          : -0.025em;
-	line-height             : 1.02;
+	line-height             : var( --ver-rhy-m01 );                                     /* Vertical Rhythm Base Minus 1 = 1 */
 
 
 }
@@ -80,7 +80,7 @@
 .titAccEmp { /* What: Title Accent Emphasis. Why: One word in each heading is set apart in color and italic. How: This draws it in the accent, light and italic. */
 
 
-	color       : var( --accent );
+	color       : var( --acc-mai-col ); /* Accent Main Color = #1f4e7a */
 	font-style  : italic;
 	font-weight : 300;
 
@@ -93,11 +93,11 @@
 .lede { /* What: Lede Paragraph. Why: The explanation reads as a short lead paragraph. How: This sets it in the body font, a little larger than body text, at a comfortable measure. */
 
 
-	color       : var( --ink-soft );
-	font-family : var( --font-body );
-	font-size   : clamp( 1.5272727273rem, 1.4vw, 1.7454545455rem );
-	line-height : 1.55;
-	max-width   : 52ch;
+	color       : var( --tex-sec-col );                                       /* Text Secondary Color = #2a3138 */
+	font-family : var( --fon-fam-mai );                                       /* Font Family Main = 'Inter Tight', -apple-system, BlinkMacSystemFont, sans-serif */
+	font-size   : clamp( var( --fon-siz-p01 ), 1.4vw, var( --fon-siz-p02 ) ); /* Font Size Base Plus 1 ~= 14.572px, Font Size Base Plus 2 ~= 19.304px */
+	line-height : var( --ver-rhy-p01 );                                       /* Vertical Rhythm Base Plus 1 ~= 1.755 */
+	max-width   : var( --tex-wid-bas );                                       /* Text Width Base Maximum ~= 29.207em */
 
 
 }
@@ -109,15 +109,15 @@
 
 
 	align-items    : center;
-	border         : 1px solid transparent;
+	border         : var( --bor-wid-bas ) solid transparent;                                                                          /* Border Width Base ~= 1.160px */
 	border-radius  : 999px;
 	display        : inline-flex;
-	font-size      : 1.3090909091rem;
+	font-size      : var( --fon-siz-p01 );                                                                                            /* Font Size Base Plus 1 ~= 14.572px */
 	font-weight    : 500;
 	gap            : 1.0909090909rem;
 	letter-spacing : 0.02em;
-	padding        : 1.3818181818rem 2.3272727273rem;
-	transition     : background-color 0.3s cubic-bezier( 0.22, 1, 0.36, 1 ), transform 0.3s cubic-bezier( 0.22, 1, 0.36, 1 );
+	padding        : var( --spa-ver-bas ) 2.3272727273rem;                                                                            /* Spacing Vertical Base ~= 14.572px */
+	transition     : background-color var( --dur-tra-p02 ) var( --mot-dec-eas ), transform var( --dur-tra-p02 ) var( --mot-dec-eas ); /* Duration Transition Base Plus 2 ~= 277.0ms, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ) */
 	white-space    : nowrap;
 
 
@@ -125,15 +125,15 @@
 .btn-primary { /* What: Primary Button. Why: Going home is the page's one action. How: This fills it with ink and paper-colored text. */
 
 
-	background : var( --ink );
-	color      : var( --paper );
+	background : var( --bac-inv-col ); /* Background Inverse Color = #1a1f24 */
+	color      : var( --bac-pag-col ); /* Background Page Color = #f5f2ec */
 
 
 }
 .btn-primary:hover { /* What: Hovered Primary Button. Why: The button should respond to the pointer. How: This turns it accent and lifts it a pixel. */
 
 
-	background : var( --accent );
+	background : var( --acc-mai-col ); /* Accent Main Color = #1f4e7a */
 	transform  : translateY( -1px );
 
 
@@ -155,7 +155,7 @@
 .arrow { /* What: Arrow Span. Why: The arrow slides forward as the button is hovered. How: This animates its position. */
 
 
-	transition : transform 0.3s cubic-bezier( 0.22, 1, 0.36, 1 );
+	transition : transform var( --dur-tra-p02 ) var( --mot-dec-eas ); /* Duration Transition Base Plus 2 ~= 277.0ms, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ) */
 
 
 }
