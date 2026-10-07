@@ -27,10 +27,10 @@
 .contact { /* What: Contact Section. Why: The page closes on a dark band with light text. How: This sets the ink background, the paper text color, the top rule, and the standard section padding. */
 
 
-	background    : var( --ink );
-	border-top    : 1px solid var( --line );
-	color         : var( --paper );
-	padding-block : var( --section-pad-y );
+	background    : var( --bac-inv-col );                            /* Background Inverse Color = #1a1f24 */
+	border-top    : var( --bor-wid-bas ) solid var( --bor-mai-col ); /* Border Width Base ~= 1.160px, Border Main Color = rgba( 26, 31, 36, 0.12 ) */
+	color         : var( --bac-pag-col );                            /* Background Page Color = #f5f2ec */
+	padding-block : var( --sec-ver-pad );                            /* Section Vertical Padding, about 78.749px to 138.200px */
 	position      : relative;
 
 
@@ -44,11 +44,11 @@
 
 	align-items           : start;
 	display               : grid;
-	gap                   : 7.2727272727rem;
+	gap                   : var( --spa-ver-p06 ) 7.2727272727rem; /* Spacing Vertical Base Plus 6 ~= 78.750px */
 	grid-template-columns : 1fr 1.05fr;
 	margin                : 0 auto;
-	max-width             : var( --container );
-	padding-inline        : var( --gutter );
+	max-width             : var( --con-max-wid );                 /* Container Maximum Width = 1280px */
+	padding-inline        : var( --gut-sid-pad );                 /* Gutter Side Padding, 20px to 48px */
 	width                 : 100%;
 
 
@@ -59,7 +59,7 @@
 	.contact__container { /* What: Stacked Contact Container. Why: The form reads best under the details. How: This turns the grid into one column with a smaller gap. */
 
 
-		gap                   : 4.3636363636rem;
+		gap                   : var( --spa-ver-p04 ); /* Spacing Vertical Base Plus 4 ~= 44.876px */
 		grid-template-columns : 1fr;
 
 
@@ -72,10 +72,10 @@
 
 
 	align-items    : center;
-	color          : rgba( 245, 242, 236, 0.5 );
+	color          : oklch( from var( --bac-pag-col ) l c h / 0.5 ); /* Background Page Color = #f5f2ec */
 	display        : inline-flex;
-	font-family    : var( --font-body );
-	font-size      : 1.1345454545rem;
+	font-family    : var( --fon-fam-mai );                           /* Font Family Main = 'Inter Tight', -apple-system, BlinkMacSystemFont, sans-serif */
+	font-size      : var( --fon-siz-bas );                           /* Font Size Base = 11px */
 	font-weight    : 500;
 	gap            : 1.0909090909rem;
 	letter-spacing : 0.18em;
@@ -86,9 +86,9 @@
 .eyebrow::before { /* What: Eyebrow Leading Line. Why: A short rule leads into the label. How: This draws a 28px hairline before the text, faded for the dark band. */
 
 
-	background : rgba( 245, 242, 236, 0.4 );
+	background : oklch( from var( --bac-pag-col ) l c h / var( --cdn-pow-003-rec ) ); /* Background Page Color = #f5f2ec, Core-Design-Number to the Power of 3 Reciprocal ~= 0.430 */
 	content    : '';
-	height     : 1px;
+	height     : var( --bor-wid-bas );                                                /* Border Width Base ~= 1.160px */
 	width      : 28px;
 
 
@@ -100,15 +100,15 @@
 .contact__title { /* What: Contact Title. Why: The heading invites the visitor in, in large display type on the dark band. How: This sets it in the display font at its largest optical size in paper, scaling with the viewport. */
 
 
-	color                   : var( --paper );
-	font-family             : var( --font-display );
-	font-size               : clamp( 3.6363636364rem, 6vw, 7.2727272727rem );
+	color                   : var( --bac-pag-col );                                     /* Background Page Color = #f5f2ec */
+	font-family             : var( --fon-fam-sec );                                     /* Font Family Secondary = 'Fraunces', 'Times New Roman', serif */
+	font-size               : clamp( var( --fon-siz-p05 ), 6vw, var( --fon-siz-p07 ) ); /* Font Size Base Plus 5 ~= 44.876px, Font Size Base Plus 7 ~= 78.749px */
 	font-variation-settings : 'opsz' 144;
 	font-weight             : 400;
 	letter-spacing          : -0.025em;
-	line-height             : 1.02;
-	margin-bottom           : 2.1818181818rem;
-	margin-top              : 2.1818181818rem;
+	line-height             : var( --ver-rhy-m01 );                                     /* Vertical Rhythm Base Minus 1 = 1 */
+	margin-bottom           : var( --spa-ver-p02 );                                     /* Spacing Vertical Base Plus 2 ~= 25.572px */
+	margin-top              : var( --spa-ver-p02 );                                     /* Spacing Vertical Base Plus 2 ~= 25.572px */
 
 
 }
@@ -116,7 +116,7 @@
 .titAccEmp { /* What: Title Accent Emphasis. Why: One word in each heading is set apart in color and italic. How: This draws it in the soft accent, light and italic, since the darker accent would sink into the dark band. */
 
 
-	color       : var( --accent-soft );
+	color       : var( --acc-lig-col ); /* Accent Light Color, the accent lightened by 0.204 */
 	font-style  : italic;
 	font-weight : 300;
 
@@ -129,12 +129,12 @@
 .contact__lede { /* What: Contact Lede Paragraph. Why: The lede says what happens after the visitor reaches out. How: This sets it in the body font, a little larger than body text, in faded paper with room below. */
 
 
-	color         : rgba( 245, 242, 236, 0.7 );
-	font-family   : var( --font-body );
-	font-size     : clamp( 1.5272727273rem, 1.4vw, 1.7454545455rem );
-	line-height   : 1.55;
-	margin-bottom : 4.3636363636rem;
-	max-width     : 52ch;
+	color         : oklch( from var( --bac-pag-col ) l c h / var( --cdn-pow-001-rec ) ); /* Background Page Color = #f5f2ec, Core-Design-Number to the Power of 1 Reciprocal ~= 0.755 */
+	font-family   : var( --fon-fam-mai );                                                /* Font Family Main = 'Inter Tight', -apple-system, BlinkMacSystemFont, sans-serif */
+	font-size     : clamp( var( --fon-siz-p01 ), 1.4vw, var( --fon-siz-p02 ) );          /* Font Size Base Plus 1 ~= 14.572px, Font Size Base Plus 2 ~= 19.304px */
+	line-height   : var( --ver-rhy-p01 );                                                /* Vertical Rhythm Base Plus 1 ~= 1.755 */
+	margin-bottom : var( --spa-ver-p04 );                                                /* Spacing Vertical Base Plus 4 ~= 44.876px */
+	max-width     : var( --tex-wid-bas );                                                /* Text Width Base Maximum ~= 29.207em */
 
 
 }
@@ -146,7 +146,7 @@
 .contact__details { /* What: Contact Details List. Why: The detail rows sit under a faint rule. How: This draws the rule above the first row. */
 
 
-	border-top : 1px solid rgba( 245, 242, 236, 0.15 );
+	border-top : var( --bor-wid-bas ) solid oklch( from var( --bac-pag-col ) l c h / var( --cdn-pow-007-rec ) ); /* Border Width Base ~= 1.160px, Background Page Color = #f5f2ec, Core-Design-Number to the Power of 7 Reciprocal ~= 0.140 */
 
 
 }
@@ -157,11 +157,11 @@
 .contact__row { /* What: Contact Row. Why: Each detail pairs a label with its value under a faint rule. How: This sets a fixed label column beside the value. */
 
 
-	border-bottom         : 1px solid rgba( 245, 242, 236, 0.15 );
+	border-bottom         : var( --bor-wid-bas ) solid oklch( from var( --bac-pag-col ) l c h / var( --cdn-pow-007-rec ) ); /* Border Width Base ~= 1.160px, Background Page Color = #f5f2ec, Core-Design-Number to the Power of 7 Reciprocal ~= 0.140 */
 	display               : grid;
-	gap                   : 2.1818181818rem;
+	gap                   : var( --spa-ver-p02 ) 2.1818181818rem;                                                           /* Spacing Vertical Base Plus 2 ~= 25.572px */
 	grid-template-columns : 110px 1fr;
-	padding               : 1.6rem 0;
+	padding               : var( --spa-ver-p01 ) 0;                                                                         /* Spacing Vertical Base Plus 1 ~= 19.304px */
 
 
 }
@@ -171,7 +171,7 @@
 	.contact__row { /* What: Stacked Contact Row. Why: The label reads best above its value on a phone. How: This turns the row into one column with a small gap. */
 
 
-		gap                   : 0.4363636364rem;
+		gap                   : var( --spa-ver-m04 ); /* Spacing Vertical Base Minus 4 ~= 4.731px */
 		grid-template-columns : 1fr;
 
 
@@ -183,10 +183,10 @@
 .rowLabTer { /* What: Row Label Term. Why: Each row's label reads as a small tracked caption. How: This sets it in faded uppercase, nudged down to line up with the value. */
 
 
-	color          : rgba( 245, 242, 236, 0.5 );
-	font-size      : 1.1345454545rem;
+	color          : oklch( from var( --bac-pag-col ) l c h / 0.5 ); /* Background Page Color = #f5f2ec */
+	font-size      : var( --fon-siz-bas );                           /* Font Size Base = 11px */
 	letter-spacing : 0.12em;
-	padding-top    : 0.2181818182rem;
+	padding-top    : var( --spa-ver-m06 );                           /* Spacing Vertical Base Minus 6 ~= 2.696px */
 	text-transform : uppercase;
 
 
@@ -198,9 +198,9 @@
 .rowValDet { /* What: Row Value Details. Why: Each row's value reads clearly on the dark band. How: This sets it in nearly full paper. */
 
 
-	color       : rgba( 245, 242, 236, 0.9 );
-	font-size   : 1.3818181818rem;
-	line-height : 1.55;
+	color       : oklch( from var( --bac-pag-col ) l c h / 0.9 ); /* Background Page Color = #f5f2ec */
+	font-size   : var( --fon-siz-p01 );                           /* Font Size Base Plus 1 ~= 14.572px */
+	line-height : var( --ver-rhy-p01 );                           /* Vertical Rhythm Base Plus 1 ~= 1.755 */
 
 
 }
@@ -208,16 +208,16 @@
 .rowValAnc { /* What: Row Value Anchor. Why: The phone and email links are marked by a faint underline. How: This draws the underline and fades its color and the text's on hover. */
 
 
-	border-bottom : 1px solid rgba( 245, 242, 236, 0.3 );
-	transition    : border-color 0.2s ease, color 0.2s ease;
+	border-bottom : var( --bor-wid-bas ) solid oklch( from var( --bac-pag-col ) l c h / var( --cdn-pow-004-rec ) );          /* Border Width Base ~= 1.160px, Background Page Color = #f5f2ec, Core-Design-Number to the Power of 4 Reciprocal ~= 0.325 */
+	transition    : border-color var( --dur-tra-p01 ) var( --mot-sta-eas ), color var( --dur-tra-p01 ) var( --mot-sta-eas ); /* Duration Transition Base Plus 1 ~= 209.1ms, Motion Standard Easing = ease */
 
 
 }
 .rowValAnc:hover { /* What: Hovered Row Value Anchor. Why: The hovered link should stand out. How: This turns its text and underline the soft accent. */
 
 
-	border-color : var( --accent-soft );
-	color        : var( --accent-soft );
+	border-color : var( --acc-lig-col ); /* Accent Light Color, the accent lightened by 0.204 */
+	color        : var( --acc-lig-col ); /* Accent Light Color, the accent lightened by 0.204 */
 
 
 }
@@ -238,8 +238,8 @@
 .muted { /* What: Muted Span. Why: The emergency note is secondary to the office hours. How: This sets it smaller and faded. */
 
 
-	color     : rgba( 245, 242, 236, 0.5 );
-	font-size : 1.2363636364rem;
+	color     : oklch( from var( --bac-pag-col ) l c h / 0.5 ); /* Background Page Color = #f5f2ec */
+	font-size : var( --fon-siz-p01 );                           /* Font Size Base Plus 1 ~= 14.572px */
 
 
 }
@@ -257,11 +257,11 @@
 .contact__signature { /* What: Contact Signature Card. Why: The full logo signs off the details on a light card. How: This draws a rounded paper card capped at 280px. */
 
 
-	background    : var( --paper );
-	border-radius : 4px;
-	margin-top    : 4.3636363636rem;
+	background    : var( --bac-pag-col );                 /* Background Page Color = #f5f2ec */
+	border-radius : var( --rad-bor-xsm );                 /* Radius Border Extra Small ~= 3.571px */
+	margin-top    : var( --spa-ver-p04 );                 /* Spacing Vertical Base Plus 4 ~= 44.876px */
 	max-width     : 280px;
-	padding       : 2.9090909091rem 3.6363636364rem;
+	padding       : var( --spa-ver-p03 ) 3.6363636364rem; /* Spacing Vertical Base Plus 3 ~= 33.876px */
 
 
 }
@@ -284,10 +284,10 @@
 .contact__form-wrap { /* What: Contact Form Wrap. Why: The form sits in a faint frame on the dark band. How: This draws a barely lighter panel with a faint border, padded to the viewport. */
 
 
-	background    : rgba( 245, 242, 236, 0.04 );
-	border        : 1px solid rgba( 245, 242, 236, 0.1 );
-	border-radius : 4px;
-	padding       : clamp( 2.5454545455rem, 3vw, 4rem );
+	background    : oklch( from var( --bac-pag-col ) l c h / 0.04 );                                                /* Background Page Color = #f5f2ec */
+	border        : var( --bor-wid-bas ) solid oklch( from var( --bac-pag-col ) l c h / var( --cdn-pow-008-rec ) ); /* Border Width Base ~= 1.160px, Background Page Color = #f5f2ec, Core-Design-Number to the Power of 8 Reciprocal ~= 0.105 */
+	border-radius : var( --rad-bor-xsm );                                                                           /* Radius Border Extra Small ~= 3.571px */
+	padding       : clamp( var( --spa-ver-p02 ), 3vw, var( --spa-ver-p04 ) ) clamp( 2.5454545455rem, 3vw, 4rem );   /* Spacing Vertical Base Plus 2 ~= 25.572px, Spacing Vertical Base Plus 4 ~= 44.876px */
 
 
 }
@@ -300,7 +300,7 @@
 
 	display        : flex;
 	flex-direction : column;
-	gap            : 2.1818181818rem;
+	gap            : var( --spa-ver-p02 ); /* Spacing Vertical Base Plus 2 ~= 25.572px */
 
 
 }
@@ -313,7 +313,7 @@
 
 	display        : flex;
 	flex-direction : column;
-	gap            : 0.7272727273rem;
+	gap            : var( --spa-ver-m02 ); /* Spacing Vertical Base Minus 2 ~= 8.304px */
 
 
 }
@@ -321,8 +321,8 @@
 .forFieLab { /* What: Form Field Label. Why: Each control is named by a small tracked caption. How: This sets it in faded uppercase. */
 
 
-	color          : rgba( 245, 242, 236, 0.55 );
-	font-size      : 1.1345454545rem;
+	color          : oklch( from var( --bac-pag-col ) l c h / var( --cdn-pow-002-rec ) ); /* Background Page Color = #f5f2ec, Core-Design-Number to the Power of 2 Reciprocal ~= 0.570 */
+	font-size      : var( --fon-siz-bas );                                                /* Font Size Base = 11px */
 	font-weight    : 500;
 	letter-spacing : 0.1em;
 	text-transform : uppercase;
@@ -337,13 +337,13 @@
 
 	background    : transparent;
 	border        : none;
-	border-bottom : 1px solid rgba( 245, 242, 236, 0.2 );
+	border-bottom : var( --bor-wid-bas ) solid oklch( from var( --bac-pag-col ) l c h / var( --cdn-pow-006-rec ) ); /* Border Width Base ~= 1.160px, Background Page Color = #f5f2ec, Core-Design-Number to the Power of 6 Reciprocal ~= 0.185 */
 	border-radius : 0;
-	color         : var( --paper );
-	font-family   : var( --font-body );
-	font-size     : 1.4545454545rem;
-	padding       : 0.8727272727rem 0;
-	transition    : border-color 0.25s ease;
+	color         : var( --bac-pag-col );                                                                           /* Background Page Color = #f5f2ec */
+	font-family   : var( --fon-fam-mai );                                                                           /* Font Family Main = 'Inter Tight', -apple-system, BlinkMacSystemFont, sans-serif */
+	font-size     : var( --fon-siz-p01 );                                                                           /* Font Size Base Plus 1 ~= 14.572px */
+	padding       : var( --spa-ver-m02 ) 0;                                                                         /* Spacing Vertical Base Minus 2 ~= 8.304px */
+	transition    : border-color var( --dur-tra-p02 ) var( --mot-sta-eas );                                         /* Duration Transition Base Plus 2 ~= 277.0ms, Motion Standard Easing = ease */
 	width         : 100%;
 
 
@@ -352,7 +352,7 @@
 .forFieTex::placeholder { /* What: Form Field Placeholder. Why: Placeholder text should read as a hint, not an answer. How: This fades it well below the typed text. */
 
 
-	color : rgba( 245, 242, 236, 0.35 );
+	color : oklch( from var( --bac-pag-col ) l c h / var( --cdn-pow-004-rec ) ); /* Background Page Color = #f5f2ec, Core-Design-Number to the Power of 4 Reciprocal ~= 0.325 */
 
 
 }
@@ -361,7 +361,7 @@
 .forFieTex:focus { /* What: Focused Form Field Controls. Why: The focused control needs a visible mark in place of the browser's outline. How: This turns its underline the soft accent. */
 
 
-	border-bottom-color : var( --accent-soft );
+	border-bottom-color : var( --acc-lig-col ); /* Accent Light Color, the accent lightened by 0.204 */
 	outline             : none;
 
 
@@ -389,7 +389,7 @@
 	background-image    : url( 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="%23a8a39a" stroke-width="1.5"><path d="M6 9l6 6 6-6"/></svg>' );
 	background-position : right 0 center;
 	background-repeat   : no-repeat;
-	background-size     : 18px;
+	background-size     : calc( var( --ver-rhy-p01 ) * 1rem ); /* Vertical Rhythm Base Plus 1 ~= 19.304px */
 	padding-right       : 24px;
 
 
@@ -398,8 +398,8 @@
 .forSelOpt { /* What: Form Select Option. Why: The opened dropdown's options should match the dark band. How: This sets each option in paper on ink. */
 
 
-	background : var( --ink );
-	color      : var( --paper );
+	background : var( --bac-inv-col ); /* Background Inverse Color = #1a1f24 */
+	color      : var( --bac-pag-col ); /* Background Page Color = #f5f2ec */
 
 
 }
@@ -407,8 +407,8 @@
 .forFieTex { /* What: Form Field Textarea. Why: The details field needs room to write and should only grow taller. How: This sets a minimum height and allows vertical resizing only. */
 
 
-	font-family : var( --font-body );
-	min-height  : 100px;
+	font-family : var( --fon-fam-mai ); /* Font Family Main = 'Inter Tight', -apple-system, BlinkMacSystemFont, sans-serif */
+	min-height  : var( --spa-ver-p07 ); /* Spacing Vertical Base Plus 7 ~= 104.323px */
 	resize      : vertical;
 
 
@@ -422,7 +422,7 @@
 
 
 	display               : grid;
-	gap                   : 2.1818181818rem;
+	gap                   : var( --spa-ver-p02 ) 2.1818181818rem; /* Spacing Vertical Base Plus 2 ~= 25.572px */
 	grid-template-columns : 1fr 1fr;
 
 
@@ -433,7 +433,7 @@
 	.field-row { /* What: Stacked Field Row. Why: The fields stack on a phone. How: This turns the row into one column. */
 
 
-		gap                   : 2.1818181818rem;
+		gap                   : var( --spa-ver-p02 ); /* Spacing Vertical Base Plus 2 ~= 25.572px */
 		grid-template-columns : 1fr;
 
 
@@ -451,18 +451,18 @@
 
 	align-items    : center;
 	align-self     : flex-start;
-	background     : var( --paper );
-	border         : 1px solid transparent;
+	background     : var( --bac-pag-col );                   /* Background Page Color = #f5f2ec */
+	border         : var( --bor-wid-bas ) solid transparent; /* Border Width Base ~= 1.160px */
 	border-radius  : 999px;
-	color          : var( --ink );
+	color          : var( --tex-mai-col );                   /* Text Main Color = #1a1f24 */
 	display        : inline-flex;
-	font-size      : 1.3090909091rem;
+	font-size      : var( --fon-siz-p01 );                   /* Font Size Base Plus 1 ~= 14.572px */
 	font-weight    : 500;
 	gap            : 1.0909090909rem;
 	letter-spacing : 0.02em;
-	margin-top     : 0.7272727273rem;
-	padding        : 1.3818181818rem 2.3272727273rem;
-	transition     : background-color 0.3s cubic-bezier( 0.22, 1, 0.36, 1 ), color 0.3s cubic-bezier( 0.22, 1, 0.36, 1 ), transform 0.3s cubic-bezier( 0.22, 1, 0.36, 1 );
+	margin-top     : var( --spa-ver-m02 );                   /* Spacing Vertical Base Minus 2 ~= 8.304px */
+	padding        : var( --spa-ver-bas ) 2.3272727273rem;   /* Spacing Vertical Base ~= 14.572px */
+	transition     : background-color var( --dur-tra-p02 ) var( --mot-dec-eas ), color var( --dur-tra-p02 ) var( --mot-dec-eas ), transform var( --dur-tra-p02 ) var( --mot-dec-eas ); /* Duration Transition Base Plus 2 ~= 277.0ms, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ) */
 	white-space    : nowrap;
 
 
@@ -470,8 +470,8 @@
 .contact__submit:hover { /* What: Hovered Contact Submit Button. Why: The button should respond to the pointer. How: This turns it the soft accent with paper text and lifts it a pixel. */
 
 
-	background : var( --accent-soft );
-	color      : var( --paper );
+	background : var( --acc-lig-col ); /* Accent Light Color, the accent lightened by 0.204 */
+	color      : var( --bac-pag-col ); /* Background Page Color = #f5f2ec */
 	transform  : translateY( -1px );
 
 
@@ -493,7 +493,7 @@
 .arrow { /* What: Arrow Span. Why: The arrow slides forward as the button is hovered. How: This animates its position. */
 
 
-	transition : transform 0.3s cubic-bezier( 0.22, 1, 0.36, 1 );
+	transition : transform var( --dur-tra-p02 ) var( --mot-dec-eas ); /* Duration Transition Base Plus 2 ~= 277.0ms, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ) */
 
 
 }
@@ -524,9 +524,9 @@
 .contact__fineprint { /* What: Contact Fine Print. Why: The consent note should read as a quiet footnote to the form. How: This sets it small and faded. */
 
 
-	color       : rgba( 245, 242, 236, 0.4 );
-	font-size   : 1.1345454545rem;
-	line-height : 1.5;
+	color       : oklch( from var( --bac-pag-col ) l c h / var( --cdn-pow-003-rec ) ); /* Background Page Color = #f5f2ec, Core-Design-Number to the Power of 3 Reciprocal ~= 0.430 */
+	font-size   : var( --fon-siz-bas );                                                /* Font Size Base = 11px */
+	line-height : var( --ver-rhy-bas );                                                /* Vertical Rhythm Base ~= 1.325 */
 
 
 }
