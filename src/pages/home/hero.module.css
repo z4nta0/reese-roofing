@@ -28,8 +28,8 @@
 	display        : flex;
 	min-height     : 100vh;
 	overflow       : hidden;
-	padding-bottom : clamp( 5.8181818182rem, 7vw, 8.7272727273rem );
-	padding-top    : calc( var( --section-pad-y ) + 4.3636363636rem );
+	padding-bottom : clamp( var( --spa-ver-p05 ), 7vw, var( --spa-ver-p07 ) ); /* Spacing Vertical Base Plus 5 ~= 59.447px, Spacing Vertical Base Plus 7 ~= 104.323px */
+	padding-top    : calc( var( --sec-ver-pad ) + var( --spa-ver-p04 ) );      /* Section Vertical Padding, about 78.749px to 138.200px, Spacing Vertical Base Plus 4 ~= 44.876px */
 	position       : relative;
 
 
@@ -55,13 +55,13 @@
 
 
 	-webkit-mask-image : radial-gradient( ellipse at 70% 30%, black 0%, transparent 75% );
-	color              : var( --ink );
+	color              : var( --tex-mai-col );     /* Text Main Color = #1a1f24 */
 	inset              : 0;
 	mask-image         : radial-gradient( ellipse at 70% 30%, black 0%, transparent 75% );
-	opacity            : 0.05;
+	opacity            : var( --cdn-pow-011-rec ); /* Core-Design-Number to the Power of 11 Reciprocal ~= 0.045 */
 	pointer-events     : none;
 	position           : absolute;
-	z-index            : 0; /* What: Background Stack Level. Why: The grid has to sit under the hero's content, which is at 1. How: This keeps it at the bottom. */
+	z-index            : 0;                        /* What: Background Stack Level. Why: The grid has to sit under the hero's content, which is at 1. How: This keeps it at the bottom. */
 
 
 }
@@ -90,11 +90,11 @@
 
 
 	margin         : 0 auto;
-	max-width      : var( --container );
-	padding-inline : var( --gutter );
+	max-width      : var( --con-max-wid ); /* Container Maximum Width = 1280px */
+	padding-inline : var( --gut-sid-pad ); /* Gutter Side Padding, 20px to 48px */
 	position       : relative;
 	width          : 100%;
-	z-index        : 1; /* What: Content Stack Level. Why: The content has to sit over the grid at 0. How: This is the lowest level that clears it, and the navigation bar sits at 2 above it. */
+	z-index        : 1;                    /* What: Content Stack Level. Why: The content has to sit over the grid at 0. How: This is the lowest level that clears it, and the navigation bar sits at 2 above it. */
 
 
 }
@@ -107,9 +107,9 @@
 
 	align-items           : center;
 	display               : grid;
-	gap                   : clamp( 2.9090909091rem, 6vw, 7.2727272727rem );
+	gap                   : var( --spa-ver-p04 ) clamp( 2.9090909091rem, 6vw, 7.2727272727rem ); /* Spacing Vertical Base Plus 4 ~= 44.876px */
 	grid-template-columns : 1.15fr 1fr;
-	margin-bottom         : 5.8181818182rem;
+	margin-bottom         : var( --spa-ver-p05 );                                                /* Spacing Vertical Base Plus 5 ~= 59.447px */
 
 
 }
@@ -119,9 +119,9 @@
 	.hero__top { /* What: Stacked Hero Top Row. Why: The copy and logo read best stacked. How: This turns the grid into one column with smaller gaps. */
 
 
-		gap                   : 3.6363636364rem;
+		gap                   : var( --spa-ver-p04 ); /* Spacing Vertical Base Plus 4 ~= 44.876px */
 		grid-template-columns : 1fr;
-		margin-bottom         : 4.3636363636rem;
+		margin-bottom         : var( --spa-ver-p04 ); /* Spacing Vertical Base Plus 4 ~= 44.876px */
 
 
 	}
@@ -135,7 +135,7 @@
 .hero__copy { /* What: Hero Copy Column. Why: The label and headline enter first. How: This plays the rise animation with no delay. */
 
 
-	animation : rise 0.9s cubic-bezier( 0.22, 1, 0.36, 1 ) both;
+	animation : rise var( --dur-ani-p06 ) var( --mot-dec-eas ) both; /* Duration Animation Base Plus 6 ~= 853.0ms, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ) */
 
 
 }
@@ -159,7 +159,7 @@
 
 
 		opacity   : 0;
-		transform : translateY( 24px );
+		transform : translateY( var( --spa-ver-p02 ) ); /* Spacing Vertical Base Plus 2 ~= 25.572px */
 
 
 	}
@@ -180,14 +180,14 @@
 
 
 	align-items    : center;
-	color          : var( --ink-muted );
+	color          : var( --tex-mut-col ); /* Text Muted Color = #6b7079 */
 	display        : inline-flex;
-	font-family    : var( --font-body );
-	font-size      : 1.1345454545rem;
+	font-family    : var( --fon-fam-mai ); /* Font Family Main = 'Inter Tight', -apple-system, BlinkMacSystemFont, sans-serif */
+	font-size      : var( --fon-siz-bas ); /* Font Size Base = 11px */
 	font-weight    : 500;
 	gap            : 1.0909090909rem;
 	letter-spacing : 0.18em;
-	margin-bottom  : 3.6363636364rem;
+	margin-bottom  : var( --spa-ver-p04 ); /* Spacing Vertical Base Plus 4 ~= 44.876px */
 	text-transform : uppercase;
 
 
@@ -195,9 +195,9 @@
 .eyebrow::before { /* What: Eyebrow Leading Line. Why: A short rule leads into the label. How: This draws a 28px hairline before the text. */
 
 
-	background : var( --ink-muted );
+	background : var( --tex-mut-col ); /* Text Muted Color = #6b7079 */
 	content    : '';
-	height     : 1px;
+	height     : var( --bor-wid-bas ); /* Border Width Base ~= 1.160px */
 	width      : 28px;
 
 
@@ -206,17 +206,16 @@
 
 /* #region hero__title */
 
-.hero__title { /* What: Hero Title. Why: The headline is the page's largest type. How: This sets it in the display font at its largest optical size, scaling with the viewport and capped to a short measure. */
+.hero__title { /* What: Hero Title. Why: The headline is the page's largest type. How: This sets it in the display font at its largest optical size, scaling with the viewport between two font size steps, with no width cap since its line breaks set its shape. */
 
 
-	color                   : var( --ink );
-	font-family             : var( --font-display );
-	font-size               : clamp( 4rem, 6.5vw, 8.7272727273rem );
+	color                   : var( --tex-mai-col );                                       /* Text Main Color = #1a1f24 */
+	font-family             : var( --fon-fam-sec );                                       /* Font Family Secondary = 'Fraunces', 'Times New Roman', serif */
+	font-size               : clamp( var( --fon-siz-p05 ), 6.5vw, var( --fon-siz-p08 ) ); /* Font Size Base Plus 5 ~= 44.876px, Font Size Base Plus 8 ~= 104.323px */
 	font-variation-settings : 'opsz' 144;
 	font-weight             : 400;
 	letter-spacing          : -0.025em;
-	line-height             : 1.02;
-	max-width               : 14ch;
+	line-height             : var( --ver-rhy-m01 );                                       /* Vertical Rhythm Base Minus 1 = 1 */
 
 
 }
@@ -224,7 +223,7 @@
 .titAccEmp { /* What: Title Accent Emphasis. Why: One word in each heading is set apart in color and italic. How: This draws it in the accent, light and italic. */
 
 
-	color       : var( --accent );
+	color       : var( --acc-mai-col ); /* Accent Main Color = #1f4e7a */
 	font-style  : italic;
 	font-weight : 300;
 
@@ -243,7 +242,7 @@
 
 
 	align-items     : center;
-	animation       : rise 1s cubic-bezier( 0.22, 1, 0.36, 1 ) 0.15s both;
+	animation       : rise var( --dur-ani-p07 ) var( --mot-dec-eas ) var( --dur-ani-bas ) both; /* Duration Animation Base Plus 7 ~= 1130.0ms, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ), Duration Animation Base ~= 157.8ms */
 	display         : flex;
 	justify-content : center;
 	position        : relative;
@@ -253,11 +252,11 @@
 .hero__logo::before { /* What: Hero Logo Ring. Why: A faint oval ring frames the logo. How: This draws a rounded hairline just outside the frame. */
 
 
-	border         : 1px solid var( --line-strong );
+	border         : var( --bor-wid-bas ) solid var( --bor-str-col ); /* Border Width Base ~= 1.160px, Border Strong Color, the main border at 0.22 opacity */
 	border-radius  : 50%;
 	content        : '';
 	inset          : -8% -4%;
-	opacity        : 0.4;
+	opacity        : var( --cdn-pow-003-rec );                        /* Core-Design-Number to the Power of 3 Reciprocal ~= 0.430 */
 	pointer-events : none;
 	position       : absolute;
 
@@ -269,7 +268,7 @@
 	.hero__logo { /* What: Leading Hero Logo Frame. Why: The logo should open the stacked hero. How: This moves it above the copy with a little room below. */
 
 
-		margin-bottom : 0.7272727273rem;
+		margin-bottom : var( --spa-ver-m02 ); /* Spacing Vertical Base Minus 2 ~= 8.304px */
 		order         : -1;
 
 
@@ -302,7 +301,7 @@
 .herLogIma { /* What: Hero Logo Image. Why: The logo should fill its column up to a set size, with a soft shadow lifting it off the page. How: This caps its width and adds a blue-tinted drop shadow. */
 
 
-	filter    : drop-shadow( 0 12px 32px rgba( 31, 78, 122, 0.12 ) );
+	filter    : drop-shadow( 0 calc( var( --ver-rhy-m01 ) * 1rem ) calc( var( --ver-rhy-p03 ) * 1rem ) oklch( from var( --acc-mai-col ) l c h / 0.12 ) ); /* Vertical Rhythm Base Minus 1 ~= 11.000px, Vertical Rhythm Base Plus 3 ~= 33.876px, Accent Main Color = #1f4e7a */
 	height    : auto;
 	max-width : 460px;
 	width     : 100%;
@@ -348,14 +347,14 @@
 
 
 	align-items           : end;
-	animation             : rise 0.9s cubic-bezier( 0.22, 1, 0.36, 1 ) 0.3s both;
-	border-bottom         : 1px solid var( --line );
-	border-top            : 1px solid var( --line );
+	animation             : rise var( --dur-ani-p06 ) var( --mot-dec-eas ) var( --dur-ani-p02 ) both; /* Duration Animation Base Plus 6 ~= 853.0ms, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ), Duration Animation Base Plus 2 ~= 277.0ms */
+	border-bottom         : var( --bor-wid-bas ) solid var( --bor-mai-col );                          /* Border Width Base ~= 1.160px, Border Main Color = rgba( 26, 31, 36, 0.12 ) */
+	border-top            : var( --bor-wid-bas ) solid var( --bor-mai-col );                          /* Border Width Base ~= 1.160px, Border Main Color = rgba( 26, 31, 36, 0.12 ) */
 	display               : grid;
-	gap                   : 4.3636363636rem;
+	gap                   : var( --spa-ver-p03 ) 4.3636363636rem;                                     /* Spacing Vertical Base Plus 3 ~= 33.876px */
 	grid-template-columns : 1fr auto;
-	padding-bottom        : 5.8181818182rem;
-	padding-top           : 4.3636363636rem;
+	padding-bottom        : var( --spa-ver-p05 );                                                     /* Spacing Vertical Base Plus 5 ~= 59.447px */
+	padding-top           : var( --spa-ver-p04 );                                                     /* Spacing Vertical Base Plus 4 ~= 44.876px */
 
 
 }
@@ -365,7 +364,7 @@
 	.hero__bottom { /* What: Stacked Hero Bottom Row. Why: The buttons read best under the pitch. How: This turns the grid into one column with a smaller gap. */
 
 
-		gap                   : 2.9090909091rem;
+		gap                   : var( --spa-ver-p03 ); /* Spacing Vertical Base Plus 3 ~= 33.876px */
 		grid-template-columns : 1fr;
 
 
@@ -390,12 +389,12 @@
 .hero__lede { /* What: Hero Lede Paragraph. Why: The pitch reads as the hero's lead paragraph. How: This sets it in the body font, a little larger than body text, at a comfortable measure. */
 
 
-	color       : var( --ink-soft );
-	font-family : var( --font-body );
-	font-size   : clamp( 1.5272727273rem, 1.4vw, 1.7454545455rem );
-	line-height : 1.55;
+	color       : var( --tex-sec-col );                                       /* Text Secondary Color = #2a3138 */
+	font-family : var( --fon-fam-mai );                                       /* Font Family Main = 'Inter Tight', -apple-system, BlinkMacSystemFont, sans-serif */
+	font-size   : clamp( var( --fon-siz-p01 ), 1.4vw, var( --fon-siz-p02 ) ); /* Font Size Base Plus 1 ~= 14.572px, Font Size Base Plus 2 ~= 19.304px */
+	line-height : var( --ver-rhy-p01 );                                       /* Vertical Rhythm Base Plus 1 ~= 1.755 */
 	margin      : 0;
-	max-width   : 52ch;
+	max-width   : var( --tex-wid-bas );                                       /* Text Width Base Maximum ~= 29.207em */
 
 
 }
@@ -409,7 +408,7 @@
 
 	display   : flex;
 	flex-wrap : wrap;
-	gap       : 1.0909090909rem;
+	gap       : var( --spa-ver-m01 ) 1.0909090909rem; /* Spacing Vertical Base Minus 1 = 11px */
 
 
 }
@@ -421,15 +420,15 @@
 
 
 	align-items    : center;
-	border         : 1px solid transparent;
+	border         : var( --bor-wid-bas ) solid transparent; /* Border Width Base ~= 1.160px */
 	border-radius  : 999px;
 	display        : inline-flex;
-	font-size      : 1.3090909091rem;
+	font-size      : var( --fon-siz-p01 );                   /* Font Size Base Plus 1 ~= 14.572px */
 	font-weight    : 500;
 	gap            : 1.0909090909rem;
 	letter-spacing : 0.02em;
-	padding        : 1.3818181818rem 2.3272727273rem;
-	transition     : background-color 0.3s cubic-bezier( 0.22, 1, 0.36, 1 ), border-color 0.3s cubic-bezier( 0.22, 1, 0.36, 1 ), color 0.3s cubic-bezier( 0.22, 1, 0.36, 1 ), transform 0.3s cubic-bezier( 0.22, 1, 0.36, 1 );
+	padding        : var( --spa-ver-bas ) 2.3272727273rem;   /* Spacing Vertical Base ~= 14.572px */
+	transition     : background-color var( --dur-tra-p02 ) var( --mot-dec-eas ), border-color var( --dur-tra-p02 ) var( --mot-dec-eas ), color var( --dur-tra-p02 ) var( --mot-dec-eas ), transform var( --dur-tra-p02 ) var( --mot-dec-eas ); /* Duration Transition Base Plus 2 ~= 277.0ms, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ) */
 	white-space    : nowrap;
 
 
@@ -437,15 +436,15 @@
 .btn-primary { /* What: Primary Button. Why: The estimate button is the hero's main action. How: This fills it with ink and paper-colored text. */
 
 
-	background : var( --ink );
-	color      : var( --paper );
+	background : var( --bac-inv-col ); /* Background Inverse Color = #1a1f24 */
+	color      : var( --bac-pag-col ); /* Background Page Color = #f5f2ec */
 
 
 }
 .btn-primary:hover { /* What: Hovered Primary Button. Why: The button should respond to the pointer. How: This turns it accent and lifts it a pixel. */
 
 
-	background : var( --accent );
+	background : var( --acc-mai-col ); /* Accent Main Color = #1f4e7a */
 	transform  : translateY( -1px );
 
 
@@ -453,17 +452,17 @@
 .btn-ghost { /* What: Ghost Button. Why: The services button is a secondary action. How: This outlines it with no fill. */
 
 
-	border-color : var( --line-strong );
-	color        : var( --ink );
+	border-color : var( --bor-str-col ); /* Border Strong Color, the main border at 0.22 opacity */
+	color        : var( --tex-mai-col ); /* Text Main Color = #1a1f24 */
 
 
 }
 .btn-ghost:hover { /* What: Hovered Ghost Button. Why: The button should respond to the pointer. How: This fills it with ink and turns its text paper-colored. */
 
 
-	background   : var( --ink );
-	border-color : var( --ink );
-	color        : var( --paper );
+	background   : var( --bac-inv-col ); /* Background Inverse Color = #1a1f24 */
+	border-color : var( --bac-inv-col ); /* Background Inverse Color = #1a1f24 */
+	color        : var( --bac-pag-col ); /* Background Page Color = #f5f2ec */
 
 
 }
@@ -484,7 +483,7 @@
 .arrow { /* What: Arrow Span. Why: The arrow slides forward as its button is hovered. How: This animates its position. */
 
 
-	transition : transform 0.3s cubic-bezier( 0.22, 1, 0.36, 1 );
+	transition : transform var( --dur-tra-p02 ) var( --mot-dec-eas ); /* Duration Transition Base Plus 2 ~= 277.0ms, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ) */
 
 
 }
@@ -522,11 +521,11 @@
 .hero__stats { /* What: Hero Stats Row. Why: The four numbers read as one row, rising in last. How: This sets a four-column grid and plays the rise animation after the longest delay. */
 
 
-	animation             : rise 0.9s cubic-bezier( 0.22, 1, 0.36, 1 ) 0.45s both;
+	animation             : rise var( --dur-ani-p06 ) var( --mot-dec-eas ) var( --dur-ani-p04 ) both; /* Duration Animation Base Plus 6 ~= 853.0ms, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ), Duration Animation Base Plus 4 ~= 486.1ms */
 	display               : grid;
-	gap                   : 2.9090909091rem;
+	gap                   : var( --spa-ver-p03 ) 2.9090909091rem;                                     /* Spacing Vertical Base Plus 3 ~= 33.876px */
 	grid-template-columns : repeat( 4, 1fr );
-	margin-top            : 4.3636363636rem;
+	margin-top            : var( --spa-ver-p04 );                                                     /* Spacing Vertical Base Plus 4 ~= 44.876px */
 
 
 }
@@ -536,7 +535,7 @@
 	.hero__stats { /* What: Two Column Hero Stats Row. Why: The stats fit two to a row. How: This sets two columns with a tighter column gap. */
 
 
-		gap                   : 2.9090909091rem 2.1818181818rem;
+		gap                   : var( --spa-ver-p03 ) 2.1818181818rem; /* Spacing Vertical Base Plus 3 ~= 33.876px */
 		grid-template-columns : repeat( 2, 1fr );
 
 
@@ -577,7 +576,7 @@
 .stat { /* What: Stat. Why: Each stat is set off by a thin rule on its left. How: This draws the rule and pads the content away from it. */
 
 
-	border-left  : 1px solid var( --line );
+	border-left  : var( --bor-wid-bas ) solid var( --bor-mai-col ); /* Border Width Base ~= 1.160px, Border Main Color = rgba( 26, 31, 36, 0.12 ) */
 	padding-left : 1.8181818182rem;
 
 
@@ -585,7 +584,7 @@
 .stat:first-child { /* What: First Stat. Why: The first stat anchors the row with a stronger rule. How: This draws its rule in full ink. */
 
 
-	border-left : 1px solid var( --ink );
+	border-left : var( --bor-wid-bas ) solid var( --tex-mai-col ); /* Border Width Base ~= 1.160px, Text Main Color = #1a1f24 */
 
 
 }
@@ -596,14 +595,14 @@
 .stat__num { /* What: Stat Number. Why: The number leads each stat in large display type. How: This sets it in the display font at its largest optical size, scaling with the viewport, with its line height trimmed to the glyphs and slightly looser tracking than the headings. */
 
 
-	color                   : var( --ink );
-	font-family             : var( --font-display );
-	font-size               : clamp( 3.2727272727rem, 4vw, 4.7272727273rem );
+	color                   : var( --tex-mai-col );                                     /* Text Main Color = #1a1f24 */
+	font-family             : var( --fon-fam-sec );                                     /* Font Family Secondary = 'Fraunces', 'Times New Roman', serif */
+	font-size               : clamp( var( --fon-siz-p04 ), 4vw, var( --fon-siz-p05 ) ); /* Font Size Base Plus 4 ~= 33.876px, Font Size Base Plus 5 ~= 44.876px */
 	font-variation-settings : 'opsz' 144;
 	font-weight             : 400;
 	letter-spacing          : -0.02em;
-	line-height             : 1;
-	margin-bottom           : 0.8727272727rem;
+	line-height             : var( --ver-rhy-m01 );                                     /* Vertical Rhythm Base Minus 1 = 1 */
+	margin-bottom           : var( --spa-ver-m02 );                                     /* Spacing Vertical Base Minus 2 ~= 8.304px */
 
 
 }
@@ -611,10 +610,10 @@
 .staSufSpa { /* What: Stat Suffix Span. Why: A number's plus sign or unit reads as secondary to the number. How: This sets it smaller, raised, and muted. */
 
 
-	color          : var( --ink-muted );
-	font-size      : 0.55em;
+	color          : var( --tex-mut-col );                   /* Text Muted Color = #6b7079 */
+	font-size      : calc( var( --cdn-pow-002-rec ) * 1em ); /* Core-Design-Number to the Power of 2 Reciprocal ~= 0.570 */
 	margin-left    : 0.1em;
-	vertical-align : 0.4em;
+	vertical-align : calc( var( --cdn-pow-003-rec ) * 1em ); /* Core-Design-Number to the Power of 3 Reciprocal ~= 0.430 */
 
 
 }
@@ -622,11 +621,11 @@
 .stat__plus { /* What: Stat Plus Span. Why: The rating's plus sign is set apart in the accent. How: This raises it like the other suffixes, but in accent italic. */
 
 
-	color          : var( --accent );
-	font-size      : 0.55em;
+	color          : var( --acc-mai-col );                   /* Accent Main Color = #1f4e7a */
+	font-size      : calc( var( --cdn-pow-002-rec ) * 1em ); /* Core-Design-Number to the Power of 2 Reciprocal ~= 0.570 */
 	font-style     : italic;
 	margin-left    : 0.1em;
-	vertical-align : 0.4em;
+	vertical-align : calc( var( --cdn-pow-003-rec ) * 1em ); /* Core-Design-Number to the Power of 3 Reciprocal ~= 0.430 */
 
 
 }
@@ -634,13 +633,13 @@
 /* #endregion stat__num */
 
 
-.stat__label { /* What: Stat Label. Why: Each number needs a short line saying what it counts. How: This sets it small and muted at a narrow measure. */
+.stat__label { /* What: Stat Label. Why: Each number needs a short line saying what it counts. How: This sets it small and muted at the small text measure. */
 
 
-	color       : var( --ink-muted );
-	font-size   : 1.1927272727rem;
-	line-height : 1.4;
-	max-width   : 22ch;
+	color       : var( --tex-mut-col ); /* Text Muted Color = #6b7079 */
+	font-size   : var( --fon-siz-p01 ); /* Font Size Base Plus 1 ~= 14.572px */
+	line-height : var( --ver-rhy-bas ); /* Vertical Rhythm Base ~= 1.325 */
+	max-width   : var( --tex-wid-sma ); /* Text Width Small Maximum ~= 22.047em */
 
 
 }
