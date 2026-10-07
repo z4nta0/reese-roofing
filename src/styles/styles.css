@@ -409,16 +409,16 @@ html { /* What: Html. Why: One rem should equal the 11px base font size, in-page
 
 }
 
-body { /* What: Body. Why: The page's default text sets the tone everything else inherits. How: This sets the body font, size, leading, and colors, with smooth font rendering. */
+body { /* What: Body. Why: The page's default text sets the tone everything else inherits. How: This sets the main font one step above the base size with generous leading, the page and main text colors, and smooth font rendering. */
 
 
 	-moz-osx-font-smoothing : grayscale;
 	-webkit-font-smoothing  : antialiased;
-	background              : var( --paper );
-	color                   : var( --ink );
-	font-family             : var( --font-body );
-	font-size               : 17px;
-	line-height             : 1.6;
+	background              : var( --bac-pag-col ); /* Background Page Color = #f5f2ec */
+	color                   : var( --tex-mai-col ); /* Text Main Color = #1a1f24 */
+	font-family             : var( --fon-fam-mai ); /* Font Family Main = 'Inter Tight', -apple-system, BlinkMacSystemFont, sans-serif */
+	font-size               : var( --fon-siz-p01 ); /* Font Size Base Plus 1 ~= 14.572px */
+	line-height             : var( --ver-rhy-p01 ); /* Vertical Rhythm Base Plus 1 ~= 1.755 */
 	text-rendering          : optimizeLegibility;
 
 
@@ -458,8 +458,8 @@ a { /* What: Anchor. Why: Links are styled by their own classes, not the browser
 ::selection { /* What: Selection. Why: Selected text should match the site's ink and paper. How: This inverts it to paper on ink. */
 
 
-	background : var( --ink );
-	color      : var( --paper );
+	background : var( --bac-inv-col ); /* Background Inverse Color = #1a1f24 */
+	color      : var( --bac-pag-col ); /* Background Page Color = #f5f2ec */
 
 
 }

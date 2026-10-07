@@ -26,12 +26,12 @@
 
 	background    : transparent;
 	left          : 0;
-	padding-block : 1.6rem;
+	padding-block : var( --spa-ver-p01 ); /* Spacing Vertical Base Plus 1 ~= 19.304px */
 	position      : fixed;
 	right         : 0;
 	top           : 0;
-	transition    : backdrop-filter 0.4s cubic-bezier( 0.22, 1, 0.36, 1 ), background-color 0.4s cubic-bezier( 0.22, 1, 0.36, 1 ), border-bottom-color 0.4s cubic-bezier( 0.22, 1, 0.36, 1 ), padding-block 0.4s cubic-bezier( 0.22, 1, 0.36, 1 ); /* What: Scroll Style Transition. Why: The bar should ease into its scrolled style. How: This animates each property the scrolled modifier changes; padding is a layout property, but the bar's height really does shrink, which no transform can reproduce. */
-	z-index       : 2; /* What: Navigation Stack Level. Why: The bar has to stay above the hero's content, which sits at 1. How: This is the lowest level that clears it. */
+	transition    : backdrop-filter var( --dur-tra-p03 ) var( --mot-dec-eas ), background-color var( --dur-tra-p03 ) var( --mot-dec-eas ), border-bottom-color var( --dur-tra-p03 ) var( --mot-dec-eas ), padding-block var( --dur-tra-p03 ) var( --mot-dec-eas ); /* Duration Transition Base Plus 3 ~= 366.9ms, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ) */ /* What: Scroll Style Transition. Why: The bar should ease into its scrolled style. How: This animates each property the scrolled modifier changes; padding is a layout property, but the bar's height really does shrink, which no transform can reproduce. */
+	z-index       : 2;                    /* What: Navigation Stack Level. Why: The bar has to stay above the hero's content, which sits at 1. How: This is the lowest level that clears it. */
 
 
 }
@@ -40,9 +40,9 @@
 
 	-webkit-backdrop-filter : saturate( 180% ) blur( 14px );
 	backdrop-filter         : saturate( 180% ) blur( 14px );
-	background              : rgba( 245, 242, 236, 0.85 );
-	border-bottom           : 1px solid var( --line );
-	padding-block           : 1.0181818182rem;
+	background              : oklch( from var( --bac-pag-col ) l c h / 0.85 ); /* Background Page Color = #f5f2ec */
+	border-bottom           : var( --bor-wid-bas ) solid var( --bor-mai-col ); /* Border Width Base ~= 1.160px, Border Main Color = rgba( 26, 31, 36, 0.12 ) */
+	padding-block           : var( --spa-ver-m01 );                            /* Spacing Vertical Base Minus 1 = 11px */
 
 
 }
@@ -71,8 +71,8 @@
 	gap             : 2.9090909091rem;
 	justify-content : space-between;
 	margin          : 0 auto;
-	max-width       : var( --container );
-	padding-inline  : var( --gutter );
+	max-width       : var( --con-max-wid ); /* Container Maximum Width = 1280px */
+	padding-inline  : var( --gut-sid-pad ); /* Gutter Side Padding, 20px to 48px */
 	width           : 100%;
 
 
@@ -86,8 +86,8 @@
 
 	align-items    : center;
 	display        : inline-flex;
-	font-family    : var( --font-display );
-	font-size      : 1.7454545455rem;
+	font-family    : var( --fon-fam-sec ); /* Font Family Secondary = 'Fraunces', 'Times New Roman', serif */
+	font-size      : var( --fon-siz-p02 ); /* Font Size Base Plus 2 ~= 19.304px */
 	gap            : 1.0181818182rem;
 	letter-spacing : -0.01em;
 
@@ -100,7 +100,7 @@
 	display    : block;
 	height     : auto;
 	object-fit : contain;
-	transition : transform 0.4s cubic-bezier( 0.22, 1, 0.36, 1 );
+	transition : transform var( --dur-tra-p03 ) var( --mot-dec-eas ); /* Duration Transition Base Plus 3 ~= 366.9ms, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ) */
 	width      : 40px;
 
 
@@ -140,7 +140,7 @@
 .nav__name-light { /* What: Navigation Name Light Span. Why: The second word reads as the softer half. How: This sets it light, italic, and muted. */
 
 
-	color       : var( --ink-muted );
+	color       : var( --tex-mut-col ); /* Text Muted Color = #6b7079 */
 	font-style  : italic;
 	font-weight : 300;
 
@@ -183,26 +183,26 @@
 .nav__link { /* What: Navigation Link. Why: Each section link needs room for the underline drawn beneath it. How: This positions it for its underline and fades its color on hover. */
 
 
-	color       : var( --ink-soft );
-	font-size   : 1.3381818182rem;
+	color       : var( --tex-sec-col );                            /* Text Secondary Color = #2a3138 */
+	font-size   : var( --fon-siz-p01 );                            /* Font Size Base Plus 1 ~= 14.572px */
 	font-weight : 500;
 	position    : relative;
-	transition  : color 0.2s ease;
+	transition  : color var( --dur-tra-p01 ) var( --mot-sta-eas ); /* Duration Transition Base Plus 1 ~= 209.1ms, Motion Standard Easing = ease */
 
 
 }
 .nav__link::after { /* What: Navigation Link Underline. Why: A line grows under a link as it's hovered. How: This draws a full-width hairline scaled to nothing from the left edge, so hovering can grow it on the compositor. */
 
 
-	background       : var( --ink );
-	bottom           : -4px;
+	background       : var( --tex-mai-col );                                /* Text Main Color = #1a1f24 */
+	bottom           : calc( var( --spa-ver-m05 ) * -1 );                   /* Spacing Vertical Base Minus 5 ~= 3.571px */
 	content          : '';
-	height           : 1px;
+	height           : var( --bor-wid-bas );                                /* Border Width Base ~= 1.160px */
 	left             : 0;
 	position         : absolute;
 	transform        : scaleX( 0 );
 	transform-origin : left;
-	transition       : transform 0.3s cubic-bezier( 0.22, 1, 0.36, 1 );
+	transition       : transform var( --dur-tra-p02 ) var( --mot-dec-eas ); /* Duration Transition Base Plus 2 ~= 277.0ms, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ) */
 	width            : 100%;
 
 
@@ -210,7 +210,7 @@
 .nav__link:hover { /* What: Hovered Navigation Link. Why: The hovered link should stand out. How: This darkens it to the main ink. */
 
 
-	color : var( --ink );
+	color : var( --tex-mai-col ); /* Text Main Color = #1a1f24 */
 
 
 }
@@ -268,17 +268,17 @@
 .nav__phone { /* What: Navigation Phone Link. Why: The number should read as secondary to the button beside it. How: This sets it small and soft, fading its color on hover. */
 
 
-	color       : var( --ink-soft );
-	font-size   : 1.3090909091rem;
+	color       : var( --tex-sec-col );                            /* Text Secondary Color = #2a3138 */
+	font-size   : var( --fon-siz-p01 );                            /* Font Size Base Plus 1 ~= 14.572px */
 	font-weight : 500;
-	transition  : color 0.2s ease;
+	transition  : color var( --dur-tra-p01 ) var( --mot-sta-eas ); /* Duration Transition Base Plus 1 ~= 209.1ms, Motion Standard Easing = ease */
 
 
 }
 .nav__phone:hover { /* What: Hovered Navigation Phone Link. Why: The hovered number should stand out. How: This colors it with the accent. */
 
 
-	color : var( --accent );
+	color : var( --acc-mai-col ); /* Accent Main Color = #1f4e7a */
 
 
 }
@@ -303,17 +303,17 @@
 
 
 	align-items    : center;
-	background     : var( --ink );
-	border         : 1px solid transparent;
+	background     : var( --bac-inv-col );                                                                                            /* Background Inverse Color = #1a1f24 */
+	border         : var( --bor-wid-bas ) solid transparent;                                                                          /* Border Width Base ~= 1.160px */
 	border-radius  : 999px;
-	color          : var( --paper );
+	color          : var( --bac-pag-col );                                                                                            /* Background Page Color = #f5f2ec */
 	display        : inline-flex;
-	font-size      : 1.2363636364rem;
+	font-size      : var( --fon-siz-p01 );                                                                                            /* Font Size Base Plus 1 ~= 14.572px */
 	font-weight    : 500;
 	gap            : 1.0909090909rem;
 	letter-spacing : 0.02em;
-	padding        : 0.9454545455rem 1.7454545455rem;
-	transition     : background-color 0.3s cubic-bezier( 0.22, 1, 0.36, 1 ), transform 0.3s cubic-bezier( 0.22, 1, 0.36, 1 );
+	padding        : var( --spa-ver-m01 ) 1.7454545455rem;                                                                            /* Spacing Vertical Base Minus 1 = 11px */
+	transition     : background-color var( --dur-tra-p02 ) var( --mot-dec-eas ), transform var( --dur-tra-p02 ) var( --mot-dec-eas ); /* Duration Transition Base Plus 2 ~= 277.0ms, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ) */
 	white-space    : nowrap;
 
 
@@ -321,7 +321,7 @@
 .nav__btn:hover { /* What: Hovered Navigation Estimate Button. Why: The button should respond to the pointer. How: This turns it accent and lifts it a pixel. */
 
 
-	background : var( --accent );
+	background : var( --acc-mai-col ); /* Accent Main Color = #1f4e7a */
 	transform  : translateY( -1px );
 
 
@@ -343,7 +343,7 @@
 .arrow { /* What: Arrow Span. Why: The arrow slides forward as the button is hovered. How: This animates its position. */
 
 
-	transition : transform 0.3s cubic-bezier( 0.22, 1, 0.36, 1 );
+	transition : transform var( --dur-tra-p02 ) var( --mot-dec-eas ); /* Duration Transition Base Plus 2 ~= 277.0ms, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ) */
 
 
 }
@@ -381,8 +381,8 @@
 
 	display        : none;
 	flex-direction : column;
-	gap            : 5px;
-	padding        : 0.7272727273rem;
+	gap            : var( --spa-ver-m04 );                 /* Spacing Vertical Base Minus 4 ~= 4.731px */
+	padding        : var( --spa-ver-m02 ) 0.7272727273rem; /* Spacing Vertical Base Minus 2 ~= 8.304px */
 
 
 }
@@ -403,9 +403,9 @@
 .togLinSpa { /* What: Toggle Line Span. Why: The menu icon is drawn from two thin lines. How: This draws each line and animates it into the close icon. */
 
 
-	background : var( --ink );
-	height     : 1.5px;
-	transition : transform 0.3s ease, opacity 0.3s ease;
+	background : var( --tex-mai-col );                                                                                   /* Text Main Color = #1a1f24 */
+	height     : var( --spa-ver-m08 );                                                                                   /* Spacing Vertical Base Minus 8 ~= 1.537px */
+	transition : transform var( --dur-tra-p02 ) var( --mot-sta-eas ), opacity var( --dur-tra-p02 ) var( --mot-sta-eas ); /* Duration Transition Base Plus 2 ~= 277.0ms, Motion Standard Easing = ease */
 	width      : 22px;
 
 
@@ -413,14 +413,14 @@
 .nav__toggle[aria-expanded='true'] .togLinSpa:first-child { /* What: Open Top Toggle Line Span. Why: The open menu's icon becomes a close cross. How: This drops the top line to the middle and turns it 45 degrees. */
 
 
-	transform : translateY( 3.25px ) rotate( 45deg );
+	transform : translateY( calc( ( var( --spa-ver-m04 ) + var( --spa-ver-m08 ) ) / 2 ) ) rotate( 45deg ); /* Spacing Vertical Base Minus 4 ~= 4.731px, Spacing Vertical Base Minus 8 ~= 1.537px */
 
 
 }
 .nav__toggle[aria-expanded='true'] .togLinSpa:last-child { /* What: Open Bottom Toggle Line Span. Why: The open menu's icon becomes a close cross. How: This lifts the bottom line to the middle and turns it the other way. */
 
 
-	transform : translateY( -3.25px ) rotate( -45deg );
+	transform : translateY( calc( ( var( --spa-ver-m04 ) + var( --spa-ver-m08 ) ) / -2 ) ) rotate( -45deg ); /* Spacing Vertical Base Minus 4 ~= 4.731px, Spacing Vertical Base Minus 8 ~= 1.537px */
 
 
 }
@@ -449,14 +449,14 @@
 .nav__drawer { /* What: Navigation Drawer. Why: Small screens show the links in a panel under the bar. How: This stacks the links on the page color, collapsed to nothing and hidden until opened, growing and shrinking as it opens and closes. */
 
 
-	background     : var( --paper );
-	border-bottom  : 0 solid var( --line );
+	background     : var( --bac-pag-col );         /* Background Page Color = #f5f2ec */
+	border-bottom  : 0 solid var( --bor-mai-col ); /* Border Main Color = rgba( 26, 31, 36, 0.12 ) */
 	display        : flex;
 	flex-direction : column;
 	max-height     : 0;
 	overflow       : hidden;
-	padding        : 0 var( --gutter );
-	transition     : border-bottom-width 0.4s cubic-bezier( 0.22, 1, 0.36, 1 ), max-height 0.4s cubic-bezier( 0.22, 1, 0.36, 1 ), padding-block 0.4s cubic-bezier( 0.22, 1, 0.36, 1 ), visibility 0s linear 0.4s; /* What: Drawer Close Transition. Why: The drawer shrinks closed under the bar, then hides from screen readers and the keyboard once it's gone. How: This animates its height and padding, layout properties chosen because the drawer's content has to be revealed rather than scaled, and delays hiding until the shrink ends. */
+	padding        : 0 var( --gut-sid-pad );       /* Gutter Side Padding, 20px to 48px */
+	transition     : border-bottom-width var( --dur-tra-p03 ) var( --mot-dec-eas ), max-height var( --dur-tra-p03 ) var( --mot-dec-eas ), padding-block var( --dur-tra-p03 ) var( --mot-dec-eas ), visibility 0s linear var( --dur-tra-p03 ); /* Duration Transition Base Plus 3 ~= 366.9ms, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ) */ /* What: Drawer Close Transition. Why: The drawer shrinks closed under the bar, then hides from screen readers and the keyboard once it's gone. How: This animates its height and padding, layout properties chosen because the drawer's content has to be revealed rather than scaled, and delays hiding until the shrink ends. */
 	visibility     : hidden;
 
 
@@ -464,10 +464,10 @@
 .nav__drawer[data-drawer-menu-open] { /* What: Open Navigation Drawer. Why: The drawer shows once the toggle opens it. How: This shows it at once, then grows its height, padding, and divider into place. */
 
 
-	border-bottom-width : 1px;
-	max-height          : 400px;
-	padding-block       : 2.1818181818rem 2.9090909091rem;
-	transition          : border-bottom-width 0.4s cubic-bezier( 0.22, 1, 0.36, 1 ), max-height 0.4s cubic-bezier( 0.22, 1, 0.36, 1 ), padding-block 0.4s cubic-bezier( 0.22, 1, 0.36, 1 ), visibility 0s linear 0s; /* What: Drawer Open Transition. Why: The drawer has to be visible for the whole time it grows. How: This animates the same properties as closing, but shows it with no delay. */
+	border-bottom-width : var( --bor-wid-bas );                      /* Border Width Base ~= 1.160px */
+	max-height          : calc( var( --ver-rhy-p12 ) * 1rem );       /* Vertical Rhythm Base Plus 12 ~= 425.596px */
+	padding-block       : var( --spa-ver-p02 ) var( --spa-ver-p03 ); /* Spacing Vertical Base Plus 2 ~= 25.572px, Spacing Vertical Base Plus 3 ~= 33.876px */
+	transition          : border-bottom-width var( --dur-tra-p03 ) var( --mot-dec-eas ), max-height var( --dur-tra-p03 ) var( --mot-dec-eas ), padding-block var( --dur-tra-p03 ) var( --mot-dec-eas ), visibility 0s linear 0s; /* Duration Transition Base Plus 3 ~= 366.9ms, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ) */ /* What: Drawer Open Transition. Why: The drawer has to be visible for the whole time it grows. How: This animates the same properties as closing, but shows it with no delay. */
 	visibility          : visible;
 
 
@@ -490,10 +490,10 @@
 .nav__drawer-link { /* What: Navigation Drawer Link. Why: Drawer links should be big enough to tap easily. How: This sets each in the display font with a divider below. */
 
 
-	border-bottom : 1px solid var( --line );
-	font-family   : var( --font-display );
-	font-size     : 2.3272727273rem;
-	padding       : 1.4545454545rem 0;
+	border-bottom : var( --bor-wid-bas ) solid var( --bor-mai-col ); /* Border Width Base ~= 1.160px, Border Main Color = rgba( 26, 31, 36, 0.12 ) */
+	font-family   : var( --fon-fam-sec );                            /* Font Family Secondary = 'Fraunces', 'Times New Roman', serif */
+	font-size     : var( --fon-siz-p03 );                            /* Font Size Base Plus 3 ~= 25.572px */
+	padding       : var( --spa-ver-bas ) 0;                          /* Spacing Vertical Base ~= 14.572px */
 
 
 }
@@ -501,9 +501,9 @@
 
 
 	border-bottom : none;
-	color         : var( --ink-muted );
-	font-family   : var( --font-body );
-	font-size     : 1.4545454545rem;
+	color         : var( --tex-mut-col ); /* Text Muted Color = #6b7079 */
+	font-family   : var( --fon-fam-mai ); /* Font Family Main = 'Inter Tight', -apple-system, BlinkMacSystemFont, sans-serif */
+	font-size     : var( --fon-siz-p01 ); /* Font Size Base Plus 1 ~= 14.572px */
 
 
 }
