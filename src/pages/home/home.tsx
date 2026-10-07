@@ -3,7 +3,7 @@ import { SitFooCom } from '../../ui/footer.tsx';
 import { HerSecCom } from './hero.tsx';
 import { SerSecCom } from './services.tsx';
 import { AboSecCom } from './about.tsx';
-import Contact from './contact';
+import { ConSecCom } from './contact.tsx';
 
 export default function Home() {
   return (
@@ -13,7 +13,7 @@ export default function Home() {
         <HerSecCom />
         <SerSecCom />
         <AboSecCom />
-        <Contact />
+        <ConSecCom />
       </main>
       <SitFooCom />
     </>

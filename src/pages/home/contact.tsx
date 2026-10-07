@@ -1,183 +1,488 @@
-import { useState } from 'react';
-import './contact.css';
-import logoFull from './logo-full.svg';
 
-type FormState = {
-  name: string;
-  company: string;
-  email: string;
-  phone: string;
-  service: string;
-  message: string;
-};
 
-const initial: FormState = {
-  name: '',
-  company: '',
-  email: '',
-  phone: '',
-  service: '',
-  message: '',
-};
 
-export default function Contact() {
-  const [form, setForm] = useState<FormState>(initial);
-  const [sent, setSent] = useState(false);
+// #region Imports
 
-  const update = (field: keyof FormState) => (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) =>
-    setForm((f) => ({ ...f, [field]: e.target.value }));
+import lofSvgUrl from './logo-full.svg'; // What: Logo-Full Svg Url. Why: The section's signature card shows the full logo. How: Vite resolves the import to the file's fingerprinted URL, used as the image's src.
+import React     from 'react';           // What: React. Why: The form tracks its fields and sent state with React's hooks and types its events with React's types. How: This is read as React.useState, React.ChangeEvent, and React.FormEvent.
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    const subject = encodeURIComponent(`Estimate request — ${form.name || 'Reese Roofing inquiry'}`);
-    const body = encodeURIComponent(
-      `Name: ${form.name}\nCompany: ${form.company}\nEmail: ${form.email}\nPhone: ${form.phone}\nService: ${form.service}\n\nMessage:\n${form.message}`
-    );
-    window.location.href = `mailto:hello@reeseroofing.example?subject=${subject}&body=${body}`;
-    setSent(true);
-  };
 
-  return (
-    <section id="contact" className="contact section">
-      <div className="container contact__container">
-        <div className="contact__intro">
-          <span className="eyebrow">04 — Get in touch</span>
-          <h2 className="display contact__title">
-            Let's talk about<br />
-            your <em>roof</em>.
-          </h2>
-          <p className="lede contact__lede">
-            Tell us a bit about your project. We'll schedule an on-site assessment and
-            get back to you within one business day with next steps.
-          </p>
+import './contact.css'; // What: Contact Stylesheet Import. Why: The section's details list, signature card, and estimate form are styled in its own stylesheet. How: This is imported purely for its side effect.
 
-          <dl className="contact__details">
-            <div className="contact__row">
-              <dt>Office</dt>
-              <dd>
-                Reese Roofing<br />
-                Lawrence, Kansas 66044
-              </dd>
-            </div>
-            <div className="contact__row">
-              <dt>Phone</dt>
-              <dd>
-                <a href="tel:+17855550199">(785) 555-0199</a>
-              </dd>
-            </div>
-            <div className="contact__row">
-              <dt>Email</dt>
-              <dd>
-                <a href="mailto:hello@reeseroofing.example">hello@reeseroofing.example</a>
-              </dd>
-            </div>
-            <div className="contact__row">
-              <dt>Hours</dt>
-              <dd>
-                Mon–Fri, 7:00 AM – 5:00 PM<br />
-                <span className="muted">24/7 emergency response</span>
-              </dd>
-            </div>
-            <div className="contact__row">
-              <dt>Service area</dt>
-              <dd>
-                Lawrence, Eudora, Baldwin City, Tonganoxie, Topeka, Kansas City metro,
-                and surrounding counties.
-              </dd>
-            </div>
-          </dl>
+// #endregion Imports
 
-          <div className="contact__signature">
-            <img src={logoFull} alt="Reese Roofing — Commercial & Residential" />
-          </div>
-        </div>
 
-        <div className="contact__form-wrap">
-          <form className="contact__form" onSubmit={handleSubmit} noValidate>
-            <div className="field">
-              <label htmlFor="name">Full name</label>
-              <input
-                id="name"
-                type="text"
-                value={form.name}
-                onChange={update('name')}
-                required
-                autoComplete="name"
-              />
-            </div>
 
-            <div className="field">
-              <label htmlFor="company">Company / property</label>
-              <input
-                id="company"
-                type="text"
-                value={form.company}
-                onChange={update('company')}
-                autoComplete="organization"
-              />
-            </div>
+/**
+ * contact.tsx = Contact Section
+ *
+ * @summary
+ * The home page's last section, where visitors reach the company. The left
+ * column gives the office, phone, email, hours, and service area beside a
+ * signature card with the full logo; the right column is an estimate request
+ * form. The site has no backend, so submitting the form opens the visitor's
+ * own email app with a message built from the fields, addressed to the
+ * company.
+ *
+ * Sections:
+ *  - Types
+ *  - Constants
+ *  - Components
+ *  - Exports
+ *
+ * @author z4nta0 <https://github.com/z4nta0>
+ *
+*/
 
-            <div className="field-row">
-              <div className="field">
-                <label htmlFor="email">Email</label>
-                <input
-                  id="email"
-                  type="email"
-                  value={form.email}
-                  onChange={update('email')}
-                  required
-                  autoComplete="email"
-                />
-              </div>
 
-              <div className="field">
-                <label htmlFor="phone">Phone</label>
-                <input
-                  id="phone"
-                  type="tel"
-                  value={form.phone}
-                  onChange={update('phone')}
-                  autoComplete="tel"
-                />
-              </div>
-            </div>
 
-            <div className="field">
-              <label htmlFor="service">Service of interest</label>
-              <select id="service" value={form.service} onChange={update('service')}>
-                <option value="">Select one…</option>
-                <option>New installation</option>
-                <option>Repair / leak</option>
-                <option>Restoration & coatings</option>
-                <option>Inspection</option>
-                <option>Storm / hail damage</option>
-                <option>Maintenance program</option>
-                <option>Not sure yet</option>
-              </select>
-            </div>
+// #region Types
 
-            <div className="field">
-              <label htmlFor="message">Project details</label>
-              <textarea
-                id="message"
-                rows={5}
-                value={form.message}
-                onChange={update('message')}
-                placeholder="Building type, approximate square footage, timing, anything else we should know…"
-              />
-            </div>
+type ConForTyp = { comStr : string, emaStr : string, mesStr : string, namStr : string, phoStr : string, serStr : string }; // What: Contact Form Type. Why: The form's six fields are read and written together as one record. How: This types the initial values, the form's state, and the field key each input updates.
 
-            <button type="submit" className="btn btn-primary contact__submit">
-              {sent ? 'Opening your email…' : 'Send request'}
-              <span className="arrow">→</span>
-            </button>
+// #endregion Types
 
-            <p className="contact__fineprint">
-              By submitting, you agree to be contacted by Reese Roofing regarding your inquiry.
-            </p>
-          </form>
-        </div>
-      </div>
-    </section>
-  );
+
+
+// #region Constants
+
+const INI_FOR_OBJ : ConForTyp = { comStr : '', emaStr : '', mesStr : '', namStr : '', phoStr : '', serStr : '' }; // What: Initial Form Object. Why: The form starts with every field empty. How: This seeds the form's state on mount.
+
+// #endregion Constants
+
+
+
+// #region Components
+
+// #region ConSecCom
+
+/**
+ * ConSecCom = Contact Section Component
+ *
+ * @summary
+ * Renders the contact section and owns its estimate form. Every field is
+ * controlled by one record in state, each input updating its own key through
+ * updFieFun. Submitting builds an email from the fields and hands it to the
+ * visitor's email app through a mailto link, then switches the submit
+ * button's label to say the email is opening. The section carries the
+ * contact anchor the navigation links and estimate buttons jump to.
+ *
+ * @author z4nta0 <https://github.com/z4nta0>
+ *
+ * @param props - This component does not use any props.
+ *
+ * @returns The home page's contact section.
+ *
+ * @example
+ * ```tsx
+ * ConSecCom() // => <ConSecCom />
+ * ```
+ *
+*/
+
+function ConSecCom () : React.JSX.Element {
+
+
+	const [ forValObj, setForValObj ] = React.useState< ConForTyp >( INI_FOR_OBJ ); // What: Form Value Object And Setter. Why: Every field's current text lives in one record. How: This starts from INI_FOR_OBJ and is updated one key at a time by updFieFun.
+	const [ senReqBoo, setSenReqBoo ] = React.useState( false );                   // What: Sent Request Boolean And Setter. Why: The submit button should confirm the email is on its way. How: This flips true once the form is submitted.
+
+
+
+	// #region updFieFun
+
+	/**
+	 * updFieFun = Update Field Function
+	 *
+	 * @summary
+	 * Builds the change handler for one form field. Calling it with a field's
+	 * key returns a handler that copies the event's new value into that key of
+	 * forValObj, leaving every other field as it was. Each input, the select,
+	 * and the textarea pass their own key, so one function serves them all.
+	 *
+	 * @author z4nta0 <https://github.com/z4nta0>
+	 *
+	 * @param fieKeyStr - Field Key String: The key in forValObj this handler
+	 *                    writes to.
+	 *
+	 * @returns The change handler for that field.
+	 *
+	 * @example
+	 * ```ts
+	 * updFieFun('namStr') // => a change handler that writes forValObj.namStr
+	 * ```
+	 *
+	*/
+
+	const updFieFun = ( fieKeyStr : keyof ConForTyp ) : ( chaEveObj : React.ChangeEvent< HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement > ) => void => ( chaEveObj ) => setForValObj( ( preForObj ) => ({ ...preForObj, [ fieKeyStr ] : chaEveObj.target.value }) ); // What: Update Field Function. Why: Every field writes to its own key in the same record. How: This returns a handler that copies the event's value into that key.
+
+	// #endregion updFieFun
+
+
+
+	// #region subForFun
+
+	/**
+	 * subForFun = Submit Form Function
+	 *
+	 * @summary
+	 * Handles the form's submit. It stops the browser's own submit, since the
+	 * site has no server to post to, builds an email subject from the
+	 * visitor's name (or a generic inquiry label when it's blank) and a body
+	 * listing every field, and sends the browser to a mailto link carrying
+	 * both, which opens the visitor's email app. It then marks the request
+	 * sent so the button's label changes.
+	 *
+	 * @author z4nta0 <https://github.com/z4nta0>
+	 *
+	 * @param subEveObj - Submit Event Object: The form's submit event.
+	 *
+	 * @returns This function does not return anything.
+	 *
+	 * @example
+	 * ```ts
+	 * subForFun(subEveObj) // => void
+	 * ```
+	 *
+	*/
+
+	const subForFun = ( subEveObj : React.FormEvent< HTMLFormElement > ) : void => { // What: Submit Form Function. Why: The form's submit has to become an email, since the site has no backend. How: This builds the message and opens it in the visitor's email app.
+
+
+		subEveObj.preventDefault(); // What: Default Submit Prevention Call. Why: The browser would otherwise try to post the form and reload the page. How: This cancels its own submit.
+
+
+
+		const bodEncStr = encodeURIComponent( `Name: ${ forValObj.namStr }\nCompany: ${ forValObj.comStr }\nEmail: ${ forValObj.emaStr }\nPhone: ${ forValObj.phoStr }\nService: ${ forValObj.serStr }\n\nMessage:\n${ forValObj.mesStr }` ); // What: Body Encoded String. Why: The email should list every field so nothing is lost. How: This writes one labeled line per field, then the message, encoded for a URL.
+		const subEncStr = encodeURIComponent( `Estimate request: ${ forValObj.namStr || 'Reese Roofing inquiry' }` ); // What: Subject Encoded String. Why: The company should see who's asking at a glance. How: This names the visitor, falling back to a generic label when the name is blank, encoded for a URL.
+
+
+		window.location.href = `mailto:hello@reeseroofing.example?subject=${ subEncStr }&body=${ bodEncStr }`; // What: Mailto Navigation Assignment. Why: The visitor's email app sends the request. How: This opens a new email to the company with the subject and body filled in.
+
+
+		setSenReqBoo( true ); // What: Sent Request Set Call. Why: The button should confirm the email is opening. How: This switches its label.
+
+
+	};
+
+	// #endregion subForFun
+
+
+
+	return (
+
+
+		<section
+			id='contact'
+
+			className='contact section'
+		>{ /* What: Contact Section Element. Why: This is where visitors reach the company. How: Its contact id is the anchor the navigation links and estimate buttons jump to, kept as is since it appears in the page's URL. */ }
+
+
+			<div className='container contact__container'>{ /* What: Contact Container Div Element. Why: The section's two columns should line up with the page's content width. How: This sets the intro and the form side by side. */ }
+
+
+				<div className='contact__intro'>{ /* What: Contact Intro Div Element. Why: The company's details sit beside the form. How: This stacks the label, heading, lede, details, and signature. */ }
+
+
+					<span className='eyebrow'>04 · Get in touch</span>{ /* What: Section Label Span Element. Why: Each section is numbered in order down the page. How: This uses the site's eyebrow style. */ }
+
+					<h2 className='display contact__title'>{ /* What: Contact Title Heading Element. Why: The heading invites the visitor in. How: Its line break sets the two-line shape, with one word in italic. */ }
+						Let's talk about<br />
+						your <em>roof</em>.
+					</h2>
+
+					<p className='lede contact__lede'>{ /* What: Contact Lede Paragraph Element. Why: Visitors should know what happens after they reach out. How: This promises an assessment and a reply within a business day. */ }
+						Tell us a bit about your project. We'll schedule an on-site assessment and
+						get back to you within one business day with next steps.
+					</p>
+
+
+
+					<dl className='contact__details'>{ /* What: Contact Details Description List Element. Why: The company's contact details read as labeled pairs. How: This holds one row per detail. */ }
+
+
+						<div className='contact__row'>{ /* What: Office Row Div Element. Why: Visitors want to know where the company is. How: This pairs the label with the address. */ }
+
+
+							<dt>Office</dt>{ /* What: Detail Term Element. Why: Each row is labeled. How: This names the detail. */ }
+
+							<dd>{ /* What: Office Detail Element. Why: This is the company's location. How: Its line break puts the city on its own line. */ }
+								Reese Roofing<br />
+								Lawrence, Kansas 66044
+							</dd>
+
+
+						</div>
+
+
+						<div className='contact__row'>{ /* What: Phone Row Div Element. Why: Many visitors would rather call. How: This pairs the label with the number. */ }
+
+
+							<dt>Phone</dt>{ /* What: Detail Term Element. Why: Each row is labeled. How: This names the detail. */ }
+
+							<dd>{ /* What: Phone Detail Element. Why: This holds the company's number. How: The number is a link that dials it. */ }
+								<a href='tel:+17855550199'>(785) 555-0199</a>{ /* What: Phone Anchor Element. Why: Phone visitors should be able to call in one tap. How: This dials the company's number. */ }
+							</dd>
+
+
+						</div>
+
+
+						<div className='contact__row'>{ /* What: Email Row Div Element. Why: Some visitors would rather write. How: This pairs the label with the address. */ }
+
+
+							<dt>Email</dt>{ /* What: Detail Term Element. Why: Each row is labeled. How: This names the detail. */ }
+
+							<dd>{ /* What: Email Detail Element. Why: This holds the company's email address. How: The address is a link that starts an email. */ }
+								<a href='mailto:hello@reeseroofing.example'>hello@reeseroofing.example</a>{ /* What: Email Anchor Element. Why: Visitors should be able to start an email in one click. How: This opens a new email to the company. */ }
+							</dd>
+
+
+						</div>
+
+
+						<div className='contact__row'>{ /* What: Hours Row Div Element. Why: Visitors want to know when someone will answer. How: This pairs the label with the hours. */ }
+
+
+							<dt>Hours</dt>{ /* What: Detail Term Element. Why: Each row is labeled. How: This names the detail. */ }
+
+							<dd>{ /* What: Hours Detail Element. Why: This gives the office hours and the emergency exception. How: Its line break puts the emergency note on its own line. */ }
+								Mon–Fri, 7:00 AM – 5:00 PM<br />
+								<span className='muted'>24/7 emergency response</span>{ /* What: Emergency Note Span Element. Why: Storm damage can't wait for office hours. How: This notes the round-the-clock response in a muted style. */ }
+							</dd>
+
+
+						</div>
+
+
+						<div className='contact__row'>{ /* What: Service Area Row Div Element. Why: Visitors check whether the company works where they are. How: This pairs the label with the area. */ }
+
+
+							<dt>Service area</dt>{ /* What: Detail Term Element. Why: Each row is labeled. How: This names the detail. */ }
+
+							<dd>{ /* What: Service Area Detail Element. Why: This lists the towns the company covers. How: This names them in one sentence. */ }
+								Lawrence, Eudora, Baldwin City, Tonganoxie, Topeka, Kansas City metro,
+								and surrounding counties.
+							</dd>
+
+
+						</div>
+
+
+					</dl>
+
+
+
+					<div className='contact__signature'>{ /* What: Contact Signature Div Element. Why: The full logo signs off the company's details. How: This sets it on a paper-colored card. */ }
+
+
+						<img
+							src={ lofSvgUrl }
+
+							alt='Reese Roofing: Commercial & Residential'
+						/>{ /* What: Signature Image Element. Why: The card shows the full logo. How: Its alt text reads the logo's wording for screen readers. */ }
+
+
+					</div>
+
+
+				</div>
+
+
+
+				<div className='contact__form-wrap'>{ /* What: Contact Form Wrap Div Element. Why: The form sits in its own framed column. How: This holds the form. */ }
+
+
+					<form
+						className='contact__form'
+
+						noValidate // What: No Validate Attribute. Why: The browser's built-in validation popups would interrupt the form's own styling. How: This turns them off, so required fields don't block the mailto handoff.
+
+						onSubmit={ subForFun }
+					>{ /* What: Contact Form Element. Why: Visitors request an estimate here. How: This hands the fields to subForFun on submit. */ }
+
+
+						<div className='field'>{ /* What: Name Field Div Element. Why: The company needs to know who's asking. How: This pairs the label with its input. */ }
+
+
+							<label htmlFor='conNamInp'>Full name</label>{ /* What: Name Label Element. Why: The input needs a visible, clickable label. How: This points at conNamInp. */ }
+
+							<input
+								id='conNamInp'
+
+								autoComplete='name'
+								required
+								type='text'
+								value={ forValObj.namStr }
+
+								onChange={ updFieFun( 'namStr' ) }
+							/>{ /* What: Contact Name Input Element. Why: This takes the visitor's name. How: Its value lives in forValObj.namStr, and the browser can fill it in. */ }
+
+
+						</div>
+
+						<div className='field'>{ /* What: Company Field Div Element. Why: Commercial jobs are usually tied to a business or property. How: This pairs the label with its input. */ }
+
+
+							<label htmlFor='conComInp'>Company / property</label>{ /* What: Company Label Element. Why: The input needs a visible, clickable label. How: This points at conComInp. */ }
+
+							<input
+								id='conComInp'
+
+								autoComplete='organization'
+								type='text'
+								value={ forValObj.comStr }
+
+								onChange={ updFieFun( 'comStr' ) }
+							/>{ /* What: Contact Company Input Element. Why: This takes the business or property name. How: Its value lives in forValObj.comStr, and the browser can fill it in. */ }
+
+
+						</div>
+
+
+						<div className='field-row'>{ /* What: Field Row Div Element. Why: Email and phone are short enough to share a row. How: This sets the two fields side by side. */ }
+
+
+							<div className='field'>{ /* What: Email Field Div Element. Why: The company replies by email. How: This pairs the label with its input. */ }
+
+
+								<label htmlFor='conEmaInp'>Email</label>{ /* What: Email Label Element. Why: The input needs a visible, clickable label. How: This points at conEmaInp. */ }
+
+								<input
+									id='conEmaInp'
+
+									autoComplete='email'
+									required
+									type='email'
+									value={ forValObj.emaStr }
+
+									onChange={ updFieFun( 'emaStr' ) }
+								/>{ /* What: Contact Email Input Element. Why: This takes the visitor's email address. How: Its value lives in forValObj.emaStr, with an email keyboard on phones. */ }
+
+
+							</div>
+
+							<div className='field'>{ /* What: Phone Field Div Element. Why: Some visitors would rather get a call back. How: This pairs the label with its input. */ }
+
+
+								<label htmlFor='conPhoInp'>Phone</label>{ /* What: Phone Label Element. Why: The input needs a visible, clickable label. How: This points at conPhoInp. */ }
+
+								<input
+									id='conPhoInp'
+
+									autoComplete='tel'
+									type='tel'
+									value={ forValObj.phoStr }
+
+									onChange={ updFieFun( 'phoStr' ) }
+								/>{ /* What: Contact Phone Input Element. Why: This takes the visitor's phone number. How: Its value lives in forValObj.phoStr, with a number pad on phones. */ }
+
+
+							</div>
+
+
+						</div>
+
+
+						<div className='field'>{ /* What: Service Field Div Element. Why: Knowing the kind of job helps the company prepare. How: This pairs the label with its dropdown. */ }
+
+
+							<label htmlFor='conSerSel'>Service of interest</label>{ /* What: Service Label Element. Why: The dropdown needs a visible, clickable label. How: This points at conSerSel. */ }
+
+							<select
+								id='conSerSel'
+
+								value={ forValObj.serStr }
+
+								onChange={ updFieFun( 'serStr' ) }
+							>{ /* What: Contact Service Select Element. Why: Visitors pick the kind of work they need. How: Its value lives in forValObj.serStr. */ }
+
+
+								<option value=''>Select one…</option>{ /* What: Placeholder Option Element. Why: The dropdown should start without a choice made. How: Its empty value matches the field's empty start. */ }
+
+								<option>New installation</option>{ /* What: Service Option Element. Why: Each option is one kind of job. How: Its text is also its value. */ }
+
+								<option>Repair / leak</option>{ /* What: Service Option Element. Why: Each option is one kind of job. How: Its text is also its value. */ }
+
+								<option>Restoration & coatings</option>{ /* What: Service Option Element. Why: Each option is one kind of job. How: Its text is also its value. */ }
+
+								<option>Inspection</option>{ /* What: Service Option Element. Why: Each option is one kind of job. How: Its text is also its value. */ }
+
+								<option>Storm / hail damage</option>{ /* What: Service Option Element. Why: Each option is one kind of job. How: Its text is also its value. */ }
+
+								<option>Maintenance program</option>{ /* What: Service Option Element. Why: Each option is one kind of job. How: Its text is also its value. */ }
+
+								<option>Not sure yet</option>{ /* What: Service Option Element. Why: Each option is one kind of job. How: Its text is also its value. */ }
+
+
+							</select>
+
+
+						</div>
+
+						<div className='field'>{ /* What: Message Field Div Element. Why: The details of the job help the company quote it. How: This pairs the label with its text area. */ }
+
+
+							<label htmlFor='conMesTex'>Project details</label>{ /* What: Message Label Element. Why: The text area needs a visible, clickable label. How: This points at conMesTex. */ }
+
+							<textarea
+								id='conMesTex'
+
+								placeholder='Building type, approximate square footage, timing, anything else we should know…'
+								rows={ 5 }
+								value={ forValObj.mesStr }
+
+								onChange={ updFieFun( 'mesStr' ) }
+							/>{ /* What: Contact Message Textarea Element. Why: This takes the project's details. How: Its value lives in forValObj.mesStr, with a placeholder suggesting what to include. */ }
+
+
+						</div>
+
+						<button
+							className='btn btn-primary contact__submit'
+
+							type='submit'
+						>{ /* What: Contact Submit Button Element. Why: This sends the request. How: It submits the form, which runs subForFun. */ }
+
+
+							{ senReqBoo ? 'Opening your email…' : 'Send request' }{ /* What: Submit Label Text. Why: The button should confirm the email is opening once it's pressed. How: This switches its label when senReqBoo turns true. */ }
+							<span className='arrow'>→</span>{ /* What: Arrow Span Element. Why: The arrow marks the button as moving the visitor onward. How: This sits right after the label. */ }
+
+
+						</button>
+
+						<p className='contact__fineprint'>{ /* What: Contact Fine Print Paragraph Element. Why: Visitors should know they'll be contacted. How: This states it under the button. */ }
+							By submitting, you agree to be contacted by Reese Roofing regarding your inquiry.
+						</p>
+
+
+					</form>
+
+
+				</div>
+
+
+			</div>
+
+
+		</section>
+
+
+	);
+
+
 }
+
+// #endregion ConSecCom
+
+// #endregion Components
+
+
+
+// #region Exports
+
+export { ConSecCom }; // What: Named Exports. Why: The home page renders the contact section last. How: This exports ConSecCom.
+
+// #endregion Exports
+
+
