@@ -1,21 +1,119 @@
-import { NavBarCom } from '../../ui/nav.tsx';
-import { SitFooCom } from '../../ui/footer.tsx';
-import { HerSecCom } from './hero.tsx';
-import { SerSecCom } from './services.tsx';
-import { AboSecCom } from './about.tsx';
-import { ConSecCom } from './contact.tsx';
 
-export default function Home() {
-  return (
-    <>
-      <NavBarCom />
-      <main>
-        <HerSecCom />
-        <SerSecCom />
-        <AboSecCom />
-        <ConSecCom />
-      </main>
-      <SitFooCom />
-    </>
-  );
+
+
+// #region Imports
+
+import { AboSecCom } from './about.tsx';         // What: About Section Component. Why: The page tells the company's story third. How: This is rendered inside main, after the services.
+import { ConSecCom } from './contact.tsx';       // What: Contact Section Component. Why: The page ends where visitors reach the company. How: This is rendered last inside main.
+import { HerSecCom } from './hero.tsx';          // What: Hero Section Component. Why: The page opens with the headline and pitch. How: This is rendered first inside main.
+import { NavBarCom } from '../../ui/nav.tsx';    // What: Navigation Bar Component. Why: Every page starts with the shared top bar. How: This is rendered above main.
+import { SerSecCom } from './services.tsx';      // What: Services Section Component. Why: The page lists what the company does second. How: This is rendered inside main, after the hero.
+import { SitFooCom } from '../../ui/footer.tsx'; // What: Site Footer Component. Why: Every page ends with the shared footer. How: This is rendered below main.
+
+// #endregion Imports
+
+
+
+/**
+ * home.tsx = Home Page
+ *
+ * @summary
+ * The site's only content page, at the root path. It stacks the shared
+ * navigation bar, the four home sections (hero, services, about, contact) in
+ * a main landmark, and the shared footer. Each section lives in its own file
+ * in this folder, so any of them can later move to a route of its own.
+ *
+ * Sections:
+ *  - Components
+ *  - Exports
+ *
+ * @author z4nta0 <https://github.com/z4nta0>
+ *
+*/
+
+
+
+// #region Components
+
+// #region HomPagCom
+
+/**
+ * HomPagCom = Home Page Component
+ *
+ * @summary
+ * Renders the home page: the navigation bar, then a main element holding the
+ * hero, services, about, and contact sections in reading order, then the
+ * footer. app.tsx renders it at the root path.
+ *
+ * @author z4nta0 <https://github.com/z4nta0>
+ *
+ * @param props - This component does not use any props.
+ *
+ * @returns The home page.
+ *
+ * @example
+ * ```tsx
+ * HomPagCom() // => <HomPagCom />
+ * ```
+ *
+*/
+
+function HomPagCom () : React.JSX.Element {
+
+
+	return (
+
+
+		<>{ /* What: Home Page Fragment. Why: The bar, main content, and footer sit side by side with no wrapper of their own. How: This groups them without adding an element. */ }
+
+
+			<NavBarCom />{ /* What: Navigation Bar Component. Why: The page starts with the shared top bar. How: This renders it above the content. */ }
+
+
+
+			<main>{ /* What: Home Main Element. Why: The four sections are the page's main content. How: This wraps them in the main landmark, in reading order. */ }
+
+
+				<HerSecCom />{ /* What: Hero Section Component. Why: The page opens with the headline and pitch. How: This renders the hero first. */ }
+
+
+
+				<SerSecCom />{ /* What: Services Section Component. Why: Visitors see what the company does next. How: This renders the services second. */ }
+
+
+
+				<AboSecCom />{ /* What: About Section Component. Why: The company's story follows its services. How: This renders the about section third. */ }
+
+
+
+				<ConSecCom />{ /* What: Contact Section Component. Why: The page ends where visitors reach the company. How: This renders the contact section last. */ }
+
+
+			</main>
+
+
+
+			<SitFooCom />{ /* What: Site Footer Component. Why: The page ends with the shared footer. How: This renders it below the content. */ }
+
+
+		</>
+
+
+	);
+
+
 }
+
+// #endregion HomPagCom
+
+// #endregion Components
+
+
+
+// #region Exports
+
+export { HomPagCom }; // What: Named Exports. Why: app.tsx renders the home page at the root path. How: This exports HomPagCom.
+
+// #endregion Exports
+
+

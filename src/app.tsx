@@ -3,9 +3,7 @@
 
 // #region Imports
 
-import Home from './pages/home/home.tsx'; // What: Home. Why: The home page holds every section of the site. How: This is rendered by the root path's route.
-
-
+import { HomPagCom } from './pages/home/home.tsx';           // What: Home Page Component. Why: The home page holds every section of the site. How: This is rendered by the root path's route.
 import { NotFouCom } from './pages/not-found/not-found.tsx'; // What: Not Found Component. Why: An unknown path should show a 404 page rather than nothing. How: This is rendered by the catch-all route.
 import { Route     } from 'react-router';                    // What: Route. Why: Each page is tied to the URL path that shows it. How: This declares the two routes below.
 import { Routes    } from 'react-router';                    // What: Routes. Why: Only the first route matching the current path should render. How: This wraps the routes below.
@@ -68,9 +66,9 @@ function AppRooCom () : React.JSX.Element {
 
 
 			<Route
-				element={ <Home /> }
+				element={ <HomPagCom /> }
 				path='/'
-			/>{ /* What: Home Route. Why: The site's root address is its home page. How: This renders Home at the root path. */ }
+			/>{ /* What: Home Route. Why: The site's root address is its home page. How: This renders HomPagCom at the root path. */ }
 
 
 
