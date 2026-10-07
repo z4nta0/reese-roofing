@@ -249,16 +249,22 @@
 
 
 }
-.herLogDiv::before { /* What: Hero Logo Div Ring. Why: A faint oval ring frames the logo. How: This draws a rounded hairline just outside the frame. */
+.herLogDiv::before { /* What: Hero Logo Div Ring. Why: A faint circular ring frames the logo. How: This draws a hairline circle centered on the logo, sized from the logo's height plus a rhythm step on each side, so it stays round at every width instead of following the column's width. */
 
 
+	--her-rin-off : var( --spa-ver-p03 ); /* Spacing Vertical Base Plus 3 ~= 33.876px */ /* What: Hero Ring Offset. Why: The ring needs a gap between it and the logo. How: This is how far the circle reaches past the logo's top and bottom, read by the height below and narrowed by the stacked variant. */
+
+	aspect-ratio   : 1;
 	border         : var( --bor-wid-bas ) solid var( --bor-str-col ); /* Border Width Base ~= 1.160px, Border Strong Color, the main border at 0.22 opacity */
 	border-radius  : 50%;
 	content        : '';
-	inset          : -8% -4%;
+	height         : calc( 100% + var( --her-rin-off ) * 2 );         /* Hero Ring Offset, about 33.876px, or 14.572px in the stacked hero */
+	left           : 50%;
 	opacity        : var( --cdn-pow-003-rec );                        /* Core-Design-Number to the Power of 3 Reciprocal ~= 0.430 */
 	pointer-events : none;
 	position       : absolute;
+	top            : 50%;
+	transform      : translate( -50%, -50% );
 
 
 }
@@ -274,10 +280,10 @@
 
 	}
 
-	.herLogDiv::before { /* What: Narrow Hero Logo Div Ring. Why: The ring needs more room around the smaller logo. How: This widens its inset. */
+	.herLogDiv::before { /* What: Narrow Hero Logo Div Ring. Why: The smaller stacked logo needs a tighter ring. How: This shrinks the ring's offset to the base step. */
 
 
-		inset : -10% -6%;
+		--her-rin-off : var( --spa-ver-bas ); /* Spacing Vertical Base ~= 14.572px */
 
 
 	}

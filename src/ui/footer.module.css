@@ -51,12 +51,13 @@
 @container app ( max-width : 600px ) { /* What: Narrow Footer Inner Div. Why: Small screens are too narrow for three items side by side. How: This applies below 600px wide. */
 
 
-	.fooInnDiv { /* What: Stacked Footer Inner Div. Why: The items read best stacked on a small screen. How: This turns the row into a left-aligned column with a smaller gap. */
+	.fooInnDiv { /* What: Stacked Footer Inner Div. Why: The items read best stacked on a small screen, sharing a left edge but centered as a group. How: This turns the row into a left-aligned column with a smaller gap, shrunk to its widest item so the inner div's auto margins center it. */
 
 
 		align-items    : flex-start;
 		flex-direction : column;
 		gap            : var( --spa-ver-p02 ); /* Spacing Vertical Base Plus 2 ~= 25.572px */
+		width          : fit-content;
 
 
 	}

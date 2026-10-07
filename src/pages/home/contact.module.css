@@ -265,6 +265,19 @@
 
 
 }
+@container app ( max-width : 500px ) { /* What: Phone Contact Signature Div. Why: On a phone the details stack full width, so a card hugging the left edge looks unbalanced. How: This applies below 500px wide. */
+
+
+	.conSigDiv { /* What: Centered Contact Signature Div. Why: The logo card should sit in the middle of the narrow column. How: This centers it with auto side margins. */
+
+
+		margin-inline : auto;
+
+
+	}
+
+
+}
 
 .conSigIma { /* What: Contact Signature Image. Why: The logo should fill its card. How: This sizes it to the card's full width, keeping its proportions. */
 
