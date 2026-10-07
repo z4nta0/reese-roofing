@@ -1,0 +1,431 @@
+
+
+
+/**
+ * about.module.css = About Section Module
+ *
+ * @summary
+ * Styles for AboSecCom: the two-column story, with the heading and a faded
+ * logo seal held in place on the left while the paragraphs and pull quote
+ * scroll past on the right, then the row of four numbered principles under a
+ * rule, stacking on smaller screens. The shared section, container, eyebrow,
+ * display, and emphasis declarations the section used to borrow from the
+ * global stylesheet are copied onto its own classes here with the values that
+ * actually rendered: the story's own bottom margin never applied, because the
+ * global container's margin came later in the cascade and overrode it.
+ *
+ * @author z4nta0 <https://github.com/z4nta0>
+ *
+*/
+
+
+
+/* #region about */
+
+.about { /* What: About Section. Why: The section sits on a slightly darker paper band with the standard section padding. How: This sets the soft paper color, the top rule, and the vertical padding. */
+
+
+	background    : var( --paper-soft );
+	border-top    : 1px solid var( --line );
+	padding-block : var( --section-pad-y );
+	position      : relative;
+
+
+}
+
+
+/* #region about__container */
+
+.about__container { /* What: About Story Container. Why: The story splits into a heading column and a text column at the page's content width. How: This centers a two-column grid with the page's side gutter. */
+
+
+	display               : grid;
+	gap                   : 5rem;
+	grid-template-columns : 1fr 1.2fr;
+	margin                : 0 auto;
+	max-width             : var( --container );
+	padding-inline        : var( --gutter );
+	width                 : 100%;
+
+
+}
+@media ( max-width : 960px ) { /* What: Narrow About Story Container. Why: Small screens are too narrow for two columns. How: This applies below 960px wide. */
+
+
+	.about__container { /* What: Stacked About Story Container. Why: The story reads best in one column. How: This turns the grid into one column with a smaller gap. */
+
+
+		gap                   : 2.5rem;
+		grid-template-columns : 1fr;
+
+
+	}
+
+
+}
+
+
+/* #region about__left */
+
+.about__left { /* What: About Left Column. Why: The heading and seal stay in view while the story beside them scrolls. How: This sticks the column 7rem from the top, aligned to its start. */
+
+
+	align-self : start;
+	position   : sticky;
+	top        : 7rem;
+
+
+}
+@media ( max-width : 960px ) { /* What: Narrow About Left Column. Why: A stacked column has nothing beside it to scroll past. How: This applies below 960px wide. */
+
+
+	.about__left { /* What: Static About Left Column. Why: The heading should scroll away normally once stacked. How: This turns off the sticking. */
+
+
+		position : static;
+
+
+	}
+
+
+}
+
+.eyebrow { /* What: Eyebrow Label. Why: A small numbered label with a leading line introduces the section. How: This sets it in tracked, muted capitals. */
+
+
+	align-items    : center;
+	color          : var( --ink-muted );
+	display        : inline-flex;
+	font-family    : var( --font-body );
+	font-size      : 0.78rem;
+	font-weight    : 500;
+	gap            : 0.75rem;
+	letter-spacing : 0.18em;
+	text-transform : uppercase;
+
+
+}
+.eyebrow::before { /* What: Eyebrow Leading Line. Why: A short rule leads into the label. How: This draws a 28px hairline before the text. */
+
+
+	background : var( --ink-muted );
+	content    : '';
+	height     : 1px;
+	width      : 28px;
+
+
+}
+
+
+/* #region about__title */
+
+.about__title { /* What: About Title. Why: The heading names the section in large display type. How: This sets it in the display font at its largest optical size, scaling with the viewport. */
+
+
+	color                   : var( --ink );
+	font-family             : var( --font-display );
+	font-size               : clamp( 2.25rem, 5.5vw, 4.5rem );
+	font-variation-settings : 'opsz' 144;
+	font-weight             : 400;
+	letter-spacing          : -0.025em;
+	line-height             : 1.02;
+	margin-top              : 1.5rem;
+
+
+}
+
+.titAccEmp { /* What: Title Accent Emphasis. Why: One word in each heading is set apart in color and italic. How: This draws it in the accent, light and italic. */
+
+
+	color       : var( --accent );
+	font-style  : italic;
+	font-weight : 300;
+
+
+}
+
+/* #endregion about__title */
+
+
+
+/* #region about__seal */
+
+.about__seal { /* What: About Seal. Why: The full logo sits under the heading as a faded seal. How: This caps it at 200px with room above and below, slightly faded. */
+
+
+	margin    : 3rem 0;
+	max-width : 200px;
+	opacity   : 0.85;
+
+
+}
+@media ( max-width : 960px ) { /* What: Narrow About Seal. Why: The stacked story has no spare column for the seal. How: This applies below 960px wide. */
+
+
+	.about__seal { /* What: Hidden About Seal. Why: The seal would only push the story down on a small screen. How: This hides it. */
+
+
+		display : none;
+
+
+	}
+
+
+}
+
+.aboSeaIma { /* What: About Seal Image. Why: The logo should fill its seal. How: This sizes it to the seal's full width, keeping its proportions. */
+
+
+	height : auto;
+	width  : 100%;
+
+
+}
+
+/* #endregion about__seal */
+
+/* #endregion about__left */
+
+
+
+.about__para { /* What: About Paragraph. Why: The story's paragraphs read comfortably in soft body text. How: This sets their size, leading, and spacing. */
+
+
+	color         : var( --ink-soft );
+	font-size     : 1.02rem;
+	line-height   : 1.7;
+	margin-bottom : 1.5rem;
+
+
+}
+.about__para--lead { /* What: Lead About Paragraph. Why: The founding idea opens the story larger, in display type. How: This sets it in the display font at a larger size in full ink. */
+
+
+	color          : var( --ink );
+	font-family    : var( --font-display );
+	font-size      : 1.4rem;
+	font-weight    : 400;
+	letter-spacing : -0.01em;
+	line-height    : 1.4;
+	margin-bottom  : 2rem;
+
+
+}
+
+
+/* #region about__quote */
+
+.about__quote { /* What: About Quote. Why: The family's quote is set apart between rules. How: This pads it with hairlines above and below and positions it for its quote mark. */
+
+
+	border-bottom : 1px solid var( --line );
+	border-top    : 1px solid var( --line );
+	margin-top    : 3rem;
+	padding       : 2.5rem 2rem 2rem;
+	position      : relative;
+
+
+}
+
+.about__quote-mark { /* What: About Quote Mark. Why: An oversized opening quote mark hangs at the quote's left. How: This sets it large in accent italic, placed at the quote's top left. */
+
+
+	color       : var( --accent );
+	font-family : var( --font-display );
+	font-size   : 4rem;
+	font-style  : italic;
+	left        : 0;
+	line-height : 1;
+	position    : absolute;
+	top         : 0.5rem;
+
+
+}
+@media ( max-width : 540px ) { /* What: Phone About Quote Mark. Why: A phone has no room to hang the mark beside the quote. How: This applies below 540px wide. */
+
+
+	.about__quote-mark { /* What: Stacked About Quote Mark. Why: The mark should sit above the quote instead. How: This puts it back in the flow as its own line. */
+
+
+		display       : block;
+		margin-bottom : 0.5rem;
+		position      : static;
+
+
+	}
+
+
+}
+
+.aboQuoPar { /* What: About Quote Paragraph. Why: The quote itself reads as large display italic. How: This sets it in the display font, indented past the quote mark. */
+
+
+	color         : var( --ink );
+	font-family   : var( --font-display );
+	font-size     : 1.4rem;
+	font-style    : italic;
+	font-weight   : 400;
+	line-height   : 1.45;
+	margin-bottom : 1rem;
+	padding-left  : 2.5rem;
+
+
+}
+@media ( max-width : 540px ) { /* What: Phone About Quote Paragraph. Why: The mark no longer hangs beside the quote on a phone. How: This applies below 540px wide. */
+
+
+	.aboQuoPar { /* What: Unindented About Quote Paragraph. Why: The quote can use the full width. How: This drops the indent. */
+
+
+		padding-left : 0;
+
+
+	}
+
+
+}
+
+.aboQuoFoo { /* What: About Quote Footer. Why: The attribution reads as a small label under the quote. How: This sets it in small tracked capitals, indented to line up with the quote. */
+
+
+	color          : var( --ink-muted );
+	font-size      : 0.85rem;
+	letter-spacing : 0.05em;
+	padding-left   : 2.5rem;
+	text-transform : uppercase;
+
+
+}
+@media ( max-width : 540px ) { /* What: Phone About Quote Footer. Why: The quote is unindented on a phone. How: This applies below 540px wide. */
+
+
+	.aboQuoFoo { /* What: Unindented About Quote Footer. Why: The attribution should line up with the quote. How: This drops the indent. */
+
+
+		padding-left : 0;
+
+
+	}
+
+
+}
+
+/* #endregion about__quote */
+
+/* #endregion about__container */
+
+
+
+/* #region container */
+
+.container { /* What: Principles Container. Why: The principles row should line up with the page's content width. How: This centers a full-width column with the page's side gutter. */
+
+
+	margin         : 0 auto;
+	max-width      : var( --container );
+	padding-inline : var( --gutter );
+	width          : 100%;
+
+
+}
+
+
+/* #region about__principles */
+
+.about__principles { /* What: About Principles Row. Why: The four principles read side by side under a rule. How: This sets a four-column grid with a rule above. */
+
+
+	border-top            : 1px solid var( --line-strong );
+	display               : grid;
+	gap                   : 2.5rem;
+	grid-template-columns : repeat( 4, 1fr );
+	padding-top           : 4rem;
+
+
+}
+@media ( max-width : 960px ) { /* What: Narrow About Principles Row. Why: Four columns don't fit a tablet. How: This applies below 960px wide. */
+
+
+	.about__principles { /* What: Two Column About Principles Row. Why: The principles fit two to a row. How: This sets two columns with a tighter column gap. */
+
+
+		gap                   : 2.5rem 2rem;
+		grid-template-columns : 1fr 1fr;
+
+
+	}
+
+
+}
+@media ( max-width : 540px ) { /* What: Phone About Principles Row. Why: Two columns don't fit a phone. How: This applies below 540px wide. */
+
+
+	.about__principles { /* What: One Column About Principles Row. Why: The principles stack on a phone. How: This sets one column. */
+
+
+		grid-template-columns : 1fr;
+
+
+	}
+
+
+}
+
+
+/* #region principle */
+
+.principle { /* What: Principle. Why: Each principle needs a little room on its right before the next. How: This pads its right side. */
+
+
+	padding-right : 1rem;
+
+
+}
+
+.principle__num { /* What: Principle Number. Why: Each principle's number reads as a small accent above its title. How: This sets it in light accent italic with room below. */
+
+
+	color         : var( --accent );
+	display       : inline-block;
+	font-family   : var( --font-display );
+	font-size     : 1rem;
+	font-style    : italic;
+	font-weight   : 300;
+	margin-bottom : 1.25rem;
+
+
+}
+
+.principle__title { /* What: Principle Title. Why: Each principle has a short name in display type. How: This sets it in the display font, tightly leaded. */
+
+
+	color          : var( --ink );
+	font-family    : var( --font-display );
+	font-size      : 1.25rem;
+	font-weight    : 400;
+	letter-spacing : -0.01em;
+	line-height    : 1.25;
+	margin-bottom  : 0.85rem;
+
+
+}
+
+.principle__body { /* What: Principle Body. Why: Each principle's sentence reads as quiet supporting text. How: This sets it small and muted. */
+
+
+	color       : var( --ink-muted );
+	font-size   : 0.92rem;
+	line-height : 1.6;
+
+
+}
+
+/* #endregion principle */
+
+/* #endregion about__principles */
+
+/* #endregion container */
+
+/* #endregion about */
+
+
