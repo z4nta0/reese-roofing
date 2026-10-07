@@ -49,9 +49,9 @@
 
 	/* #region Spacing Tokens */
 
-	--container     : 1280px;                      /* What: Container. Why: Content shouldn't stretch across very wide screens. How: Every section's container caps its width at this. */
-	--gutter        : clamp( 1.25rem, 4vw, 3rem ); /* What: Gutter. Why: Content needs side margins that grow with the screen. How: Every container and the drawer pad their sides with it. */
-	--section-pad-y : clamp( 5rem, 10vw, 9rem );   /* What: Section Padding Y. Why: Sections need generous vertical breathing room that scales with the screen. How: Every section pads its top and bottom with it. */
+	--container     : 1280px;                                           /* What: Container. Why: Content shouldn't stretch across very wide screens. How: Every section's container caps its width at this. */
+	--gutter        : clamp( 1.8181818182rem, 4vw, 4.3636363636rem );   /* What: Gutter. Why: Content needs side margins that grow with the screen. How: Every container and the drawer pad their sides with it. */
+	--section-pad-y : clamp( 7.2727272727rem, 10vw, 13.0909090909rem ); /* What: Section Padding Y. Why: Sections need generous vertical breathing room that scales with the screen. How: Every section pads its top and bottom with it. */
 
 	/* #endregion Spacing Tokens */
 
@@ -85,10 +85,11 @@
 
 }
 
-html { /* What: Html. Why: In-page links should glide to their sections, and phones shouldn't inflate the text. How: This turns on smooth scrolling and turns off automatic text resizing. */
+html { /* What: Html. Why: One rem should equal the 11px base font size, in-page links should glide to their sections, and phones shouldn't inflate the text. How: This sets the root to 68.75% (11/16) of the browser's own default, so 1rem is 11px at the usual 16px default and still follows any size a person sets, turns on smooth scrolling, and turns off automatic text resizing. */
 
 
 	-webkit-text-size-adjust : 100%;
+	font-size                : 68.75%;
 	scroll-behavior          : smooth;
 
 

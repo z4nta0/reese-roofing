@@ -26,7 +26,7 @@
 
 	background    : transparent;
 	left          : 0;
-	padding-block : 1.1rem;
+	padding-block : 1.6rem;
 	position      : fixed;
 	right         : 0;
 	top           : 0;
@@ -42,7 +42,7 @@
 	backdrop-filter         : saturate( 180% ) blur( 14px );
 	background              : rgba( 245, 242, 236, 0.85 );
 	border-bottom           : 1px solid var( --line );
-	padding-block           : 0.7rem;
+	padding-block           : 1.0181818182rem;
 
 
 }
@@ -68,7 +68,7 @@
 
 	align-items     : center;
 	display         : flex;
-	gap             : 2rem;
+	gap             : 2.9090909091rem;
 	justify-content : space-between;
 	margin          : 0 auto;
 	max-width       : var( --container );
@@ -87,8 +87,8 @@
 	align-items    : center;
 	display        : inline-flex;
 	font-family    : var( --font-display );
-	font-size      : 1.2rem;
-	gap            : 0.7rem;
+	font-size      : 1.7454545455rem;
+	gap            : 1.0181818182rem;
 	letter-spacing : -0.01em;
 
 
@@ -159,7 +159,7 @@
 
 
 	display   : flex;
-	gap       : 2rem;
+	gap       : 2.9090909091rem;
 	left      : 50%;
 	position  : absolute;
 	transform : translateX( -50% );
@@ -184,7 +184,7 @@
 
 
 	color       : var( --ink-soft );
-	font-size   : 0.92rem;
+	font-size   : 1.3381818182rem;
 	font-weight : 500;
 	position    : relative;
 	transition  : color 0.2s ease;
@@ -247,7 +247,7 @@
 
 	align-items : center;
 	display     : flex;
-	gap         : 1.25rem;
+	gap         : 1.8181818182rem;
 
 
 }
@@ -269,7 +269,7 @@
 
 
 	color       : var( --ink-soft );
-	font-size   : 0.9rem;
+	font-size   : 1.3090909091rem;
 	font-weight : 500;
 	transition  : color 0.2s ease;
 
@@ -308,11 +308,11 @@
 	border-radius  : 999px;
 	color          : var( --paper );
 	display        : inline-flex;
-	font-size      : 0.85rem;
+	font-size      : 1.2363636364rem;
 	font-weight    : 500;
-	gap            : 0.75rem;
+	gap            : 1.0909090909rem;
 	letter-spacing : 0.02em;
-	padding        : 0.65rem 1.2rem;
+	padding        : 0.9454545455rem 1.7454545455rem;
 	transition     : background-color 0.3s cubic-bezier( 0.22, 1, 0.36, 1 ), transform 0.3s cubic-bezier( 0.22, 1, 0.36, 1 );
 	white-space    : nowrap;
 
@@ -382,7 +382,7 @@
 	display        : none;
 	flex-direction : column;
 	gap            : 5px;
-	padding        : 0.5rem;
+	padding        : 0.7272727273rem;
 
 
 }
@@ -466,7 +466,7 @@
 
 	border-bottom-width : 1px;
 	max-height          : 400px;
-	padding-block       : 1.5rem 2rem;
+	padding-block       : 2.1818181818rem 2.9090909091rem;
 	transition          : border-bottom-width 0.4s cubic-bezier( 0.22, 1, 0.36, 1 ), max-height 0.4s cubic-bezier( 0.22, 1, 0.36, 1 ), padding-block 0.4s cubic-bezier( 0.22, 1, 0.36, 1 ), visibility 0s linear 0s; /* What: Drawer Open Transition. Why: The drawer has to be visible for the whole time it grows. How: This animates the same properties as closing, but shows it with no delay. */
 	visibility          : visible;
 
@@ -492,8 +492,8 @@
 
 	border-bottom : 1px solid var( --line );
 	font-family   : var( --font-display );
-	font-size     : 1.6rem;
-	padding       : 1rem 0;
+	font-size     : 2.3272727273rem;
+	padding       : 1.4545454545rem 0;
 
 
 }
@@ -503,7 +503,7 @@
 	border-bottom : none;
 	color         : var( --ink-muted );
 	font-family   : var( --font-body );
-	font-size     : 1rem;
+	font-size     : 1.4545454545rem;
 
 
 }

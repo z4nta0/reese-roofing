@@ -25,10 +25,10 @@
 	align-items     : center;
 	display         : flex;
 	flex-direction  : column;
-	gap             : 1.5rem;
+	gap             : 2.1818181818rem;
 	justify-content : center;
 	min-height      : 100vh;
-	padding         : 2rem;
+	padding         : 2.9090909091rem;
 	text-align      : center;
 
 
@@ -41,9 +41,9 @@
 	color          : var( --ink-muted );
 	display        : inline-flex;
 	font-family    : var( --font-body );
-	font-size      : 0.78rem;
+	font-size      : 1.1345454545rem;
 	font-weight    : 500;
-	gap            : 0.75rem;
+	gap            : 1.0909090909rem;
 	letter-spacing : 0.18em;
 	text-transform : uppercase;
 
@@ -68,7 +68,7 @@
 
 	color                   : var( --ink );
 	font-family             : var( --font-display );
-	font-size               : clamp( 3rem, 8vw, 6rem );
+	font-size               : clamp( 4.3636363636rem, 8vw, 8.7272727273rem );
 	font-variation-settings : 'opsz' 144;
 	font-weight             : 400;
 	letter-spacing          : -0.025em;
@@ -95,7 +95,7 @@
 
 	color       : var( --ink-soft );
 	font-family : var( --font-body );
-	font-size   : clamp( 1.05rem, 1.4vw, 1.2rem );
+	font-size   : clamp( 1.5272727273rem, 1.4vw, 1.7454545455rem );
 	line-height : 1.55;
 	max-width   : 52ch;
 
@@ -112,11 +112,11 @@
 	border         : 1px solid transparent;
 	border-radius  : 999px;
 	display        : inline-flex;
-	font-size      : 0.9rem;
+	font-size      : 1.3090909091rem;
 	font-weight    : 500;
-	gap            : 0.75rem;
+	gap            : 1.0909090909rem;
 	letter-spacing : 0.02em;
-	padding        : 0.95rem 1.6rem;
+	padding        : 1.3818181818rem 2.3272727273rem;
 	transition     : background-color 0.3s cubic-bezier( 0.22, 1, 0.36, 1 ), transform 0.3s cubic-bezier( 0.22, 1, 0.36, 1 );
 	white-space    : nowrap;
 

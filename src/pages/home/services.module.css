@@ -53,9 +53,9 @@
 
 	align-items           : end;
 	display               : grid;
-	gap                   : 3rem;
+	gap                   : 4.3636363636rem;
 	grid-template-columns : 1fr 1fr;
-	margin-bottom         : 5rem;
+	margin-bottom         : 7.2727272727rem;
 
 
 }
@@ -65,7 +65,7 @@
 	.services__head { /* What: Stacked Services Head Block. Why: The lede reads best under the heading. How: This turns the grid into one column with a smaller gap. */
 
 
-		gap                   : 1.5rem;
+		gap                   : 2.1818181818rem;
 		grid-template-columns : 1fr;
 
 
@@ -81,9 +81,9 @@
 	color          : var( --ink-muted );
 	display        : inline-flex;
 	font-family    : var( --font-body );
-	font-size      : 0.78rem;
+	font-size      : 1.1345454545rem;
 	font-weight    : 500;
-	gap            : 0.75rem;
+	gap            : 1.0909090909rem;
 	letter-spacing : 0.18em;
 	text-transform : uppercase;
 
@@ -108,13 +108,13 @@
 
 	color                   : var( --ink );
 	font-family             : var( --font-display );
-	font-size               : clamp( 2.25rem, 5vw, 4.25rem );
+	font-size               : clamp( 3.2727272727rem, 5vw, 6.1818181818rem );
 	font-variation-settings : 'opsz' 144;
 	font-weight             : 400;
 	grid-column             : 1;
 	letter-spacing          : -0.025em;
 	line-height             : 1.02;
-	margin-top              : 1.5rem;
+	margin-top              : 2.1818181818rem;
 
 
 }
@@ -150,11 +150,11 @@
 
 	color          : var( --ink-soft );
 	font-family    : var( --font-body );
-	font-size      : clamp( 1.05rem, 1.4vw, 1.2rem );
+	font-size      : clamp( 1.5272727273rem, 1.4vw, 1.7454545455rem );
 	grid-column    : 2;
 	line-height    : 1.55;
 	max-width      : 52ch;
-	padding-bottom : 0.5rem;
+	padding-bottom : 0.7272727273rem;
 
 
 }
@@ -224,7 +224,7 @@
 	background    : var( --paper );
 	border-bottom : 1px solid var( --line-strong );
 	border-right  : 1px solid var( --line-strong );
-	padding       : 2.5rem 2rem 2.75rem;
+	padding       : 3.6363636364rem 2.9090909091rem 4rem;
 	position      : relative;
 	transition    : background-color 0.3s ease;
 
@@ -259,9 +259,9 @@
 
 	align-items   : baseline;
 	display       : flex;
-	gap           : 1rem;
-	margin-bottom : 1.5rem;
-	min-height    : 5rem;
+	gap           : 1.4545454545rem;
+	margin-bottom : 2.1818181818rem;
+	min-height    : 7.2727272727rem;
 
 
 }
@@ -284,7 +284,7 @@
 
 	color          : var( --accent );
 	font-family    : var( --font-display );
-	font-size      : 1.2rem;
+	font-size      : 1.7454545455rem;
 	font-style     : italic;
 	font-weight    : 300;
 	letter-spacing : -0.02em;
@@ -297,7 +297,7 @@
 
 	color          : var( --ink );
 	font-family    : var( --font-display );
-	font-size      : 1.55rem;
+	font-size      : 2.2545454545rem;
 	font-weight    : 400;
 	letter-spacing : -0.015em;
 	line-height    : 1.15;
@@ -312,9 +312,9 @@
 
 
 	color         : var( --ink-soft );
-	font-size     : 0.98rem;
+	font-size     : 1.4254545455rem;
 	line-height   : 1.6;
-	margin-bottom : 1.75rem;
+	margin-bottom : 2.5454545455rem;
 
 
 }
@@ -327,7 +327,7 @@
 
 	border-top  : 1px solid var( --line );
 	list-style  : none;
-	padding-top : 1.25rem;
+	padding-top : 1.8181818182rem;
 
 
 }
@@ -338,9 +338,9 @@
 	align-items : center;
 	color       : var( --ink-muted );
 	display     : flex;
-	font-size   : 0.86rem;
-	gap         : 0.6rem;
-	padding     : 0.4rem 0;
+	font-size   : 1.2509090909rem;
+	gap         : 0.8727272727rem;
+	padding     : 0.5818181818rem 0;
 
 
 }

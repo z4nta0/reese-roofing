@@ -28,8 +28,8 @@
 	display        : flex;
 	min-height     : 100vh;
 	overflow       : hidden;
-	padding-bottom : clamp( 4rem, 7vw, 6rem );
-	padding-top    : calc( var( --section-pad-y ) + 3rem );
+	padding-bottom : clamp( 5.8181818182rem, 7vw, 8.7272727273rem );
+	padding-top    : calc( var( --section-pad-y ) + 4.3636363636rem );
 	position       : relative;
 
 
@@ -107,9 +107,9 @@
 
 	align-items           : center;
 	display               : grid;
-	gap                   : clamp( 2rem, 6vw, 5rem );
+	gap                   : clamp( 2.9090909091rem, 6vw, 7.2727272727rem );
 	grid-template-columns : 1.15fr 1fr;
-	margin-bottom         : 4rem;
+	margin-bottom         : 5.8181818182rem;
 
 
 }
@@ -119,9 +119,9 @@
 	.hero__top { /* What: Stacked Hero Top Row. Why: The copy and logo read best stacked. How: This turns the grid into one column with smaller gaps. */
 
 
-		gap                   : 2.5rem;
+		gap                   : 3.6363636364rem;
 		grid-template-columns : 1fr;
-		margin-bottom         : 3rem;
+		margin-bottom         : 4.3636363636rem;
 
 
 	}
@@ -183,11 +183,11 @@
 	color          : var( --ink-muted );
 	display        : inline-flex;
 	font-family    : var( --font-body );
-	font-size      : 0.78rem;
+	font-size      : 1.1345454545rem;
 	font-weight    : 500;
-	gap            : 0.75rem;
+	gap            : 1.0909090909rem;
 	letter-spacing : 0.18em;
-	margin-bottom  : 2.5rem;
+	margin-bottom  : 3.6363636364rem;
 	text-transform : uppercase;
 
 
@@ -211,7 +211,7 @@
 
 	color                   : var( --ink );
 	font-family             : var( --font-display );
-	font-size               : clamp( 2.75rem, 6.5vw, 6rem );
+	font-size               : clamp( 4rem, 6.5vw, 8.7272727273rem );
 	font-variation-settings : 'opsz' 144;
 	font-weight             : 400;
 	letter-spacing          : -0.025em;
@@ -269,7 +269,7 @@
 	.hero__logo { /* What: Leading Hero Logo Frame. Why: The logo should open the stacked hero. How: This moves it above the copy with a little room below. */
 
 
-		margin-bottom : 0.5rem;
+		margin-bottom : 0.7272727273rem;
 		order         : -1;
 
 
@@ -352,10 +352,10 @@
 	border-bottom         : 1px solid var( --line );
 	border-top            : 1px solid var( --line );
 	display               : grid;
-	gap                   : 3rem;
+	gap                   : 4.3636363636rem;
 	grid-template-columns : 1fr auto;
-	padding-bottom        : 4rem;
-	padding-top           : 3rem;
+	padding-bottom        : 5.8181818182rem;
+	padding-top           : 4.3636363636rem;
 
 
 }
@@ -365,7 +365,7 @@
 	.hero__bottom { /* What: Stacked Hero Bottom Row. Why: The buttons read best under the pitch. How: This turns the grid into one column with a smaller gap. */
 
 
-		gap                   : 2rem;
+		gap                   : 2.9090909091rem;
 		grid-template-columns : 1fr;
 
 
@@ -392,7 +392,7 @@
 
 	color       : var( --ink-soft );
 	font-family : var( --font-body );
-	font-size   : clamp( 1.05rem, 1.4vw, 1.2rem );
+	font-size   : clamp( 1.5272727273rem, 1.4vw, 1.7454545455rem );
 	line-height : 1.55;
 	margin      : 0;
 	max-width   : 52ch;
@@ -409,7 +409,7 @@
 
 	display   : flex;
 	flex-wrap : wrap;
-	gap       : 0.75rem;
+	gap       : 1.0909090909rem;
 
 
 }
@@ -424,11 +424,11 @@
 	border         : 1px solid transparent;
 	border-radius  : 999px;
 	display        : inline-flex;
-	font-size      : 0.9rem;
+	font-size      : 1.3090909091rem;
 	font-weight    : 500;
-	gap            : 0.75rem;
+	gap            : 1.0909090909rem;
 	letter-spacing : 0.02em;
-	padding        : 0.95rem 1.6rem;
+	padding        : 1.3818181818rem 2.3272727273rem;
 	transition     : background-color 0.3s cubic-bezier( 0.22, 1, 0.36, 1 ), border-color 0.3s cubic-bezier( 0.22, 1, 0.36, 1 ), color 0.3s cubic-bezier( 0.22, 1, 0.36, 1 ), transform 0.3s cubic-bezier( 0.22, 1, 0.36, 1 );
 	white-space    : nowrap;
 
@@ -524,9 +524,9 @@
 
 	animation             : rise 0.9s cubic-bezier( 0.22, 1, 0.36, 1 ) 0.45s both;
 	display               : grid;
-	gap                   : 2rem;
+	gap                   : 2.9090909091rem;
 	grid-template-columns : repeat( 4, 1fr );
-	margin-top            : 3rem;
+	margin-top            : 4.3636363636rem;
 
 
 }
@@ -536,7 +536,7 @@
 	.hero__stats { /* What: Two Column Hero Stats Row. Why: The stats fit two to a row. How: This sets two columns with a tighter column gap. */
 
 
-		gap                   : 2rem 1.5rem;
+		gap                   : 2.9090909091rem 2.1818181818rem;
 		grid-template-columns : repeat( 2, 1fr );
 
 
@@ -578,7 +578,7 @@
 
 
 	border-left  : 1px solid var( --line );
-	padding-left : 1.25rem;
+	padding-left : 1.8181818182rem;
 
 
 }
@@ -598,12 +598,12 @@
 
 	color                   : var( --ink );
 	font-family             : var( --font-display );
-	font-size               : clamp( 2.25rem, 4vw, 3.25rem );
+	font-size               : clamp( 3.2727272727rem, 4vw, 4.7272727273rem );
 	font-variation-settings : 'opsz' 144;
 	font-weight             : 400;
 	letter-spacing          : -0.02em;
 	line-height             : 1;
-	margin-bottom           : 0.6rem;
+	margin-bottom           : 0.8727272727rem;
 
 
 }
@@ -638,7 +638,7 @@
 
 
 	color       : var( --ink-muted );
-	font-size   : 0.82rem;
+	font-size   : 1.1927272727rem;
 	line-height : 1.4;
 	max-width   : 22ch;
 
