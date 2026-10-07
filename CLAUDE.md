@@ -31,5 +31,3 @@ src/
   here the file already shares its folder's name, so a search finds it
   without one.
 - **Nav and Footer live in `ui/`**, since the 404 page will use them too.
-- **`vite-env.d.ts` stays at the `src/` root**, where Vite's template puts
-  it. It's an ambient type declaration file, so nothing imports it.
