@@ -10,10 +10,11 @@
  * buttons between hairlines, and the stats row, each block rising into place
  * in turn. The shared section, container, eyebrow, display, lede, button, and
  * arrow declarations the hero used to borrow from the global stylesheet are
- * copied onto its own classes here with the values that actually rendered:
- * the section's own taller top padding and the stats' own line height and
- * letter spacing never applied, because the global rules came later in the
- * cascade and overrode them.
+ * copied onto its own classes here with the values that actually rendered: the
+ * stats' own line height and letter spacing never applied, because the global
+ * rules came later in the cascade and overrode them. The section itself takes
+ * extra top padding to clear the fixed bar, and a lighter bottom padding than
+ * the other sections.
  *
  * @author z4nta0 <https://github.com/z4nta0>
  *
@@ -23,15 +24,16 @@
 
 /* #region hero */
 
-.hero { /* What: Hero Section. Why: The hero fills the first screen and centers its content in it. How: This sets a full-height flex column with the standard section padding, clipping the grid at its edges. */
+.hero { /* What: Hero Section. Why: The hero fills the first screen and centers its content in it. How: This sets a full-height flex column with extra top padding to clear the fixed bar and a lighter bottom padding, clipping the grid at its edges. */
 
 
-	align-items   : center;
-	display       : flex;
-	min-height    : 100vh;
-	overflow      : hidden;
-	padding-block : var( --section-pad-y );
-	position      : relative;
+	align-items    : center;
+	display        : flex;
+	min-height     : 100vh;
+	overflow       : hidden;
+	padding-bottom : clamp( 4rem, 7vw, 6rem );
+	padding-top    : calc( var( --section-pad-y ) + 3rem );
+	position       : relative;
 
 
 }
