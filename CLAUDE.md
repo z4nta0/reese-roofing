@@ -52,16 +52,17 @@ reorganization, ESLint setup, config rebuild, and dependency upgrades.
 4. **404 page**: rebuilt with Nav and Footer from `ui/`, written to the rules
    from its first line.
 
-Under review: the CSS module pass found styles that were written but never
-rendered, because a later global rule overrode them. Each was applied on
-2026-10-07 as its own commit, so any the user rejects can be reverted alone:
+Applied original intent (kept by the user, 2026-10-07): the CSS module pass
+found styles that were written but never rendered, because a later global
+rule overrode them. Each was applied as its own commit:
 - `c15eee8`: the navigation bar's compact estimate button.
 - `35cc127`: the hero's extra top padding and lighter bottom padding.
 - `72390da`: the hero stat numbers' line height and letter spacing.
 - `6c97153`: the about story's bottom margin before the principles.
 - `a39b331`: the contact heading's soft accent italic word.
 - `281265f`: the paper contact submit button on the dark band.
-- `8a5f993`: the mobile drawer's open and close animation.
+- `8a5f993`: the mobile drawer's open and close animation (made
+  cross-browser in a later commit).
 
 The `--brand` and `--paper-warm` tokens aren't read anywhere; the
 design-system pass decides whether they stay.
