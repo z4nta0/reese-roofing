@@ -64,22 +64,22 @@ function NotFouCom () : React.JSX.Element {
 		<main className={ cssModObj.notFouMai }>{ /* What: Not Found Main Element. Why: The page's one message is its main content. How: This centers a single column in the full viewport height. */ }
 
 
-			<span className={ cssModObj.eyebrow }>Error 404</span>{ /* What: Error Label Span Element. Why: A small label names the error before the heading. How: This uses the site's eyebrow style. */ }
+			<span className={ cssModObj.eyeLabSpa }>Error 404</span>{ /* What: Error Label Span Element. Why: A small label names the error before the heading. How: This uses the site's eyebrow style. */ }
 
-			<h1 className={ cssModObj.display }>{ /* What: Not Found Heading Element. Why: The page's heading states the problem plainly. How: This sets it in the display style, sized to the viewport between two bounds by its module class. */ }
+			<h1 className={ cssModObj.notFouHea }>{ /* What: Not Found Heading Element. Why: The page's heading states the problem plainly. How: This sets it in the display style, sized to the viewport between two bounds by its module class. */ }
 				Page not <em className={ cssModObj.titAccEmp }>found</em>.
 			</h1>
 
-			<p className={ cssModObj.lede }>The page you're looking for doesn't exist. Let's get you back home.</p>{ /* What: Explanation Paragraph Element. Why: Visitors should know what happened and what to do next. How: This uses the site's lede style. */ }
+			<p className={ cssModObj.nofLedPar }>The page you're looking for doesn't exist. Let's get you back home.</p>{ /* What: Explanation Paragraph Element. Why: Visitors should know what happened and what to do next. How: This uses the site's lede style. */ }
 
 
 
 			<Link
-				className={` ${ cssModObj.btn }   ${ cssModObj.btnPrimary } `}
+				className={` ${ cssModObj.butBasAnc }   ${ cssModObj.butBasAncPrimary } `}
 
 				to='/'
 			>{ /* What: Link. Why: The page's one action is going back home. How: This navigates to the root path inside the site. */ }
-				Return home <span className={ cssModObj.arrow }>→</span>
+				Return home <span className={ cssModObj.arrIcoSpa }>→</span>
 			</Link>
 
 

@@ -18,9 +18,9 @@
 
 
 
-/* #region services */
+/* #region homSerSec */
 
-.services { /* What: Services Section. Why: The section opens with a hairline and the standard section padding. How: This sets the page color, the top rule, and the vertical padding. */
+.homSerSec { /* What: Home Services Section. Why: The section opens with a hairline and the standard section padding. How: This sets the page color, the top rule, and the vertical padding. */
 
 
 	background    : var( --bac-pag-col );                            /* Background Page Color = #f5f2ec */
@@ -32,9 +32,9 @@
 }
 
 
-/* #region container */
+/* #region pagConDiv */
 
-.container { /* What: Services Container. Why: The section's content should line up with the page's content width. How: This centers a full-width column with the page's side gutter. */
+.pagConDiv { /* What: Page Container Div. Why: The section's content should line up with the page's content width. How: This centers a full-width column with the page's side gutter. */
 
 
 	margin         : 0 auto;
@@ -46,9 +46,9 @@
 }
 
 
-/* #region services__head */
+/* #region serHeaDiv */
 
-.services__head { /* What: Services Head Block. Why: The heading and lede share a row above the cards. How: This sets a two-column grid aligned to the bottom. */
+.serHeaDiv { /* What: Services Head Div. Why: The heading and lede share a row above the cards. How: This sets a two-column grid aligned to the bottom. */
 
 
 	align-items           : end;
@@ -59,10 +59,10 @@
 
 
 }
-@container app ( max-width : 960px ) { /* What: Narrow Services Head Block. Why: Small screens are too narrow for two columns. How: This applies below 960px wide. */
+@container app ( max-width : 960px ) { /* What: Narrow Services Head Div. Why: Small screens are too narrow for two columns. How: This applies below 960px wide. */
 
 
-	.services__head { /* What: Stacked Services Head Block. Why: The lede reads best under the heading. How: This turns the grid into one column with a smaller gap. */
+	.serHeaDiv { /* What: Stacked Services Head Div. Why: The lede reads best under the heading. How: This turns the grid into one column with a smaller gap. */
 
 
 		gap                   : var( --spa-ver-p02 ); /* Spacing Vertical Base Plus 2 ~= 25.572px */
@@ -74,7 +74,7 @@
 
 }
 
-.eyebrow { /* What: Eyebrow Label. Why: A small numbered label with a leading line introduces the section. How: This sets it in tracked, muted capitals. */
+.eyeLabSpa { /* What: Eyebrow Label Span. Why: A small numbered label with a leading line introduces the section. How: This sets it in tracked, muted capitals. */
 
 
 	align-items    : center;
@@ -89,7 +89,7 @@
 
 
 }
-.eyebrow::before { /* What: Eyebrow Leading Line. Why: A short rule leads into the label. How: This draws a 28px hairline before the text. */
+.eyeLabSpa::before { /* What: Eyebrow Label Span Leading Line. Why: A short rule leads into the label. How: This draws a 28px hairline before the text. */
 
 
 	background : var( --tex-mut-col ); /* Text Muted Color = #6b7079 */
@@ -101,9 +101,9 @@
 }
 
 
-/* #region services__title */
+/* #region serTitHea */
 
-.services__title { /* What: Services Title. Why: The heading names the section in large display type. How: This sets it in the display font at its largest optical size, scaling with the viewport, in the first column. */
+.serTitHea { /* What: Services Title Heading. Why: The heading names the section in large display type. How: This sets it in the display font at its largest optical size, scaling with the viewport, in the first column. */
 
 
 	color                   : var( --tex-mai-col );                                     /* Text Main Color = #1a1f24 */
@@ -118,10 +118,10 @@
 
 
 }
-@container app ( max-width : 960px ) { /* What: Narrow Services Title. Why: The stacked head has one column. How: This applies below 960px wide. */
+@container app ( max-width : 960px ) { /* What: Narrow Services Title Heading. Why: The stacked head has one column. How: This applies below 960px wide. */
 
 
-	.services__title { /* What: Stacked Services Title. Why: The heading stays in the only column. How: This keeps it in column 1. */
+	.serTitHea { /* What: Stacked Services Title Heading. Why: The heading stays in the only column. How: This keeps it in column 1. */
 
 
 		grid-column : 1;
@@ -142,10 +142,10 @@
 
 }
 
-/* #endregion services__title */
+/* #endregion serTitHea */
 
 
-.services__lede { /* What: Services Lede Paragraph. Why: The lede says how every project starts, beside the heading. How: This sets it in the body font, a little larger than body text, in the second column. */
+.serLedPar { /* What: Services Lede Paragraph. Why: The lede says how every project starts, beside the heading. How: This sets it in the body font, a little larger than body text, in the second column. */
 
 
 	color          : var( --tex-sec-col );                                       /* Text Secondary Color = #2a3138 */
@@ -161,7 +161,7 @@
 @container app ( max-width : 960px ) { /* What: Narrow Services Lede Paragraph. Why: The stacked head has one column. How: This applies below 960px wide. */
 
 
-	.services__lede { /* What: Stacked Services Lede Paragraph. Why: The lede moves under the heading. How: This puts it in column 1. */
+	.serLedPar { /* What: Stacked Services Lede Paragraph. Why: The lede moves under the heading. How: This puts it in column 1. */
 
 
 		grid-column : 1;
@@ -172,13 +172,13 @@
 
 }
 
-/* #endregion services__head */
+/* #endregion serHeaDiv */
 
 
 
-/* #region services__grid */
+/* #region serGriDiv */
 
-.services__grid { /* What: Services Grid. Why: The cards share hairline borders, so the grid draws the outer top and left edges. How: This sets three columns with those two edges. */
+.serGriDiv { /* What: Services Grid Div. Why: The cards share hairline borders, so the grid draws the outer top and left edges. How: This sets three columns with those two edges. */
 
 
 	border-left           : var( --bor-wid-bas ) solid var( --bor-str-col ); /* Border Width Base ~= 1.160px, Border Strong Color, the main border at 0.22 opacity */
@@ -188,10 +188,10 @@
 
 
 }
-@container app ( max-width : 960px ) { /* What: Narrow Services Grid. Why: Three cards don't fit across a tablet. How: This applies below 960px wide. */
+@container app ( max-width : 960px ) { /* What: Narrow Services Grid Div. Why: Three cards don't fit across a tablet. How: This applies below 960px wide. */
 
 
-	.services__grid { /* What: Two Column Services Grid. Why: The cards fit two to a row. How: This sets two columns. */
+	.serGriDiv { /* What: Two Column Services Grid Div. Why: The cards fit two to a row. How: This sets two columns. */
 
 
 		grid-template-columns : 1fr 1fr;
@@ -201,10 +201,10 @@
 
 
 }
-@container app ( max-width : 640px ) { /* What: Phone Services Grid. Why: Two cards don't fit across a phone. How: This applies below 640px wide. */
+@container app ( max-width : 640px ) { /* What: Phone Services Grid Div. Why: Two cards don't fit across a phone. How: This applies below 640px wide. */
 
 
-	.services__grid { /* What: One Column Services Grid. Why: The cards stack on a phone. How: This sets one column. */
+	.serGriDiv { /* What: One Column Services Grid Div. Why: The cards stack on a phone. How: This sets one column. */
 
 
 		grid-template-columns : 1fr;
@@ -216,9 +216,9 @@
 }
 
 
-/* #region service */
+/* #region serCarArt */
 
-.service { /* What: Service Card. Why: Each card draws its own right and bottom edges, completing the shared grid lines, and tints on hover. How: This sets those edges, the card's padding, and a background that fades on hover. */
+.serCarArt { /* What: Service Card Article. Why: Each card draws its own right and bottom edges, completing the shared grid lines, and tints on hover. How: This sets those edges, the card's padding, and a background that fades on hover. */
 
 
 	background    : var( --bac-pag-col );                                       /* Background Page Color = #f5f2ec */
@@ -230,17 +230,17 @@
 
 
 }
-.service:hover { /* What: Hovered Service Card. Why: The hovered card should stand out from its neighbors. How: This tints it with the soft paper color. */
+.serCarArt:hover { /* What: Hovered Service Card Article. Why: The hovered card should stand out from its neighbors. How: This tints it with the soft paper color. */
 
 
 	background : var( --bac-sur-col ); /* Background Surface Color = #ebe7df */
 
 
 }
-@media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Service Card. Why: Someone who asked for less motion shouldn't see the tint fade. How: This applies only when the reduced-motion preference is set. */
+@media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Service Card Article. Why: Someone who asked for less motion shouldn't see the tint fade. How: This applies only when the reduced-motion preference is set. */
 
 
-	.service { /* What: Motionless Service Card. Why: The hover tint should appear at once. How: This turns the transition off. */
+	.serCarArt { /* What: Motionless Service Card Article. Why: The hover tint should appear at once. How: This turns the transition off. */
 
 
 		transition : none;
@@ -252,9 +252,9 @@
 }
 
 
-/* #region service__head */
+/* #region carHeaDiv */
 
-.service__head { /* What: Service Head Row. Why: The number and title lead each card at the same height in every card. How: This sets them side by side on a shared baseline with a minimum height. */
+.carHeaDiv { /* What: Card Head Div. Why: The number and title lead each card at the same height in every card. How: This sets them side by side on a shared baseline with a minimum height. */
 
 
 	align-items   : baseline;
@@ -265,10 +265,10 @@
 
 
 }
-@container app ( max-width : 640px ) { /* What: Phone Service Head Row. Why: Stacked cards don't need matching head heights. How: This applies below 640px wide. */
+@container app ( max-width : 640px ) { /* What: Phone Card Head Div. Why: Stacked cards don't need matching head heights. How: This applies below 640px wide. */
 
 
-	.service__head { /* What: Auto Height Service Head Row. Why: Each head can take only the height it needs. How: This drops the minimum height. */
+	.carHeaDiv { /* What: Auto Height Card Head Div. Why: Each head can take only the height it needs. How: This drops the minimum height. */
 
 
 		min-height : auto;
@@ -279,7 +279,7 @@
 
 }
 
-.service__id { /* What: Service Identifier. Why: The card's number reads as a small accent beside the title. How: This sets it in light italic display type in the accent. */
+.carIdeSpa { /* What: Card Identifier Span. Why: The card's number reads as a small accent beside the title. How: This sets it in light italic display type in the accent. */
 
 
 	color          : var( --acc-mai-col ); /* Accent Main Color = #1f4e7a */
@@ -292,7 +292,7 @@
 
 }
 
-.service__title { /* What: Service Title. Why: Each card names its service in display type. How: This sets it in the display font, tightly leaded. */
+.carTitHea { /* What: Card Title Heading. Why: Each card names its service in display type. How: This sets it in the display font, tightly leaded. */
 
 
 	color          : var( --tex-mai-col ); /* Text Main Color = #1a1f24 */
@@ -305,10 +305,10 @@
 
 }
 
-/* #endregion service__head */
+/* #endregion carHeaDiv */
 
 
-.service__desc { /* What: Service Description. Why: The card's sentence sits under its head. How: This sets it in soft body text with room below. */
+.carDesPar { /* What: Card Description Paragraph. Why: The card's sentence sits under its head. How: This sets it in soft body text with room below. */
 
 
 	color         : var( --tex-sec-col ); /* Text Secondary Color = #2a3138 */
@@ -320,9 +320,9 @@
 }
 
 
-/* #region service__list */
+/* #region carDetUno */
 
-.service__list { /* What: Service List. Why: The card's details sit below a hairline. How: This drops the default bullets and draws the rule above. */
+.carDetUno { /* What: Card Detail Unordered. Why: The card's details sit below a hairline. How: This drops the default bullets and draws the rule above. */
 
 
 	border-top  : var( --bor-wid-bas ) solid var( --bor-mai-col ); /* Border Width Base ~= 1.160px, Border Main Color = rgba( 26, 31, 36, 0.12 ) */
@@ -344,7 +344,7 @@
 
 
 }
-.serDetIte::before { /* What: Service Detail Bullet. Why: A small accent dot marks each detail. How: This draws a small accent circle, its width matching its rhythm-step height, that never shrinks. */
+.serDetIte::before { /* What: Service Detail Item Bullet. Why: A small accent dot marks each detail. How: This draws a small accent circle, its width matching its rhythm-step height, that never shrinks. */
 
 
 	background    : var( --acc-mai-col ); /* Accent Main Color = #1f4e7a */
@@ -357,14 +357,14 @@
 
 }
 
-/* #endregion service__list */
+/* #endregion carDetUno */
 
-/* #endregion service */
+/* #endregion serCarArt */
 
-/* #endregion services__grid */
+/* #endregion serGriDiv */
 
-/* #endregion container */
+/* #endregion pagConDiv */
 
-/* #endregion services */
+/* #endregion homSerSec */
 
 

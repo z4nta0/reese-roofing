@@ -170,24 +170,24 @@ function SerSecCom () : React.JSX.Element {
 		<section
 			id='services'
 
-			className={ cssModObj.services }
+			className={ cssModObj.homSerSec }
 		>{ /* What: Services Section Element. Why: This lists what the company does. How: Its services id is the anchor the navigation links jump to, kept as is since it appears in the page's URL. */ }
 
 
-			<div className={ cssModObj.container }>{ /* What: Services Container Div Element. Why: The section's content should line up with the page's content width. How: This holds the heading block and the card grid. */ }
+			<div className={ cssModObj.pagConDiv }>{ /* What: Services Container Div Element. Why: The section's content should line up with the page's content width. How: This holds the heading block and the card grid. */ }
 
 
-				<div className={ cssModObj.servicesHead }>{ /* What: Services Head Div Element. Why: The label, heading, and lede introduce the cards. How: This stacks the three. */ }
+				<div className={ cssModObj.serHeaDiv }>{ /* What: Services Head Div Element. Why: The label, heading, and lede introduce the cards. How: This stacks the three. */ }
 
 
-					<span className={ cssModObj.eyebrow }>02 · What we do</span>{ /* What: Section Label Span Element. Why: Each section is numbered in order down the page. How: This uses the site's eyebrow style. */ }
+					<span className={ cssModObj.eyeLabSpa }>02 · What we do</span>{ /* What: Section Label Span Element. Why: Each section is numbered in order down the page. How: This uses the site's eyebrow style. */ }
 
-					<h2 className={ cssModObj.servicesTitle }>{ /* What: Services Title Heading Element. Why: The heading names the section. How: Its line break sets the two-line shape, with one word in italic. */ }
+					<h2 className={ cssModObj.serTitHea }>{ /* What: Services Title Heading Element. Why: The heading names the section. How: Its line break sets the two-line shape, with one word in italic. */ }
 						A full range of commercial<br />
 						roofing <em className={ cssModObj.titAccEmp }>specialties</em>.
 					</h2>
 
-					<p className={ cssModObj.servicesLede }>{ /* What: Services Lede Paragraph Element. Why: The lede says how every project starts. How: This uses the site's lede style. */ }
+					<p className={ cssModObj.serLedPar }>{ /* What: Services Lede Paragraph Element. Why: The lede says how every project starts. How: This uses the site's lede style. */ }
 						From new construction to emergency repair, every project starts with an
 						on-site assessment and a clear, line-itemed proposal, so you know exactly
 						what's being installed and why.
@@ -198,7 +198,7 @@ function SerSecCom () : React.JSX.Element {
 
 
 
-				<div className={ cssModObj.servicesGrid }>{ /* What: Services Grid Div Element. Why: The services read best as a grid of cards. How: This lays out one card per service. */ }
+				<div className={ cssModObj.serGriDiv }>{ /* What: Services Grid Div Element. Why: The services read best as a grid of cards. How: This lays out one card per service. */ }
 
 
 					{ SER_RCD_ARR.map( ( serRcdObj ) => ( // What: Service Card Map. Why: Every service gets its own card. How: This renders one article per row of SER_RCD_ARR.
@@ -207,23 +207,23 @@ function SerSecCom () : React.JSX.Element {
 						<article
 							key={ serRcdObj.ideStr }
 
-							className={ cssModObj.service }
+							className={ cssModObj.serCarArt }
 						>{ /* What: Service Article Element. Why: Each service is a self-contained card. How: This holds the card's head, description, and detail list. */ }
 
 
-							<div className={ cssModObj.serviceHead }>{ /* What: Service Head Div Element. Why: The number and title lead each card. How: This sets them together. */ }
+							<div className={ cssModObj.carHeaDiv }>{ /* What: Service Head Div Element. Why: The number and title lead each card. How: This sets them together. */ }
 
 
-								<span className={ cssModObj.serviceId }>{ serRcdObj.ideStr }</span>{ /* What: Service Identifier Span Element. Why: The cards are numbered in order. How: This shows the row's two-digit number. */ }
+								<span className={ cssModObj.carIdeSpa }>{ serRcdObj.ideStr }</span>{ /* What: Service Identifier Span Element. Why: The cards are numbered in order. How: This shows the row's two-digit number. */ }
 
-								<h3 className={ cssModObj.serviceTitle }>{ serRcdObj.titStr }</h3>{ /* What: Service Title Heading Element. Why: Each card names its service. How: This shows the row's title. */ }
+								<h3 className={ cssModObj.carTitHea }>{ serRcdObj.titStr }</h3>{ /* What: Service Title Heading Element. Why: Each card names its service. How: This shows the row's title. */ }
 
 
 							</div>
 
-							<p className={ cssModObj.serviceDesc }>{ serRcdObj.desStr }</p>{ /* What: Service Description Paragraph Element. Why: Each card summarizes its service in a sentence. How: This shows the row's description. */ }
+							<p className={ cssModObj.carDesPar }>{ serRcdObj.desStr }</p>{ /* What: Service Description Paragraph Element. Why: Each card summarizes its service in a sentence. How: This shows the row's description. */ }
 
-							<ul className={ cssModObj.serviceList }>{ /* What: Service List Unordered Element. Why: The specific work a service covers reads best as bullets. How: This lists the row's details. */ }
+							<ul className={ cssModObj.carDetUno }>{ /* What: Service List Unordered Element. Why: The specific work a service covers reads best as bullets. How: This lists the row's details. */ }
 
 
 								{ serRcdObj.detArr.map( ( detIteStr ) => ( // What: Detail Item Map. Why: Every detail gets its own bullet. How: This renders one list item per entry.

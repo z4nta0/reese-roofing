@@ -18,9 +18,9 @@
 
 
 
-/* #region about */
+/* #region homAboSec */
 
-.about { /* What: About Section. Why: The section sits on a slightly darker paper band with the standard section padding. How: This sets the soft paper color, the top rule, and the vertical padding. */
+.homAboSec { /* What: Home About Section. Why: The section sits on a slightly darker paper band with the standard section padding. How: This sets the soft paper color, the top rule, and the vertical padding. */
 
 
 	background    : var( --bac-sur-col );                            /* Background Surface Color = #ebe7df */
@@ -32,9 +32,9 @@
 }
 
 
-/* #region about__container */
+/* #region aboStoDiv */
 
-.about__container { /* What: About Story Container. Why: The story splits into a heading column and a text column at the page's content width. How: This centers a two-column grid with the page's side gutter and room below it before the principles. */
+.aboStoDiv { /* What: About Story Div. Why: The story splits into a heading column and a text column at the page's content width. How: This centers a two-column grid with the page's side gutter and room below it before the principles. */
 
 
 	display               : grid;
@@ -48,10 +48,10 @@
 
 
 }
-@container app ( max-width : 960px ) { /* What: Narrow About Story Container. Why: Small screens are too narrow for two columns. How: This applies below 960px wide. */
+@container app ( max-width : 960px ) { /* What: Narrow About Story Div. Why: Small screens are too narrow for two columns. How: This applies below 960px wide. */
 
 
-	.about__container { /* What: Stacked About Story Container. Why: The story reads best in one column. How: This turns the grid into one column with a smaller gap and less room below. */
+	.aboStoDiv { /* What: Stacked About Story Div. Why: The story reads best in one column. How: This turns the grid into one column with a smaller gap and less room below. */
 
 
 		gap                   : var( --spa-ver-p04 ); /* Spacing Vertical Base Plus 4 ~= 44.876px */
@@ -65,9 +65,9 @@
 }
 
 
-/* #region about__left */
+/* #region aboLefDiv */
 
-.about__left { /* What: About Left Column. Why: The heading and seal stay in view while the story beside them scrolls. How: This sticks the column a rhythm step below the top, clearing the fixed bar, aligned to its start. */
+.aboLefDiv { /* What: About Left Div. Why: The heading and seal stay in view while the story beside them scrolls. How: This sticks the column a rhythm step below the top, clearing the fixed bar, aligned to its start. */
 
 
 	align-self : start;
@@ -76,10 +76,10 @@
 
 
 }
-@container app ( max-width : 960px ) { /* What: Narrow About Left Column. Why: A stacked column has nothing beside it to scroll past. How: This applies below 960px wide. */
+@container app ( max-width : 960px ) { /* What: Narrow About Left Div. Why: A stacked column has nothing beside it to scroll past. How: This applies below 960px wide. */
 
 
-	.about__left { /* What: Static About Left Column. Why: The heading should scroll away normally once stacked. How: This turns off the sticking. */
+	.aboLefDiv { /* What: Static About Left Div. Why: The heading should scroll away normally once stacked. How: This turns off the sticking. */
 
 
 		position : static;
@@ -90,7 +90,7 @@
 
 }
 
-.eyebrow { /* What: Eyebrow Label. Why: A small numbered label with a leading line introduces the section. How: This sets it in tracked, muted capitals. */
+.eyeLabSpa { /* What: Eyebrow Label Span. Why: A small numbered label with a leading line introduces the section. How: This sets it in tracked, muted capitals. */
 
 
 	align-items    : center;
@@ -105,7 +105,7 @@
 
 
 }
-.eyebrow::before { /* What: Eyebrow Leading Line. Why: A short rule leads into the label. How: This draws a 28px hairline before the text. */
+.eyeLabSpa::before { /* What: Eyebrow Label Span Leading Line. Why: A short rule leads into the label. How: This draws a 28px hairline before the text. */
 
 
 	background : var( --tex-mut-col ); /* Text Muted Color = #6b7079 */
@@ -117,9 +117,9 @@
 }
 
 
-/* #region about__title */
+/* #region aboTitHea */
 
-.about__title { /* What: About Title. Why: The heading names the section in large display type. How: This sets it in the display font at its largest optical size, scaling with the viewport. */
+.aboTitHea { /* What: About Title Heading. Why: The heading names the section in large display type. How: This sets it in the display font at its largest optical size, scaling with the viewport. */
 
 
 	color                   : var( --tex-mai-col );                                       /* Text Main Color = #1a1f24 */
@@ -144,13 +144,13 @@
 
 }
 
-/* #endregion about__title */
+/* #endregion aboTitHea */
 
 
 
-/* #region about__seal */
+/* #region aboSeaDiv */
 
-.about__seal { /* What: About Seal. Why: The full logo sits under the heading as a faded seal. How: This caps it at 200px with room above and below, slightly faded. */
+.aboSeaDiv { /* What: About Seal Div. Why: The full logo sits under the heading as a faded seal. How: This caps it at 200px with room above and below, slightly faded. */
 
 
 	margin    : var( --spa-ver-p04 ) 0; /* Spacing Vertical Base Plus 4 ~= 44.876px */
@@ -159,10 +159,10 @@
 
 
 }
-@container app ( max-width : 960px ) { /* What: Narrow About Seal. Why: The stacked story has no spare column for the seal. How: This applies below 960px wide. */
+@container app ( max-width : 960px ) { /* What: Narrow About Seal Div. Why: The stacked story has no spare column for the seal. How: This applies below 960px wide. */
 
 
-	.about__seal { /* What: Hidden About Seal. Why: The seal would only push the story down on a small screen. How: This hides it. */
+	.aboSeaDiv { /* What: Hidden About Seal Div. Why: The seal would only push the story down on a small screen. How: This hides it. */
 
 
 		display : none;
@@ -182,13 +182,13 @@
 
 }
 
-/* #endregion about__seal */
+/* #endregion aboSeaDiv */
 
-/* #endregion about__left */
+/* #endregion aboLefDiv */
 
 
 
-.about__para { /* What: About Paragraph. Why: The story's paragraphs read comfortably in soft body text. How: This sets their size, leading, and spacing. */
+.aboStoPar { /* What: About Story Paragraph. Why: The story's paragraphs read comfortably in soft body text. How: This sets their size, leading, and spacing. */
 
 
 	color         : var( --tex-sec-col ); /* Text Secondary Color = #2a3138 */
@@ -198,7 +198,7 @@
 
 
 }
-.about__para--lead { /* What: Lead About Paragraph. Why: The founding idea opens the story larger, in display type. How: This sets it in the display font at a larger size in full ink. */
+.aboStoPar--lead { /* What: Lead About Story Paragraph. Why: The founding idea opens the story larger, in display type. How: This sets it in the display font at a larger size in full ink. */
 
 
 	color          : var( --tex-mai-col ); /* Text Main Color = #1a1f24 */
@@ -213,9 +213,9 @@
 }
 
 
-/* #region about__quote */
+/* #region aboQuoBlo */
 
-.about__quote { /* What: About Quote. Why: The family's quote is set apart between rules. How: This pads it with hairlines above and below and positions it for its quote mark. */
+.aboQuoBlo { /* What: About Quote Blockquote. Why: The family's quote is set apart between rules. How: This pads it with hairlines above and below and positions it for its quote mark. */
 
 
 	border-bottom : var( --bor-wid-bas ) solid var( --bor-mai-col );           /* Border Width Base ~= 1.160px, Border Main Color = rgba( 26, 31, 36, 0.12 ) */
@@ -227,7 +227,7 @@
 
 }
 
-.about__quote-mark { /* What: About Quote Mark. Why: An oversized opening quote mark hangs at the quote's left. How: This sets it large in accent italic, placed at the quote's top left. */
+.quoMarSpa { /* What: Quote Mark Span. Why: An oversized opening quote mark hangs at the quote's left. How: This sets it large in accent italic, placed at the quote's top left. */
 
 
 	color       : var( --acc-mai-col ); /* Accent Main Color = #1f4e7a */
@@ -241,10 +241,10 @@
 
 
 }
-@container app ( max-width : 540px ) { /* What: Phone About Quote Mark. Why: A phone has no room to hang the mark beside the quote. How: This applies below 540px wide. */
+@container app ( max-width : 540px ) { /* What: Phone Quote Mark Span. Why: A phone has no room to hang the mark beside the quote. How: This applies below 540px wide. */
 
 
-	.about__quote-mark { /* What: Stacked About Quote Mark. Why: The mark should sit above the quote instead. How: This puts it back in the flow as its own line. */
+	.quoMarSpa { /* What: Stacked Quote Mark Span. Why: The mark should sit above the quote instead. How: This puts it back in the flow as its own line. */
 
 
 		display       : block;
@@ -310,15 +310,15 @@
 
 }
 
-/* #endregion about__quote */
+/* #endregion aboQuoBlo */
 
-/* #endregion about__container */
+/* #endregion aboStoDiv */
 
 
 
-/* #region container */
+/* #region pagConDiv */
 
-.container { /* What: Principles Container. Why: The principles row should line up with the page's content width. How: This centers a full-width column with the page's side gutter. */
+.pagConDiv { /* What: Page Container Div. Why: The principles row should line up with the page's content width. How: This centers a full-width column with the page's side gutter. */
 
 
 	margin         : 0 auto;
@@ -330,9 +330,9 @@
 }
 
 
-/* #region about__principles */
+/* #region aboPriDiv */
 
-.about__principles { /* What: About Principles Row. Why: The four principles read side by side under a rule. How: This sets a four-column grid with a rule above. */
+.aboPriDiv { /* What: About Principles Div. Why: The four principles read side by side under a rule. How: This sets a four-column grid with a rule above. */
 
 
 	border-top            : var( --bor-wid-bas ) solid var( --bor-str-col ); /* Border Width Base ~= 1.160px, Border Strong Color, the main border at 0.22 opacity */
@@ -343,10 +343,10 @@
 
 
 }
-@container app ( max-width : 960px ) { /* What: Narrow About Principles Row. Why: Four columns don't fit a tablet. How: This applies below 960px wide. */
+@container app ( max-width : 960px ) { /* What: Narrow About Principles Div. Why: Four columns don't fit a tablet. How: This applies below 960px wide. */
 
 
-	.about__principles { /* What: Two Column About Principles Row. Why: The principles fit two to a row. How: This sets two columns with a tighter column gap. */
+	.aboPriDiv { /* What: Two Column About Principles Div. Why: The principles fit two to a row. How: This sets two columns with a tighter column gap. */
 
 
 		gap                   : var( --spa-ver-p04 ) 2.9090909091rem; /* Spacing Vertical Base Plus 4 ~= 44.876px */
@@ -357,10 +357,10 @@
 
 
 }
-@container app ( max-width : 540px ) { /* What: Phone About Principles Row. Why: Two columns don't fit a phone. How: This applies below 540px wide. */
+@container app ( max-width : 540px ) { /* What: Phone About Principles Div. Why: Two columns don't fit a phone. How: This applies below 540px wide. */
 
 
-	.about__principles { /* What: One Column About Principles Row. Why: The principles stack on a phone. How: This sets one column. */
+	.aboPriDiv { /* What: One Column About Principles Div. Why: The principles stack on a phone. How: This sets one column. */
 
 
 		grid-template-columns : 1fr;
@@ -372,9 +372,9 @@
 }
 
 
-/* #region principle */
+/* #region priIteDiv */
 
-.principle { /* What: Principle. Why: Each principle needs a little room on its right before the next. How: This pads its right side. */
+.priIteDiv { /* What: Principle Item Div. Why: Each principle needs a little room on its right before the next. How: This pads its right side. */
 
 
 	padding-right : 1.4545454545rem;
@@ -382,7 +382,7 @@
 
 }
 
-.principle__num { /* What: Principle Number. Why: Each principle's number reads as a small accent above its title. How: This sets it in light accent italic with room below. */
+.priNumSpa { /* What: Principle Number Span. Why: Each principle's number reads as a small accent above its title. How: This sets it in light accent italic with room below. */
 
 
 	color         : var( --acc-mai-col ); /* Accent Main Color = #1f4e7a */
@@ -396,7 +396,7 @@
 
 }
 
-.principle__title { /* What: Principle Title. Why: Each principle has a short name in display type. How: This sets it in the display font, tightly leaded. */
+.priTitHea { /* What: Principle Title Heading. Why: Each principle has a short name in display type. How: This sets it in the display font, tightly leaded. */
 
 
 	color          : var( --tex-mai-col ); /* Text Main Color = #1a1f24 */
@@ -410,7 +410,7 @@
 
 }
 
-.principle__body { /* What: Principle Body. Why: Each principle's sentence reads as quiet supporting text. How: This sets it small and muted. */
+.priBodPar { /* What: Principle Body Paragraph. Why: Each principle's sentence reads as quiet supporting text. How: This sets it small and muted. */
 
 
 	color       : var( --tex-mut-col ); /* Text Muted Color = #6b7079 */
@@ -420,12 +420,12 @@
 
 }
 
-/* #endregion principle */
+/* #endregion priIteDiv */
 
-/* #endregion about__principles */
+/* #endregion aboPriDiv */
 
-/* #endregion container */
+/* #endregion pagConDiv */
 
-/* #endregion about */
+/* #endregion homAboSec */
 
 

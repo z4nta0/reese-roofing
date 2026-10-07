@@ -19,9 +19,9 @@
 
 
 
-/* #region hero */
+/* #region homHerSec */
 
-.hero { /* What: Hero Section. Why: The hero fills the first screen and centers its content in it. How: This sets a full-height flex column with extra top padding to clear the fixed bar and a lighter bottom padding, clipping the grid at its edges. */
+.homHerSec { /* What: Home Hero Section. Why: The hero fills the first screen and centers its content in it. How: This sets a full-height flex column with extra top padding to clear the fixed bar and a lighter bottom padding, clipping the grid at its edges. */
 
 
 	align-items    : center;
@@ -34,10 +34,10 @@
 
 
 }
-@container app ( max-width : 960px ) { /* What: Narrow Hero Section. Why: A stacked hero on a small screen shouldn't be forced to a full screen's height. How: This applies below 960px wide. */
+@container app ( max-width : 960px ) { /* What: Narrow Home Hero Section. Why: A stacked hero on a small screen shouldn't be forced to a full screen's height. How: This applies below 960px wide. */
 
 
-	.hero { /* What: Auto Height Hero Section. Why: The content sets the height once it stacks. How: This drops the full-height minimum. */
+	.homHerSec { /* What: Auto Height Home Hero Section. Why: The content sets the height once it stacks. How: This drops the full-height minimum. */
 
 
 		min-height : auto;
@@ -49,9 +49,9 @@
 }
 
 
-/* #region hero__bg */
+/* #region herBacDiv */
 
-.hero__bg { /* What: Hero Background. Why: A faint architectural grid sits behind the hero, fading out away from the logo. How: This covers the section at 5% opacity, masked to a soft ellipse, behind everything and ignoring the pointer. */
+.herBacDiv { /* What: Hero Background Div. Why: A faint architectural grid sits behind the hero, fading out away from the logo. How: This covers the section at 5% opacity, masked to a soft ellipse, behind everything and ignoring the pointer. */
 
 
 	-webkit-mask-image : radial-gradient( ellipse at 70% 30%, black 0%, transparent 75% );
@@ -80,13 +80,13 @@
 
 /* #endregion herGriSvg */
 
-/* #endregion hero__bg */
+/* #endregion herBacDiv */
 
 
 
-/* #region hero__inner */
+/* #region herInnDiv */
 
-.hero__inner { /* What: Hero Inner Column. Why: The hero's content should line up with the page's content width, above the grid. How: This centers a full-width column and lifts it over the background. */
+.herInnDiv { /* What: Hero Inner Div. Why: The hero's content should line up with the page's content width, above the grid. How: This centers a full-width column and lifts it over the background. */
 
 
 	margin         : 0 auto;
@@ -100,9 +100,9 @@
 }
 
 
-/* #region hero__top */
+/* #region herTopDiv */
 
-.hero__top { /* What: Hero Top Row. Why: The headline and logo share the first row. How: This sets a two-column grid with the copy slightly wider. */
+.herTopDiv { /* What: Hero Top Div. Why: The headline and logo share the first row. How: This sets a two-column grid with the copy slightly wider. */
 
 
 	align-items           : center;
@@ -113,10 +113,10 @@
 
 
 }
-@container app ( max-width : 960px ) { /* What: Narrow Hero Top Row. Why: Small screens are too narrow for two columns. How: This applies below 960px wide. */
+@container app ( max-width : 960px ) { /* What: Narrow Hero Top Div. Why: Small screens are too narrow for two columns. How: This applies below 960px wide. */
 
 
-	.hero__top { /* What: Stacked Hero Top Row. Why: The copy and logo read best stacked. How: This turns the grid into one column with smaller gaps. */
+	.herTopDiv { /* What: Stacked Hero Top Div. Why: The copy and logo read best stacked. How: This turns the grid into one column with smaller gaps. */
 
 
 		gap                   : var( --spa-ver-p04 ); /* Spacing Vertical Base Plus 4 ~= 44.876px */
@@ -130,19 +130,19 @@
 }
 
 
-/* #region hero__copy */
+/* #region herCopDiv */
 
-.hero__copy { /* What: Hero Copy Column. Why: The label and headline enter first. How: This plays the rise animation with no delay. */
+.herCopDiv { /* What: Hero Copy Div. Why: The label and headline enter first. How: This plays the entrance animation with no delay. */
 
 
-	animation : rise var( --dur-ani-p06 ) var( --mot-dec-eas ) both; /* Duration Animation Base Plus 6 ~= 853.0ms, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ) */
+	animation : divEnterFadeIn var( --dur-ani-p06 ) var( --mot-dec-eas ) both; /* Duration Animation Base Plus 6 ~= 853.0ms, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ) */
 
 
 }
-@media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Hero Copy. Why: Someone who asked for less motion shouldn't see the copy rise. How: This applies only when the reduced-motion preference is set. */
+@media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Hero Copy Div. Why: Someone who asked for less motion shouldn't see the copy rise. How: This applies only when the reduced-motion preference is set. */
 
 
-	.hero__copy { /* What: Motionless Hero Copy Column. Why: The copy should simply be there. How: This turns the animation off. */
+	.herCopDiv { /* What: Motionless Hero Copy Div. Why: The copy should simply be there. How: This turns the animation off. */
 
 
 		animation : none;
@@ -152,7 +152,7 @@
 
 
 }
-@keyframes rise { /* What: Rise. Why: Each hero block slides up and fades in as the page opens. How: This moves from 24px below and transparent to its place, fully shown. */
+@keyframes divEnterFadeIn { /* What: Div Enter Fade In. Why: Each hero block slides up and fades in as the page opens. How: This moves from 24px below and transparent to its place, fully shown. */
 
 
 	from {
@@ -176,7 +176,7 @@
 
 }
 
-.eyebrow { /* What: Eyebrow Label. Why: A small uppercase label with a leading line introduces the headline. How: This sets it in tracked, muted capitals with room below. */
+.eyeLabSpa { /* What: Eyebrow Label Span. Why: A small uppercase label with a leading line introduces the headline. How: This sets it in tracked, muted capitals with room below. */
 
 
 	align-items    : center;
@@ -192,7 +192,7 @@
 
 
 }
-.eyebrow::before { /* What: Eyebrow Leading Line. Why: A short rule leads into the label. How: This draws a 28px hairline before the text. */
+.eyeLabSpa::before { /* What: Eyebrow Label Span Leading Line. Why: A short rule leads into the label. How: This draws a 28px hairline before the text. */
 
 
 	background : var( --tex-mut-col ); /* Text Muted Color = #6b7079 */
@@ -204,9 +204,9 @@
 }
 
 
-/* #region hero__title */
+/* #region herTitHea */
 
-.hero__title { /* What: Hero Title. Why: The headline is the page's largest type. How: This sets it in the display font at its largest optical size, scaling with the viewport between two font size steps, with no width cap since its line breaks set its shape. */
+.herTitHea { /* What: Hero Title Heading. Why: The headline is the page's largest type. How: This sets it in the display font at its largest optical size, scaling with the viewport between two font size steps, with no width cap since its line breaks set its shape. */
 
 
 	color                   : var( --tex-mai-col );                                       /* Text Main Color = #1a1f24 */
@@ -230,26 +230,26 @@
 
 }
 
-/* #endregion hero__title */
+/* #endregion herTitHea */
 
-/* #endregion hero__copy */
+/* #endregion herCopDiv */
 
 
 
-/* #region hero__logo */
+/* #region herLogDiv */
 
-.hero__logo { /* What: Hero Logo Frame. Why: The logo is the hero's main visual, ringed and rising in just after the copy. How: This centers the logo and plays the rise animation after a short delay. */
+.herLogDiv { /* What: Hero Logo Div. Why: The logo is the hero's main visual, ringed and rising in just after the copy. How: This centers the logo and plays the entrance animation after a short delay. */
 
 
 	align-items     : center;
-	animation       : rise var( --dur-ani-p07 ) var( --mot-dec-eas ) var( --dur-ani-bas ) both; /* Duration Animation Base Plus 7 ~= 1130.0ms, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ), Duration Animation Base ~= 157.8ms */
+	animation       : divEnterFadeIn var( --dur-ani-p07 ) var( --mot-dec-eas ) var( --dur-ani-bas ) both; /* Duration Animation Base Plus 7 ~= 1130.0ms, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ), Duration Animation Base ~= 157.8ms */
 	display         : flex;
 	justify-content : center;
 	position        : relative;
 
 
 }
-.hero__logo::before { /* What: Hero Logo Ring. Why: A faint oval ring frames the logo. How: This draws a rounded hairline just outside the frame. */
+.herLogDiv::before { /* What: Hero Logo Div Ring. Why: A faint oval ring frames the logo. How: This draws a rounded hairline just outside the frame. */
 
 
 	border         : var( --bor-wid-bas ) solid var( --bor-str-col ); /* Border Width Base ~= 1.160px, Border Strong Color, the main border at 0.22 opacity */
@@ -262,10 +262,10 @@
 
 
 }
-@container app ( max-width : 960px ) { /* What: Narrow Hero Logo Frame. Why: The stacked hero puts the logo first. How: This applies below 960px wide. */
+@container app ( max-width : 960px ) { /* What: Narrow Hero Logo Div. Why: The stacked hero puts the logo first. How: This applies below 960px wide. */
 
 
-	.hero__logo { /* What: Leading Hero Logo Frame. Why: The logo should open the stacked hero. How: This moves it above the copy with a little room below. */
+	.herLogDiv { /* What: Leading Hero Logo Div. Why: The logo should open the stacked hero. How: This moves it above the copy with a little room below. */
 
 
 		margin-bottom : var( --spa-ver-m02 ); /* Spacing Vertical Base Minus 2 ~= 8.304px */
@@ -274,7 +274,7 @@
 
 	}
 
-	.hero__logo::before { /* What: Narrow Hero Logo Ring. Why: The ring needs more room around the smaller logo. How: This widens its inset. */
+	.herLogDiv::before { /* What: Narrow Hero Logo Div Ring. Why: The ring needs more room around the smaller logo. How: This widens its inset. */
 
 
 		inset : -10% -6%;
@@ -284,10 +284,10 @@
 
 
 }
-@media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Hero Logo. Why: Someone who asked for less motion shouldn't see the logo rise. How: This applies only when the reduced-motion preference is set. */
+@media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Hero Logo Div. Why: Someone who asked for less motion shouldn't see the logo rise. How: This applies only when the reduced-motion preference is set. */
 
 
-	.hero__logo { /* What: Motionless Hero Logo Frame. Why: The logo should simply be there. How: This turns the animation off. */
+	.herLogDiv { /* What: Motionless Hero Logo Div. Why: The logo should simply be there. How: This turns the animation off. */
 
 
 		animation : none;
@@ -335,19 +335,19 @@
 
 }
 
-/* #endregion hero__logo */
+/* #endregion herLogDiv */
 
-/* #endregion hero__top */
+/* #endregion herTopDiv */
 
 
 
-/* #region hero__bottom */
+/* #region herBotDiv */
 
-.hero__bottom { /* What: Hero Bottom Row. Why: The pitch and the buttons share a row between hairlines, rising in after the top row. How: This sets a two-column grid with rules above and below and plays the rise animation after a delay. */
+.herBotDiv { /* What: Hero Bottom Div. Why: The pitch and the buttons share a row between hairlines, rising in after the top row. How: This sets a two-column grid with rules above and below and plays the entrance animation after a delay. */
 
 
 	align-items           : end;
-	animation             : rise var( --dur-ani-p06 ) var( --mot-dec-eas ) var( --dur-ani-p02 ) both; /* Duration Animation Base Plus 6 ~= 853.0ms, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ), Duration Animation Base Plus 2 ~= 277.0ms */
+	animation             : divEnterFadeIn var( --dur-ani-p06 ) var( --mot-dec-eas ) var( --dur-ani-p02 ) both; /* Duration Animation Base Plus 6 ~= 853.0ms, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ), Duration Animation Base Plus 2 ~= 277.0ms */
 	border-bottom         : var( --bor-wid-bas ) solid var( --bor-mai-col );                          /* Border Width Base ~= 1.160px, Border Main Color = rgba( 26, 31, 36, 0.12 ) */
 	border-top            : var( --bor-wid-bas ) solid var( --bor-mai-col );                          /* Border Width Base ~= 1.160px, Border Main Color = rgba( 26, 31, 36, 0.12 ) */
 	display               : grid;
@@ -358,10 +358,10 @@
 
 
 }
-@container app ( max-width : 960px ) { /* What: Narrow Hero Bottom Row. Why: Small screens are too narrow for the pitch and buttons side by side. How: This applies below 960px wide. */
+@container app ( max-width : 960px ) { /* What: Narrow Hero Bottom Div. Why: Small screens are too narrow for the pitch and buttons side by side. How: This applies below 960px wide. */
 
 
-	.hero__bottom { /* What: Stacked Hero Bottom Row. Why: The buttons read best under the pitch. How: This turns the grid into one column with a smaller gap. */
+	.herBotDiv { /* What: Stacked Hero Bottom Div. Why: The buttons read best under the pitch. How: This turns the grid into one column with a smaller gap. */
 
 
 		gap                   : var( --spa-ver-p03 ); /* Spacing Vertical Base Plus 3 ~= 33.876px */
@@ -372,10 +372,10 @@
 
 
 }
-@media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Hero Bottom. Why: Someone who asked for less motion shouldn't see the row rise. How: This applies only when the reduced-motion preference is set. */
+@media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Hero Bottom Div. Why: Someone who asked for less motion shouldn't see the row rise. How: This applies only when the reduced-motion preference is set. */
 
 
-	.hero__bottom { /* What: Motionless Hero Bottom Row. Why: The row should simply be there. How: This turns the animation off. */
+	.herBotDiv { /* What: Motionless Hero Bottom Div. Why: The row should simply be there. How: This turns the animation off. */
 
 
 		animation : none;
@@ -386,7 +386,7 @@
 
 }
 
-.hero__lede { /* What: Hero Lede Paragraph. Why: The pitch reads as the hero's lead paragraph. How: This sets it in the body font, a little larger than body text, at a comfortable measure. */
+.herLedPar { /* What: Hero Lede Paragraph. Why: The pitch reads as the hero's lead paragraph. How: This sets it in the body font, a little larger than body text, at a comfortable measure. */
 
 
 	color       : var( --tex-sec-col );                                       /* Text Secondary Color = #2a3138 */
@@ -401,9 +401,9 @@
 
 
 
-/* #region hero__actions */
+/* #region herActDiv */
 
-.hero__actions { /* What: Hero Actions Row. Why: The hero's two next steps sit together. How: This sets the buttons side by side, wrapping if needed. */
+.herActDiv { /* What: Hero Actions Div. Why: The hero's two next steps sit together. How: This sets the buttons side by side, wrapping if needed. */
 
 
 	display   : flex;
@@ -414,9 +414,9 @@
 }
 
 
-/* #region btn */
+/* #region butBasAnc */
 
-.btn { /* What: Button. Why: The hero's actions share the site's pill button shape. How: This draws a rounded pill with its label and arrow side by side, easing its colors and lift on hover. */
+.butBasAnc { /* What: Button Base Anchor. Why: The hero's actions share the site's pill button shape. How: This draws a rounded pill with its label and arrow side by side, easing its colors and lift on hover. */
 
 
 	align-items    : center;
@@ -433,7 +433,7 @@
 
 
 }
-.btn-primary { /* What: Primary Button. Why: The estimate button is the hero's main action. How: This fills it with ink and paper-colored text. */
+.butBasAnc--primary { /* What: Primary Button Base Anchor. Why: The estimate button is the hero's main action. How: This fills it with ink and paper-colored text. */
 
 
 	background : var( --bac-inv-col ); /* Background Inverse Color = #1a1f24 */
@@ -441,7 +441,7 @@
 
 
 }
-.btn-primary:hover { /* What: Hovered Primary Button. Why: The button should respond to the pointer. How: This turns it accent and lifts it a pixel. */
+.butBasAnc--primary:hover { /* What: Hovered Primary Button Base Anchor. Why: The button should respond to the pointer. How: This turns it accent and lifts it a pixel. */
 
 
 	background : var( --acc-mai-col ); /* Accent Main Color = #1f4e7a */
@@ -449,7 +449,7 @@
 
 
 }
-.btn-ghost { /* What: Ghost Button. Why: The services button is a secondary action. How: This outlines it with no fill. */
+.butBasAnc--ghost { /* What: Ghost Button Base Anchor. Why: The services button is a secondary action. How: This outlines it with no fill. */
 
 
 	border-color : var( --bor-str-col ); /* Border Strong Color, the main border at 0.22 opacity */
@@ -457,7 +457,7 @@
 
 
 }
-.btn-ghost:hover { /* What: Hovered Ghost Button. Why: The button should respond to the pointer. How: This fills it with ink and turns its text paper-colored. */
+.butBasAnc--ghost:hover { /* What: Hovered Ghost Button Base Anchor. Why: The button should respond to the pointer. How: This fills it with ink and turns its text paper-colored. */
 
 
 	background   : var( --bac-inv-col ); /* Background Inverse Color = #1a1f24 */
@@ -466,10 +466,10 @@
 
 
 }
-@media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Button. Why: Someone who asked for less motion shouldn't see the buttons animate. How: This applies only when the reduced-motion preference is set. */
+@media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Button Base Anchor. Why: Someone who asked for less motion shouldn't see the buttons animate. How: This applies only when the reduced-motion preference is set. */
 
 
-	.btn { /* What: Motionless Button. Why: The hover styles should appear at once. How: This turns the transition off. */
+	.butBasAnc { /* What: Motionless Button Base Anchor. Why: The hover styles should appear at once. How: This turns the transition off. */
 
 
 		transition : none;
@@ -480,24 +480,24 @@
 
 }
 
-.arrow { /* What: Arrow Span. Why: The arrow slides forward as its button is hovered. How: This animates its position. */
+.arrIcoSpa { /* What: Arrow Icon Span. Why: The arrow slides forward as its button is hovered. How: This animates its position. */
 
 
 	transition : transform var( --dur-tra-p02 ) var( --mot-dec-eas ); /* Duration Transition Base Plus 2 ~= 277.0ms, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ) */
 
 
 }
-.btn:hover .arrow { /* What: Hovered Arrow Span. Why: The arrow points the visitor onward when its button is hovered. How: This moves it 4px right. */
+.butBasAnc:hover .arrIcoSpa { /* What: Hovered Arrow Icon Span. Why: The arrow points the visitor onward when its button is hovered. How: This moves it 4px right. */
 
 
 	transform : translateX( 4px );
 
 
 }
-@media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Arrow. Why: Someone who asked for less motion shouldn't see the arrow slide. How: This applies only when the reduced-motion preference is set. */
+@media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Arrow Icon Span. Why: Someone who asked for less motion shouldn't see the arrow slide. How: This applies only when the reduced-motion preference is set. */
 
 
-	.arrow { /* What: Motionless Arrow Span. Why: The arrow should simply shift. How: This turns the transition off. */
+	.arrIcoSpa { /* What: Motionless Arrow Icon Span. Why: The arrow should simply shift. How: This turns the transition off. */
 
 
 		transition : none;
@@ -508,20 +508,20 @@
 
 }
 
-/* #endregion btn */
+/* #endregion butBasAnc */
 
-/* #endregion hero__actions */
+/* #endregion herActDiv */
 
-/* #endregion hero__bottom */
-
-
-
-/* #region hero__stats */
-
-.hero__stats { /* What: Hero Stats Row. Why: The four numbers read as one row, rising in last. How: This sets a four-column grid and plays the rise animation after the longest delay. */
+/* #endregion herBotDiv */
 
 
-	animation             : rise var( --dur-ani-p06 ) var( --mot-dec-eas ) var( --dur-ani-p04 ) both; /* Duration Animation Base Plus 6 ~= 853.0ms, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ), Duration Animation Base Plus 4 ~= 486.1ms */
+
+/* #region herStaDiv */
+
+.herStaDiv { /* What: Hero Stats Div. Why: The four numbers read as one row, rising in last. How: This sets a four-column grid and plays the entrance animation after the longest delay. */
+
+
+	animation             : divEnterFadeIn var( --dur-ani-p06 ) var( --mot-dec-eas ) var( --dur-ani-p04 ) both; /* Duration Animation Base Plus 6 ~= 853.0ms, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ), Duration Animation Base Plus 4 ~= 486.1ms */
 	display               : grid;
 	gap                   : var( --spa-ver-p03 ) 2.9090909091rem;                                     /* Spacing Vertical Base Plus 3 ~= 33.876px */
 	grid-template-columns : repeat( 4, 1fr );
@@ -529,10 +529,10 @@
 
 
 }
-@container app ( max-width : 960px ) { /* What: Narrow Hero Stats Row. Why: Four columns don't fit a small screen. How: This applies below 960px wide. */
+@container app ( max-width : 960px ) { /* What: Narrow Hero Stats Div. Why: Four columns don't fit a small screen. How: This applies below 960px wide. */
 
 
-	.hero__stats { /* What: Two Column Hero Stats Row. Why: The stats fit two to a row. How: This sets two columns with a tighter column gap. */
+	.herStaDiv { /* What: Two Column Hero Stats Div. Why: The stats fit two to a row. How: This sets two columns with a tighter column gap. */
 
 
 		gap                   : var( --spa-ver-p03 ) 2.1818181818rem; /* Spacing Vertical Base Plus 3 ~= 33.876px */
@@ -543,10 +543,10 @@
 
 
 }
-@container app ( max-width : 500px ) { /* What: Phone Hero Stats Row. Why: Phones keep the two-column layout. How: This applies below 500px wide. */
+@container app ( max-width : 500px ) { /* What: Phone Hero Stats Div. Why: Phones keep the two-column layout. How: This applies below 500px wide. */
 
 
-	.hero__stats { /* What: Phone Two Column Hero Stats Row. Why: The stats still fit two to a row. How: This sets two equal columns. */
+	.herStaDiv { /* What: Phone Two Column Hero Stats Div. Why: The stats still fit two to a row. How: This sets two equal columns. */
 
 
 		grid-template-columns : 1fr 1fr;
@@ -556,10 +556,10 @@
 
 
 }
-@media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Hero Stats. Why: Someone who asked for less motion shouldn't see the stats rise. How: This applies only when the reduced-motion preference is set. */
+@media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Hero Stats Div. Why: Someone who asked for less motion shouldn't see the stats rise. How: This applies only when the reduced-motion preference is set. */
 
 
-	.hero__stats { /* What: Motionless Hero Stats Row. Why: The stats should simply be there. How: This turns the animation off. */
+	.herStaDiv { /* What: Motionless Hero Stats Div. Why: The stats should simply be there. How: This turns the animation off. */
 
 
 		animation : none;
@@ -571,9 +571,9 @@
 }
 
 
-/* #region stat */
+/* #region staIteDiv */
 
-.stat { /* What: Stat. Why: Each stat is set off by a thin rule on its left. How: This draws the rule and pads the content away from it. */
+.staIteDiv { /* What: Stat Item Div. Why: Each stat is set off by a thin rule on its left. How: This draws the rule and pads the content away from it. */
 
 
 	border-left  : var( --bor-wid-bas ) solid var( --bor-mai-col ); /* Border Width Base ~= 1.160px, Border Main Color = rgba( 26, 31, 36, 0.12 ) */
@@ -581,7 +581,7 @@
 
 
 }
-.stat:first-child { /* What: First Stat. Why: The first stat anchors the row with a stronger rule. How: This draws its rule in full ink. */
+.staIteDiv:first-child { /* What: First Stat Item Div. Why: The first stat anchors the row with a stronger rule. How: This draws its rule in full ink. */
 
 
 	border-left : var( --bor-wid-bas ) solid var( --tex-mai-col ); /* Border Width Base ~= 1.160px, Text Main Color = #1a1f24 */
@@ -590,9 +590,9 @@
 }
 
 
-/* #region stat__num */
+/* #region staNumDiv */
 
-.stat__num { /* What: Stat Number. Why: The number leads each stat in large display type. How: This sets it in the display font at its largest optical size, scaling with the viewport, with its line height trimmed to the glyphs and slightly looser tracking than the headings. */
+.staNumDiv { /* What: Stat Number Div. Why: The number leads each stat in large display type. How: This sets it in the display font at its largest optical size, scaling with the viewport, with its line height trimmed to the glyphs and slightly looser tracking than the headings. */
 
 
 	color                   : var( --tex-mai-col );                                     /* Text Main Color = #1a1f24 */
@@ -618,7 +618,7 @@
 
 }
 
-.stat__plus { /* What: Stat Plus Span. Why: The rating's plus sign is set apart in the accent. How: This raises it like the other suffixes, but in accent italic. */
+.staPluSpa { /* What: Stat Plus Span. Why: The rating's plus sign is set apart in the accent. How: This raises it like the other suffixes, but in accent italic. */
 
 
 	color          : var( --acc-mai-col );                   /* Accent Main Color = #1f4e7a */
@@ -630,10 +630,10 @@
 
 }
 
-/* #endregion stat__num */
+/* #endregion staNumDiv */
 
 
-.stat__label { /* What: Stat Label. Why: Each number needs a short line saying what it counts. How: This sets it small and muted at the small text measure. */
+.staLabDiv { /* What: Stat Label Div. Why: Each number needs a short line saying what it counts. How: This sets it small and muted at the small text measure. */
 
 
 	color       : var( --tex-mut-col ); /* Text Muted Color = #6b7079 */
@@ -644,12 +644,12 @@
 
 }
 
-/* #endregion stat */
+/* #endregion staIteDiv */
 
-/* #endregion hero__stats */
+/* #endregion herStaDiv */
 
-/* #endregion hero__inner */
+/* #endregion herInnDiv */
 
-/* #endregion hero */
+/* #endregion homHerSec */
 
 

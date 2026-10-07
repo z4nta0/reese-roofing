@@ -64,16 +64,16 @@ function SitFooCom () : React.JSX.Element {
 	return (
 
 
-		<footer className={ cssModObj.footer }>{ /* What: Site Footer Element. Why: This is the page's footer landmark. How: This holds the footer's single content row. */ }
+		<footer className={ cssModObj.sitFooFoo }>{ /* What: Site Footer Element. Why: This is the page's footer landmark. How: This holds the footer's single content row. */ }
 
 
-			<div className={ cssModObj.footerInner }>{ /* What: Footer Inner Div Element. Why: The footer's contents should line up with the page's content width. How: This holds the brand, the meta lines, and the back-to-top link in one row. */ }
+			<div className={ cssModObj.fooInnDiv }>{ /* What: Footer Inner Div Element. Why: The footer's contents should line up with the page's content width. How: This holds the brand, the meta lines, and the back-to-top link in one row. */ }
 
 
-				<div className={ cssModObj.footerBrand }>{ /* What: Footer Brand Div Element. Why: The footer repeats the company's mark and name. How: This sets them side by side. */ }
+				<div className={ cssModObj.fooBraDiv }>{ /* What: Footer Brand Div Element. Why: The footer repeats the company's mark and name. How: This sets them side by side. */ }
 
 
-					<span className={ cssModObj.footerMark }>{ /* What: Footer Mark Span Element. Why: The logo mark sits in its own sized box. How: This holds the mark's image. */ }
+					<span className={ cssModObj.fooMarSpa }>{ /* What: Footer Mark Span Element. Why: The logo mark sits in its own sized box. How: This holds the mark's image. */ }
 
 
 						<img
@@ -96,7 +96,7 @@ function SitFooCom () : React.JSX.Element {
 
 				</div>
 
-				<div className={ cssModObj.footerMeta }>{ /* What: Footer Meta Div Element. Why: The legal and location details sit together. How: This stacks the copyright and licensing lines. */ }
+				<div className={ cssModObj.fooMetDiv }>{ /* What: Footer Meta Div Element. Why: The legal and location details sit together. How: This stacks the copyright and licensing lines. */ }
 
 
 					<span>© { curYeaNum } Reese Roofing, LLC</span>{ /* What: Copyright Span Element. Why: The footer states the company's copyright. How: This pairs the current year with the company's legal name. */ }
@@ -107,13 +107,13 @@ function SitFooCom () : React.JSX.Element {
 				</div>
 
 				<a
-					className={ cssModObj.footerTop }
+					className={ cssModObj.fooTopAnc }
 
 					href='#top'
 
 					aria-label='Back to top'
 				>{ /* What: Footer Top Anchor Element. Why: A long page should offer a quick way back up. How: This links to the page's top anchor. */ }
-					Back to top <span className={ cssModObj.arrow }>↑</span>
+					Back to top <span className={ cssModObj.arrIcoSpa }>↑</span>
 				</a>
 
 

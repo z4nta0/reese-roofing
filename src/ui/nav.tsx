@@ -105,14 +105,14 @@ function NavBarCom () : React.JSX.Element {
 	return (
 
 
-		<header className={` ${ cssModObj.nav }   ${ scrPasBoo ? cssModObj.navScrolled : '' } `}>{ /* What: Navigation Header Element. Why: This is the site's top bar landmark. How: This takes its scrolled style once scrPasBoo is true. */ }
+		<header className={` ${ cssModObj.navBarHed }   ${ scrPasBoo ? cssModObj.navBarHedScrolled : '' } `}>{ /* What: Navigation Header Element. Why: This is the site's top bar landmark. How: This takes its scrolled style once scrPasBoo is true. */ }
 
 
-			<div className={ cssModObj.navInner }>{ /* What: Navigation Inner Div Element. Why: The bar's contents should line up with the page's content width. How: This holds the brand, links, actions, and toggle in one row. */ }
+			<div className={ cssModObj.navInnDiv }>{ /* What: Navigation Inner Div Element. Why: The bar's contents should line up with the page's content width. How: This holds the brand, links, actions, and toggle in one row. */ }
 
 
 				<a
-					className={ cssModObj.navBrand }
+					className={ cssModObj.navBraAnc }
 
 					href='#top'
 
@@ -121,7 +121,7 @@ function NavBarCom () : React.JSX.Element {
 
 
 					<img
-						className={ cssModObj.navMark }
+						className={ cssModObj.navMarIma }
 
 						height='36'
 						src={ lomSvgUrl }
@@ -130,15 +130,15 @@ function NavBarCom () : React.JSX.Element {
 						alt=''
 					/>{ /* What: Navigation Mark Image Element. Why: The bar shows the simple logo mark beside the name. How: Its empty alt leaves the link's aria-label to name it, since the image is decorative. */ }
 
-					<span className={ cssModObj.navName }>{ /* What: Navigation Name Span Element. Why: The company's name sits beside the mark. How: The second word takes a lighter weight. */ }
-						Reese <span className={ cssModObj.navNameLight }>Roofing</span>
+					<span className={ cssModObj.navNamSpa }>{ /* What: Navigation Name Span Element. Why: The company's name sits beside the mark. How: The second word takes a lighter weight. */ }
+						Reese <span className={ cssModObj.namLigSpa }>Roofing</span>
 					</span>
 
 
 				</a>
 
 				<nav
-					className={ cssModObj.navLinks }
+					className={ cssModObj.navLinNav }
 
 					aria-label='Primary'
 				>{ /* What: Navigation Links Nav Element. Why: The section links form the site's primary navigation landmark. How: This lists one link per row of NAV_LIN_ARR. */ }
@@ -150,7 +150,7 @@ function NavBarCom () : React.JSX.Element {
 						<a
 							key={ navLinObj.hreStr }
 
-							className={ cssModObj.navLink }
+							className={ cssModObj.navLinAnc }
 
 							href={ navLinObj.hreStr }
 						>{ /* What: Navigation Link Anchor Element. Why: Each link jumps to its section. How: This links to the row's anchor. */ }
@@ -163,11 +163,11 @@ function NavBarCom () : React.JSX.Element {
 
 				</nav>
 
-				<div className={ cssModObj.navCta }>{ /* What: Navigation Call-To-Action Div Element. Why: The bar's two ways to reach the company sit together. How: This holds the phone link and the estimate button. */ }
+				<div className={ cssModObj.navCtaDiv }>{ /* What: Navigation Call-To-Action Div Element. Why: The bar's two ways to reach the company sit together. How: This holds the phone link and the estimate button. */ }
 
 
 					<a
-						className={ cssModObj.navPhone }
+						className={ cssModObj.navPhoAnc }
 
 						href='tel:+17855550199'
 
@@ -177,19 +177,19 @@ function NavBarCom () : React.JSX.Element {
 					</a>
 
 					<a
-						className={ cssModObj.navBtn }
+						className={ cssModObj.navEstAnc }
 
 						href='#contact'
 					>{ /* What: Navigation Button Anchor Element. Why: The bar's main action is requesting an estimate. How: This links to the contact section. */ }
 						Get an estimate
-						<span className={ cssModObj.arrow }>→</span>{ /* What: Arrow Span Element. Why: The arrow marks the button as moving the visitor onward. How: This sits right after the label. */ }
+						<span className={ cssModObj.arrIcoSpa }>→</span>{ /* What: Arrow Span Element. Why: The arrow marks the button as moving the visitor onward. How: This sits right after the label. */ }
 					</a>
 
 
 				</div>
 
 				<button
-					className={ cssModObj.navToggle }
+					className={ cssModObj.navTogBut }
 
 					aria-expanded={ draOpeBoo }
 					aria-label='Toggle menu'
@@ -210,7 +210,7 @@ function NavBarCom () : React.JSX.Element {
 
 
 			<div
-				className={ cssModObj.navDrawer }
+				className={ cssModObj.navDraDiv }
 
 				data-drawer-menu-open={ draOpeBoo || undefined } // What: Drawer Menu Open Attribute. Why: The drawer's stylesheet opens it while this is present. How: This is set only while draOpeBoo is true, and React drops it otherwise.
 			>{ /* What: Navigation Drawer Div Element. Why: Small screens show the links in a drawer below the bar. How: This opens while draOpeBoo is true. */ }
@@ -222,7 +222,7 @@ function NavBarCom () : React.JSX.Element {
 					<a
 						key={ navLinObj.hreStr }
 
-						className={ cssModObj.navDrawerLink }
+						className={ cssModObj.draLinAnc }
 
 						href={ navLinObj.hreStr }
 
@@ -235,7 +235,7 @@ function NavBarCom () : React.JSX.Element {
 				))}
 
 				<a
-					className={` ${ cssModObj.navDrawerLink }   ${ cssModObj.navDrawerLinkMuted } `}
+					className={` ${ cssModObj.draLinAnc }   ${ cssModObj.draLinAncMuted } `}
 
 					href='tel:+17855550199'
 				>{ /* What: Drawer Phone Anchor Element. Why: The drawer keeps the phone number reachable on small screens. How: This dials the company's number. */ }

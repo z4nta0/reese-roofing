@@ -34,7 +34,7 @@
 
 }
 
-.eyebrow { /* What: Eyebrow Label. Why: A small label with a leading line names the error. How: This sets it in tracked, muted capitals. */
+.eyeLabSpa { /* What: Eyebrow Label Span. Why: A small label with a leading line names the error. How: This sets it in tracked, muted capitals. */
 
 
 	align-items    : center;
@@ -49,7 +49,7 @@
 
 
 }
-.eyebrow::before { /* What: Eyebrow Leading Line. Why: A short rule leads into the label. How: This draws a 28px hairline before the text. */
+.eyeLabSpa::before { /* What: Eyebrow Label Span Leading Line. Why: A short rule leads into the label. How: This draws a 28px hairline before the text. */
 
 
 	background : var( --tex-mut-col ); /* Text Muted Color = #6b7079 */
@@ -61,9 +61,9 @@
 }
 
 
-/* #region display */
+/* #region notFouHea */
 
-.display { /* What: Display Heading. Why: The heading states the problem in large display type. How: This sets it in the display font at its largest optical size, scaling with the viewport between two bounds. */
+.notFouHea { /* What: Not Found Heading. Why: The heading states the problem in large display type. How: This sets it in the display font at its largest optical size, scaling with the viewport between two bounds. */
 
 
 	color                   : var( --tex-mai-col );                                     /* Text Main Color = #1a1f24 */
@@ -87,10 +87,10 @@
 
 }
 
-/* #endregion display */
+/* #endregion notFouHea */
 
 
-.lede { /* What: Lede Paragraph. Why: The explanation reads as a short lead paragraph. How: This sets it in the body font, a little larger than body text, at a comfortable measure. */
+.nofLedPar { /* What: Not-Found Lede Paragraph. Why: The explanation reads as a short lead paragraph. How: This sets it in the body font, a little larger than body text, at a comfortable measure. */
 
 
 	color       : var( --tex-sec-col );                                       /* Text Secondary Color = #2a3138 */
@@ -103,9 +103,9 @@
 }
 
 
-/* #region btn */
+/* #region butBasAnc */
 
-.btn { /* What: Button. Why: The way home uses the site's pill button shape. How: This draws a rounded pill with its label and arrow side by side, easing its colors and lift on hover. */
+.butBasAnc { /* What: Button Base Anchor. Why: The way home uses the site's pill button shape. How: This draws a rounded pill with its label and arrow side by side, easing its colors and lift on hover. */
 
 
 	align-items    : center;
@@ -122,7 +122,7 @@
 
 
 }
-.btn-primary { /* What: Primary Button. Why: Going home is the page's one action. How: This fills it with ink and paper-colored text. */
+.butBasAnc--primary { /* What: Primary Button Base Anchor. Why: Going home is the page's one action. How: This fills it with ink and paper-colored text. */
 
 
 	background : var( --bac-inv-col ); /* Background Inverse Color = #1a1f24 */
@@ -130,7 +130,7 @@
 
 
 }
-.btn-primary:hover { /* What: Hovered Primary Button. Why: The button should respond to the pointer. How: This turns it accent and lifts it a pixel. */
+.butBasAnc--primary:hover { /* What: Hovered Primary Button Base Anchor. Why: The button should respond to the pointer. How: This turns it accent and lifts it a pixel. */
 
 
 	background : var( --acc-mai-col ); /* Accent Main Color = #1f4e7a */
@@ -138,10 +138,10 @@
 
 
 }
-@media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Button. Why: Someone who asked for less motion shouldn't see the button animate. How: This applies only when the reduced-motion preference is set. */
+@media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Button Base Anchor. Why: Someone who asked for less motion shouldn't see the button animate. How: This applies only when the reduced-motion preference is set. */
 
 
-	.btn { /* What: Motionless Button. Why: The hover style should appear at once. How: This turns the transition off. */
+	.butBasAnc { /* What: Motionless Button Base Anchor. Why: The hover style should appear at once. How: This turns the transition off. */
 
 
 		transition : none;
@@ -152,24 +152,24 @@
 
 }
 
-.arrow { /* What: Arrow Span. Why: The arrow slides forward as the button is hovered. How: This animates its position. */
+.arrIcoSpa { /* What: Arrow Icon Span. Why: The arrow slides forward as the button is hovered. How: This animates its position. */
 
 
 	transition : transform var( --dur-tra-p02 ) var( --mot-dec-eas ); /* Duration Transition Base Plus 2 ~= 277.0ms, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ) */
 
 
 }
-.btn:hover .arrow { /* What: Hovered Arrow Span. Why: The arrow points the visitor onward when the button is hovered. How: This moves it 4px right. */
+.butBasAnc:hover .arrIcoSpa { /* What: Hovered Arrow Icon Span. Why: The arrow points the visitor onward when the button is hovered. How: This moves it 4px right. */
 
 
 	transform : translateX( 4px );
 
 
 }
-@media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Arrow. Why: Someone who asked for less motion shouldn't see the arrow slide. How: This applies only when the reduced-motion preference is set. */
+@media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Arrow Icon Span. Why: Someone who asked for less motion shouldn't see the arrow slide. How: This applies only when the reduced-motion preference is set. */
 
 
-	.arrow { /* What: Motionless Arrow Span. Why: The arrow should simply shift. How: This turns the transition off. */
+	.arrIcoSpa { /* What: Motionless Arrow Icon Span. Why: The arrow should simply shift. How: This turns the transition off. */
 
 
 		transition : none;
@@ -180,7 +180,7 @@
 
 }
 
-/* #endregion btn */
+/* #endregion butBasAnc */
 
 /* #endregion notFouMai */
 

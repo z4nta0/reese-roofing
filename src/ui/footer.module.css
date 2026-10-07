@@ -17,9 +17,9 @@
 
 
 
-/* #region footer */
+/* #region sitFooFoo */
 
-.footer { /* What: Site Footer. Why: The footer closes the page on a dark band. How: This sets the ink background with muted light text and a faint top edge. */
+.sitFooFoo { /* What: Site Footer Footer. Why: The footer closes the page on a dark band. How: This sets the ink background with muted light text and a faint top edge. */
 
 
 	background : var( --bac-inv-col );                                                                           /* Background Inverse Color = #1a1f24 */
@@ -31,9 +31,9 @@
 }
 
 
-/* #region footer__inner */
+/* #region fooInnDiv */
 
-.footer__inner { /* What: Footer Inner Row. Why: The footer's contents should line up with the page's content width. How: This spreads the brand, meta lines, and top link across one centered row that can wrap. */
+.fooInnDiv { /* What: Footer Inner Div. Why: The footer's contents should line up with the page's content width. How: This spreads the brand, meta lines, and top link across one centered row that can wrap. */
 
 
 	align-items     : center;
@@ -48,10 +48,10 @@
 
 
 }
-@container app ( max-width : 600px ) { /* What: Narrow Footer Inner Row. Why: Small screens are too narrow for three items side by side. How: This applies below 600px wide. */
+@container app ( max-width : 600px ) { /* What: Narrow Footer Inner Div. Why: Small screens are too narrow for three items side by side. How: This applies below 600px wide. */
 
 
-	.footer__inner { /* What: Stacked Footer Inner Row. Why: The items read best stacked on a small screen. How: This turns the row into a left-aligned column with a smaller gap. */
+	.fooInnDiv { /* What: Stacked Footer Inner Div. Why: The items read best stacked on a small screen. How: This turns the row into a left-aligned column with a smaller gap. */
 
 
 		align-items    : flex-start;
@@ -65,9 +65,9 @@
 }
 
 
-/* #region footer__brand */
+/* #region fooBraDiv */
 
-.footer__brand { /* What: Footer Brand. Why: The footer repeats the company's mark and name. How: This sets them side by side in the display font, on the paper color. */
+.fooBraDiv { /* What: Footer Brand Div. Why: The footer repeats the company's mark and name. How: This sets them side by side in the display font, on the paper color. */
 
 
 	align-items : center;
@@ -81,9 +81,9 @@
 }
 
 
-/* #region footer__mark */
+/* #region fooMarSpa */
 
-.footer__mark { /* What: Footer Mark Box. Why: The dark mark needs a light tile to show against the dark footer. How: This draws a small rounded paper square, its width matching its rhythm-step height, with the mark centered in it. */
+.fooMarSpa { /* What: Footer Mark Span. Why: The dark mark needs a light tile to show against the dark footer. How: This draws a small rounded paper square, its width matching its rhythm-step height, with the mark centered in it. */
 
 
 	background    : var( --bac-pag-col );     /* Background Page Color = #f5f2ec */
@@ -107,7 +107,7 @@
 
 }
 
-/* #endregion footer__mark */
+/* #endregion fooMarSpa */
 
 
 .namLigSpa { /* What: Name Light Span. Why: The name's second word reads as the softer half. How: This sets it light, italic, and faded. */
@@ -120,13 +120,13 @@
 
 }
 
-/* #endregion footer__brand */
+/* #endregion fooBraDiv */
 
 
 
-/* #region footer__meta */
+/* #region fooMetDiv */
 
-.footer__meta { /* What: Footer Meta Column. Why: The copyright and licensing lines read as one small block. How: This stacks them centered in a smaller size. */
+.fooMetDiv { /* What: Footer Meta Div. Why: The copyright and licensing lines read as one small block. How: This stacks them centered in a smaller size. */
 
 
 	display        : flex;
@@ -137,10 +137,10 @@
 
 
 }
-@container app ( max-width : 600px ) { /* What: Narrow Footer Meta Column. Why: The stacked footer is left-aligned on small screens. How: This applies below 600px wide. */
+@container app ( max-width : 600px ) { /* What: Narrow Footer Meta Div. Why: The stacked footer is left-aligned on small screens. How: This applies below 600px wide. */
 
 
-	.footer__meta { /* What: Left Footer Meta Column. Why: The lines should line up with the stacked brand and link. How: This aligns them to the left. */
+	.fooMetDiv { /* What: Left Footer Meta Div. Why: The lines should line up with the stacked brand and link. How: This aligns them to the left. */
 
 
 		align-items : flex-start;
@@ -152,12 +152,12 @@
 
 }
 
-/* #endregion footer__meta */
+/* #endregion fooMetDiv */
 
 
-/* #region footer__top */
+/* #region fooTopAnc */
 
-.footer__top { /* What: Footer Top Link. Why: The back-to-top link is a quiet secondary action. How: This sets it small with its arrow beside it, brightening on hover. */
+.fooTopAnc { /* What: Footer Top Anchor. Why: The back-to-top link is a quiet secondary action. How: This sets it small with its arrow beside it, brightening on hover. */
 
 
 	align-items : center;
@@ -169,17 +169,17 @@
 
 
 }
-.footer__top:hover { /* What: Hovered Footer Top Link. Why: The hovered link should stand out on the dark band. How: This turns it the soft accent. */
+.fooTopAnc:hover { /* What: Hovered Footer Top Anchor. Why: The hovered link should stand out on the dark band. How: This turns it the soft accent. */
 
 
 	color : var( --acc-lig-col ); /* Accent Light Color, the accent lightened by 0.204 */
 
 
 }
-@media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Footer Top Link. Why: Someone who asked for less motion shouldn't see the color fade. How: This applies only when the reduced-motion preference is set. */
+@media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Footer Top Anchor. Why: Someone who asked for less motion shouldn't see the color fade. How: This applies only when the reduced-motion preference is set. */
 
 
-	.footer__top { /* What: Motionless Footer Top Link. Why: The hover color should appear at once. How: This turns the transition off. */
+	.fooTopAnc { /* What: Motionless Footer Top Anchor. Why: The hover color should appear at once. How: This turns the transition off. */
 
 
 		transition : none;
@@ -190,24 +190,24 @@
 
 }
 
-.arrow { /* What: Arrow Span. Why: The arrow lifts as the link is hovered, pointing the way back up. How: This animates its position. */
+.arrIcoSpa { /* What: Arrow Icon Span. Why: The arrow lifts as the link is hovered, pointing the way back up. How: This animates its position. */
 
 
 	transition : transform var( --dur-tra-p02 ) var( --mot-dec-eas ); /* Duration Transition Base Plus 2 ~= 277.0ms, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ) */
 
 
 }
-.footer__top:hover .arrow { /* What: Hovered Arrow Span. Why: The arrow reinforces the link's direction on hover. How: This lifts it 3px. */
+.fooTopAnc:hover .arrIcoSpa { /* What: Hovered Arrow Icon Span. Why: The arrow reinforces the link's direction on hover. How: This lifts it 3px. */
 
 
 	transform : translateY( -3px );
 
 
 }
-@media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Arrow. Why: Someone who asked for less motion shouldn't see the arrow move. How: This applies only when the reduced-motion preference is set. */
+@media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Arrow Icon Span. Why: Someone who asked for less motion shouldn't see the arrow move. How: This applies only when the reduced-motion preference is set. */
 
 
-	.arrow { /* What: Motionless Arrow Span. Why: The arrow should simply shift. How: This turns the transition off. */
+	.arrIcoSpa { /* What: Motionless Arrow Icon Span. Why: The arrow should simply shift. How: This turns the transition off. */
 
 
 		transition : none;
@@ -218,10 +218,10 @@
 
 }
 
-/* #endregion footer__top */
+/* #endregion fooTopAnc */
 
-/* #endregion footer__inner */
+/* #endregion fooInnDiv */
 
-/* #endregion footer */
+/* #endregion sitFooFoo */
 
 
