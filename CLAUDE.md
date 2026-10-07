@@ -44,13 +44,31 @@ reorganization, ESLint setup, config rebuild, and dependency upgrades.
    2. `src/` from the bottom of the dependency order up: `main.tsx`,
       `app.tsx`, `ui/` (`nav.tsx`, `footer.tsx`), then `pages/`
       (`not-found/`, then `home/`'s sections and `home.tsx`).
-2. **CSS module pass**: each component's `.css` becomes a `.module.css`
-   next to it, per "### CSS modules and JS hooks".
+2. **CSS module pass** (done 2026-10-07): each component's `.css` becomes a
+   `.module.css` next to it, per "### CSS modules and JS hooks".
 3. **Design-system pass**: custom properties renamed and moved onto tokens,
    per "### Custom property naming". Horizontal sizing has to be decided with
    the user first, per "Width is decided per project".
 4. **404 page**: rebuilt with Nav and Footer from `ui/`, written to the rules
    from its first line.
+
+Open items from the CSS module pass, for the user to decide on: these styles
+were written but never rendered, because a later global rule overrode them,
+and the modules keep what actually rendered:
+- The navigation bar's estimate button was meant to be smaller (`0.65rem
+  1.2rem` padding, `0.85rem` text) than the standard button.
+- The hero was meant to have extra top padding (`calc( section + 3rem )`) and
+  its own bottom padding (`clamp( 4rem, 7vw, 6rem )`).
+- The hero's stat numbers were meant to have `line-height : 1` and
+  `letter-spacing : -0.02em`.
+- The about section's story was meant to have a bottom margin (`6rem`, or
+  `4rem` below 960px) before the principles.
+- The contact heading's italic word was meant to use `--accent-soft`.
+- The contact submit button was meant to be paper on the dark band (hovering
+  to `--accent-soft`); it renders as an ink button on the ink section.
+- The mobile drawer's `max-height` transition never plays, since the drawer
+  switches from `display : none`.
+- The `--brand` and `--paper-warm` tokens aren't read anywhere.
 
 Open item: the live Netlify site keeps the Node version it was pinned to
 when it was created, and React Router 8 needs Node 22.22 or newer to build.

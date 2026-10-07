@@ -31,10 +31,10 @@ npm run preview
 src/
 ├── assets/            Images and fonts shared by 2+ pages (logo-mark.svg, fonts/)
 ├── pages/
-│   ├── home/          Home page and its sections (Hero, Services, About, Contact, logo-full.svg)
-│   └── not-found/     404 page
-├── ui/                Shared components (Nav, Footer)
-├── styles/            fonts.css (@font-face) + styles.css (design tokens, reset, base typography)
+│   ├── home/          Home page and its sections (Hero, Services, About, Contact), each with its own .module.css, plus logo-full.svg
+│   └── not-found/     404 page and its .module.css
+├── ui/                Shared components (Nav, Footer), each with its own .module.css
+├── styles/            fonts.css (@font-face) + styles.css (design tokens and base element styles)
 ├── app.tsx            React Router setup
 └── main.tsx           Entry point
 ```
