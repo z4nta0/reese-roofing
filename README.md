@@ -58,9 +58,9 @@ When you're ready to make this real, update:
 - **Email:** `hello@reeseroofing.example` — same; appears in Contact and the mailto form action
 - **Address:** placeholder Lawrence, KS 66044 — Contact section
 - **Stats in Hero:** 17+ years, 400+ roofs, etc. — replace with real numbers
-- **Services list:** edit `services` array in `src/pages/home/services.tsx`
+- **Services list:** edit the `SER_RCD_ARR` array in `src/pages/home/services.tsx`
 - **About copy & quote:** `src/pages/home/about.tsx`
-- **Form backend:** the form currently uses `mailto:` as a no-backend fallback. To wire up a real backend, replace the `handleSubmit` handler in `src/pages/home/contact.tsx` with a `fetch` POST to your endpoint (Formspree, Netlify Forms, your own API, etc.).
+- **Form backend:** the form currently uses `mailto:` as a no-backend fallback. To wire up a real backend, replace the `subForFun` handler in `src/pages/home/contact.tsx` with a `fetch` POST to your endpoint (Formspree, Netlify Forms, your own API, etc.).
 
 ## Routing
 
