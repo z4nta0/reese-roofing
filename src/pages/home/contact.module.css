@@ -9,13 +9,14 @@
  * lede, detail rows, and signature card on the left and the framed estimate
  * form on the right, stacking on smaller screens. The form's fields are
  * underlined controls in light text that turn the soft accent on focus. The
- * shared section, container, eyebrow, display, lede, button, and arrow
- * declarations the section used to borrow from the global stylesheet are
- * copied onto its own classes here with the values that actually rendered,
- * so the important flags it needed to beat them are gone. Two of its own
+ * heading's italic word takes the soft accent, so it stays readable on the
+ * dark band. The shared section, container, eyebrow, display, lede, button,
+ * and arrow declarations the section used to borrow from the global stylesheet
+ * are copied onto its own classes here with the values that actually rendered,
+ * so the important flags it needed to beat them are gone. One of its own
  * intended styles never applied, because the global rules came later in the
- * cascade: the heading's softer accent on its italic word, and the submit
- * button's paper background, which renders in ink like every primary button.
+ * cascade: the submit button's paper background, which renders in ink like
+ * every primary button.
  *
  * @author z4nta0 <https://github.com/z4nta0>
  *
@@ -114,10 +115,10 @@
 
 }
 
-.titAccEmp { /* What: Title Accent Emphasis. Why: One word in each heading is set apart in color and italic. How: This draws it in the accent, light and italic. */
+.titAccEmp { /* What: Title Accent Emphasis. Why: One word in each heading is set apart in color and italic. How: This draws it in the soft accent, light and italic, since the darker accent would sink into the dark band. */
 
 
-	color       : var( --accent );
+	color       : var( --accent-soft );
 	font-style  : italic;
 	font-weight : 300;
 
