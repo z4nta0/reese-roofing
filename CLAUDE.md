@@ -46,10 +46,9 @@ reorganization, ESLint setup, config rebuild, and dependency upgrades.
       (`not-found/`, then `home/`'s sections and `home.tsx`).
 2. **CSS module pass** (done 2026-10-07): each component's `.css` becomes a
    `.module.css` next to it, per "### CSS modules and JS hooks".
-3. **Design-system pass** (done 2026-10-07 except horizontal sizes):
-   custom properties renamed and moved onto tokens, per "### Custom property
-   naming". Horizontal sizing is decided with the user after the vertical
-   values are in, per "Width is decided per project".
+3. **Design-system pass** (done 2026-10-07): custom properties renamed and
+   moved onto tokens, per "### Custom property naming", with horizontal sizes
+   decided below.
 4. **404 page**: rebuilt with Nav and Footer from `ui/`, written to the rules
    from its first line.
 
@@ -65,19 +64,11 @@ rule overrode them. Each was applied as its own commit:
 - `8a5f993`: the mobile drawer's open and close animation (made
   cross-browser in a later commit).
 
-The `--brand` and `--paper-warm` tokens aren't read anywhere; the
-design-system pass decides whether they stay.
-
-Horizontal sizes (decided 2026-10-07): horizontal values stay exactly as they
-are through the design-system pass. Once the new vertical design values are in,
-the user compares both options from the user-level "Width is decided per
-project" rule (the vertical rhythm or a viewport-based horizontal rhythm)
-before choosing.
-
-Under trial (2026-10-07): the viewport-based horizontal rhythm, ease-my-life's
-`--hor-rhy-*` tokens, applied in "Horizontal Rhythm Applied For Review" and
-refined in "Horizontal Sizes Split Between Fixed And Fluid", so reverting those
-two commits restores the fixed sizes. The split:
+Horizontal sizes (decided 2026-10-07): after comparing both options from the
+user-level "Width is decided per project" rule, the user chose the
+viewport-based horizontal rhythm, ease-my-life's `--hor-rhy-*` tokens, but only
+for layout values; everything inside a component stays on fixed rem steps. The
+split:
 - **Fluid (horizontal rhythm)**: layout values only, the gutter, the column
   gaps between section columns, the contact label column, and the logos. Each
   is a `clamp()` between two `--spa-hor-*` (or rhythm width) steps, so it never
