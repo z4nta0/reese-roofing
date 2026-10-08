@@ -85,6 +85,7 @@ design/
 
 - **Type pairing:** Fraunces (display serif, optical-size aware) paired with Inter Tight (refined sans). Italic Fraunces accents pull the design together.
 - **Palette:** Warm off-white paper (`#f5f2ec`), deep ink (`#1a1f24`), and a navy accent (`#1f4e7a`) drawn from the logo. Italic display accents and small details (numbered IDs, list bullets, pull quote marks) all use this brand navy so the design feels native to the logo.
+- **Interaction:** Every hover, press, and focus visibly registers, subtly: buttons lift on hover and press in when held, text links dim while pressed, arrows nudge forward, keyboard focus draws a ring that eases in (navy on paper, light blue on the dark bands), and the contact button's sent label rises in. Reduced motion keeps the changes and drops the movement.
 - **Layout:** Editorial grid, generous negative space, hairline dividers, numbered section labels (02 to 04, after the hero). Hover states are intentional but never showy.
 - **Logo usage:**
   - The **full logo** (`src/pages/home/logo-full.svg`) anchors the hero as the primary visual, doubles as a "seal" in the sticky left column of the About section, and appears on a paper-colored signature card in the Contact section. It's a two-color SVG (navy mark + grey subtext).
