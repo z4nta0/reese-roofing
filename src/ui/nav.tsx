@@ -139,8 +139,9 @@ function NavBarCom () : React.JSX.Element {
 
 						href='/#top'
 
-						aria-label='Reese Roofing, home'
-					>{ /* What: Navigation Brand Anchor Element. Why: The logo and name should take visitors back to the top. How: This links to the home page's top anchor, which works from any page. */ }
+						aria-hidden='true' // What: Hidden Brand Link Attribute. Why: The nav's Home link already leads to the same place, and two links to one address read as a redundant pair to screen reader users. How: This hides the logo link from screen readers, leaving the labeled Home link as the one they hear.
+						tabIndex={ -1 } // What: Unfocusable Brand Link Index. Why: A link hidden from screen readers must not take keyboard focus, or a keyboard user would land on something that announces nothing. How: This takes it out of the tab order, so Tab moves straight to the Home link.
+					>{ /* What: Navigation Brand Anchor Element. Why: The logo and name should take mouse and touch visitors back to the top. How: This links to the home page's top anchor, which works from any page, while staying hidden from screen readers and the keyboard in favor of the nav's Home link. */ }
 
 
 						<img
