@@ -134,7 +134,7 @@
 
 /* #region butBasAnc */
 
-.butBasAnc { /* What: Button Base Anchor. Why: The page's two buttons use the site's pill button shape. How: This draws a rounded pill whose height comes from its line height alone, with its label and arrow side by side, easing its colors and lift on hover. */
+.butBasAnc { /* What: Button Base Anchor. Why: The page's two buttons use the site's pill button shape. How: This draws a rounded pill whose height comes from its line height alone, with its label and any arrow side by side, easing its colors and lift on hover. */
 
 
 	align-items    : center;
@@ -152,7 +152,7 @@
 
 
 }
-.butBasAnc--primary { /* What: Primary Button Base Anchor. Why: Going home is the page's one action. How: This fills it with ink and paper-colored text. */
+.butBasAnc--primary { /* What: Primary Button Base Anchor. Why: Going home is the page's main action. How: This fills it with ink and paper-colored text. */
 
 
 	background : var( --bac-inv-col ); /* Background Inverse Color = #1a1f24 */

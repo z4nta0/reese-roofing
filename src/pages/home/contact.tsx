@@ -5,7 +5,7 @@
 
 import cssModObj from './contact.module.css'; // What: CSS Module Object. Why: The section's details list, signature card, and estimate form are styled in its own module. How: Each element reads its hashed class name from this object.
 import lofSvgUrl from './logo-full.svg';      // What: Logo-Full Svg Url. Why: The section's signature card shows the full logo. How: Vite resolves the import to the file's fingerprinted URL, used as the image's src.
-import React from 'react';                    // What: React. Why: The form tracks its fields and sent state with React's hooks and types its events with React's types. How: This is read as React.useState, React.ChangeEvent, and React.FormEvent.
+import React from 'react';                    // What: React. Why: The form tracks its fields and sent state with React's hooks and types its events with React's types. How: This is read as React.useState, React.ChangeEvent, React.FormEvent, and React.JSX.Element.
 
 // #endregion Imports
 
@@ -517,8 +517,6 @@ function ConSecCom () : React.JSX.Element {
 
 							type='submit'
 						>{ /* What: Contact Submit Button Element. Why: This sends the request. How: It submits the form, which runs subForFun. */ }
-
-
 							{ senReqBoo ? 'Opening your email…' : 'Send request' }{ /* What: Submit Label Text. Why: The button should confirm the email is opening once it's pressed. How: This switches its label when senReqBoo turns true. */ }
 							<span
 								className={ cssModObj.arrIcoSpa }
@@ -527,8 +525,6 @@ function ConSecCom () : React.JSX.Element {
 							>{ /* What: Arrow Icon Span Element. Why: The arrow marks the button as moving the visitor onward. How: This sits right after the label, hidden from screen readers since it only decorates the label. */ }
 								→
 							</span>
-
-
 						</button>
 
 						<p className={ cssModObj.forFinPar }>{ /* What: Contact Fine-Print Paragraph Element. Why: Visitors should know they'll be contacted. How: This states it under the button. */ }

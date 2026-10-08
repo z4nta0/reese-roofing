@@ -127,7 +127,7 @@
 
 /* #region fooMetDiv */
 
-.fooMetDiv { /* What: Footer Meta Div. Why: The copyright and licensing lines read as one small block. How: This stacks them centered at body size, smaller than the brand. */
+.fooMetDiv { /* What: Footer Meta Div. Why: The copyright, licensing, and demo lines read as one small block. How: This stacks them centered at body size, smaller than the brand. */
 
 
 	display        : flex;

@@ -3,7 +3,7 @@
 
 // #region Imports
 
-import React from 'react'; // What: React. Why: The page scrolls to a linked section once it has rendered. How: This is read as React.useEffect.
+import React from 'react'; // What: React. Why: The page scrolls to a linked section once it has rendered. How: This is read as React.useEffect, and as React.JSX.Element for the page's return type.
 
 
 import { AboSecCom } from './about.tsx';         // What: About Section Component. Why: The page tells the company's story third. How: This is rendered inside main, after the services.
