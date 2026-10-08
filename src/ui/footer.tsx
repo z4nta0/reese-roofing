@@ -15,8 +15,9 @@ import lomSvgUrl from '../assets/logo-mark.svg'; // What: Logo-Mark Svg Url. Why
  *
  * @summary
  * The site's footer, shared by every page. It repeats the brand, gives the
- * copyright year and the company's licensing and location, and links back to
- * the top of the page.
+ * copyright year and the company's licensing and location, says the company
+ * is fictional and the site a portfolio demo, and links back to the top of
+ * the page.
  *
  * Sections:
  *  - Components
@@ -38,8 +39,9 @@ import lomSvgUrl from '../assets/logo-mark.svg'; // What: Logo-Mark Svg Url. Why
  * @summary
  * Renders the site's footer: the logo mark and name, the copyright line with
  * the current year read from the visitor's clock on each render, so it never
- * needs a yearly edit, the licensing and location line, and a link back to
- * the top of the page.
+ * needs a yearly edit, the licensing and location line, the line saying the
+ * company is fictional and the site a portfolio demo by techgeek.support, and
+ * a link back to the top of the page.
  *
  * @author z4nta0 <https://github.com/z4nta0>
  *
@@ -96,12 +98,14 @@ function SitFooCom () : React.JSX.Element {
 
 				</div>
 
-				<div className={ cssModObj.fooMetDiv }>{ /* What: Footer Meta Div Element. Why: The legal and location details sit together. How: This stacks the copyright and licensing lines. */ }
+				<div className={ cssModObj.fooMetDiv }>{ /* What: Footer Meta Div Element. Why: The legal and location details sit together. How: This stacks the copyright, licensing, and demo lines. */ }
 
 
 					<span>© { curYeaNum } Reese Roofing, LLC</span>{ /* What: Copyright Span Element. Why: The footer states the company's copyright. How: This pairs the current year with the company's legal name. */ }
 
 					<span>Licensed & insured · Lawrence, KS</span>{ /* What: Licensing Span Element. Why: Visitors look for proof a roofer is licensed and local. How: This states both on one line. */ }
+
+					<span className={ cssModObj.fooDemSpa }>Reese Roofing is a fictional company. This site is a portfolio demo by <a className={ cssModObj.fooDemAnc } href='https://techgeek.support/'>techgeek.support</a>.</span>{ /* What: Footer Demo Span Element. Why: The site is a portfolio piece, and no visitor or AI agent reading it should take Reese Roofing for a real roofer. How: This says so on every page, linking to the site's builder. */ }
 
 
 				</div>
