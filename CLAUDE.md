@@ -1,9 +1,33 @@
 # Project CLAUDE.md: reese-roofing
 
 A marketing website for Reese Roofing (React, Vite, React Router, deployed on
-Netlify). The client chose a different site, so this one is kept as a proof of
-work. Every rule in the user-level CLAUDE.md applies here; this file records
-only what's specific to this project.
+Netlify at https://reese-roofing.netlify.app/). **Reese Roofing is not a real
+business.** This was one of two mockups made for a client, who kept the other
+one; this one is a portfolio piece by techgeek.support, linked from
+https://techgeek.support. Nothing in the site, its docs, or its metadata may
+present the company as real (see "## SEO"). Every rule in the user-level
+CLAUDE.md applies here; this file records only what's specific to this
+project.
+
+## SEO
+Decided 2026-10-08. Under the user-level "## SEO" rule this is a site that
+isn't a real business, so it gets the demo treatment rather than local SEO:
+- **Out of search**: a `noindex` robots meta in `index.html`, `X-Robots-Tag:
+  noindex` on every file through `public/_headers`, and no sitemap.
+  `public/robots.txt` allows search crawlers, so they can read the `noindex`,
+  and disallows AI training and AI answer crawlers (GPTBot, ClaudeBot,
+  PerplexityBot, and others). AI agents fetching the page for a person are
+  left alone, since the page itself tells them it's a demo.
+- **Says what it is**: the title, description, Open Graph and Twitter tags,
+  and `public/og-image.png` (1200x630) call it a portfolio demo by
+  techgeek.support, and the footer says the company is fictional, linking
+  to techgeek.support. The 404 page renders its own `<title>`.
+- **Structured data**: one `WebSite` JSON-LD block about a fictional company,
+  created by techgeek.support. Never `LocalBusiness`, an address, or a phone.
+- **Placeholders stay reserved**: the phone is a 555-01xx number and the
+  email an `.example` domain.
+- **Checked by** `npm run test:seo`. No off-site work (Business Profile,
+  listings, reviews) applies.
 
 ## Directory structure
 Decided 2026-10-07. Adapts the user-level "### Directory structure" layout to a
@@ -69,13 +93,17 @@ opens the HTML report. The states each suite visits (both pages at 390px and
   walk runs under reduced motion so smooth scrolling and focus transitions
   have finished when a stop is measured. axe's "needs review" results are
   printed and attached to the report rather than failing the run.
+- `npm run test:seo`: checks each route's title, description, robots,
+  canonical, social tags, and structured data, the footer's demo line,
+  `robots.txt`, `_headers`, and the preview image's size.
 - `npm test` runs every suite.
 
 Next (planned 2026-10-07):
-- **Accessibility**: an audit and fixes across both pages.
-- **SEO**: an audit and fixes, index.html's head included.
+- **Accessibility** (done 2026-10-08): an audit and fixes across both pages.
+- **SEO** (done 2026-10-08): set up for a demo site, per "## SEO" above.
 - **Reusable tests**: a suite to rerun after large changes, checking that
   every page renders and behaves correctly in all three browser engines.
+  The accessibility and seo suites are its first parts.
 
 Applied original intent (kept by the user, 2026-10-07): the CSS module pass
 found styles that were written but never rendered, because a later global

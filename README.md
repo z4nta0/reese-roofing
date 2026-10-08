@@ -1,6 +1,18 @@
-# Reese Roofing
+# Reese Roofing (Portfolio Demo)
 
-A single-page marketing site for Reese Roofing, a commercial roofing contractor serving Lawrence, Kansas and the surrounding area.
+**Reese Roofing is a fictional company, and this is not a real business's website.** It's a portfolio piece by [techgeek.support](https://techgeek.support/): one of two website mockups designed for a client, who chose the other one. This one is kept as a proof of work and linked from techgeek.support's portfolio.
+
+Live at [reese-roofing.netlify.app](https://reese-roofing.netlify.app/). Its phone number (a 555-01xx number), email (an `.example` domain), address, stats, and history are all placeholders, so nothing on it should be read as a real roofer's details.
+
+## Search and AI visibility
+
+Since the company isn't real, the site is set up to stay out of search results and AI answers, and to say what it is wherever it's read:
+
+- **Kept out of search:** a `noindex` robots meta tag on every page and an `X-Robots-Tag: noindex` header on every file (`public/_headers`), with no sitemap. `public/robots.txt` lets search crawlers in so they can read the `noindex`, and disallows AI training and AI answer crawlers.
+- **Says it's a demo:** the page title, description, Open Graph and Twitter card tags, and the 1200x630 preview card (`public/og-image.png`) all call it a portfolio demo by techgeek.support, so shared links preview honestly. A line in the footer says the company is fictional.
+- **No business data:** the JSON-LD structured data describes a `WebSite` about a fictional company, with no `LocalBusiness` type, address, or phone.
+
+`npm run test:seo` checks all of this in Chromium, Firefox, and WebKit.
 
 ## Stack
 
@@ -17,6 +29,16 @@ npm run dev
 ```
 
 Open the URL Vite prints (usually `http://localhost:5173`).
+
+## Tests
+
+```bash
+npm test                    # every suite
+npm run test:accessibility  # axe-core plus scripted keyboard, naming, reflow, and motion checks
+npm run test:seo            # head tags, structured data, robots.txt, _headers, and the preview image
+```
+
+Each suite runs in Chromium, Firefox, and WebKit against its own dev server on port 5191. Reports land in `tests/output/` (git-ignored).
 
 ## Build
 
@@ -52,7 +74,7 @@ src/
 
 ## Customization checklist
 
-When you're ready to make this real, update:
+If this design is ever reused for a real business, update the placeholders below, and swap the demo SEO for real local SEO: remove the `noindex` meta tag, `public/_headers` rule, and AI crawler block, add a sitemap, replace the `WebSite` JSON-LD with `LocalBusiness` (`RoofingContractor`) data matching the real details, rewrite the title, description, social tags, and preview card, and drop the footer's demo line.
 
 - **Phone number:** `(785) 555-0199`. Search the repo for it; it appears in the Nav, Contact, and Footer areas
 - **Email:** `hello@reeseroofing.example`. Same; it appears in Contact and the mailto form action
