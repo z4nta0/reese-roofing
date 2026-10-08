@@ -127,7 +127,7 @@
 
 /* #region fooMetDiv */
 
-.fooMetDiv { /* What: Footer Meta Div. Why: The copyright and licensing lines read as one small block. How: This stacks them centered in a smaller size. */
+.fooMetDiv { /* What: Footer Meta Div. Why: The copyright and licensing lines read as one small block. How: This stacks them centered at body size, smaller than the brand. */
 
 
 	display        : flex;
@@ -158,7 +158,7 @@
 
 /* #region fooTopAnc */
 
-.fooTopAnc { /* What: Footer Top Anchor. Why: The back-to-top link is a quiet secondary action. How: This sets it small with its arrow beside it, brightening on hover. */
+.fooTopAnc { /* What: Footer Top Anchor. Why: The back-to-top link is a quiet secondary action. How: This sets it at body size with its arrow beside it, brightening on hover. */
 
 
 	align-items : center;

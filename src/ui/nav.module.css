@@ -23,7 +23,7 @@
 .navScrDiv { /* What: Navigation Scrim Div. Why: The open drawer should stand apart from a dimmed page, and the page should only dim on screens that have the drawer. How: This covers the viewport in the scrim color at the bar's stack level, hidden by default and shown below 880px, fading in while the drawer is open. */
 
 
-	background : oklch( from var( --scr-mai-col ) l c h / var( --cdn-pow-003-rec ) );                          /* Scrim Main Color = var( --bac-inv-col ), Core-Design-Number to the Power of 3 Reciprocal ~= 0.430 */
+	background : oklch( from var( --scr-mai-col ) l c h / var( --cdn-pow-003-rec ) );                          /* Scrim Main Color = #1a1f24, Core-Design-Number to the Power of 3 Reciprocal ~= 0.430 */
 	display    : none;
 	inset      : 0;
 	opacity    : 0;
@@ -327,7 +327,7 @@
 
 }
 
-.navPhoAnc { /* What: Navigation Phone Anchor. Why: The number should read as secondary to the button beside it. How: This sets it small and soft, fading its color on hover. */
+.navPhoAnc { /* What: Navigation Phone Anchor. Why: The number should read as secondary to the button beside it. How: This sets it at body size in a soft color, fading its color on hover. */
 
 
 	color       : var( --tex-sec-col );                            /* Text Secondary Color = #2a3138 */
@@ -476,14 +476,14 @@
 .navTogBut[aria-expanded='true'] .togLinSpa:first-child { /* What: Open Top Toggle Line Span. Why: The open menu's icon becomes a close cross. How: This drops the top line to the middle and turns it 45 degrees. */
 
 
-	transform : translateY( calc( ( var( --spa-ver-m04 ) + var( --spa-ver-m08 ) ) / 2 ) ) rotate( 45deg ); /* Spacing Vertical Base Minus 4 ~= 4.732px, Spacing Vertical Base Minus 8 ~= 1.537px */
+	transform : translateY( calc( ( var( --spa-ver-m04 ) + calc( var( --ver-rhy-m08 ) * 1rem ) ) / 2 ) ) rotate( 45deg ); /* Spacing Vertical Base Minus 4 ~= 4.732px, Vertical Rhythm Base Minus 8 ~= 1.536px */
 
 
 }
 .navTogBut[aria-expanded='true'] .togLinSpa:last-child { /* What: Open Bottom Toggle Line Span. Why: The open menu's icon becomes a close cross. How: This lifts the bottom line to the middle and turns it the other way. */
 
 
-	transform : translateY( calc( ( var( --spa-ver-m04 ) + var( --spa-ver-m08 ) ) / -2 ) ) rotate( -45deg ); /* Spacing Vertical Base Minus 4 ~= 4.732px, Spacing Vertical Base Minus 8 ~= 1.537px */
+	transform : translateY( calc( ( var( --spa-ver-m04 ) + calc( var( --ver-rhy-m08 ) * 1rem ) ) / -2 ) ) rotate( -45deg ); /* Spacing Vertical Base Minus 4 ~= 4.732px, Vertical Rhythm Base Minus 8 ~= 1.536px */
 
 
 }
@@ -570,7 +570,7 @@
 .navDraDiv[data-drawer-menu-open] .draLinAnc { /* What: Entering Drawer Link Anchor. Why: The rows should arrive one after another as the drawer opens. How: This plays the entrance, delayed by one stagger step per row above it, with one extra step so the drawer has started opening first. */
 
 
-	animation : drawerItemOpenFadeIn var( --dur-ani-p02 ) var( --mot-dec-eas ) calc( var( --dur-ani-m03 ) * ( var( --dra-ite-ind ) + 1 ) ) both; /* Duration Animation Base Plus 2 ~= 277.0ms, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ), Duration Animation Base Minus 3 ~= 67.9ms, Drawer Item Index, set on each row by its own style attribute */
+	animation : drawerItemOpenFadeIn var( --dur-ani-p02 ) var( --mot-dec-eas ) calc( var( --dur-ani-m03 ) * ( var( --dra-ite-ind ) + 1 ) ) both; /* Duration Animation Base Plus 2 ~= 277.0ms, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ), Duration Animation Base Minus 3 ~= 67.9ms, Drawer Item Index, set on each drawer item by its own style attribute */
 
 
 }
@@ -663,7 +663,7 @@
 .navDraDiv[data-drawer-menu-open] .draConDiv { /* What: Entering Drawer Contact Div. Why: The contact block should arrive after the last row. How: This plays the drawer's entrance, delayed by one stagger step per row above it, with one extra step so the drawer has started opening first. */
 
 
-	animation : drawerItemOpenFadeIn var( --dur-ani-p02 ) var( --mot-dec-eas ) calc( var( --dur-ani-m03 ) * ( var( --dra-ite-ind ) + 1 ) ) both; /* Duration Animation Base Plus 2 ~= 277.0ms, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ), Duration Animation Base Minus 3 ~= 67.9ms, Drawer Item Index, set on each row by its own style attribute */
+	animation : drawerItemOpenFadeIn var( --dur-ani-p02 ) var( --mot-dec-eas ) calc( var( --dur-ani-m03 ) * ( var( --dra-ite-ind ) + 1 ) ) both; /* Duration Animation Base Plus 2 ~= 277.0ms, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ), Duration Animation Base Minus 3 ~= 67.9ms, Drawer Item Index, set on each drawer item by its own style attribute */
 
 
 }

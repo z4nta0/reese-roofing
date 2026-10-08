@@ -51,7 +51,7 @@
 
 /* #region herBacDiv */
 
-.herBacDiv { /* What: Hero Background Div. Why: A faint architectural grid sits behind the hero, fading out away from the logo. How: This covers the section at 5% opacity, masked to a soft ellipse, behind everything and ignoring the pointer. */
+.herBacDiv { /* What: Hero Background Div. Why: A faint architectural grid sits behind the hero, fading out away from the logo. How: This covers the section at about 4.5% opacity, masked to a soft ellipse, behind everything and ignoring the pointer. */
 
 
 	-webkit-mask-image : radial-gradient( ellipse at 70% 30%, black 0%, transparent 75% );
