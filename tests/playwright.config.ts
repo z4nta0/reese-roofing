@@ -18,10 +18,12 @@ import { fileURLToPath } from 'node:url';         // What: File URL To Path. Why
  * in all three of Playwright's engines (Chromium, Firefox, and WebKit), one
  * project per suite and engine, since a check that passes in one engine
  * proves nothing about the others. The suites are accessibility, which the
- * pre-commit check runs, and seo. Playwright starts the Vite dev server on
- * port 5191 for the run and stops it afterwards, so a dev server already
- * running on the usual 5173 is never touched. Reports and failure screenshots
- * land in tests/output, which git ignores.
+ * pre-commit check runs, interaction, rendering, responsive, and seo.
+ * Playwright starts the Vite dev server on port 5191 for the run and stops it
+ * afterwards, so a dev server already running on the usual 5173 is never
+ * touched. Reports and failure screenshots land in tests/output, which git
+ * ignores, while the rendering suite's approved screenshots live in
+ * tests/rendering/baselines and are committed.
  *
  * Sections:
  *  - Constants
@@ -56,6 +58,9 @@ const SUI_NAM_ARR = [ // What: Suite Name Array. Why: Each suite lives in its ow
 
 
 	'accessibility', // What: Accessibility Suite. Why: The pre-commit accessibility scan runs from here. How: This names tests/accessibility.
+	'interaction',   // What: Interaction Suite. Why: Every control's feedback and the site's behavior are checked from here. How: This names tests/interaction.
+	'rendering',     // What: Rendering Suite. Why: Each page state is compared with its approved screenshot from here. How: This names tests/rendering.
+	'responsive',    // What: Responsive Suite. Why: Each page is measured across screen widths from here. How: This names tests/responsive.
 	'seo'            // What: SEO Suite. Why: The site's search and link preview setup is checked from here. How: This names tests/seo.
 
 
@@ -66,10 +71,11 @@ const SUI_NAM_ARR = [ // What: Suite Name Array. Why: Each suite lives in its ow
 const PLA_CON_OBJ = defineConfig({ // What: Playwright Config Object. Why: Playwright reads its whole setup from this file's default export. How: This holds the shared page settings, one project per suite and engine, the reporters, and the dev server.
 
 
-	fullyParallel : false,            // What: Fully Parallel. Why: Each spec file walks its states in order. How: This keeps a file's tests running in sequence, while separate files may still run in parallel.
-	outputDir     : 'output/results', // What: Output Directory. Why: Failure screenshots and traces need a home git ignores. How: This writes them under tests/output/results.
-	testDir       : '.',              // What: Test Directory. Why: Each project picks its own folder below. How: This roots test discovery at tests/.
-	workers       : 3,                // What: Workers. Why: The engines are independent, but each worker drives a full browser. How: This runs up to three spec files at once.
+	fullyParallel        : false,                                              // What: Fully Parallel. Why: Each spec file walks its states in order. How: This keeps a file's tests running in sequence, while separate files may still run in parallel.
+	outputDir            : 'output/results',                                   // What: Output Directory. Why: Failure screenshots and traces need a home git ignores. How: This writes them under tests/output/results.
+	snapshotPathTemplate : '{testFileDir}/baselines/{arg}-{projectName}{ext}', // What: Snapshot Path Template. Why: The rendering suite's approved screenshots belong in the repo beside their spec, one per state and engine. How: This writes each to tests/rendering/baselines, named after its state and project.
+	testDir              : '.',                                                // What: Test Directory. Why: Each project picks its own folder below. How: This roots test discovery at tests/.
+	workers              : 3,                                                  // What: Workers. Why: The engines are independent, but each worker drives a full browser. How: This runs up to three spec files at once.
 
 	projects : SUI_NAM_ARR.flatMap( ( suiNamStr ) => ENG_NAM_ARR.map( ( engNamStr ) => ({ // What: Projects. Why: Each suite runs on its own in each engine. How: This crosses every suite with every engine into a project named after both, runnable alone with --project.
 
