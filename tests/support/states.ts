@@ -17,8 +17,8 @@ import type { Page } from '@playwright/test'; // What: Page. Why: Opening a stat
  * one. A state is a page at a width, sometimes with something opened on it:
  * the home page and the 404 page at phone and desktop widths, and the mobile
  * drawer open on a phone. opeStaFun sizes the viewport, loads the page, waits
- * for the fonts and any entrance animations to settle so nothing is measured
- * mid-fade, and runs the state's own action, such as opening the drawer.
+ * for the fonts, runs the state's own action, such as opening the drawer, and
+ * then waits for any animations to settle so nothing is measured mid-fade.
  *
  * Sections:
  *  - Types
