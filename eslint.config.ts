@@ -85,7 +85,7 @@ const ESL_CON_ARR = [ // What: ESLint Config Array. Why: ESLint reads its flat c
 
 	},
 
-	{ // What: Jsx Config Object. Why: Hook calls in components follow rules of their own. How: This adds the React Hooks recommended rules for every .tsx file.
+	{ // What: JSX Config Object. Why: Hook calls in components follow rules of their own. How: This adds the React Hooks recommended rules for every .tsx file.
 
 
 		files   : [ '**/*.tsx' ],                        // What: Files. Why: Hooks only appear in .tsx files. How: This matches every one of them.

@@ -4,7 +4,7 @@
 // #region Imports
 
 import cssModObj from './hero.module.css'; // What: CSS Module Object. Why: The hero's grid background, two-row layout, and stats are styled in its own module. How: Each element reads its hashed class name from this object.
-import lofSvgUrl from './logo-full.svg';   // What: Logo-Full Svg URL. Why: The hero's main visual is the full logo. How: Vite resolves the import to the file's fingerprinted URL, used as the image's src.
+import lofSvgUrl from './logo-full.svg';   // What: Logo-Full SVG URL. Why: The hero's main visual is the full logo. How: Vite resolves the import to the file's fingerprinted URL, used as the image's src.
 
 // #endregion Imports
 
@@ -81,7 +81,7 @@ function HerSecCom () : React.JSX.Element {
 
 					preserveAspectRatio='xMidYMid slice'
 					viewBox='0 0 1440 800'
-				>{ /* What: Hero Grid Svg Element. Why: The grid is drawn as a vector so it stays crisp at any size. How: Its slice aspect ratio fills the section, cropping rather than letterboxing. */ }
+				>{ /* What: Hero Grid SVG Element. Why: The grid is drawn as a vector so it stays crisp at any size. How: Its slice aspect ratio fills the section, cropping rather than letterboxing. */ }
 
 
 					<defs>{ /* What: Grid Definitions Element. Why: The grid's tile is defined once and repeated. How: This holds the pattern the rectangle below fills with. */ }

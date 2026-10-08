@@ -4,7 +4,7 @@
 // #region Imports
 
 import cssModObj from './contact.module.css'; // What: CSS Module Object. Why: The section's details list, signature card, and estimate form are styled in its own module. How: Each element reads its hashed class name from this object.
-import lofSvgUrl from './logo-full.svg';      // What: Logo-Full Svg URL. Why: The section's signature card shows the full logo. How: Vite resolves the import to the file's fingerprinted URL, used as the image's src.
+import lofSvgUrl from './logo-full.svg';      // What: Logo-Full SVG URL. Why: The section's signature card shows the full logo. How: Vite resolves the import to the file's fingerprinted URL, used as the image's src.
 import React from 'react';                    // What: React. Why: The form tracks its fields and sent state with React's hooks and types its events with React's types. How: This is read as React.useState, React.ChangeEvent, React.FormEvent, and React.JSX.Element.
 
 // #endregion Imports

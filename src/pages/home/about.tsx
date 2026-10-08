@@ -4,7 +4,7 @@
 // #region Imports
 
 import cssModObj from './about.module.css'; // What: CSS Module Object. Why: The section's two-column story, seal, quote, and principles row are styled in its own module. How: Each element reads its hashed class name from this object.
-import lofSvgUrl from './logo-full.svg';    // What: Logo-Full Svg URL. Why: The section's sticky seal is the full logo. How: Vite resolves the import to the file's fingerprinted URL, used as the image's src.
+import lofSvgUrl from './logo-full.svg';    // What: Logo-Full SVG URL. Why: The section's sticky seal is the full logo. How: Vite resolves the import to the file's fingerprinted URL, used as the image's src.
 
 // #endregion Imports
 

@@ -69,7 +69,7 @@
 
 /* #region herGriSvg */
 
-.herGriSvg { /* What: Hero Grid Svg. Why: The grid drawing should fill the whole background. How: This stretches it to the background's full size. */
+.herGriSvg { /* What: Hero Grid SVG. Why: The grid drawing should fill the whole background. How: This stretches it to the background's full size. */
 
 
 	height : 100%;

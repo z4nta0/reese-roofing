@@ -113,7 +113,7 @@ for ( const rouRcdObj of ROU_RCD_ARR ) { // What: Route Test Loop. Why: Every ro
 		await expect( curPagObj.getByRole( 'contentinfo' ) ).toContainText( 'Reese Roofing is a fictional company.' );                 // What: Footer Notice Assertion. Why: Visitors and AI agents reading the page itself should learn the company isn't real. How: This checks the footer's demo line.
 
 
-		const jsoScrArr = await curPagObj.locator( 'script[type="application/ld+json"]' ).allTextContents(); // What: Json Script Array. Why: The structured data decides what search engines and agents think the page is. How: This reads every JSON-LD script's text.
+		const jsoScrArr = await curPagObj.locator( 'script[type="application/ld+json"]' ).allTextContents(); // What: JSON Script Array. Why: The structured data decides what search engines and agents think the page is. How: This reads every JSON-LD script's text.
 
 
 		expect( jsoScrArr.map( ( jsoTexStr ) => JSON.parse( jsoTexStr )[ '@type' ] ) ).toEqual( [ 'WebSite' ] ); // What: Website Type Assertion. Why: The page should describe exactly one demo website. How: This parses each script, which also fails on invalid JSON, and checks there's one, typed WebSite.
@@ -170,12 +170,12 @@ test( 'the social preview image is a 1200x630 png under 300 KB', async ( { page 
 
 
 	const resImaObj = await curPagObj.request.get( '/og-image.png' ); // What: Response Image Object. Why: The image has to exist where the tags point. How: This fetches it from the dev server.
-	const pngBufObj = await resImaObj.body();                         // What: Png Buffer Object. Why: The image's size is written in its header. How: This reads the response bytes.
+	const pngBufObj = await resImaObj.body();                         // What: PNG Buffer Object. Why: The image's size is written in its header. How: This reads the response bytes.
 
 
-	expect( resImaObj.headers()[ 'content-type' ] ).toBe( 'image/png' );                               // What: Png Type Assertion. Why: The tags promise a PNG. How: This checks the served type.
-	expect( pngBufObj.length ).toBeLessThan( 300 * 1024 );                                             // What: Png Bytes Assertion. Why: WhatsApp drops a preview image of 300 KB or more. How: This checks the file's byte count.
-	expect( [ pngBufObj.readUInt32BE( 16 ), pngBufObj.readUInt32BE( 20 ) ] ).toEqual( [ 1200, 630 ] ); // What: Png Size Assertion. Why: The tags promise 1,200 by 630 pixels. How: This reads the width and height a PNG stores at bytes 16 and 20.
+	expect( resImaObj.headers()[ 'content-type' ] ).toBe( 'image/png' );                               // What: PNG Type Assertion. Why: The tags promise a PNG. How: This checks the served type.
+	expect( pngBufObj.length ).toBeLessThan( 300 * 1024 );                                             // What: PNG Bytes Assertion. Why: WhatsApp drops a preview image of 300 KB or more. How: This checks the file's byte count.
+	expect( [ pngBufObj.readUInt32BE( 16 ), pngBufObj.readUInt32BE( 20 ) ] ).toEqual( [ 1200, 630 ] ); // What: PNG Size Assertion. Why: The tags promise 1,200 by 630 pixels. How: This reads the width and height a PNG stores at bytes 16 and 20.
 
 
 } );

@@ -82,7 +82,7 @@ const TAB_MAX_NUM = 80;         // What: Tab Maximum Number. Why: A keyboard tra
 async function namProFun ( curPagObj : Page ) : Promise< string[] > {
 
 
-	const ariSnaStr = await curPagObj.locator( 'body' ).ariaSnapshot();    // What: Aria Snapshot String. Why: The accessibility tree shows each control's role and announced name. How: This reads the body's tree as text, one node per line.
+	const ariSnaStr = await curPagObj.locator( 'body' ).ariaSnapshot();    // What: ARIA Snapshot String. Why: The accessibility tree shows each control's role and announced name. How: This reads the body's tree as text, one node per line.
 	const conLinArr = ariSnaStr.match( /- (link|button)\b[^\n]*/g ) || []; // What: Control Line Array. Why: Only links and buttons are checked here. How: This keeps every tree line for one of those roles.
 
 	const proLisArr : string[] = []; // What: Problem List Array. Why: Every problem should be reported, not just the first. How: This collects them.
@@ -269,7 +269,7 @@ function stoInfFun () : StoInfTyp | null {
 	const topCurEle = document.elementFromPoint( recCurObj.left + recCurObj.width / 2, recCurObj.top + recCurObj.height / 2 ); // What: Top Current Element. Why: Whatever is drawn on top at the stop's center is what a person sees there. How: This asks the page which element sits at that point.
 
 
-	const ariLabStr = actCurEle.getAttribute( 'aria-label' ); // What: Aria Label String. Why: A stop's own label names it best. How: This reads its aria-label, or null.
+	const ariLabStr = actCurEle.getAttribute( 'aria-label' ); // What: ARIA Label String. Why: A stop's own label names it best. How: This reads its aria-label, or null.
 	const eleIdeStr = actCurEle.id;                           // What: Element Identifier String. Why: A form field without a label is still recognizable by its id. How: This reads the stop's id, empty when it has none.
 	const eleTexStr = actCurEle.textContent;                  // What: Element Text String. Why: A link or button is usually named by its text. How: This reads the stop's text.
 
