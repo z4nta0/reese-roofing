@@ -4,7 +4,7 @@
 // #region Imports
 
 import cssModObj from './footer.module.css';     // What: CSS Module Object. Why: The footer's layout and type are styled in its own module. How: Each element reads its hashed class name from this object.
-import lomSvgUrl from '../assets/logo-mark.svg'; // What: Logo-Mark Svg Url. Why: The footer's brand shows the simple logo mark. How: Vite resolves the import to the file's fingerprinted URL, used as the image's src.
+import lomSvgUrl from '../assets/logo-mark.svg'; // What: Logo-Mark Svg URL. Why: The footer's brand shows the simple logo mark. How: Vite resolves the import to the file's fingerprinted URL, used as the image's src.
 
 // #endregion Imports
 

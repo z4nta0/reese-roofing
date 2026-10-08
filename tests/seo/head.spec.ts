@@ -37,7 +37,7 @@ import { test   } from '@playwright/test'; // What: Test. Why: Each route and ea
 
 // #region Constants
 
-const LIV_URL_STR = 'https://reese-roofing.netlify.app/'; // What: Live Url String. Why: The canonical and social tags must name the live address. How: This is the address they're compared with.
+const LIV_URL_STR = 'https://reese-roofing.netlify.app/'; // What: Live URL String. Why: The canonical and social tags must name the live address. How: This is the address they're compared with.
 
 
 
@@ -54,7 +54,7 @@ const SOC_KEY_ARR = [ // What: Social Key Array. Why: The social preview rule li
 	'og:site_name',        // What: Open Graph Site Name Key. Why: Every card needs the name of the site the link belongs to. How: This names the tag.
 	'og:title',            // What: Open Graph Title Key. Why: Every card needs the card's title. How: This names the tag.
 	'og:type',             // What: Open Graph Type Key. Why: Every card needs what kind of page it is. How: This names the tag.
-	'og:url',              // What: Open Graph Url Key. Why: Every card needs the address shares should count toward. How: This names the tag.
+	'og:url',              // What: Open Graph URL Key. Why: Every card needs the address shares should count toward. How: This names the tag.
 	'twitter:card',        // What: Twitter Card Key. Why: Every card needs the layout X and similar apps use. How: This names the tag.
 	'twitter:description', // What: Twitter Description Key. Why: Every card needs the summary on X. How: This names the tag.
 	'twitter:image',       // What: Twitter Image Key. Why: Every card needs the image on X. How: This names the tag.
@@ -107,7 +107,7 @@ for ( const rouRcdObj of ROU_RCD_ARR ) { // What: Route Test Loop. Why: Every ro
 		await expect( curPagObj.locator( 'meta[name="robots"]' ) ).toHaveAttribute( 'content', /noindex/ );                            // What: Robots Assertion. Why: A fictional company must stay out of search results. How: This checks the robots meta asks for noindex.
 		await expect( curPagObj.locator( 'meta[name="description"]' ) ).toHaveAttribute( 'content', /fictional/ );                     // What: Description Assertion. Why: Any summary of the page should say the company isn't real. How: This checks the description calls it fictional.
 		await expect( curPagObj.locator( 'link[rel="canonical"]' ) ).toHaveAttribute( 'href', LIV_URL_STR );                           // What: Canonical Assertion. Why: Every address the site answers at should point at the live one. How: This checks the canonical link names it.
-		await expect( curPagObj.locator( 'meta[property="og:url"]' ) ).toHaveAttribute( 'content', LIV_URL_STR );                      // What: Open Graph Url Assertion. Why: Shared links should count as one page. How: This checks the social URL names the live address.
+		await expect( curPagObj.locator( 'meta[property="og:url"]' ) ).toHaveAttribute( 'content', LIV_URL_STR );                      // What: Open Graph URL Assertion. Why: Shared links should count as one page. How: This checks the social URL names the live address.
 		await expect( curPagObj.locator( 'meta[property="og:image"]' ) ).toHaveAttribute( 'content', `${ LIV_URL_STR }og-image.png` ); // What: Open Graph Image Assertion. Why: Link previews need an absolute image address. How: This checks it points at the live preview card.
 		await expect( curPagObj.locator( 'meta[name="twitter:card"]' ) ).toHaveAttribute( 'content', 'summary_large_image' );          // What: Twitter Card Assertion. Why: The preview card should show at its full size. How: This checks the large image layout is asked for.
 		await expect( curPagObj.getByRole( 'contentinfo' ) ).toContainText( 'Reese Roofing is a fictional company.' );                 // What: Footer Notice Assertion. Why: Visitors and AI agents reading the page itself should learn the company isn't real. How: This checks the footer's demo line.
@@ -155,7 +155,7 @@ test( 'the social preview tags are complete', async ( { page : curPagObj } ) => 
 
 
 	expect( Object.keys( socTagObj ) ).toEqual( expect.arrayContaining( SOC_KEY_ARR ) ); // What: Complete Tags Assertion. Why: A missing tag leaves part of the card blank. How: This checks every required key is present, allowing optional extras.
-	expect( [ socTagObj[ 'og:image' ], socTagObj[ 'og:url' ], socTagObj[ 'twitter:image' ] ] ).toEqual( [ `${ LIV_URL_STR }og-image.png`, LIV_URL_STR, `${ LIV_URL_STR }og-image.png` ] ); // What: Absolute Urls Assertion. Why: Scrapers can't resolve a relative address. How: This checks each URL tag names the live https address.
+	expect( [ socTagObj[ 'og:image' ], socTagObj[ 'og:url' ], socTagObj[ 'twitter:image' ] ] ).toEqual( [ `${ LIV_URL_STR }og-image.png`, LIV_URL_STR, `${ LIV_URL_STR }og-image.png` ] ); // What: Absolute URLs Assertion. Why: Scrapers can't resolve a relative address. How: This checks each URL tag names the live https address.
 	expect( socTagObj[ 'og:image:type' ] ).toBe( 'image/png' );                          // What: Image Type Assertion. Why: The tag has to match the file. How: This checks it names a PNG.
 	expect( socTagObj[ 'og:title' ].length ).toBeLessThanOrEqual( 60 );                  // What: Title Length Assertion. Why: Longer titles are cut off in most cards. How: This checks it stays at 60 characters or fewer.
 	expect( socTagObj[ 'og:description' ].length ).toBeGreaterThanOrEqual( 110 );        // What: Description Minimum Assertion. Why: A very short summary wastes the card's space. How: This checks it reaches 110 characters.
