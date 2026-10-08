@@ -44,8 +44,8 @@ import { Routes    } from 'react-router';                    // What: Routes. Wh
  * Renders the site's route table inside the app container, so whichever page
  * matches the current URL path is the one on screen: the home page at the
  * root path, and the 404 page for anything else. The container wrapper is
- * what every module's layout queries measure. main.tsx renders it once, inside BrowserRouter, which
- * supplies the URL the routes match against.
+ * what every module's layout queries measure. main.tsx renders it once,
+ * inside BrowserRouter, which supplies the URL the routes match against.
  *
  * @author z4nta0 <https://github.com/z4nta0>
  *
