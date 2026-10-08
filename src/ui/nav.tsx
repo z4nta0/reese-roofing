@@ -64,7 +64,11 @@ const NAV_LIN_ARR = [ // What: Nav Link Array. Why: The bar and its mobile drawe
  * contact block with the phone number, the hours, and the estimate button;
  * picking a link or the button closes it again. While the drawer is open the
  * bar takes a solid background, so the two read as one panel, and a scrim
- * dims the page below; clicking the scrim closes the drawer.
+ * dims the page below; clicking the scrim closes the drawer. The open drawer
+ * also acts as a modal layer: the page's content beside the bar turns inert,
+ * so Tab and screen readers stay in the bar and drawer, Escape closes it and
+ * returns focus to the toggle, and widening the screen until the toggle
+ * disappears closes it too.
  *
  * @author z4nta0 <https://github.com/z4nta0>
  *
@@ -84,6 +88,10 @@ function NavBarCom () : React.JSX.Element {
 
 	const [ draOpeBoo, setDraOpeBoo ] = React.useState( false ); // What: Drawer Open Boolean And Setter. Why: The mobile drawer opens and closes from the toggle button. How: This starts closed and drives the toggle's aria-expanded and the drawer's open attribute.
 	const [ scrPasBoo, setScrPasBoo ] = React.useState( false ); // What: Scroll Past Boolean And Setter. Why: The bar takes its scrolled style once the page moves past the top. How: This starts false and is set by the scroll listener below.
+
+	const heaBarRef = React.useRef< HTMLElement >( null );       // What: Header Bar Reference. Why: The open drawer makes everything beside the bar inert. How: This points at the bar, whose parent holds the page's other content.
+	const scrDivRef = React.useRef< HTMLDivElement >( null );    // What: Scrim Div Reference. Why: The scrim has to stay clickable while the rest of the page is inert. How: This points at the scrim, so it's left out.
+	const togButRef = React.useRef< HTMLButtonElement >( null ); // What: Toggle Button Reference. Why: Escape hands focus back to the button that opened the drawer, and a hidden toggle means the drawer no longer applies. How: This points at the menu toggle.
 
 
 	React.useEffect( () => { // What: Scroll Listener Effect. Why: The bar's style depends on the window's scroll position. How: This checks the position once, then again on every scroll until unmount.
@@ -106,6 +114,64 @@ function NavBarCom () : React.JSX.Element {
 
 
 
+	React.useEffect( () => { // What: Modal Drawer Effect. Why: The open drawer sits over a dimmed page, so keyboard and screen reader users should stay in the bar and drawer until it closes, rather than landing on links hidden under the scrim. How: While the drawer is open, this makes the bar's sibling content inert, closes the drawer on Escape with focus back on the toggle, and closes it if a wider screen hides the toggle.
+
+
+		if ( !draOpeBoo ) return; // What: Closed Drawer Guard. Why: Only the open drawer changes the rest of the page. How: This leaves everything alone while the drawer is closed.
+
+
+
+		const heaBarEle = heaBarRef.current!; // What: Header Bar Element. Why: The bar and its drawer stay usable. How: This reads the bar. // What: Non-Null Note. Why: TypeScript can't see the ref is attached. How: Effects run after the bar has mounted.
+		const scrDivEle = scrDivRef.current!; // What: Scrim Div Element. Why: The scrim stays clickable to close the drawer. How: This reads the scrim. // What: Non-Null Note. Why: TypeScript can't see the ref is attached. How: Effects run after the scrim has mounted.
+		const sibEleArr = Array.from( heaBarEle.parentElement!.children ).filter( ( sibCurEle ) => sibCurEle !== heaBarEle && sibCurEle !== scrDivEle ); // What: Sibling Element Array. Why: The page's main content and footer sit beside the bar. How: This lists every element sharing the bar's parent except the bar and its scrim. // What: Non-Null Note. Why: TypeScript can't see the bar has a parent. How: A mounted bar always renders inside its page's root element.
+		const togButEle = togButRef.current!; // What: Toggle Button Element. Why: Escape returns focus here, and its visibility says whether the drawer still applies. How: This reads the toggle. // What: Non-Null Note. Why: TypeScript can't see the ref is attached. How: Effects run after the toggle has mounted.
+
+
+		const onKeyDowFun = ( keyEveObj : KeyboardEvent ) => { // What: On Key Down Function. Why: Escape is the expected way out of a layer over the page. How: This closes the drawer and puts focus back on the toggle when Escape is pressed.
+
+
+			if ( keyEveObj.key !== 'Escape' ) return; // What: Escape Key Guard. Why: Only Escape closes the drawer. How: This ignores every other key.
+
+
+
+			setDraOpeBoo( false ); // What: Drawer Close Call. Why: Escape closes the drawer. How: This sets the drawer state to closed.
+
+			togButEle.focus(); // What: Toggle Focus Call. Why: Focus would otherwise be left inside the closing drawer. How: This moves it to the toggle, where the visitor opened the drawer.
+
+
+		};
+
+
+		const onResWinFun = () => { if ( !togButEle.getClientRects().length ) setDraOpeBoo( false ); }; // What: On Resize Window Function. Why: A screen widened past the drawer's breakpoint hides the toggle, which would leave the page inert with no way to close it. How: This closes the drawer once the toggle no longer renders.
+
+
+		for ( const sibCurEle of sibEleArr ) sibCurEle.setAttribute( 'inert', '' ); // What: Sibling Inert Loop. Why: Content under the scrim shouldn't take focus or be read while the drawer is open. How: This marks each sibling inert, removing it from the tab order, the accessibility tree, and pointer input.
+
+
+
+		document.addEventListener( 'keydown', onKeyDowFun ); // What: Key Down Listener Registration. Why: Escape should close the drawer wherever focus is. How: This listens on the whole document.
+		window.addEventListener( 'resize', onResWinFun );    // What: Resize Listener Registration. Why: Widening the screen can hide the toggle. How: This rechecks on every resize.
+
+
+
+		return () => { // What: Modal Drawer Cleanup. Why: Closing the drawer gives the page back. How: This removes the inert marks and both listeners.
+
+
+			for ( const sibCurEle of sibEleArr ) sibCurEle.removeAttribute( 'inert' ); // What: Sibling Restore Loop. Why: The page has to be usable again once the drawer closes. How: This removes each sibling's inert mark.
+
+
+
+			document.removeEventListener( 'keydown', onKeyDowFun ); // What: Key Down Listener Cleanup. Why: Escape should do nothing once the drawer is closed. How: This removes the listener.
+			window.removeEventListener( 'resize', onResWinFun );    // What: Resize Listener Cleanup. Why: Resizing doesn't matter once the drawer is closed. How: This removes the listener.
+
+
+		};
+
+
+	}, [ draOpeBoo ] ); // What: Effect Dependency Array. Why: The page's inert state and the listeners have to follow the drawer opening and closing. How: draOpeBoo changing reruns the effect, which applies them while it's true and its cleanup removes them.
+
+
+
 	return (
 
 
@@ -113,6 +179,8 @@ function NavBarCom () : React.JSX.Element {
 
 
 			<div
+				ref={ scrDivRef }
+
 				className={ cssModObj.navScrDiv }
 
 				data-drawer-menu-open={ draOpeBoo || undefined } // What: Drawer Menu Open Attribute. Why: The scrim fades in only while the drawer is open. How: This is set only while draOpeBoo is true, and React drops it otherwise.
@@ -125,6 +193,8 @@ function NavBarCom () : React.JSX.Element {
 
 
 			<header
+				ref={ heaBarRef }
+
 				className={` ${ cssModObj.navBarHed }   ${ scrPasBoo ? cssModObj.navBarHedScrolled : '' } `}
 
 				data-drawer-menu-open={ draOpeBoo || undefined } // What: Drawer Menu Open Attribute. Why: The bar takes a solid background while the drawer is open, so the two read as one panel. How: This is set only while draOpeBoo is true, and React drops it otherwise.
@@ -219,6 +289,8 @@ function NavBarCom () : React.JSX.Element {
 					</div>
 
 					<button
+						ref={ togButRef }
+
 						className={ cssModObj.navTogBut }
 
 						aria-expanded={ draOpeBoo }
