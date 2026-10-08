@@ -53,6 +53,24 @@ reorganization, ESLint setup, config rebuild, and dependency upgrades.
    written to the rules from its first line.
 5. **Full rule audit** (done 2026-10-07): repeated passes until clean.
 
+## Test suites
+Added 2026-10-08. Playwright suites live in `tests/`, one project per suite
+and engine in `tests/playwright.config.ts`, which starts its own dev server
+on port 5191 (never the usual 5173) and stops it afterwards. Every suite runs
+in Chromium, Firefox, and WebKit. Results, screenshots, and traces go to
+`tests/output/` (git-ignored); `npx playwright show-report tests/output/report`
+opens the HTML report. The states each suite visits (both pages at 390px and
+1440px, plus the open drawer) are listed in `tests/support/states.ts`.
+- `npm run test:accessibility`: the pre-commit accessibility scan. axe-core
+  checks each state against WCAG 2.2 A and AA plus best practices
+  (`axe.spec.ts`), and scripted checks (`scripted.spec.ts`) cover link and
+  button names, a Tab walk (order, traps, focus on screen, uncovered, and
+  visible), reflow at 320px, and motion under reduced motion. The keyboard
+  walk runs under reduced motion so smooth scrolling and focus transitions
+  have finished when a stop is measured. axe's "needs review" results are
+  printed and attached to the report rather than failing the run.
+- `npm test` runs every suite.
+
 Next (planned 2026-10-07):
 - **Accessibility**: an audit and fixes across both pages.
 - **SEO**: an audit and fixes, index.html's head included.

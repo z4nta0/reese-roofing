@@ -21,13 +21,14 @@ yarn-error.log*
 
 
 
-# What: Generated And Local Files Block. Why: Build output, dependencies, local secrets, and test screenshots are recreated or kept per machine. How: This ignores the build output, node_modules, local env files, and the shots folder test runs write their screenshots to.
+# What: Generated And Local Files Block. Why: Build output, dependencies, local secrets, and test screenshots are recreated or kept per machine. How: This ignores the build output, node_modules, local env files, the shots folder test runs write their screenshots to, and the test suites' reports and run output.
 *.env
 *.local
 dist
 dist-ssr
 node_modules
 shots
+tests/output
 
 
 
