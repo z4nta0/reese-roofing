@@ -46,10 +46,13 @@ npm run typecheck  # TypeScript across src/, the configs, tests/, and design/
 ```bash
 npm test                    # every suite
 npm run test:accessibility  # axe-core plus scripted keyboard, naming, reflow, and motion checks
+npm run test:interaction    # hover, press, and focus feedback on every control, plus navigation, the drawer, the form, and the 404 page
+npm run test:rendering      # full-page screenshots of each page state against approved baselines
+npm run test:responsive     # both pages and the drawer from 320 to 1,920px: no sideways scroll, spill, or overlap
 npm run test:seo            # head tags, structured data, robots.txt, _headers, and the preview image
 ```
 
-Each suite runs in Chromium, Firefox, and WebKit against its own dev server on port 5191, so a dev server already running on 5173 is left alone. Reports land in `tests/output/` (git-ignored); `npx playwright show-report tests/output/report` opens the HTML report. If a browser is missing, `npx playwright install chromium firefox webkit` installs all three.
+Each suite runs in Chromium, Firefox, and WebKit against its own dev server on port 5191, so a dev server already running on 5173 is left alone. Reports land in `tests/output/` (git-ignored); `npx playwright show-report tests/output/report` opens the HTML report. The rendering suite's approved screenshots live in `tests/rendering/baselines/` and match to the pixel, so after a change meant to alter how a page looks, review the diff in the report, then run `npm run test:rendering -- --update-snapshots` and commit the new baselines with the change. If a browser is missing, `npx playwright install chromium firefox webkit` installs all three.
 
 ## Build
 
@@ -74,8 +77,11 @@ src/
 public/                Files served at fixed addresses: favicons, og-image.png, robots.txt, Netlify's _headers and _redirects
 tests/
 ├── accessibility/     axe-core scan and scripted checks
+├── interaction/       control feedback and site behavior checks
+├── rendering/         screenshot comparisons and their baselines/
+├── responsive/        layout checks across screen widths
 ├── seo/               head, structured data, crawler file, and preview image checks
-├── support/           the page states the accessibility checks visit
+├── support/           the page states the suites visit
 └── playwright.config.ts
 design/
 └── og-image/          card.html and the script that captures it as public/og-image.png
