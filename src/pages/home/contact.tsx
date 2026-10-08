@@ -273,12 +273,12 @@ function ConSecCom () : React.JSX.Element {
 						</div>
 
 
-						<div className={ cssModObj.conRowDiv }>{ /* What: Service Area Row Div Element. Why: Visitors check whether the company works where they are. How: This pairs the label with the area. */ }
+						<div className={ cssModObj.conRowDiv }>{ /* What: Service-Area Row Div Element. Why: Visitors check whether the company works where they are. How: This pairs the label with the area. */ }
 
 
 							<dt className={ cssModObj.rowLabTer }>Service area</dt>{ /* What: Detail Term Element. Why: Each row is labeled. How: This names the detail. */ }
 
-							<dd className={ cssModObj.rowValDet }>{ /* What: Service Area Detail Element. Why: This lists the towns the company covers. How: This names them in one sentence. */ }
+							<dd className={ cssModObj.rowValDet }>{ /* What: Service-Area Detail Element. Why: This lists the towns the company covers. How: This names them in one sentence. */ }
 								Lawrence, Eudora, Baldwin City, Tonganoxie, Topeka, Kansas City metro,
 								and surrounding counties.
 							</dd>
@@ -310,7 +310,7 @@ function ConSecCom () : React.JSX.Element {
 
 
 
-				<div className={ cssModObj.conForDiv }>{ /* What: Contact Form Wrap Div Element. Why: The form sits in its own framed column. How: This holds the form. */ }
+				<div className={ cssModObj.conForDiv }>{ /* What: Contact Form Div Element. Why: The form sits in its own framed column. How: This holds the form. */ }
 
 
 					<form
@@ -520,12 +520,12 @@ function ConSecCom () : React.JSX.Element {
 
 
 							{ senReqBoo ? 'Opening your email…' : 'Send request' }{ /* What: Submit Label Text. Why: The button should confirm the email is opening once it's pressed. How: This switches its label when senReqBoo turns true. */ }
-							<span className={ cssModObj.arrIcoSpa }>→</span>{ /* What: Arrow Span Element. Why: The arrow marks the button as moving the visitor onward. How: This sits right after the label. */ }
+							<span className={ cssModObj.arrIcoSpa }>→</span>{ /* What: Arrow Icon Span Element. Why: The arrow marks the button as moving the visitor onward. How: This sits right after the label. */ }
 
 
 						</button>
 
-						<p className={ cssModObj.forFinPar }>{ /* What: Contact Fine Print Paragraph Element. Why: Visitors should know they'll be contacted. How: This states it under the button. */ }
+						<p className={ cssModObj.forFinPar }>{ /* What: Contact Fine-Print Paragraph Element. Why: Visitors should know they'll be contacted. How: This states it under the button. */ }
 							By submitting, you agree to be contacted by Reese Roofing regarding your inquiry.
 						</p>
 

@@ -21,7 +21,7 @@
 
 /* #region homHerSec */
 
-.homHerSec { /* What: Home Hero Section. Why: The hero fills the first screen and centers its content in it. How: This sets a full-height flex column with extra top padding to clear the fixed bar and a lighter bottom padding, clipping the grid at its edges. */
+.homHerSec { /* What: Home Hero Section. Why: The hero fills the first screen and centers its content in it. How: This sets a full-height flex row that centers its content vertically, with extra top padding to clear the fixed bar and a lighter bottom padding, clipping the grid at its edges. */
 
 
 	align-items    : center;
@@ -29,7 +29,7 @@
 	min-height     : 100vh;
 	overflow       : hidden;
 	padding-bottom : clamp( var( --spa-ver-p05 ), 7vw, var( --spa-ver-p07 ) ); /* Spacing Vertical Base Plus 5 ~= 59.447px, Spacing Vertical Base Plus 7 ~= 104.323px */
-	padding-top    : calc( var( --sec-ver-pad ) + var( --spa-ver-p04 ) );      /* Section Vertical Padding, about 78.749px to 138.200px, Spacing Vertical Base Plus 4 ~= 44.876px */
+	padding-top    : calc( var( --sec-ver-pad ) + var( --spa-ver-p04 ) );      /* Section Vertical Padding, about 78.751px to 138.199px, Spacing Vertical Base Plus 4 ~= 44.876px */
 	position       : relative;
 
 
@@ -107,7 +107,7 @@
 
 	align-items           : center;
 	display               : grid;
-	gap                   : var( --spa-ver-p04 ) clamp( var( --spa-hor-p03 ), var( --hor-rhy-017 ), var( --spa-hor-p06 ) ); /* Spacing Vertical Base Plus 4 ~= 44.876px, Spacing Horizontal Base Plus 3 ~= 33.876px, Horizontal Rhythm 17 ~= 115.363px @ 1920px width, Spacing Horizontal Base Plus 6 ~= 78.750px */
+	gap                   : var( --spa-ver-p04 ) clamp( var( --spa-hor-p03 ), var( --hor-rhy-017 ), var( --spa-hor-p06 ) ); /* Spacing Vertical Base Plus 4 ~= 44.876px, Spacing Horizontal Base Plus 3 ~= 33.876px, Horizontal Rhythm 17 ~= 115.363px @ 1920px width, Spacing Horizontal Base Plus 6 ~= 78.751px */
 	grid-template-columns : 1.15fr 1fr;
 	margin-bottom         : var( --spa-ver-p05 );                                                                           /* Spacing Vertical Base Plus 5 ~= 59.447px */
 
@@ -255,7 +255,7 @@
 	--her-rin-off : var( --spa-ver-p03 ); /* Spacing Vertical Base Plus 3 ~= 33.876px */ /* What: Hero Ring Offset. Why: The ring needs a gap between it and the logo. How: This is how far the oval reaches past the logo's top and bottom, read by the height below and narrowed by the stacked variant. */
 
 	aspect-ratio   : 1.14;                                            /* What: Ring Aspect Ratio. Why: The original oval measured about 1.14 times as wide as tall on a desktop screen. How: This keeps that shape at every size, a literal since no rhythm power lands within 10% of it. */
-	border         : var( --bor-wid-bas ) solid var( --bor-str-col ); /* Border Width Base ~= 1.160px, Border Strong Color, the main border at 0.22 opacity */
+	border         : var( --bor-wid-bas ) solid var( --bor-str-col ); /* Border Width Base ~= 1.160px, Border Strong Color = #1a1f24 at 0.22 opacity */
 	border-radius  : 50%;
 	content        : '';
 	height         : calc( 100% + var( --her-rin-off ) * 2 );         /* Hero Ring Offset, about 33.876px, or 14.572px in the stacked hero */
@@ -307,7 +307,7 @@
 .herLogIma { /* What: Hero Logo Image. Why: The logo should fill its column up to a set size, with a soft shadow lifting it off the page. How: This caps its width at a horizontal step, never narrower than the p08 rhythm step, and adds a blue-tinted drop shadow. */
 
 
-	filter    : drop-shadow( 0 calc( var( --ver-rhy-m01 ) * 1rem ) calc( var( --ver-rhy-p03 ) * 1rem ) oklch( from var( --acc-mai-col ) l c h / 0.12 ) ); /* Vertical Rhythm Base Minus 1 ~= 11.000px, Vertical Rhythm Base Plus 3 ~= 33.876px, Accent Main Color = #1f4e7a */
+	filter    : drop-shadow( 0 calc( var( --ver-rhy-m01 ) * 1rem ) calc( var( --ver-rhy-p03 ) * 1rem ) oklch( from var( --acc-mai-col ) l c h / 0.12 ) ); /* Vertical Rhythm Base Minus 1 = 11px, Vertical Rhythm Base Plus 3 ~= 33.876px, Accent Main Color = #1f4e7a */
 	height    : auto;
 	max-width : max( calc( var( --ver-rhy-p08 ) * 1rem ), var( --hor-rhy-022 ) );                                                                         /* Vertical Rhythm Base Plus 8 ~= 138.199px, Horizontal Rhythm 22 ~= 470.635px @ 1920px width */
 	width     : 100%;
@@ -354,8 +354,8 @@
 
 	align-items           : end;
 	animation             : divEnterFadeIn var( --dur-ani-p06 ) var( --mot-dec-eas ) var( --dur-ani-p02 ) both;             /* Duration Animation Base Plus 6 ~= 853.0ms, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ), Duration Animation Base Plus 2 ~= 277.0ms */
-	border-bottom         : var( --bor-wid-bas ) solid var( --bor-mai-col );                                                /* Border Width Base ~= 1.160px, Border Main Color = rgba( 26, 31, 36, 0.12 ) */
-	border-top            : var( --bor-wid-bas ) solid var( --bor-mai-col );                                                /* Border Width Base ~= 1.160px, Border Main Color = rgba( 26, 31, 36, 0.12 ) */
+	border-bottom         : var( --bor-wid-bas ) solid var( --bor-mai-col );                                                /* Border Width Base ~= 1.160px, Border Main Color = #1a1f24 at 0.12 opacity */
+	border-top            : var( --bor-wid-bas ) solid var( --bor-mai-col );                                                /* Border Width Base ~= 1.160px, Border Main Color = #1a1f24 at 0.12 opacity */
 	display               : grid;
 	gap                   : var( --spa-ver-p03 ) clamp( var( --spa-hor-p02 ), var( --hor-rhy-014 ), var( --spa-hor-p05 ) ); /* Spacing Vertical Base Plus 3 ~= 33.876px, Spacing Horizontal Base Plus 2 ~= 25.572px, Horizontal Rhythm 14 ~= 49.625px @ 1920px width, Spacing Horizontal Base Plus 5 ~= 59.447px */
 	grid-template-columns : 1fr auto;
@@ -459,7 +459,7 @@
 .butBasAnc--ghost { /* What: Ghost Button Base Anchor. Why: The services button is a secondary action. How: This outlines it with no fill. */
 
 
-	border-color : var( --bor-str-col ); /* Border Strong Color, the main border at 0.22 opacity */
+	border-color : var( --bor-str-col ); /* Border Strong Color = #1a1f24 at 0.22 opacity */
 	color        : var( --tex-mai-col ); /* Text Main Color = #1a1f24 */
 
 
@@ -550,19 +550,6 @@
 
 
 }
-@container app ( max-width : 500px ) { /* What: Phone Hero Stats Div. Why: Phones keep the two-column layout. How: This applies below 500px wide. */
-
-
-	.herStaDiv { /* What: Phone Two Column Hero Stats Div. Why: The stats still fit two to a row. How: This sets two equal columns. */
-
-
-		grid-template-columns : 1fr 1fr;
-
-
-	}
-
-
-}
 @media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Hero Stats Div. Why: Someone who asked for less motion shouldn't see the stats rise. How: This applies only when the reduced-motion preference is set. */
 
 
@@ -583,7 +570,7 @@
 .staIteDiv { /* What: Stat Item Div. Why: Each stat is set off by a thin rule on its left. How: This draws the rule and pads the content away from it. */
 
 
-	border-left  : var( --bor-wid-bas ) solid var( --bor-mai-col ); /* Border Width Base ~= 1.160px, Border Main Color = rgba( 26, 31, 36, 0.12 ) */
+	border-left  : var( --bor-wid-bas ) solid var( --bor-mai-col ); /* Border Width Base ~= 1.160px, Border Main Color = #1a1f24 at 0.12 opacity */
 	padding-left : var( --spa-hor-p01 );                            /* Spacing Horizontal Base Plus 1 ~= 19.304px */
 
 

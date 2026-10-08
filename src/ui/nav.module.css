@@ -23,7 +23,7 @@
 .navScrDiv { /* What: Navigation Scrim Div. Why: The open drawer should stand apart from a dimmed page, and the page should only dim on screens that have the drawer. How: This covers the viewport in the scrim color at the bar's stack level, hidden by default and shown below 880px, fading in while the drawer is open. */
 
 
-	background : oklch( from var( --scr-mai-col ) l c h / var( --cdn-pow-003-rec ) );                          /* Scrim Main Color = Background Inverse Color = #1a1f24, Core-Design-Number to the Power of 3 Reciprocal ~= 0.430 */
+	background : oklch( from var( --scr-mai-col ) l c h / var( --cdn-pow-003-rec ) );                          /* Scrim Main Color = var( --bac-inv-col ), Core-Design-Number to the Power of 3 Reciprocal ~= 0.430 */
 	display    : none;
 	inset      : 0;
 	opacity    : 0;
@@ -92,11 +92,11 @@
 .navBarHed--scrolled { /* What: Scrolled Navigation Bar Header. Why: Once the page moves, the bar needs a background to stay readable over content. How: This frosts it, tightens its padding, and adds a hairline below. */
 
 
-	-webkit-backdrop-filter : saturate( 180% ) blur( 14px );
-	backdrop-filter         : saturate( 180% ) blur( 14px );
-	background              : oklch( from var( --bac-pag-col ) l c h / 0.85 ); /* Background Page Color = #f5f2ec */
-	border-bottom           : var( --bor-wid-bas ) solid var( --bor-mai-col ); /* Border Width Base ~= 1.160px, Border Main Color = rgba( 26, 31, 36, 0.12 ) */
-	padding-block           : var( --spa-ver-m01 );                            /* Spacing Vertical Base Minus 1 = 11px */
+	-webkit-backdrop-filter : saturate( 180% ) blur( calc( var( --ver-rhy-bas ) * 1rem ) ); /* Vertical Rhythm Base ~= 14.572px */
+	backdrop-filter         : saturate( 180% ) blur( calc( var( --ver-rhy-bas ) * 1rem ) ); /* Vertical Rhythm Base ~= 14.572px */
+	background              : oklch( from var( --bac-pag-col ) l c h / 0.85 );              /* Background Page Color = #f5f2ec */
+	border-bottom           : var( --bor-wid-bas ) solid var( --bor-mai-col );              /* Border Width Base ~= 1.160px, Border Main Color = #1a1f24 at 0.12 opacity */
+	padding-block           : var( --spa-ver-m01 );                                         /* Spacing Vertical Base Minus 1 = 11px */
 
 
 }
@@ -257,7 +257,7 @@
 
 
 	background       : var( --tex-mai-col );                                /* Text Main Color = #1a1f24 */
-	bottom           : calc( var( --spa-ver-m05 ) * -1 );                   /* Spacing Vertical Base Minus 5 ~= 3.571px */
+	bottom           : calc( var( --spa-ver-m05 ) * -1 );                   /* Spacing Vertical Base Minus 5 ~= 3.572px */
 	content          : '';
 	height           : var( --bor-wid-bas );                                /* Border Width Base ~= 1.160px */
 	left             : 0;
@@ -444,7 +444,7 @@
 
 	display        : none;
 	flex-direction : column;
-	gap            : var( --spa-ver-m04 );                      /* Spacing Vertical Base Minus 4 ~= 4.731px */
+	gap            : var( --spa-ver-m04 );                      /* Spacing Vertical Base Minus 4 ~= 4.732px */
 	padding        : var( --spa-ver-m02 ) var( --spa-hor-m02 ); /* Spacing Vertical Base Minus 2 ~= 8.304px, Spacing Horizontal Base Minus 2 ~= 8.304px */
 
 
@@ -467,7 +467,7 @@
 
 
 	background : var( --tex-mai-col );                                                                                   /* Text Main Color = #1a1f24 */
-	height     : var( --spa-ver-m08 );                                                                                   /* Spacing Vertical Base Minus 8 ~= 1.537px */
+	height     : calc( var( --ver-rhy-m08 ) * 1rem );                                                                    /* Vertical Rhythm Base Minus 8 ~= 1.536px */
 	transition : transform var( --dur-tra-p02 ) var( --mot-sta-eas ), opacity var( --dur-tra-p02 ) var( --mot-sta-eas ); /* Duration Transition Base Plus 2 ~= 277.0ms, Motion Standard Easing = ease */
 	width      : calc( var( --ver-rhy-p01 ) * 1rem );                                                                    /* Vertical Rhythm Base Plus 1 ~= 19.304px */
 
@@ -476,14 +476,14 @@
 .navTogBut[aria-expanded='true'] .togLinSpa:first-child { /* What: Open Top Toggle Line Span. Why: The open menu's icon becomes a close cross. How: This drops the top line to the middle and turns it 45 degrees. */
 
 
-	transform : translateY( calc( ( var( --spa-ver-m04 ) + var( --spa-ver-m08 ) ) / 2 ) ) rotate( 45deg ); /* Spacing Vertical Base Minus 4 ~= 4.731px, Spacing Vertical Base Minus 8 ~= 1.537px */
+	transform : translateY( calc( ( var( --spa-ver-m04 ) + var( --spa-ver-m08 ) ) / 2 ) ) rotate( 45deg ); /* Spacing Vertical Base Minus 4 ~= 4.732px, Spacing Vertical Base Minus 8 ~= 1.537px */
 
 
 }
 .navTogBut[aria-expanded='true'] .togLinSpa:last-child { /* What: Open Bottom Toggle Line Span. Why: The open menu's icon becomes a close cross. How: This lifts the bottom line to the middle and turns it the other way. */
 
 
-	transform : translateY( calc( ( var( --spa-ver-m04 ) + var( --spa-ver-m08 ) ) / -2 ) ) rotate( -45deg ); /* Spacing Vertical Base Minus 4 ~= 4.731px, Spacing Vertical Base Minus 8 ~= 1.537px */
+	transform : translateY( calc( ( var( --spa-ver-m04 ) + var( --spa-ver-m08 ) ) / -2 ) ) rotate( -45deg ); /* Spacing Vertical Base Minus 4 ~= 4.732px, Spacing Vertical Base Minus 8 ~= 1.537px */
 
 
 }
@@ -513,20 +513,20 @@
 
 
 	background     : var( --bac-pag-col );                             /* Background Page Color = #f5f2ec */
-	border-bottom  : 0 solid var( --bor-mai-col );                     /* Border Main Color = rgba( 26, 31, 36, 0.12 ) */
+	border-bottom  : 0 solid var( --bor-mai-col );                     /* Border Main Color = #1a1f24 at 0.12 opacity */
 	box-shadow     : var( --ele-lar-sha );                             /* Elevation Large Shadow, about 0 19px 45px -15px plus 0 6px 15px -4px */
-	clip-path      : inset( 0 0 calc( var( --spa-ver-p06 ) * -1 ) 0 ); /* Spacing Vertical Base Plus 6 ~= 78.750px */ /* What: Shadow Clip Path. Why: The shadow's upper layer would otherwise bleed a grey line onto the bar above the drawer. How: This clips everything above the drawer's top edge while leaving room below for the shadow's full reach. */
+	clip-path      : inset( 0 0 calc( var( --spa-ver-p06 ) * -1 ) 0 ); /* Spacing Vertical Base Plus 6 ~= 78.751px */ /* What: Shadow Clip Path. Why: The shadow's upper layer would otherwise bleed a grey line onto the bar above the drawer. How: This clips everything above the drawer's top edge while leaving room below for the shadow's full reach. */
 	display        : flex;
 	flex-direction : column;
 	max-height     : 0;
 	overflow       : hidden;
 	padding        : 0 var( --gut-sid-pad );                           /* Gutter Side Padding, about 19.304px to 44.876px */
-	transition     : border-bottom-width var( --dur-tra-p03 ) var( --mot-dec-eas ), max-height var( --dur-tra-p03 ) var( --mot-dec-eas ), padding-block var( --dur-tra-p03 ) var( --mot-dec-eas ), visibility 0s linear var( --dur-tra-p03 ); /* Duration Transition Base Plus 3 ~= 366.9ms, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ) */ /* What: Drawer Close Transition. Why: The drawer shrinks closed under the bar, then hides from screen readers and the keyboard once it's gone. How: This animates its height and padding, layout properties chosen because the drawer's content has to be revealed rather than scaled, and delays hiding until the shrink ends. */
+	transition     : border-bottom-width var( --dur-tra-p03 ) var( --mot-dec-eas ), max-height var( --dur-tra-p03 ) var( --mot-dec-eas ), padding-block var( --dur-tra-p03 ) var( --mot-dec-eas ), visibility 0s linear var( --dur-tra-p03 ); /* Duration Transition Base Plus 3 ~= 366.9ms, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ) */ /* What: Drawer Close Transition. Why: The drawer shrinks closed under the bar, then hides from screen readers and the keyboard once it's gone. How: This animates its height, padding, and divider width, layout properties chosen because the drawer's content has to be revealed rather than scaled, and delays hiding until the shrink ends. */
 	visibility     : hidden;
 
 
 }
-.navDraDiv[data-drawer-menu-open] { /* What: Open Navigation Drawer Div. Why: The drawer shows once the toggle opens it. How: This shows it at once, then grows its height, padding, and divider into place. */
+.navDraDiv[data-drawer-menu-open] { /* What: Open Navigation Drawer Div. Why: The drawer shows once the toggle opens it. How: This shows it at once, then grows its height, padding, and divider width into place, layout properties for the same reason as the closing transition. */
 
 
 	border-bottom-width : var( --bor-wid-bas );                      /* Border Width Base ~= 1.160px */
@@ -552,15 +552,16 @@
 
 }
 
+
 /* #region draLinAnc */
 
 .draLinAnc { /* What: Drawer Link Anchor. Why: Drawer links should be big enough to tap easily, numbered like the sections they lead to. How: This lays each out as its number, its name in the display font, and an arrow at the far end, with a divider below. */
 
 
 	align-items           : baseline;
-	border-bottom         : var( --bor-wid-bas ) solid var( --bor-mai-col ); /* Border Width Base ~= 1.160px, Border Main Color = rgba( 26, 31, 36, 0.12 ) */
+	border-bottom         : var( --bor-wid-bas ) solid var( --bor-mai-col ); /* Border Width Base ~= 1.160px, Border Main Color = #1a1f24 at 0.12 opacity */
+	column-gap            : var( --spa-hor-bas );                            /* Spacing Horizontal Base ~= 14.572px */
 	display               : grid;
-	gap                   : var( --spa-hor-bas );                            /* Spacing Horizontal Base ~= 14.572px */
 	grid-template-columns : auto 1fr auto;
 	padding               : var( --spa-ver-bas ) 0;                          /* Spacing Vertical Base ~= 14.572px */
 
@@ -569,7 +570,7 @@
 .navDraDiv[data-drawer-menu-open] .draLinAnc { /* What: Entering Drawer Link Anchor. Why: The rows should arrive one after another as the drawer opens. How: This plays the entrance, delayed by one stagger step per row above it, with one extra step so the drawer has started opening first. */
 
 
-	animation : drawerItemOpenFadeIn var( --dur-ani-p02 ) var( --mot-dec-eas ) calc( var( --dur-ani-m03 ) * ( var( --dra-ite-ind ) + 1 ) ) both; /* Duration Animation Base Plus 2 ~= 277.0ms, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ), Duration Animation Base Minus 3 ~= 67.9ms */
+	animation : drawerItemOpenFadeIn var( --dur-ani-p02 ) var( --mot-dec-eas ) calc( var( --dur-ani-m03 ) * ( var( --dra-ite-ind ) + 1 ) ) both; /* Duration Animation Base Plus 2 ~= 277.0ms, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ), Duration Animation Base Minus 3 ~= 67.9ms, Drawer Item Index, set on each row by its own style attribute */
 
 
 }
@@ -583,15 +584,6 @@
 
 
 	}
-
-
-}
-.draLinAnc:hover .arrIcoSpa,
-.draLinAnc:active .arrIcoSpa,
-.draLinAnc:focus-visible .arrIcoSpa { /* What: Hovered Drawer Arrow Icon Span. Why: The arrow points the visitor onward when its row is hovered, pressed, or focused. How: This nudges it right by a few pixels, kept literal since no spacing step lands within 10% of the 4px nudge. */
-
-
-	transform : translateX( 4px );
 
 
 }
@@ -642,6 +634,16 @@
 
 }
 
+.draLinAnc:hover .arrIcoSpa,
+.draLinAnc:active .arrIcoSpa,
+.draLinAnc:focus-visible .arrIcoSpa { /* What: Hovered Drawer Arrow Icon Span. Why: The arrow points the visitor onward when its row is hovered, pressed, or focused. How: This nudges it right by a few pixels, kept literal since no spacing step lands within 10% of the 4px nudge. */
+
+
+	transform : translateX( 4px );
+
+
+}
+
 /* #endregion draLinAnc */
 
 
@@ -661,7 +663,7 @@
 .navDraDiv[data-drawer-menu-open] .draConDiv { /* What: Entering Drawer Contact Div. Why: The contact block should arrive after the last row. How: This plays the drawer's entrance, delayed by one stagger step per row above it, with one extra step so the drawer has started opening first. */
 
 
-	animation : drawerItemOpenFadeIn var( --dur-ani-p02 ) var( --mot-dec-eas ) calc( var( --dur-ani-m03 ) * ( var( --dra-ite-ind ) + 1 ) ) both; /* Duration Animation Base Plus 2 ~= 277.0ms, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ), Duration Animation Base Minus 3 ~= 67.9ms */
+	animation : drawerItemOpenFadeIn var( --dur-ani-p02 ) var( --mot-dec-eas ) calc( var( --dur-ani-m03 ) * ( var( --dra-ite-ind ) + 1 ) ) both; /* Duration Animation Base Plus 2 ~= 277.0ms, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ), Duration Animation Base Minus 3 ~= 67.9ms, Drawer Item Index, set on each row by its own style attribute */
 
 
 }

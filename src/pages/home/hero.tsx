@@ -183,7 +183,7 @@ function HerSecCom () : React.JSX.Element {
 							href='#contact'
 						>{ /* What: Estimate Button Anchor Element. Why: The page's main action is requesting an estimate. How: This links to the contact section. */ }
 							Request an estimate
-							<span className={ cssModObj.arrIcoSpa }>→</span>{ /* What: Arrow Span Element. Why: The arrow marks the button as moving the visitor onward. How: This sits right after the label. */ }
+							<span className={ cssModObj.arrIcoSpa }>→</span>{ /* What: Arrow Icon Span Element. Why: The arrow marks the button as moving the visitor onward. How: This sits right after the label. */ }
 						</a>
 
 						<a
@@ -241,9 +241,7 @@ function HerSecCom () : React.JSX.Element {
 					<div className={ cssModObj.staIteDiv }>{ /* What: Rating Stat Div Element. Why: Accreditation and insurance are the usual checks before hiring. How: This pairs the rating with its label. */ }
 
 
-						<div className={ cssModObj.staNumDiv }>{ /* What: Stat Number Div Element. Why: The rating leads this stat. How: Its plus sign takes its own class. */ }
-							A<span className={ cssModObj.staPluSpa }>+</span>
-						</div>
+						<div className={ cssModObj.staNumDiv }>A<span className={ cssModObj.staPluSpa }>+</span></div>{ /* What: Stat Number Div Element. Why: The rating leads this stat. How: Its plus sign takes its own class. */ }
 
 						<div className={ cssModObj.staLabDiv }>BBB accredited & fully insured</div>{ /* What: Stat Label Div Element. Why: Each number needs to say what it counts. How: This sits below the number. */ }
 

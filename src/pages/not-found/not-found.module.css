@@ -37,11 +37,11 @@
 
 	align-items     : center;
 	display         : flex;
+	flex            : 1;
 	flex-direction  : column;
 	gap             : var( --spa-ver-p02 ); /* Spacing Vertical Base Plus 2 ~= 25.572px */
 	justify-content : center;
-	flex            : 1;
-	padding         : calc( var( --sec-ver-pad ) + var( --spa-ver-p04 ) ) clamp( var( --spa-hor-p01 ), var( --hor-rhy-012 ), var( --spa-hor-p03 ) ) var( --sec-ver-pad ); /* Section Vertical Padding, about 78.749px to 138.200px, Spacing Vertical Base Plus 4 ~= 44.876px, Spacing Horizontal Base Plus 1 ~= 19.304px, Horizontal Rhythm 12 ~= 28.278px @ 1920px width, Spacing Horizontal Base Plus 3 ~= 33.876px */
+	padding         : calc( var( --sec-ver-pad ) + var( --spa-ver-p04 ) ) clamp( var( --spa-hor-p01 ), var( --hor-rhy-012 ), var( --spa-hor-p03 ) ) var( --sec-ver-pad ); /* Section Vertical Padding, about 78.751px to 138.199px, Spacing Vertical Base Plus 4 ~= 44.876px, Spacing Horizontal Base Plus 1 ~= 19.304px, Horizontal Rhythm 12 ~= 28.278px @ 1920px width, Spacing Horizontal Base Plus 3 ~= 33.876px */
 	text-align      : center;
 
 
@@ -117,7 +117,6 @@
 
 
 
-
 /* #region nofActDiv */
 
 .nofActDiv { /* What: Not-Found Actions Div. Why: The page's two ways onward sit together. How: This sets the buttons side by side, centered, wrapping if needed. */
@@ -172,7 +171,7 @@
 .butBasAnc--ghost { /* What: Ghost Button Base Anchor. Why: The estimate button is the page's secondary action. How: This outlines it with no fill. */
 
 
-	border-color : var( --bor-str-col ); /* Border Strong Color, the main border at 0.22 opacity */
+	border-color : var( --bor-str-col ); /* Border Strong Color = #1a1f24 at 0.22 opacity */
 	color        : var( --tex-mai-col ); /* Text Main Color = #1a1f24 */
 
 

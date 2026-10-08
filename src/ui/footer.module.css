@@ -88,12 +88,12 @@
 
 
 	background    : var( --bac-pag-col );                      /* Background Page Color = #f5f2ec */
-	border-radius : var( --rad-bor-xsm );                      /* Radius Border Extra Small ~= 3.571px */
+	border-radius : var( --rad-bor-xsm );                      /* Radius Border Extra Small ~= 3.572px */
 	display       : inline-grid;
-	height        : var( --spa-ver-p03 );                      /* Spacing Vertical Base Plus 3 ~= 33.876px */
-	padding       : var( --spa-ver-m05 ) var( --spa-hor-m05 ); /* Spacing Vertical Base Minus 5 ~= 3.571px, Spacing Horizontal Base Minus 5 ~= 3.571px */
+	height        : calc( var( --ver-rhy-p03 ) * 1rem );       /* Vertical Rhythm Base Plus 3 ~= 33.876px */
+	padding       : var( --spa-ver-m05 ) var( --spa-hor-m05 ); /* Spacing Vertical Base Minus 5 ~= 3.572px, Spacing Horizontal Base Minus 5 ~= 3.572px */
 	place-items   : center;
-	width         : var( --spa-ver-p03 );                      /* Spacing Vertical Base Plus 3 ~= 33.876px */
+	width         : calc( var( --ver-rhy-p03 ) * 1rem );       /* Vertical Rhythm Base Plus 3 ~= 33.876px */
 
 
 }
@@ -133,7 +133,7 @@
 	display        : flex;
 	flex-direction : column;
 	font-size      : var( --fon-siz-p01 ); /* Font Size Base Plus 1 ~= 14.572px */
-	gap            : var( --spa-ver-m05 ); /* Spacing Vertical Base Minus 5 ~= 3.571px */
+	gap            : var( --spa-ver-m05 ); /* Spacing Vertical Base Minus 5 ~= 3.572px */
 	text-align     : center;
 
 

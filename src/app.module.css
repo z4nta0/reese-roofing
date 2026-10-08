@@ -15,7 +15,7 @@
 
 
 
-.appRooDiv { /* What: App Root. Why: Every module's layout breakpoints should measure the site itself, so they keep working if the site is ever embedded or framed. How: This names the wrapper the app container, queried by its inline size. */
+.appRooDiv { /* What: App Root Div. Why: Every module's layout breakpoints should measure the site itself, so they keep working if the site is ever embedded or framed. How: This names the wrapper the app container, queried by its inline size. */
 
 
 	container : app / inline-size;

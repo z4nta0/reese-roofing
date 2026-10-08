@@ -28,9 +28,9 @@
 
 
 	background    : var( --bac-inv-col );                            /* Background Inverse Color = #1a1f24 */
-	border-top    : var( --bor-wid-bas ) solid var( --bor-mai-col ); /* Border Width Base ~= 1.160px, Border Main Color = rgba( 26, 31, 36, 0.12 ) */
+	border-top    : var( --bor-wid-bas ) solid var( --bor-mai-col ); /* Border Width Base ~= 1.160px, Border Main Color = #1a1f24 at 0.12 opacity */
 	color         : var( --bac-pag-col );                            /* Background Page Color = #f5f2ec */
-	padding-block : var( --sec-ver-pad );                            /* Section Vertical Padding, about 78.749px to 138.200px */
+	padding-block : var( --sec-ver-pad );                            /* Section Vertical Padding, about 78.751px to 138.199px */
 	position      : relative;
 
 
@@ -44,7 +44,7 @@
 
 	align-items           : start;
 	display               : grid;
-	gap                   : var( --spa-ver-p06 ) clamp( var( --spa-hor-p04 ), var( --hor-rhy-016 ), var( --spa-hor-p07 ) ); /* Spacing Vertical Base Plus 6 ~= 78.750px, Spacing Horizontal Base Plus 4 ~= 44.876px, Horizontal Rhythm 16 ~= 87.085px @ 1920px width, Spacing Horizontal Base Plus 7 ~= 104.323px */
+	gap                   : var( --spa-ver-p06 ) clamp( var( --spa-hor-p04 ), var( --hor-rhy-016 ), var( --spa-hor-p07 ) ); /* Spacing Vertical Base Plus 6 ~= 78.751px, Spacing Horizontal Base Plus 4 ~= 44.876px, Horizontal Rhythm 16 ~= 87.085px @ 1920px width, Spacing Horizontal Base Plus 7 ~= 104.323px */
 	grid-template-columns : 1fr 1.05fr;
 	margin                : 0 auto;
 	max-width             : var( --con-max-wid );                                                                           /* Container Maximum Width, about 1449.4px */
@@ -102,7 +102,7 @@
 
 	color                   : var( --bac-pag-col );                                     /* Background Page Color = #f5f2ec */
 	font-family             : var( --fon-fam-sec );                                     /* Font Family Secondary = 'Fraunces', 'Times New Roman', serif */
-	font-size               : clamp( var( --fon-siz-p05 ), 6vw, var( --fon-siz-p07 ) ); /* Font Size Base Plus 5 ~= 44.876px, Font Size Base Plus 7 ~= 78.749px */
+	font-size               : clamp( var( --fon-siz-p05 ), 6vw, var( --fon-siz-p07 ) ); /* Font Size Base Plus 5 ~= 44.876px, Font Size Base Plus 7 ~= 78.751px */
 	font-variation-settings : 'opsz' 144;
 	font-weight             : 400;
 	letter-spacing          : -0.025em;
@@ -171,7 +171,7 @@
 	.conRowDiv { /* What: Stacked Contact Row Div. Why: The label reads best above its value on a phone. How: This turns the row into one column with a small gap. */
 
 
-		gap                   : var( --spa-ver-m04 ); /* Spacing Vertical Base Minus 4 ~= 4.731px */
+		gap                   : var( --spa-ver-m04 ); /* Spacing Vertical Base Minus 4 ~= 4.732px */
 		grid-template-columns : 1fr;
 
 
@@ -258,7 +258,7 @@
 
 
 	background    : var( --bac-pag-col );                                                                           /* Background Page Color = #f5f2ec */
-	border-radius : var( --rad-bor-xsm );                                                                           /* Radius Border Extra Small ~= 3.571px */
+	border-radius : var( --rad-bor-xsm );                                                                           /* Radius Border Extra Small ~= 3.572px */
 	margin-top    : var( --spa-ver-p04 );                                                                           /* Spacing Vertical Base Plus 4 ~= 44.876px */
 	max-width     : max( calc( var( --ver-rhy-p09 ) * 1rem ), var( --hor-rhy-020 ) );                               /* Vertical Rhythm Base Plus 9 ~= 183.074px, Horizontal Rhythm 20 ~= 268.187px @ 1920px width */
 	padding       : var( --spa-ver-p03 ) clamp( var( --spa-hor-p01 ), var( --hor-rhy-013 ), var( --spa-hor-p04 ) ); /* Spacing Vertical Base Plus 3 ~= 33.876px, Spacing Horizontal Base Plus 1 ~= 19.304px, Horizontal Rhythm 13 ~= 37.460px @ 1920px width, Spacing Horizontal Base Plus 4 ~= 44.876px */
@@ -299,7 +299,7 @@
 
 	background    : oklch( from var( --bac-pag-col ) l c h / 0.04 );                                                                                    /* Background Page Color = #f5f2ec */
 	border        : var( --bor-wid-bas ) solid oklch( from var( --bac-pag-col ) l c h / var( --cdn-pow-008-rec ) );                                     /* Border Width Base ~= 1.160px, Background Page Color = #f5f2ec, Core-Design-Number to the Power of 8 Reciprocal ~= 0.105 */
-	border-radius : var( --rad-bor-xsm ); /* Radius Border Extra Small ~= 3.571px */
+	border-radius : var( --rad-bor-xsm ); /* Radius Border Extra Small ~= 3.572px */
 	padding       : clamp( var( --spa-ver-p02 ), 3vw, var( --spa-ver-p04 ) ) clamp( var( --spa-hor-p02 ), var( --hor-rhy-015 ), var( --spa-hor-p04 ) ); /* Spacing Vertical Base Plus 2 ~= 25.572px, Spacing Vertical Base Plus 4 ~= 44.876px, Spacing Horizontal Base Plus 2 ~= 25.572px, Horizontal Rhythm 15 ~= 65.739px @ 1920px width, Spacing Horizontal Base Plus 4 ~= 44.876px */
 
 
@@ -395,6 +395,9 @@
 
 }
 
+
+/* #region forFieSel */
+
 .forFieSel { /* What: Form Field Select. Why: The dropdown should match the other controls, with its own arrow in place of the browser's. How: This drops the native styling and draws a thin chevron at the right. */
 
 
@@ -417,11 +420,13 @@
 
 }
 
+/* #endregion forFieSel */
+
+
 .forFieTex { /* What: Form Field Textarea. Why: The details field needs room to write and should only grow taller. How: This sets a minimum height and allows vertical resizing only. */
 
 
-	font-family : var( --fon-fam-mai ); /* Font Family Main = 'Inter Tight', -apple-system, BlinkMacSystemFont, sans-serif */
-	min-height  : var( --spa-ver-p07 ); /* Spacing Vertical Base Plus 7 ~= 104.323px */
+	min-height  : calc( var( --ver-rhy-p07 ) * 1rem ); /* Vertical Rhythm Base Plus 7 ~= 104.323px */
 	resize      : vertical;
 
 
@@ -430,6 +435,8 @@
 /* #endregion forFieDiv */
 
 
+
+/* #region forRowDiv */
 
 .forRowDiv { /* What: Form Row Div. Why: Email and phone are short enough to share a row. How: This sets two equal columns. */
 
@@ -454,6 +461,8 @@
 
 
 }
+
+/* #endregion forRowDiv */
 
 
 

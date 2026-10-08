@@ -24,8 +24,8 @@
 
 
 	background    : var( --bac-sur-col );                            /* Background Surface Color = #ebe7df */
-	border-top    : var( --bor-wid-bas ) solid var( --bor-mai-col ); /* Border Width Base ~= 1.160px, Border Main Color = rgba( 26, 31, 36, 0.12 ) */
-	padding-block : var( --sec-ver-pad );                            /* Section Vertical Padding, about 78.749px to 138.200px */
+	border-top    : var( --bor-wid-bas ) solid var( --bor-mai-col ); /* Border Width Base ~= 1.160px, Border Main Color = #1a1f24 at 0.12 opacity */
+	padding-block : var( --sec-ver-pad );                            /* Section Vertical Padding, about 78.751px to 138.199px */
 	position      : relative;
 
 
@@ -38,7 +38,7 @@
 
 
 	display               : grid;
-	gap                   : var( --spa-ver-p06 ) clamp( var( --spa-hor-p04 ), var( --hor-rhy-016 ), var( --spa-hor-p07 ) ); /* Spacing Vertical Base Plus 6 ~= 78.750px, Spacing Horizontal Base Plus 4 ~= 44.876px, Horizontal Rhythm 16 ~= 87.085px @ 1920px width, Spacing Horizontal Base Plus 7 ~= 104.323px */
+	gap                   : var( --spa-ver-p06 ) clamp( var( --spa-hor-p04 ), var( --hor-rhy-016 ), var( --spa-hor-p07 ) ); /* Spacing Vertical Base Plus 6 ~= 78.751px, Spacing Horizontal Base Plus 4 ~= 44.876px, Horizontal Rhythm 16 ~= 87.085px @ 1920px width, Spacing Horizontal Base Plus 7 ~= 104.323px */
 	grid-template-columns : 1fr 1.2fr;
 	margin                : 0 auto;
 	margin-bottom         : var( --spa-ver-p07 );                                                                           /* Spacing Vertical Base Plus 7 ~= 104.323px */
@@ -124,7 +124,7 @@
 
 	color                   : var( --tex-mai-col );                                       /* Text Main Color = #1a1f24 */
 	font-family             : var( --fon-fam-sec );                                       /* Font Family Secondary = 'Fraunces', 'Times New Roman', serif */
-	font-size               : clamp( var( --fon-siz-p04 ), 5.5vw, var( --fon-siz-p07 ) ); /* Font Size Base Plus 4 ~= 33.876px, Font Size Base Plus 7 ~= 78.749px */
+	font-size               : clamp( var( --fon-siz-p04 ), 5.5vw, var( --fon-siz-p07 ) ); /* Font Size Base Plus 4 ~= 33.876px, Font Size Base Plus 7 ~= 78.751px */
 	font-variation-settings : 'opsz' 144;
 	font-weight             : 400;
 	letter-spacing          : -0.025em;
@@ -145,7 +145,6 @@
 }
 
 /* #endregion aboTitHea */
-
 
 
 /* #region aboSeaDiv */
@@ -218,8 +217,8 @@
 .aboQuoBlo { /* What: About Quote Blockquote. Why: The family's quote is set apart between rules. How: This pads it with hairlines above and below and positions it for its quote mark. */
 
 
-	border-bottom : var( --bor-wid-bas ) solid var( --bor-mai-col );                /* Border Width Base ~= 1.160px, Border Main Color = rgba( 26, 31, 36, 0.12 ) */
-	border-top    : var( --bor-wid-bas ) solid var( --bor-mai-col );                /* Border Width Base ~= 1.160px, Border Main Color = rgba( 26, 31, 36, 0.12 ) */
+	border-bottom : var( --bor-wid-bas ) solid var( --bor-mai-col );                /* Border Width Base ~= 1.160px, Border Main Color = #1a1f24 at 0.12 opacity */
+	border-top    : var( --bor-wid-bas ) solid var( --bor-mai-col );                /* Border Width Base ~= 1.160px, Border Main Color = #1a1f24 at 0.12 opacity */
 	margin-top    : var( --spa-ver-p04 );                                           /* Spacing Vertical Base Plus 4 ~= 44.876px */
 	padding       : var( --spa-ver-p04 ) var( --spa-hor-p03 ) var( --spa-ver-p03 ); /* Spacing Vertical Base Plus 4 ~= 44.876px, Spacing Horizontal Base Plus 3 ~= 33.876px, Spacing Vertical Base Plus 3 ~= 33.876px */
 	position      : relative;
@@ -235,7 +234,7 @@
 	font-size   : var( --fon-siz-p06 ); /* Font Size Base Plus 6 ~= 59.447px */
 	font-style  : italic;
 	left        : 0;
-	line-height : 1;
+	line-height : var( --ver-rhy-m01 ); /* Vertical Rhythm Base Minus 1 = 1 */
 	position    : absolute;
 	top         : var( --spa-ver-m02 ); /* Spacing Vertical Base Minus 2 ~= 8.304px */
 
@@ -335,7 +334,7 @@
 .aboPriDiv { /* What: About Principles Div. Why: The four principles read side by side under a rule. How: This sets a four-column grid with a rule above. */
 
 
-	border-top            : var( --bor-wid-bas ) solid var( --bor-str-col );                                                /* Border Width Base ~= 1.160px, Border Strong Color, the main border at 0.22 opacity */
+	border-top            : var( --bor-wid-bas ) solid var( --bor-str-col );                                                /* Border Width Base ~= 1.160px, Border Strong Color = #1a1f24 at 0.22 opacity */
 	display               : grid;
 	gap                   : var( --spa-ver-p04 ) clamp( var( --spa-hor-p02 ), var( --hor-rhy-013 ), var( --spa-hor-p04 ) ); /* Spacing Vertical Base Plus 4 ~= 44.876px, Spacing Horizontal Base Plus 2 ~= 25.572px, Horizontal Rhythm 13 ~= 37.460px @ 1920px width, Spacing Horizontal Base Plus 4 ~= 44.876px */
 	grid-template-columns : repeat( 4, 1fr );

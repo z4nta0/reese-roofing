@@ -125,8 +125,8 @@
 
 	--bor-wid-sma : calc( var( --ver-rhy-m12 ) * 1rem ); /* What: Border Width Small ~= 0.499px. Why: This is the border width for the hairline most borders use. How: This multiplies the m12 rhythm step by 1rem, which browsers snap to whole pixels. */
 	--bor-wid-bas : calc( var( --ver-rhy-m09 ) * 1rem ); /* What: Border Width Base ~= 1.160px. Why: This is the border width for stronger borders and controls. How: This multiplies the m09 rhythm step by 1rem, which browsers snap to whole pixels. */
-	--bor-wid-lar : calc( var( --ver-rhy-m07 ) * 1rem ); /* What: Border Width Large ~= 2.035px. Why: This is the border width for focus outlines and spotlight borders. How: This multiplies the m07 rhythm step by 1rem, which browsers snap to whole pixels. */
-	--bor-wid-xla : calc( var( --ver-rhy-m05 ) * 1rem ); /* What: Border Width Extra Large ~= 3.571px. Why: This is the border width for the heaviest ring. How: This multiplies the m05 rhythm step by 1rem, which browsers snap to whole pixels. */
+	--bor-wid-lar : calc( var( --ver-rhy-m07 ) * 1rem ); /* What: Border Width Large ~= 2.035px. Why: This is the scale's step for heavier lines, which nothing on this site draws yet. How: This multiplies the m07 rhythm step by 1rem, which browsers snap to whole pixels. */
+	--bor-wid-xla : calc( var( --ver-rhy-m05 ) * 1rem ); /* What: Border Width Extra Large ~= 3.572px. Why: This is the border width for the heaviest ring. How: This multiplies the m05 rhythm step by 1rem, which browsers snap to whole pixels. */
 
 	/* #endregion Border Width Tokens */
 
@@ -143,7 +143,7 @@
 	--bac-inv-col : #1a1f24;                                                  /* What: Background Inverse Color. Why: Dark bands, the footer, and primary buttons need one dark surface color. How: Those surfaces read it, with paper-colored text on top. */
 	--bac-pag-col : #f5f2ec;                                                  /* What: Background Page Color. Why: The page sits on a warm off-white rather than pure white. How: The page background reads it, and text on dark surfaces reads it, at full strength or faded. */
 	--bac-sur-col : #ebe7df;                                                  /* What: Background Surface Color. Why: Some bands and hovers need a slightly darker paper. How: The about section and hovered service cards read it. */
-	--bor-mai-col : rgba( 26, 31, 36, 0.12 );                                 /* What: Border Main Color. Why: Dividers should be barely there. How: Section edges and hairline rules read it. */
+	--bor-mai-col : oklch( from var( --tex-mai-col ) l c h / 0.12 );          /* What: Border Main Color. Why: Dividers should be barely there. How: Section edges and hairline rules read it. */
 	--bor-str-col : oklch( from var( --bor-mai-col ) l c h / 0.22 );          /* What: Border Strong Color. Why: A few dividers need to hold up as structure. How: This raises the main border's opacity to 0.22 for the service grid, principles rule, and logo ring. */
 	--err-dar-col : ;                                                         /* What: Error Dark Color. Why: The standard role set includes the error family. How: This site has no errors to show, so it stays empty. */
 	--err-mai-col : ;                                                         /* What: Error Main Color. Why: The standard role set includes the error family. How: This site has no errors to show, so it stays empty. */
@@ -203,9 +203,9 @@
 	/* #region Easing Tokens */
 
 	--mot-acc-eas : cubic-bezier( .4, 0, 1, 1 );      /* What: Motion Accelerate Easing. Why: Things leaving the screen should speed up as they go. How: Transitions and animations read it as their timing function. */
-	--mot-bou-eas : cubic-bezier( .34, 1.56, .5, 1 ); /* What: Motion Bounce Easing. Why: Celebratory pops and check marks should spring past their target before settling. How: Transitions and animations read it as their timing function. */
+	--mot-bou-eas : cubic-bezier( .34, 1.56, .5, 1 ); /* What: Motion Bounce Easing. Why: The easing set includes a strong spring past the target for playful motion, which this site doesn't use yet. How: Transitions and animations read it as their timing function. */
 	--mot-dec-eas : cubic-bezier( .2, .7, .3, 1 );    /* What: Motion Decelerate Easing. Why: Things arriving should start fast and land softly. How: Transitions and animations read it as their timing function. */
-	--mot-ove-eas : cubic-bezier( .34, 1.2, .5, 1 );  /* What: Motion Overshoot Easing. Why: Inserted rows and fills should ease slightly past their target before settling. How: Transitions and animations read it as their timing function. */
+	--mot-ove-eas : cubic-bezier( .34, 1.2, .5, 1 );  /* What: Motion Overshoot Easing. Why: The easing set includes a gentle overshoot past the target, which this site doesn't use yet. How: Transitions and animations read it as their timing function. */
 	--mot-sta-eas : ease;                             /* What: Motion Standard Easing. Why: Most hovers, toggles, and fades need one ordinary, smooth curve. How: Transitions and animations read it as their timing function. */
 
 	/* #endregion Easing Tokens */
@@ -214,11 +214,11 @@
 
 	/* #region Elevation Tokens */
 
-	--ele-sma-sha : 0 calc( var( --ver-rhy-m09 ) * 1rem ) calc( var( --ver-rhy-m07 ) * 1rem ) oklch( from var( --sha-mai-col ) l c h / var( --cdn-pow-007-rec ) ); /* What: Elevation Small Shadow, about 0 1.2px 2px. Why: Knobs and small raised controls sit just above their surface. How: This is one tight contact shadow. */
-	--ele-med-sha : 0 calc( var( --ver-rhy-m02 ) * 1rem ) calc( var( --ver-rhy-p02 ) * 1rem ) oklch( from var( --sha-mai-col ) l c h / var( --cdn-pow-006-rec ) ), 0 calc( var( --ver-rhy-m05 ) * 1rem ) calc( var( --ver-rhy-m02 ) * 1rem ) calc( var( --ver-rhy-m07 ) * -1rem ) oklch( from var( --sha-mai-col ) l c h / var( --cdn-pow-008-rec ) );                  /* What: Elevation Medium Shadow, about 0 8px 26px plus 0 3.6px 8px -2px. Why: Small floating surfaces such as info tips and the bottom tab bar hover just off the page. How: This pairs a soft key shadow with a crisp contact layer. */
-	--ele-lar-sha : 0 calc( var( --ver-rhy-p01 ) * 1rem ) calc( var( --ver-rhy-p04 ) * 1rem ) calc( var( --ver-rhy-bas ) * -1rem ) oklch( from var( --sha-mai-col ) l c h / var( --cdn-pow-004-rec ) ), 0 calc( var( --ver-rhy-m03 ) * 1rem ) calc( var( --ver-rhy-bas ) * 1rem ) calc( var( --ver-rhy-m05 ) * -1rem ) oklch( from var( --sha-mai-col ) l c h / 0.16 ); /* What: Elevation Large Shadow, about 0 19px 45px -15px plus 0 6px 15px -4px. Why: Popovers and anything being dragged lift well clear of the page. How: This pairs a deep key shadow with a crisp contact layer. */
-	--ele-xla-sha : 0 calc( var( --ver-rhy-p02 ) * 1rem ) calc( var( --ver-rhy-p05 ) * 1rem ) calc( var( --ver-rhy-p01 ) * -1rem ) oklch( from var( --sha-mai-col ) l c h / var( --cdn-pow-003-rec ) ), 0 calc( var( --ver-rhy-m02 ) * 1rem ) calc( var( --ver-rhy-p01 ) * 1rem ) calc( var( --ver-rhy-m04 ) * -1rem ) oklch( from var( --sha-mai-col ) l c h / 0.16 ); /* What: Elevation Extra Large Shadow, about 0 26px 59px -19px plus 0 8px 19px -5px. Why: Modals float highest, above a scrim. How: This pairs the deepest key shadow with a crisp contact layer. */
-	--ele-sid-sha : calc( var( --ver-rhy-p01 ) * 1rem ) 0 calc( var( --ver-rhy-p04 ) * 1rem ) calc( var( --ver-rhy-bas ) * -1rem ) oklch( from var( --sha-mai-col ) l c h / var( --cdn-pow-004-rec ) ), calc( var( --ver-rhy-m03 ) * 1rem ) 0 calc( var( --ver-rhy-bas ) * 1rem ) calc( var( --ver-rhy-m05 ) * -1rem ) oklch( from var( --sha-mai-col ) l c h / 0.16 ); /* What: Elevation Side Shadow, about 19px 0 45px -15px plus 6px 0 15px -4px. Why: The side rail's drawer and pull handle slide in from the left edge, so their shadow falls sideways. How: This is the large shadow with its x and y offsets swapped, so it falls to the right. */
+	--ele-sma-sha : 0 calc( var( --ver-rhy-m09 ) * 1rem ) calc( var( --ver-rhy-m07 ) * 1rem ) oklch( from var( --sha-mai-col ) l c h / var( --cdn-pow-007-rec ) ); /* What: Elevation Small Shadow, about 0 1.2px 2px. Why: Small raised controls would sit just above their surface; nothing on this site uses this level yet. How: This is one tight contact shadow. */
+	--ele-med-sha : 0 calc( var( --ver-rhy-m02 ) * 1rem ) calc( var( --ver-rhy-p02 ) * 1rem ) oklch( from var( --sha-mai-col ) l c h / var( --cdn-pow-006-rec ) ), 0 calc( var( --ver-rhy-m05 ) * 1rem ) calc( var( --ver-rhy-m02 ) * 1rem ) calc( var( --ver-rhy-m07 ) * -1rem ) oklch( from var( --sha-mai-col ) l c h / var( --cdn-pow-008-rec ) );                  /* What: Elevation Medium Shadow, about 0 8px 26px plus 0 3.6px 8px -2px. Why: Small floating surfaces such as tooltips would hover just off the page; none exist on this site yet. How: This pairs a soft key shadow with a crisp contact layer. */
+	--ele-lar-sha : 0 calc( var( --ver-rhy-p01 ) * 1rem ) calc( var( --ver-rhy-p04 ) * 1rem ) calc( var( --ver-rhy-bas ) * -1rem ) oklch( from var( --sha-mai-col ) l c h / var( --cdn-pow-004-rec ) ), 0 calc( var( --ver-rhy-m03 ) * 1rem ) calc( var( --ver-rhy-bas ) * 1rem ) calc( var( --ver-rhy-m05 ) * -1rem ) oklch( from var( --sha-mai-col ) l c h / 0.16 ); /* What: Elevation Large Shadow, about 0 19px 45px -15px plus 0 6px 15px -4px. Why: The mobile drawer lifts well clear of the page it drops over. How: This pairs a deep key shadow with a crisp contact layer. */
+	--ele-xla-sha : 0 calc( var( --ver-rhy-p02 ) * 1rem ) calc( var( --ver-rhy-p05 ) * 1rem ) calc( var( --ver-rhy-p01 ) * -1rem ) oklch( from var( --sha-mai-col ) l c h / var( --cdn-pow-003-rec ) ), 0 calc( var( --ver-rhy-m02 ) * 1rem ) calc( var( --ver-rhy-p01 ) * 1rem ) calc( var( --ver-rhy-m04 ) * -1rem ) oklch( from var( --sha-mai-col ) l c h / 0.16 ); /* What: Elevation Extra Large Shadow, about 0 26px 59px -19px plus 0 8px 19px -5px. Why: Modals would float highest, above a scrim; this site has none yet. How: This pairs the deepest key shadow with a crisp contact layer. */
+	--ele-sid-sha : calc( var( --ver-rhy-p01 ) * 1rem ) 0 calc( var( --ver-rhy-p04 ) * 1rem ) calc( var( --ver-rhy-bas ) * -1rem ) oklch( from var( --sha-mai-col ) l c h / var( --cdn-pow-004-rec ) ), calc( var( --ver-rhy-m03 ) * 1rem ) 0 calc( var( --ver-rhy-bas ) * 1rem ) calc( var( --ver-rhy-m05 ) * -1rem ) oklch( from var( --sha-mai-col ) l c h / 0.16 ); /* What: Elevation Side Shadow, about 19px 0 45px -15px plus 6px 0 15px -4px. Why: A drawer sliding in from a side edge would cast its shadow sideways; this site's drawer drops from the top, so nothing uses it yet. How: This is the large shadow with its x and y offsets swapped, so it falls to the right. */
 
 	/* #endregion Elevation Tokens */
 
@@ -242,7 +242,7 @@
 	--fon-siz-p04 : calc( var( --fon-siz-bas ) * var( --cdn-pow-004 ) ); /* What: Font Size Base Plus 4 ~= 33.876px. Why: This is four steps up the scale from the base. How: This multiplies the base by the fourth power of the core design number. */
 	--fon-siz-p05 : calc( var( --fon-siz-bas ) * var( --cdn-pow-005 ) ); /* What: Font Size Base Plus 5 ~= 44.876px. Why: This is five steps up the scale from the base. How: This multiplies the base by the fifth power of the core design number. */
 	--fon-siz-p06 : calc( var( --fon-siz-bas ) * var( --cdn-pow-006 ) ); /* What: Font Size Base Plus 6 ~= 59.447px. Why: This is six steps up the scale from the base. How: This multiplies the base by the sixth power of the core design number. */
-	--fon-siz-p07 : calc( var( --fon-siz-bas ) * var( --cdn-pow-007 ) ); /* What: Font Size Base Plus 7 ~= 78.749px. Why: This is seven steps up the scale from the base. How: This multiplies the base by the seventh power of the core design number. */
+	--fon-siz-p07 : calc( var( --fon-siz-bas ) * var( --cdn-pow-007 ) ); /* What: Font Size Base Plus 7 ~= 78.751px. Why: This is seven steps up the scale from the base. How: This multiplies the base by the seventh power of the core design number. */
 	--fon-siz-p08 : calc( var( --fon-siz-bas ) * var( --cdn-pow-008 ) ); /* What: Font Size Base Plus 8 ~= 104.323px. Why: This is eight steps up the scale from the base, for the largest display headings. How: This multiplies the base by the eighth power of the core design number. */
 
 	/* #endregion Font Size Tokens */
@@ -287,7 +287,7 @@
 
 	--con-max-wid : calc( 1920px / var( --cdn-pow-001 ) );                                                   /* What: Container Maximum Width. Why: The content column should fill the screen on phones and tablets but stop widening on very large monitors. How: Every section's container caps its width at the largest horizontal step's value at a 1920px viewport, about 1449.4px, so below that width only the gutter limits it. */
 	--gut-sid-pad : clamp( var( --spa-hor-p01 ), var( --hor-rhy-016 ), var( --spa-hor-p04 ) );               /* What: Gutter Side Padding. Why: Content needs side margins that grow with the screen within sensible bounds. How: Every container and the drawer pad their sides with horizontal step 016, held between the p01 and p04 horizontal spacing steps, about 19.304px to 44.876px. */
-	--sec-ver-pad : clamp( calc( var( --ver-rhy-p06 ) * 1rem ), 10vw, calc( var( --ver-rhy-p08 ) * 1rem ) ); /* What: Section Vertical Padding. Why: Sections need generous vertical breathing room that scales with the screen. How: Every section pads its top and bottom with it, growing with the viewport between the p06 and p08 rhythm steps, about 78.749px to 138.200px. */
+	--sec-ver-pad : clamp( calc( var( --ver-rhy-p06 ) * 1rem ), 10vw, calc( var( --ver-rhy-p08 ) * 1rem ) ); /* What: Section Vertical Padding. Why: Sections need generous vertical breathing room that scales with the screen. How: Every section pads its top and bottom with it, growing with the viewport between the p06 and p08 rhythm steps, about 78.751px to 138.199px. */
 
 	/* #endregion Layout Tokens */
 
@@ -295,11 +295,11 @@
 
 	/* #region Radius Tokens */
 
-	--rad-bor-xsm : calc( var( --ver-rhy-m05 ) * 1rem ); /* What: Radius Border Extra Small ~= 3.571px. Why: Tiny pieces, swatches, and focus rings get the subtlest rounding. How: This multiplies the m05 rhythm step by 1rem. */
-	--rad-bor-sma : calc( var( --ver-rhy-m02 ) * 1rem ); /* What: Radius Border Small ~= 8.304px. Why: Inputs, small buttons, and grips share one small corner. How: This multiplies the m02 rhythm step by 1rem. */
-	--rad-bor-med : calc( var( --ver-rhy-m01 ) * 1rem ); /* What: Radius Border Medium = 11px. Why: Rows, tabs, list cards, and inner blocks share one corner. How: This multiplies the m01 rhythm step by 1rem. */
-	--rad-bor-lar : calc( var( --ver-rhy-bas ) * 1rem ); /* What: Radius Border Large ~= 14.572px. Why: Cards, panels, and modals share one larger corner. How: This multiplies the bas rhythm step by 1rem. */
-	--rad-bor-xla : calc( var( --ver-rhy-p01 ) * 1rem ); /* What: Radius Border Extra Large ~= 19.304px. Why: The largest surfaces and tracks get the softest corners. How: This multiplies the p01 rhythm step by 1rem. */
+	--rad-bor-xsm : calc( var( --ver-rhy-m05 ) * 1rem ); /* What: Radius Border Extra Small ~= 3.572px. Why: The footer's mark box, the contact logo card, and the contact form panel get the subtlest rounding. How: This multiplies the m05 rhythm step by 1rem. */
+	--rad-bor-sma : calc( var( --ver-rhy-m02 ) * 1rem ); /* What: Radius Border Small ~= 8.304px. Why: This is the scale's small corner, which nothing on this site uses yet. How: This multiplies the m02 rhythm step by 1rem. */
+	--rad-bor-med : calc( var( --ver-rhy-m01 ) * 1rem ); /* What: Radius Border Medium = 11px. Why: This is the scale's medium corner, which nothing on this site uses yet. How: This multiplies the m01 rhythm step by 1rem. */
+	--rad-bor-lar : calc( var( --ver-rhy-bas ) * 1rem ); /* What: Radius Border Large ~= 14.572px. Why: This is the scale's large corner, which nothing on this site uses yet. How: This multiplies the bas rhythm step by 1rem. */
+	--rad-bor-xla : calc( var( --ver-rhy-p01 ) * 1rem ); /* What: Radius Border Extra Large ~= 19.304px. Why: This is the scale's softest corner, which nothing on this site uses yet. How: This multiplies the p01 rhythm step by 1rem. */
 
 	/* #endregion Radius Tokens */
 
@@ -311,8 +311,8 @@
 	--spa-hor-m08 : calc( var( --ver-rhy-m08 ) * 1rem ); /* What: Spacing Horizontal Base Minus 8 ~= 1.537px. Why: Horizontal margins, padding, and column gaps that stay one size on every screen share the vertical rhythm. How: This multiplies the m08 rhythm step by 1rem. */
 	--spa-hor-m07 : calc( var( --ver-rhy-m07 ) * 1rem ); /* What: Spacing Horizontal Base Minus 7 ~= 2.035px. Why: Horizontal margins, padding, and column gaps that stay one size on every screen share the vertical rhythm. How: This multiplies the m07 rhythm step by 1rem. */
 	--spa-hor-m06 : calc( var( --ver-rhy-m06 ) * 1rem ); /* What: Spacing Horizontal Base Minus 6 ~= 2.696px. Why: Horizontal margins, padding, and column gaps that stay one size on every screen share the vertical rhythm. How: This multiplies the m06 rhythm step by 1rem. */
-	--spa-hor-m05 : calc( var( --ver-rhy-m05 ) * 1rem ); /* What: Spacing Horizontal Base Minus 5 ~= 3.571px. Why: Horizontal margins, padding, and column gaps that stay one size on every screen share the vertical rhythm. How: This multiplies the m05 rhythm step by 1rem. */
-	--spa-hor-m04 : calc( var( --ver-rhy-m04 ) * 1rem ); /* What: Spacing Horizontal Base Minus 4 ~= 4.731px. Why: Horizontal margins, padding, and column gaps that stay one size on every screen share the vertical rhythm. How: This multiplies the m04 rhythm step by 1rem. */
+	--spa-hor-m05 : calc( var( --ver-rhy-m05 ) * 1rem ); /* What: Spacing Horizontal Base Minus 5 ~= 3.572px. Why: Horizontal margins, padding, and column gaps that stay one size on every screen share the vertical rhythm. How: This multiplies the m05 rhythm step by 1rem. */
+	--spa-hor-m04 : calc( var( --ver-rhy-m04 ) * 1rem ); /* What: Spacing Horizontal Base Minus 4 ~= 4.732px. Why: Horizontal margins, padding, and column gaps that stay one size on every screen share the vertical rhythm. How: This multiplies the m04 rhythm step by 1rem. */
 	--spa-hor-m03 : calc( var( --ver-rhy-m03 ) * 1rem ); /* What: Spacing Horizontal Base Minus 3 ~= 6.268px. Why: Horizontal margins, padding, and column gaps that stay one size on every screen share the vertical rhythm. How: This multiplies the m03 rhythm step by 1rem. */
 	--spa-hor-m02 : calc( var( --ver-rhy-m02 ) * 1rem ); /* What: Spacing Horizontal Base Minus 2 ~= 8.304px. Why: Horizontal margins, padding, and column gaps that stay one size on every screen share the vertical rhythm. How: This multiplies the m02 rhythm step by 1rem. */
 	--spa-hor-m01 : calc( var( --ver-rhy-m01 ) * 1rem ); /* What: Spacing Horizontal Base Minus 1 = 11px. Why: Horizontal margins, padding, and column gaps that stay one size on every screen share the vertical rhythm. How: This multiplies the m01 rhythm step by 1rem. */
@@ -322,17 +322,17 @@
 	--spa-hor-p03 : calc( var( --ver-rhy-p03 ) * 1rem ); /* What: Spacing Horizontal Base Plus 3 ~= 33.876px. Why: Horizontal margins, padding, and column gaps that stay one size on every screen share the vertical rhythm. How: This multiplies the p03 rhythm step by 1rem. */
 	--spa-hor-p04 : calc( var( --ver-rhy-p04 ) * 1rem ); /* What: Spacing Horizontal Base Plus 4 ~= 44.876px. Why: Horizontal margins, padding, and column gaps that stay one size on every screen share the vertical rhythm. How: This multiplies the p04 rhythm step by 1rem. */
 	--spa-hor-p05 : calc( var( --ver-rhy-p05 ) * 1rem ); /* What: Spacing Horizontal Base Plus 5 ~= 59.447px. Why: Horizontal margins, padding, and column gaps that stay one size on every screen share the vertical rhythm. How: This multiplies the p05 rhythm step by 1rem. */
-	--spa-hor-p06 : calc( var( --ver-rhy-p06 ) * 1rem ); /* What: Spacing Horizontal Base Plus 6 ~= 78.750px. Why: Horizontal margins, padding, and column gaps that stay one size on every screen share the vertical rhythm. How: This multiplies the p06 rhythm step by 1rem. */
+	--spa-hor-p06 : calc( var( --ver-rhy-p06 ) * 1rem ); /* What: Spacing Horizontal Base Plus 6 ~= 78.751px. Why: Horizontal margins, padding, and column gaps that stay one size on every screen share the vertical rhythm. How: This multiplies the p06 rhythm step by 1rem. */
 	--spa-hor-p07 : calc( var( --ver-rhy-p07 ) * 1rem ); /* What: Spacing Horizontal Base Plus 7 ~= 104.323px. Why: Horizontal margins, padding, and column gaps that stay one size on every screen share the vertical rhythm. How: This multiplies the p07 rhythm step by 1rem. */
-	--spa-hor-p08 : calc( var( --ver-rhy-p08 ) * 1rem ); /* What: Spacing Horizontal Base Plus 8 ~= 138.200px. Why: Horizontal margins, padding, and column gaps that stay one size on every screen share the vertical rhythm. How: This multiplies the p08 rhythm step by 1rem. */
+	--spa-hor-p08 : calc( var( --ver-rhy-p08 ) * 1rem ); /* What: Spacing Horizontal Base Plus 8 ~= 138.199px. Why: Horizontal margins, padding, and column gaps that stay one size on every screen share the vertical rhythm. How: This multiplies the p08 rhythm step by 1rem. */
 
 
 	--spa-ver-m09 : calc( var( --ver-rhy-m09 ) * 1rem ); /* What: Spacing Vertical Base Minus 9 ~= 1.160px. Why: Vertical margins, padding, and row gaps share the vertical rhythm. How: This multiplies the m09 rhythm step by 1rem. */
 	--spa-ver-m08 : calc( var( --ver-rhy-m08 ) * 1rem ); /* What: Spacing Vertical Base Minus 8 ~= 1.537px. Why: Vertical margins, padding, and row gaps share the vertical rhythm. How: This multiplies the m08 rhythm step by 1rem. */
 	--spa-ver-m07 : calc( var( --ver-rhy-m07 ) * 1rem ); /* What: Spacing Vertical Base Minus 7 ~= 2.035px. Why: Vertical margins, padding, and row gaps share the vertical rhythm. How: This multiplies the m07 rhythm step by 1rem. */
 	--spa-ver-m06 : calc( var( --ver-rhy-m06 ) * 1rem ); /* What: Spacing Vertical Base Minus 6 ~= 2.696px. Why: Vertical margins, padding, and row gaps share the vertical rhythm. How: This multiplies the m06 rhythm step by 1rem. */
-	--spa-ver-m05 : calc( var( --ver-rhy-m05 ) * 1rem ); /* What: Spacing Vertical Base Minus 5 ~= 3.571px. Why: Vertical margins, padding, and row gaps share the vertical rhythm. How: This multiplies the m05 rhythm step by 1rem. */
-	--spa-ver-m04 : calc( var( --ver-rhy-m04 ) * 1rem ); /* What: Spacing Vertical Base Minus 4 ~= 4.731px. Why: Vertical margins, padding, and row gaps share the vertical rhythm. How: This multiplies the m04 rhythm step by 1rem. */
+	--spa-ver-m05 : calc( var( --ver-rhy-m05 ) * 1rem ); /* What: Spacing Vertical Base Minus 5 ~= 3.572px. Why: Vertical margins, padding, and row gaps share the vertical rhythm. How: This multiplies the m05 rhythm step by 1rem. */
+	--spa-ver-m04 : calc( var( --ver-rhy-m04 ) * 1rem ); /* What: Spacing Vertical Base Minus 4 ~= 4.732px. Why: Vertical margins, padding, and row gaps share the vertical rhythm. How: This multiplies the m04 rhythm step by 1rem. */
 	--spa-ver-m03 : calc( var( --ver-rhy-m03 ) * 1rem ); /* What: Spacing Vertical Base Minus 3 ~= 6.268px. Why: Vertical margins, padding, and row gaps share the vertical rhythm. How: This multiplies the m03 rhythm step by 1rem. */
 	--spa-ver-m02 : calc( var( --ver-rhy-m02 ) * 1rem ); /* What: Spacing Vertical Base Minus 2 ~= 8.304px. Why: Vertical margins, padding, and row gaps share the vertical rhythm. How: This multiplies the m02 rhythm step by 1rem. */
 	--spa-ver-m01 : calc( var( --ver-rhy-m01 ) * 1rem ); /* What: Spacing Vertical Base Minus 1 = 11px. Why: Vertical margins, padding, and row gaps share the vertical rhythm. How: This multiplies the m01 rhythm step by 1rem. */
@@ -342,9 +342,9 @@
 	--spa-ver-p03 : calc( var( --ver-rhy-p03 ) * 1rem ); /* What: Spacing Vertical Base Plus 3 ~= 33.876px. Why: Vertical margins, padding, and row gaps share the vertical rhythm. How: This multiplies the p03 rhythm step by 1rem. */
 	--spa-ver-p04 : calc( var( --ver-rhy-p04 ) * 1rem ); /* What: Spacing Vertical Base Plus 4 ~= 44.876px. Why: Vertical margins, padding, and row gaps share the vertical rhythm. How: This multiplies the p04 rhythm step by 1rem. */
 	--spa-ver-p05 : calc( var( --ver-rhy-p05 ) * 1rem ); /* What: Spacing Vertical Base Plus 5 ~= 59.447px. Why: Vertical margins, padding, and row gaps share the vertical rhythm. How: This multiplies the p05 rhythm step by 1rem. */
-	--spa-ver-p06 : calc( var( --ver-rhy-p06 ) * 1rem ); /* What: Spacing Vertical Base Plus 6 ~= 78.750px. Why: Vertical margins, padding, and row gaps share the vertical rhythm. How: This multiplies the p06 rhythm step by 1rem. */
+	--spa-ver-p06 : calc( var( --ver-rhy-p06 ) * 1rem ); /* What: Spacing Vertical Base Plus 6 ~= 78.751px. Why: Vertical margins, padding, and row gaps share the vertical rhythm. How: This multiplies the p06 rhythm step by 1rem. */
 	--spa-ver-p07 : calc( var( --ver-rhy-p07 ) * 1rem ); /* What: Spacing Vertical Base Plus 7 ~= 104.323px. Why: Vertical margins, padding, and row gaps share the vertical rhythm. How: This multiplies the p07 rhythm step by 1rem. */
-	--spa-ver-p08 : calc( var( --ver-rhy-p08 ) * 1rem ); /* What: Spacing Vertical Base Plus 8 ~= 138.200px. Why: Vertical margins, padding, and row gaps share the vertical rhythm. How: This multiplies the p08 rhythm step by 1rem. */
+	--spa-ver-p08 : calc( var( --ver-rhy-p08 ) * 1rem ); /* What: Spacing Vertical Base Plus 8 ~= 138.199px. Why: Vertical margins, padding, and row gaps share the vertical rhythm. How: This multiplies the p08 rhythm step by 1rem. */
 
 	/* #endregion Spacing Tokens */
 
@@ -352,8 +352,8 @@
 
 	/* #region Text Width Tokens */
 
-	--tex-wid-bas : calc( var( --cdn-pow-012 ) * 1em ); /* What: Text Width Base Maximum ~= 29.207em. Why: Paragraph text reads best near 66 characters per line. How: Inter Tight averages about 2.34 characters per em, so this caps a line at about 68 characters at any font size. */
 	--tex-wid-sma : calc( var( --cdn-pow-011 ) * 1em ); /* What: Text Width Small Maximum ~= 22.047em. Why: Small or secondary text (hints, captions, subtitles) reads best near 50 characters per line. How: Inter Tight averages about 2.34 characters per em, so this caps a line at about 52 characters at any font size. */
+	--tex-wid-bas : calc( var( --cdn-pow-012 ) * 1em ); /* What: Text Width Base Maximum ~= 29.207em. Why: Paragraph text reads best near 66 characters per line. How: Inter Tight averages about 2.34 characters per em, so this caps a line at about 68 characters at any font size. */
 
 	/* #endregion Text Width Tokens */
 

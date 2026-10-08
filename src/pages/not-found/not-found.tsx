@@ -1,15 +1,14 @@
 
 
 
-
 // #region Imports
 
 import cssModObj from './not-found.module.css'; // What: CSS Module Object. Why: The page's layout and its label, heading, paragraph, and buttons are styled in its own module. How: Each element reads its hashed class name from this object.
 
 
-import { Link      } from 'react-router';         // What: Link. Why: The way home should navigate inside the site without a full page load. How: This renders the return button.
-import { NavBarCom } from '../../ui/nav.tsx';     // What: Navigation Bar Component. Why: The 404 page keeps the site's top bar, so every section stays one tap away. How: This is rendered first inside the page.
-import { SitFooCom } from '../../ui/footer.tsx';  // What: Site Footer Component. Why: The 404 page ends with the site's footer like every page. How: This is rendered last inside the page.
+import { Link      } from 'react-router';        // What: Link. Why: The way home should navigate inside the site without a full page load. How: This renders the return button.
+import { NavBarCom } from '../../ui/nav.tsx';    // What: Navigation Bar Component. Why: The 404 page keeps the site's top bar, so every section stays one tap away. How: This is rendered first inside the page.
+import { SitFooCom } from '../../ui/footer.tsx'; // What: Site Footer Component. Why: The 404 page ends with the site's footer like every page. How: This is rendered last inside the page.
 
 // #endregion Imports
 
@@ -102,6 +101,8 @@ function NotFouCom () : React.JSX.Element {
 					>{ /* What: Link. Why: The page's main action is going back home. How: This navigates to the root path inside the site. */ }
 						Return home <span className={ cssModObj.arrIcoSpa }>→</span>
 					</Link>
+
+
 
 					<a
 						className={` ${ cssModObj.butBasAnc }   ${ cssModObj.butBasAncGhost } `}

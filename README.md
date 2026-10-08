@@ -1,6 +1,6 @@
 # Reese Roofing
 
-A single-page marketing site for Reese Roofing — a commercial roofing contractor serving Lawrence, Kansas and the surrounding area.
+A single-page marketing site for Reese Roofing, a commercial roofing contractor serving Lawrence, Kansas and the surrounding area.
 
 ## Stack
 
@@ -47,17 +47,17 @@ src/
 - **Logo usage:**
   - The **full logo** (`src/pages/home/logo-full.svg`) anchors the hero as the primary visual, doubles as a "seal" in the sticky left column of the About section, and appears on a paper-colored signature card in the Contact section. It's a two-color SVG (navy mark + grey subtext).
   - The **simple mark** (`src/assets/logo-mark.svg`) is used in the nav bar and the footer.
-  - The **favicon** uses an SVG (`/public/favicon.svg`) — a centered, padded version of the simple mark — with raster `.ico` and PNG fallbacks (16/32/192/512) plus a 180×180 Apple touch icon on a paper-colored background.
+  - The **favicon** uses an SVG (`/public/favicon.svg`), a centered, padded version of the simple mark, with raster `.ico` and PNG fallbacks (16/32/192/512) plus a 180×180 Apple touch icon on a paper-colored background.
   - All logos are vector SVG: crisp at any size, tiny payloads, and the brand navy `#1f4e7a` is set as the `fill` attribute so you can edit it directly in the SVG files if you ever want a different color treatment.
 
 ## Customization checklist
 
 When you're ready to make this real, update:
 
-- **Phone number:** `(785) 555-0199` — search the repo for it; appears in Nav, Contact, Footer area
-- **Email:** `hello@reeseroofing.example` — same; appears in Contact and the mailto form action
-- **Address:** placeholder Lawrence, KS 66044 — Contact section
-- **Stats in Hero:** 17+ years, 400+ roofs, etc. — replace with real numbers
+- **Phone number:** `(785) 555-0199`. Search the repo for it; it appears in the Nav, Contact, and Footer areas
+- **Email:** `hello@reeseroofing.example`. Same; it appears in Contact and the mailto form action
+- **Address:** placeholder Lawrence, KS 66044, in the Contact section
+- **Stats in Hero:** 17+ years, 400+ roofs, etc. Replace them with real numbers
 - **Services list:** edit the `SER_RCD_ARR` array in `src/pages/home/services.tsx`
 - **About copy & quote:** `src/pages/home/about.tsx`
 - **Form backend:** the form currently uses `mailto:` as a no-backend fallback. To wire up a real backend, replace the `subForFun` handler in `src/pages/home/contact.tsx` with a `fetch` POST to your endpoint (Formspree, Netlify Forms, your own API, etc.).
