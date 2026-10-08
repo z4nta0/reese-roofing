@@ -21,10 +21,11 @@ import type { Plugin } from 'vite'; // What: Plugin. Why: The page minifier is a
  * @summary
  * The build and dev server config. It compiles React, reads CSS module class
  * names as camelCase keys, and, for production builds only, compacts
- * index.html, which Vite processes but never minifies, so the page's comments
- * and indentation stay out of what visitors download. Every other setting
- * stays at Vite's default, including copying the files in public/ (the
- * favicons and Netlify's _redirects) into the build untouched.
+ * index.html, which Vite processes but never minifies, so the page's comments,
+ * indentation, and JSON-LD whitespace stay out of what visitors download.
+ * Every other setting stays at Vite's default, including copying the files in
+ * public/ (the favicons, the social preview image, robots.txt, and Netlify's
+ * _headers and _redirects) into the build untouched.
  *
  * Sections:
  *  - Helpers
@@ -47,9 +48,10 @@ import type { Plugin } from 'vite'; // What: Plugin. Why: The page minifier is a
  * Builds the Vite plugin that compacts the shipped index.html. Vite injects
  * the bundle's script and stylesheet tags into the page but otherwise ships
  * it as written, with every comment and indentation level the formatting
- * rules give it. For production builds only, this strips the page's HTML
- * comments and the comment inside its external script tag, trims every
- * line, and drops blank lines. The newlines between lines are kept, so text
+ * rules give it. For production builds only, this re-serializes the
+ * page's JSON-LD on one line, which also fails the build if that JSON is
+ * ever invalid, strips the page's HTML comments and the comment inside its
+ * external script tag, trims every line, and drops blank lines. The newlines between lines are kept, so text
  * wrapped across lines keeps the space between its words. It runs after
  * Vite's own transforms, so the tags Vite injects are compacted too. The
  * dev server serves the page as written.
@@ -82,6 +84,7 @@ const minHtmFun = () : Plugin => ({ // What: Minify Html Function. Why: index.ht
 
 
 			return htmTexStr                                                                               // What: Compacted Page Return. Why: Vite writes whatever this returns as the shipped page. How: This chains each compaction over the page's text.
+				.replace( /(?<=<script type='application\/ld\+json'>)[\s\S]*?(?=<\/script>)/g, ( jsoTexStr ) => JSON.stringify( JSON.parse( jsoTexStr ) ) ) // What: Json-Ld Compaction. Why: Structured data reads the same without its indentation, and invalid JSON should stop the build rather than ship. How: This parses each JSON-LD script's contents and writes them back on one line.
 				.replace( /(<script\b[^>]*\bsrc=[^>]*>)\s*(?:\/\*[\s\S]*?\*\/\s*)+(<\/script>)/g, '$1$2' ) // What: External Script Comment Strip. Why: An external script's only content is its comment. How: This empties the tag.
 				.replace( /<!--[\s\S]*?-->/g, '' )                                                         // What: Html Comment Strip. Why: Comments mean nothing to the browser. How: This removes every HTML comment.
 				.split( '\n' )                                                                             // What: Line Split. Why: Indentation and blank lines are dropped line by line. How: This splits the page into lines.
