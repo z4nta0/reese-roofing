@@ -7,15 +7,69 @@
  * @summary
  * Styles for NavBarCom: the fixed top bar, which turns frosted once the page
  * scrolls, with the brand, the centered section links, the phone link and
- * estimate button, and on small screens the menu toggle and its drop-down
- * drawer. The shared container, button, and arrow styles the bar used to
- * borrow from the global stylesheet are copied onto its own classes here. The
- * estimate button is a compact version of the site's primary button, with
- * smaller padding and text to suit the bar.
+ * estimate button, and on small screens the menu toggle, its drop-down drawer,
+ * and the scrim that dims the page behind the drawer. The shared container,
+ * button, and arrow styles the bar used to borrow from the global stylesheet
+ * are copied onto its own classes here. The estimate button is a version of
+ * the site's primary button with slightly narrower side padding to suit the
+ * bar.
  *
  * @author z4nta0 <https://github.com/z4nta0>
  *
 */
+
+
+
+.navScrDiv { /* What: Navigation Scrim Div. Why: The open drawer should stand apart from a dimmed page, and the page should only dim on screens that have the drawer. How: This covers the viewport in the scrim color at the bar's stack level, hidden by default and shown below 880px, fading in while the drawer is open. */
+
+
+	background : oklch( from var( --scr-mai-col ) l c h / var( --cdn-pow-003-rec ) );                          /* Scrim Main Color = Background Inverse Color = #1a1f24, Core-Design-Number to the Power of 3 Reciprocal ~= 0.430 */
+	display    : none;
+	inset      : 0;
+	opacity    : 0;
+	position   : fixed;
+	transition : opacity var( --dur-tra-p03 ) var( --mot-dec-eas ), visibility 0s linear var( --dur-tra-p03 ); /* Duration Transition Base Plus 3 ~= 366.9ms, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ) */
+	visibility : hidden;
+	z-index    : 2;                                                                                            /* What: Scrim Stack Level. Why: The scrim has to cover the hero's content, which sits at 1, while staying under the bar, also at 2. How: This matches the bar's level, and the scrim comes first in the markup, so the bar paints above it. */
+
+
+}
+.navScrDiv[data-drawer-menu-open] { /* What: Open Navigation Scrim Div. Why: The page dims while the drawer is open. How: This shows the scrim at once, then fades it in. */
+
+
+	opacity    : 1;
+	transition : opacity var( --dur-tra-p03 ) var( --mot-dec-eas ), visibility 0s linear 0s; /* Duration Transition Base Plus 3 ~= 366.9ms, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ) */
+	visibility : visible;
+
+
+}
+@container app ( max-width : 880px ) { /* What: Narrow Navigation Scrim Div. Why: Only screens with the drawer need the scrim. How: This applies below 880px wide. */
+
+
+	.navScrDiv { /* What: Shown Navigation Scrim Div. Why: The scrim has to exist where the drawer can open. How: This turns its display on, leaving it hidden until the drawer opens. */
+
+
+		display : block;
+
+
+	}
+
+
+}
+@media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Navigation Scrim Div. Why: Someone who asked for less motion shouldn't see the page fade. How: This applies only when the reduced-motion preference is set. */
+
+
+	.navScrDiv,
+	.navScrDiv[data-drawer-menu-open] { /* What: Motionless Navigation Scrim Div. Why: The dimming should simply switch on and off. How: This turns the transitions off in both states, matching the open state's own selector so it wins there too. */
+
+
+		transition : none;
+
+
+	}
+
+
+}
 
 
 
@@ -515,7 +569,7 @@
 .navDraDiv[data-drawer-menu-open] .draLinAnc { /* What: Entering Drawer Link Anchor. Why: The rows should arrive one after another as the drawer opens. How: This plays the entrance, delayed by one stagger step per row above it, with one extra step so the drawer has started opening first. */
 
 
-	animation : drawerItemOpenFadeIn var( --dur-ani-p02 ) var( --mot-dec-eas ) calc( var( --dur-ani-m03 ) * ( var( --dra-ite-ind ) + 1 ) ) both; /* Duration Animation Base Plus 2 ~= 277.0ms, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ), Duration Animation Base Minus 3 ~= 67.9ms, Drawer Item Index, set on each row by its own style attribute */
+	animation : drawerItemOpenFadeIn var( --dur-ani-p02 ) var( --mot-dec-eas ) calc( var( --dur-ani-m03 ) * ( var( --dra-ite-ind ) + 1 ) ) both; /* Duration Animation Base Plus 2 ~= 277.0ms, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ), Duration Animation Base Minus 3 ~= 67.9ms */
 
 
 }
@@ -607,7 +661,7 @@
 .navDraDiv[data-drawer-menu-open] .draConDiv { /* What: Entering Drawer Contact Div. Why: The contact block should arrive after the last row. How: This plays the drawer's entrance, delayed by one stagger step per row above it, with one extra step so the drawer has started opening first. */
 
 
-	animation : drawerItemOpenFadeIn var( --dur-ani-p02 ) var( --mot-dec-eas ) calc( var( --dur-ani-m03 ) * ( var( --dra-ite-ind ) + 1 ) ) both; /* Duration Animation Base Plus 2 ~= 277.0ms, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ), Duration Animation Base Minus 3 ~= 67.9ms, Drawer Item Index, set on each row by its own style attribute */
+	animation : drawerItemOpenFadeIn var( --dur-ani-p02 ) var( --mot-dec-eas ) calc( var( --dur-ani-m03 ) * ( var( --dra-ite-ind ) + 1 ) ) both; /* Duration Animation Base Plus 2 ~= 277.0ms, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ), Duration Animation Base Minus 3 ~= 67.9ms */
 
 
 }
