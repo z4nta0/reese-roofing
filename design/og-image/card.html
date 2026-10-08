@@ -1,0 +1,205 @@
+
+
+
+
+<!doctype html><!-- What: Document Type Declaration. Why: Browsers render the page in standards mode only with a doctype. How: This declares HTML5. -->
+
+
+
+<html lang='en'><!-- What: Root Html Element. Why: The card is set in English text. How: This marks the document as English. -->
+
+
+	<head><!-- What: Document Head Element. Why: The card's fonts and layout load before it's captured. How: This holds them in the sections below. -->
+
+
+		<!-- #region Document -->
+
+		<meta charset='UTF-8' />                         <!-- What: Character Set Meta. Why: The card's text has to decode as UTF-8. How: This sits first in the head. -->
+		<title>Reese Roofing Social Preview Card</title> <!-- What: Page Title Element. Why: The file should say what it is when opened in a browser. How: This names the card. -->
+
+		<!-- #endregion Document -->
+
+
+		<!-- #region Card Styles -->
+
+		<style>/* What: Card Styles. Why: The card is one fixed-size image, styled entirely here. How: This loads the site's fonts and lays the card out in pixels, the one unit a 1200x630 image is measured in. */
+
+			@font-face { /* What: Fraunces Upright Face. Why: The card's heading uses the site's display serif. How: This loads the site's own variable font file. */
+
+
+				font-family : 'Fraunces';
+				font-weight : 100 900;
+				src         : url( '../../src/assets/fonts/Fraunces-VariableFont_opsz,wght.woff2' ) format( 'woff2' );
+
+
+			}
+
+			@font-face { /* What: Fraunces Italic Face. Why: The heading's accent word is set in italic, as on the site. How: This loads the italic variable font file. */
+
+
+				font-family : 'Fraunces';
+				font-style  : italic;
+				font-weight : 100 900;
+				src         : url( '../../src/assets/fonts/Fraunces-Italic-VariableFont_opsz,wght.woff2' ) format( 'woff2' );
+
+
+			}
+
+			@font-face { /* What: Inter Tight Face. Why: The card's smaller lines use the site's main sans serif. How: This loads its variable font file. */
+
+
+				font-family : 'Inter Tight';
+				font-weight : 100 900;
+				src         : url( '../../src/assets/fonts/InterTight-VariableFont_wght.woff2' ) format( 'woff2' );
+
+
+			}
+
+			html,
+			body { /* What: Page Root. Why: The capture should hold the card and nothing around it. How: This clears the browser's default margin. */
+
+
+				margin : 0;
+
+
+			}
+
+			/* #region carBodBod */
+
+			body { /* What: Card Body Body. Why: The card fills the whole 1200x630 capture in the site's paper and ink. How: This sizes it and centers its single column. */
+
+
+				align-items     : center;
+				background      : #f5f2ec;
+				color           : #1a1f24;
+				display         : flex;
+				font-family     : 'Inter Tight', sans-serif;
+				height          : 630px;
+				justify-content : center;
+				overflow        : hidden;
+				position        : relative;
+				width           : 1200px;
+
+
+			}
+			body::before { /* What: Card Grid Lines. Why: The hero's faint drafting grid ties the card to the site. How: This lays two repeating hairline gradients across the whole card. */
+
+
+				background-image : linear-gradient( rgba( 26, 31, 36, 0.06 ) 1px, transparent 1px ), linear-gradient( 90deg, rgba( 26, 31, 36, 0.06 ) 1px, transparent 1px );
+				background-size  : 56px 56px;
+				content          : '';
+				inset            : 0;
+				position         : absolute;
+
+
+			}
+
+
+			/* #region carColDiv */
+
+			.carColDiv { /* What: Card Column Div. Why: Some apps crop the card to its center square, so everything that matters sits inside the middle 630px. How: This stacks the logo and three lines in one centered column above the grid. */
+
+
+				align-items    : center;
+				display        : flex;
+				flex-direction : column;
+				position       : relative;
+				text-align     : center;
+
+
+			}
+
+			.carLogIma { /* What: Card Logo Image. Why: The full logo is what makes the card recognizable at a glance. How: This sets it at a height that leaves room for the lines below. */
+
+
+				display : block;
+				height  : 268px;
+
+
+			}
+
+			.carTitPar { /* What: Card Title Paragraph. Why: The card's main line says what the site is. How: This sets it large in the display serif. */
+
+
+				font-family    : 'Fraunces', serif;
+				font-size      : 60px;
+				letter-spacing : -0.01em;
+				line-height    : 1.1;
+				margin         : 26px 0 0;
+
+
+			}
+			.carTitPar em { /* What: Card Title Emphasis. Why: The accent word picks up the logo's navy, as italic accents do on the site. How: This colors it. */
+
+
+				color : #1f4e7a;
+
+
+			}
+
+			.carNotPar { /* What: Card Notice Paragraph. Why: The card must say plainly that the company isn't real. How: This sets the notice in muted gray, large enough to read at thumbnail size. */
+
+
+				color       : #636871;
+				font-size   : 40px;
+				font-weight : 500;
+				line-height : 1.2;
+				margin      : 14px 0 0;
+
+
+			}
+
+			.carBuiPar { /* What: Card Builder Paragraph. Why: The card credits who built the site. How: This sets it in ink at the same size as the notice. */
+
+
+				font-size   : 40px;
+				font-weight : 600;
+				line-height : 1.2;
+				margin      : 6px 0 0;
+
+
+			}
+
+			/* #endregion carColDiv */
+
+			/* #endregion carBodBod */
+
+		</style>
+
+		<!-- #endregion Card Styles -->
+
+
+	</head>
+
+
+
+	<body><!-- What: Card Body Element. Why: This is the card itself. How: Its single column holds everything the image shows. -->
+
+
+		<div class='carColDiv'><!-- What: Card Column Div Element. Why: The card's content sits in one centered column. How: This stacks the logo and the three lines. -->
+
+
+			<img
+				class='carLogIma'
+
+				src='../../src/pages/home/logo-full.svg'
+
+				alt='Reese Roofing'
+			/><!-- What: Card Logo Image Element. Why: The full logo identifies the site. How: This loads the same SVG the site's hero shows. -->
+
+			<p class='carTitPar'>A portfolio <em>demo</em></p><!-- What: Card Title Paragraph Element. Why: The main line says what the site is. How: The accent word is italic navy. -->
+
+			<p class='carNotPar'>Not a real business</p><!-- What: Card Notice Paragraph Element. Why: Nobody seeing the card should take Reese Roofing for a real roofer. How: This says so directly. -->
+
+			<p class='carBuiPar'>by techgeek.support</p><!-- What: Card Builder Paragraph Element. Why: The card credits who built the site. How: This names techgeek.support. -->
+
+
+		</div>
+
+
+	</body>
+
+
+</html>
+
+

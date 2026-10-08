@@ -25,6 +25,7 @@
 		"verbatimModuleSyntax": true
 	},
 	"include": [
+		"design",
 		"tests"
 	]
 }
