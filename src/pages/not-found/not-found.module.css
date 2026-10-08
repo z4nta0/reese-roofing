@@ -1,0 +1,238 @@
+
+
+
+/**
+ * not-found.module.css = Not Found Page Module
+ *
+ * @summary
+ * Styles for NotFouCom: a page column at least the screen's height, holding
+ * the shared bar and footer around a centered main column with the error
+ * label, the heading, the explanation, and the two buttons onward. The label,
+ * heading, paragraph, and buttons copy the shared eyebrow, display, lede,
+ * button, and arrow styles onto the page's own classes.
+ *
+ * @author z4nta0 <https://github.com/z4nta0>
+ *
+*/
+
+
+
+/* #region nofPagDiv */
+
+.nofPagDiv { /* What: Not-Found Page Div. Why: The footer should sit at the bottom of the screen on a page this short. How: This stacks the bar, main content, and footer in a column at least the viewport's height. */
+
+
+	display        : flex;
+	flex-direction : column;
+	min-height     : 100vh;
+
+
+}
+
+
+/* #region nofConMai */
+
+.nofConMai { /* What: Not-Found Content Main. Why: The page's one message sits in the middle of the screen. How: This grows to fill the page column between the bar and the footer and centers a spaced column in it, its top padding clearing the fixed bar the way the hero's does. */
+
+
+	align-items     : center;
+	display         : flex;
+	flex            : 1;
+	flex-direction  : column;
+	gap             : var( --spa-ver-p02 ); /* Spacing Vertical Base Plus 2 ~= 25.572px */
+	justify-content : center;
+	padding         : calc( var( --sec-ver-pad ) + var( --spa-ver-p04 ) ) clamp( var( --spa-hor-p01 ), var( --hor-rhy-012 ), var( --spa-hor-p03 ) ) var( --sec-ver-pad ); /* Section Vertical Padding, about 78.751px - 138.199px, Spacing Vertical Base Plus 4 ~= 44.876px, Spacing Horizontal Base Plus 1 ~= 19.304px, Horizontal Rhythm 12 ~= 28.278px @ 1,920px width, Spacing Horizontal Base Plus 3 ~= 33.876px */
+	text-align      : center;
+
+
+}
+
+.eyeLabSpa { /* What: Eyebrow Label Span. Why: A small label with a leading line names the error. How: This sets it in tracked, muted capitals. */
+
+
+	align-items    : center;
+	color          : var( --tex-mut-col ); /* Text Muted Color = #6b7079 */
+	display        : inline-flex;
+	font-family    : var( --fon-fam-mai ); /* Font Family Main = 'Inter Tight', -apple-system, BlinkMacSystemFont, sans-serif */
+	font-size      : var( --fon-siz-bas ); /* Font Size Base = 11px */
+	font-weight    : 500;
+	gap            : var( --spa-hor-m01 ); /* Spacing Horizontal Base Minus 1 = 11px */
+	letter-spacing : 0.18em;
+	text-transform : uppercase;
+
+
+}
+.eyeLabSpa::before { /* What: Eyebrow Label Span Leading Line. Why: A short rule leads into the label. How: This draws a short hairline, one rhythm step long, before the text. */
+
+
+	background : var( --tex-mut-col );                /* Text Muted Color = #6b7079 */
+	content    : '';
+	height     : var( --bor-wid-bas );                /* Border Width Base ~= 1.160px */
+	width      : calc( var( --ver-rhy-p02 ) * 1rem ); /* Vertical Rhythm Base Plus 2 ~= 25.572px */
+
+
+}
+
+
+/* #region nofTitHea */
+
+.nofTitHea { /* What: Not-Found Title Heading. Why: The heading states the problem in large display type. How: This sets it in the display font at its largest optical size, scaling with the viewport between two bounds. */
+
+
+	color                   : var( --tex-mai-col );                                     /* Text Main Color = #1a1f24 */
+	font-family             : var( --fon-fam-sec );                                     /* Font Family Secondary = 'Fraunces', 'Times New Roman', serif */
+	font-size               : clamp( var( --fon-siz-p05 ), 8vw, var( --fon-siz-p08 ) ); /* Font Size Base Plus 5 ~= 44.876px, Font Size Base Plus 8 ~= 104.323px */
+	font-variation-settings : 'opsz' 144;
+	font-weight             : 400;
+	letter-spacing          : -0.025em;
+	line-height             : var( --ver-rhy-m01 );                                     /* Vertical Rhythm Base Minus 1 = 1 */
+
+
+}
+
+.titAccEmp { /* What: Title Accent Emphasis. Why: One word in each heading is set apart in color and italic. How: This draws it in the accent, light and italic. */
+
+
+	color       : var( --acc-mai-col ); /* Accent Main Color = #1f4e7a */
+	font-style  : italic;
+	font-weight : 300;
+
+
+}
+
+/* #endregion nofTitHea */
+
+
+.secLedPar { /* What: Section Lede Paragraph. Why: The explanation reads as a short lead paragraph. How: This sets it in the body font, a little larger than body text, at a comfortable measure. */
+
+
+	color       : var( --tex-sec-col );                                       /* Text Secondary Color = #2a3138 */
+	font-family : var( --fon-fam-mai );                                       /* Font Family Main = 'Inter Tight', -apple-system, BlinkMacSystemFont, sans-serif */
+	font-size   : clamp( var( --fon-siz-p01 ), 1.4vw, var( --fon-siz-p02 ) ); /* Font Size Base Plus 1 ~= 14.572px, Font Size Base Plus 2 ~= 19.304px */
+	line-height : var( --ver-rhy-p01 );                                       /* Vertical Rhythm Base Plus 1 ~= 1.755 */
+	max-width   : var( --tex-wid-bas );                                       /* Text Width Base Maximum ~= 29.207em */
+
+
+}
+
+
+
+/* #region nofActDiv */
+
+.nofActDiv { /* What: Not-Found Actions Div. Why: The page's two ways onward sit together. How: This sets the buttons side by side, centered, wrapping if needed. */
+
+
+	display         : flex;
+	flex-wrap       : wrap;
+	gap             : var( --spa-ver-m01 ) var( --spa-hor-m01 ); /* Spacing Vertical Base Minus 1 = 11px, Spacing Horizontal Base Minus 1 = 11px */
+	justify-content : center;
+	margin-top      : var( --spa-ver-m02 );                      /* Spacing Vertical Base Minus 2 ~= 8.304px */
+
+
+}
+
+
+/* #region butBasAnc */
+
+.butBasAnc { /* What: Button Base Anchor. Why: The page's two buttons use the site's pill button shape. How: This draws a rounded pill whose height comes from its line height alone, with its label and arrow side by side, easing its colors and lift on hover. */
+
+
+	align-items    : center;
+	border         : var( --bor-wid-bas ) solid transparent;                                      /* Border Width Base ~= 1.160px */
+	border-radius  : 999px;
+	display        : inline-flex;
+	font-size      : var( --fon-siz-p01 );                                                        /* Font Size Base Plus 1 ~= 14.572px */
+	font-weight    : 500;
+	gap            : var( --spa-hor-m01 );                                                        /* Spacing Horizontal Base Minus 1 = 11px */
+	letter-spacing : 0.02em;
+	line-height    : calc( var( --ver-rhy-p04 ) * 1rem );                                         /* Vertical Rhythm Base Plus 4 ~= 44.876px */
+	padding        : 0 clamp( var( --spa-hor-p01 ), var( --hor-rhy-012 ), var( --spa-hor-p03 ) ); /* Spacing Horizontal Base Plus 1 ~= 19.304px, Horizontal Rhythm 12 ~= 28.278px @ 1,920px width, Spacing Horizontal Base Plus 3 ~= 33.876px */
+	transition     : background-color var( --dur-tra-p02 ) var( --mot-dec-eas ), border-color var( --dur-tra-p02 ) var( --mot-dec-eas ), color var( --dur-tra-p02 ) var( --mot-dec-eas ), transform var( --dur-tra-p02 ) var( --mot-dec-eas ); /* Duration Transition Base Plus 2 ~= 277.0ms, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ) */
+	white-space    : nowrap;
+
+
+}
+.butBasAnc--primary { /* What: Primary Button Base Anchor. Why: Going home is the page's one action. How: This fills it with ink and paper-colored text. */
+
+
+	background : var( --bac-inv-col ); /* Background Inverse Color = #1a1f24 */
+	color      : var( --bac-pag-col ); /* Background Page Color = #f5f2ec */
+
+
+}
+.butBasAnc--primary:hover { /* What: Hovered Primary Button Base Anchor. Why: The button should respond to the pointer. How: This turns it accent and lifts it a pixel. */
+
+
+	background : var( --acc-mai-col ); /* Accent Main Color = #1f4e7a */
+	transform  : translateY( -1px );
+
+
+}
+.butBasAnc--ghost { /* What: Ghost Button Base Anchor. Why: The estimate button is the page's secondary action. How: This outlines it with no fill. */
+
+
+	border-color : var( --bor-str-col ); /* Border Strong Color = #1a1f24 @ 0.22 opacity */
+	color        : var( --tex-mai-col ); /* Text Main Color = #1a1f24 */
+
+
+}
+.butBasAnc--ghost:hover { /* What: Hovered Ghost Button Base Anchor. Why: The button should respond to the pointer. How: This fills it with ink and turns its text paper-colored. */
+
+
+	background   : var( --bac-inv-col ); /* Background Inverse Color = #1a1f24 */
+	border-color : var( --bac-inv-col ); /* Background Inverse Color = #1a1f24 */
+	color        : var( --bac-pag-col ); /* Background Page Color = #f5f2ec */
+
+
+}
+@media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Button Base Anchor. Why: Someone who asked for less motion shouldn't see the button animate. How: This applies only when the reduced-motion preference is set. */
+
+
+	.butBasAnc { /* What: Motionless Button Base Anchor. Why: The hover style should appear at once. How: This turns the transition off. */
+
+
+		transition : none;
+
+
+	}
+
+
+}
+
+.arrIcoSpa { /* What: Arrow Icon Span. Why: The arrow slides forward as the button is hovered. How: This animates its position. */
+
+
+	transition : transform var( --dur-tra-p02 ) var( --mot-dec-eas ); /* Duration Transition Base Plus 2 ~= 277.0ms, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ) */
+
+
+}
+.butBasAnc:hover .arrIcoSpa { /* What: Hovered Arrow Icon Span. Why: The arrow points the visitor onward when the button is hovered. How: This nudges it right by a few pixels, kept literal since no spacing step lands within 10% of the 4px nudge. */
+
+
+	transform : translateX( 4px );
+
+
+}
+@media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Arrow Icon Span. Why: Someone who asked for less motion shouldn't see the arrow slide. How: This applies only when the reduced-motion preference is set. */
+
+
+	.arrIcoSpa { /* What: Motionless Arrow Icon Span. Why: The arrow should simply shift. How: This turns the transition off. */
+
+
+		transition : none;
+
+
+	}
+
+
+}
+
+/* #endregion butBasAnc */
+
+/* #endregion nofActDiv */
+
+/* #endregion nofConMai */
+
+/* #endregion nofPagDiv */
+
+

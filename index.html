@@ -1,27 +1,91 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Reese Roofing — commercial roofing contractor serving Lawrence, Kansas and the surrounding area. Installation, repair, maintenance, and inspections." />
-    <meta name="theme-color" content="#1f4e7a" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="icon" href="/favicon.ico" sizes="any" />
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
-    <link rel="icon" type="image/png" sizes="192x192" href="/favicon-192x192.png" />
-    <link rel="icon" type="image/png" sizes="512x512" href="/favicon-512x512.png" />
-    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-    <title>Reese Roofing — Commercial Roofing in Lawrence, KS</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600&family=Inter+Tight:wght@400;500;600&display=swap"
-      rel="stylesheet"
-    />
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
-  </body>
+
+
+
+<!doctype html><!-- What: Document Type Declaration. Why: Browsers render the page in standards mode only with a doctype. How: This declares HTML5. -->
+
+
+
+<html lang='en'><!-- What: Root Html Element. Why: Screen readers and translation tools need the page's language. How: This marks the document as English. -->
+
+
+	<head><!-- What: Document Head Element. Why: The page's metadata and icon links load before the body paints. How: This holds them in the sections below. -->
+
+
+		<!-- #region Document -->
+
+		<meta charset='UTF-8' />                                                 <!-- What: Character Set Meta. Why: The browser has to decode the page as UTF-8 before it reads anything else. How: This sits first in the head, inside the first 1024 bytes the browser checks. -->
+		<meta name='viewport' content='width=device-width, initial-scale=1.0' /> <!-- What: Viewport Meta. Why: Phones should lay the site out at device width instead of a zoomed-out desktop width. How: This sets the layout width to the device's and starts at no zoom. -->
+		<title>Reese Roofing | Commercial Roofing in Lawrence, KS</title>        <!-- What: Page Title Element. Why: The tab, bookmarks, and search results name the page by its title. How: This pairs the company's name with what it does and where. -->
+
+		<!-- #endregion Document -->
+
+
+		<!-- #region Search -->
+
+		<meta name='description' content='Reese Roofing is a commercial roofing contractor serving Lawrence, Kansas and the surrounding area. Installation, repair, maintenance, and inspections.' /> <!-- What: Description Meta. Why: Search results show a short summary under the title. How: This gives the company's trade, area, and services in one line. -->
+
+		<!-- #endregion Search -->
+
+
+		<!-- #region Web App -->
+
+		<meta name='theme-color' content='#1f4e7a' /> <!-- What: Theme Color Meta. Why: Mobile browsers tint their chrome around the page. How: This sets it to the brand navy from the logo. -->
+
+		<!-- #endregion Web App -->
+
+
+		<!-- #region Icons -->
+
+		<!--
+			index.html = Icons Section
+
+			@summary
+			SVG comes first, since modern browsers prefer it and it scales to
+			any tab density, then the root favicon.ico for older browsers, then
+			the PNG fallbacks. The order is the browser's order of preference,
+			so it stays as written rather than alphabetical.
+
+			@author z4nta0 <https://github.com/z4nta0>
+
+		-->
+
+
+
+		<link href='/favicon.svg'         rel='icon' type='image/svg+xml' />             <!-- What: Svg Icon Link. Why: Modern browsers prefer a vector favicon that stays sharp at any tab density. How: This lists the SVG first. -->
+		<link href='/favicon.ico'         rel='icon' sizes='any' />                      <!-- What: Ico Icon Link. Why: Older browsers read only a .ico favicon. How: This points at the root favicon.ico, which also answers the request browsers make for it on their own. -->
+		<link href='/favicon-32x32.png'   rel='icon' sizes='32x32'   type='image/png' /> <!-- What: Medium Png Icon Link. Why: A browser without SVG favicons needs a raster fallback. How: This offers the 32px PNG. -->
+		<link href='/favicon-16x16.png'   rel='icon' sizes='16x16'   type='image/png' /> <!-- What: Small Png Icon Link. Why: Small tab icons look crisper drawn at their own size. How: This offers the 16px PNG. -->
+		<link href='/favicon-192x192.png' rel='icon' sizes='192x192' type='image/png' /> <!-- What: Large Png Icon Link. Why: Some browsers and Android pick a large icon for shortcuts and tab previews. How: This offers the 192px PNG. -->
+		<link href='/favicon-512x512.png' rel='icon' sizes='512x512' type='image/png' /> <!-- What: Extra Large Png Icon Link. Why: High-density screens and app launchers can ask for a bigger icon still. How: This offers the 512px PNG. -->
+
+		<!-- #endregion Icons -->
+
+
+		<!-- #region Home Screen -->
+
+		<link href='/apple-touch-icon.png' rel='apple-touch-icon' sizes='180x180' /> <!-- What: Apple Touch Icon Link. Why: iOS draws the home screen icon from this link. How: This points at the 180px touch icon on a paper-colored background. -->
+
+		<!-- #endregion Home Screen -->
+
+
+	</head>
+
+
+
+	<body><!-- What: Document Body Element. Why: This holds the site's mount point and its entry script. How: The mount point stays empty until React renders the site into it. -->
+
+
+		<div id='appMouDiv'></div><!-- What: App Mount Div Element. Why: React needs one element to render the site into. How: main.tsx renders the app into this id. -->
+
+		<script
+			src='/src/main.tsx'
+			type='module'
+		>/* What: Site Module Script Element. Why: This loads the site itself. How: Vite replaces it with the built, hashed bundle at build time. */</script>
+
+
+	</body>
+
+
 </html>
+
+

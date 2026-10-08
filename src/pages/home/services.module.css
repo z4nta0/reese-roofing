@@ -1,0 +1,357 @@
+
+
+
+/**
+ * services.module.css = Services Section Module
+ *
+ * @summary
+ * Styles for SerSecCom: the section's two-column heading block, then the
+ * grid of service cards sharing hairline borders, three across on wide
+ * screens, two on tablets, and one on phones, each card tinting on hover. The
+ * shared section, container, eyebrow, display, and lede declarations the
+ * section used to borrow from the global stylesheet are copied onto its own
+ * classes here.
+ *
+ * @author z4nta0 <https://github.com/z4nta0>
+ *
+*/
+
+
+
+/* #region homSerSec */
+
+.homSerSec { /* What: Home Services Section. Why: The section opens with a hairline and the standard section padding. How: This sets the page color, the top rule, and the vertical padding. */
+
+
+	background    : var( --bac-pag-col );                            /* Background Page Color = #f5f2ec */
+	border-top    : var( --bor-wid-bas ) solid var( --bor-mai-col ); /* Border Width Base ~= 1.160px, Border Main Color = #1a1f24 @ 0.12 opacity */
+	padding-block : var( --sec-ver-pad );                            /* Section Vertical Padding, about 78.751px - 138.199px */
+	position      : relative;
+
+
+}
+
+
+/* #region pagConDiv */
+
+.pagConDiv { /* What: Page Container Div. Why: The section's content should line up with the page's content width. How: This centers a full-width column with the page's side gutter. */
+
+
+	margin         : 0 auto;
+	max-width      : var( --con-max-wid ); /* Container Maximum Width, about 1,449.4px */
+	padding-inline : var( --gut-sid-pad ); /* Gutter Side Padding, about 19.304px - 44.876px */
+	width          : 100%;
+
+
+}
+
+
+/* #region serHeaDiv */
+
+.serHeaDiv { /* What: Services Head Div. Why: The heading and lede share a row above the cards. How: This sets a two-column grid aligned to the bottom. */
+
+
+	align-items           : end;
+	display               : grid;
+	gap                   : var( --spa-ver-p04 ) clamp( var( --spa-hor-p02 ), var( --hor-rhy-014 ), var( --spa-hor-p05 ) ); /* Spacing Vertical Base Plus 4 ~= 44.876px, Spacing Horizontal Base Plus 2 ~= 25.572px, Horizontal Rhythm 14 ~= 49.625px @ 1,920px width, Spacing Horizontal Base Plus 5 ~= 59.447px */
+	grid-template-columns : 1fr 1fr;
+	margin-bottom         : var( --spa-ver-p06 );                                                                           /* Spacing Vertical Base Plus 6 ~= 78.751px */
+
+
+}
+@container app ( max-width : 960px ) { /* What: Narrow Services Head Div. Why: Small screens are too narrow for two columns. How: This applies below 960px wide. */
+
+
+	.serHeaDiv { /* What: Stacked Services Head Div. Why: The lede reads best under the heading. How: This turns the grid into one column with a smaller gap. */
+
+
+		gap                   : var( --spa-ver-p02 ); /* Spacing Vertical Base Plus 2 ~= 25.572px */
+		grid-template-columns : 1fr;
+
+
+	}
+
+
+}
+
+.eyeLabSpa { /* What: Eyebrow Label Span. Why: A small numbered label with a leading line introduces the section. How: This sets it in tracked, muted capitals. */
+
+
+	align-items    : center;
+	color          : var( --tex-mut-col ); /* Text Muted Color = #6b7079 */
+	display        : inline-flex;
+	font-family    : var( --fon-fam-mai ); /* Font Family Main = 'Inter Tight', -apple-system, BlinkMacSystemFont, sans-serif */
+	font-size      : var( --fon-siz-bas ); /* Font Size Base = 11px */
+	font-weight    : 500;
+	gap            : var( --spa-hor-m01 ); /* Spacing Horizontal Base Minus 1 = 11px */
+	letter-spacing : 0.18em;
+	text-transform : uppercase;
+
+
+}
+.eyeLabSpa::before { /* What: Eyebrow Label Span Leading Line. Why: A short rule leads into the label. How: This draws a short hairline, one rhythm step long, before the text. */
+
+
+	background : var( --tex-mut-col );                /* Text Muted Color = #6b7079 */
+	content    : '';
+	height     : var( --bor-wid-bas );                /* Border Width Base ~= 1.160px */
+	width      : calc( var( --ver-rhy-p02 ) * 1rem ); /* Vertical Rhythm Base Plus 2 ~= 25.572px */
+
+
+}
+
+
+/* #region serTitHea */
+
+.serTitHea { /* What: Services Title Heading. Why: The heading names the section in large display type. How: This sets it in the display font at its largest optical size, scaling with the viewport, in the first column. */
+
+
+	color                   : var( --tex-mai-col );                                     /* Text Main Color = #1a1f24 */
+	font-family             : var( --fon-fam-sec );                                     /* Font Family Secondary = 'Fraunces', 'Times New Roman', serif */
+	font-size               : clamp( var( --fon-siz-p04 ), 5vw, var( --fon-siz-p06 ) ); /* Font Size Base Plus 4 ~= 33.876px, Font Size Base Plus 6 ~= 59.447px */
+	font-variation-settings : 'opsz' 144;
+	font-weight             : 400;
+	grid-column             : 1;
+	letter-spacing          : -0.025em;
+	line-height             : var( --ver-rhy-m01 );                                     /* Vertical Rhythm Base Minus 1 = 1 */
+	margin-top              : var( --spa-ver-p02 );                                     /* Spacing Vertical Base Plus 2 ~= 25.572px */
+
+
+}
+
+.titAccEmp { /* What: Title Accent Emphasis. Why: One word in each heading is set apart in color and italic. How: This draws it in the accent, light and italic. */
+
+
+	color       : var( --acc-mai-col ); /* Accent Main Color = #1f4e7a */
+	font-style  : italic;
+	font-weight : 300;
+
+
+}
+
+/* #endregion serTitHea */
+
+
+.secLedPar { /* What: Section Lede Paragraph. Why: The lede says how every project starts, beside the heading. How: This sets it in the body font, a little larger than body text, in the second column. */
+
+
+	color          : var( --tex-sec-col );                                       /* Text Secondary Color = #2a3138 */
+	font-family    : var( --fon-fam-mai );                                       /* Font Family Main = 'Inter Tight', -apple-system, BlinkMacSystemFont, sans-serif */
+	font-size      : clamp( var( --fon-siz-p01 ), 1.4vw, var( --fon-siz-p02 ) ); /* Font Size Base Plus 1 ~= 14.572px, Font Size Base Plus 2 ~= 19.304px */
+	grid-column    : 2;
+	line-height    : var( --ver-rhy-p01 );                                       /* Vertical Rhythm Base Plus 1 ~= 1.755 */
+	max-width      : var( --tex-wid-bas );                                       /* Text Width Base Maximum ~= 29.207em */
+	padding-bottom : var( --spa-ver-m02 );                                       /* Spacing Vertical Base Minus 2 ~= 8.304px */
+
+
+}
+@container app ( max-width : 960px ) { /* What: Narrow Section Lede Paragraph. Why: The stacked head has one column. How: This applies below 960px wide. */
+
+
+	.secLedPar { /* What: Stacked Section Lede Paragraph. Why: The lede moves under the heading. How: This puts it in column 1. */
+
+
+		grid-column : 1;
+
+
+	}
+
+
+}
+
+/* #endregion serHeaDiv */
+
+
+
+/* #region serGriDiv */
+
+.serGriDiv { /* What: Services Grid Div. Why: The cards share hairline borders, so the grid draws the outer top and left edges. How: This sets three columns with those two edges. */
+
+
+	border-left           : var( --bor-wid-bas ) solid var( --bor-str-col ); /* Border Width Base ~= 1.160px, Border Strong Color = #1a1f24 @ 0.22 opacity */
+	border-top            : var( --bor-wid-bas ) solid var( --bor-str-col ); /* Border Width Base ~= 1.160px, Border Strong Color = #1a1f24 @ 0.22 opacity */
+	display               : grid;
+	grid-template-columns : repeat( 3, 1fr );
+
+
+}
+@container app ( max-width : 960px ) { /* What: Narrow Services Grid Div. Why: Three cards don't fit across a tablet. How: This applies below 960px wide. */
+
+
+	.serGriDiv { /* What: Two Column Services Grid Div. Why: The cards fit two to a row. How: This sets two columns. */
+
+
+		grid-template-columns : 1fr 1fr;
+
+
+	}
+
+
+}
+@container app ( max-width : 640px ) { /* What: Phone Services Grid Div. Why: Two cards don't fit across a phone. How: This applies below 640px wide. */
+
+
+	.serGriDiv { /* What: One Column Services Grid Div. Why: The cards stack on a phone. How: This sets one column. */
+
+
+		grid-template-columns : 1fr;
+
+
+	}
+
+
+}
+
+
+/* #region serCarArt */
+
+.serCarArt { /* What: Service Card Article. Why: Each card draws its own right and bottom edges, completing the shared grid lines, and tints on hover. How: This sets those edges, the card's padding, and a background that fades on hover. */
+
+
+	background    : var( --bac-pag-col );                                           /* Background Page Color = #f5f2ec */
+	border-bottom : var( --bor-wid-bas ) solid var( --bor-str-col );                /* Border Width Base ~= 1.160px, Border Strong Color = #1a1f24 @ 0.22 opacity */
+	border-right  : var( --bor-wid-bas ) solid var( --bor-str-col );                /* Border Width Base ~= 1.160px, Border Strong Color = #1a1f24 @ 0.22 opacity */
+	padding       : var( --spa-ver-p04 ) var( --spa-hor-p03 ) var( --spa-ver-p04 ); /* Spacing Vertical Base Plus 4 ~= 44.876px, Spacing Horizontal Base Plus 3 ~= 33.876px */
+	position      : relative;
+	transition    : background-color var( --dur-tra-p02 ) var( --mot-sta-eas );     /* Duration Transition Base Plus 2 ~= 277.0ms, Motion Standard Easing = ease */
+
+
+}
+.serCarArt:hover { /* What: Hovered Service Card Article. Why: The hovered card should stand out from its neighbors. How: This tints it with the soft paper color. */
+
+
+	background : var( --bac-sur-col ); /* Background Surface Color = #ebe7df */
+
+
+}
+@media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Service Card Article. Why: Someone who asked for less motion shouldn't see the tint fade. How: This applies only when the reduced-motion preference is set. */
+
+
+	.serCarArt { /* What: Motionless Service Card Article. Why: The hover tint should appear at once. How: This turns the transition off. */
+
+
+		transition : none;
+
+
+	}
+
+
+}
+
+
+/* #region carHeaDiv */
+
+.carHeaDiv { /* What: Card Head Div. Why: The number and title lead each card at the same height in every card. How: This sets them side by side on a shared baseline with a minimum height. */
+
+
+	align-items   : baseline;
+	display       : flex;
+	gap           : var( --spa-hor-bas );                /* Spacing Horizontal Base ~= 14.572px */
+	margin-bottom : var( --spa-ver-p02 );                /* Spacing Vertical Base Plus 2 ~= 25.572px */
+	min-height    : calc( var( --ver-rhy-p06 ) * 1rem ); /* Vertical Rhythm Base Plus 6 ~= 78.751px */
+
+
+}
+@container app ( max-width : 640px ) { /* What: Phone Card Head Div. Why: Stacked cards don't need matching head heights. How: This applies below 640px wide. */
+
+
+	.carHeaDiv { /* What: Auto Height Card Head Div. Why: Each head can take only the height it needs. How: This drops the minimum height. */
+
+
+		min-height : auto;
+
+
+	}
+
+
+}
+
+.carIdeSpa { /* What: Card Identifier Span. Why: The card's number reads as a small accent beside the title. How: This sets it in light italic display type in the accent. */
+
+
+	color          : var( --acc-mai-col ); /* Accent Main Color = #1f4e7a */
+	font-family    : var( --fon-fam-sec ); /* Font Family Secondary = 'Fraunces', 'Times New Roman', serif */
+	font-size      : var( --fon-siz-p02 ); /* Font Size Base Plus 2 ~= 19.304px */
+	font-style     : italic;
+	font-weight    : 300;
+	letter-spacing : -0.02em;
+
+
+}
+
+.carTitHea { /* What: Card Title Heading. Why: Each card names its service in display type. How: This sets it in the display font, tightly leaded. */
+
+
+	color          : var( --tex-mai-col ); /* Text Main Color = #1a1f24 */
+	font-family    : var( --fon-fam-sec ); /* Font Family Secondary = 'Fraunces', 'Times New Roman', serif */
+	font-size      : var( --fon-siz-p03 ); /* Font Size Base Plus 3 ~= 25.572px */
+	font-weight    : 400;
+	letter-spacing : -0.015em;
+	line-height    : var( --ver-rhy-m01 ); /* Vertical Rhythm Base Minus 1 = 1 */
+
+
+}
+
+/* #endregion carHeaDiv */
+
+
+.carDesPar { /* What: Card Description Paragraph. Why: The card's sentence sits under its head. How: This sets it in soft body text with room below. */
+
+
+	color         : var( --tex-sec-col ); /* Text Secondary Color = #2a3138 */
+	font-size     : var( --fon-siz-p01 ); /* Font Size Base Plus 1 ~= 14.572px */
+	line-height   : var( --ver-rhy-p01 ); /* Vertical Rhythm Base Plus 1 ~= 1.755 */
+	margin-bottom : var( --spa-ver-p02 ); /* Spacing Vertical Base Plus 2 ~= 25.572px */
+
+
+}
+
+
+/* #region carDetUno */
+
+.carDetUno { /* What: Card Detail Unordered. Why: The card's details sit below a hairline. How: This drops the default bullets and draws the rule above. */
+
+
+	border-top  : var( --bor-wid-bas ) solid var( --bor-mai-col ); /* Border Width Base ~= 1.160px, Border Main Color = #1a1f24 @ 0.12 opacity */
+	list-style  : none;
+	padding-top : var( --spa-ver-p01 );                            /* Spacing Vertical Base Plus 1 ~= 19.304px */
+
+
+}
+
+.serDetIte { /* What: Service Detail Item. Why: Each detail reads as a small muted line with its own dot. How: This sets the text beside a custom bullet. */
+
+
+	align-items : center;
+	color       : var( --tex-mut-col );   /* Text Muted Color = #6b7079 */
+	display     : flex;
+	font-size   : var( --fon-siz-p01 );   /* Font Size Base Plus 1 ~= 14.572px */
+	gap         : var( --spa-hor-m02 );   /* Spacing Horizontal Base Minus 2 ~= 8.304px */
+	padding     : var( --spa-ver-m03 ) 0; /* Spacing Vertical Base Minus 3 ~= 6.268px */
+
+
+}
+.serDetIte::before { /* What: Service Detail Item Bullet. Why: A small accent dot marks each detail. How: This draws a small accent circle, its width matching its rhythm-step height, that never shrinks. */
+
+
+	background    : var( --acc-mai-col );                /* Accent Main Color = #1f4e7a */
+	border-radius : 50%;
+	content       : '';
+	flex-shrink   : 0;
+	height        : calc( var( --ver-rhy-m05 ) * 1rem ); /* Vertical Rhythm Base Minus 5 ~= 3.572px */
+	width         : calc( var( --ver-rhy-m05 ) * 1rem ); /* Vertical Rhythm Base Minus 5 ~= 3.572px */
+
+
+}
+
+/* #endregion carDetUno */
+
+/* #endregion serCarArt */
+
+/* #endregion serGriDiv */
+
+/* #endregion pagConDiv */
+
+/* #endregion homSerSec */
+
+

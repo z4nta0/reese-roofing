@@ -1,0 +1,649 @@
+
+
+
+/**
+ * hero.module.css = Hero Section Module
+ *
+ * @summary
+ * Styles for HerSecCom: the full-height opening section over a faint, masked
+ * grid, with the headline beside the ringed logo, the pitch and its two
+ * buttons between hairlines, and the stats row, each block rising into place
+ * in turn. The shared section, container, eyebrow, display, lede, button, and
+ * arrow declarations the hero used to borrow from the global stylesheet are
+ * copied onto its own classes here. The section takes extra top padding to
+ * clear the fixed bar, and a lighter bottom padding than the other sections.
+ *
+ * @author z4nta0 <https://github.com/z4nta0>
+ *
+*/
+
+
+
+/* #region homHerSec */
+
+.homHerSec { /* What: Home Hero Section. Why: The hero fills the first screen and centers its content in it. How: This sets a full-height flex row that centers its content vertically, with extra top padding to clear the fixed bar and a lighter bottom padding, clipping the grid at its edges. */
+
+
+	align-items    : center;
+	display        : flex;
+	min-height     : 100vh;
+	overflow       : hidden;
+	padding-bottom : clamp( var( --spa-ver-p05 ), 7vw, var( --spa-ver-p07 ) ); /* Spacing Vertical Base Plus 5 ~= 59.447px, Spacing Vertical Base Plus 7 ~= 104.323px */
+	padding-top    : calc( var( --sec-ver-pad ) + var( --spa-ver-p04 ) );      /* Section Vertical Padding, about 78.751px - 138.199px, Spacing Vertical Base Plus 4 ~= 44.876px */
+	position       : relative;
+
+
+}
+@container app ( max-width : 960px ) { /* What: Narrow Home Hero Section. Why: A stacked hero on a small screen shouldn't be forced to a full screen's height. How: This applies below 960px wide. */
+
+
+	.homHerSec { /* What: Auto Height Home Hero Section. Why: The content sets the height once it stacks. How: This drops the full-height minimum. */
+
+
+		min-height : auto;
+
+
+	}
+
+
+}
+
+
+/* #region herBacDiv */
+
+.herBacDiv { /* What: Hero Background Div. Why: A faint architectural grid sits behind the hero, fading out away from the logo. How: This covers the section at about 4.5% opacity, masked to a soft ellipse, behind everything and ignoring the pointer. */
+
+
+	-webkit-mask-image : radial-gradient( ellipse at 70% 30%, black 0%, transparent 75% );
+	color              : var( --tex-mai-col );     /* Text Main Color = #1a1f24 */
+	inset              : 0;
+	mask-image         : radial-gradient( ellipse at 70% 30%, black 0%, transparent 75% );
+	opacity            : var( --cdn-pow-011-rec ); /* Core-Design-Number to the Power of 11 Reciprocal ~= 0.045 */
+	pointer-events     : none;
+	position           : absolute;
+	z-index            : 0;                        /* What: Background Stack Level. Why: The grid has to sit under the hero's content, which is at 1. How: This keeps it at the bottom. */
+
+
+}
+
+
+/* #region herGriSvg */
+
+.herGriSvg { /* What: Hero Grid Svg. Why: The grid drawing should fill the whole background. How: This stretches it to the background's full size. */
+
+
+	height : 100%;
+	width  : 100%;
+
+
+}
+
+/* #endregion herGriSvg */
+
+/* #endregion herBacDiv */
+
+
+
+/* #region pagConDiv */
+
+.pagConDiv { /* What: Page Container Div. Why: The hero's content should line up with the page's content width, above the grid. How: This centers a full-width column and lifts it over the background. */
+
+
+	margin         : 0 auto;
+	max-width      : var( --con-max-wid ); /* Container Maximum Width, about 1,449.4px */
+	padding-inline : var( --gut-sid-pad ); /* Gutter Side Padding, about 19.304px - 44.876px */
+	position       : relative;
+	width          : 100%;
+	z-index        : 1;                    /* What: Content Stack Level. Why: The content has to sit over the grid at 0. How: This is the lowest level that clears it, and the navigation bar sits at 2 above it. */
+
+
+}
+
+
+/* #region herTopDiv */
+
+.herTopDiv { /* What: Hero Top Div. Why: The headline and logo share the first row. How: This sets a two-column grid with the copy slightly wider. */
+
+
+	align-items           : center;
+	display               : grid;
+	gap                   : var( --spa-ver-p04 ) clamp( var( --spa-hor-p03 ), var( --hor-rhy-017 ), var( --spa-hor-p06 ) ); /* Spacing Vertical Base Plus 4 ~= 44.876px, Spacing Horizontal Base Plus 3 ~= 33.876px, Horizontal Rhythm 17 ~= 115.363px @ 1,920px width, Spacing Horizontal Base Plus 6 ~= 78.751px */
+	grid-template-columns : 1.15fr 1fr;
+	margin-bottom         : var( --spa-ver-p05 );                                                                           /* Spacing Vertical Base Plus 5 ~= 59.447px */
+
+
+}
+@container app ( max-width : 960px ) { /* What: Narrow Hero Top Div. Why: Small screens are too narrow for two columns. How: This applies below 960px wide. */
+
+
+	.herTopDiv { /* What: Stacked Hero Top Div. Why: The copy and logo read best stacked. How: This turns the grid into one column with smaller gaps. */
+
+
+		gap                   : var( --spa-ver-p04 ); /* Spacing Vertical Base Plus 4 ~= 44.876px */
+		grid-template-columns : 1fr;
+		margin-bottom         : var( --spa-ver-p04 ); /* Spacing Vertical Base Plus 4 ~= 44.876px */
+
+
+	}
+
+
+}
+
+
+/* #region herCopDiv */
+
+.herCopDiv { /* What: Hero Copy Div. Why: The label and headline enter first. How: This plays the entrance animation with no delay. */
+
+
+	animation : divEnterFadeIn var( --dur-ani-p06 ) var( --mot-dec-eas ) both; /* Duration Animation Base Plus 6 ~= 853.0ms, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ) */
+
+
+}
+@media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Hero Copy Div. Why: Someone who asked for less motion shouldn't see the copy rise. How: This applies only when the reduced-motion preference is set. */
+
+
+	.herCopDiv { /* What: Motionless Hero Copy Div. Why: The copy should simply be there. How: This turns the animation off. */
+
+
+		animation : none;
+
+
+	}
+
+
+}
+@keyframes divEnterFadeIn { /* What: Div Enter Fade In. Why: Each hero block slides up and fades in as the page opens. How: This moves from a rhythm step below and transparent to its place, fully shown. */
+
+
+	from {
+
+
+		opacity   : 0;
+		transform : translateY( var( --spa-ver-p02 ) ); /* Spacing Vertical Base Plus 2 ~= 25.572px */
+
+
+	}
+
+	to {
+
+
+		opacity   : 1;
+		transform : translateY( 0 );
+
+
+	}
+
+
+}
+
+.eyeLabSpa { /* What: Eyebrow Label Span. Why: A small uppercase label with a leading line introduces the headline. How: This sets it in tracked, muted capitals with room below. */
+
+
+	align-items    : center;
+	color          : var( --tex-mut-col ); /* Text Muted Color = #6b7079 */
+	display        : inline-flex;
+	font-family    : var( --fon-fam-mai ); /* Font Family Main = 'Inter Tight', -apple-system, BlinkMacSystemFont, sans-serif */
+	font-size      : var( --fon-siz-bas ); /* Font Size Base = 11px */
+	font-weight    : 500;
+	gap            : var( --spa-hor-m01 ); /* Spacing Horizontal Base Minus 1 = 11px */
+	letter-spacing : 0.18em;
+	margin-bottom  : var( --spa-ver-p04 ); /* Spacing Vertical Base Plus 4 ~= 44.876px */
+	text-transform : uppercase;
+
+
+}
+.eyeLabSpa::before { /* What: Eyebrow Label Span Leading Line. Why: A short rule leads into the label. How: This draws a short hairline, one rhythm step long, before the text. */
+
+
+	background : var( --tex-mut-col );                /* Text Muted Color = #6b7079 */
+	content    : '';
+	height     : var( --bor-wid-bas );                /* Border Width Base ~= 1.160px */
+	width      : calc( var( --ver-rhy-p02 ) * 1rem ); /* Vertical Rhythm Base Plus 2 ~= 25.572px */
+
+
+}
+
+
+/* #region herTitHea */
+
+.herTitHea { /* What: Hero Title Heading. Why: The headline is the page's largest type. How: This sets it in the display font at its largest optical size, scaling with the viewport between two font size steps, with no width cap since its line breaks set its shape. */
+
+
+	color                   : var( --tex-mai-col );                                       /* Text Main Color = #1a1f24 */
+	font-family             : var( --fon-fam-sec );                                       /* Font Family Secondary = 'Fraunces', 'Times New Roman', serif */
+	font-size               : clamp( var( --fon-siz-p05 ), 6.5vw, var( --fon-siz-p08 ) ); /* Font Size Base Plus 5 ~= 44.876px, Font Size Base Plus 8 ~= 104.323px */
+	font-variation-settings : 'opsz' 144;
+	font-weight             : 400;
+	letter-spacing          : -0.025em;
+	line-height             : var( --ver-rhy-m01 );                                       /* Vertical Rhythm Base Minus 1 = 1 */
+
+
+}
+
+.titAccEmp { /* What: Title Accent Emphasis. Why: One word in each heading is set apart in color and italic. How: This draws it in the accent, light and italic. */
+
+
+	color       : var( --acc-mai-col ); /* Accent Main Color = #1f4e7a */
+	font-style  : italic;
+	font-weight : 300;
+
+
+}
+
+/* #endregion herTitHea */
+
+/* #endregion herCopDiv */
+
+
+
+/* #region herLogDiv */
+
+.herLogDiv { /* What: Hero Logo Div. Why: The logo is the hero's main visual, ringed and rising in just after the copy. How: This centers the logo and plays the entrance animation after a short delay. */
+
+
+	align-items     : center;
+	animation       : divEnterFadeIn var( --dur-ani-p07 ) var( --mot-dec-eas ) var( --dur-ani-bas ) both; /* Duration Animation Base Plus 7 ~= 1,130.0ms, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ), Duration Animation Base ~= 157.8ms */
+	display         : flex;
+	justify-content : center;
+	position        : relative;
+
+
+}
+.herLogDiv::before { /* What: Hero Logo Div Ring. Why: A faint oval ring frames the logo, a little wider than it is tall, as originally designed. How: This draws a hairline oval centered on the logo, its height the logo's plus a rhythm step on each side and its width set from that height, so it follows the logo's size instead of the column's width and never runs off a phone's screen. */
+
+
+	--her-rin-off : var( --spa-ver-p03 ); /* Spacing Vertical Base Plus 3 ~= 33.876px */ /* What: Hero Ring Offset. Why: The ring needs a gap between it and the logo. How: This is how far the oval reaches past the logo's top and bottom, read by the height below and narrowed by the stacked variant. */
+
+	aspect-ratio   : 1.14;                                            /* What: Ring Aspect Ratio. Why: The original oval measured about 1.14 times as wide as tall on a desktop screen. How: This keeps that shape at every size, a literal since no rhythm power lands within 10% of it. */
+	border         : var( --bor-wid-bas ) solid var( --bor-str-col ); /* Border Width Base ~= 1.160px, Border Strong Color = #1a1f24 @ 0.22 opacity */
+	border-radius  : 50%;
+	content        : '';
+	height         : calc( 100% + var( --her-rin-off ) * 2 );         /* Hero Ring Offset, about 33.876px, or 14.572px in the stacked hero */
+	left           : 50%;
+	opacity        : var( --cdn-pow-003-rec );                        /* Core-Design-Number to the Power of 3 Reciprocal ~= 0.430 */
+	pointer-events : none;
+	position       : absolute;
+	top            : 50%;
+	transform      : translate( -50%, -50% );
+
+
+}
+@container app ( max-width : 960px ) { /* What: Narrow Hero Logo Div. Why: The stacked hero puts the logo first. How: This applies below 960px wide. */
+
+
+	.herLogDiv { /* What: Leading Hero Logo Div. Why: The logo should open the stacked hero. How: This moves it above the copy with a little room below. */
+
+
+		margin-bottom : var( --spa-ver-m02 ); /* Spacing Vertical Base Minus 2 ~= 8.304px */
+		order         : -1;
+
+
+	}
+
+	.herLogDiv::before { /* What: Narrow Hero Logo Div Ring. Why: The smaller stacked logo needs a tighter ring. How: This shrinks the ring's offset to the base step. */
+
+
+		--her-rin-off : var( --spa-ver-bas ); /* Spacing Vertical Base ~= 14.572px */
+
+
+	}
+
+
+}
+@media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Hero Logo Div. Why: Someone who asked for less motion shouldn't see the logo rise. How: This applies only when the reduced-motion preference is set. */
+
+
+	.herLogDiv { /* What: Motionless Hero Logo Div. Why: The logo should simply be there. How: This turns the animation off. */
+
+
+		animation : none;
+
+
+	}
+
+
+}
+
+.herLogIma { /* What: Hero Logo Image. Why: The logo should fill its column up to a set size, with a soft shadow lifting it off the page. How: This caps its width at a horizontal step, never narrower than the p08 rhythm step, and adds a blue-tinted drop shadow. */
+
+
+	filter    : drop-shadow( 0 calc( var( --ver-rhy-m01 ) * 1rem ) calc( var( --ver-rhy-p03 ) * 1rem ) oklch( from var( --acc-mai-col ) l c h / 0.12 ) ); /* Vertical Rhythm Base Minus 1 = 11px, Vertical Rhythm Base Plus 3 ~= 33.876px, Accent Main Color = #1f4e7a */
+	height    : auto;
+	max-width : max( calc( var( --ver-rhy-p08 ) * 1rem ), var( --hor-rhy-022 ) );                                                                         /* Vertical Rhythm Base Plus 8 ~= 138.199px, Horizontal Rhythm 22 ~= 470.635px @ 1,920px width */
+	width     : 100%;
+
+
+}
+@container app ( max-width : 960px ) { /* What: Narrow Hero Logo Image. Why: The stacked logo shouldn't dominate a small screen. How: This applies below 960px wide. */
+
+
+	.herLogIma { /* What: Smaller Hero Logo Image. Why: The logo leads the stacked hero at a modest size. How: This caps it at a smaller horizontal step, never narrower than the p10 rhythm step. */
+
+
+		max-width : max( calc( var( --ver-rhy-p10 ) * 1rem ), var( --hor-rhy-020 ) ); /* Vertical Rhythm Base Plus 10 ~= 242.522px, Horizontal Rhythm 20 ~= 268.187px @ 1,920px width */
+
+
+	}
+
+
+}
+@container app ( max-width : 500px ) { /* What: Phone Hero Logo Image. Why: Phones need the logo smaller still. How: This applies below 500px wide. */
+
+
+	.herLogIma { /* What: Smallest Hero Logo Image. Why: The logo should leave room for the headline on a phone. How: This caps it at a smaller horizontal step still, never narrower than the p09 rhythm step. */
+
+
+		max-width : max( calc( var( --ver-rhy-p09 ) * 1rem ), var( --hor-rhy-019 ) ); /* Vertical Rhythm Base Plus 9 ~= 183.074px, Horizontal Rhythm 19 ~= 202.448px @ 1,920px width */
+
+
+	}
+
+
+}
+
+/* #endregion herLogDiv */
+
+/* #endregion herTopDiv */
+
+
+
+/* #region herBotDiv */
+
+.herBotDiv { /* What: Hero Bottom Div. Why: The pitch and the buttons share a row between hairlines, rising in after the top row. How: This sets a two-column grid with rules above and below and plays the entrance animation after a delay. */
+
+
+	align-items           : end;
+	animation             : divEnterFadeIn var( --dur-ani-p06 ) var( --mot-dec-eas ) var( --dur-ani-p02 ) both;             /* Duration Animation Base Plus 6 ~= 853.0ms, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ), Duration Animation Base Plus 2 ~= 277.0ms */
+	border-bottom         : var( --bor-wid-bas ) solid var( --bor-mai-col );                                                /* Border Width Base ~= 1.160px, Border Main Color = #1a1f24 @ 0.12 opacity */
+	border-top            : var( --bor-wid-bas ) solid var( --bor-mai-col );                                                /* Border Width Base ~= 1.160px, Border Main Color = #1a1f24 @ 0.12 opacity */
+	display               : grid;
+	gap                   : var( --spa-ver-p03 ) clamp( var( --spa-hor-p02 ), var( --hor-rhy-014 ), var( --spa-hor-p05 ) ); /* Spacing Vertical Base Plus 3 ~= 33.876px, Spacing Horizontal Base Plus 2 ~= 25.572px, Horizontal Rhythm 14 ~= 49.625px @ 1,920px width, Spacing Horizontal Base Plus 5 ~= 59.447px */
+	grid-template-columns : 1fr auto;
+	padding-bottom        : var( --spa-ver-p05 );                                                                           /* Spacing Vertical Base Plus 5 ~= 59.447px */
+	padding-top           : var( --spa-ver-p04 );                                                                           /* Spacing Vertical Base Plus 4 ~= 44.876px */
+
+
+}
+@container app ( max-width : 960px ) { /* What: Narrow Hero Bottom Div. Why: Small screens are too narrow for the pitch and buttons side by side. How: This applies below 960px wide. */
+
+
+	.herBotDiv { /* What: Stacked Hero Bottom Div. Why: The buttons read best under the pitch. How: This turns the grid into one column with a smaller gap. */
+
+
+		gap                   : var( --spa-ver-p03 ); /* Spacing Vertical Base Plus 3 ~= 33.876px */
+		grid-template-columns : 1fr;
+
+
+	}
+
+
+}
+@media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Hero Bottom Div. Why: Someone who asked for less motion shouldn't see the row rise. How: This applies only when the reduced-motion preference is set. */
+
+
+	.herBotDiv { /* What: Motionless Hero Bottom Div. Why: The row should simply be there. How: This turns the animation off. */
+
+
+		animation : none;
+
+
+	}
+
+
+}
+
+.secLedPar { /* What: Section Lede Paragraph. Why: The pitch reads as the hero's lead paragraph. How: This sets it in the body font, a little larger than body text, at a comfortable measure. */
+
+
+	color       : var( --tex-sec-col );                                       /* Text Secondary Color = #2a3138 */
+	font-family : var( --fon-fam-mai );                                       /* Font Family Main = 'Inter Tight', -apple-system, BlinkMacSystemFont, sans-serif */
+	font-size   : clamp( var( --fon-siz-p01 ), 1.4vw, var( --fon-siz-p02 ) ); /* Font Size Base Plus 1 ~= 14.572px, Font Size Base Plus 2 ~= 19.304px */
+	line-height : var( --ver-rhy-p01 );                                       /* Vertical Rhythm Base Plus 1 ~= 1.755 */
+	margin      : 0;
+	max-width   : var( --tex-wid-bas );                                       /* Text Width Base Maximum ~= 29.207em */
+
+
+}
+
+
+
+/* #region herActDiv */
+
+.herActDiv { /* What: Hero Actions Div. Why: The hero's two next steps sit together. How: This sets the buttons side by side, wrapping if needed. */
+
+
+	display   : flex;
+	flex-wrap : wrap;
+	gap       : var( --spa-ver-m01 ) var( --spa-hor-m01 ); /* Spacing Vertical Base Minus 1 = 11px, Spacing Horizontal Base Minus 1 = 11px */
+
+
+}
+
+
+/* #region butBasAnc */
+
+.butBasAnc { /* What: Button Base Anchor. Why: The hero's actions share the site's pill button shape. How: This draws a rounded pill whose height comes from its line height alone, with its label and arrow side by side, easing its colors and lift on hover. */
+
+
+	align-items    : center;
+	border         : var( --bor-wid-bas ) solid transparent;                                      /* Border Width Base ~= 1.160px */
+	border-radius  : 999px;
+	display        : inline-flex;
+	font-size      : var( --fon-siz-p01 );                                                        /* Font Size Base Plus 1 ~= 14.572px */
+	font-weight    : 500;
+	gap            : var( --spa-hor-m01 );                                                        /* Spacing Horizontal Base Minus 1 = 11px */
+	letter-spacing : 0.02em;
+	line-height    : calc( var( --ver-rhy-p04 ) * 1rem );                                         /* Vertical Rhythm Base Plus 4 ~= 44.876px */
+	padding        : 0 clamp( var( --spa-hor-p01 ), var( --hor-rhy-012 ), var( --spa-hor-p03 ) ); /* Spacing Horizontal Base Plus 1 ~= 19.304px, Horizontal Rhythm 12 ~= 28.278px @ 1,920px width, Spacing Horizontal Base Plus 3 ~= 33.876px */
+	transition     : background-color var( --dur-tra-p02 ) var( --mot-dec-eas ), border-color var( --dur-tra-p02 ) var( --mot-dec-eas ), color var( --dur-tra-p02 ) var( --mot-dec-eas ), transform var( --dur-tra-p02 ) var( --mot-dec-eas ); /* Duration Transition Base Plus 2 ~= 277.0ms, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ) */
+	white-space    : nowrap;
+
+
+}
+.butBasAnc--primary { /* What: Primary Button Base Anchor. Why: The estimate button is the hero's main action. How: This fills it with ink and paper-colored text. */
+
+
+	background : var( --bac-inv-col ); /* Background Inverse Color = #1a1f24 */
+	color      : var( --bac-pag-col ); /* Background Page Color = #f5f2ec */
+
+
+}
+.butBasAnc--primary:hover { /* What: Hovered Primary Button Base Anchor. Why: The button should respond to the pointer. How: This turns it accent and lifts it a pixel. */
+
+
+	background : var( --acc-mai-col ); /* Accent Main Color = #1f4e7a */
+	transform  : translateY( -1px );
+
+
+}
+.butBasAnc--ghost { /* What: Ghost Button Base Anchor. Why: The services button is a secondary action. How: This outlines it with no fill. */
+
+
+	border-color : var( --bor-str-col ); /* Border Strong Color = #1a1f24 @ 0.22 opacity */
+	color        : var( --tex-mai-col ); /* Text Main Color = #1a1f24 */
+
+
+}
+.butBasAnc--ghost:hover { /* What: Hovered Ghost Button Base Anchor. Why: The button should respond to the pointer. How: This fills it with ink and turns its text paper-colored. */
+
+
+	background   : var( --bac-inv-col ); /* Background Inverse Color = #1a1f24 */
+	border-color : var( --bac-inv-col ); /* Background Inverse Color = #1a1f24 */
+	color        : var( --bac-pag-col ); /* Background Page Color = #f5f2ec */
+
+
+}
+@media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Button Base Anchor. Why: Someone who asked for less motion shouldn't see the buttons animate. How: This applies only when the reduced-motion preference is set. */
+
+
+	.butBasAnc { /* What: Motionless Button Base Anchor. Why: The hover styles should appear at once. How: This turns the transition off. */
+
+
+		transition : none;
+
+
+	}
+
+
+}
+
+.arrIcoSpa { /* What: Arrow Icon Span. Why: The arrow slides forward as its button is hovered. How: This animates its position. */
+
+
+	transition : transform var( --dur-tra-p02 ) var( --mot-dec-eas ); /* Duration Transition Base Plus 2 ~= 277.0ms, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ) */
+
+
+}
+.butBasAnc:hover .arrIcoSpa { /* What: Hovered Arrow Icon Span. Why: The arrow points the visitor onward when its button is hovered. How: This nudges it right by a few pixels, kept literal since no spacing step lands within 10% of the 4px nudge. */
+
+
+	transform : translateX( 4px );
+
+
+}
+@media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Arrow Icon Span. Why: Someone who asked for less motion shouldn't see the arrow slide. How: This applies only when the reduced-motion preference is set. */
+
+
+	.arrIcoSpa { /* What: Motionless Arrow Icon Span. Why: The arrow should simply shift. How: This turns the transition off. */
+
+
+		transition : none;
+
+
+	}
+
+
+}
+
+/* #endregion butBasAnc */
+
+/* #endregion herActDiv */
+
+/* #endregion herBotDiv */
+
+
+
+/* #region herStaDiv */
+
+.herStaDiv { /* What: Hero Stats Div. Why: The four numbers read as one row, rising in last. How: This sets a four-column grid and plays the entrance animation after the longest delay. */
+
+
+	animation             : divEnterFadeIn var( --dur-ani-p06 ) var( --mot-dec-eas ) var( --dur-ani-p04 ) both;             /* Duration Animation Base Plus 6 ~= 853.0ms, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ), Duration Animation Base Plus 4 ~= 486.1ms */
+	display               : grid;
+	gap                   : var( --spa-ver-p03 ) clamp( var( --spa-hor-p01 ), var( --hor-rhy-012 ), var( --spa-hor-p03 ) ); /* Spacing Vertical Base Plus 3 ~= 33.876px, Spacing Horizontal Base Plus 1 ~= 19.304px, Horizontal Rhythm 12 ~= 28.278px @ 1,920px width, Spacing Horizontal Base Plus 3 ~= 33.876px */
+	grid-template-columns : repeat( 4, 1fr );
+	margin-top            : var( --spa-ver-p04 );                                                                           /* Spacing Vertical Base Plus 4 ~= 44.876px */
+
+
+}
+@container app ( max-width : 960px ) { /* What: Narrow Hero Stats Div. Why: Four columns don't fit a small screen. How: This applies below 960px wide. */
+
+
+	.herStaDiv { /* What: Two Column Hero Stats Div. Why: The stats fit two to a row. How: This sets two columns with a tighter column gap. */
+
+
+		gap                   : var( --spa-ver-p03 ) clamp( var( --spa-hor-bas ), var( --hor-rhy-011 ), var( --spa-hor-p02 ) ); /* Spacing Vertical Base Plus 3 ~= 33.876px, Spacing Horizontal Base ~= 14.572px, Horizontal Rhythm 11 ~= 21.346px @ 1,920px width, Spacing Horizontal Base Plus 2 ~= 25.572px */
+		grid-template-columns : repeat( 2, 1fr );
+
+
+	}
+
+
+}
+@media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Hero Stats Div. Why: Someone who asked for less motion shouldn't see the stats rise. How: This applies only when the reduced-motion preference is set. */
+
+
+	.herStaDiv { /* What: Motionless Hero Stats Div. Why: The stats should simply be there. How: This turns the animation off. */
+
+
+		animation : none;
+
+
+	}
+
+
+}
+
+
+/* #region staIteDiv */
+
+.staIteDiv { /* What: Stat Item Div. Why: Each stat is set off by a thin rule on its left. How: This draws the rule and pads the content away from it. */
+
+
+	border-left  : var( --bor-wid-bas ) solid var( --bor-mai-col ); /* Border Width Base ~= 1.160px, Border Main Color = #1a1f24 @ 0.12 opacity */
+	padding-left : var( --spa-hor-p01 );                            /* Spacing Horizontal Base Plus 1 ~= 19.304px */
+
+
+}
+.staIteDiv:first-child { /* What: First Stat Item Div. Why: The first stat anchors the row with a stronger rule. How: This draws its rule in full ink. */
+
+
+	border-left : var( --bor-wid-bas ) solid var( --tex-mai-col ); /* Border Width Base ~= 1.160px, Text Main Color = #1a1f24 */
+
+
+}
+
+
+/* #region staNumDiv */
+
+.staNumDiv { /* What: Stat Number Div. Why: The number leads each stat in large display type. How: This sets it in the display font at its largest optical size, scaling with the viewport, with its line height trimmed to the glyphs and slightly looser tracking than the headings. */
+
+
+	color                   : var( --tex-mai-col );                                     /* Text Main Color = #1a1f24 */
+	font-family             : var( --fon-fam-sec );                                     /* Font Family Secondary = 'Fraunces', 'Times New Roman', serif */
+	font-size               : clamp( var( --fon-siz-p04 ), 4vw, var( --fon-siz-p05 ) ); /* Font Size Base Plus 4 ~= 33.876px, Font Size Base Plus 5 ~= 44.876px */
+	font-variation-settings : 'opsz' 144;
+	font-weight             : 400;
+	letter-spacing          : -0.02em;
+	line-height             : var( --ver-rhy-m01 );                                     /* Vertical Rhythm Base Minus 1 = 1 */
+	margin-bottom           : var( --spa-ver-m02 );                                     /* Spacing Vertical Base Minus 2 ~= 8.304px */
+
+
+}
+
+.staSufSpa { /* What: Stat Suffix Span. Why: A number's plus sign or unit reads as secondary to the number. How: This sets it smaller, raised, and muted. */
+
+
+	color          : var( --tex-mut-col );                   /* Text Muted Color = #6b7079 */
+	font-size      : calc( var( --cdn-pow-002-rec ) * 1em ); /* Core-Design-Number to the Power of 2 Reciprocal ~= 0.570 */
+	margin-left    : calc( var( --cdn-pow-008-rec ) * 1em ); /* Core-Design-Number to the Power of 8 Reciprocal ~= 0.105 */
+	vertical-align : calc( var( --cdn-pow-003-rec ) * 1em ); /* Core-Design-Number to the Power of 3 Reciprocal ~= 0.430 */
+
+
+}
+
+.staPluSpa { /* What: Stat Plus Span. Why: The rating's plus sign is set apart in the accent. How: This raises it like the other suffixes, but in accent italic. */
+
+
+	color          : var( --acc-mai-col );                   /* Accent Main Color = #1f4e7a */
+	font-size      : calc( var( --cdn-pow-002-rec ) * 1em ); /* Core-Design-Number to the Power of 2 Reciprocal ~= 0.570 */
+	font-style     : italic;
+	margin-left    : calc( var( --cdn-pow-008-rec ) * 1em ); /* Core-Design-Number to the Power of 8 Reciprocal ~= 0.105 */
+	vertical-align : calc( var( --cdn-pow-003-rec ) * 1em ); /* Core-Design-Number to the Power of 3 Reciprocal ~= 0.430 */
+
+
+}
+
+/* #endregion staNumDiv */
+
+
+.staLabDiv { /* What: Stat Label Div. Why: Each number needs a short line saying what it counts. How: This sets it at body size, muted, at the small text measure. */
+
+
+	color       : var( --tex-mut-col ); /* Text Muted Color = #6b7079 */
+	font-size   : var( --fon-siz-p01 ); /* Font Size Base Plus 1 ~= 14.572px */
+	line-height : var( --ver-rhy-bas ); /* Vertical Rhythm Base ~= 1.325 */
+	max-width   : var( --tex-wid-sma ); /* Text Width Small Maximum ~= 22.047em */
+
+
+}
+
+/* #endregion staIteDiv */
+
+/* #endregion herStaDiv */
+
+/* #endregion pagConDiv */
+
+/* #endregion homHerSec */
+
+

@@ -1,0 +1,228 @@
+
+
+
+/**
+ * footer.module.css = Site Footer Module
+ *
+ * @summary
+ * Styles for SitFooCom: the dark footer band with the brand on the left, the
+ * copyright and licensing lines in the middle, and the back-to-top link on
+ * the right, stacking into one left-aligned column on small screens. The
+ * shared container declarations the footer used to borrow from the global
+ * stylesheet are copied onto its own row class here.
+ *
+ * @author z4nta0 <https://github.com/z4nta0>
+ *
+*/
+
+
+
+/* #region sitFooFoo */
+
+.sitFooFoo { /* What: Site Footer Footer. Why: The footer closes the page on a dark band. How: This sets the ink background with muted light text and a faint top edge. */
+
+
+	background : var( --bac-inv-col );                                                                           /* Background Inverse Color = #1a1f24 */
+	border-top : var( --bor-wid-bas ) solid oklch( from var( --bac-pag-col ) l c h / var( --cdn-pow-008-rec ) ); /* Border Width Base ~= 1.160px, Background Page Color = #f5f2ec, Core-Design-Number to the Power of 8 Reciprocal ~= 0.105 */
+	color      : oklch( from var( --bac-pag-col ) l c h / var( --cdn-pow-002-rec ) );                            /* Background Page Color = #f5f2ec, Core-Design-Number to the Power of 2 Reciprocal ~= 0.570 */
+	padding    : var( --spa-ver-p04 ) 0;                                                                         /* Spacing Vertical Base Plus 4 ~= 44.876px */
+
+
+}
+
+
+/* #region fooInnDiv */
+
+.fooInnDiv { /* What: Footer Inner Div. Why: The footer's contents should line up with the page's content width. How: This spreads the brand, meta lines, and top link across one centered row that can wrap. */
+
+
+	align-items     : center;
+	display         : flex;
+	flex-wrap       : wrap;
+	gap             : var( --spa-ver-p03 ) clamp( var( --spa-hor-p01 ), var( --hor-rhy-012 ), var( --spa-hor-p03 ) ); /* Spacing Vertical Base Plus 3 ~= 33.876px, Spacing Horizontal Base Plus 1 ~= 19.304px, Horizontal Rhythm 12 ~= 28.278px @ 1,920px width, Spacing Horizontal Base Plus 3 ~= 33.876px */
+	justify-content : space-between;
+	margin          : 0 auto;
+	max-width       : var( --con-max-wid );                                                                           /* Container Maximum Width, about 1,449.4px */
+	padding-inline  : var( --gut-sid-pad );                                                                           /* Gutter Side Padding, about 19.304px - 44.876px */
+	width           : 100%;
+
+
+}
+@container app ( max-width : 600px ) { /* What: Narrow Footer Inner Div. Why: Small screens are too narrow for three items side by side. How: This applies below 600px wide. */
+
+
+	.fooInnDiv { /* What: Stacked Footer Inner Div. Why: The items read best stacked on a small screen, sharing a left edge but centered as a group. How: This turns the row into a left-aligned column with a smaller gap, shrunk to its widest item so the inner div's auto margins center it. */
+
+
+		align-items    : flex-start;
+		flex-direction : column;
+		gap            : var( --spa-ver-p02 ); /* Spacing Vertical Base Plus 2 ~= 25.572px */
+		width          : fit-content;
+
+
+	}
+
+
+}
+
+
+/* #region fooBraDiv */
+
+.fooBraDiv { /* What: Footer Brand Div. Why: The footer repeats the company's mark and name. How: This sets them side by side in the display font, on the paper color. */
+
+
+	align-items : center;
+	color       : var( --bac-pag-col ); /* Background Page Color = #f5f2ec */
+	display     : inline-flex;
+	font-family : var( --fon-fam-sec ); /* Font Family Secondary = 'Fraunces', 'Times New Roman', serif */
+	font-size   : var( --fon-siz-p02 ); /* Font Size Base Plus 2 ~= 19.304px */
+	gap         : var( --spa-hor-m01 ); /* Spacing Horizontal Base Minus 1 = 11px */
+
+
+}
+
+
+/* #region fooMarSpa */
+
+.fooMarSpa { /* What: Footer Mark Span. Why: The dark mark needs a light tile to show against the dark footer. How: This draws a small rounded paper square, its width matching its rhythm-step height, with the mark centered in it. */
+
+
+	background    : var( --bac-pag-col );                      /* Background Page Color = #f5f2ec */
+	border-radius : var( --rad-bor-xsm );                      /* Radius Border Extra Small ~= 3.572px */
+	display       : inline-grid;
+	height        : calc( var( --ver-rhy-p03 ) * 1rem );       /* Vertical Rhythm Base Plus 3 ~= 33.876px */
+	padding       : var( --spa-ver-m05 ) var( --spa-hor-m05 ); /* Spacing Vertical Base Minus 5 ~= 3.572px, Spacing Horizontal Base Minus 5 ~= 3.572px */
+	place-items   : center;
+	width         : calc( var( --ver-rhy-p03 ) * 1rem );       /* Vertical Rhythm Base Plus 3 ~= 33.876px */
+
+
+}
+
+.fooMarIma { /* What: Footer Mark Image. Why: The mark should fill its tile. How: This sizes it to the tile's full width, keeping its proportions. */
+
+
+	display : block;
+	height  : auto;
+	width   : 100%;
+
+
+}
+
+/* #endregion fooMarSpa */
+
+
+.namLigSpa { /* What: Name Light Span. Why: The name's second word reads as the softer half. How: This sets it light, italic, and faded. */
+
+
+	color       : oklch( from var( --bac-pag-col ) l c h / 0.5 ); /* Background Page Color = #f5f2ec */
+	font-style  : italic;
+	font-weight : 300;
+
+
+}
+
+/* #endregion fooBraDiv */
+
+
+
+/* #region fooMetDiv */
+
+.fooMetDiv { /* What: Footer Meta Div. Why: The copyright and licensing lines read as one small block. How: This stacks them centered at body size, smaller than the brand. */
+
+
+	display        : flex;
+	flex-direction : column;
+	font-size      : var( --fon-siz-p01 ); /* Font Size Base Plus 1 ~= 14.572px */
+	gap            : var( --spa-ver-m05 ); /* Spacing Vertical Base Minus 5 ~= 3.572px */
+	text-align     : center;
+
+
+}
+@container app ( max-width : 600px ) { /* What: Narrow Footer Meta Div. Why: The stacked footer is left-aligned on small screens. How: This applies below 600px wide. */
+
+
+	.fooMetDiv { /* What: Left Footer Meta Div. Why: The lines should line up with the stacked brand and link. How: This aligns them to the left. */
+
+
+		align-items : flex-start;
+		text-align  : left;
+
+
+	}
+
+
+}
+
+/* #endregion fooMetDiv */
+
+
+/* #region fooTopAnc */
+
+.fooTopAnc { /* What: Footer Top Anchor. Why: The back-to-top link is a quiet secondary action. How: This sets it at body size with its arrow beside it, brightening on hover. */
+
+
+	align-items : center;
+	color       : oklch( from var( --bac-pag-col ) l c h / var( --cdn-pow-002-rec ) ); /* Background Page Color = #f5f2ec, Core-Design-Number to the Power of 2 Reciprocal ~= 0.570 */
+	display     : inline-flex;
+	font-size   : var( --fon-siz-p01 );                                                /* Font Size Base Plus 1 ~= 14.572px */
+	gap         : var( --spa-hor-m03 );                                                /* Spacing Horizontal Base Minus 3 ~= 6.268px */
+	transition  : color var( --dur-tra-p01 ) var( --mot-sta-eas );                     /* Duration Transition Base Plus 1 ~= 209.1ms, Motion Standard Easing = ease */
+
+
+}
+.fooTopAnc:hover { /* What: Hovered Footer Top Anchor. Why: The hovered link should stand out on the dark band. How: This turns it the soft accent. */
+
+
+	color : var( --acc-lig-col ); /* Accent Light Color, the accent lightened by 0.204 */
+
+
+}
+@media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Footer Top Anchor. Why: Someone who asked for less motion shouldn't see the color fade. How: This applies only when the reduced-motion preference is set. */
+
+
+	.fooTopAnc { /* What: Motionless Footer Top Anchor. Why: The hover color should appear at once. How: This turns the transition off. */
+
+
+		transition : none;
+
+
+	}
+
+
+}
+
+.arrIcoSpa { /* What: Arrow Icon Span. Why: The arrow lifts as the link is hovered, pointing the way back up. How: This animates its position. */
+
+
+	transition : transform var( --dur-tra-p02 ) var( --mot-dec-eas ); /* Duration Transition Base Plus 2 ~= 277.0ms, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ) */
+
+
+}
+.fooTopAnc:hover .arrIcoSpa { /* What: Hovered Arrow Icon Span. Why: The arrow reinforces the link's direction on hover. How: This lifts it 3px. */
+
+
+	transform : translateY( -3px );
+
+
+}
+@media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Arrow Icon Span. Why: Someone who asked for less motion shouldn't see the arrow move. How: This applies only when the reduced-motion preference is set. */
+
+
+	.arrIcoSpa { /* What: Motionless Arrow Icon Span. Why: The arrow should simply shift. How: This turns the transition off. */
+
+
+		transition : none;
+
+
+	}
+
+
+}
+
+/* #endregion fooTopAnc */
+
+/* #endregion fooInnDiv */
+
+/* #endregion sitFooFoo */
+
+

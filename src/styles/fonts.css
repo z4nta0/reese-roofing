@@ -1,0 +1,65 @@
+
+
+
+/**
+ * fonts.css = Fonts
+ *
+ * @summary
+ * The site's self-hosted variable fonts: Fraunces in upright and italic, and
+ * Inter Tight upright, replacing the Google Fonts stylesheet index.html used
+ * to load. Fraunces has a real italic face, so the italic accents in its
+ * headings, quote, and numbers draw true italic letterforms rather than a
+ * slanted copy of the upright, which is all the browser had before. Each file
+ * is Google's own latin subset of the family, which covers every character the
+ * site's copy uses; the one exception, the right arrow, isn't in any file
+ * Google serves for either family, so it keeps rendering from a fallback font
+ * exactly as it did before. Each face declares its file's full weight range,
+ * read from the font's fvar table, so the browser draws every weight from the
+ * font itself instead of synthesizing it. Fraunces also carries an optical
+ * size axis (9 to 144), which the display headings set through
+ * font-variation-settings. The files live in src/assets/fonts/ and are pulled
+ * in through url(), so Vite fingerprints them.
+ *
+ * @author z4nta0 <https://github.com/z4nta0>
+ *
+*/
+
+
+
+@font-face { /* What: Fraunces Font Face. Why: Fraunces is the display font for headings and italic accents. How: This loads its latin variable file across its full 100 to 900 weight range, showing fallback text until it arrives. */
+
+
+	font-display : swap;
+	font-family  : 'Fraunces';
+	font-style   : normal;
+	font-weight  : 100 900;
+	src          : url( '../assets/fonts/Fraunces-VariableFont_opsz,wght.woff2' ) format( 'woff2' );
+
+
+}
+
+@font-face { /* What: Fraunces Italic Font Face. Why: Fraunces sets every italic accent on the site, and a true italic draws different letterforms than a slanted upright. How: This loads its latin italic variable file across its full 100 to 900 weight range, showing fallback text until it arrives. */
+
+
+	font-display : swap;
+	font-family  : 'Fraunces';
+	font-style   : italic;
+	font-weight  : 100 900;
+	src          : url( '../assets/fonts/Fraunces-Italic-VariableFont_opsz,wght.woff2' ) format( 'woff2' );
+
+
+}
+
+@font-face { /* What: Inter Tight Font Face. Why: Inter Tight is the body font for paragraphs, labels, and the interface. How: This loads its latin variable file across its full 100 to 900 weight range, showing fallback text until it arrives. */
+
+
+	font-display : swap;
+	font-family  : 'Inter Tight';
+	font-style   : normal;
+	font-weight  : 100 900;
+	src          : url( '../assets/fonts/InterTight-VariableFont_wght.woff2' ) format( 'woff2' );
+
+
+}
+
+
