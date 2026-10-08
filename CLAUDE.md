@@ -26,7 +26,11 @@ isn't a real business, so it gets the demo treatment rather than local SEO:
   `design/og-image/card.html` (outside the served tree) is captured by `npm
   run og-image` (`design/og-image/render.mts`, type checked through
   `tsconfig.test.json`, since it drives a browser) into `public/og-image.png`,
-  with every element inside the center 630x630 square.
+  with every element inside the center 630x630 square. The card imports the
+  site's `fonts.css` and `styles.css` and reads their tokens; only its
+  1200x630 size, its 40px lines, their 1.2 line height and weights, and the
+  title's -0.01em letter spacing stay literal, since the scale has no step
+  within 10% of them.
 - **Structured data**: one `WebSite` JSON-LD block about a fictional company,
   created by techgeek.support. Never `LocalBusiness`, an address, or a phone.
 - **Placeholders stay reserved**: the phone is a 555-01xx number and the

@@ -21,61 +21,24 @@
 
 		<!-- #region Card Styles -->
 
-		<style>/* What: Card Style Element. Why: The card is one fixed-size image, styled entirely here. How: This loads the site's fonts and lays the card out in pixels, the one unit a 1,200x630 image is measured in. */
+		<style>/* What: Card Style Element. Why: The card is one fixed-size image, styled here from the site's own fonts and tokens. How: This imports the site's font faces and global stylesheet, then lays the card out on the site's scale, keeping literal pixels only where the scale has no step within 10%. */
 
 
-			@font-face { /* What: Fraunces Upright Face. Why: The card's heading uses the site's display serif. How: This loads the site's own variable font file. */
-
-
-				font-family : 'Fraunces';
-				font-weight : 100 900;
-				src         : url( '../../src/assets/fonts/Fraunces-VariableFont_opsz,wght.woff2' ) format( 'woff2' );
-
-
-			}
-
-			@font-face { /* What: Fraunces Italic Face. Why: The heading's accent word is set in italic, as on the site. How: This loads the italic variable font file. */
-
-
-				font-family : 'Fraunces';
-				font-style  : italic;
-				font-weight : 100 900;
-				src         : url( '../../src/assets/fonts/Fraunces-Italic-VariableFont_opsz,wght.woff2' ) format( 'woff2' );
-
-
-			}
-
-			@font-face { /* What: Inter Tight Face. Why: The card's smaller lines use the site's main sans serif. How: This loads its variable font file. */
-
-
-				font-family : 'Inter Tight';
-				font-weight : 100 900;
-				src         : url( '../../src/assets/fonts/InterTight-VariableFont_wght.woff2' ) format( 'woff2' );
-
-
-			}
-
-			html,
-			body { /* What: Page Root. Why: The capture should hold the card and nothing around it. How: This clears the browser's default margin. */
-
-
-				margin : 0;
-
-
-			}
+			@import url( '../../src/styles/fonts.css' );  /* What: Site Fonts Import. Why: The card should be set in the site's own typefaces. How: This loads the site's font faces, whose file paths resolve from fonts.css itself. */
+			@import url( '../../src/styles/styles.css' ); /* What: Site Styles Import. Why: The card should read the site's colors and scale rather than copies of them. How: This loads the global tokens and base element styles, which also make 1rem the site's 11px base. */
 
 
 
 			/* #region carBodBod */
 
-			.carBodBod { /* What: Card Body Body. Why: The card fills the whole 1,200x630 capture in the site's paper and ink. How: This sizes it and centers its single column. */
+			.carBodBod { /* What: Card Body Body. Why: The card fills the whole 1,200x630 capture in the site's paper and ink. How: This sizes it in literal pixels, the image's own fixed size, and centers its single column. */
 
 
 				align-items     : center;
-				background      : #f5f2ec;
-				color           : #1a1f24;
+				background      : var( --bac-pag-col ); /* Background Page Color = #f5f2ec */
+				color           : var( --tex-mai-col ); /* Text Main Color = #1a1f24 */
 				display         : flex;
-				font-family     : 'Inter Tight', sans-serif;
+				font-family     : var( --fon-fam-mai ); /* Font Family Main = 'Inter Tight', -apple-system, BlinkMacSystemFont, sans-serif */
 				height          : 630px;
 				justify-content : center;
 				overflow        : hidden;
@@ -84,11 +47,11 @@
 
 
 			}
-			.carBodBod::before { /* What: Card Body Body Grid Lines. Why: The hero's faint drafting grid ties the card to the site. How: This lays two repeating hairline gradients across the whole card. */
+			.carBodBod::before { /* What: Card Body Body Grid Lines. Why: The hero's faint drafting grid ties the card to the site. How: This lays two repeating hairline gradients, one rhythm step apart, across the whole card. */
 
 
-				background-image : linear-gradient( rgba( 26, 31, 36, 0.06 ) 1px, transparent 1px ), linear-gradient( 90deg, rgba( 26, 31, 36, 0.06 ) 1px, transparent 1px );
-				background-size  : 56px 56px;
+				background-image : linear-gradient( oklch( from var( --tex-mai-col ) l c h / var( --cdn-pow-010-rec ) ) var( --bor-wid-bas ), transparent var( --bor-wid-bas ) ), linear-gradient( 90deg, oklch( from var( --tex-mai-col ) l c h / var( --cdn-pow-010-rec ) ) var( --bor-wid-bas ), transparent var( --bor-wid-bas ) ); /* Text Main Color = #1a1f24, Core-Design-Number to the Power of 10 Reciprocal ~= 0.060, Border Width Base ~= 1.160px */
+				background-size  : calc( var( --ver-rhy-p05 ) * 1rem ) calc( var( --ver-rhy-p05 ) * 1rem ); /* Vertical Rhythm Base Plus 5 ~= 59.447px */
 				content          : '';
 				inset            : 0;
 				position         : absolute;
@@ -111,11 +74,11 @@
 
 			}
 
-			.carLogIma { /* What: Card Logo Image. Why: The full logo is what makes the card recognizable at a glance. How: This sets it at a height that leaves room for the lines below. */
+			.carLogIma { /* What: Card Logo Image. Why: The full logo is what makes the card recognizable at a glance. How: This sets it at a rhythm step tall enough to lead the card while leaving room for the lines below. */
 
 
 				display : block;
-				height  : 268px;
+				height  : calc( var( --ver-rhy-p10 ) * 1rem ); /* Vertical Rhythm Base Plus 10 ~= 242.517px */
 
 
 			}
@@ -126,11 +89,11 @@
 			.carTitPar { /* What: Card Title Paragraph. Why: The card's main line says what the site is. How: This sets it large in the display serif. */
 
 
-				font-family    : 'Fraunces', serif;
-				font-size      : 60px;
+				font-family    : var( --fon-fam-sec );     /* Font Family Secondary = 'Fraunces', 'Times New Roman', serif */
+				font-size      : var( --fon-siz-p06 );     /* Font Size Base Plus 6 ~= 59.447px */
 				letter-spacing : -0.01em;
-				line-height    : 1.1;
-				margin         : 26px 0 0;
+				line-height    : var( --ver-rhy-m01 );     /* Vertical Rhythm Base Minus 1 = 1 */
+				margin         : var( --spa-ver-p02 ) 0 0; /* Spacing Vertical Base Plus 2 ~= 25.572px */
 
 
 			}
@@ -138,7 +101,7 @@
 			.carAccEmp { /* What: Card Accent Emphasis. Why: The accent word picks up the logo's navy, as italic accents do on the site. How: This colors it. */
 
 
-				color : #1f4e7a;
+				color : var( --acc-mai-col ); /* Accent Main Color = #1f4e7a */
 
 
 			}
@@ -146,14 +109,14 @@
 			/* #endregion carTitPar */
 
 
-			.carNotPar { /* What: Card Notice Paragraph. Why: The card must say plainly that the company isn't real. How: This sets the notice in muted gray, large enough to read at thumbnail size. */
+			.carNotPar { /* What: Card Notice Paragraph. Why: The card must say plainly that the company isn't real. How: This sets the notice in muted gray at 40px, large enough to read at thumbnail size, a size the font scale has no step near. */
 
 
-				color       : #636871;
+				color       : var( --tex-mut-col );     /* Text Muted Color = #636871 */
 				font-size   : 40px;
 				font-weight : 500;
 				line-height : 1.2;
-				margin      : 14px 0 0;
+				margin      : var( --spa-ver-bas ) 0 0; /* Spacing Vertical Base ~= 14.572px */
 
 
 			}
@@ -164,7 +127,7 @@
 				font-size   : 40px;
 				font-weight : 600;
 				line-height : 1.2;
-				margin      : 6px 0 0;
+				margin      : var( --spa-ver-m03 ) 0 0; /* Spacing Vertical Base Minus 3 ~= 6.268px */
 
 
 			}
