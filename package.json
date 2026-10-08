@@ -10,6 +10,7 @@
 		"preview": "vite preview",
 		"test": "playwright test --config tests/playwright.config.ts",
 		"test:accessibility": "playwright test --config tests/playwright.config.ts --project \"accessibility-*\"",
+		"test:seo": "playwright test --config tests/playwright.config.ts --project \"seo-*\"",
 		"typecheck": "tsc -b"
 	},
 	"dependencies": {

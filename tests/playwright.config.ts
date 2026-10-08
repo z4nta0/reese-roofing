@@ -18,8 +18,8 @@ import { fileURLToPath } from 'node:url';         // What: File URL To Path. Why
  * The config behind npm test and its suites, each run against the real site
  * in all three of Playwright's engines (Chromium, Firefox, and WebKit), one
  * project per suite and engine, since a check that passes in one engine
- * proves nothing about the others. So far the one suite is accessibility,
- * which the pre-commit check runs. Playwright starts the Vite dev server on
+ * proves nothing about the others. The suites are accessibility, which the
+ * pre-commit check runs, and seo. Playwright starts the Vite dev server on
  * port 5191 for the run and stops it afterwards, so a dev server already
  * running on the usual 5173 is never touched. Reports and failure screenshots
  * land in tests/output, which git ignores.
@@ -53,6 +53,17 @@ const ENG_NAM_ARR = [ // What: Engine Name Array. Why: Every suite runs in all t
 
 
 
+const SUI_NAM_ARR = [ // What: Suite Name Array. Why: Each suite lives in its own folder and runs as its own projects. How: Each entry names a folder under tests/, crossed with each engine into one project apiece.
+
+
+	'accessibility', // What: Accessibility Suite. Why: The pre-commit accessibility scan runs from here. How: This names tests/accessibility.
+	'seo'            // What: Seo Suite. Why: The site's search and link preview setup is checked from here. How: This names tests/seo.
+
+
+];
+
+
+
 const PLA_CON_OBJ = defineConfig({ // What: Playwright Config Object. Why: Playwright reads its whole setup from this file's default export. How: This holds the shared page settings, one project per suite and engine, the reporters, and the dev server.
 
 
@@ -61,15 +72,15 @@ const PLA_CON_OBJ = defineConfig({ // What: Playwright Config Object. Why: Playw
 	testDir       : '.',              // What: Test Directory. Why: Each project picks its own folder below. How: This roots test discovery at tests/.
 	workers       : 3,                // What: Workers. Why: The engines are independent, but each worker drives a full browser. How: This runs up to three spec files at once.
 
-	projects : ENG_NAM_ARR.map( ( engNamStr ) => ({ // What: Projects. Why: Each suite runs on its own in each engine. How: This maps every engine to an accessibility project named after it, runnable alone with --project.
+	projects : SUI_NAM_ARR.flatMap( ( suiNamStr ) => ENG_NAM_ARR.map( ( engNamStr ) => ({ // What: Projects. Why: Each suite runs on its own in each engine. How: This crosses every suite with every engine into a project named after both, runnable alone with --project.
 
 
-		name      : `accessibility-${ engNamStr }`, // What: Name. Why: A failure has to say which engine it came from. How: This names the project after its suite and engine.
-		testMatch : 'accessibility/**/*.spec.ts',   // What: Test Match. Why: Each suite lives in its own folder. How: This runs every spec under tests/accessibility.
-		use       : { browserName : engNamStr }     // What: Use. Why: The project has to launch its own engine. How: This sets the browser it runs in.
+		name      : `${ suiNamStr }-${ engNamStr }`, // What: Name. Why: A failure has to say which suite and engine it came from. How: This names the project after both.
+		testMatch : `${ suiNamStr }/**/*.spec.ts`,   // What: Test Match. Why: Each suite lives in its own folder. How: This runs every spec in the suite's folder under tests/.
+		use       : { browserName : engNamStr }      // What: Use. Why: The project has to launch its own engine. How: This sets the browser it runs in.
 
 
-	})),
+	}))),
 
 	reporter : [ // What: Reporter. Why: A run needs a live summary in the terminal and a browsable report afterwards. How: This prints a line per test and writes an HTML report to tests/output/report.
 
