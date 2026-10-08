@@ -123,7 +123,7 @@ function HerSecCom () : React.JSX.Element {
 
 
 
-			<div className={ cssModObj.herInnDiv }>{ /* What: Hero Inner Div Element. Why: The hero's content should line up with the page's content width. How: This stacks the top row, the bottom row, and the stats. */ }
+			<div className={ cssModObj.pagConDiv }>{ /* What: Page Container Div Element. Why: The hero's content should line up with the page's content width. How: This stacks the top row, the bottom row, and the stats. */ }
 
 
 				<div className={ cssModObj.herTopDiv }>{ /* What: Hero Top Div Element. Why: The headline and logo share the first row. How: This sets the copy on the left and the logo on the right. */ }

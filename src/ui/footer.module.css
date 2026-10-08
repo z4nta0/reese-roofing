@@ -39,11 +39,11 @@
 	align-items     : center;
 	display         : flex;
 	flex-wrap       : wrap;
-	gap             : var( --spa-ver-p03 ) clamp( var( --spa-hor-p01 ), var( --hor-rhy-012 ), var( --spa-hor-p03 ) ); /* Spacing Vertical Base Plus 3 ~= 33.876px, Spacing Horizontal Base Plus 1 ~= 19.304px, Horizontal Rhythm 12 ~= 28.278px @ 1920px width, Spacing Horizontal Base Plus 3 ~= 33.876px */
+	gap             : var( --spa-ver-p03 ) clamp( var( --spa-hor-p01 ), var( --hor-rhy-012 ), var( --spa-hor-p03 ) ); /* Spacing Vertical Base Plus 3 ~= 33.876px, Spacing Horizontal Base Plus 1 ~= 19.304px, Horizontal Rhythm 12 ~= 28.278px @ 1,920px width, Spacing Horizontal Base Plus 3 ~= 33.876px */
 	justify-content : space-between;
 	margin          : 0 auto;
-	max-width       : var( --con-max-wid );                                                                           /* Container Maximum Width, about 1449.4px */
-	padding-inline  : var( --gut-sid-pad );                                                                           /* Gutter Side Padding, about 19.304px to 44.876px */
+	max-width       : var( --con-max-wid );                                                                           /* Container Maximum Width, about 1,449.4px */
+	padding-inline  : var( --gut-sid-pad );                                                                           /* Gutter Side Padding, about 19.304px - 44.876px */
 	width           : 100%;
 
 

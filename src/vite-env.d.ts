@@ -17,7 +17,6 @@
 
 
 
-// What: Vite Client Types Reference. Why: Asset, stylesheet, and CSS module imports need types TypeScript doesn't know on its own. How: This triple-slash directive loads vite/client's declarations, its value double-quoted as the directive syntax expects.
-/// <reference types="vite/client" />
+/// <reference types="vite/client" /> // What: Vite Client Types Reference. Why: Asset, stylesheet, and CSS module imports need types TypeScript doesn't know on its own. How: This triple-slash directive loads vite/client's declarations, its value double-quoted as the directive syntax expects.
 
 

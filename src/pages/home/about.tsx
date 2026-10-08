@@ -54,10 +54,10 @@ import lofSvgUrl from './logo-full.svg';    // What: Logo-Full Svg Url. Why: The
 const PRI_RCD_ARR = [ // What: Principle Record Array. Why: The principles row is data, not markup, so a principle changes in one place. How: AboSecCom maps over it, numbering each row by its position.
 
 
-	{ bodStr : 'Every project is led by an owner-operator who walks the roof, signs the proposal, and stays reachable from kickoff to close-out.', titStr : 'Local, accountable, on-site' }, // What: Local Principle Row. Why: Clients want one accountable person. How: This is principle 01.
-	{ bodStr : 'Our systems are spec\'d for what this region actually delivers: high winds, hail, freeze-thaw cycles, and brutal summer UV.', titStr : 'Built for Kansas weather' }, // What: Weather Principle Row. Why: Kansas weather is hard on roofs. How: This is principle 02.
-	{ bodStr : 'You get a line-itemed estimate, a real schedule, and direct answers, not change-order surprises buried in fine print.', titStr : 'Honest scopes & timelines' }, // What: Honesty Principle Row. Why: Surprise costs are the common complaint about contractors. How: This is principle 03.
-	{ bodStr : 'Manufacturer-certified on TPO, EPDM, and metal systems, which means material and workmanship warranties that actually mean something.', titStr : 'Warranty-backed installs' } // What: Warranty Principle Row. Why: A warranty is only as good as the installer behind it. How: This is principle 04.
+	{ titStr : 'Local, accountable, on-site', bodStr : 'Every project is led by an owner-operator who walks the roof, signs the proposal, and stays reachable from kickoff to close-out.'      }, // What: Local Principle Row. Why: Clients want one accountable person. How: This is principle 01.
+	{ titStr : 'Built for Kansas weather',    bodStr : 'Our systems are spec\'d for what this region actually delivers: high winds, hail, freeze-thaw cycles, and brutal summer UV.'           }, // What: Weather Principle Row. Why: Kansas weather is hard on roofs. How: This is principle 02.
+	{ titStr : 'Honest scopes & timelines',   bodStr : 'You get a line-itemed estimate, a real schedule, and direct answers, not change-order surprises buried in fine print.'                 }, // What: Honesty Principle Row. Why: Surprise costs are the common complaint about contractors. How: This is principle 03.
+	{ titStr : 'Warranty-backed installs',    bodStr : 'Manufacturer-certified on TPO, EPDM, and metal systems, which means material and workmanship warranties that actually mean something.' }  // What: Warranty Principle Row. Why: A warranty is only as good as the installer behind it. How: This is principle 04.
 
 
 ];
