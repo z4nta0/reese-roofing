@@ -154,7 +154,7 @@
 
 /* #region conRowDiv */
 
-.conRowDiv { /* What: Contact Row Div. Why: Each detail pairs a label with its value under a faint rule. How: This sets a fixed label column beside the value. */
+.conRowDiv { /* What: Contact Row Div. Why: Each detail pairs a label with its value under a faint rule. How: This sets a label column, scaling with the viewport between two rhythm steps, beside the value. */
 
 
 	border-bottom         : var( --bor-wid-bas ) solid oklch( from var( --bac-pag-col ) l c h / var( --cdn-pow-007-rec ) );              /* Border Width Base ~= 1.160px, Background Page Color = #f5f2ec, Core-Design-Number to the Power of 7 Reciprocal ~= 0.140 */
@@ -235,7 +235,7 @@
 
 }
 
-.rowNotSpa { /* What: Row Note Span. Why: The emergency note is secondary to the office hours. How: This sets it smaller and faded. */
+.rowNotSpa { /* What: Row Note Span. Why: The emergency note is secondary to the office hours. How: This sets it in faded paper at the value's own size. */
 
 
 	color     : oklch( from var( --bac-pag-col ) l c h / 0.5 ); /* Background Page Color = #f5f2ec */

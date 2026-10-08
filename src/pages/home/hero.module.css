@@ -627,7 +627,7 @@
 /* #endregion staNumDiv */
 
 
-.staLabDiv { /* What: Stat Label Div. Why: Each number needs a short line saying what it counts. How: This sets it small and muted at the small text measure. */
+.staLabDiv { /* What: Stat Label Div. Why: Each number needs a short line saying what it counts. How: This sets it at body size, muted, at the small text measure. */
 
 
 	color       : var( --tex-mut-col ); /* Text Muted Color = #6b7079 */

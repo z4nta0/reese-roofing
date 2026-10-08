@@ -284,7 +284,7 @@
 
 }
 
-.aboQuoFoo { /* What: About Quote Footer. Why: The attribution reads as a small label under the quote. How: This sets it in small tracked capitals, indented to line up with the quote. */
+.aboQuoFoo { /* What: About Quote Footer. Why: The attribution reads as a small label under the quote. How: This sets it in tracked capitals at body size, indented to line up with the quote. */
 
 
 	color          : var( --tex-mut-col ); /* Text Muted Color = #6b7079 */
@@ -409,7 +409,7 @@
 
 }
 
-.priBodPar { /* What: Principle Body Paragraph. Why: Each principle's sentence reads as quiet supporting text. How: This sets it small and muted. */
+.priBodPar { /* What: Principle Body Paragraph. Why: Each principle's sentence reads as quiet supporting text. How: This sets it at body size in the muted color. */
 
 
 	color       : var( --tex-mut-col ); /* Text Muted Color = #6b7079 */

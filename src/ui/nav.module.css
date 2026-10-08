@@ -717,7 +717,7 @@
 
 }
 
-.draHouPar { /* What: Drawer Hours Paragraph. Why: The hours are supporting detail under the number. How: This sets them small and muted. */
+.draHouPar { /* What: Drawer Hours Paragraph. Why: The hours are supporting detail under the number. How: This sets them at body size in the muted color, on a tighter line. */
 
 
 	color       : var( --tex-mut-col ); /* Text Muted Color = #6b7079 */

@@ -135,7 +135,7 @@
 
 	/* #region Color Tokens */
 
-	--acc-lig-col : oklch( from var( --acc-mai-col ) calc( l + 0.204 ) c h ); /* What: Accent Light Color. Why: Hover text and focus lines on the dark band need a lighter accent that stays readable there. How: This lightens the main accent, so it follows the accent if it changes. */
+	--acc-lig-col : oklch( from var( --acc-mai-col ) calc( l + 0.204 ) c h ); /* What: Accent Light Color. Why: Hover text, focus lines, and the submit button's hover fill on the dark band need a lighter accent that stays readable there. How: This lightens the main accent, so it follows the accent if it changes. */
 	--acc-mai-col : #1f4e7a;                                                  /* What: Accent Main Color. Why: Actions, emphasis, and numbering share the navy from the logo. How: Buttons, italic accents, and numbers read it. */
 	--acc-sec-col : ;                                                         /* What: Accent Secondary Color. Why: The standard role set includes a second accent. How: This site has no second accent, so it stays empty. */
 	--acc-tin-col : ;                                                         /* What: Accent Tint Color. Why: The standard role set includes a pale accent tint. How: This site doesn't use one, so it stays empty. */
@@ -145,7 +145,7 @@
 	--bac-pag-col : #f5f2ec;                                                  /* What: Background Page Color. Why: The page sits on a warm off-white rather than pure white. How: The page background reads it, and text on dark surfaces reads it, at full strength or faded. */
 	--bac-sur-col : #ebe7df;                                                  /* What: Background Surface Color. Why: Some bands and hovers need a slightly darker paper. How: The about section and hovered service cards read it. */
 	--bor-mai-col : oklch( from var( --tex-mai-col ) l c h / 0.12 );          /* What: Border Main Color. Why: Dividers should be barely there. How: Section edges and hairline rules read it. */
-	--bor-str-col : oklch( from var( --bor-mai-col ) l c h / 0.22 );          /* What: Border Strong Color. Why: A few dividers need to hold up as structure. How: This raises the main border's opacity to 0.22 for the service grid, principles rule, and logo ring. */
+	--bor-str-col : oklch( from var( --bor-mai-col ) l c h / 0.22 );          /* What: Border Strong Color. Why: A few dividers need to hold up as structure. How: This raises the main border's opacity to 0.22 for the service grid, principles rule, logo ring, and ghost buttons. */
 	--err-dar-col : ;                                                         /* What: Error Dark Color. Why: The standard role set includes the error family. How: This site has no errors to show, so it stays empty. */
 	--err-mai-col : ;                                                         /* What: Error Main Color. Why: The standard role set includes the error family. How: This site has no errors to show, so it stays empty. */
 	--err-tin-col : ;                                                         /* What: Error Tint Color. Why: The standard role set includes the error family. How: This site has no errors to show, so it stays empty. */
@@ -156,7 +156,7 @@
 	--suc-tin-col : ;                                                         /* What: Success Tint Color. Why: The standard role set includes the success family. How: This site has no success states, so it stays empty. */
 	--tex-acc-col : var( --bac-pag-col );                                     /* What: Text Accent Color. Why: Text on an accent background needs to stay readable. How: This reads the page color; nothing on this site reads it yet. */
 	--tex-mai-col : #1a1f24;                                                  /* What: Text Main Color. Why: Body text and headings share one near-black. How: The body and every heading read it. */
-	--tex-mut-col : #6b7079;                                                  /* What: Text Muted Color. Why: Labels and secondary details should recede. How: Eyebrows, captions, and quiet links read it. */
+	--tex-mut-col : #6b7079;                                                  /* What: Text Muted Color. Why: Labels and secondary details should recede. How: Eyebrows, captions, labels, and supporting lines read it. */
 	--tex-sec-col : #2a3138;                                                  /* What: Text Secondary Color. Why: Long paragraphs read more gently than full ink. How: Ledes, descriptions, and links read it. */
 	--war-dar-col : ;                                                         /* What: Warning Dark Color. Why: The standard role set includes the warning family. How: This site has no warnings to show, so it stays empty. */
 	--war-mai-col : ;                                                         /* What: Warning Main Color. Why: The standard role set includes the warning family. How: This site has no warnings to show, so it stays empty. */
@@ -288,7 +288,7 @@
 
 	--con-max-wid : calc( 1920px / var( --cdn-pow-001 ) );                                                   /* What: Container Maximum Width. Why: The content column should fill the screen on phones and tablets but stop widening on very large monitors. How: Every section's container caps its width at the largest horizontal step's value at a 1920px viewport, about 1449.4px, so below that width only the gutter limits it. */
 	--gut-sid-pad : clamp( var( --spa-hor-p01 ), var( --hor-rhy-016 ), var( --spa-hor-p04 ) );               /* What: Gutter Side Padding. Why: Content needs side margins that grow with the screen within sensible bounds. How: Every container and the drawer pad their sides with horizontal step 016, held between the p01 and p04 horizontal spacing steps, about 19.304px to 44.876px. */
-	--sec-ver-pad : clamp( calc( var( --ver-rhy-p06 ) * 1rem ), 10vw, calc( var( --ver-rhy-p08 ) * 1rem ) ); /* What: Section Vertical Padding. Why: Sections need generous vertical breathing room that scales with the screen. How: Every section pads its top and bottom with it, growing with the viewport between the p06 and p08 rhythm steps, about 78.751px to 138.199px. */
+	--sec-ver-pad : clamp( calc( var( --ver-rhy-p06 ) * 1rem ), 10vw, calc( var( --ver-rhy-p08 ) * 1rem ) ); /* What: Section Vertical Padding. Why: Sections need generous vertical breathing room that scales with the screen. How: Every section pads its top and bottom with it, the hero and 404 page adding a step on top and the hero using its own lighter bottom, growing with the viewport between the p06 and p08 rhythm steps, about 78.751px to 138.199px. */
 
 	/* #endregion Layout Tokens */
 
@@ -375,7 +375,7 @@
 	--ver-rhy-m02 : var( --cdn-pow-001-rec ); /* What: Vertical Rhythm Base Minus 2 ~= 0.755. Why: This is 2 steps below the base step, for tight vertical spacing. How: This is the reciprocal of the first power of the core design number, multiplied by 1rem where a length is needed. */
 	--ver-rhy-m01 : var( --cdn-pow-000 );     /* What: Vertical Rhythm Base Minus 1 = 1. Why: Headings and single-line elements need no breathing room between lines. How: This is read unitless as line-height, so each line is exactly its own font size tall. */
 	--ver-rhy-bas : var( --cdn-pow-001 );     /* What: Vertical Rhythm Base ~= 1.325. Why: Line height and every other height-related value share one base rhythm drawn from the core design number. How: This is read unitless as line-height, so each element multiplies it by its own font size, and other vertical values can build on it. */
-	--ver-rhy-p01 : var( --cdn-pow-002 );     /* What: Vertical Rhythm Base Plus 1 ~= 1.755. Why: Small labels that share a row with a taller control, like the page kickers, need a roomier line. How: This is read unitless as line-height (about 19.3px on base-size text), or multiplied by 1rem where a fixed height is needed. */
+	--ver-rhy-p01 : var( --cdn-pow-002 );     /* What: Vertical Rhythm Base Plus 1 ~= 1.755. Why: Body text, ledes, and detail values need a roomy line. How: This is read unitless as line-height (about 19.3px on base-size text), or multiplied by 1rem where a fixed height is needed. */
 	--ver-rhy-p02 : var( --cdn-pow-003 );     /* What: Vertical Rhythm Base Plus 2 ~= 2.325. Why: This is 2 steps above the base step, for roomy vertical spacing. How: This is the third power of the core design number, multiplied by 1rem where a length is needed. */
 	--ver-rhy-p03 : var( --cdn-pow-004 );     /* What: Vertical Rhythm Base Plus 3 ~= 3.080. Why: This is 3 steps above the base step, for the roomiest vertical spacing. How: This is the fourth power of the core design number, multiplied by 1rem where a length is needed. */
 	--ver-rhy-p04 : var( --cdn-pow-005 );     /* What: Vertical Rhythm Base Plus 4 ~= 4.080. Why: This is 4 steps above the base step, for the roomiest vertical spacing. How: This is the fifth power of the core design number, multiplied by 1rem where a length is needed. */
