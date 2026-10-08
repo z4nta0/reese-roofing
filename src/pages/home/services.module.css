@@ -112,7 +112,7 @@
 	font-variation-settings : 'opsz' 144;
 	font-weight             : 400;
 	grid-column             : 1;
-	letter-spacing          : -0.025em;
+	letter-spacing          : calc( var( --cdn-pow-013-rec ) * -1em );                  /* Core-Design-Number to the Power of 13 Reciprocal ~= 0.026 */
 	line-height             : var( --ver-rhy-m01 );                                     /* Vertical Rhythm Base Minus 1 = 1 */
 	margin-top              : var( --spa-ver-p02 );                                     /* Spacing Vertical Base Plus 2 ~= 25.572px */
 
@@ -269,12 +269,12 @@
 .carIdeSpa { /* What: Card Identifier Span. Why: The card's number reads as a small accent beside the title. How: This sets it in light italic display type in the accent. */
 
 
-	color          : var( --acc-mai-col ); /* Accent Main Color = #1f4e7a */
-	font-family    : var( --fon-fam-sec ); /* Font Family Secondary = 'Fraunces', 'Times New Roman', serif */
-	font-size      : var( --fon-siz-p02 ); /* Font Size Base Plus 2 ~= 19.304px */
+	color          : var( --acc-mai-col );                    /* Accent Main Color = #1f4e7a */
+	font-family    : var( --fon-fam-sec );                    /* Font Family Secondary = 'Fraunces', 'Times New Roman', serif */
+	font-size      : var( --fon-siz-p02 );                    /* Font Size Base Plus 2 ~= 19.304px */
 	font-style     : italic;
 	font-weight    : 300;
-	letter-spacing : -0.02em;
+	letter-spacing : calc( var( --cdn-pow-014-rec ) * -1em ); /* Core-Design-Number to the Power of 14 Reciprocal ~= 0.020 */
 
 
 }
@@ -282,12 +282,12 @@
 .carTitHea { /* What: Card Title Heading. Why: Each card names its service in display type. How: This sets it in the display font, tightly leaded. */
 
 
-	color          : var( --tex-mai-col ); /* Text Main Color = #1a1f24 */
-	font-family    : var( --fon-fam-sec ); /* Font Family Secondary = 'Fraunces', 'Times New Roman', serif */
-	font-size      : var( --fon-siz-p03 ); /* Font Size Base Plus 3 ~= 25.572px */
+	color          : var( --tex-mai-col );                    /* Text Main Color = #1a1f24 */
+	font-family    : var( --fon-fam-sec );                    /* Font Family Secondary = 'Fraunces', 'Times New Roman', serif */
+	font-size      : var( --fon-siz-p03 );                    /* Font Size Base Plus 3 ~= 25.572px */
 	font-weight    : 400;
-	letter-spacing : -0.015em;
-	line-height    : var( --ver-rhy-m01 ); /* Vertical Rhythm Base Minus 1 = 1 */
+	letter-spacing : calc( var( --cdn-pow-015-rec ) * -1em ); /* Core-Design-Number to the Power of 15 Reciprocal ~= 0.015 */
+	line-height    : var( --ver-rhy-m01 );                    /* Vertical Rhythm Base Minus 1 = 1 */
 
 
 }

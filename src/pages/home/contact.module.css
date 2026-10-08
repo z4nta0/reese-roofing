@@ -105,7 +105,7 @@
 	font-size               : clamp( var( --fon-siz-p05 ), 6vw, var( --fon-siz-p07 ) ); /* Font Size Base Plus 5 ~= 44.876px, Font Size Base Plus 7 ~= 78.751px */
 	font-variation-settings : 'opsz' 144;
 	font-weight             : 400;
-	letter-spacing          : -0.025em;
+	letter-spacing          : calc( var( --cdn-pow-013-rec ) * -1em );                  /* Core-Design-Number to the Power of 13 Reciprocal ~= 0.026 */
 	line-height             : var( --ver-rhy-m01 );                                     /* Vertical Rhythm Base Minus 1 = 1 */
 	margin-bottom           : var( --spa-ver-p02 );                                     /* Spacing Vertical Base Plus 2 ~= 25.572px */
 	margin-top              : var( --spa-ver-p02 );                                     /* Spacing Vertical Base Plus 2 ~= 25.572px */
@@ -481,7 +481,7 @@
 	font-size      : var( --fon-siz-p01 );                                                        /* Font Size Base Plus 1 ~= 14.572px */
 	font-weight    : 500;
 	gap            : var( --spa-hor-m01 );                                                        /* Spacing Horizontal Base Minus 1 = 11px */
-	letter-spacing : 0.02em;
+	letter-spacing : calc( var( --cdn-pow-014-rec ) * 1em );                                      /* Core-Design-Number to the Power of 14 Reciprocal ~= 0.020 */
 	line-height    : calc( var( --ver-rhy-p04 ) * 1rem );                                         /* Vertical Rhythm Base Plus 4 ~= 44.876px */
 	margin-top     : var( --spa-ver-m02 );                                                        /* Spacing Vertical Base Minus 2 ~= 8.304px */
 	padding        : 0 clamp( var( --spa-hor-p01 ), var( --hor-rhy-012 ), var( --spa-hor-p03 ) ); /* Spacing Horizontal Base Plus 1 ~= 19.304px, Horizontal Rhythm 12 ~= 28.278px @ 1,920px width, Spacing Horizontal Base Plus 3 ~= 33.876px */
