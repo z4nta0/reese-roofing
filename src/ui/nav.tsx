@@ -206,7 +206,13 @@ function NavBarCom () : React.JSX.Element {
 							href='/#contact'
 						>{ /* What: Navigation Estimate Anchor Element. Why: The bar's main action is requesting an estimate. How: This links to the home page's contact section, which works from any page. */ }
 							Get an estimate
-							<span className={ cssModObj.arrIcoSpa }>→</span>{ /* What: Arrow Icon Span Element. Why: The arrow marks the button as moving the visitor onward. How: This sits right after the label. */ }
+							<span
+								className={ cssModObj.arrIcoSpa }
+
+								aria-hidden='true'
+							>{ /* What: Arrow Icon Span Element. Why: The arrow marks the button as moving the visitor onward. How: This sits right after the label, hidden from screen readers since it only decorates the label. */ }
+								→
+							</span>
 						</a>
 
 
@@ -260,7 +266,13 @@ function NavBarCom () : React.JSX.Element {
 
 							<span className={ cssModObj.draLabSpa }>{ navLinObj.labStr }</span>{ /* What: Drawer Label Span Element. Why: The section's name is the row's main text. How: This prints the row's label. */ }
 
-							<span className={ cssModObj.arrIcoSpa }>→</span>{ /* What: Arrow Icon Span Element. Why: The arrow marks the row as moving the visitor onward. How: This sits at the row's far end and slides when the row is hovered or pressed. */ }
+							<span
+								className={ cssModObj.arrIcoSpa }
+
+								aria-hidden='true'
+							>{ /* What: Arrow Icon Span Element. Why: The arrow marks the row as moving the visitor onward. How: This sits at the row's far end and slides when the row is hovered or pressed, hidden from screen readers since it only decorates the label. */ }
+								→
+							</span>
 
 
 						</a>
@@ -297,7 +309,13 @@ function NavBarCom () : React.JSX.Element {
 							onClick={ () => setDraOpeBoo( false ) }
 						>{ /* What: Drawer Estimate Anchor Element. Why: Requesting an estimate is the site's main action, and the bar's button is hidden on small screens. How: This links to the contact section as a full-width pill and closes the drawer behind it. */ }
 							Get an estimate
-							<span className={ cssModObj.arrIcoSpa }>→</span>{ /* What: Arrow Icon Span Element. Why: The arrow marks the button as moving the visitor onward. How: This sits right after the label. */ }
+							<span
+								className={ cssModObj.arrIcoSpa }
+
+								aria-hidden='true'
+							>{ /* What: Arrow Icon Span Element. Why: The arrow marks the button as moving the visitor onward. How: This sits right after the label, hidden from screen readers since it only decorates the label. */ }
+								→
+							</span>
 						</a>
 
 

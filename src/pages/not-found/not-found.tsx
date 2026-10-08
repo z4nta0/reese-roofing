@@ -99,7 +99,7 @@ function NotFouCom () : React.JSX.Element {
 
 						to='/'
 					>{ /* What: Link. Why: The page's main action is going back home. How: This navigates to the root path inside the site. */ }
-						Return home <span className={ cssModObj.arrIcoSpa }>→</span>
+						Return home <span className={ cssModObj.arrIcoSpa } aria-hidden='true'>→</span>
 					</Link>
 
 

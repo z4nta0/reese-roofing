@@ -183,7 +183,13 @@ function HerSecCom () : React.JSX.Element {
 							href='#contact'
 						>{ /* What: Estimate Button Anchor Element. Why: The page's main action is requesting an estimate. How: This links to the contact section. */ }
 							Request an estimate
-							<span className={ cssModObj.arrIcoSpa }>→</span>{ /* What: Arrow Icon Span Element. Why: The arrow marks the button as moving the visitor onward. How: This sits right after the label. */ }
+							<span
+								className={ cssModObj.arrIcoSpa }
+
+								aria-hidden='true'
+							>{ /* What: Arrow Icon Span Element. Why: The arrow marks the button as moving the visitor onward. How: This sits right after the label, hidden from screen readers since it only decorates the label. */ }
+								→
+							</span>
 						</a>
 
 						<a

@@ -113,7 +113,7 @@ function SitFooCom () : React.JSX.Element {
 
 					aria-label='Back to top'
 				>{ /* What: Footer Top Anchor Element. Why: A long page should offer a quick way back up. How: This links to the page's top anchor. */ }
-					Back to top <span className={ cssModObj.arrIcoSpa }>↑</span>
+					Back to top <span className={ cssModObj.arrIcoSpa } aria-hidden='true'>↑</span>
 				</a>
 
 

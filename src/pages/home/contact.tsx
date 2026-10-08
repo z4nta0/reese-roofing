@@ -520,7 +520,13 @@ function ConSecCom () : React.JSX.Element {
 
 
 							{ senReqBoo ? 'Opening your email…' : 'Send request' }{ /* What: Submit Label Text. Why: The button should confirm the email is opening once it's pressed. How: This switches its label when senReqBoo turns true. */ }
-							<span className={ cssModObj.arrIcoSpa }>→</span>{ /* What: Arrow Icon Span Element. Why: The arrow marks the button as moving the visitor onward. How: This sits right after the label. */ }
+							<span
+								className={ cssModObj.arrIcoSpa }
+
+								aria-hidden='true'
+							>{ /* What: Arrow Icon Span Element. Why: The arrow marks the button as moving the visitor onward. How: This sits right after the label, hidden from screen readers since it only decorates the label. */ }
+								→
+							</span>
 
 
 						</button>
