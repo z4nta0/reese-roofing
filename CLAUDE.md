@@ -51,6 +51,13 @@ reorganization, ESLint setup, config rebuild, and dependency upgrades.
    decided below.
 4. **404 page** (done 2026-10-07): rebuilt with Nav and Footer from `ui/`,
    written to the rules from its first line.
+5. **Full rule audit** (done 2026-10-07): repeated passes until clean.
+
+Next (planned 2026-10-07):
+- **Accessibility**: an audit and fixes across both pages.
+- **SEO**: an audit and fixes, index.html's head included.
+- **Reusable tests**: a suite to rerun after large changes, checking that
+  every page renders and behaves correctly in all three browser engines.
 
 Applied original intent (kept by the user, 2026-10-07): the CSS module pass
 found styles that were written but never rendered, because a later global
