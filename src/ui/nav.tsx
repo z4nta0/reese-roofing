@@ -33,13 +33,13 @@ import React     from 'react';                   // What: React. Why: The bar tr
 
 // #region Constants
 
-const NAV_LIN_ARR = [ // What: Nav Link Array. Why: The bar and its mobile drawer list the same section links. How: Each row pairs a section's anchor with its label, and both lists map over it, the drawer numbering the rows in order to match the sections' own numbered labels.
+const NAV_LIN_ARR = [ // What: Nav Link Array. Why: The bar and its mobile drawer list the same section links. How: Each row pairs a home page section's anchor, written with the root path so it works from any page, with its label, and both lists map over it, the drawer numbering the rows in order to match the sections' own numbered labels.
 
 
-	{ hreStr : '#top',      labStr : 'Home' },     // What: Home Link Row. Why: Not every visitor knows the logo leads home, so the bar spells it out. How: This links to the hero's top anchor.
-	{ hreStr : '#services', labStr : 'Services' }, // What: Services Link Row. Why: The services section is the first stop for most visitors. How: This links to its anchor.
-	{ hreStr : '#about',    labStr : 'About' },    // What: About Link Row. Why: Visitors check who they'd be hiring. How: This links to its anchor.
-	{ hreStr : '#contact',  labStr : 'Contact' }   // What: Contact Link Row. Why: The contact section is where an estimate is requested. How: This links to its anchor.
+	{ hreStr : '/#top',      labStr : 'Home' },     // What: Home Link Row. Why: Not every visitor knows the logo leads home, so the bar spells it out. How: This links to the hero's top anchor.
+	{ hreStr : '/#services', labStr : 'Services' }, // What: Services Link Row. Why: The services section is the first stop for most visitors. How: This links to its anchor.
+	{ hreStr : '/#about',    labStr : 'About' },    // What: About Link Row. Why: Visitors check who they'd be hiring. How: This links to its anchor.
+	{ hreStr : '/#contact',  labStr : 'Contact' }   // What: Contact Link Row. Why: The contact section is where an estimate is requested. How: This links to its anchor.
 
 
 ];
@@ -137,10 +137,10 @@ function NavBarCom () : React.JSX.Element {
 					<a
 						className={ cssModObj.navBraAnc }
 
-						href='#top'
+						href='/#top'
 
 						aria-label='Reese Roofing, home'
-					>{ /* What: Navigation Brand Anchor Element. Why: The logo and name should take visitors back to the top. How: This links to the page's top anchor. */ }
+					>{ /* What: Navigation Brand Anchor Element. Why: The logo and name should take visitors back to the top. How: This links to the home page's top anchor, which works from any page. */ }
 
 
 						<img
@@ -202,8 +202,8 @@ function NavBarCom () : React.JSX.Element {
 						<a
 							className={ cssModObj.navEstAnc }
 
-							href='#contact'
-						>{ /* What: Navigation Button Anchor Element. Why: The bar's main action is requesting an estimate. How: This links to the contact section. */ }
+							href='/#contact'
+						>{ /* What: Navigation Button Anchor Element. Why: The bar's main action is requesting an estimate. How: This links to the home page's contact section, which works from any page. */ }
 							Get an estimate
 							<span className={ cssModObj.arrIcoSpa }>→</span>{ /* What: Arrow Span Element. Why: The arrow marks the button as moving the visitor onward. How: This sits right after the label. */ }
 						</a>
@@ -291,7 +291,7 @@ function NavBarCom () : React.JSX.Element {
 						<a
 							className={ cssModObj.draEstAnc }
 
-							href='#contact'
+							href='/#contact'
 
 							onClick={ () => setDraOpeBoo( false ) }
 						>{ /* What: Drawer Estimate Anchor Element. Why: Requesting an estimate is the site's main action, and the bar's button is hidden on small screens. How: This links to the contact section as a full-width pill and closes the drawer behind it. */ }

@@ -3,6 +3,9 @@
 
 // #region Imports
 
+import React from 'react'; // What: React. Why: The page scrolls to a linked section once it has rendered. How: This is read as React.useEffect.
+
+
 import { AboSecCom } from './about.tsx';         // What: About Section Component. Why: The page tells the company's story third. How: This is rendered inside main, after the services.
 import { ConSecCom } from './contact.tsx';       // What: Contact Section Component. Why: The page ends where visitors reach the company. How: This is rendered last inside main.
 import { HerSecCom } from './hero.tsx';          // What: Hero Section Component. Why: The page opens with the headline and pitch. How: This is rendered first inside main.
@@ -43,7 +46,10 @@ import { SitFooCom } from '../../ui/footer.tsx'; // What: Site Footer Component.
  * @summary
  * Renders the home page: the navigation bar, then a main element holding the
  * hero, services, about, and contact sections in reading order, then the
- * footer. app.tsx renders it at the root path.
+ * footer. app.tsx renders it at the root path. When the address carries a
+ * section's hash (a link from another page, or a bookmark), it scrolls that
+ * section into view once the fonts have loaded, since Chromium and WebKit
+ * look for the anchor before the page has rendered it and stay at the top.
  *
  * @author z4nta0 <https://github.com/z4nta0>
  *
@@ -59,6 +65,23 @@ import { SitFooCom } from '../../ui/footer.tsx'; // What: Site Footer Component.
 */
 
 function HomPagCom () : React.JSX.Element {
+
+
+	React.useEffect( () => { // What: Hash Scroll Effect. Why: Chromium and WebKit don't scroll to a section's anchor that's rendered after load, so a link or bookmark to /#services would land at the top. How: Once the fonts have loaded and the layout has settled, this jumps straight to the hash's element, the way the browser itself would have.
+
+
+		const hasIdeStr = window.location.hash.slice( 1 ); // What: Hash Identifier String. Why: The address's hash names the section to show. How: This drops the leading # to leave the element's id.
+
+
+		if ( !hasIdeStr ) return; // What: No Hash Guard. Why: An address without a hash should start at the top as usual. How: This exits before scheduling any scroll.
+
+
+
+		document.fonts.ready.then( () => document.getElementById( hasIdeStr )?.scrollIntoView( { behavior : 'instant' } ) ); // What: Hash Section Scroll Call. Why: The jump should land where the section sits once the fonts have reflowed the page above it. How: This waits for the fonts, then scrolls the section into view instantly rather than smoothly, as an arrival rather than a movement.
+
+
+	}, [] ); // What: Effect Dependency Array. Why: The page should only jump to its hash once, when it first renders. How: An empty array means there is no dependency that could ever change to trigger a re-run.
+
 
 
 	return (
