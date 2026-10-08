@@ -265,7 +265,7 @@ function NavBarCom () : React.JSX.Element {
 
 							href='tel:+17855550199'
 
-							aria-label='Call Reese Roofing'
+							aria-label='Call (785) 555-0199'
 						>{ /* What: Navigation Phone Anchor Element. Why: Phone visitors should be able to call in one tap. How: This dials the company's number. */ }
 							(785) 555-0199
 						</a>
@@ -372,7 +372,7 @@ function NavBarCom () : React.JSX.Element {
 
 							href='tel:+17855550199'
 
-							aria-label='Call Reese Roofing'
+							aria-label='Call (785) 555-0199'
 						>{ /* What: Drawer Phone Anchor Element. Why: Phone visitors should be able to call in one tap. How: This dials the company's number. */ }
 							(785) 555-0199
 						</a>
