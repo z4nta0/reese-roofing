@@ -46,10 +46,11 @@
 
 
 }
-.navBarHed[data-drawer-menu-open] { /* What: Drawer Open Navigation Bar Header. Why: The bar and the open drawer should read as one solid panel, even at the top of the page where the bar is otherwise transparent. How: This gives the bar the drawer's solid paper background while the drawer is open. */
+.navBarHed[data-drawer-menu-open] { /* What: Drawer Open Navigation Bar Header. Why: The bar and the open drawer should read as one solid panel, even at the top of the page where the bar is otherwise transparent, and the bar's bottom padding would otherwise sit below the drawer as a strip of paper hiding the page. How: This gives the bar the drawer's solid paper background and drops its bottom padding while the drawer is open, so the drawer's shadow falls straight onto the page. */
 
 
-	background : var( --bac-pag-col ); /* Background Page Color = #f5f2ec */
+	background     : var( --bac-pag-col ); /* Background Page Color = #f5f2ec */
+	padding-bottom : 0;
 
 
 }
