@@ -42,13 +42,14 @@ import { SitFooCom } from '../../ui/footer.tsx'; // What: Site Footer Component.
  * NotFouCom = Not Found Component
  *
  * @summary
- * Renders the 404 page: the navigation bar, then a main element holding a
- * centered column with an error label, the heading, a short explanation, and
- * two buttons, then the footer. The return button navigates home inside the
- * site; the estimate button is a plain link to the home page's contact
- * anchor, so the browser loads the home page and scrolls to the form. The
- * main element carries the top anchor, so the footer's back-to-top link
- * works here too. app.tsx renders it for every path no other route claims.
+ * Renders the 404 page: its own title, which React moves into the head, the
+ * navigation bar, then a main element holding a centered column with an
+ * error label, the heading, a short explanation, and two buttons, then the
+ * footer. The return button navigates home inside the site; the estimate
+ * button is a plain link to the home page's contact anchor, so the browser
+ * loads the home page and scrolls to the form. The main element carries the
+ * top anchor, so the footer's back-to-top link works here too. app.tsx
+ * renders it for every path no other route claims.
  *
  * @author z4nta0 <https://github.com/z4nta0>
  *
@@ -70,6 +71,10 @@ function NotFouCom () : React.JSX.Element {
 
 
 		<div className={ cssModObj.nofPagDiv }>{ /* What: Not-Found Page Div Element. Why: The footer should sit at the bottom of the screen on a page this short. How: This stacks the bar, main content, and footer in a column at least the screen's height. */ }
+
+
+			<title>Page Not Found | Reese Roofing Portfolio Demo</title>{ /* What: Page Title Element. Why: A visitor's tab and history should say the address they tried doesn't exist. How: React 19 moves this title into the head ahead of index.html's own, and takes it out again when the page leaves, so the home page's title applies once more. */ }
+
 
 
 			<NavBarCom />{ /* What: Navigation Bar Component. Why: The page starts with the shared top bar. How: This renders it above the content. */ }
@@ -98,8 +103,8 @@ function NotFouCom () : React.JSX.Element {
 						className={` ${ cssModObj.butBasAnc }   ${ cssModObj.butBasAncPrimary } `}
 
 						to='/'
-					>{ /* What: Link. Why: The page's main action is going back home. How: This navigates to the root path inside the site. */ }
-						Return home <span className={ cssModObj.arrIcoSpa }>→</span>
+					>{ /* What: Return Home Link. Why: The page's main action is going back home. How: This navigates to the root path inside the site. */ }
+						Return home <span className={ cssModObj.arrIcoSpa } aria-hidden='true'>→</span>
 					</Link>
 
 

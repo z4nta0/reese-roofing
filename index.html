@@ -5,7 +5,7 @@
 
 
 
-<html lang='en'><!-- What: Root Html Element. Why: Screen readers and translation tools need the page's language. How: This marks the document as English. -->
+<html lang='en'><!-- What: Root HTML Element. Why: Screen readers and translation tools need the page's language. How: This marks the document as English. -->
 
 
 	<head><!-- What: Document Head Element. Why: The page's metadata and icon links load before the body paints. How: This holds them in the sections below. -->
@@ -13,16 +13,18 @@
 
 		<!-- #region Document -->
 
-		<meta charset='UTF-8' />                                                 <!-- What: Character Set Meta. Why: The browser has to decode the page as UTF-8 before it reads anything else. How: This sits first in the head, inside the first 1024 bytes the browser checks. -->
+		<meta charset='UTF-8' />                                                 <!-- What: Character Set Meta. Why: The browser has to decode the page as UTF-8 before it reads anything else. How: This sits first in the head, inside the first 1,024 bytes the browser checks. -->
 		<meta name='viewport' content='width=device-width, initial-scale=1.0' /> <!-- What: Viewport Meta. Why: Phones should lay the site out at device width instead of a zoomed-out desktop width. How: This sets the layout width to the device's and starts at no zoom. -->
-		<title>Reese Roofing | Commercial Roofing in Lawrence, KS</title>        <!-- What: Page Title Element. Why: The tab, bookmarks, and search results name the page by its title. How: This pairs the company's name with what it does and where. -->
+		<title>Reese Roofing | Portfolio Demo by techgeek.support</title>        <!-- What: Page Title Element. Why: The tab, bookmarks, and link previews name the page by its title. How: This pairs the fictional company's name with what the site really is and who built it. -->
 
 		<!-- #endregion Document -->
 
 
 		<!-- #region Search -->
 
-		<meta name='description' content='Reese Roofing is a commercial roofing contractor serving Lawrence, Kansas and the surrounding area. Installation, repair, maintenance, and inspections.' /> <!-- What: Description Meta. Why: Search results show a short summary under the title. How: This gives the company's trade, area, and services in one line. -->
+		<link href='https://reese-roofing.netlify.app/' rel='canonical' /> <!-- What: Canonical Link. Why: Netlify also serves the site at deploy preview addresses, which should all point at one address. How: This names the live address as the page's own. -->
+		<meta name='description' content='A portfolio demo website for Reese Roofing, a fictional commercial roofing company. Designed and built by techgeek.support. Not a real business.' /> <!-- What: Description Meta. Why: Link previews and any search listing show a short summary under the title. How: This says plainly that the company is fictional and the site is a portfolio demo, and who built it. -->
+		<meta name='robots'      content='noindex' />                      <!-- What: Robots Meta. Why: A fictional company shouldn't turn up in search results, where it could pass for a real roofer. How: This asks every search engine to leave the page out of its index, while still following its links; the X-Robots-Tag header in public/_headers says the same for every file. -->
 
 		<!-- #endregion Search -->
 
@@ -51,12 +53,12 @@
 
 
 
-		<link href='/favicon.svg'         rel='icon' type='image/svg+xml' />             <!-- What: Svg Icon Link. Why: Modern browsers prefer a vector favicon that stays sharp at any tab density. How: This lists the SVG first. -->
-		<link href='/favicon.ico'         rel='icon' sizes='any' />                      <!-- What: Ico Icon Link. Why: Older browsers read only a .ico favicon. How: This points at the root favicon.ico, which also answers the request browsers make for it on their own. -->
-		<link href='/favicon-32x32.png'   rel='icon' sizes='32x32'   type='image/png' /> <!-- What: Medium Png Icon Link. Why: A browser without SVG favicons needs a raster fallback. How: This offers the 32px PNG. -->
-		<link href='/favicon-16x16.png'   rel='icon' sizes='16x16'   type='image/png' /> <!-- What: Small Png Icon Link. Why: Small tab icons look crisper drawn at their own size. How: This offers the 16px PNG. -->
-		<link href='/favicon-192x192.png' rel='icon' sizes='192x192' type='image/png' /> <!-- What: Large Png Icon Link. Why: Some browsers and Android pick a large icon for shortcuts and tab previews. How: This offers the 192px PNG. -->
-		<link href='/favicon-512x512.png' rel='icon' sizes='512x512' type='image/png' /> <!-- What: Extra Large Png Icon Link. Why: High-density screens and app launchers can ask for a bigger icon still. How: This offers the 512px PNG. -->
+		<link href='/favicon.svg'         rel='icon' type='image/svg+xml' />             <!-- What: SVG Icon Link. Why: Modern browsers prefer a vector favicon that stays sharp at any tab density. How: This lists the SVG first. -->
+		<link href='/favicon.ico'         rel='icon' sizes='any' />                      <!-- What: ICO Icon Link. Why: Older browsers read only a .ico favicon. How: This points at the root favicon.ico, which also answers the request browsers make for it on their own. -->
+		<link href='/favicon-32x32.png'   rel='icon' sizes='32x32'   type='image/png' /> <!-- What: Medium PNG Icon Link. Why: A browser without SVG favicons needs a raster fallback. How: This offers the 32px PNG. -->
+		<link href='/favicon-16x16.png'   rel='icon' sizes='16x16'   type='image/png' /> <!-- What: Small PNG Icon Link. Why: Small tab icons look crisper drawn at their own size. How: This offers the 16px PNG. -->
+		<link href='/favicon-192x192.png' rel='icon' sizes='192x192' type='image/png' /> <!-- What: Large PNG Icon Link. Why: Some browsers and Android pick a large icon for shortcuts and tab previews. How: This offers the 192px PNG. -->
+		<link href='/favicon-512x512.png' rel='icon' sizes='512x512' type='image/png' /> <!-- What: Extra Large PNG Icon Link. Why: High-density screens and app launchers can ask for a bigger icon still. How: This offers the 512px PNG. -->
 
 		<!-- #endregion Icons -->
 
@@ -66,6 +68,60 @@
 		<link href='/apple-touch-icon.png' rel='apple-touch-icon' sizes='180x180' /> <!-- What: Apple Touch Icon Link. Why: iOS draws the home screen icon from this link. How: This points at the 180px touch icon on a paper-colored background. -->
 
 		<!-- #endregion Home Screen -->
+
+
+		<!-- #region Open Graph -->
+
+		<meta property='og:description'  content='A portfolio demo website for Reese Roofing, a fictional commercial roofing company. Designed and built by techgeek.support. Not a real business.' /> <!-- What: Open Graph Description Meta. Why: A shared link shows a summary under its title. How: This reuses the page description, which says the company is fictional. -->
+		<meta property='og:image'        content='https://reese-roofing.netlify.app/og-image.png' />                                                 <!-- What: Open Graph Image Meta. Why: A shared link shows a preview image. How: This points at the 1,200x630 card in public/, which labels the site a portfolio demo. -->
+		<meta property='og:image:alt'    content='Reese Roofing logo above the words A portfolio demo, Not a real business, by techgeek.support.' /> <!-- What: Open Graph Image Alt Meta. Why: Screen readers on social sites read the preview image's description. How: This describes the card, its notice included. -->
+		<meta property='og:image:height' content='630' />                                                                                            <!-- What: Open Graph Image Height Meta. Why: Sites can lay out the preview before the image loads. How: This gives its height in pixels. -->
+		<meta property='og:image:type'   content='image/png' />                                                                                      <!-- What: Open Graph Image Type Meta. Why: Some apps check an image's type before fetching it. How: This names the card a PNG. -->
+		<meta property='og:image:width'  content='1200' />                                                                                           <!-- What: Open Graph Image Width Meta. Why: Sites can lay out the preview before the image loads. How: This gives its width in pixels. -->
+		<meta property='og:locale'       content='en_US' />                                                                                          <!-- What: Open Graph Locale Meta. Why: Sites can tell which language the page is in. How: This names US English. -->
+		<meta property='og:site_name'    content='Reese Roofing Portfolio Demo' />                                                                   <!-- What: Open Graph Site Name Meta. Why: Previews show which site a link belongs to. How: This names the site as a demo rather than as the company. -->
+		<meta property='og:title'        content='Reese Roofing | Portfolio Demo by techgeek.support' />                                             <!-- What: Open Graph Title Meta. Why: A shared link shows a title. How: This matches the page title. -->
+		<meta property='og:type'         content='website' />                                                                                        <!-- What: Open Graph Type Meta. Why: Sites shape a preview by what kind of page it is. How: This marks it a website. -->
+		<meta property='og:url'          content='https://reese-roofing.netlify.app/' />                                                             <!-- What: Open Graph URL Meta. Why: Shares from any address should count as one page. How: This names the live address. -->
+
+		<!-- #endregion Open Graph -->
+
+
+		<!-- #region Twitter Card -->
+
+		<meta name='twitter:card'        content='summary_large_image' /> <!-- What: Twitter Card Meta. Why: X and similar sites pick a preview layout from this tag. How: This asks for the large image layout, which suits the 1,200x630 card. -->
+		<meta name='twitter:description' content='A portfolio demo website for Reese Roofing, a fictional commercial roofing company. Designed and built by techgeek.support. Not a real business.' /> <!-- What: Twitter Description Meta. Why: The preview shows a summary. How: This reuses the page description. -->
+		<meta name='twitter:image'       content='https://reese-roofing.netlify.app/og-image.png' />                                                                                                   <!-- What: Twitter Image Meta. Why: The preview shows an image. How: This points at the same card as Open Graph. -->
+		<meta name='twitter:image:alt'   content='Reese Roofing logo above the words A portfolio demo, Not a real business, by techgeek.support.' />                                                   <!-- What: Twitter Image Alt Meta. Why: Screen readers read the preview image's description. How: This reuses the Open Graph description of the card. -->
+		<meta name='twitter:title'       content='Reese Roofing | Portfolio Demo by techgeek.support' />                                                                                               <!-- What: Twitter Title Meta. Why: The preview shows a title. How: This matches the page title. -->
+
+		<!-- #endregion Twitter Card -->
+
+
+		<!-- #region Structured Data -->
+
+		<script type='application/ld+json'>
+			{
+				"@context": "https://schema.org",
+				"@type": "WebSite",
+				"name": "Reese Roofing Portfolio Demo",
+				"url": "https://reese-roofing.netlify.app/",
+				"description": "A portfolio demo website for Reese Roofing, a fictional commercial roofing company. Designed and built by techgeek.support. Not a real business.",
+				"inLanguage": "en-US",
+				"about": {
+					"@type": "Thing",
+					"name": "Reese Roofing",
+					"description": "A fictional commercial roofing company invented for this portfolio demo. It is not a real business, and its phone number, email, and address are placeholders."
+				},
+				"creator": {
+					"@type": "Organization",
+					"name": "techgeek.support",
+					"url": "https://techgeek.support/"
+				}
+			}
+		</script><!-- What: Website Structured Data Script. Why: Search engines and AI agents read JSON-LD to learn what a page is, and this one must never describe a real business. How: This describes the page as a demo website about a fictional company, built by techgeek.support, with no LocalBusiness data. -->
+
+		<!-- #endregion Structured Data -->
 
 
 	</head>

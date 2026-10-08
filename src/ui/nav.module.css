@@ -94,7 +94,7 @@
 
 	-webkit-backdrop-filter : saturate( 180% ) blur( calc( var( --ver-rhy-bas ) * 1rem ) ); /* Vertical Rhythm Base ~= 14.572px */
 	backdrop-filter         : saturate( 180% ) blur( calc( var( --ver-rhy-bas ) * 1rem ) ); /* Vertical Rhythm Base ~= 14.572px */
-	background              : oklch( from var( --bac-pag-col ) l c h / 0.85 );              /* Background Page Color = #f5f2ec */
+	background              : oklch( from var( --bac-pag-col ) l c h / 0.85 );              /* Background Page Color = #f5f2ec @ 0.85 opacity */
 	border-bottom           : var( --bor-wid-bas ) solid var( --bor-mai-col );              /* Border Width Base ~= 1.160px, Border Main Color = #1a1f24 @ 0.12 opacity */
 	padding-block           : var( --spa-ver-m01 );                                         /* Spacing Vertical Base Minus 1 = 11px */
 
@@ -202,7 +202,7 @@
 .namLigSpa { /* What: Name Light Span. Why: The second word reads as the softer half. How: This sets it light, italic, and muted. */
 
 
-	color       : var( --tex-mut-col ); /* Text Muted Color = #6b7079 */
+	color       : var( --tex-mut-col ); /* Text Muted Color = #636871 */
 	font-style  : italic;
 	font-weight : 300;
 
@@ -373,7 +373,7 @@
 	font-size      : var( --fon-siz-p01 );                                                                                            /* Font Size Base Plus 1 ~= 14.572px */
 	font-weight    : 500;
 	gap            : var( --spa-hor-m01 );                                                                                            /* Spacing Horizontal Base Minus 1 = 11px */
-	letter-spacing : 0.02em;
+	letter-spacing : calc( var( --cdn-pow-014-rec ) * 1em );                                                                          /* Core-Design-Number to the Power of 14 Reciprocal ~= 0.020 */
 	line-height    : calc( var( --ver-rhy-p04 ) * 1rem );                                                                             /* Vertical Rhythm Base Plus 4 ~= 44.876px */
 	padding        : 0 clamp( var( --spa-hor-bas ), var( --hor-rhy-011 ), var( --spa-hor-p02 ) );                                     /* Spacing Horizontal Base ~= 14.572px, Horizontal Rhythm 11 ~= 21.346px @ 1,920px width, Spacing Horizontal Base Plus 2 ~= 25.572px */
 	transition     : background-color var( --dur-tra-p02 ) var( --mot-dec-eas ), transform var( --dur-tra-p02 ) var( --mot-dec-eas ); /* Duration Transition Base Plus 2 ~= 277.0ms, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ) */
@@ -614,12 +614,12 @@
 .draNumSpa { /* What: Drawer Number Span. Why: The row's number should read as a quiet index beside its name. How: This sets it small, tracked, and muted in the body font with even-width figures. */
 
 
-	color                : var( --tex-mut-col ); /* Text Muted Color = #6b7079 */
-	font-family          : var( --fon-fam-mai ); /* Font Family Main = 'Inter Tight', -apple-system, BlinkMacSystemFont, sans-serif */
-	font-size            : var( --fon-siz-bas ); /* Font Size Base = 11px */
+	color                : var( --tex-mut-col );                   /* Text Muted Color = #636871 */
+	font-family          : var( --fon-fam-mai );                   /* Font Family Main = 'Inter Tight', -apple-system, BlinkMacSystemFont, sans-serif */
+	font-size            : var( --fon-siz-bas );                   /* Font Size Base = 11px */
 	font-variant-numeric : tabular-nums;
 	font-weight          : 500;
-	letter-spacing       : 0.18em;
+	letter-spacing       : calc( var( --cdn-pow-006-rec ) * 1em ); /* Core-Design-Number to the Power of 6 Reciprocal ~= 0.185 */
 
 
 }
@@ -685,13 +685,13 @@
 
 
 	align-items    : center;
-	color          : var( --tex-mut-col ); /* Text Muted Color = #6b7079 */
+	color          : var( --tex-mut-col );                   /* Text Muted Color = #636871 */
 	display        : inline-flex;
-	font-family    : var( --fon-fam-mai ); /* Font Family Main = 'Inter Tight', -apple-system, BlinkMacSystemFont, sans-serif */
-	font-size      : var( --fon-siz-bas ); /* Font Size Base = 11px */
+	font-family    : var( --fon-fam-mai );                   /* Font Family Main = 'Inter Tight', -apple-system, BlinkMacSystemFont, sans-serif */
+	font-size      : var( --fon-siz-bas );                   /* Font Size Base = 11px */
 	font-weight    : 500;
-	gap            : var( --spa-hor-m01 ); /* Spacing Horizontal Base Minus 1 = 11px */
-	letter-spacing : 0.18em;
+	gap            : var( --spa-hor-m01 );                   /* Spacing Horizontal Base Minus 1 = 11px */
+	letter-spacing : calc( var( --cdn-pow-006-rec ) * 1em ); /* Core-Design-Number to the Power of 6 Reciprocal ~= 0.185 */
 	text-transform : uppercase;
 
 
@@ -699,7 +699,7 @@
 .eyeLabSpa::before { /* What: Eyebrow Label Span Leading Line. Why: A short rule leads into the label. How: This draws a short hairline, one rhythm step long, before the text. */
 
 
-	background : var( --tex-mut-col );                /* Text Muted Color = #6b7079 */
+	background : var( --tex-mut-col );                /* Text Muted Color = #636871 */
 	content    : '';
 	height     : var( --bor-wid-bas );                /* Border Width Base ~= 1.160px */
 	width      : calc( var( --ver-rhy-p02 ) * 1rem ); /* Vertical Rhythm Base Plus 2 ~= 25.572px */
@@ -720,7 +720,7 @@
 .draHouPar { /* What: Drawer Hours Paragraph. Why: The hours are supporting detail under the number. How: This sets them at body size in the muted color, on a tighter line. */
 
 
-	color       : var( --tex-mut-col ); /* Text Muted Color = #6b7079 */
+	color       : var( --tex-mut-col ); /* Text Muted Color = #636871 */
 	font-size   : var( --fon-siz-p01 ); /* Font Size Base Plus 1 ~= 14.572px */
 	line-height : var( --ver-rhy-bas ); /* Vertical Rhythm Base ~= 1.325 */
 
@@ -743,7 +743,7 @@
 	font-weight     : 500;
 	gap             : var( --spa-hor-m01 );                                                                                            /* Spacing Horizontal Base Minus 1 = 11px */
 	justify-content : center;
-	letter-spacing  : 0.02em;
+	letter-spacing  : calc( var( --cdn-pow-014-rec ) * 1em );                                                                          /* Core-Design-Number to the Power of 14 Reciprocal ~= 0.020 */
 	line-height     : calc( var( --ver-rhy-p04 ) * 1rem );                                                                             /* Vertical Rhythm Base Plus 4 ~= 44.876px */
 	margin-top      : var( --spa-ver-m01 );                                                                                            /* Spacing Vertical Base Minus 1 = 11px */
 	padding         : 0 var( --spa-hor-p01 );                                                                                          /* Spacing Horizontal Base Plus 1 ~= 19.304px */

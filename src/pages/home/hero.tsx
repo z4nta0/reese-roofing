@@ -4,7 +4,7 @@
 // #region Imports
 
 import cssModObj from './hero.module.css'; // What: CSS Module Object. Why: The hero's grid background, two-row layout, and stats are styled in its own module. How: Each element reads its hashed class name from this object.
-import lofSvgUrl from './logo-full.svg';   // What: Logo-Full Svg Url. Why: The hero's main visual is the full logo. How: Vite resolves the import to the file's fingerprinted URL, used as the image's src.
+import lofSvgUrl from './logo-full.svg';   // What: Logo-Full SVG URL. Why: The hero's main visual is the full logo. How: Vite resolves the import to the file's fingerprinted URL, used as the image's src.
 
 // #endregion Imports
 
@@ -81,7 +81,7 @@ function HerSecCom () : React.JSX.Element {
 
 					preserveAspectRatio='xMidYMid slice'
 					viewBox='0 0 1440 800'
-				>{ /* What: Hero Grid Svg Element. Why: The grid is drawn as a vector so it stays crisp at any size. How: Its slice aspect ratio fills the section, cropping rather than letterboxing. */ }
+				>{ /* What: Hero Grid SVG Element. Why: The grid is drawn as a vector so it stays crisp at any size. How: Its slice aspect ratio fills the section, cropping rather than letterboxing. */ }
 
 
 					<defs>{ /* What: Grid Definitions Element. Why: The grid's tile is defined once and repeated. How: This holds the pattern the rectangle below fills with. */ }
@@ -183,7 +183,13 @@ function HerSecCom () : React.JSX.Element {
 							href='#contact'
 						>{ /* What: Estimate Button Anchor Element. Why: The page's main action is requesting an estimate. How: This links to the contact section. */ }
 							Request an estimate
-							<span className={ cssModObj.arrIcoSpa }>→</span>{ /* What: Arrow Icon Span Element. Why: The arrow marks the button as moving the visitor onward. How: This sits right after the label. */ }
+							<span
+								className={ cssModObj.arrIcoSpa }
+
+								aria-hidden='true'
+							>{ /* What: Arrow Icon Span Element. Why: The arrow marks the button as moving the visitor onward. How: This sits right after the label, hidden from screen readers since it only decorates the label. */ }
+								→
+							</span>
 						</a>
 
 						<a

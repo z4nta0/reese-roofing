@@ -1,9 +1,42 @@
 # Project CLAUDE.md: reese-roofing
 
 A marketing website for Reese Roofing (React, Vite, React Router, deployed on
-Netlify). The client chose a different site, so this one is kept as a proof of
-work. Every rule in the user-level CLAUDE.md applies here; this file records
-only what's specific to this project.
+Netlify at https://reese-roofing.netlify.app/). **Reese Roofing is not a real
+business.** This was one of two mockups made for a client, who kept the other
+one; this one is a portfolio piece by techgeek.support, linked from
+https://techgeek.support. Nothing in the site, its docs, or its metadata may
+present the company as real (see "## SEO"). Every rule in the user-level
+CLAUDE.md applies here; this file records only what's specific to this
+project.
+
+## SEO
+Decided 2026-10-08. Under the user-level "## SEO" rule this is a site that
+isn't a real business, so it gets the demo treatment rather than local SEO:
+- **Out of search**: a `noindex` robots meta in `index.html`, `X-Robots-Tag:
+  noindex` on every file through `public/_headers`, and no sitemap.
+  `public/robots.txt` allows search crawlers, so they can read the `noindex`,
+  and disallows AI training and AI answer crawlers (GPTBot, ClaudeBot,
+  PerplexityBot, and others). AI agents fetching the page for a person are
+  left alone, since the page itself tells them it's a demo.
+- **Says what it is**: the title, description, Open Graph and Twitter tags,
+  and `public/og-image.png` (1200x630) call it a portfolio demo by
+  techgeek.support, and the footer says the company is fictional, linking
+  to techgeek.support. The 404 page renders its own `<title>`.
+- **Social preview card**: per the user-level "## Social Previews" rule,
+  `design/og-image/card.html` (outside the served tree) is captured by `npm
+  run og-image` (`design/og-image/render.mts`, type checked through
+  `tsconfig.test.json`, since it drives a browser) into `public/og-image.png`,
+  with every element inside the center 630x630 square. The card imports the
+  site's `fonts.css` and `styles.css` and reads their tokens; only its
+  1200x630 size, its 40px lines, their 1.2 line height and weights, and the
+  title's -0.01em letter spacing stay literal, since the scale has no step
+  within 10% of them.
+- **Structured data**: one `WebSite` JSON-LD block about a fictional company,
+  created by techgeek.support. Never `LocalBusiness`, an address, or a phone.
+- **Placeholders stay reserved**: the phone is a 555-01xx number and the
+  email an `.example` domain.
+- **Checked by** `npm run test:seo`. No off-site work (Business Profile,
+  listings, reviews) applies.
 
 ## Directory structure
 Decided 2026-10-07. Adapts the user-level "### Directory structure" layout to a
@@ -19,6 +52,9 @@ src/
   ui/                    components used by 2 or more pages (Nav, Footer)
   styles/                global CSS only (fonts.css, styles.css)
 ```
+Outside `src/` (added 2026-10-08): `tests/` holds the Playwright suites (see
+"## Test suites"), and `design/` holds source artwork that isn't served,
+so far the social preview card (see "## SEO").
 - **`pages/` takes the place of `tabs/`.** Each route gets its own folder,
   and a component only that page uses (Home's Hero, Services, About, and
   Contact sections) lives in that folder. When a section becomes a route of
@@ -53,11 +89,35 @@ reorganization, ESLint setup, config rebuild, and dependency upgrades.
    written to the rules from its first line.
 5. **Full rule audit** (done 2026-10-07): repeated passes until clean.
 
+## Test suites
+Added 2026-10-08. Playwright suites live in `tests/`, one project per suite
+and engine in `tests/playwright.config.ts`, which starts its own dev server
+on port 5191 (never the usual 5173) and stops it afterwards. Every suite runs
+in Chromium, Firefox, and WebKit. Results, screenshots, and traces go to
+`tests/output/` (git-ignored); `npx playwright show-report tests/output/report`
+opens the HTML report. The states each suite visits (both pages at 390px and
+1440px, plus the open drawer) are listed in `tests/support/states.ts`; the
+seo suite reads the head of each route instead.
+- `npm run test:accessibility`: the pre-commit accessibility scan. axe-core
+  checks each state against WCAG 2.2 A and AA plus best practices
+  (`axe.spec.ts`), and scripted checks (`scripted.spec.ts`) cover link and
+  button names, a Tab walk (order, traps, focus on screen, uncovered, and
+  visible), reflow at 320px, and motion under reduced motion. The keyboard
+  walk runs under reduced motion so smooth scrolling and focus transitions
+  have finished when a stop is measured. axe's "needs review" results are
+  printed and attached to the report rather than failing the run.
+- `npm run test:seo`: checks each route's title, description, robots,
+  canonical, social tags, and structured data, the footer's demo line,
+  `robots.txt`, `_headers`, and the preview image's size.
+- `npm test` runs every suite.
+
 Next (planned 2026-10-07):
-- **Accessibility**: an audit and fixes across both pages.
-- **SEO**: an audit and fixes, index.html's head included.
-- **Reusable tests**: a suite to rerun after large changes, checking that
-  every page renders and behaves correctly in all three browser engines.
+- **Accessibility** (done 2026-10-08): an audit and fixes across both pages.
+- **SEO** (done 2026-10-08): set up for a demo site, per "## SEO" above.
+- **Reusable tests** (started 2026-10-08): a suite to rerun after large
+  changes, checking that every page renders and behaves correctly in all
+  three browser engines. The accessibility and seo suites are its first
+  parts; rendering and interaction suites are still to come.
 
 Applied original intent (kept by the user, 2026-10-07): the CSS module pass
 found styles that were written but never rendered, because a later global
@@ -103,6 +163,5 @@ Design system choices (decided 2026-10-07):
 - **Breakpoints**: 500, 540, 600, 640, 880, and 960px, measured against the
   `app` container on AppRooCom's root element.
 
-Open item: the live Netlify site keeps the Node version it was pinned to
-when it was created, and React Router 8 needs Node 22.22 or newer to build.
-Confirm the site's Node version before this branch is merged and deployed.
+Node on Netlify (confirmed 2026-10-08): the live site builds on Node 24.x,
+which meets React Router 8's minimum of 22.22.

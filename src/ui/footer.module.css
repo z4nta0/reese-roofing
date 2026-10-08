@@ -6,9 +6,9 @@
  *
  * @summary
  * Styles for SitFooCom: the dark footer band with the brand on the left, the
- * copyright and licensing lines in the middle, and the back-to-top link on
- * the right, stacking into one left-aligned column on small screens. The
- * shared container declarations the footer used to borrow from the global
+ * copyright, licensing, and demo lines in the middle, and the back-to-top
+ * link on the right, stacking into one left-aligned column on small screens.
+ * The shared container declarations the footer used to borrow from the global
  * stylesheet are copied onto its own row class here.
  *
  * @author z4nta0 <https://github.com/z4nta0>
@@ -114,7 +114,7 @@
 .namLigSpa { /* What: Name Light Span. Why: The name's second word reads as the softer half. How: This sets it light, italic, and faded. */
 
 
-	color       : oklch( from var( --bac-pag-col ) l c h / 0.5 ); /* Background Page Color = #f5f2ec */
+	color       : oklch( from var( --bac-pag-col ) l c h / 0.5 ); /* Background Page Color = #f5f2ec @ 0.5 opacity */
 	font-style  : italic;
 	font-weight : 300;
 
@@ -127,7 +127,7 @@
 
 /* #region fooMetDiv */
 
-.fooMetDiv { /* What: Footer Meta Div. Why: The copyright and licensing lines read as one small block. How: This stacks them centered at body size, smaller than the brand. */
+.fooMetDiv { /* What: Footer Meta Div. Why: The copyright, licensing, and demo lines read as one small block. How: This stacks them centered at body size, smaller than the brand. */
 
 
 	display        : flex;
@@ -153,7 +153,52 @@
 
 }
 
+
+/* #region fooDemSpa */
+
+.fooDemSpa { /* What: Footer Demo Span. Why: The demo notice is the longest meta line and shouldn't stretch the footer's middle column. How: This caps it at the small text measure, so it wraps onto a second line. */
+
+
+	max-width : var( --tex-wid-sma ); /* Text Width Small Maximum ~= 22.047em */
+
+
+}
+
+.fooDemAnc { /* What: Footer Demo Anchor. Why: The builder's link has to read as a link inside the sentence. How: This sets it in the paper color with an underline, turning the soft accent on hover. */
+
+
+	color                 : var( --bac-pag-col );                            /* Background Page Color = #f5f2ec */
+	text-decoration       : underline;
+	text-underline-offset : calc( var( --cdn-pow-005-rec ) * 1em );          /* Core-Design-Number to the Power of 5 Reciprocal ~= 0.245 */
+	transition            : color var( --dur-tra-p01 ) var( --mot-sta-eas ); /* Duration Transition Base Plus 1 ~= 209.1ms, Motion Standard Easing = ease */
+
+
+}
+.fooDemAnc:hover { /* What: Hovered Footer Demo Anchor. Why: The hovered link should stand out on the dark band. How: This turns it the soft accent. */
+
+
+	color : var( --acc-lig-col ); /* Accent Light Color, the accent lightened by 0.204 */
+
+
+}
+@media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Footer Demo Anchor. Why: Someone who asked for less motion shouldn't see the color fade. How: This applies only when the reduced-motion preference is set. */
+
+
+	.fooDemAnc { /* What: Motionless Footer Demo Anchor. Why: The hover color should appear at once. How: This turns the transition off. */
+
+
+		transition : none;
+
+
+	}
+
+
+}
+
+/* #endregion fooDemSpa */
+
 /* #endregion fooMetDiv */
+
 
 
 /* #region fooTopAnc */

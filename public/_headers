@@ -1,0 +1,3 @@
+# What: Site-Wide Robots Header Block. Why: A fictional company shouldn't turn up in search results, and a header covers files a robots meta tag can't, such as the preview image. How: This sends X-Robots-Tag noindex with every file Netlify serves, matching the page's robots meta.
+/*
+	X-Robots-Tag: noindex

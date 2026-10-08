@@ -55,13 +55,13 @@
 
 
 	-webkit-mask-image : radial-gradient( ellipse at 70% 30%, black 0%, transparent 75% );
-	color              : var( --tex-mai-col );     /* Text Main Color = #1a1f24 */
+	color              : var( --tex-mai-col );                                             /* Text Main Color = #1a1f24 */
 	inset              : 0;
 	mask-image         : radial-gradient( ellipse at 70% 30%, black 0%, transparent 75% );
-	opacity            : var( --cdn-pow-011-rec ); /* Core-Design-Number to the Power of 11 Reciprocal ~= 0.045 */
+	opacity            : var( --cdn-pow-011-rec );                                         /* Core-Design-Number to the Power of 11 Reciprocal ~= 0.045 */
 	pointer-events     : none;
 	position           : absolute;
-	z-index            : 0;                        /* What: Background Stack Level. Why: The grid has to sit under the hero's content, which is at 1. How: This keeps it at the bottom. */
+	z-index            : 0;                                                                /* What: Background Stack Level. Why: The grid has to sit under the hero's content, which is at 1. How: This keeps it at the bottom. */
 
 
 }
@@ -69,7 +69,7 @@
 
 /* #region herGriSvg */
 
-.herGriSvg { /* What: Hero Grid Svg. Why: The grid drawing should fill the whole background. How: This stretches it to the background's full size. */
+.herGriSvg { /* What: Hero Grid SVG. Why: The grid drawing should fill the whole background. How: This stretches it to the background's full size. */
 
 
 	height : 100%;
@@ -180,14 +180,14 @@
 
 
 	align-items    : center;
-	color          : var( --tex-mut-col ); /* Text Muted Color = #6b7079 */
+	color          : var( --tex-mut-col );                   /* Text Muted Color = #636871 */
 	display        : inline-flex;
-	font-family    : var( --fon-fam-mai ); /* Font Family Main = 'Inter Tight', -apple-system, BlinkMacSystemFont, sans-serif */
-	font-size      : var( --fon-siz-bas ); /* Font Size Base = 11px */
+	font-family    : var( --fon-fam-mai );                   /* Font Family Main = 'Inter Tight', -apple-system, BlinkMacSystemFont, sans-serif */
+	font-size      : var( --fon-siz-bas );                   /* Font Size Base = 11px */
 	font-weight    : 500;
-	gap            : var( --spa-hor-m01 ); /* Spacing Horizontal Base Minus 1 = 11px */
-	letter-spacing : 0.18em;
-	margin-bottom  : var( --spa-ver-p04 ); /* Spacing Vertical Base Plus 4 ~= 44.876px */
+	gap            : var( --spa-hor-m01 );                   /* Spacing Horizontal Base Minus 1 = 11px */
+	letter-spacing : calc( var( --cdn-pow-006-rec ) * 1em ); /* Core-Design-Number to the Power of 6 Reciprocal ~= 0.185 */
+	margin-bottom  : var( --spa-ver-p04 );                   /* Spacing Vertical Base Plus 4 ~= 44.876px */
 	text-transform : uppercase;
 
 
@@ -195,7 +195,7 @@
 .eyeLabSpa::before { /* What: Eyebrow Label Span Leading Line. Why: A short rule leads into the label. How: This draws a short hairline, one rhythm step long, before the text. */
 
 
-	background : var( --tex-mut-col );                /* Text Muted Color = #6b7079 */
+	background : var( --tex-mut-col );                /* Text Muted Color = #636871 */
 	content    : '';
 	height     : var( --bor-wid-bas );                /* Border Width Base ~= 1.160px */
 	width      : calc( var( --ver-rhy-p02 ) * 1rem ); /* Vertical Rhythm Base Plus 2 ~= 25.572px */
@@ -214,7 +214,7 @@
 	font-size               : clamp( var( --fon-siz-p05 ), 6.5vw, var( --fon-siz-p08 ) ); /* Font Size Base Plus 5 ~= 44.876px, Font Size Base Plus 8 ~= 104.323px */
 	font-variation-settings : 'opsz' 144;
 	font-weight             : 400;
-	letter-spacing          : -0.025em;
+	letter-spacing          : calc( var( --cdn-pow-013-rec ) * -1em );                    /* Core-Design-Number to the Power of 13 Reciprocal ~= 0.026 */
 	line-height             : var( --ver-rhy-m01 );                                       /* Vertical Rhythm Base Minus 1 = 1 */
 
 
@@ -307,7 +307,7 @@
 .herLogIma { /* What: Hero Logo Image. Why: The logo should fill its column up to a set size, with a soft shadow lifting it off the page. How: This caps its width at a horizontal step, never narrower than the p08 rhythm step, and adds a blue-tinted drop shadow. */
 
 
-	filter    : drop-shadow( 0 calc( var( --ver-rhy-m01 ) * 1rem ) calc( var( --ver-rhy-p03 ) * 1rem ) oklch( from var( --acc-mai-col ) l c h / 0.12 ) ); /* Vertical Rhythm Base Minus 1 = 11px, Vertical Rhythm Base Plus 3 ~= 33.876px, Accent Main Color = #1f4e7a */
+	filter    : drop-shadow( 0 calc( var( --ver-rhy-m01 ) * 1rem ) calc( var( --ver-rhy-p03 ) * 1rem ) oklch( from var( --acc-mai-col ) l c h / 0.12 ) ); /* Vertical Rhythm Base Minus 1 = 11px, Vertical Rhythm Base Plus 3 ~= 33.876px, Accent Main Color = #1f4e7a @ 0.12 opacity */
 	height    : auto;
 	max-width : max( calc( var( --ver-rhy-p08 ) * 1rem ), var( --hor-rhy-022 ) );                                                                         /* Vertical Rhythm Base Plus 8 ~= 138.199px, Horizontal Rhythm 22 ~= 470.635px @ 1,920px width */
 	width     : 100%;
@@ -432,7 +432,7 @@
 	font-size      : var( --fon-siz-p01 );                                                        /* Font Size Base Plus 1 ~= 14.572px */
 	font-weight    : 500;
 	gap            : var( --spa-hor-m01 );                                                        /* Spacing Horizontal Base Minus 1 = 11px */
-	letter-spacing : 0.02em;
+	letter-spacing : calc( var( --cdn-pow-014-rec ) * 1em );                                      /* Core-Design-Number to the Power of 14 Reciprocal ~= 0.020 */
 	line-height    : calc( var( --ver-rhy-p04 ) * 1rem );                                         /* Vertical Rhythm Base Plus 4 ~= 44.876px */
 	padding        : 0 clamp( var( --spa-hor-p01 ), var( --hor-rhy-012 ), var( --spa-hor-p03 ) ); /* Spacing Horizontal Base Plus 1 ~= 19.304px, Horizontal Rhythm 12 ~= 28.278px @ 1,920px width, Spacing Horizontal Base Plus 3 ~= 33.876px */
 	transition     : background-color var( --dur-tra-p02 ) var( --mot-dec-eas ), border-color var( --dur-tra-p02 ) var( --mot-dec-eas ), color var( --dur-tra-p02 ) var( --mot-dec-eas ), transform var( --dur-tra-p02 ) var( --mot-dec-eas ); /* Duration Transition Base Plus 2 ~= 277.0ms, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ) */
@@ -594,7 +594,7 @@
 	font-size               : clamp( var( --fon-siz-p04 ), 4vw, var( --fon-siz-p05 ) ); /* Font Size Base Plus 4 ~= 33.876px, Font Size Base Plus 5 ~= 44.876px */
 	font-variation-settings : 'opsz' 144;
 	font-weight             : 400;
-	letter-spacing          : -0.02em;
+	letter-spacing          : calc( var( --cdn-pow-014-rec ) * -1em );                  /* Core-Design-Number to the Power of 14 Reciprocal ~= 0.020 */
 	line-height             : var( --ver-rhy-m01 );                                     /* Vertical Rhythm Base Minus 1 = 1 */
 	margin-bottom           : var( --spa-ver-m02 );                                     /* Spacing Vertical Base Minus 2 ~= 8.304px */
 
@@ -604,7 +604,7 @@
 .staSufSpa { /* What: Stat Suffix Span. Why: A number's plus sign or unit reads as secondary to the number. How: This sets it smaller, raised, and muted. */
 
 
-	color          : var( --tex-mut-col );                   /* Text Muted Color = #6b7079 */
+	color          : var( --tex-mut-col );                   /* Text Muted Color = #636871 */
 	font-size      : calc( var( --cdn-pow-002-rec ) * 1em ); /* Core-Design-Number to the Power of 2 Reciprocal ~= 0.570 */
 	margin-left    : calc( var( --cdn-pow-008-rec ) * 1em ); /* Core-Design-Number to the Power of 8 Reciprocal ~= 0.105 */
 	vertical-align : calc( var( --cdn-pow-003-rec ) * 1em ); /* Core-Design-Number to the Power of 3 Reciprocal ~= 0.430 */
@@ -630,7 +630,7 @@
 .staLabDiv { /* What: Stat Label Div. Why: Each number needs a short line saying what it counts. How: This sets it at body size, muted, at the small text measure. */
 
 
-	color       : var( --tex-mut-col ); /* Text Muted Color = #6b7079 */
+	color       : var( --tex-mut-col ); /* Text Muted Color = #636871 */
 	font-size   : var( --fon-siz-p01 ); /* Font Size Base Plus 1 ~= 14.572px */
 	line-height : var( --ver-rhy-bas ); /* Vertical Rhythm Base ~= 1.325 */
 	max-width   : var( --tex-wid-sma ); /* Text Width Small Maximum ~= 22.047em */

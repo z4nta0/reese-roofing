@@ -51,13 +51,13 @@
 
 
 	align-items    : center;
-	color          : var( --tex-mut-col ); /* Text Muted Color = #6b7079 */
+	color          : var( --tex-mut-col );                   /* Text Muted Color = #636871 */
 	display        : inline-flex;
-	font-family    : var( --fon-fam-mai ); /* Font Family Main = 'Inter Tight', -apple-system, BlinkMacSystemFont, sans-serif */
-	font-size      : var( --fon-siz-bas ); /* Font Size Base = 11px */
+	font-family    : var( --fon-fam-mai );                   /* Font Family Main = 'Inter Tight', -apple-system, BlinkMacSystemFont, sans-serif */
+	font-size      : var( --fon-siz-bas );                   /* Font Size Base = 11px */
 	font-weight    : 500;
-	gap            : var( --spa-hor-m01 ); /* Spacing Horizontal Base Minus 1 = 11px */
-	letter-spacing : 0.18em;
+	gap            : var( --spa-hor-m01 );                   /* Spacing Horizontal Base Minus 1 = 11px */
+	letter-spacing : calc( var( --cdn-pow-006-rec ) * 1em ); /* Core-Design-Number to the Power of 6 Reciprocal ~= 0.185 */
 	text-transform : uppercase;
 
 
@@ -65,7 +65,7 @@
 .eyeLabSpa::before { /* What: Eyebrow Label Span Leading Line. Why: A short rule leads into the label. How: This draws a short hairline, one rhythm step long, before the text. */
 
 
-	background : var( --tex-mut-col );                /* Text Muted Color = #6b7079 */
+	background : var( --tex-mut-col );                /* Text Muted Color = #636871 */
 	content    : '';
 	height     : var( --bor-wid-bas );                /* Border Width Base ~= 1.160px */
 	width      : calc( var( --ver-rhy-p02 ) * 1rem ); /* Vertical Rhythm Base Plus 2 ~= 25.572px */
@@ -84,7 +84,7 @@
 	font-size               : clamp( var( --fon-siz-p05 ), 8vw, var( --fon-siz-p08 ) ); /* Font Size Base Plus 5 ~= 44.876px, Font Size Base Plus 8 ~= 104.323px */
 	font-variation-settings : 'opsz' 144;
 	font-weight             : 400;
-	letter-spacing          : -0.025em;
+	letter-spacing          : calc( var( --cdn-pow-013-rec ) * -1em );                  /* Core-Design-Number to the Power of 13 Reciprocal ~= 0.026 */
 	line-height             : var( --ver-rhy-m01 );                                     /* Vertical Rhythm Base Minus 1 = 1 */
 
 
@@ -134,7 +134,7 @@
 
 /* #region butBasAnc */
 
-.butBasAnc { /* What: Button Base Anchor. Why: The page's two buttons use the site's pill button shape. How: This draws a rounded pill whose height comes from its line height alone, with its label and arrow side by side, easing its colors and lift on hover. */
+.butBasAnc { /* What: Button Base Anchor. Why: The page's two buttons use the site's pill button shape. How: This draws a rounded pill whose height comes from its line height alone, with its label and any arrow side by side, easing its colors and lift on hover. */
 
 
 	align-items    : center;
@@ -144,7 +144,7 @@
 	font-size      : var( --fon-siz-p01 );                                                        /* Font Size Base Plus 1 ~= 14.572px */
 	font-weight    : 500;
 	gap            : var( --spa-hor-m01 );                                                        /* Spacing Horizontal Base Minus 1 = 11px */
-	letter-spacing : 0.02em;
+	letter-spacing : calc( var( --cdn-pow-014-rec ) * 1em );                                      /* Core-Design-Number to the Power of 14 Reciprocal ~= 0.020 */
 	line-height    : calc( var( --ver-rhy-p04 ) * 1rem );                                         /* Vertical Rhythm Base Plus 4 ~= 44.876px */
 	padding        : 0 clamp( var( --spa-hor-p01 ), var( --hor-rhy-012 ), var( --spa-hor-p03 ) ); /* Spacing Horizontal Base Plus 1 ~= 19.304px, Horizontal Rhythm 12 ~= 28.278px @ 1,920px width, Spacing Horizontal Base Plus 3 ~= 33.876px */
 	transition     : background-color var( --dur-tra-p02 ) var( --mot-dec-eas ), border-color var( --dur-tra-p02 ) var( --mot-dec-eas ), color var( --dur-tra-p02 ) var( --mot-dec-eas ), transform var( --dur-tra-p02 ) var( --mot-dec-eas ); /* Duration Transition Base Plus 2 ~= 277.0ms, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ) */
@@ -152,7 +152,7 @@
 
 
 }
-.butBasAnc--primary { /* What: Primary Button Base Anchor. Why: Going home is the page's one action. How: This fills it with ink and paper-colored text. */
+.butBasAnc--primary { /* What: Primary Button Base Anchor. Why: Going home is the page's main action. How: This fills it with ink and paper-colored text. */
 
 
 	background : var( --bac-inv-col ); /* Background Inverse Color = #1a1f24 */

@@ -1,13 +1,29 @@
-# Reese Roofing
+# Reese Roofing (Portfolio Demo)
 
-A single-page marketing site for Reese Roofing, a commercial roofing contractor serving Lawrence, Kansas and the surrounding area.
+**Reese Roofing is a fictional company, and this is not a real business's website.** It's a portfolio piece by [techgeek.support](https://techgeek.support/): one of two website mockups designed for a client, who chose the other one. This one is kept as a proof of work and linked from techgeek.support's portfolio.
+
+Live at [reese-roofing.netlify.app](https://reese-roofing.netlify.app/). Its phone number (a 555-01xx number), email (an `.example` domain), address, stats, and history are all placeholders, so nothing on it should be read as a real roofer's details.
+
+## Search and AI visibility
+
+Since the company isn't real, the site is set up to stay out of search results and AI answers, and to say what it is wherever it's read:
+
+- **Kept out of search:** a `noindex` robots meta tag on every page and an `X-Robots-Tag: noindex` header on every file (`public/_headers`), with no sitemap. `public/robots.txt` lets search crawlers in so they can read the `noindex`, and disallows AI training and AI answer crawlers.
+- **Says it's a demo:** the page title, description, Open Graph and Twitter card tags, and the 1200x630 preview card (`public/og-image.png`) all call it a portfolio demo by techgeek.support, so shared links preview honestly. A line in the footer says the company is fictional.
+- **No business data:** the JSON-LD structured data describes a `WebSite` about a fictional company, with no `LocalBusiness` type, address, or phone.
+
+`npm run test:seo` checks all of this in Chromium, Firefox, and WebKit.
+
+The preview card is drawn from the site's own logo and fonts by `design/og-image/card.html` and captured by `npm run og-image`, which writes `public/og-image.png` and fails if it reaches WhatsApp's 300 KB limit. Everything on it sits inside the center square, since some apps crop previews to one. Apps cache previews for a long time, so a changed card should get a new filename, with the `og:image` and `twitter:image` tags updated to match.
 
 ## Stack
 
-- **Node.js** 22.22 or newer (React Router 8 and Vite 8 require it)
+- **Node.js** 22.22 or newer (React Router 8 requires it)
 - **Vite 8** dev server / bundler
 - **React 19** + **TypeScript 6**
 - **React Router 8** (set up for future expansion: it currently routes `/` to Home and everything else to a 404)
+- **ESLint 9** with typescript-eslint, and **Playwright** with axe-core for the test suites
+- Deployed on **Netlify**, which serves `index.html` for every path (`public/_redirects`) so the router can show the 404 page
 
 ## Getting started
 
@@ -17,6 +33,23 @@ npm run dev
 ```
 
 Open the URL Vite prints (usually `http://localhost:5173`).
+
+## Checks
+
+```bash
+npm run lint       # ESLint across the repo
+npm run typecheck  # TypeScript across src/, the configs, tests/, and design/
+```
+
+## Tests
+
+```bash
+npm test                    # every suite
+npm run test:accessibility  # axe-core plus scripted keyboard, naming, reflow, and motion checks
+npm run test:seo            # head tags, structured data, robots.txt, _headers, and the preview image
+```
+
+Each suite runs in Chromium, Firefox, and WebKit against its own dev server on port 5191, so a dev server already running on 5173 is left alone. Reports land in `tests/output/` (git-ignored); `npx playwright show-report tests/output/report` opens the HTML report. If a browser is missing, `npx playwright install chromium firefox webkit` installs all three.
 
 ## Build
 
@@ -35,15 +68,24 @@ src/
 │   └── not-found/     404 page and its .module.css
 ├── ui/                Shared components (Nav, Footer), each with its own .module.css
 ├── styles/            fonts.css (@font-face) + styles.css (design tokens and base element styles)
-├── app.tsx            React Router setup
-└── main.tsx           Entry point
+├── app.tsx            React Router setup, with app.module.css for the root's container
+├── main.tsx           Entry point
+└── vite-env.d.ts      Vite's client type declarations
+public/                Files served at fixed addresses: favicons, og-image.png, robots.txt, Netlify's _headers and _redirects
+tests/
+├── accessibility/     axe-core scan and scripted checks
+├── seo/               head, structured data, crawler file, and preview image checks
+├── support/           the page states the accessibility checks visit
+└── playwright.config.ts
+design/
+└── og-image/          card.html and the script that captures it as public/og-image.png
 ```
 
 ## Design notes
 
 - **Type pairing:** Fraunces (display serif, optical-size aware) paired with Inter Tight (refined sans). Italic Fraunces accents pull the design together.
 - **Palette:** Warm off-white paper (`#f5f2ec`), deep ink (`#1a1f24`), and a navy accent (`#1f4e7a`) drawn from the logo. Italic display accents and small details (numbered IDs, list bullets, pull quote marks) all use this brand navy so the design feels native to the logo.
-- **Layout:** Editorial grid, generous negative space, hairline dividers, numbered sections (01–04). Hover states are intentional but never showy.
+- **Layout:** Editorial grid, generous negative space, hairline dividers, numbered section labels (02 to 04, after the hero). Hover states are intentional but never showy.
 - **Logo usage:**
   - The **full logo** (`src/pages/home/logo-full.svg`) anchors the hero as the primary visual, doubles as a "seal" in the sticky left column of the About section, and appears on a paper-colored signature card in the Contact section. It's a two-color SVG (navy mark + grey subtext).
   - The **simple mark** (`src/assets/logo-mark.svg`) is used in the nav bar and the footer.
@@ -52,11 +94,12 @@ src/
 
 ## Customization checklist
 
-When you're ready to make this real, update:
+If this design is ever reused for a real business, update the placeholders below, and swap the demo SEO for real local SEO: remove the `noindex` meta tag, `public/_headers` rule, and AI crawler block, add a sitemap, replace the `WebSite` JSON-LD with `LocalBusiness` (`RoofingContractor`) data matching the real details, rewrite the title, description, social tags, and preview card, and drop the footer's demo line.
 
-- **Phone number:** `(785) 555-0199`. Search the repo for it; it appears in the Nav, Contact, and Footer areas
-- **Email:** `hello@reeseroofing.example`. Same; it appears in Contact and the mailto form action
-- **Address:** placeholder Lawrence, KS 66044, in the Contact section
+- **Phone number:** `(785) 555-0199`. Search the repo for it; it appears in the Nav (bar and drawer) and the Contact section
+- **Email:** `hello@reeseroofing.example`. Same; it appears in the Contact section's contact details and in the mailto link the form opens on submit (`subForFun` in `src/pages/home/contact.tsx`)
+- **Address:** placeholder Lawrence, Kansas 66044, in the Contact section
+- **Footer:** the company's legal name, licensing line, and the demo notice in `src/ui/footer.tsx`
 - **Stats in Hero:** 17+ years, 400+ roofs, etc. Replace them with real numbers
 - **Services list:** edit the `SER_RCD_ARR` array in `src/pages/home/services.tsx`
 - **About copy & quote:** `src/pages/home/about.tsx`

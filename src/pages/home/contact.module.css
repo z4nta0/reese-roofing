@@ -72,13 +72,13 @@
 
 
 	align-items    : center;
-	color          : oklch( from var( --bac-pag-col ) l c h / 0.5 ); /* Background Page Color = #f5f2ec */
+	color          : oklch( from var( --bac-pag-col ) l c h / 0.5 ); /* Background Page Color = #f5f2ec @ 0.5 opacity */
 	display        : inline-flex;
 	font-family    : var( --fon-fam-mai );                           /* Font Family Main = 'Inter Tight', -apple-system, BlinkMacSystemFont, sans-serif */
 	font-size      : var( --fon-siz-bas );                           /* Font Size Base = 11px */
 	font-weight    : 500;
 	gap            : var( --spa-hor-m01 );                           /* Spacing Horizontal Base Minus 1 = 11px */
-	letter-spacing : 0.18em;
+	letter-spacing : calc( var( --cdn-pow-006-rec ) * 1em );         /* Core-Design-Number to the Power of 6 Reciprocal ~= 0.185 */
 	text-transform : uppercase;
 
 
@@ -105,7 +105,7 @@
 	font-size               : clamp( var( --fon-siz-p05 ), 6vw, var( --fon-siz-p07 ) ); /* Font Size Base Plus 5 ~= 44.876px, Font Size Base Plus 7 ~= 78.751px */
 	font-variation-settings : 'opsz' 144;
 	font-weight             : 400;
-	letter-spacing          : -0.025em;
+	letter-spacing          : calc( var( --cdn-pow-013-rec ) * -1em );                  /* Core-Design-Number to the Power of 13 Reciprocal ~= 0.026 */
 	line-height             : var( --ver-rhy-m01 );                                     /* Vertical Rhythm Base Minus 1 = 1 */
 	margin-bottom           : var( --spa-ver-p02 );                                     /* Spacing Vertical Base Plus 2 ~= 25.572px */
 	margin-top              : var( --spa-ver-p02 );                                     /* Spacing Vertical Base Plus 2 ~= 25.572px */
@@ -183,7 +183,7 @@
 .rowLabTer { /* What: Row Label Term. Why: Each row's label reads as a small tracked caption. How: This sets it in faded uppercase, nudged down to line up with the value. */
 
 
-	color          : oklch( from var( --bac-pag-col ) l c h / 0.5 ); /* Background Page Color = #f5f2ec */
+	color          : oklch( from var( --bac-pag-col ) l c h / 0.5 ); /* Background Page Color = #f5f2ec @ 0.5 opacity */
 	font-size      : var( --fon-siz-bas );                           /* Font Size Base = 11px */
 	letter-spacing : 0.12em;
 	padding-top    : var( --spa-ver-m06 );                           /* Spacing Vertical Base Minus 6 ~= 2.696px */
@@ -198,7 +198,7 @@
 .rowValDet { /* What: Row Value Details. Why: Each row's value reads clearly on the dark band. How: This sets it in nearly full paper. */
 
 
-	color       : oklch( from var( --bac-pag-col ) l c h / 0.9 ); /* Background Page Color = #f5f2ec */
+	color       : oklch( from var( --bac-pag-col ) l c h / 0.9 ); /* Background Page Color = #f5f2ec @ 0.9 opacity */
 	font-size   : var( --fon-siz-p01 );                           /* Font Size Base Plus 1 ~= 14.572px */
 	line-height : var( --ver-rhy-p01 );                           /* Vertical Rhythm Base Plus 1 ~= 1.755 */
 
@@ -238,7 +238,7 @@
 .rowNotSpa { /* What: Row Note Span. Why: The emergency note is secondary to the office hours. How: This sets it in faded paper at the value's own size. */
 
 
-	color     : oklch( from var( --bac-pag-col ) l c h / 0.5 ); /* Background Page Color = #f5f2ec */
+	color     : oklch( from var( --bac-pag-col ) l c h / 0.5 ); /* Background Page Color = #f5f2ec @ 0.5 opacity */
 	font-size : var( --fon-siz-p01 );                           /* Font Size Base Plus 1 ~= 14.572px */
 
 
@@ -297,7 +297,7 @@
 .conForDiv { /* What: Contact Form Div. Why: The form sits in a faint frame on the dark band. How: This draws a barely lighter panel with a faint border, its side padding scaling with the viewport between two spacing steps. */
 
 
-	background    : oklch( from var( --bac-pag-col ) l c h / 0.04 );                                                                                    /* Background Page Color = #f5f2ec */
+	background    : oklch( from var( --bac-pag-col ) l c h / 0.04 );                                                                                    /* Background Page Color = #f5f2ec @ 0.04 opacity */
 	border        : var( --bor-wid-bas ) solid oklch( from var( --bac-pag-col ) l c h / var( --cdn-pow-008-rec ) );                                     /* Border Width Base ~= 1.160px, Background Page Color = #f5f2ec, Core-Design-Number to the Power of 8 Reciprocal ~= 0.105 */
 	border-radius : var( --rad-bor-xsm ); /* Radius Border Extra Small ~= 3.572px */
 	padding       : clamp( var( --spa-ver-p02 ), 3vw, var( --spa-ver-p04 ) ) clamp( var( --spa-hor-p02 ), var( --hor-rhy-015 ), var( --spa-hor-p04 ) ); /* Spacing Vertical Base Plus 2 ~= 25.572px, Spacing Vertical Base Plus 4 ~= 44.876px, Spacing Horizontal Base Plus 2 ~= 25.572px, Horizontal Rhythm 15 ~= 65.739px @ 1,920px width, Spacing Horizontal Base Plus 4 ~= 44.876px */
@@ -337,7 +337,7 @@
 	color          : oklch( from var( --bac-pag-col ) l c h / var( --cdn-pow-002-rec ) ); /* Background Page Color = #f5f2ec, Core-Design-Number to the Power of 2 Reciprocal ~= 0.570 */
 	font-size      : var( --fon-siz-bas );                                                /* Font Size Base = 11px */
 	font-weight    : 500;
-	letter-spacing : 0.1em;
+	letter-spacing : calc( var( --cdn-pow-008-rec ) * 1em );                              /* Core-Design-Number to the Power of 8 Reciprocal ~= 0.105 */
 	text-transform : uppercase;
 
 
@@ -481,7 +481,7 @@
 	font-size      : var( --fon-siz-p01 );                                                        /* Font Size Base Plus 1 ~= 14.572px */
 	font-weight    : 500;
 	gap            : var( --spa-hor-m01 );                                                        /* Spacing Horizontal Base Minus 1 = 11px */
-	letter-spacing : 0.02em;
+	letter-spacing : calc( var( --cdn-pow-014-rec ) * 1em );                                      /* Core-Design-Number to the Power of 14 Reciprocal ~= 0.020 */
 	line-height    : calc( var( --ver-rhy-p04 ) * 1rem );                                         /* Vertical Rhythm Base Plus 4 ~= 44.876px */
 	margin-top     : var( --spa-ver-m02 );                                                        /* Spacing Vertical Base Minus 2 ~= 8.304px */
 	padding        : 0 clamp( var( --spa-hor-p01 ), var( --hor-rhy-012 ), var( --spa-hor-p03 ) ); /* Spacing Horizontal Base Plus 1 ~= 19.304px, Horizontal Rhythm 12 ~= 28.278px @ 1,920px width, Spacing Horizontal Base Plus 3 ~= 33.876px */
@@ -547,7 +547,7 @@
 .forFinPar { /* What: Form Fine Paragraph. Why: The consent note should read as a quiet footnote to the form. How: This sets it small and faded. */
 
 
-	color       : oklch( from var( --bac-pag-col ) l c h / var( --cdn-pow-003-rec ) ); /* Background Page Color = #f5f2ec, Core-Design-Number to the Power of 3 Reciprocal ~= 0.430 */
+	color       : oklch( from var( --bac-pag-col ) l c h / var( --cdn-pow-002-rec ) ); /* Background Page Color = #f5f2ec, Core-Design-Number to the Power of 2 Reciprocal ~= 0.570 */
 	font-size   : var( --fon-siz-bas );                                                /* Font Size Base = 11px */
 	line-height : var( --ver-rhy-bas );                                                /* Vertical Rhythm Base ~= 1.325 */
 

@@ -117,6 +117,10 @@
 	--cdn-pow-009-rec : calc( 1 / var( --cdn-pow-009 ) ); /* What: Core-Design-Number to the Power of 9 Reciprocal ~= 0.080. Why: Sometimes the reciprocal of the ninth power of the core design number is needed for scaling, literal number or percentage. How: This divides one by the core design number to the power of 9. */
 	--cdn-pow-010-rec : calc( 1 / var( --cdn-pow-010 ) ); /* What: Core-Design-Number to the Power of 10 Reciprocal ~= 0.060. Why: Sometimes the reciprocal of the tenth power of the core design number is needed for scaling, literal number or percentage. How: This divides one by the core design number to the power of 10. */
 	--cdn-pow-011-rec : calc( 1 / var( --cdn-pow-011 ) ); /* What: Core-Design-Number to the Power of 11 Reciprocal ~= 0.045. Why: Sometimes the reciprocal of the eleventh power of the core design number is needed for scaling, literal number or percentage. How: This divides one by the core design number to the power of 11. */
+	--cdn-pow-012-rec : calc( 1 / var( --cdn-pow-012 ) ); /* What: Core-Design-Number to the Power of 12 Reciprocal ~= 0.034. Why: Sometimes the reciprocal of the twelfth power of the core design number is needed for scaling, literal number or percentage. How: This divides one by the core design number to the power of 12. */
+	--cdn-pow-013-rec : calc( 1 / var( --cdn-pow-013 ) ); /* What: Core-Design-Number to the Power of 13 Reciprocal ~= 0.026. Why: Sometimes the reciprocal of the thirteenth power of the core design number is needed for scaling, literal number or percentage. How: This divides one by the core design number to the power of 13. */
+	--cdn-pow-014-rec : calc( 1 / var( --cdn-pow-014 ) ); /* What: Core-Design-Number to the Power of 14 Reciprocal ~= 0.020. Why: Sometimes the reciprocal of the fourteenth power of the core design number is needed for scaling, literal number or percentage. How: This divides one by the core design number to the power of 14. */
+	--cdn-pow-015-rec : calc( 1 / var( --cdn-pow-015 ) ); /* What: Core-Design-Number to the Power of 15 Reciprocal ~= 0.015. Why: Sometimes the reciprocal of the fifteenth power of the core design number is needed for scaling, literal number or percentage. How: This divides one by the core design number to the power of 15. */
 
 	/* #endregion Core Design Numbers */
 
@@ -156,7 +160,7 @@
 	--suc-tin-col : ;                                                         /* What: Success Tint Color. Why: The standard role set includes the success family. How: This site has no success states, so it stays empty. */
 	--tex-acc-col : var( --bac-pag-col );                                     /* What: Text Accent Color. Why: Text on an accent background needs to stay readable. How: This reads the page color; nothing on this site reads it yet. */
 	--tex-mai-col : #1a1f24;                                                  /* What: Text Main Color. Why: Body text and headings share one near-black. How: The body and every heading read it. */
-	--tex-mut-col : #6b7079;                                                  /* What: Text Muted Color. Why: Labels and secondary details should recede. How: Eyebrows, captions, labels, and supporting lines read it. */
+	--tex-mut-col : #636871;                                                  /* What: Text Muted Color. Why: Labels and secondary details should recede. How: Eyebrows, captions, labels, and supporting lines read it, dark enough to reach WCAG AA's 4.5:1 contrast on both the page and surface backgrounds. */
 	--tex-sec-col : #2a3138;                                                  /* What: Text Secondary Color. Why: Long paragraphs read more gently than full ink. How: Ledes, descriptions, and links read it. */
 	--war-dar-col : ;                                                         /* What: Warning Dark Color. Why: The standard role set includes the warning family. How: This site has no warnings to show, so it stays empty. */
 	--war-mai-col : ;                                                         /* What: Warning Main Color. Why: The standard role set includes the warning family. How: This site has no warnings to show, so it stays empty. */
@@ -414,7 +418,7 @@
 
 }
 
-html { /* What: Html. Why: One rem should equal the 11px base font size, in-page links should glide to their sections, and phones shouldn't inflate the text. How: This sets the root to 68.75% (11/16) of the browser's own default, so 1rem is 11px at the usual 16px default and still follows any size a person sets, turns on smooth scrolling, and turns off automatic text resizing. */
+html { /* What: HTML. Why: One rem should equal the 11px base font size, in-page links should glide to their sections, and phones shouldn't inflate the text. How: This sets the root to 68.75% (11/16) of the browser's own default, so 1rem is 11px at the usual 16px default and still follows any size a person sets, turns on smooth scrolling, and turns off automatic text resizing. */
 
 
 	-webkit-text-size-adjust : 100%;
@@ -423,10 +427,10 @@ html { /* What: Html. Why: One rem should equal the 11px base font size, in-page
 
 
 }
-@media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Html. Why: Someone who asked for less motion shouldn't see the page glide. How: This applies only when the reduced-motion preference is set. */
+@media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion HTML. Why: Someone who asked for less motion shouldn't see the page glide. How: This applies only when the reduced-motion preference is set. */
 
 
-	html { /* What: Instant Scrolling Html. Why: In-page links should jump straight to their sections. How: This turns smooth scrolling off. */
+	html { /* What: Instant Scrolling HTML. Why: In-page links should jump straight to their sections. How: This turns smooth scrolling off. */
 
 
 		scroll-behavior : auto;
@@ -479,6 +483,18 @@ a { /* What: Anchor. Why: Links are styled by their own classes, not the browser
 
 	color           : inherit;
 	text-decoration : none;
+
+
+}
+
+a,
+button,
+input,
+select,
+textarea { /* What: Focusable Controls. Why: Tabbing to a control scrolls it into view, and without room for the fixed bar it can stop right under the bar, hidden while focused. How: This keeps a scroll margin above every control, so the browser stops scrolling with the control below the bar. */
+
+
+	scroll-margin-top : var( --spa-ver-p06 ); /* Spacing Vertical Base Plus 6 ~= 78.751px */ /* What: Bar Clearance Margin. Why: The scrolled bar is about 69.9px tall on wide screens and 56.9px on phones. How: This is the smallest spacing step taller than both, leaving a little room below the bar. */
 
 
 }

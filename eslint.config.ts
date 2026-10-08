@@ -25,9 +25,10 @@ import tseslint   from 'typescript-eslint';         // What: TypeScript ESLint. 
  * undefined name and no-undef can't see TypeScript's type-only names. Every
  * .tsx file also gets the React Hooks plugin's recommended rules, minus the
  * four React Compiler readiness rules, which only matter to a site built with
- * the React Compiler, which this one isn't. The build output (dist/) is
- * ignored. npm run lint runs it across the repo, and an editor integration
- * can run it per file. Adapted from ease-my-life's own config.
+ * the React Compiler, which this one isn't. Generated output (dist/ and
+ * tests/output/) is ignored. npm run lint runs it across the repo, and an
+ * editor integration can run it per file. Adapted from ease-my-life's own
+ * config.
  *
  * Sections:
  *  - Constants
@@ -44,7 +45,7 @@ import tseslint   from 'typescript-eslint';         // What: TypeScript ESLint. 
 const ESL_CON_ARR = [ // What: ESLint Config Array. Why: ESLint reads its flat config as an array of objects, each scoped to the files it lists. How: This holds the build-output ignore, typescript-eslint's recommended configs and two rule overrides, the src/ undefined-component config, and the .tsx hooks config.
 
 
-	{ ignores : [ 'dist/**' ] }, // What: Ignores Object. Why: The build output is generated, not hand-written, so its lint results mean nothing. How: This global ignores entry skips dist/ for every config below.
+	{ ignores : [ 'dist/**', 'tests/output/**' ] }, // What: Ignores Object. Why: The build output and the test suites' reports are generated, not hand-written, so their lint results mean nothing. How: This global ignores entry skips both folders for every config below; one glob each, since braces break ESLint's matching here.
 
 	...tseslint.configs.recommended, // What: Recommended Configs Spread. Why: typescript-eslint's recommended rules catch TypeScript mistakes the compiler allows, such as an any or an unused variable. How: This spreads its recommended configs in, which apply to every file ESLint lints and switch off the core rules TypeScript already covers.
 
@@ -84,7 +85,7 @@ const ESL_CON_ARR = [ // What: ESLint Config Array. Why: ESLint reads its flat c
 
 	},
 
-	{ // What: Jsx Config Object. Why: Hook calls in components follow rules of their own. How: This adds the React Hooks recommended rules for every .tsx file.
+	{ // What: JSX Config Object. Why: Hook calls in components follow rules of their own. How: This adds the React Hooks recommended rules for every .tsx file.
 
 
 		files   : [ '**/*.tsx' ],                        // What: Files. Why: Hooks only appear in .tsx files. How: This matches every one of them.

@@ -78,13 +78,13 @@
 
 
 	align-items    : center;
-	color          : var( --tex-mut-col ); /* Text Muted Color = #6b7079 */
+	color          : var( --tex-mut-col );                   /* Text Muted Color = #636871 */
 	display        : inline-flex;
-	font-family    : var( --fon-fam-mai ); /* Font Family Main = 'Inter Tight', -apple-system, BlinkMacSystemFont, sans-serif */
-	font-size      : var( --fon-siz-bas ); /* Font Size Base = 11px */
+	font-family    : var( --fon-fam-mai );                   /* Font Family Main = 'Inter Tight', -apple-system, BlinkMacSystemFont, sans-serif */
+	font-size      : var( --fon-siz-bas );                   /* Font Size Base = 11px */
 	font-weight    : 500;
-	gap            : var( --spa-hor-m01 ); /* Spacing Horizontal Base Minus 1 = 11px */
-	letter-spacing : 0.18em;
+	gap            : var( --spa-hor-m01 );                   /* Spacing Horizontal Base Minus 1 = 11px */
+	letter-spacing : calc( var( --cdn-pow-006-rec ) * 1em ); /* Core-Design-Number to the Power of 6 Reciprocal ~= 0.185 */
 	text-transform : uppercase;
 
 
@@ -92,7 +92,7 @@
 .eyeLabSpa::before { /* What: Eyebrow Label Span Leading Line. Why: A short rule leads into the label. How: This draws a short hairline, one rhythm step long, before the text. */
 
 
-	background : var( --tex-mut-col );                /* Text Muted Color = #6b7079 */
+	background : var( --tex-mut-col );                /* Text Muted Color = #636871 */
 	content    : '';
 	height     : var( --bor-wid-bas );                /* Border Width Base ~= 1.160px */
 	width      : calc( var( --ver-rhy-p02 ) * 1rem ); /* Vertical Rhythm Base Plus 2 ~= 25.572px */
@@ -112,7 +112,7 @@
 	font-variation-settings : 'opsz' 144;
 	font-weight             : 400;
 	grid-column             : 1;
-	letter-spacing          : -0.025em;
+	letter-spacing          : calc( var( --cdn-pow-013-rec ) * -1em );                  /* Core-Design-Number to the Power of 13 Reciprocal ~= 0.026 */
 	line-height             : var( --ver-rhy-m01 );                                     /* Vertical Rhythm Base Minus 1 = 1 */
 	margin-top              : var( --spa-ver-p02 );                                     /* Spacing Vertical Base Plus 2 ~= 25.572px */
 
@@ -269,12 +269,12 @@
 .carIdeSpa { /* What: Card Identifier Span. Why: The card's number reads as a small accent beside the title. How: This sets it in light italic display type in the accent. */
 
 
-	color          : var( --acc-mai-col ); /* Accent Main Color = #1f4e7a */
-	font-family    : var( --fon-fam-sec ); /* Font Family Secondary = 'Fraunces', 'Times New Roman', serif */
-	font-size      : var( --fon-siz-p02 ); /* Font Size Base Plus 2 ~= 19.304px */
+	color          : var( --acc-mai-col );                    /* Accent Main Color = #1f4e7a */
+	font-family    : var( --fon-fam-sec );                    /* Font Family Secondary = 'Fraunces', 'Times New Roman', serif */
+	font-size      : var( --fon-siz-p02 );                    /* Font Size Base Plus 2 ~= 19.304px */
 	font-style     : italic;
 	font-weight    : 300;
-	letter-spacing : -0.02em;
+	letter-spacing : calc( var( --cdn-pow-014-rec ) * -1em ); /* Core-Design-Number to the Power of 14 Reciprocal ~= 0.020 */
 
 
 }
@@ -282,12 +282,12 @@
 .carTitHea { /* What: Card Title Heading. Why: Each card names its service in display type. How: This sets it in the display font, tightly leaded. */
 
 
-	color          : var( --tex-mai-col ); /* Text Main Color = #1a1f24 */
-	font-family    : var( --fon-fam-sec ); /* Font Family Secondary = 'Fraunces', 'Times New Roman', serif */
-	font-size      : var( --fon-siz-p03 ); /* Font Size Base Plus 3 ~= 25.572px */
+	color          : var( --tex-mai-col );                    /* Text Main Color = #1a1f24 */
+	font-family    : var( --fon-fam-sec );                    /* Font Family Secondary = 'Fraunces', 'Times New Roman', serif */
+	font-size      : var( --fon-siz-p03 );                    /* Font Size Base Plus 3 ~= 25.572px */
 	font-weight    : 400;
-	letter-spacing : -0.015em;
-	line-height    : var( --ver-rhy-m01 ); /* Vertical Rhythm Base Minus 1 = 1 */
+	letter-spacing : calc( var( --cdn-pow-015-rec ) * -1em ); /* Core-Design-Number to the Power of 15 Reciprocal ~= 0.015 */
+	line-height    : var( --ver-rhy-m01 );                    /* Vertical Rhythm Base Minus 1 = 1 */
 
 
 }
@@ -323,7 +323,7 @@
 
 
 	align-items : center;
-	color       : var( --tex-mut-col );   /* Text Muted Color = #6b7079 */
+	color       : var( --tex-mut-col );   /* Text Muted Color = #636871 */
 	display     : flex;
 	font-size   : var( --fon-siz-p01 );   /* Font Size Base Plus 1 ~= 14.572px */
 	gap         : var( --spa-hor-m02 );   /* Spacing Horizontal Base Minus 2 ~= 8.304px */
