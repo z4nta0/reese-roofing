@@ -14,6 +14,8 @@ Since the company isn't real, the site is set up to stay out of search results a
 
 `npm run test:seo` checks all of this in Chromium, Firefox, and WebKit.
 
+The preview card is drawn from the site's own logo and fonts by `design/og-image/card.html` and captured by `npm run og-image`, which writes `public/og-image.png` and fails if it reaches WhatsApp's 300 KB limit. Everything on it sits inside the center square, since some apps crop previews to one. Apps cache previews for a long time, so a changed card should get a new filename, with the `og:image` and `twitter:image` tags updated to match.
+
 ## Stack
 
 - **Node.js** 22.22 or newer (React Router 8 and Vite 8 require it)

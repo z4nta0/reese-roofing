@@ -22,6 +22,11 @@ isn't a real business, so it gets the demo treatment rather than local SEO:
   and `public/og-image.png` (1200x630) call it a portfolio demo by
   techgeek.support, and the footer says the company is fictional, linking
   to techgeek.support. The 404 page renders its own `<title>`.
+- **Social preview card**: per the user-level "## Social Previews" rule,
+  `design/og-image/card.html` (outside the served tree) is captured by `npm
+  run og-image` (`design/og-image/render.mts`, type checked through
+  `tsconfig.test.json`, since it drives a browser) into `public/og-image.png`,
+  with every element inside the center 630x630 square.
 - **Structured data**: one `WebSite` JSON-LD block about a fictional company,
   created by techgeek.support. Never `LocalBusiness`, an address, or a phone.
 - **Placeholders stay reserved**: the phone is a 555-01xx number and the
