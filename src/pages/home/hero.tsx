@@ -168,7 +168,7 @@ function HerSecCom () : React.JSX.Element {
 				<div className={ cssModObj.herBotDiv }>{ /* What: Hero Bottom Div Element. Why: The pitch and the calls to action share the second row. How: This sets them side by side. */ }
 
 
-					<p className={ cssModObj.herLedPar }>{ /* What: Hero Lede Paragraph Element. Why: The pitch says who the company serves and what it promises. How: This uses the site's lede style. */ }
+					<p className={ cssModObj.secLedPar }>{ /* What: Section Lede Paragraph Element. Why: The pitch says who the company serves and what it promises. How: This uses the site's lede style. */ }
 						Reese Roofing serves businesses, property managers, and homeowners across
 						Lawrence and the surrounding region, delivering installations and repairs
 						that hold up to Kansas wind, sun, and storm.

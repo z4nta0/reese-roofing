@@ -30,9 +30,9 @@
 }
 
 
-/* #region notFouMai */
+/* #region nofConMai */
 
-.notFouMai { /* What: Not Found Main. Why: The page's one message sits in the middle of the screen. How: This grows to fill the page column between the bar and the footer and centers a spaced column in it, its top padding clearing the fixed bar the way the hero's does. */
+.nofConMai { /* What: Not-Found Content Main. Why: The page's one message sits in the middle of the screen. How: This grows to fill the page column between the bar and the footer and centers a spaced column in it, its top padding clearing the fixed bar the way the hero's does. */
 
 
 	align-items     : center;
@@ -74,9 +74,9 @@
 }
 
 
-/* #region notFouHea */
+/* #region nofTitHea */
 
-.notFouHea { /* What: Not Found Heading. Why: The heading states the problem in large display type. How: This sets it in the display font at its largest optical size, scaling with the viewport between two bounds. */
+.nofTitHea { /* What: Not-Found Title Heading. Why: The heading states the problem in large display type. How: This sets it in the display font at its largest optical size, scaling with the viewport between two bounds. */
 
 
 	color                   : var( --tex-mai-col );                                     /* Text Main Color = #1a1f24 */
@@ -100,10 +100,10 @@
 
 }
 
-/* #endregion notFouHea */
+/* #endregion nofTitHea */
 
 
-.nofLedPar { /* What: Not-Found Lede Paragraph. Why: The explanation reads as a short lead paragraph. How: This sets it in the body font, a little larger than body text, at a comfortable measure. */
+.secLedPar { /* What: Section Lede Paragraph. Why: The explanation reads as a short lead paragraph. How: This sets it in the body font, a little larger than body text, at a comfortable measure. */
 
 
 	color       : var( --tex-sec-col );                                       /* Text Secondary Color = #2a3138 */
@@ -231,7 +231,7 @@
 
 /* #endregion nofActDiv */
 
-/* #endregion notFouMai */
+/* #endregion nofConMai */
 
 /* #endregion nofPagDiv */
 

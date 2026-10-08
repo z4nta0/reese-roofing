@@ -189,7 +189,7 @@ function ConSecCom () : React.JSX.Element {
 						your <em className={ cssModObj.titAccEmp }>roof</em>.
 					</h2>
 
-					<p className={ cssModObj.conLedPar }>{ /* What: Contact Lede Paragraph Element. Why: Visitors should know what happens after they reach out. How: This promises an assessment and a reply within a business day. */ }
+					<p className={ cssModObj.secLedPar }>{ /* What: Section Lede Paragraph Element. Why: Visitors should know what happens after they reach out. How: This promises an assessment and a reply within a business day. */ }
 						Tell us a bit about your project. We'll schedule an on-site assessment and
 						get back to you within one business day with next steps.
 					</p>

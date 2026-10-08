@@ -132,7 +132,7 @@
 /* #endregion serTitHea */
 
 
-.serLedPar { /* What: Services Lede Paragraph. Why: The lede says how every project starts, beside the heading. How: This sets it in the body font, a little larger than body text, in the second column. */
+.secLedPar { /* What: Section Lede Paragraph. Why: The lede says how every project starts, beside the heading. How: This sets it in the body font, a little larger than body text, in the second column. */
 
 
 	color          : var( --tex-sec-col );                                       /* Text Secondary Color = #2a3138 */
@@ -145,10 +145,10 @@
 
 
 }
-@container app ( max-width : 960px ) { /* What: Narrow Services Lede Paragraph. Why: The stacked head has one column. How: This applies below 960px wide. */
+@container app ( max-width : 960px ) { /* What: Narrow Section Lede Paragraph. Why: The stacked head has one column. How: This applies below 960px wide. */
 
 
-	.serLedPar { /* What: Stacked Services Lede Paragraph. Why: The lede moves under the heading. How: This puts it in column 1. */
+	.secLedPar { /* What: Stacked Section Lede Paragraph. Why: The lede moves under the heading. How: This puts it in column 1. */
 
 
 		grid-column : 1;

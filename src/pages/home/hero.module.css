@@ -392,7 +392,7 @@
 
 }
 
-.herLedPar { /* What: Hero Lede Paragraph. Why: The pitch reads as the hero's lead paragraph. How: This sets it in the body font, a little larger than body text, at a comfortable measure. */
+.secLedPar { /* What: Section Lede Paragraph. Why: The pitch reads as the hero's lead paragraph. How: This sets it in the body font, a little larger than body text, at a comfortable measure. */
 
 
 	color       : var( --tex-sec-col );                                       /* Text Secondary Color = #2a3138 */
@@ -606,7 +606,7 @@
 
 	color          : var( --tex-mut-col );                   /* Text Muted Color = #6b7079 */
 	font-size      : calc( var( --cdn-pow-002-rec ) * 1em ); /* Core-Design-Number to the Power of 2 Reciprocal ~= 0.570 */
-	margin-left    : 0.1em;
+	margin-left    : calc( var( --cdn-pow-008-rec ) * 1em ); /* Core-Design-Number to the Power of 8 Reciprocal ~= 0.105 */
 	vertical-align : calc( var( --cdn-pow-003-rec ) * 1em ); /* Core-Design-Number to the Power of 3 Reciprocal ~= 0.430 */
 
 
@@ -618,7 +618,7 @@
 	color          : var( --acc-mai-col );                   /* Accent Main Color = #1f4e7a */
 	font-size      : calc( var( --cdn-pow-002-rec ) * 1em ); /* Core-Design-Number to the Power of 2 Reciprocal ~= 0.570 */
 	font-style     : italic;
-	margin-left    : 0.1em;
+	margin-left    : calc( var( --cdn-pow-008-rec ) * 1em ); /* Core-Design-Number to the Power of 8 Reciprocal ~= 0.105 */
 	vertical-align : calc( var( --cdn-pow-003-rec ) * 1em ); /* Core-Design-Number to the Power of 3 Reciprocal ~= 0.430 */
 
 

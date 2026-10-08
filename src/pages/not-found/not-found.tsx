@@ -79,17 +79,17 @@ function NotFouCom () : React.JSX.Element {
 			<main
 				id='top'
 
-				className={ cssModObj.notFouMai }
-			>{ /* What: Not Found Main Element. Why: The page's one message is its main content. How: This centers a single column in the space between the bar and the footer, and its id, kept as top since it's a navigation target, is where the footer's back-to-top link lands. */ }
+				className={ cssModObj.nofConMai }
+			>{ /* What: Not-Found Content Main Element. Why: The page's one message is its main content. How: This centers a single column in the space between the bar and the footer, and its id, kept as top since it's a navigation target, is where the footer's back-to-top link lands. */ }
 
 
 				<span className={ cssModObj.eyeLabSpa }>Error 404</span>{ /* What: Error Label Span Element. Why: A small label names the error before the heading. How: This uses the site's eyebrow style. */ }
 
-				<h1 className={ cssModObj.notFouHea }>{ /* What: Not Found Heading Element. Why: The page's heading states the problem plainly. How: This sets it in the display style, sized to the viewport between two bounds by its module class. */ }
+				<h1 className={ cssModObj.nofTitHea }>{ /* What: Not-Found Title Heading Element. Why: The page's heading states the problem plainly. How: This sets it in the display style, sized to the viewport between two bounds by its module class. */ }
 					Page not <em className={ cssModObj.titAccEmp }>found</em>.
 				</h1>
 
-				<p className={ cssModObj.nofLedPar }>The page you're looking for doesn't exist. Let's get you back home.</p>{ /* What: Explanation Paragraph Element. Why: Visitors should know what happened and what to do next. How: This uses the site's lede style. */ }
+				<p className={ cssModObj.secLedPar }>The page you're looking for doesn't exist. Let's get you back home.</p>{ /* What: Section Lede Paragraph Element. Why: Visitors should know what happened and what to do next. How: This uses the site's lede style. */ }
 
 				<div className={ cssModObj.nofActDiv }>{ /* What: Not-Found Actions Div Element. Why: The page's two ways onward sit together. How: This holds the return and estimate buttons side by side, wrapping if needed. */ }
 

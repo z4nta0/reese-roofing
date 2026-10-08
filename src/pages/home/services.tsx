@@ -187,7 +187,7 @@ function SerSecCom () : React.JSX.Element {
 						roofing <em className={ cssModObj.titAccEmp }>specialties</em>.
 					</h2>
 
-					<p className={ cssModObj.serLedPar }>{ /* What: Services Lede Paragraph Element. Why: The lede says how every project starts. How: This uses the site's lede style. */ }
+					<p className={ cssModObj.secLedPar }>{ /* What: Section Lede Paragraph Element. Why: The lede says how every project starts. How: This uses the site's lede style. */ }
 						From new construction to emergency repair, every project starts with an
 						on-site assessment and a clear, line-itemed proposal, so you know exactly
 						what's being installed and why.
