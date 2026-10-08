@@ -105,6 +105,7 @@ for ( const rouRcdObj of ROU_RCD_ARR ) { // What: Route Test Loop. Why: Every ro
 
 		await expect( curPagObj ).toHaveTitle( rouRcdObj.titStr );                                                                     // What: Title Assertion. Why: Each route names itself, saying it's a demo. How: This waits for the route's exact title.
 		await expect( curPagObj.locator( 'meta[name="robots"]' ) ).toHaveAttribute( 'content', /noindex/ );                            // What: Robots Assertion. Why: A fictional company must stay out of search results. How: This checks the robots meta asks for noindex.
+		await expect( curPagObj.locator( 'meta[name="author"]' ) ).toHaveAttribute( 'content', 'techgeek.support' );                   // What: Author Assertion. Why: The page should name its real builder rather than the fictional company. How: This checks the author meta names techgeek.support.
 		await expect( curPagObj.locator( 'meta[name="description"]' ) ).toHaveAttribute( 'content', /fictional/ );                     // What: Description Assertion. Why: Any summary of the page should say the company isn't real. How: This checks the description calls it fictional.
 		await expect( curPagObj.locator( 'link[rel="canonical"]' ) ).toHaveAttribute( 'href', LIV_URL_STR );                           // What: Canonical Assertion. Why: Every address the site answers at should point at the live one. How: This checks the canonical link names it.
 		await expect( curPagObj.locator( 'meta[property="og:url"]' ) ).toHaveAttribute( 'content', LIV_URL_STR );                      // What: Open Graph URL Assertion. Why: Shared links should count as one page. How: This checks the social URL names the live address.
@@ -158,8 +159,8 @@ test( 'the social preview tags are complete', async ( { page : curPagObj } ) => 
 	expect( [ socTagObj[ 'og:image' ], socTagObj[ 'og:url' ], socTagObj[ 'twitter:image' ] ] ).toEqual( [ `${ LIV_URL_STR }og-image.png`, LIV_URL_STR, `${ LIV_URL_STR }og-image.png` ] ); // What: Absolute URLs Assertion. Why: Scrapers can't resolve a relative address. How: This checks each URL tag names the live https address.
 	expect( socTagObj[ 'og:image:type' ] ).toBe( 'image/png' );                          // What: Image Type Assertion. Why: The tag has to match the file. How: This checks it names a PNG.
 	expect( socTagObj[ 'og:title' ].length ).toBeLessThanOrEqual( 60 );                  // What: Title Length Assertion. Why: Longer titles are cut off in most cards. How: This checks it stays at 60 characters or fewer.
-	expect( socTagObj[ 'og:description' ].length ).toBeGreaterThanOrEqual( 110 );        // What: Description Minimum Assertion. Why: A very short summary wastes the card's space. How: This checks it reaches 110 characters.
-	expect( socTagObj[ 'og:description' ].length ).toBeLessThanOrEqual( 160 );           // What: Description Maximum Assertion. Why: Longer summaries are cut off. How: This checks it stays at 160 characters or fewer.
+	expect( socTagObj[ 'og:description' ].length ).toBeGreaterThanOrEqual( 100 );        // What: Description Minimum Assertion. Why: A very short summary wastes the card's space. How: This checks it reaches 100 characters.
+	expect( socTagObj[ 'og:description' ].length ).toBeLessThanOrEqual( 125 );           // What: Description Maximum Assertion. Why: Mobile cards cut a summary off around 125 characters. How: This checks it stays at 125 characters or fewer.
 
 
 } );
