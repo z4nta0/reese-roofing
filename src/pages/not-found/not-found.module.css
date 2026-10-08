@@ -5,11 +5,11 @@
  * not-found.module.css = Not Found Page Module
  *
  * @summary
- * Styles for NotFouCom: one full-height, centered column holding the error
- * label, the heading, the explanation, and the button home. The layout used
- * to be inline styles, and the label, heading, paragraph, and button borrowed
- * the shared eyebrow, display, lede, button, and arrow classes from the
- * global stylesheet; all of it is copied onto the page's own classes here.
+ * Styles for NotFouCom: a page column at least the screen's height, holding
+ * the shared bar and footer around a centered main column with the error
+ * label, the heading, the explanation, and the two buttons onward. The label,
+ * heading, paragraph, and buttons copy the shared eyebrow, display, lede,
+ * button, and arrow styles onto the page's own classes.
  *
  * @author z4nta0 <https://github.com/z4nta0>
  *
@@ -17,18 +17,31 @@
 
 
 
+/* #region nofPagDiv */
+
+.nofPagDiv { /* What: Not-Found Page Div. Why: The footer should sit at the bottom of the screen on a page this short. How: This stacks the bar, main content, and footer in a column at least the viewport's height. */
+
+
+	display        : flex;
+	flex-direction : column;
+	min-height     : 100vh;
+
+
+}
+
+
 /* #region notFouMai */
 
-.notFouMai { /* What: Not Found Main. Why: The page's one message sits in the middle of the screen. How: This centers a spaced column in the full viewport height. */
+.notFouMai { /* What: Not Found Main. Why: The page's one message sits in the middle of the screen. How: This grows to fill the page column between the bar and the footer and centers a spaced column in it, its top padding clearing the fixed bar the way the hero's does. */
 
 
 	align-items     : center;
 	display         : flex;
 	flex-direction  : column;
-	gap             : var( --spa-ver-p02 );                                                                           /* Spacing Vertical Base Plus 2 ~= 25.572px */
+	gap             : var( --spa-ver-p02 ); /* Spacing Vertical Base Plus 2 ~= 25.572px */
 	justify-content : center;
-	min-height      : 100vh;
-	padding         : var( --spa-ver-p03 ) clamp( var( --spa-hor-p01 ), var( --hor-rhy-012 ), var( --spa-hor-p03 ) ); /* Spacing Vertical Base Plus 3 ~= 33.876px, Spacing Horizontal Base Plus 1 ~= 19.304px, Horizontal Rhythm 12 ~= 28.278px @ 1920px width, Spacing Horizontal Base Plus 3 ~= 33.876px */
+	flex            : 1;
+	padding         : calc( var( --sec-ver-pad ) + var( --spa-ver-p04 ) ) clamp( var( --spa-hor-p01 ), var( --hor-rhy-012 ), var( --spa-hor-p03 ) ) var( --sec-ver-pad ); /* Section Vertical Padding, about 78.749px to 138.200px, Spacing Vertical Base Plus 4 ~= 44.876px, Spacing Horizontal Base Plus 1 ~= 19.304px, Horizontal Rhythm 12 ~= 28.278px @ 1920px width, Spacing Horizontal Base Plus 3 ~= 33.876px */
 	text-align      : center;
 
 
@@ -103,22 +116,39 @@
 }
 
 
+
+
+/* #region nofActDiv */
+
+.nofActDiv { /* What: Not-Found Actions Div. Why: The page's two ways onward sit together. How: This sets the buttons side by side, centered, wrapping if needed. */
+
+
+	display         : flex;
+	flex-wrap       : wrap;
+	gap             : var( --spa-ver-m01 ) var( --spa-hor-m01 ); /* Spacing Vertical Base Minus 1 = 11px, Spacing Horizontal Base Minus 1 = 11px */
+	justify-content : center;
+	margin-top      : var( --spa-ver-m02 );                      /* Spacing Vertical Base Minus 2 ~= 8.304px */
+
+
+}
+
+
 /* #region butBasAnc */
 
-.butBasAnc { /* What: Button Base Anchor. Why: The way home uses the site's pill button shape. How: This draws a rounded pill whose height comes from its line height alone, with its label and arrow side by side, easing its colors and lift on hover. */
+.butBasAnc { /* What: Button Base Anchor. Why: The page's two buttons use the site's pill button shape. How: This draws a rounded pill whose height comes from its line height alone, with its label and arrow side by side, easing its colors and lift on hover. */
 
 
 	align-items    : center;
-	border         : var( --bor-wid-bas ) solid transparent;                                                                          /* Border Width Base ~= 1.160px */
+	border         : var( --bor-wid-bas ) solid transparent;                                      /* Border Width Base ~= 1.160px */
 	border-radius  : 999px;
 	display        : inline-flex;
-	font-size      : var( --fon-siz-p01 );                                                                                            /* Font Size Base Plus 1 ~= 14.572px */
+	font-size      : var( --fon-siz-p01 );                                                        /* Font Size Base Plus 1 ~= 14.572px */
 	font-weight    : 500;
-	gap            : var( --spa-hor-m01 );                                                                                            /* Spacing Horizontal Base Minus 1 = 11px */
+	gap            : var( --spa-hor-m01 );                                                        /* Spacing Horizontal Base Minus 1 = 11px */
 	letter-spacing : 0.02em;
-	line-height    : calc( var( --ver-rhy-p04 ) * 1rem );                                                                             /* Vertical Rhythm Base Plus 4 ~= 44.876px */
-	padding        : 0 clamp( var( --spa-hor-p01 ), var( --hor-rhy-012 ), var( --spa-hor-p03 ) );                                     /* Spacing Horizontal Base Plus 1 ~= 19.304px, Horizontal Rhythm 12 ~= 28.278px @ 1920px width, Spacing Horizontal Base Plus 3 ~= 33.876px */
-	transition     : background-color var( --dur-tra-p02 ) var( --mot-dec-eas ), transform var( --dur-tra-p02 ) var( --mot-dec-eas ); /* Duration Transition Base Plus 2 ~= 277.0ms, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ) */
+	line-height    : calc( var( --ver-rhy-p04 ) * 1rem );                                         /* Vertical Rhythm Base Plus 4 ~= 44.876px */
+	padding        : 0 clamp( var( --spa-hor-p01 ), var( --hor-rhy-012 ), var( --spa-hor-p03 ) ); /* Spacing Horizontal Base Plus 1 ~= 19.304px, Horizontal Rhythm 12 ~= 28.278px @ 1920px width, Spacing Horizontal Base Plus 3 ~= 33.876px */
+	transition     : background-color var( --dur-tra-p02 ) var( --mot-dec-eas ), border-color var( --dur-tra-p02 ) var( --mot-dec-eas ), color var( --dur-tra-p02 ) var( --mot-dec-eas ), transform var( --dur-tra-p02 ) var( --mot-dec-eas ); /* Duration Transition Base Plus 2 ~= 277.0ms, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ) */
 	white-space    : nowrap;
 
 
@@ -136,6 +166,23 @@
 
 	background : var( --acc-mai-col ); /* Accent Main Color = #1f4e7a */
 	transform  : translateY( -1px );
+
+
+}
+.butBasAnc--ghost { /* What: Ghost Button Base Anchor. Why: The estimate button is the page's secondary action. How: This outlines it with no fill. */
+
+
+	border-color : var( --bor-str-col ); /* Border Strong Color, the main border at 0.22 opacity */
+	color        : var( --tex-mai-col ); /* Text Main Color = #1a1f24 */
+
+
+}
+.butBasAnc--ghost:hover { /* What: Hovered Ghost Button Base Anchor. Why: The button should respond to the pointer. How: This fills it with ink and turns its text paper-colored. */
+
+
+	background   : var( --bac-inv-col ); /* Background Inverse Color = #1a1f24 */
+	border-color : var( --bac-inv-col ); /* Background Inverse Color = #1a1f24 */
+	color        : var( --bac-pag-col ); /* Background Page Color = #f5f2ec */
 
 
 }
@@ -183,6 +230,10 @@
 
 /* #endregion butBasAnc */
 
+/* #endregion nofActDiv */
+
 /* #endregion notFouMai */
+
+/* #endregion nofPagDiv */
 
 

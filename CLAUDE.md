@@ -49,7 +49,7 @@ reorganization, ESLint setup, config rebuild, and dependency upgrades.
 3. **Design-system pass** (done 2026-10-07): custom properties renamed and
    moved onto tokens, per "### Custom property naming", with horizontal sizes
    decided below.
-4. **404 page**: rebuilt with Nav and Footer from `ui/`, written to the rules
+4. **404 page** (done 2026-10-07): rebuilt with Nav and Footer from `ui/`, written to the rules
    from its first line.
 
 Applied original intent (kept by the user, 2026-10-07): the CSS module pass
