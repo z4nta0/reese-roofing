@@ -9,7 +9,7 @@ Live at [reese-roofing.netlify.app](https://reese-roofing.netlify.app/). Its pho
 Since the company isn't real, the site is set up to stay out of search results and AI answers, and to say what it is wherever it's read:
 
 - **Kept out of search:** a `noindex` robots meta tag on every page and an `X-Robots-Tag: noindex` header on every file (`public/_headers`), with no sitemap. `public/robots.txt` lets search crawlers in so they can read the `noindex`, and disallows AI training and AI answer crawlers.
-- **Says it's a demo:** the page title, description, Open Graph and Twitter card tags, and the 1200x630 preview card (`public/og-image.png`) all call it a portfolio demo by techgeek.support, so shared links preview honestly. A line in the footer says the company is fictional.
+- **Says it's a demo:** the page title, description, author tag (naming techgeek.support), Open Graph and Twitter card tags, and the 1200x630 preview card (`public/og-image.png`) all call it a portfolio demo by techgeek.support, so shared links preview honestly. A line in the footer says the company is fictional.
 - **No business data:** the JSON-LD structured data describes a `WebSite` about a fictional company, with no `LocalBusiness` type, address, or phone.
 
 `npm run test:seo` checks all of this in Chromium, Firefox, and WebKit.
