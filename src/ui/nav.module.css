@@ -217,14 +217,11 @@
 
 /* #region navLinNav */
 
-.navLinNav { /* What: Navigation Links Nav. Why: The section links sit in the exact middle of the bar, whatever the width of its sides. How: This centers the row absolutely against the bar. */
+.navLinNav { /* What: Navigation Links Nav. Why: The section links sit between the brand and the bar's actions, taking their share of the row so they never run into either side. How: This lays the links out in a row inside the bar's own flex row, whose spacing centers it between its neighbors. */
 
 
-	display   : flex;
-	gap       : var( --spa-hor-p03 ); /* Spacing Horizontal Base Plus 3 ~= 33.876px */
-	left      : 50%;
-	position  : absolute;
-	transform : translateX( -50% );
+	display : flex;
+	gap     : var( --spa-hor-p03 ); /* Spacing Horizontal Base Plus 3 ~= 33.876px */
 
 
 }
