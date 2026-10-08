@@ -547,7 +547,7 @@
 .forFinPar { /* What: Form Fine Paragraph. Why: The consent note should read as a quiet footnote to the form. How: This sets it small and faded. */
 
 
-	color       : oklch( from var( --bac-pag-col ) l c h / var( --cdn-pow-003-rec ) ); /* Background Page Color = #f5f2ec, Core-Design-Number to the Power of 3 Reciprocal ~= 0.430 */
+	color       : oklch( from var( --bac-pag-col ) l c h / var( --cdn-pow-002-rec ) ); /* Background Page Color = #f5f2ec, Core-Design-Number to the Power of 2 Reciprocal ~= 0.570 */
 	font-size   : var( --fon-siz-bas );                                                /* Font Size Base = 11px */
 	line-height : var( --ver-rhy-bas );                                                /* Vertical Rhythm Base ~= 1.325 */
 
