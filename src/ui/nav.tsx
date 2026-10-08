@@ -262,7 +262,13 @@ function NavBarCom () : React.JSX.Element {
 						>{ /* What: Drawer Link Anchor Element. Why: Each link jumps to its section. How: This links to the row's anchor and closes the drawer behind it. */ }
 
 
-							<span className={ cssModObj.draNumSpa }>{ String( linIndNum + 1 ).padStart( 2, '0' ) }</span>{ /* What: Drawer Number Span Element. Why: The rows are numbered like the sections they lead to. How: This shows the row's position, padded to two digits. */ }
+							<span
+								className={ cssModObj.draNumSpa }
+
+								aria-hidden='true'
+							>{ /* What: Drawer Number Span Element. Why: The rows are numbered like the sections they lead to. How: This shows the row's position, padded to two digits, hidden from screen readers since the number is only visual and the row's label names it. */ }
+								{ String( linIndNum + 1 ).padStart( 2, '0' ) }{ /* What: Padded Row Number. Why: Each row shows its position as two digits, matching the sections' numbered labels. How: This adds 1 to the zero-based index and pads it with a leading zero. */ }
+							</span>
 
 							<span className={ cssModObj.draLabSpa }>{ navLinObj.labStr }</span>{ /* What: Drawer Label Span Element. Why: The section's name is the row's main text. How: This prints the row's label. */ }
 
