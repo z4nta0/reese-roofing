@@ -1,7 +1,6 @@
 
 
 
-
 // #region Imports
 
 import type { Page } from '@playwright/test'; // What: Page. Why: Opening a state drives a Playwright page. How: This types opeStaFun's page parameter.
@@ -53,12 +52,14 @@ type StaRcdTyp = { // What: State Record Type. Why: Every check reads the same d
 
 // #region Constants
 
+// #region STA_RCD_ARR
+
 /**
  * STA_RCD_ARR = State Record Array
  *
  * @summary
  * Every state the checks visit: each route at a phone width (390px) and a
- * desktop width (1440px), plus the mobile drawer open at the phone width,
+ * desktop width (1,440px), plus the mobile drawer open at the phone width,
  * since the drawer is only reachable there. The 404 page is reached through
  * an address the site doesn't have, the way a visitor would land on it.
  * Every row shares the {@link StaRcdTyp} shape, so its fields carry no
@@ -77,9 +78,9 @@ type StaRcdTyp = { // What: State Record Type. Why: Every check reads the same d
 const STA_RCD_ARR : StaRcdTyp[] = [ // What: State Record Array. Why: Every check walks the same list of states, so a new state is added in one place. How: Each row names a state, its path, and its viewport, and the drawer row adds the action that opens it.
 
 
-	{ heiNum : 900, ideStr : 'home-desktop',      patStr : '/',        widNum : 1440 }, // What: Home Desktop State. Why: Most visitors on a computer land here. How: This loads the home page at 1440px.
+	{ heiNum : 900, ideStr : 'home-desktop',      patStr : '/',        widNum : 1440 }, // What: Home Desktop State. Why: Most visitors on a computer land here. How: This loads the home page at 1,440px.
 	{ heiNum : 844, ideStr : 'home-phone',        patStr : '/',        widNum : 390  }, // What: Home Phone State. Why: The phone layout stacks every section and hides the bar's links behind the menu. How: This loads the home page at 390px.
-	{ heiNum : 900, ideStr : 'not-found-desktop', patStr : '/missing', widNum : 1440 }, // What: Not Found Desktop State. Why: A mistyped address should be as usable as any page. How: This loads an unknown path at 1440px.
+	{ heiNum : 900, ideStr : 'not-found-desktop', patStr : '/missing', widNum : 1440 }, // What: Not Found Desktop State. Why: A mistyped address should be as usable as any page. How: This loads an unknown path at 1,440px.
 	{ heiNum : 844, ideStr : 'not-found-phone',   patStr : '/missing', widNum : 390  }, // What: Not Found Phone State. Why: The 404 page has its own phone layout. How: This loads an unknown path at 390px.
 
 	{ // What: Drawer Phone State. Why: The open drawer holds the phone's only copy of the links, contact details, and estimate button. How: This loads the home page at 390px and opens the menu through its toggle button.
@@ -97,6 +98,8 @@ const STA_RCD_ARR : StaRcdTyp[] = [ // What: State Record Array. Why: Every chec
 
 
 ];
+
+// #endregion STA_RCD_ARR
 
 // #endregion Constants
 

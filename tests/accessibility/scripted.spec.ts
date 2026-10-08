@@ -1,7 +1,6 @@
 
 
 
-
 // #region Imports
 
 import { expect      } from '@playwright/test';     // What: Expect. Why: Each check passes only with no problems found. How: This asserts each problem list is empty.
@@ -32,7 +31,6 @@ import type { Page } from '@playwright/test'; // What: Page. Why: Every helper d
  * every problem found, by element.
  *
  * Sections:
- *  - Types
  *  - Constants
  *  - Helpers
  *  - Module Init
@@ -43,29 +41,11 @@ import type { Page } from '@playwright/test'; // What: Page. Why: Every helper d
 
 
 
-// #region Types
-
-type StoInfTyp = { // What: Stop Information Type. Why: The keyboard walk judges each stop outside the page. How: This describes what the page reports about one stop.
-
-
-	covBoo : boolean, // What: Covered Boolean. Why: A stop hidden behind another element can't be seen while focused. How: This is true when something else sits on top of the stop's center.
-	desStr : string,  // What: Description String. Why: A problem should name the element a person would recognize. How: This joins the stop's tag and its label or text.
-	indBoo : boolean, // What: Indicator Boolean. Why: A keyboard user has to see where focus is. How: This is true when focusing the stop changes how it looks.
-	ordNum : number,  // What: Order Number. Why: Focus order is compared with document order. How: This is the stop's position among every element in the page.
-	visBoo : boolean  // What: Visible Boolean. Why: A stop off screen leaves a keyboard user lost. How: This is true when the stop has a size and overlaps the viewport.
-
-
-};
-
-// #endregion Types
-
-
-
 // #region Constants
 
 const GLY_DEC_REG = /[←↑→↓·•]/; // What: Glyph Decorative Regular Expression. Why: A decorative glyph inside a name is read aloud as noise, such as right arrow. How: This matches the arrows and dots the site draws as decoration.
-const REF_WID_NUM = 320;         // What: Reflow Width Number. Why: WCAG's reflow criterion asks for no sideways scrolling at 320 CSS pixels, the width of 1280px at 400% zoom. How: This is the viewport width the reflow check opens each state at.
-const TAB_MAX_NUM = 80;          // What: Tab Maximum Number. Why: A keyboard trap would otherwise keep the walk going forever. How: This caps the walk at far more Tab presses than the site has stops.
+const REF_WID_NUM = 320;        // What: Reflow Width Number. Why: WCAG's reflow criterion asks for no sideways scrolling at 320 CSS pixels, the width of 1,280px at 400% zoom. How: This is the viewport width the reflow check opens each state at.
+const TAB_MAX_NUM = 80;         // What: Tab Maximum Number. Why: A keyboard trap would otherwise keep the walk going forever. How: This caps the walk at far more Tab presses than the site has stops.
 
 // #endregion Constants
 
@@ -102,7 +82,7 @@ const TAB_MAX_NUM = 80;          // What: Tab Maximum Number. Why: A keyboard tr
 async function namProFun ( curPagObj : Page ) : Promise< string[] > {
 
 
-	const ariSnaStr = await curPagObj.locator( 'body' ).ariaSnapshot();   // What: Aria Snapshot String. Why: The accessibility tree shows each control's role and announced name. How: This reads the body's tree as text, one node per line.
+	const ariSnaStr = await curPagObj.locator( 'body' ).ariaSnapshot();    // What: Aria Snapshot String. Why: The accessibility tree shows each control's role and announced name. How: This reads the body's tree as text, one node per line.
 	const conLinArr = ariSnaStr.match( /- (link|button)\b[^\n]*/g ) || []; // What: Control Line Array. Why: Only links and buttons are checked here. How: This keeps every tree line for one of those roles.
 
 	const proLisArr : string[] = []; // What: Problem List Array. Why: Every problem should be reported, not just the first. How: This collects them.
@@ -112,7 +92,6 @@ async function namProFun ( curPagObj : Page ) : Promise< string[] > {
 
 
 		const conNamStr = ( conLinStr.match( /"([^"]*)"/ ) || [] )[ 1 ] || ''; // What: Control Name String. Why: The announced name sits in quotes after the role. How: This takes the quoted text, or an empty name when there's none.
-
 
 
 		if ( !conNamStr.trim() ) proLisArr.push( `${ conLinStr } has no name` ); // What: Missing Name Check. Why: A control with no name is announced as just its role. How: This records the line when its name is empty.
@@ -203,6 +182,18 @@ function scrSetFun () : Promise< void > {
 
 
 
+type StoInfTyp = { // What: Stop Information Type. Why: The keyboard walk judges each stop outside the page. How: This describes what the page reports about one stop.
+
+
+	covBoo : boolean, // What: Covered Boolean. Why: A stop hidden behind another element can't be seen while focused. How: This is true when something else sits on top of the stop's center.
+	desStr : string,  // What: Description String. Why: A problem should name the element a person would recognize. How: This joins the stop's tag and its label or text.
+	indBoo : boolean, // What: Indicator Boolean. Why: A keyboard user has to see where focus is. How: This is true when focusing the stop changes how it looks.
+	ordNum : number,  // What: Order Number. Why: Focus order is compared with document order. How: This is the stop's position among every element in the page.
+	visBoo : boolean  // What: Visible Boolean. Why: A stop off screen leaves a keyboard user lost. How: This is true when the stop has a size and overlaps the viewport.
+
+
+};
+
 // #region stoInfFun
 
 /**
@@ -237,10 +228,14 @@ function stoInfFun () : StoInfTyp | null {
 
 
 	const actCurEle = document.activeElement as HTMLElement | null; // What: Active Current Element. Why: The stop is whatever holds focus after the press. How: This reads the focused element. // What: Type Assertion Note. Why: activeElement types as Element, which has no blur or focus. How: Every element that can hold focus on this site is an HTMLElement.
+	const actBodBoo = actCurEle === document.body;                  // What: Active Body Boolean. Why: Focus resting on the body means no stop holds it. How: This compares the focused element with the body.
+	const actMisBoo = !actCurEle;                                   // What: Active Missing Boolean. Why: Some engines report no focused element at all once focus leaves. How: This is true when there is none.
+	const docBluBoo = !document.hasFocus();                         // What: Document Blurred Boolean. Why: Focus can leave for the browser's own interface. How: This is true when the document no longer has focus.
+
+	const walDonBoo = actMisBoo || actBodBoo || docBluBoo; // What: Walk Done Boolean. Why: Any of the three means the walk has left the page. How: This combines them.
 
 
-
-	if ( !actCurEle || actCurEle === document.body || !document.hasFocus() ) return null; // What: Walk End Guard. Why: Focus on the body, nowhere, or outside the document means the walk has left the page. How: This returns null to end the walk.
+	if ( walDonBoo ) return null; // What: Walk End Guard. Why: Focus on the body, nowhere, or outside the document means the walk has left the page. How: This returns null to end the walk.
 
 
 
@@ -273,6 +268,23 @@ function stoInfFun () : StoInfTyp | null {
 	const topCurEle = document.elementFromPoint( recCurObj.left + recCurObj.width / 2, recCurObj.top + recCurObj.height / 2 ); // What: Top Current Element. Why: Whatever is drawn on top at the stop's center is what a person sees there. How: This asks the page which element sits at that point.
 
 
+	const ariLabStr = actCurEle.getAttribute( 'aria-label' ); // What: Aria Label String. Why: A stop's own label names it best. How: This reads its aria-label, or null.
+	const eleIdeStr = actCurEle.id;                           // What: Element Identifier String. Why: A form field without a label is still recognizable by its id. How: This reads the stop's id, empty when it has none.
+	const eleTexStr = actCurEle.textContent;                  // What: Element Text String. Why: A link or button is usually named by its text. How: This reads the stop's text.
+
+	const stoLabStr = ariLabStr || eleIdeStr || eleTexStr || ''; // What: Stop Label String. Why: A problem should name the stop the way a person would recognize it. How: This takes the label, then the id, then the text, then nothing.
+
+
+	const botBelBoo = recCurObj.bottom > 0;        // What: Bottom Below Boolean. Why: A stop entirely above the viewport is off screen. How: This is true when its bottom edge sits below the viewport's top.
+	const heiPosBoo = recCurObj.height > 0;        // What: Height Positive Boolean. Why: A stop with no height can't be seen. How: This is true when it has some height.
+	const lefInsBoo = recCurObj.left < innerWidth; // What: Left Inside Boolean. Why: A stop entirely right of the viewport is off screen. How: This is true when its left edge sits inside the viewport's width.
+	const rigInsBoo = recCurObj.right > 0;         // What: Right Inside Boolean. Why: A stop entirely left of the viewport is off screen. How: This is true when its right edge sits past the viewport's left.
+	const topAboBoo = recCurObj.top < innerHeight; // What: Top Above Boolean. Why: A stop entirely below the viewport is off screen. How: This is true when its top edge sits above the viewport's bottom.
+	const widPosBoo = recCurObj.width > 0;         // What: Width Positive Boolean. Why: A stop with no width can't be seen. How: This is true when it has some width.
+
+	const visStoBoo = botBelBoo && heiPosBoo && lefInsBoo && rigInsBoo && topAboBoo && widPosBoo; // What: Visible Stop Boolean. Why: A focused stop has to be on screen. How: This is true when it has a size and overlaps the viewport.
+
+
 
 	return { // What: Stop Information Return. Why: The walk judges each stop outside the page. How: This hands back the stop's coverage, description, indicator, position, and visibility.
 
@@ -281,8 +293,9 @@ function stoInfFun () : StoInfTyp | null {
 		indBoo : focSigStr !== bluSigStr,                                                     // What: Indicator Boolean. Why: A keyboard user has to see where focus is. How: This is true when focusing the stop changes how it looks.
 		ordNum : Array.prototype.indexOf.call( document.querySelectorAll( '*' ), actCurEle ), // What: Order Number. Why: Focus order is compared with document order. How: This is the stop's position among every element in the page.
 
-		desStr : `${ actCurEle.tagName.toLowerCase() } "${ ( actCurEle.getAttribute( 'aria-label' ) || actCurEle.id || actCurEle.textContent || '' ).trim().slice( 0, 40 ) }"`, // What: Description String. Why: A problem should name the element a person would recognize. How: This joins the tag with its label, its id, or its text.
-		visBoo : recCurObj.width > 0 && recCurObj.height > 0 && recCurObj.bottom > 0 && recCurObj.top < innerHeight && recCurObj.right > 0 && recCurObj.left < innerWidth // What: Visible Boolean. Why: A stop off screen leaves a keyboard user lost. How: This is true when the stop has a size and overlaps the viewport.
+		visBoo : visStoBoo,                                                                   // What: Visible Boolean. Why: A stop off screen leaves a keyboard user lost. How: This reads whether the stop has a size and overlaps the viewport.
+
+		desStr : `${ actCurEle.tagName.toLowerCase() } "${ stoLabStr.trim().slice( 0, 40 ) }"` // What: Description String. Why: A problem should name the element a person would recognize. How: This joins the tag with the first 40 characters of its label, id, or text.
 
 
 	};
@@ -333,13 +346,12 @@ async function keyProFun ( curPagObj : Page, engNamStr : string ) : Promise< str
 
 
 	const posTabNum = await curPagObj.locator( '[tabindex]' ).evaluateAll( ( tabEleArr ) => tabEleArr.filter( ( tabCurEle ) => Number( tabCurEle.getAttribute( 'tabindex' ) ) > 0 ).length ); // What: Positive Tabindex Number. Why: A positive tabindex pulls an element ahead of the document order. How: This counts every element carrying one.
-	const tabKeyStr = engNamStr === 'webkit' ? 'Alt+Tab' : 'Tab';                                                                                                          // What: Tab Key String. Why: WebKit skips links on a plain Tab, the way Safari does by default. How: This picks Alt+Tab there and Tab everywhere else.
+	const tabKeyStr = engNamStr === 'webkit' ? 'Alt+Tab' : 'Tab'; // What: Tab Key String. Why: WebKit skips links on a plain Tab, the way Safari does by default. How: This picks Alt+Tab there and Tab everywhere else.
 
 	const proLisArr : string[] = posTabNum ? [ `${ posTabNum } element(s) use a positive tabindex` ] : []; // What: Problem List Array. Why: Every problem should be reported, not just the first. How: This starts with the positive tabindex count, when there is one, and collects the rest during the walk.
 
-	let firStoStr = '';    // What: First Stop String. Why: Focus coming back to the first stop means the walk went all the way around. How: This holds the first stop's description.
-	let preOrdNum = -1;    // What: Previous Order Number. Why: Each stop must come later in the document than the last. How: This holds the previous stop's position among every element.
-	let walEndBoo = false; // What: Walk Ended Boolean. Why: A walk that never ends is a keyboard trap. How: This turns true once focus leaves the page or comes back around.
+	let firStoStr = ''; // What: First Stop String. Why: Focus coming back to the first stop means the walk went all the way around. How: This holds the first stop's description.
+	let preOrdNum = -1; // What: Previous Order Number. Why: Each stop must come later in the document than the last. How: This holds the previous stop's position among every element.
 
 
 	for ( let tabCouNum = 0; tabCouNum < TAB_MAX_NUM; tabCouNum++ ) { // What: Tab Walk Loop. Why: Every stop is checked in the order a keyboard user meets it. How: This presses Tab once per pass, up to the cap.
@@ -350,11 +362,11 @@ async function keyProFun ( curPagObj : Page, engNamStr : string ) : Promise< str
 		await curPagObj.evaluate( scrSetFun ); // What: Scroll Settled Wait. Why: Some engines scroll a focused field into view a few frames late. How: This waits until the page has stopped scrolling.
 
 
-		const stoInfObj = await curPagObj.evaluate( stoInfFun ); // What: Stop Information Object. Why: The stop is described and measured inside the page. How: This runs stoInfFun there.
+		const stoInfObj = await curPagObj.evaluate( stoInfFun );                                          // What: Stop Information Object. Why: The stop is described and measured inside the page. How: This runs stoInfFun there.
+		const walEndBoo = !stoInfObj || stoInfObj.desStr === firStoStr || stoInfObj.ordNum === preOrdNum; // What: Walk Ended Boolean. Why: Focus leaving the page, coming back around, or staying put means every stop was visited. How: This checks each in turn, the later two only once a stop exists, so the chain stays inline. // What: Firefox Walk End Note. Why: Firefox moves focus out to its own interface after the last stop but still reports that stop as focused. How: Focus staying on the same stop after a press is read as the walk leaving the page.
 
 
-
-		if ( !stoInfObj || stoInfObj.desStr === firStoStr || stoInfObj.ordNum === preOrdNum ) { walEndBoo = true; break; } // What: Walk End Check. Why: Focus leaving the page, coming back around, or staying put means every stop was visited. How: This marks the walk ended and stops pressing Tab. // What: Firefox Walk End Note. Why: Firefox moves focus out to its own interface after the last stop but still reports that stop as focused. How: Focus staying on the same stop after a press is read as the walk leaving the page.
+		if ( walEndBoo ) return proLisArr; // What: Walk End Guard. Why: A walk that reaches its end has found every problem there is. How: This returns them, ending the walk.
 
 
 
@@ -383,7 +395,7 @@ async function keyProFun ( curPagObj : Page, engNamStr : string ) : Promise< str
 
 
 
-	if ( !walEndBoo ) proLisArr.push( `focus never left the page within ${ TAB_MAX_NUM } presses, a likely keyboard trap` ); // What: Trap Check. Why: A keyboard user must always be able to Tab away. How: This records a walk that never ended.
+	proLisArr.push( `focus never left the page within ${ TAB_MAX_NUM } presses, a likely keyboard trap` ); // What: Trap Record Call. Why: A keyboard user must always be able to Tab away. How: The loop returns as soon as the walk ends, so reaching this line means it never did.
 
 
 

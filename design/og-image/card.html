@@ -1,7 +1,6 @@
 
 
 
-
 <!doctype html><!-- What: Document Type Declaration. Why: Browsers render the page in standards mode only with a doctype. How: This declares HTML5. -->
 
 
@@ -22,7 +21,7 @@
 
 		<!-- #region Card Styles -->
 
-		<style>/* What: Card Styles. Why: The card is one fixed-size image, styled entirely here. How: This loads the site's fonts and lays the card out in pixels, the one unit a 1200x630 image is measured in. */
+		<style>/* What: Card Styles. Why: The card is one fixed-size image, styled entirely here. How: This loads the site's fonts and lays the card out in pixels, the one unit a 1,200x630 image is measured in. */
 
 			@font-face { /* What: Fraunces Upright Face. Why: The card's heading uses the site's display serif. How: This loads the site's own variable font file. */
 
@@ -66,7 +65,7 @@
 
 			/* #region carBodBod */
 
-			body { /* What: Card Body Body. Why: The card fills the whole 1200x630 capture in the site's paper and ink. How: This sizes it and centers its single column. */
+			.carBodBod { /* What: Card Body Body. Why: The card fills the whole 1,200x630 capture in the site's paper and ink. How: This sizes it and centers its single column. */
 
 
 				align-items     : center;
@@ -82,7 +81,7 @@
 
 
 			}
-			body::before { /* What: Card Grid Lines. Why: The hero's faint drafting grid ties the card to the site. How: This lays two repeating hairline gradients across the whole card. */
+			.carBodBod::before { /* What: Card Body Body Grid Lines. Why: The hero's faint drafting grid ties the card to the site. How: This lays two repeating hairline gradients across the whole card. */
 
 
 				background-image : linear-gradient( rgba( 26, 31, 36, 0.06 ) 1px, transparent 1px ), linear-gradient( 90deg, rgba( 26, 31, 36, 0.06 ) 1px, transparent 1px );
@@ -118,6 +117,9 @@
 
 			}
 
+
+			/* #region carTitPar */
+
 			.carTitPar { /* What: Card Title Paragraph. Why: The card's main line says what the site is. How: This sets it large in the display serif. */
 
 
@@ -129,13 +131,17 @@
 
 
 			}
-			.carTitPar em { /* What: Card Title Emphasis. Why: The accent word picks up the logo's navy, as italic accents do on the site. How: This colors it. */
+
+			.carAccEmp { /* What: Card Accent Emphasis. Why: The accent word picks up the logo's navy, as italic accents do on the site. How: This colors it. */
 
 
 				color : #1f4e7a;
 
 
 			}
+
+			/* #endregion carTitPar */
+
 
 			.carNotPar { /* What: Card Notice Paragraph. Why: The card must say plainly that the company isn't real. How: This sets the notice in muted gray, large enough to read at thumbnail size. */
 
@@ -173,7 +179,7 @@
 
 
 
-	<body><!-- What: Card Body Element. Why: This is the card itself. How: Its single column holds everything the image shows. -->
+	<body class='carBodBod'><!-- What: Card Body Element. Why: This is the card itself. How: Its single column holds everything the image shows. -->
 
 
 		<div class='carColDiv'><!-- What: Card Column Div Element. Why: The card's content sits in one centered column. How: This stacks the logo and the three lines. -->
@@ -187,7 +193,7 @@
 				alt='Reese Roofing'
 			/><!-- What: Card Logo Image Element. Why: The full logo identifies the site. How: This loads the same SVG the site's hero shows. -->
 
-			<p class='carTitPar'>A portfolio <em>demo</em></p><!-- What: Card Title Paragraph Element. Why: The main line says what the site is. How: The accent word is italic navy. -->
+			<p class='carTitPar'>A portfolio <em class='carAccEmp'>demo</em></p><!-- What: Card Title Paragraph Element. Why: The main line says what the site is. How: The accent word is italic navy. -->
 
 			<p class='carNotPar'>Not a real business</p><!-- What: Card Notice Paragraph Element. Why: Nobody seeing the card should take Reese Roofing for a real roofer. How: This says so directly. -->
 

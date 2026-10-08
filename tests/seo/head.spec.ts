@@ -1,7 +1,6 @@
 
 
 
-
 // #region Imports
 
 import { expect } from '@playwright/test'; // What: Expect. Why: Each check passes only when the page says what it should. How: This asserts on the page's head, files, and footer.
@@ -23,7 +22,7 @@ import { test   } from '@playwright/test'; // What: Test. Why: Each route and ea
  * demo website rather than a local business, the footer says the company is
  * fictional, robots.txt lets search crawlers read the noindex while keeping
  * AI crawlers out, Netlify's _headers sends noindex with every file, and the
- * social preview tags are complete and the image is the 1200x630 card under
+ * social preview tags are complete and the image is the 1,200x630 card under
  * 300 KB the tags promise.
  *
  * Sections:
@@ -41,25 +40,26 @@ import { test   } from '@playwright/test'; // What: Test. Why: Each route and ea
 const LIV_URL_STR = 'https://reese-roofing.netlify.app/'; // What: Live Url String. Why: The canonical and social tags must name the live address. How: This is the address they're compared with.
 
 
+
 const SOC_KEY_ARR = [ // What: Social Key Array. Why: The social preview rule lists every tag a complete card needs. How: Each entry names one Open Graph or Twitter tag the page must carry.
 
 
-	'og:description',     // What: Open Graph Description Key. Why: Every card needs the summary under the title. How: This names the tag.
-	'og:image',           // What: Open Graph Image Key. Why: Every card needs the preview image. How: This names the tag.
-	'og:image:alt',       // What: Open Graph Image Alt Key. Why: Every card needs the image's description for screen readers. How: This names the tag.
-	'og:image:height',    // What: Open Graph Image Height Key. Why: Every card needs the image's height, for laying out the card early. How: This names the tag.
-	'og:image:type',      // What: Open Graph Image Type Key. Why: Every card needs the image's file type. How: This names the tag.
-	'og:image:width',     // What: Open Graph Image Width Key. Why: Every card needs the image's width, for laying out the card early. How: This names the tag.
-	'og:locale',          // What: Open Graph Locale Key. Why: Every card needs the page's language. How: This names the tag.
-	'og:site_name',       // What: Open Graph Site Name Key. Why: Every card needs the name of the site the link belongs to. How: This names the tag.
-	'og:title',           // What: Open Graph Title Key. Why: Every card needs the card's title. How: This names the tag.
-	'og:type',            // What: Open Graph Type Key. Why: Every card needs what kind of page it is. How: This names the tag.
-	'og:url',             // What: Open Graph Url Key. Why: Every card needs the address shares should count toward. How: This names the tag.
-	'twitter:card',       // What: Twitter Card Key. Why: Every card needs the layout X and similar apps use. How: This names the tag.
-	'twitter:description',// What: Twitter Description Key. Why: Every card needs the summary on X. How: This names the tag.
-	'twitter:image',      // What: Twitter Image Key. Why: Every card needs the image on X. How: This names the tag.
-	'twitter:image:alt',  // What: Twitter Image Alt Key. Why: Every card needs the image's description on X. How: This names the tag.
-	'twitter:title'       // What: Twitter Title Key. Why: Every card needs the card's title on X. How: This names the tag.
+	'og:description',      // What: Open Graph Description Key. Why: Every card needs the summary under the title. How: This names the tag.
+	'og:image',            // What: Open Graph Image Key. Why: Every card needs the preview image. How: This names the tag.
+	'og:image:alt',        // What: Open Graph Image Alt Key. Why: Every card needs the image's description for screen readers. How: This names the tag.
+	'og:image:height',     // What: Open Graph Image Height Key. Why: Every card needs the image's height, for laying out the card early. How: This names the tag.
+	'og:image:type',       // What: Open Graph Image Type Key. Why: Every card needs the image's file type. How: This names the tag.
+	'og:image:width',      // What: Open Graph Image Width Key. Why: Every card needs the image's width, for laying out the card early. How: This names the tag.
+	'og:locale',           // What: Open Graph Locale Key. Why: Every card needs the page's language. How: This names the tag.
+	'og:site_name',        // What: Open Graph Site Name Key. Why: Every card needs the name of the site the link belongs to. How: This names the tag.
+	'og:title',            // What: Open Graph Title Key. Why: Every card needs the card's title. How: This names the tag.
+	'og:type',             // What: Open Graph Type Key. Why: Every card needs what kind of page it is. How: This names the tag.
+	'og:url',              // What: Open Graph Url Key. Why: Every card needs the address shares should count toward. How: This names the tag.
+	'twitter:card',        // What: Twitter Card Key. Why: Every card needs the layout X and similar apps use. How: This names the tag.
+	'twitter:description', // What: Twitter Description Key. Why: Every card needs the summary on X. How: This names the tag.
+	'twitter:image',       // What: Twitter Image Key. Why: Every card needs the image on X. How: This names the tag.
+	'twitter:image:alt',   // What: Twitter Image Alt Key. Why: Every card needs the image's description on X. How: This names the tag.
+	'twitter:title'        // What: Twitter Title Key. Why: Every card needs the card's title on X. How: This names the tag.
 
 
 ];
@@ -117,7 +117,6 @@ for ( const rouRcdObj of ROU_RCD_ARR ) { // What: Route Test Loop. Why: Every ro
 
 
 		expect( jsoScrArr.map( ( jsoTexStr ) => JSON.parse( jsoTexStr )[ '@type' ] ) ).toEqual( [ 'WebSite' ] ); // What: Website Type Assertion. Why: The page should describe exactly one demo website. How: This parses each script, which also fails on invalid JSON, and checks there's one, typed WebSite.
-
 		expect( jsoScrArr.join( '' ) ).not.toMatch( /LocalBusiness|RoofingContractor|PostalAddress|telephone/ ); // What: No Business Data Assertion. Why: Structured data must never present the fictional company as a real business. How: This checks no local business type, address, or phone appears in it.
 
 
@@ -167,7 +166,7 @@ test( 'the social preview tags are complete', async ( { page : curPagObj } ) => 
 
 
 
-test( 'the social preview image is a 1200x630 png under 300 KB', async ( { page : curPagObj } ) => { // What: Preview Image Test. Why: The social tags promise a 1200x630 card. How: This fetches the image, checks its byte count, and reads its size from the PNG header.
+test( 'the social preview image is a 1200x630 png under 300 KB', async ( { page : curPagObj } ) => { // What: Preview Image Test. Why: The social tags promise a 1,200x630 card. How: This fetches the image, checks its byte count, and reads its size from the PNG header.
 
 
 	const resImaObj = await curPagObj.request.get( '/og-image.png' ); // What: Response Image Object. Why: The image has to exist where the tags point. How: This fetches it from the dev server.
@@ -176,7 +175,7 @@ test( 'the social preview image is a 1200x630 png under 300 KB', async ( { page 
 
 	expect( resImaObj.headers()[ 'content-type' ] ).toBe( 'image/png' );                               // What: Png Type Assertion. Why: The tags promise a PNG. How: This checks the served type.
 	expect( pngBufObj.length ).toBeLessThan( 300 * 1024 );                                             // What: Png Bytes Assertion. Why: WhatsApp drops a preview image of 300 KB or more. How: This checks the file's byte count.
-	expect( [ pngBufObj.readUInt32BE( 16 ), pngBufObj.readUInt32BE( 20 ) ] ).toEqual( [ 1200, 630 ] ); // What: Png Size Assertion. Why: The tags promise 1200 by 630 pixels. How: This reads the width and height a PNG stores at bytes 16 and 20.
+	expect( [ pngBufObj.readUInt32BE( 16 ), pngBufObj.readUInt32BE( 20 ) ] ).toEqual( [ 1200, 630 ] ); // What: Png Size Assertion. Why: The tags promise 1,200 by 630 pixels. How: This reads the width and height a PNG stores at bytes 16 and 20.
 
 
 } );

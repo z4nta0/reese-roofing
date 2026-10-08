@@ -1,7 +1,6 @@
 
 
 
-
 // #region Imports
 
 import { chromium      } from '@playwright/test'; // What: Chromium. Why: The card is captured in a real browser so it uses the site's own fonts and SVG. How: This launches Playwright's Chromium.
@@ -16,9 +15,9 @@ import { statSync      } from 'node:fs';          // What: Stat Sync. Why: The f
  * render.mts = Social Preview Card Renderer
  *
  * @summary
- * Rebuilds public/og-image.png, the 1200x630 card shown when a link to the
+ * Rebuilds public/og-image.png, the 1,200x630 card shown when a link to the
  * site is shared, from card.html beside this script. It opens the card in
- * Chromium at exactly 1200x630, waits for the site's fonts, captures it as a
+ * Chromium at exactly 1,200x630, waits for the site's fonts, captures it as a
  * PNG, and fails if the file reaches 300 KB, the most WhatsApp will show.
  * Run it with npm run og-image whenever the card or the site's look changes,
  * and give a changed image a new filename, since apps cache previews.
@@ -45,8 +44,8 @@ const OUT_PAT_STR = fileURLToPath( new URL( '../../public/og-image.png', import.
 
 // #region Module Init
 
-const broInsObj = await chromium.launch();                                               // What: Browser Instance Object. Why: The card is drawn by a real browser. How: This launches Chromium.
-const carPagObj = await broInsObj.newPage( { viewport : { height : 630, width : 1200 } } ); // What: Card Page Object. Why: The capture has to be exactly the card's size. How: This opens a 1200x630 page.
+const broInsObj = await chromium.launch();                                                  // What: Browser Instance Object. Why: The card is drawn by a real browser. How: This launches Chromium.
+const carPagObj = await broInsObj.newPage( { viewport : { height : 630, width : 1200 } } ); // What: Card Page Object. Why: The capture has to be exactly the card's size. How: This opens a 1,200x630 page.
 
 
 await carPagObj.goto( CAR_URL_STR ); // What: Card Load Call. Why: The card has to be on screen before it's captured. How: This opens card.html.
@@ -59,7 +58,6 @@ await broInsObj.close(); // What: Browser Close Call. Why: The script should exi
 
 
 const outBytNum = statSync( OUT_PAT_STR ).size; // What: Output Bytes Number. Why: The card has to stay under WhatsApp's limit. How: This reads the saved file's size.
-
 
 
 if ( outBytNum >= MAX_BYT_NUM ) throw new Error( `og-image.png is ${ outBytNum } bytes, at or over the ${ MAX_BYT_NUM } byte limit.` ); // What: Size Guard. Why: An image over the limit would quietly drop out of WhatsApp previews. How: This fails the run with the file's size.

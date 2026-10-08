@@ -1,7 +1,6 @@
 
 
 
-
 // #region Imports
 
 import { defineConfig  } from '@playwright/test'; // What: Define Config. Why: Playwright's config helper passes the config through with its types. How: This wraps the exported config object.
