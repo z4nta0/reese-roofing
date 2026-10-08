@@ -22,6 +22,8 @@
 .sitFooFoo { /* What: Site Footer Footer. Why: The footer closes the page on a dark band. How: This sets the ink background with muted light text and a faint top edge. */
 
 
+	--foc-rin-col : var( --acc-lig-col ); /* Accent Light Color, the accent lightened by 0.204 */ /* What: Focus Ring Color Override. Why: The navy ring would sink into this dark band. How: Every link and button inside draws its ring in the light accent instead. */
+
 	background : var( --bac-inv-col );                                                                           /* Background Inverse Color = #1a1f24 */
 	border-top : var( --bor-wid-bas ) solid oklch( from var( --bac-pag-col ) l c h / var( --cdn-pow-008-rec ) ); /* Border Width Base ~= 1.160px, Background Page Color = #f5f2ec, Core-Design-Number to the Power of 8 Reciprocal ~= 0.105 */
 	color      : oklch( from var( --bac-pag-col ) l c h / var( --cdn-pow-002-rec ) );                            /* Background Page Color = #f5f2ec, Core-Design-Number to the Power of 2 Reciprocal ~= 0.570 */
@@ -167,10 +169,10 @@
 .fooDemAnc { /* What: Footer Demo Anchor. Why: The builder's link has to read as a link inside the sentence. How: This sets it in the paper color with an underline, turning the soft accent on hover. */
 
 
-	color                 : var( --bac-pag-col );                            /* Background Page Color = #f5f2ec */
+	color                 : var( --bac-pag-col );                   /* Background Page Color = #f5f2ec */
 	text-decoration       : underline;
-	text-underline-offset : calc( var( --cdn-pow-005-rec ) * 1em );          /* Core-Design-Number to the Power of 5 Reciprocal ~= 0.245 */
-	transition            : color var( --dur-tra-p01 ) var( --mot-sta-eas ); /* Duration Transition Base Plus 1 ~= 209.1ms, Motion Standard Easing = ease */
+	text-underline-offset : calc( var( --cdn-pow-005-rec ) * 1em ); /* Core-Design-Number to the Power of 5 Reciprocal ~= 0.245 */
+	transition            : color var( --dur-tra-p01 ) var( --mot-sta-eas ), opacity var( --dur-tra-p01 ) var( --mot-sta-eas ), outline-offset var( --dur-tra-p01 ) var( --mot-dec-eas ), outline-width var( --dur-tra-p01 ) var( --mot-dec-eas ); /* Duration Transition Base Plus 1 ~= 209.1ms, Motion Standard Easing = ease, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ) */
 
 
 }
@@ -181,10 +183,17 @@
 
 
 }
+.fooDemAnc:active { /* What: Pressed Footer Demo Anchor. Why: A press should register before the page responds. How: This dims the link slightly while it's held. */
+
+
+	opacity : var( --cdn-pow-001-rec ); /* Core-Design-Number to the Power of 1 Reciprocal ~= 0.755 */
+
+
+}
 @media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Footer Demo Anchor. Why: Someone who asked for less motion shouldn't see the color fade. How: This applies only when the reduced-motion preference is set. */
 
 
-	.fooDemAnc { /* What: Motionless Footer Demo Anchor. Why: The hover color should appear at once. How: This turns the transition off. */
+	.fooDemAnc { /* What: Motionless Footer Demo Anchor. Why: The hover, press, and focus changes should appear at once. How: This turns the transition off. */
 
 
 		transition : none;
@@ -211,7 +220,7 @@
 	display     : inline-flex;
 	font-size   : var( --fon-siz-p01 );                                                /* Font Size Base Plus 1 ~= 14.572px */
 	gap         : var( --spa-hor-m03 );                                                /* Spacing Horizontal Base Minus 3 ~= 6.268px */
-	transition  : color var( --dur-tra-p01 ) var( --mot-sta-eas );                     /* Duration Transition Base Plus 1 ~= 209.1ms, Motion Standard Easing = ease */
+	transition  : color var( --dur-tra-p01 ) var( --mot-sta-eas ), opacity var( --dur-tra-p01 ) var( --mot-sta-eas ), outline-offset var( --dur-tra-p01 ) var( --mot-dec-eas ), outline-width var( --dur-tra-p01 ) var( --mot-dec-eas ); /* Duration Transition Base Plus 1 ~= 209.1ms, Motion Standard Easing = ease, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ) */
 
 
 }
@@ -222,10 +231,17 @@
 
 
 }
+.fooTopAnc:active { /* What: Pressed Footer Top Anchor. Why: A press should register before the page responds. How: This dims the link slightly while it's held. */
+
+
+	opacity : var( --cdn-pow-001-rec ); /* Core-Design-Number to the Power of 1 Reciprocal ~= 0.755 */
+
+
+}
 @media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Footer Top Anchor. Why: Someone who asked for less motion shouldn't see the color fade. How: This applies only when the reduced-motion preference is set. */
 
 
-	.fooTopAnc { /* What: Motionless Footer Top Anchor. Why: The hover color should appear at once. How: This turns the transition off. */
+	.fooTopAnc { /* What: Motionless Footer Top Anchor. Why: The hover, press, and focus changes should appear at once. How: This turns the transition off. */
 
 
 		transition : none;
