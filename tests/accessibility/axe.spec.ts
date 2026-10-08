@@ -136,28 +136,34 @@ async function scaStaFun ( curPagObj : Page ) : Promise< AxeResTyp > {
 
 // #region Module Init
 
-for ( const staRcdObj of STA_RCD_ARR ) test( `${ staRcdObj.ideStr } has no axe violations`, async ( { page : curPagObj }, tesInfObj ) => { // What: Axe Test. Why: Every page state must pass the scan. How: This opens the state, scans it, reports anything needing review, and fails on any violation.
+for ( const staRcdObj of STA_RCD_ARR ) { // What: State Test Loop. Why: Every page state must pass the scan. How: This declares one axe test per state.
 
 
-	await opeStaFun( curPagObj, staRcdObj ); // What: State Open Call. Why: The scan should see the state settled. How: This loads and settles it.
+	test( `${ staRcdObj.ideStr } has no axe violations`, async ( { page : curPagObj }, tesInfObj ) => { // What: Axe Test. Why: A state passes only with zero axe violations. How: This opens the state, scans it, reports anything needing review, and fails on any violation.
 
 
-	const axeResObj = await scaStaFun( curPagObj );      // What: Axe Result Object. Why: Both the violations and the incomplete results come from one scan. How: This scans the page.
-	const revLinArr = sumResFun( axeResObj.incomplete ); // What: Review Line Array. Why: Results axe couldn't decide need a person's look. How: This summarizes them.
+		await opeStaFun( curPagObj, staRcdObj ); // What: State Open Call. Why: The scan should see the state settled. How: This loads and settles it.
 
 
-	for ( const revLinStr of revLinArr ) tesInfObj.annotations.push( { description : revLinStr, type : 'needs review' } ); // What: Review Annotations Loop. Why: The report should list each result needing review beside its test. How: This attaches each line as an annotation.
+		const axeResObj = await scaStaFun( curPagObj );      // What: Axe Result Object. Why: Both the violations and the incomplete results come from one scan. How: This scans the page.
+		const revLinArr = sumResFun( axeResObj.incomplete ); // What: Review Line Array. Why: Results axe couldn't decide need a person's look. How: This summarizes them.
+
+
+		for ( const revLinStr of revLinArr ) tesInfObj.annotations.push( { description : revLinStr, type : 'needs review' } ); // What: Review Annotations Loop. Why: The report should list each result needing review beside its test. How: This attaches each line as an annotation.
 
 
 
-	if ( revLinArr.length ) console.log( `[${ tesInfObj.project.name }] ${ staRcdObj.ideStr } needs review:\n  ${ revLinArr.join( '\n  ' ) }` ); // What: Review Log Call. Why: The terminal run should show what needs a look without opening the report. How: This prints the state's review lines under its project and name.
+		if ( revLinArr.length ) console.log( `[${ tesInfObj.project.name }] ${ staRcdObj.ideStr } needs review:\n  ${ revLinArr.join( '\n  ' ) }` ); // What: Review Log Call. Why: The terminal run should show what needs a look without opening the report. How: This prints the state's review lines under its project and name.
 
 
 
-	expect( sumResFun( axeResObj.violations ) ).toEqual( [] ); // What: No Violations Assertion. Why: The state passes only with zero violations. How: This compares the summarized violations with an empty list, so a failure prints each one.
+		expect( sumResFun( axeResObj.violations ) ).toEqual( [] ); // What: No Violations Assertion. Why: The state passes only with zero violations. How: This compares the summarized violations with an empty list, so a failure prints each one.
 
 
-} );
+	} );
+
+
+}
 
 // #endregion Module Init
 
