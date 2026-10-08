@@ -22,8 +22,9 @@
 
 		<!-- #region Search -->
 
+		<meta name='author'      content='techgeek.support' />             <!-- What: Author Meta. Why: Link preview inspectors and search engines look for who made a page, and this one should name its real builder, not the fictional company. How: This names techgeek.support. -->
 		<link href='https://reese-roofing.netlify.app/' rel='canonical' /> <!-- What: Canonical Link. Why: Netlify also serves the site at deploy preview addresses, which should all point at one address. How: This names the live address as the page's own. -->
-		<meta name='description' content='A portfolio demo website for Reese Roofing, a fictional commercial roofing company. Designed and built by techgeek.support. Not a real business.' /> <!-- What: Description Meta. Why: Link previews and any search listing show a short summary under the title. How: This says plainly that the company is fictional and the site is a portfolio demo, and who built it. -->
+		<meta name='description' content='A portfolio demo site for Reese Roofing, a fictional commercial roofer, built by techgeek.support. Not a real business.' /> <!-- What: Description Meta. Why: Link previews and any search listing show a short summary under the title. How: This says plainly that the company is fictional and the site is a portfolio demo, and who built it. -->
 		<meta name='robots'      content='noindex' />                      <!-- What: Robots Meta. Why: A fictional company shouldn't turn up in search results, where it could pass for a real roofer. How: This asks every search engine to leave the page out of its index, while still following its links; the X-Robots-Tag header in public/_headers says the same for every file. -->
 
 		<!-- #endregion Search -->
@@ -72,7 +73,7 @@
 
 		<!-- #region Open Graph -->
 
-		<meta property='og:description'  content='A portfolio demo website for Reese Roofing, a fictional commercial roofing company. Designed and built by techgeek.support. Not a real business.' /> <!-- What: Open Graph Description Meta. Why: A shared link shows a summary under its title. How: This reuses the page description, which says the company is fictional. -->
+		<meta property='og:description'  content='A portfolio demo site for Reese Roofing, a fictional commercial roofer, built by techgeek.support. Not a real business.' /> <!-- What: Open Graph Description Meta. Why: A shared link shows a summary under its title. How: This reuses the page description, which says the company is fictional. -->
 		<meta property='og:image'        content='https://reese-roofing.netlify.app/og-image.png' />                                                 <!-- What: Open Graph Image Meta. Why: A shared link shows a preview image. How: This points at the 1,200x630 card in public/, which labels the site a portfolio demo. -->
 		<meta property='og:image:alt'    content='Reese Roofing logo above the words A portfolio demo, Not a real business, by techgeek.support.' /> <!-- What: Open Graph Image Alt Meta. Why: Screen readers on social sites read the preview image's description. How: This describes the card, its notice included. -->
 		<meta property='og:image:height' content='630' />                                                                                            <!-- What: Open Graph Image Height Meta. Why: Sites can lay out the preview before the image loads. How: This gives its height in pixels. -->
@@ -90,7 +91,7 @@
 		<!-- #region Twitter Card -->
 
 		<meta name='twitter:card'        content='summary_large_image' /> <!-- What: Twitter Card Meta. Why: X and similar sites pick a preview layout from this tag. How: This asks for the large image layout, which suits the 1,200x630 card. -->
-		<meta name='twitter:description' content='A portfolio demo website for Reese Roofing, a fictional commercial roofing company. Designed and built by techgeek.support. Not a real business.' /> <!-- What: Twitter Description Meta. Why: The preview shows a summary. How: This reuses the page description. -->
+		<meta name='twitter:description' content='A portfolio demo site for Reese Roofing, a fictional commercial roofer, built by techgeek.support. Not a real business.' /> <!-- What: Twitter Description Meta. Why: The preview shows a summary. How: This reuses the page description. -->
 		<meta name='twitter:image'       content='https://reese-roofing.netlify.app/og-image.png' />                                                                                                   <!-- What: Twitter Image Meta. Why: The preview shows an image. How: This points at the same card as Open Graph. -->
 		<meta name='twitter:image:alt'   content='Reese Roofing logo above the words A portfolio demo, Not a real business, by techgeek.support.' />                                                   <!-- What: Twitter Image Alt Meta. Why: Screen readers read the preview image's description. How: This reuses the Open Graph description of the card. -->
 		<meta name='twitter:title'       content='Reese Roofing | Portfolio Demo by techgeek.support' />                                                                                               <!-- What: Twitter Title Meta. Why: The preview shows a title. How: This matches the page title. -->
@@ -106,7 +107,7 @@
 				"@type": "WebSite",
 				"name": "Reese Roofing Portfolio Demo",
 				"url": "https://reese-roofing.netlify.app/",
-				"description": "A portfolio demo website for Reese Roofing, a fictional commercial roofing company. Designed and built by techgeek.support. Not a real business.",
+				"description": "A portfolio demo site for Reese Roofing, a fictional commercial roofer, built by techgeek.support. Not a real business.",
 				"inLanguage": "en-US",
 				"about": {
 					"@type": "Thing",

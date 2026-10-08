@@ -18,10 +18,12 @@ isn't a real business, so it gets the demo treatment rather than local SEO:
   and disallows AI training and AI answer crawlers (GPTBot, ClaudeBot,
   PerplexityBot, and others). AI agents fetching the page for a person are
   left alone, since the page itself tells them it's a demo.
-- **Says what it is**: the title, description, Open Graph and Twitter tags,
-  and `public/og-image.png` (1200x630) call it a portfolio demo by
-  techgeek.support, and the footer says the company is fictional, linking
-  to techgeek.support. The 404 page renders its own `<title>`.
+- **Says what it is**: the title, description (kept to 125 characters or
+  fewer, which mobile cards show in full), Open Graph and Twitter tags, and
+  `public/og-image.png` (1200x630) call it a portfolio demo by
+  techgeek.support, the author meta names techgeek.support, and the footer
+  says the company is fictional, linking to techgeek.support. The 404 page
+  renders its own `<title>`.
 - **Social preview card**: per the user-level "## Social Previews" rule,
   `design/og-image/card.html` (outside the served tree) is captured by `npm
   run og-image` (`design/og-image/render.mts`, type checked through
