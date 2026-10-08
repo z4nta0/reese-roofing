@@ -22,6 +22,8 @@ The preview card is drawn from the site's own logo and fonts by `design/og-image
 - **Vite 8** dev server / bundler
 - **React 19** + **TypeScript 6**
 - **React Router 8** (set up for future expansion: it currently routes `/` to Home and everything else to a 404)
+- **ESLint 9** with typescript-eslint, and **Playwright** with axe-core for the test suites
+- Deployed on **Netlify**, which serves `index.html` for every path (`public/_redirects`) so the router can show the 404 page
 
 ## Getting started
 
@@ -32,6 +34,13 @@ npm run dev
 
 Open the URL Vite prints (usually `http://localhost:5173`).
 
+## Checks
+
+```bash
+npm run lint       # ESLint across the repo
+npm run typecheck  # TypeScript across src/, the configs, tests/, and design/
+```
+
 ## Tests
 
 ```bash
@@ -40,7 +49,7 @@ npm run test:accessibility  # axe-core plus scripted keyboard, naming, reflow, a
 npm run test:seo            # head tags, structured data, robots.txt, _headers, and the preview image
 ```
 
-Each suite runs in Chromium, Firefox, and WebKit against its own dev server on port 5191. Reports land in `tests/output/` (git-ignored).
+Each suite runs in Chromium, Firefox, and WebKit against its own dev server on port 5191, so a dev server already running on 5173 is left alone. Reports land in `tests/output/` (git-ignored); `npx playwright show-report tests/output/report` opens the HTML report. If a browser is missing, `npx playwright install chromium firefox webkit` installs all three.
 
 ## Build
 
@@ -59,8 +68,17 @@ src/
 │   └── not-found/     404 page and its .module.css
 ├── ui/                Shared components (Nav, Footer), each with its own .module.css
 ├── styles/            fonts.css (@font-face) + styles.css (design tokens and base element styles)
-├── app.tsx            React Router setup
-└── main.tsx           Entry point
+├── app.tsx            React Router setup, with app.module.css for the root's container
+├── main.tsx           Entry point
+└── vite-env.d.ts      Vite's client type declarations
+public/                Files served at fixed addresses: favicons, og-image.png, robots.txt, Netlify's _headers and _redirects
+tests/
+├── accessibility/     axe-core scan and scripted checks
+├── seo/               head, structured data, crawler file, and preview image checks
+├── support/           the page states the accessibility checks visit
+└── playwright.config.ts
+design/
+└── og-image/          card.html and the script that captures it as public/og-image.png
 ```
 
 ## Design notes
@@ -78,9 +96,10 @@ src/
 
 If this design is ever reused for a real business, update the placeholders below, and swap the demo SEO for real local SEO: remove the `noindex` meta tag, `public/_headers` rule, and AI crawler block, add a sitemap, replace the `WebSite` JSON-LD with `LocalBusiness` (`RoofingContractor`) data matching the real details, rewrite the title, description, social tags, and preview card, and drop the footer's demo line.
 
-- **Phone number:** `(785) 555-0199`. Search the repo for it; it appears in the Nav, Contact, and Footer areas
-- **Email:** `hello@reeseroofing.example`. Same; it appears in Contact and the mailto form action
-- **Address:** placeholder Lawrence, KS 66044, in the Contact section
+- **Phone number:** `(785) 555-0199`. Search the repo for it; it appears in the Nav (bar and drawer) and the Contact section
+- **Email:** `hello@reeseroofing.example`. Same; it appears in the Contact section and its mailto form action
+- **Address:** placeholder Lawrence, Kansas 66044, in the Contact section
+- **Footer:** the company's legal name, licensing line, and the demo notice in `src/ui/footer.tsx`
 - **Stats in Hero:** 17+ years, 400+ roofs, etc. Replace them with real numbers
 - **Services list:** edit the `SER_RCD_ARR` array in `src/pages/home/services.tsx`
 - **About copy & quote:** `src/pages/home/about.tsx`

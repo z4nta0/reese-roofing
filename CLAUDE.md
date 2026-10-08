@@ -48,6 +48,9 @@ src/
   ui/                    components used by 2 or more pages (Nav, Footer)
   styles/                global CSS only (fonts.css, styles.css)
 ```
+Outside `src/` (added 2026-10-08): `tests/` holds the Playwright suites (see
+"## Test suites"), and `design/` holds source artwork that isn't served,
+so far the social preview card (see "## SEO").
 - **`pages/` takes the place of `tabs/`.** Each route gets its own folder,
   and a component only that page uses (Home's Hero, Services, About, and
   Contact sections) lives in that folder. When a section becomes a route of
@@ -89,7 +92,8 @@ on port 5191 (never the usual 5173) and stops it afterwards. Every suite runs
 in Chromium, Firefox, and WebKit. Results, screenshots, and traces go to
 `tests/output/` (git-ignored); `npx playwright show-report tests/output/report`
 opens the HTML report. The states each suite visits (both pages at 390px and
-1440px, plus the open drawer) are listed in `tests/support/states.ts`.
+1440px, plus the open drawer) are listed in `tests/support/states.ts`; the
+seo suite reads the head of each route instead.
 - `npm run test:accessibility`: the pre-commit accessibility scan. axe-core
   checks each state against WCAG 2.2 A and AA plus best practices
   (`axe.spec.ts`), and scripted checks (`scripted.spec.ts`) cover link and
@@ -106,9 +110,10 @@ opens the HTML report. The states each suite visits (both pages at 390px and
 Next (planned 2026-10-07):
 - **Accessibility** (done 2026-10-08): an audit and fixes across both pages.
 - **SEO** (done 2026-10-08): set up for a demo site, per "## SEO" above.
-- **Reusable tests**: a suite to rerun after large changes, checking that
-  every page renders and behaves correctly in all three browser engines.
-  The accessibility and seo suites are its first parts.
+- **Reusable tests** (started 2026-10-08): a suite to rerun after large
+  changes, checking that every page renders and behaves correctly in all
+  three browser engines. The accessibility and seo suites are its first
+  parts; rendering and interaction suites are still to come.
 
 Applied original intent (kept by the user, 2026-10-07): the CSS module pass
 found styles that were written but never rendered, because a later global
@@ -154,6 +159,5 @@ Design system choices (decided 2026-10-07):
 - **Breakpoints**: 500, 540, 600, 640, 880, and 960px, measured against the
   `app` container on AppRooCom's root element.
 
-Open item: the live Netlify site keeps the Node version it was pinned to
-when it was created, and React Router 8 needs Node 22.22 or newer to build.
-Confirm the site's Node version before this branch is merged and deployed.
+Node on Netlify (confirmed 2026-10-08): the live site builds on Node 24.x,
+which meets React Router 8's minimum of 22.22.
