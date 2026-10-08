@@ -202,7 +202,7 @@
 .namLigSpa { /* What: Name Light Span. Why: The second word reads as the softer half. How: This sets it light, italic, and muted. */
 
 
-	color       : var( --tex-mut-col ); /* Text Muted Color = #6b7079 */
+	color       : var( --tex-mut-col ); /* Text Muted Color = #636871 */
 	font-style  : italic;
 	font-weight : 300;
 
@@ -614,7 +614,7 @@
 .draNumSpa { /* What: Drawer Number Span. Why: The row's number should read as a quiet index beside its name. How: This sets it small, tracked, and muted in the body font with even-width figures. */
 
 
-	color                : var( --tex-mut-col ); /* Text Muted Color = #6b7079 */
+	color                : var( --tex-mut-col ); /* Text Muted Color = #636871 */
 	font-family          : var( --fon-fam-mai ); /* Font Family Main = 'Inter Tight', -apple-system, BlinkMacSystemFont, sans-serif */
 	font-size            : var( --fon-siz-bas ); /* Font Size Base = 11px */
 	font-variant-numeric : tabular-nums;
@@ -685,7 +685,7 @@
 
 
 	align-items    : center;
-	color          : var( --tex-mut-col ); /* Text Muted Color = #6b7079 */
+	color          : var( --tex-mut-col ); /* Text Muted Color = #636871 */
 	display        : inline-flex;
 	font-family    : var( --fon-fam-mai ); /* Font Family Main = 'Inter Tight', -apple-system, BlinkMacSystemFont, sans-serif */
 	font-size      : var( --fon-siz-bas ); /* Font Size Base = 11px */
@@ -699,7 +699,7 @@
 .eyeLabSpa::before { /* What: Eyebrow Label Span Leading Line. Why: A short rule leads into the label. How: This draws a short hairline, one rhythm step long, before the text. */
 
 
-	background : var( --tex-mut-col );                /* Text Muted Color = #6b7079 */
+	background : var( --tex-mut-col );                /* Text Muted Color = #636871 */
 	content    : '';
 	height     : var( --bor-wid-bas );                /* Border Width Base ~= 1.160px */
 	width      : calc( var( --ver-rhy-p02 ) * 1rem ); /* Vertical Rhythm Base Plus 2 ~= 25.572px */
@@ -720,7 +720,7 @@
 .draHouPar { /* What: Drawer Hours Paragraph. Why: The hours are supporting detail under the number. How: This sets them at body size in the muted color, on a tighter line. */
 
 
-	color       : var( --tex-mut-col ); /* Text Muted Color = #6b7079 */
+	color       : var( --tex-mut-col ); /* Text Muted Color = #636871 */
 	font-size   : var( --fon-siz-p01 ); /* Font Size Base Plus 1 ~= 14.572px */
 	line-height : var( --ver-rhy-bas ); /* Vertical Rhythm Base ~= 1.325 */
 
