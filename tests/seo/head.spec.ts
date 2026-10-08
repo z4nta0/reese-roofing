@@ -23,7 +23,8 @@ import { test   } from '@playwright/test'; // What: Test. Why: Each route and ea
  * demo website rather than a local business, the footer says the company is
  * fictional, robots.txt lets search crawlers read the noindex while keeping
  * AI crawlers out, Netlify's _headers sends noindex with every file, and the
- * social preview image is the 1200x630 card the tags promise.
+ * social preview tags are complete and the image is the 1200x630 card under
+ * 300 KB the tags promise.
  *
  * Sections:
  *  - Constants
@@ -38,6 +39,30 @@ import { test   } from '@playwright/test'; // What: Test. Why: Each route and ea
 // #region Constants
 
 const LIV_URL_STR = 'https://reese-roofing.netlify.app/'; // What: Live Url String. Why: The canonical and social tags must name the live address. How: This is the address they're compared with.
+
+
+const SOC_KEY_ARR = [ // What: Social Key Array. Why: The social preview rule lists every tag a complete card needs. How: Each entry names one Open Graph or Twitter tag the page must carry.
+
+
+	'og:description',     // What: Open Graph Description Key. Why: Every card needs the summary under the title. How: This names the tag.
+	'og:image',           // What: Open Graph Image Key. Why: Every card needs the preview image. How: This names the tag.
+	'og:image:alt',       // What: Open Graph Image Alt Key. Why: Every card needs the image's description for screen readers. How: This names the tag.
+	'og:image:height',    // What: Open Graph Image Height Key. Why: Every card needs the image's height, for laying out the card early. How: This names the tag.
+	'og:image:type',      // What: Open Graph Image Type Key. Why: Every card needs the image's file type. How: This names the tag.
+	'og:image:width',     // What: Open Graph Image Width Key. Why: Every card needs the image's width, for laying out the card early. How: This names the tag.
+	'og:locale',          // What: Open Graph Locale Key. Why: Every card needs the page's language. How: This names the tag.
+	'og:site_name',       // What: Open Graph Site Name Key. Why: Every card needs the name of the site the link belongs to. How: This names the tag.
+	'og:title',           // What: Open Graph Title Key. Why: Every card needs the card's title. How: This names the tag.
+	'og:type',            // What: Open Graph Type Key. Why: Every card needs what kind of page it is. How: This names the tag.
+	'og:url',             // What: Open Graph Url Key. Why: Every card needs the address shares should count toward. How: This names the tag.
+	'twitter:card',       // What: Twitter Card Key. Why: Every card needs the layout X and similar apps use. How: This names the tag.
+	'twitter:description',// What: Twitter Description Key. Why: Every card needs the summary on X. How: This names the tag.
+	'twitter:image',      // What: Twitter Image Key. Why: Every card needs the image on X. How: This names the tag.
+	'twitter:image:alt',  // What: Twitter Image Alt Key. Why: Every card needs the image's description on X. How: This names the tag.
+	'twitter:title'       // What: Twitter Title Key. Why: Every card needs the card's title on X. How: This names the tag.
+
+
+];
 
 
 
@@ -120,7 +145,29 @@ test( 'robots.txt and _headers keep the demo out of search', async ( { page : cu
 
 
 
-test( 'the social preview image is a 1200x630 png', async ( { page : curPagObj } ) => { // What: Preview Image Test. Why: The social tags promise a 1200x630 card. How: This fetches the image and reads its size from the PNG header.
+test( 'the social preview tags are complete', async ( { page : curPagObj } ) => { // What: Social Tags Test. Why: A link shared anywhere should show a full, honest card. How: This loads the home page and checks every social tag, its absolute URLs, and the copy's lengths.
+
+
+	await curPagObj.goto( '/' ); // What: Home Load Call. Why: Link scrapers read the page every route shares. How: This opens the home page.
+
+
+	const socTagArr = await curPagObj.locator( 'meta[property^="og:"], meta[name^="twitter:"]' ).evaluateAll( ( tagEleArr ) => tagEleArr.map( ( tagCurEle ) => [ tagCurEle.getAttribute( 'property' ) || tagCurEle.getAttribute( 'name' ) || '', tagCurEle.getAttribute( 'content' ) || '' ] ) ); // What: Social Tag Array. Why: Every social tag is checked by its key and value. How: This reads each Open Graph and Twitter tag as a key and content pair.
+	const socTagObj = Object.fromEntries( socTagArr ); // What: Social Tag Object. Why: Tags are easier to check by key. How: This turns the pairs into an object.
+
+
+	expect( Object.keys( socTagObj ) ).toEqual( expect.arrayContaining( SOC_KEY_ARR ) ); // What: Complete Tags Assertion. Why: A missing tag leaves part of the card blank. How: This checks every required key is present, allowing optional extras.
+	expect( [ socTagObj[ 'og:image' ], socTagObj[ 'og:url' ], socTagObj[ 'twitter:image' ] ] ).toEqual( [ `${ LIV_URL_STR }og-image.png`, LIV_URL_STR, `${ LIV_URL_STR }og-image.png` ] ); // What: Absolute Urls Assertion. Why: Scrapers can't resolve a relative address. How: This checks each URL tag names the live https address.
+	expect( socTagObj[ 'og:image:type' ] ).toBe( 'image/png' );                          // What: Image Type Assertion. Why: The tag has to match the file. How: This checks it names a PNG.
+	expect( socTagObj[ 'og:title' ].length ).toBeLessThanOrEqual( 60 );                  // What: Title Length Assertion. Why: Longer titles are cut off in most cards. How: This checks it stays at 60 characters or fewer.
+	expect( socTagObj[ 'og:description' ].length ).toBeGreaterThanOrEqual( 110 );        // What: Description Minimum Assertion. Why: A very short summary wastes the card's space. How: This checks it reaches 110 characters.
+	expect( socTagObj[ 'og:description' ].length ).toBeLessThanOrEqual( 160 );           // What: Description Maximum Assertion. Why: Longer summaries are cut off. How: This checks it stays at 160 characters or fewer.
+
+
+} );
+
+
+
+test( 'the social preview image is a 1200x630 png under 300 KB', async ( { page : curPagObj } ) => { // What: Preview Image Test. Why: The social tags promise a 1200x630 card. How: This fetches the image, checks its byte count, and reads its size from the PNG header.
 
 
 	const resImaObj = await curPagObj.request.get( '/og-image.png' ); // What: Response Image Object. Why: The image has to exist where the tags point. How: This fetches it from the dev server.
@@ -128,6 +175,7 @@ test( 'the social preview image is a 1200x630 png', async ( { page : curPagObj }
 
 
 	expect( resImaObj.headers()[ 'content-type' ] ).toBe( 'image/png' );                               // What: Png Type Assertion. Why: The tags promise a PNG. How: This checks the served type.
+	expect( pngBufObj.length ).toBeLessThan( 300 * 1024 );                                             // What: Png Bytes Assertion. Why: WhatsApp drops a preview image of 300 KB or more. How: This checks the file's byte count.
 	expect( [ pngBufObj.readUInt32BE( 16 ), pngBufObj.readUInt32BE( 20 ) ] ).toEqual( [ 1200, 630 ] ); // What: Png Size Assertion. Why: The tags promise 1200 by 630 pixels. How: This reads the width and height a PNG stores at bytes 16 and 20.
 
 
