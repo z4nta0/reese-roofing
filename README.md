@@ -18,7 +18,7 @@ The preview card is drawn from the site's own logo and fonts by `design/og-image
 
 ## Stack
 
-- **Node.js** 22.22 or newer (React Router 8 and Vite 8 require it)
+- **Node.js** 22.22 or newer (React Router 8 requires it)
 - **Vite 8** dev server / bundler
 - **React 19** + **TypeScript 6**
 - **React Router 8** (set up for future expansion: it currently routes `/` to Home and everything else to a 404)
@@ -85,7 +85,7 @@ design/
 
 - **Type pairing:** Fraunces (display serif, optical-size aware) paired with Inter Tight (refined sans). Italic Fraunces accents pull the design together.
 - **Palette:** Warm off-white paper (`#f5f2ec`), deep ink (`#1a1f24`), and a navy accent (`#1f4e7a`) drawn from the logo. Italic display accents and small details (numbered IDs, list bullets, pull quote marks) all use this brand navy so the design feels native to the logo.
-- **Layout:** Editorial grid, generous negative space, hairline dividers, numbered sections (01–04). Hover states are intentional but never showy.
+- **Layout:** Editorial grid, generous negative space, hairline dividers, numbered section labels (02 to 04, after the hero). Hover states are intentional but never showy.
 - **Logo usage:**
   - The **full logo** (`src/pages/home/logo-full.svg`) anchors the hero as the primary visual, doubles as a "seal" in the sticky left column of the About section, and appears on a paper-colored signature card in the Contact section. It's a two-color SVG (navy mark + grey subtext).
   - The **simple mark** (`src/assets/logo-mark.svg`) is used in the nav bar and the footer.
@@ -97,7 +97,7 @@ design/
 If this design is ever reused for a real business, update the placeholders below, and swap the demo SEO for real local SEO: remove the `noindex` meta tag, `public/_headers` rule, and AI crawler block, add a sitemap, replace the `WebSite` JSON-LD with `LocalBusiness` (`RoofingContractor`) data matching the real details, rewrite the title, description, social tags, and preview card, and drop the footer's demo line.
 
 - **Phone number:** `(785) 555-0199`. Search the repo for it; it appears in the Nav (bar and drawer) and the Contact section
-- **Email:** `hello@reeseroofing.example`. Same; it appears in the Contact section and its mailto form action
+- **Email:** `hello@reeseroofing.example`. Same; it appears in the Contact section's contact details and in the mailto link the form opens on submit (`subForFun` in `src/pages/home/contact.tsx`)
 - **Address:** placeholder Lawrence, Kansas 66044, in the Contact section
 - **Footer:** the company's legal name, licensing line, and the demo notice in `src/ui/footer.tsx`
 - **Stats in Hero:** 17+ years, 400+ roofs, etc. Replace them with real numbers
