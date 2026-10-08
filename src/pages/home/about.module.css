@@ -94,13 +94,13 @@
 
 
 	align-items    : center;
-	color          : var( --tex-mut-col ); /* Text Muted Color = #636871 */
+	color          : var( --tex-mut-col );                   /* Text Muted Color = #636871 */
 	display        : inline-flex;
-	font-family    : var( --fon-fam-mai ); /* Font Family Main = 'Inter Tight', -apple-system, BlinkMacSystemFont, sans-serif */
-	font-size      : var( --fon-siz-bas ); /* Font Size Base = 11px */
+	font-family    : var( --fon-fam-mai );                   /* Font Family Main = 'Inter Tight', -apple-system, BlinkMacSystemFont, sans-serif */
+	font-size      : var( --fon-siz-bas );                   /* Font Size Base = 11px */
 	font-weight    : 500;
-	gap            : var( --spa-hor-m01 ); /* Spacing Horizontal Base Minus 1 = 11px */
-	letter-spacing : 0.18em;
+	gap            : var( --spa-hor-m01 );                   /* Spacing Horizontal Base Minus 1 = 11px */
+	letter-spacing : calc( var( --cdn-pow-006-rec ) * 1em ); /* Core-Design-Number to the Power of 6 Reciprocal ~= 0.185 */
 	text-transform : uppercase;
 
 
@@ -287,10 +287,10 @@
 .aboQuoFoo { /* What: About Quote Footer. Why: The attribution reads as a small label under the quote. How: This sets it in tracked capitals at body size, indented to line up with the quote. */
 
 
-	color          : var( --tex-mut-col ); /* Text Muted Color = #636871 */
-	font-size      : var( --fon-siz-p01 ); /* Font Size Base Plus 1 ~= 14.572px */
-	letter-spacing : 0.05em;
-	padding-left   : var( --spa-hor-p04 ); /* Spacing Horizontal Base Plus 4 ~= 44.876px */
+	color          : var( --tex-mut-col );                   /* Text Muted Color = #636871 */
+	font-size      : var( --fon-siz-p01 );                   /* Font Size Base Plus 1 ~= 14.572px */
+	letter-spacing : calc( var( --cdn-pow-011-rec ) * 1em ); /* Core-Design-Number to the Power of 11 Reciprocal ~= 0.045 */
+	padding-left   : var( --spa-hor-p04 );                   /* Spacing Horizontal Base Plus 4 ~= 44.876px */
 	text-transform : uppercase;
 
 

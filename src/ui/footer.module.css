@@ -114,7 +114,7 @@
 .namLigSpa { /* What: Name Light Span. Why: The name's second word reads as the softer half. How: This sets it light, italic, and faded. */
 
 
-	color       : oklch( from var( --bac-pag-col ) l c h / 0.5 ); /* Background Page Color = #f5f2ec */
+	color       : oklch( from var( --bac-pag-col ) l c h / 0.5 ); /* Background Page Color = #f5f2ec @ 0.5 opacity */
 	font-style  : italic;
 	font-weight : 300;
 
@@ -167,9 +167,9 @@
 .fooDemAnc { /* What: Footer Demo Anchor. Why: The builder's link has to read as a link inside the sentence. How: This sets it in the paper color with an underline, turning the soft accent on hover. */
 
 
-	color                 : var( --bac-pag-col );                              /* Background Page Color = #f5f2ec */
+	color                 : var( --bac-pag-col );                            /* Background Page Color = #f5f2ec */
 	text-decoration       : underline;
-	text-underline-offset : calc( var( --cdn-pow-005-rec ) * 1em );           /* Core-Design-Number to the Power of 5 Reciprocal ~= 0.245 */
+	text-underline-offset : calc( var( --cdn-pow-005-rec ) * 1em );          /* Core-Design-Number to the Power of 5 Reciprocal ~= 0.245 */
 	transition            : color var( --dur-tra-p01 ) var( --mot-sta-eas ); /* Duration Transition Base Plus 1 ~= 209.1ms, Motion Standard Easing = ease */
 
 
@@ -198,6 +198,7 @@
 /* #endregion fooDemSpa */
 
 /* #endregion fooMetDiv */
+
 
 
 /* #region fooTopAnc */

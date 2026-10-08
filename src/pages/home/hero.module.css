@@ -180,14 +180,14 @@
 
 
 	align-items    : center;
-	color          : var( --tex-mut-col ); /* Text Muted Color = #636871 */
+	color          : var( --tex-mut-col );                   /* Text Muted Color = #636871 */
 	display        : inline-flex;
-	font-family    : var( --fon-fam-mai ); /* Font Family Main = 'Inter Tight', -apple-system, BlinkMacSystemFont, sans-serif */
-	font-size      : var( --fon-siz-bas ); /* Font Size Base = 11px */
+	font-family    : var( --fon-fam-mai );                   /* Font Family Main = 'Inter Tight', -apple-system, BlinkMacSystemFont, sans-serif */
+	font-size      : var( --fon-siz-bas );                   /* Font Size Base = 11px */
 	font-weight    : 500;
-	gap            : var( --spa-hor-m01 ); /* Spacing Horizontal Base Minus 1 = 11px */
-	letter-spacing : 0.18em;
-	margin-bottom  : var( --spa-ver-p04 ); /* Spacing Vertical Base Plus 4 ~= 44.876px */
+	gap            : var( --spa-hor-m01 );                   /* Spacing Horizontal Base Minus 1 = 11px */
+	letter-spacing : calc( var( --cdn-pow-006-rec ) * 1em ); /* Core-Design-Number to the Power of 6 Reciprocal ~= 0.185 */
+	margin-bottom  : var( --spa-ver-p04 );                   /* Spacing Vertical Base Plus 4 ~= 44.876px */
 	text-transform : uppercase;
 
 
@@ -307,7 +307,7 @@
 .herLogIma { /* What: Hero Logo Image. Why: The logo should fill its column up to a set size, with a soft shadow lifting it off the page. How: This caps its width at a horizontal step, never narrower than the p08 rhythm step, and adds a blue-tinted drop shadow. */
 
 
-	filter    : drop-shadow( 0 calc( var( --ver-rhy-m01 ) * 1rem ) calc( var( --ver-rhy-p03 ) * 1rem ) oklch( from var( --acc-mai-col ) l c h / 0.12 ) ); /* Vertical Rhythm Base Minus 1 = 11px, Vertical Rhythm Base Plus 3 ~= 33.876px, Accent Main Color = #1f4e7a */
+	filter    : drop-shadow( 0 calc( var( --ver-rhy-m01 ) * 1rem ) calc( var( --ver-rhy-p03 ) * 1rem ) oklch( from var( --acc-mai-col ) l c h / 0.12 ) ); /* Vertical Rhythm Base Minus 1 = 11px, Vertical Rhythm Base Plus 3 ~= 33.876px, Accent Main Color = #1f4e7a @ 0.12 opacity */
 	height    : auto;
 	max-width : max( calc( var( --ver-rhy-p08 ) * 1rem ), var( --hor-rhy-022 ) );                                                                         /* Vertical Rhythm Base Plus 8 ~= 138.199px, Horizontal Rhythm 22 ~= 470.635px @ 1,920px width */
 	width     : 100%;

@@ -5,7 +5,7 @@
 
 import cssModObj from './nav.module.css';        // What: CSS Module Object. Why: The bar's layout, scrolled state, and mobile drawer are styled in its own module. How: Each element reads its hashed class name from this object.
 import lomSvgUrl from '../assets/logo-mark.svg'; // What: Logo-Mark Svg Url. Why: The bar's brand link shows the simple logo mark. How: Vite resolves the import to the file's fingerprinted URL, used as the image's src.
-import React     from 'react';                   // What: React. Why: The bar tracks its scroll and drawer state with React's hooks. How: This is read as React.useState and React.useEffect.
+import React     from 'react';                   // What: React. Why: The bar tracks its scroll and drawer state with React's hooks. How: This is read for its hooks (React.useState, React.useEffect, and React.useRef) and its types.
 
 // #endregion Imports
 
@@ -222,7 +222,7 @@ function NavBarCom () : React.JSX.Element {
 							width='40'
 
 							alt=''
-						/>{ /* What: Navigation Mark Image Element. Why: The bar shows the simple logo mark beside the name. How: Its empty alt leaves the link's aria-label to name it, since the image is decorative. */ }
+						/>{ /* What: Navigation Mark Image Element. Why: The bar shows the simple logo mark beside the name. How: Its empty alt marks it decorative, since the link around it is hidden from screen readers in favor of the nav's Home link. */ }
 
 						<span className={ cssModObj.navNamSpa }>{ /* What: Navigation Name Span Element. Why: The company's name sits beside the mark. How: The second word takes a lighter weight. */ }
 							Reese <span className={ cssModObj.namLigSpa }>Roofing</span>

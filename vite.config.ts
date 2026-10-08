@@ -51,10 +51,10 @@ import type { Plugin } from 'vite'; // What: Plugin. Why: The page minifier is a
  * rules give it. For production builds only, this re-serializes the
  * page's JSON-LD on one line, which also fails the build if that JSON is
  * ever invalid, strips the page's HTML comments and the comment inside its
- * external script tag, trims every line, and drops blank lines. The newlines between lines are kept, so text
- * wrapped across lines keeps the space between its words. It runs after
- * Vite's own transforms, so the tags Vite injects are compacted too. The
- * dev server serves the page as written.
+ * external script tag, trims every line, and drops blank lines. The
+ * newlines between lines are kept, so text wrapped across lines keeps the
+ * space between its words. It runs after Vite's own transforms, so the tags
+ * Vite injects are compacted too. The dev server serves the page as written.
  *
  * @author z4nta0 <https://github.com/z4nta0>
  *

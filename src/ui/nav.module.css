@@ -94,7 +94,7 @@
 
 	-webkit-backdrop-filter : saturate( 180% ) blur( calc( var( --ver-rhy-bas ) * 1rem ) ); /* Vertical Rhythm Base ~= 14.572px */
 	backdrop-filter         : saturate( 180% ) blur( calc( var( --ver-rhy-bas ) * 1rem ) ); /* Vertical Rhythm Base ~= 14.572px */
-	background              : oklch( from var( --bac-pag-col ) l c h / 0.85 );              /* Background Page Color = #f5f2ec */
+	background              : oklch( from var( --bac-pag-col ) l c h / 0.85 );              /* Background Page Color = #f5f2ec @ 0.85 opacity */
 	border-bottom           : var( --bor-wid-bas ) solid var( --bor-mai-col );              /* Border Width Base ~= 1.160px, Border Main Color = #1a1f24 @ 0.12 opacity */
 	padding-block           : var( --spa-ver-m01 );                                         /* Spacing Vertical Base Minus 1 = 11px */
 
@@ -614,12 +614,12 @@
 .draNumSpa { /* What: Drawer Number Span. Why: The row's number should read as a quiet index beside its name. How: This sets it small, tracked, and muted in the body font with even-width figures. */
 
 
-	color                : var( --tex-mut-col ); /* Text Muted Color = #636871 */
-	font-family          : var( --fon-fam-mai ); /* Font Family Main = 'Inter Tight', -apple-system, BlinkMacSystemFont, sans-serif */
-	font-size            : var( --fon-siz-bas ); /* Font Size Base = 11px */
+	color                : var( --tex-mut-col );                   /* Text Muted Color = #636871 */
+	font-family          : var( --fon-fam-mai );                   /* Font Family Main = 'Inter Tight', -apple-system, BlinkMacSystemFont, sans-serif */
+	font-size            : var( --fon-siz-bas );                   /* Font Size Base = 11px */
 	font-variant-numeric : tabular-nums;
 	font-weight          : 500;
-	letter-spacing       : 0.18em;
+	letter-spacing       : calc( var( --cdn-pow-006-rec ) * 1em ); /* Core-Design-Number to the Power of 6 Reciprocal ~= 0.185 */
 
 
 }
@@ -685,13 +685,13 @@
 
 
 	align-items    : center;
-	color          : var( --tex-mut-col ); /* Text Muted Color = #636871 */
+	color          : var( --tex-mut-col );                   /* Text Muted Color = #636871 */
 	display        : inline-flex;
-	font-family    : var( --fon-fam-mai ); /* Font Family Main = 'Inter Tight', -apple-system, BlinkMacSystemFont, sans-serif */
-	font-size      : var( --fon-siz-bas ); /* Font Size Base = 11px */
+	font-family    : var( --fon-fam-mai );                   /* Font Family Main = 'Inter Tight', -apple-system, BlinkMacSystemFont, sans-serif */
+	font-size      : var( --fon-siz-bas );                   /* Font Size Base = 11px */
 	font-weight    : 500;
-	gap            : var( --spa-hor-m01 ); /* Spacing Horizontal Base Minus 1 = 11px */
-	letter-spacing : 0.18em;
+	gap            : var( --spa-hor-m01 );                   /* Spacing Horizontal Base Minus 1 = 11px */
+	letter-spacing : calc( var( --cdn-pow-006-rec ) * 1em ); /* Core-Design-Number to the Power of 6 Reciprocal ~= 0.185 */
 	text-transform : uppercase;
 
 
