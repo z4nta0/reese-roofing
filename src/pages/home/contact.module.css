@@ -27,6 +27,8 @@
 .homConSec { /* What: Home Contact Section. Why: The page closes on a dark band with light text. How: This sets the ink background, the paper text color, the top rule, and the standard section padding. */
 
 
+	--foc-rin-col : var( --acc-lig-col ); /* Accent Light Color, the accent lightened by 0.204 */ /* What: Focus Ring Color Override. Why: The navy ring would sink into this dark band. How: Every link and button inside draws its ring in the light accent instead. */
+
 	background    : var( --bac-inv-col );                            /* Background Inverse Color = #1a1f24 */
 	border-top    : var( --bor-wid-bas ) solid var( --bor-mai-col ); /* Border Width Base ~= 1.160px, Border Main Color = #1a1f24 @ 0.12 opacity */
 	color         : var( --bac-pag-col );                            /* Background Page Color = #f5f2ec */
@@ -208,8 +210,8 @@
 .rowValAnc { /* What: Row Value Anchor. Why: The phone and email links are marked by a faint underline. How: This draws the underline and fades its color and the text's on hover. */
 
 
-	border-bottom : var( --bor-wid-bas ) solid oklch( from var( --bac-pag-col ) l c h / var( --cdn-pow-004-rec ) );          /* Border Width Base ~= 1.160px, Background Page Color = #f5f2ec, Core-Design-Number to the Power of 4 Reciprocal ~= 0.325 */
-	transition    : border-color var( --dur-tra-p01 ) var( --mot-sta-eas ), color var( --dur-tra-p01 ) var( --mot-sta-eas ); /* Duration Transition Base Plus 1 ~= 209.1ms, Motion Standard Easing = ease */
+	border-bottom : var( --bor-wid-bas ) solid oklch( from var( --bac-pag-col ) l c h / var( --cdn-pow-004-rec ) ); /* Border Width Base ~= 1.160px, Background Page Color = #f5f2ec, Core-Design-Number to the Power of 4 Reciprocal ~= 0.325 */
+	transition    : border-color var( --dur-tra-p01 ) var( --mot-sta-eas ), color var( --dur-tra-p01 ) var( --mot-sta-eas ), opacity var( --dur-tra-p01 ) var( --mot-sta-eas ), outline-offset var( --dur-tra-p01 ) var( --mot-dec-eas ), outline-width var( --dur-tra-p01 ) var( --mot-dec-eas ); /* Duration Transition Base Plus 1 ~= 209.1ms, Motion Standard Easing = ease, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ) */
 
 
 }
@@ -221,10 +223,17 @@
 
 
 }
+.rowValAnc:active { /* What: Pressed Row Value Anchor. Why: A press should register before the page responds. How: This dims the link slightly while it's held. */
+
+
+	opacity : var( --cdn-pow-001-rec ); /* Core-Design-Number to the Power of 1 Reciprocal ~= 0.755 */
+
+
+}
 @media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Row Value Anchor. Why: Someone who asked for less motion shouldn't see the color fade. How: This applies only when the reduced-motion preference is set. */
 
 
-	.rowValAnc { /* What: Motionless Row Value Anchor. Why: The hover colors should appear at once. How: This turns the transition off. */
+	.rowValAnc { /* What: Motionless Row Value Anchor. Why: The hover, press, and focus changes should appear at once. How: This turns the transition off. */
 
 
 		transition : none;
@@ -485,7 +494,7 @@
 	line-height    : calc( var( --ver-rhy-p04 ) * 1rem );                                         /* Vertical Rhythm Base Plus 4 ~= 44.876px */
 	margin-top     : var( --spa-ver-m02 );                                                        /* Spacing Vertical Base Minus 2 ~= 8.304px */
 	padding        : 0 clamp( var( --spa-hor-p01 ), var( --hor-rhy-012 ), var( --spa-hor-p03 ) ); /* Spacing Horizontal Base Plus 1 ~= 19.304px, Horizontal Rhythm 12 ~= 28.278px @ 1,920px width, Spacing Horizontal Base Plus 3 ~= 33.876px */
-	transition     : background-color var( --dur-tra-p02 ) var( --mot-dec-eas ), color var( --dur-tra-p02 ) var( --mot-dec-eas ), transform var( --dur-tra-p02 ) var( --mot-dec-eas ); /* Duration Transition Base Plus 2 ~= 277.0ms, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ) */
+	transition     : background-color var( --dur-tra-p02 ) var( --mot-dec-eas ), color var( --dur-tra-p02 ) var( --mot-dec-eas ), outline-offset var( --dur-tra-p01 ) var( --mot-dec-eas ), outline-width var( --dur-tra-p01 ) var( --mot-dec-eas ), transform var( --dur-tra-p02 ) var( --mot-dec-eas ); /* Duration Transition Base Plus 2 ~= 277.0ms, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ), Duration Transition Base Plus 1 ~= 209.1ms */
 	white-space    : nowrap;
 
 
@@ -499,13 +508,65 @@
 
 
 }
+.forSubBut:active { /* What: Pressed Form Submit Button. Why: A press should register before the page responds. How: This presses the button in slightly. */
+
+
+	transform : scale( 0.97 ); /* What: Press Scale. Why: A press should be felt before anything else happens. How: This shrinks the button by 3% and drops its hover lift, a literal since no scale step lands near it. */
+
+
+}
 @media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Form Submit Button. Why: Someone who asked for less motion shouldn't see the button animate. How: This applies only when the reduced-motion preference is set. */
 
 
-	.forSubBut { /* What: Motionless Form Submit Button. Why: The hover style should appear at once. How: This turns the transition off. */
+	.forSubBut { /* What: Motionless Form Submit Button. Why: The hover, press, and focus changes should appear at once. How: This turns the transition off. */
 
 
 		transition : none;
+
+
+	}
+
+
+}
+
+.subLabSpa { /* What: Submit Label Span. Why: The sent label should arrive with a small flourish, so the visitor sees their press worked. How: This rises it into place and fades it in once, with a gentle overshoot. */
+
+
+	animation : subLabSpaSentFadeIn var( --dur-ani-p02 ) var( --mot-ove-eas ) both; /* Duration Animation Base Plus 2 ~= 277.0ms, Motion Overshoot Easing = cubic-bezier( .34, 1.2, .5, 1 ) */
+	display   : inline-block;                                                        /* What: Inline Block Display. Why: A transform has no effect on a plain inline box. How: This lets the label move while it stays in its line. */
+
+
+}
+@media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Submit Label Span. Why: Someone who asked for less motion should see the new label at once. How: This applies only when the reduced-motion preference is set. */
+
+
+	.subLabSpa { /* What: Motionless Submit Label Span. Why: The label should simply change. How: This turns the animation off. */
+
+
+		animation : none;
+
+
+	}
+
+
+}
+@keyframes subLabSpaSentFadeIn { /* What: Submit Label Span Sent Fade In. Why: The sent label rises in once when the request is sent. How: This starts a small step below and transparent, then settles in place. */
+
+
+	from {
+
+
+		opacity   : 0;
+		transform : translateY( var( --spa-ver-m05 ) ); /* Spacing Vertical Base Minus 5 ~= 3.572px */
+
+
+	}
+
+	to {
+
+
+		opacity   : 1;
+		transform : none;
 
 
 	}

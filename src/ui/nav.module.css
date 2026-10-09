@@ -217,14 +217,11 @@
 
 /* #region navLinNav */
 
-.navLinNav { /* What: Navigation Links Nav. Why: The section links sit in the exact middle of the bar, whatever the width of its sides. How: This centers the row absolutely against the bar. */
+.navLinNav { /* What: Navigation Links Nav. Why: The section links sit between the brand and the bar's actions, taking their share of the row so they never run into either side. How: This lays the links out in a row inside the bar's own flex row, whose spacing centers it between its neighbors. */
 
 
-	display   : flex;
-	gap       : var( --spa-hor-p03 ); /* Spacing Horizontal Base Plus 3 ~= 33.876px */
-	left      : 50%;
-	position  : absolute;
-	transform : translateX( -50% );
+	display : flex;
+	gap     : var( --spa-hor-p03 ); /* Spacing Horizontal Base Plus 3 ~= 33.876px */
 
 
 }
@@ -245,11 +242,11 @@
 .navLinAnc { /* What: Navigation Link Anchor. Why: Each section link needs room for the underline drawn beneath it. How: This positions it for its underline and fades its color on hover. */
 
 
-	color       : var( --tex-sec-col );                            /* Text Secondary Color = #2a3138 */
-	font-size   : var( --fon-siz-p01 );                            /* Font Size Base Plus 1 ~= 14.572px */
+	color       : var( --tex-sec-col ); /* Text Secondary Color = #2a3138 */
+	font-size   : var( --fon-siz-p01 ); /* Font Size Base Plus 1 ~= 14.572px */
 	font-weight : 500;
 	position    : relative;
-	transition  : color var( --dur-tra-p01 ) var( --mot-sta-eas ); /* Duration Transition Base Plus 1 ~= 209.1ms, Motion Standard Easing = ease */
+	transition  : color var( --dur-tra-p01 ) var( --mot-sta-eas ), opacity var( --dur-tra-p01 ) var( --mot-sta-eas ), outline-offset var( --dur-tra-p01 ) var( --mot-dec-eas ), outline-width var( --dur-tra-p01 ) var( --mot-dec-eas ); /* Duration Transition Base Plus 1 ~= 209.1ms, Motion Standard Easing = ease, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ) */
 
 
 }
@@ -283,11 +280,18 @@
 
 
 }
+.navLinAnc:active { /* What: Pressed Navigation Link Anchor. Why: A press should register before the page responds. How: This dims the link slightly while it's held. */
+
+
+	opacity : var( --cdn-pow-001-rec ); /* Core-Design-Number to the Power of 1 Reciprocal ~= 0.755 */
+
+
+}
 @media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Navigation Link Anchor. Why: Someone who asked for less motion shouldn't see the link or its underline animate. How: This applies only when the reduced-motion preference is set. */
 
 
 	.navLinAnc,
-	.navLinAnc::after { /* What: Motionless Navigation Link Anchor. Why: The hover color and underline should appear at once. How: This turns both transitions off. */
+	.navLinAnc::after { /* What: Motionless Navigation Link Anchor. Why: The hover, press, and focus changes should appear at once. How: This turns both transitions off. */
 
 
 		transition : none;
@@ -330,10 +334,10 @@
 .navPhoAnc { /* What: Navigation Phone Anchor. Why: The number should read as secondary to the button beside it. How: This sets it at body size in a soft color, fading its color on hover. */
 
 
-	color       : var( --tex-sec-col );                            /* Text Secondary Color = #2a3138 */
-	font-size   : var( --fon-siz-p01 );                            /* Font Size Base Plus 1 ~= 14.572px */
+	color       : var( --tex-sec-col ); /* Text Secondary Color = #2a3138 */
+	font-size   : var( --fon-siz-p01 ); /* Font Size Base Plus 1 ~= 14.572px */
 	font-weight : 500;
-	transition  : color var( --dur-tra-p01 ) var( --mot-sta-eas ); /* Duration Transition Base Plus 1 ~= 209.1ms, Motion Standard Easing = ease */
+	transition  : color var( --dur-tra-p01 ) var( --mot-sta-eas ), opacity var( --dur-tra-p01 ) var( --mot-sta-eas ), outline-offset var( --dur-tra-p01 ) var( --mot-dec-eas ), outline-width var( --dur-tra-p01 ) var( --mot-dec-eas ); /* Duration Transition Base Plus 1 ~= 209.1ms, Motion Standard Easing = ease, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ) */
 
 
 }
@@ -344,10 +348,17 @@
 
 
 }
+.navPhoAnc:active { /* What: Pressed Navigation Phone Anchor. Why: A press should register before the page responds. How: This dims the number slightly while it's held. */
+
+
+	opacity : var( --cdn-pow-001-rec ); /* Core-Design-Number to the Power of 1 Reciprocal ~= 0.755 */
+
+
+}
 @media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Navigation Phone Anchor. Why: Someone who asked for less motion shouldn't see the color fade. How: This applies only when the reduced-motion preference is set. */
 
 
-	.navPhoAnc { /* What: Motionless Navigation Phone Anchor. Why: The hover color should appear at once. How: This turns the transition off. */
+	.navPhoAnc { /* What: Motionless Navigation Phone Anchor. Why: The hover, press, and focus changes should appear at once. How: This turns the transition off. */
 
 
 		transition : none;
@@ -365,18 +376,18 @@
 
 
 	align-items    : center;
-	background     : var( --bac-inv-col );                                                                                            /* Background Inverse Color = #1a1f24 */
-	border         : var( --bor-wid-bas ) solid transparent;                                                                          /* Border Width Base ~= 1.160px */
+	background     : var( --bac-inv-col );                                                        /* Background Inverse Color = #1a1f24 */
+	border         : var( --bor-wid-bas ) solid transparent;                                      /* Border Width Base ~= 1.160px */
 	border-radius  : 999px;
-	color          : var( --bac-pag-col );                                                                                            /* Background Page Color = #f5f2ec */
+	color          : var( --bac-pag-col );                                                        /* Background Page Color = #f5f2ec */
 	display        : inline-flex;
-	font-size      : var( --fon-siz-p01 );                                                                                            /* Font Size Base Plus 1 ~= 14.572px */
+	font-size      : var( --fon-siz-p01 );                                                        /* Font Size Base Plus 1 ~= 14.572px */
 	font-weight    : 500;
-	gap            : var( --spa-hor-m01 );                                                                                            /* Spacing Horizontal Base Minus 1 = 11px */
-	letter-spacing : calc( var( --cdn-pow-014-rec ) * 1em );                                                                          /* Core-Design-Number to the Power of 14 Reciprocal ~= 0.020 */
-	line-height    : calc( var( --ver-rhy-p04 ) * 1rem );                                                                             /* Vertical Rhythm Base Plus 4 ~= 44.876px */
-	padding        : 0 clamp( var( --spa-hor-bas ), var( --hor-rhy-011 ), var( --spa-hor-p02 ) );                                     /* Spacing Horizontal Base ~= 14.572px, Horizontal Rhythm 11 ~= 21.346px @ 1,920px width, Spacing Horizontal Base Plus 2 ~= 25.572px */
-	transition     : background-color var( --dur-tra-p02 ) var( --mot-dec-eas ), transform var( --dur-tra-p02 ) var( --mot-dec-eas ); /* Duration Transition Base Plus 2 ~= 277.0ms, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ) */
+	gap            : var( --spa-hor-m01 );                                                        /* Spacing Horizontal Base Minus 1 = 11px */
+	letter-spacing : calc( var( --cdn-pow-014-rec ) * 1em );                                      /* Core-Design-Number to the Power of 14 Reciprocal ~= 0.020 */
+	line-height    : calc( var( --ver-rhy-p04 ) * 1rem );                                         /* Vertical Rhythm Base Plus 4 ~= 44.876px */
+	padding        : 0 clamp( var( --spa-hor-bas ), var( --hor-rhy-011 ), var( --spa-hor-p02 ) ); /* Spacing Horizontal Base ~= 14.572px, Horizontal Rhythm 11 ~= 21.346px @ 1,920px width, Spacing Horizontal Base Plus 2 ~= 25.572px */
+	transition     : background-color var( --dur-tra-p02 ) var( --mot-dec-eas ), outline-offset var( --dur-tra-p01 ) var( --mot-dec-eas ), outline-width var( --dur-tra-p01 ) var( --mot-dec-eas ), transform var( --dur-tra-p02 ) var( --mot-dec-eas ); /* Duration Transition Base Plus 2 ~= 277.0ms, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ), Duration Transition Base Plus 1 ~= 209.1ms */
 	white-space    : nowrap;
 
 
@@ -389,10 +400,17 @@
 
 
 }
+.navEstAnc:active { /* What: Pressed Navigation Estimate Anchor. Why: A press should register before the page responds. How: This presses the button in slightly. */
+
+
+	transform : scale( 0.97 ); /* What: Press Scale. Why: A press should be felt before anything else happens. How: This shrinks the button by 3% and drops its hover lift, a literal since no scale step lands near it. */
+
+
+}
 @media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Navigation Estimate Anchor. Why: Someone who asked for less motion shouldn't see the button animate. How: This applies only when the reduced-motion preference is set. */
 
 
-	.navEstAnc { /* What: Motionless Navigation Estimate Anchor. Why: The hover style should appear at once. How: This turns the transition off. */
+	.navEstAnc { /* What: Motionless Navigation Estimate Anchor. Why: The hover, press, and focus changes should appear at once. How: This turns the transition off. */
 
 
 		transition : none;
@@ -446,6 +464,7 @@
 	flex-direction : column;
 	gap            : var( --spa-ver-m04 );                      /* Spacing Vertical Base Minus 4 ~= 4.732px */
 	padding        : var( --spa-ver-m02 ) var( --spa-hor-m02 ); /* Spacing Vertical Base Minus 2 ~= 8.304px, Spacing Horizontal Base Minus 2 ~= 8.304px */
+	transition     : outline-offset var( --dur-tra-p01 ) var( --mot-dec-eas ), outline-width var( --dur-tra-p01 ) var( --mot-dec-eas ), transform var( --dur-tra-p02 ) var( --mot-dec-eas ); /* Duration Transition Base Plus 1 ~= 209.1ms, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ), Duration Transition Base Plus 2 ~= 277.0ms */
 
 
 }
@@ -462,14 +481,34 @@
 
 
 }
+.navTogBut:active { /* What: Pressed Navigation Toggle Button. Why: A press should register before the page responds. How: This presses the button in slightly. */
+
+
+	transform : scale( 0.97 ); /* What: Press Scale. Why: A press should be felt before anything else happens. How: This shrinks the button by 3% and drops its hover lift, a literal since no scale step lands near it. */
+
+
+}
+@media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Navigation Toggle Button. Why: Someone who asked for less motion shouldn't see it move. How: This applies only when the reduced-motion preference is set. */
+
+
+	.navTogBut { /* What: Motionless Navigation Toggle Button. Why: The press and focus changes should appear at once. How: This turns the transition off. */
+
+
+		transition : none;
+
+
+	}
+
+
+}
 
 .togLinSpa { /* What: Toggle Line Span. Why: The menu icon is drawn from two thin lines. How: This draws each line and animates it into the close icon. */
 
 
-	background : var( --tex-mai-col );                                                                                   /* Text Main Color = #1a1f24 */
-	height     : calc( var( --ver-rhy-m08 ) * 1rem );                                                                    /* Vertical Rhythm Base Minus 8 ~= 1.536px */
-	transition : transform var( --dur-tra-p02 ) var( --mot-sta-eas ), opacity var( --dur-tra-p02 ) var( --mot-sta-eas ); /* Duration Transition Base Plus 2 ~= 277.0ms, Motion Standard Easing = ease */
-	width      : calc( var( --ver-rhy-p01 ) * 1rem );                                                                    /* Vertical Rhythm Base Plus 1 ~= 19.304px */
+	background : var( --tex-mai-col );                /* Text Main Color = #1a1f24 */
+	height     : calc( var( --ver-rhy-m08 ) * 1rem ); /* Vertical Rhythm Base Minus 8 ~= 1.536px */
+	transition : background-color var( --dur-tra-p01 ) var( --mot-sta-eas ), opacity var( --dur-tra-p02 ) var( --mot-sta-eas ), transform var( --dur-tra-p02 ) var( --mot-sta-eas ); /* Duration Transition Base Plus 1 ~= 209.1ms, Motion Standard Easing = ease, Duration Transition Base Plus 2 ~= 277.0ms */
+	width      : calc( var( --ver-rhy-p01 ) * 1rem ); /* Vertical Rhythm Base Plus 1 ~= 19.304px */
 
 
 }
@@ -484,6 +523,13 @@
 
 
 	transform : translateY( calc( ( var( --spa-ver-m04 ) + calc( var( --ver-rhy-m08 ) * 1rem ) ) / -2 ) ) rotate( -45deg ); /* Spacing Vertical Base Minus 4 ~= 4.732px, Vertical Rhythm Base Minus 8 ~= 1.536px */
+
+
+}
+.navTogBut:hover .togLinSpa { /* What: Hovered Toggle Line Span. Why: The menu button should respond to the pointer. How: This turns both lines the accent. */
+
+
+	background : var( --acc-mai-col ); /* Accent Main Color = #1f4e7a */
 
 
 }
@@ -627,9 +673,37 @@
 .draLabSpa { /* What: Drawer Label Span. Why: The section's name is the row's main text. How: This sets it in the display font at a tappable size. */
 
 
-	color       : var( --tex-mai-col ); /* Text Main Color = #1a1f24 */
-	font-family : var( --fon-fam-sec ); /* Font Family Secondary = 'Fraunces', 'Times New Roman', serif */
-	font-size   : var( --fon-siz-p03 ); /* Font Size Base Plus 3 ~= 25.572px */
+	color       : var( --tex-mai-col );                                                                               /* Text Main Color = #1a1f24 */
+	font-family : var( --fon-fam-sec );                                                                               /* Font Family Secondary = 'Fraunces', 'Times New Roman', serif */
+	font-size   : var( --fon-siz-p03 );                                                                               /* Font Size Base Plus 3 ~= 25.572px */
+	transition  : color var( --dur-tra-p01 ) var( --mot-sta-eas ), opacity var( --dur-tra-p01 ) var( --mot-sta-eas ); /* Duration Transition Base Plus 1 ~= 209.1ms, Motion Standard Easing = ease */
+
+
+}
+.draLinAnc:hover .draLabSpa { /* What: Hovered Drawer Label Span. Why: The hovered row should stand out. How: This turns its name the accent. */
+
+
+	color : var( --acc-mai-col ); /* Accent Main Color = #1f4e7a */
+
+
+}
+.draLinAnc:active .draLabSpa { /* What: Pressed Drawer Label Span. Why: A press should register before the drawer closes. How: This dims the row's name slightly while it's held, since the row's own opacity is held by its entrance animation. */
+
+
+	opacity : var( --cdn-pow-001-rec ); /* Core-Design-Number to the Power of 1 Reciprocal ~= 0.755 */
+
+
+}
+@media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Drawer Label Span. Why: Someone who asked for less motion shouldn't see it move. How: This applies only when the reduced-motion preference is set. */
+
+
+	.draLabSpa { /* What: Motionless Drawer Label Span. Why: The press and focus changes should appear at once. How: This turns the transition off. */
+
+
+		transition : none;
+
+
+	}
 
 
 }
@@ -713,6 +787,34 @@
 	color       : var( --tex-mai-col ); /* Text Main Color = #1a1f24 */
 	font-family : var( --fon-fam-sec ); /* Font Family Secondary = 'Fraunces', 'Times New Roman', serif */
 	font-size   : var( --fon-siz-p02 ); /* Font Size Base Plus 2 ~= 19.304px */
+	transition  : color var( --dur-tra-p01 ) var( --mot-sta-eas ), opacity var( --dur-tra-p01 ) var( --mot-sta-eas ), outline-offset var( --dur-tra-p01 ) var( --mot-dec-eas ), outline-width var( --dur-tra-p01 ) var( --mot-dec-eas ); /* Duration Transition Base Plus 1 ~= 209.1ms, Motion Standard Easing = ease, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ) */
+
+
+}
+.draPhoAnc:hover { /* What: Hovered Drawer Phone Anchor. Why: The hovered number should stand out. How: This colors it with the accent. */
+
+
+	color : var( --acc-mai-col ); /* Accent Main Color = #1f4e7a */
+
+
+}
+.draPhoAnc:active { /* What: Pressed Drawer Phone Anchor. Why: A press should register before the page responds. How: This dims the number slightly while it's held. */
+
+
+	opacity : var( --cdn-pow-001-rec ); /* Core-Design-Number to the Power of 1 Reciprocal ~= 0.755 */
+
+
+}
+@media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Drawer Phone Anchor. Why: Someone who asked for less motion shouldn't see it move. How: This applies only when the reduced-motion preference is set. */
+
+
+	.draPhoAnc { /* What: Motionless Drawer Phone Anchor. Why: The press and focus changes should appear at once. How: This turns the transition off. */
+
+
+		transition : none;
+
+
+	}
 
 
 }
@@ -734,20 +836,20 @@
 
 
 	align-items     : center;
-	background      : var( --bac-inv-col );                                                                                            /* Background Inverse Color = #1a1f24 */
-	border          : var( --bor-wid-bas ) solid transparent;                                                                          /* Border Width Base ~= 1.160px */
+	background      : var( --bac-inv-col );                   /* Background Inverse Color = #1a1f24 */
+	border          : var( --bor-wid-bas ) solid transparent; /* Border Width Base ~= 1.160px */
 	border-radius   : 999px;
-	color           : var( --bac-pag-col );                                                                                            /* Background Page Color = #f5f2ec */
+	color           : var( --bac-pag-col );                   /* Background Page Color = #f5f2ec */
 	display         : flex;
-	font-size       : var( --fon-siz-p01 );                                                                                            /* Font Size Base Plus 1 ~= 14.572px */
+	font-size       : var( --fon-siz-p01 );                   /* Font Size Base Plus 1 ~= 14.572px */
 	font-weight     : 500;
-	gap             : var( --spa-hor-m01 );                                                                                            /* Spacing Horizontal Base Minus 1 = 11px */
+	gap             : var( --spa-hor-m01 );                   /* Spacing Horizontal Base Minus 1 = 11px */
 	justify-content : center;
-	letter-spacing  : calc( var( --cdn-pow-014-rec ) * 1em );                                                                          /* Core-Design-Number to the Power of 14 Reciprocal ~= 0.020 */
-	line-height     : calc( var( --ver-rhy-p04 ) * 1rem );                                                                             /* Vertical Rhythm Base Plus 4 ~= 44.876px */
-	margin-top      : var( --spa-ver-m01 );                                                                                            /* Spacing Vertical Base Minus 1 = 11px */
-	padding         : 0 var( --spa-hor-p01 );                                                                                          /* Spacing Horizontal Base Plus 1 ~= 19.304px */
-	transition      : background-color var( --dur-tra-p02 ) var( --mot-dec-eas ), transform var( --dur-tra-p02 ) var( --mot-dec-eas ); /* Duration Transition Base Plus 2 ~= 277.0ms, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ) */
+	letter-spacing  : calc( var( --cdn-pow-014-rec ) * 1em ); /* Core-Design-Number to the Power of 14 Reciprocal ~= 0.020 */
+	line-height     : calc( var( --ver-rhy-p04 ) * 1rem );    /* Vertical Rhythm Base Plus 4 ~= 44.876px */
+	margin-top      : var( --spa-ver-m01 );                   /* Spacing Vertical Base Minus 1 = 11px */
+	padding         : 0 var( --spa-hor-p01 );                 /* Spacing Horizontal Base Plus 1 ~= 19.304px */
+	transition      : background-color var( --dur-tra-p02 ) var( --mot-dec-eas ), outline-offset var( --dur-tra-p01 ) var( --mot-dec-eas ), outline-width var( --dur-tra-p01 ) var( --mot-dec-eas ), transform var( --dur-tra-p02 ) var( --mot-dec-eas ); /* Duration Transition Base Plus 2 ~= 277.0ms, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ), Duration Transition Base Plus 1 ~= 209.1ms */
 	white-space     : nowrap;
 
 
@@ -760,10 +862,17 @@
 
 
 }
+.draEstAnc:active { /* What: Pressed Drawer Estimate Anchor. Why: A press should register before the page responds. How: This presses the button in slightly. */
+
+
+	transform : scale( 0.97 ); /* What: Press Scale. Why: A press should be felt before anything else happens. How: This shrinks the button by 3% and drops its hover lift, a literal since no scale step lands near it. */
+
+
+}
 @media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Drawer Estimate Anchor. Why: Someone who asked for less motion shouldn't see the button animate. How: This applies only when the reduced-motion preference is set. */
 
 
-	.draEstAnc { /* What: Motionless Drawer Estimate Anchor. Why: The hover style should appear at once. How: This turns the transition off. */
+	.draEstAnc { /* What: Motionless Drawer Estimate Anchor. Why: The hover, press, and focus changes should appear at once. How: This turns the transition off. */
 
 
 		transition : none;

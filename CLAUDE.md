@@ -99,7 +99,8 @@ in Chromium, Firefox, and WebKit. Results, screenshots, and traces go to
 `tests/output/` (git-ignored); `npx playwright show-report tests/output/report`
 opens the HTML report. The states each suite visits (both pages at 390px and
 1440px, plus the open drawer) are listed in `tests/support/states.ts`; the
-seo suite reads the head of each route instead.
+responsive suite opens its own widths through the same helper, and the seo
+suite reads the head of each route instead.
 - `npm run test:accessibility`: the pre-commit accessibility scan. axe-core
   checks each state against WCAG 2.2 A and AA plus best practices
   (`axe.spec.ts`), and scripted checks (`scripted.spec.ts`) cover link and
@@ -108,6 +109,28 @@ seo suite reads the head of each route instead.
   walk runs under reduced motion so smooth scrolling and focus transitions
   have finished when a stop is measured. axe's "needs review" results are
   printed and attached to the report rather than failing the run.
+- `npm run test:interaction`: checks the interaction feedback rule on every
+  state (every reachable link and button changes on hover and on press and
+  transitions its focus ring, the first keyboard stop draws a 2px ring, and
+  reduced motion keeps the changes with no transitions), then the site's
+  behavior: the section, Home, and back to top links, every way the drawer
+  opens and closes, the contact form's sent label and mailto link (the
+  mailto test is Chromium-only, through the DevTools Protocol), and the 404
+  page.
+- `npm run test:rendering`: compares a full-page screenshot of every state
+  with its baseline in `tests/rendering/baselines/`, with zero tolerance,
+  since each engine renders identically from run to run here and even a
+  0.1% tolerance hid the nav links moving. The footer's year is masked.
+  After an intended visual change, refresh with `npm run test:rendering --
+  --update-snapshots` and commit the baselines with it. Baselines are
+  captured on Linux.
+- `npm run test:responsive`: measures the home page, the 404 page, and the
+  open drawer at 21 widths from 320 to 1,920px (a pixel either side of each
+  breakpoint included), failing on sideways scrolling, an unclipped element
+  past either edge, text spilling its box, or two reachable controls
+  overlapping. It found the bar's links running into the phone number just
+  above the drawer breakpoint, fixed by returning the links to the bar's
+  flex row.
 - `npm run test:seo`: checks each route's title, description, robots,
   canonical, social tags, and structured data, the footer's demo line,
   `robots.txt`, `_headers`, and the preview image's size.
@@ -118,8 +141,8 @@ Next (planned 2026-10-07):
 - **SEO** (done 2026-10-08): set up for a demo site, per "## SEO" above.
 - **Reusable tests** (started 2026-10-08): a suite to rerun after large
   changes, checking that every page renders and behaves correctly in all
-  three browser engines. The accessibility and seo suites are its first
-  parts; rendering and interaction suites are still to come.
+  three browser engines. Done 2026-10-08: the accessibility, interaction,
+  rendering, responsive, and seo suites.
 
 Applied original intent (kept by the user, 2026-10-07): the CSS module pass
 found styles that were written but never rendered, because a later global

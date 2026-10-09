@@ -153,6 +153,7 @@
 	--err-dar-col : ;                                                         /* What: Error Dark Color. Why: The standard role set includes the error family. How: This site has no errors to show, so it stays empty. */
 	--err-mai-col : ;                                                         /* What: Error Main Color. Why: The standard role set includes the error family. How: This site has no errors to show, so it stays empty. */
 	--err-tin-col : ;                                                         /* What: Error Tint Color. Why: The standard role set includes the error family. How: This site has no errors to show, so it stays empty. */
+	--foc-rin-col : var( --acc-mai-col );                                     /* What: Focus Ring Color. Why: Keyboard focus needs one ring color that stands out on the page, kept apart from the accent so dark bands can swap it. How: Links and buttons draw their focus ring in it, and the contact band and footer set it to the light accent. */
 	--scr-mai-col : var( --bac-inv-col );                                     /* What: Scrim Main Color. Why: The open mobile drawer dims the page behind it with one shade, the site's ink. How: The scrim reads it with its own alpha through relative color syntax. */
 	--sha-mai-col : var( --bac-inv-col );                                     /* What: Shadow Main Color. Why: Every elevation shadow casts one color, a soft ink that suits the warm paper better than pure black. How: The --ele-* shadows read it with each layer's own alpha through relative color syntax. */
 	--suc-dar-col : ;                                                         /* What: Success Dark Color. Why: The standard role set includes the success family. How: This site has no success states, so it stays empty. */
@@ -495,6 +496,40 @@ textarea { /* What: Focusable Controls. Why: Tabbing to a control scrolls it int
 
 
 	scroll-margin-top : var( --spa-ver-p06 ); /* Spacing Vertical Base Plus 6 ~= 78.751px */ /* What: Bar Clearance Margin. Why: The scrolled bar is about 69.9px tall on wide screens and 56.9px on phones. How: This is the smallest spacing step taller than both, leaving a little room below the bar. */
+
+
+}
+
+a,
+button { /* What: Focus Ring Controls. Why: Keyboard focus should ease in rather than snap, in a ring that suits the site. How: This gives every link and button a zero-width outline in the focus ring color, held a little away from it, ready to grow in on focus. */
+
+
+	outline        : 0 solid var( --foc-rin-col );                                                                                      /* Focus Ring Color = #1f4e7a */ /* What: Zero Width Outline. Why: A zero width stays invisible, even in forced colors mode, until something is focused. How: The focused rule below grows it. */
+	outline-offset : calc( var( --ver-rhy-m03 ) * 1rem );                                                                               /* Vertical Rhythm Base Minus 3 ~= 6.268px */
+	transition     : outline-offset var( --dur-tra-p01 ) var( --mot-dec-eas ), outline-width var( --dur-tra-p01 ) var( --mot-dec-eas ); /* Duration Transition Base Plus 1 ~= 209.1ms, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ) */
+
+
+}
+a:focus-visible,
+button:focus-visible { /* What: Focused Focus Ring Controls. Why: A keyboard user has to see where focus is. How: This grows the ring to its full width and draws it in close, so it eases in; every element with its own transition lists the two outline properties so the ease survives. */
+
+
+	outline-offset : var( --bor-wid-lar ); /* Border Width Large ~= 2.035px */
+	outline-width  : var( --bor-wid-lar ); /* Border Width Large ~= 2.035px */
+
+
+}
+@media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Focus Ring Controls. Why: Someone who asked for less motion should see the ring appear at once. How: This applies only when the reduced-motion preference is set. */
+
+
+	a,
+	button { /* What: Motionless Focus Ring Controls. Why: The ring should simply appear. How: This turns the transition off. */
+
+
+		transition : none;
+
+
+	}
 
 
 }

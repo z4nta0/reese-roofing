@@ -517,7 +517,7 @@ function ConSecCom () : React.JSX.Element {
 
 							type='submit'
 						>{ /* What: Contact Submit Button Element. Why: This sends the request. How: It submits the form, which runs subForFun. */ }
-							{ senReqBoo ? 'Opening your email…' : 'Send request' }{ /* What: Submit Label Text. Why: The button should confirm the email is opening once it's pressed. How: This switches its label when senReqBoo turns true. */ }
+							{ senReqBoo ? <span className={ cssModObj.subLabSpa }>Opening your email…</span> : 'Send request' }{ /* What: Submit Label Text. Why: The button should confirm the email is opening once it's pressed. How: This switches its label when senReqBoo turns true, the new label in a span that rises in so the change registers. */ }
 							<span
 								className={ cssModObj.arrIcoSpa }
 
