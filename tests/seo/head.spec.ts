@@ -24,10 +24,12 @@ import { test   } from '@playwright/test'; // What: Test. Why: Each route and ea
  * noindex while the named AI crawlers' group disallows the site and no sitemap
  * is served, and Netlify's _headers sends noindex with every file. It also
  * checks the social preview tags are complete and call it a demo, and the
- * image is the 1,200x630 card under 300 KB the tags promise, and that _headers
- * sends each of the security headers a header checker looks for, once, and
- * that _redirects sends every unknown path to the app, since the dev server
- * never applies either file.
+ * image is the 1,200x630 card under 300 KB the tags promise, that every route
+ * has exactly one description of 120 to 125 characters, that the raw home
+ * page, fetched without a browser, carries its full title and description, and
+ * that _headers sends each of the security headers a header checker looks for,
+ * once, and that _redirects sends every unknown path to the app, since the dev
+ * server never applies either file.
  *
  * Sections:
  *  - Constants

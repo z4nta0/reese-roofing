@@ -139,27 +139,27 @@ the same helper, and the seo suite reads the head of each route instead.
   checks each state against WCAG 2.2 A and AA plus best practices
   (`axe.spec.ts`), and scripted checks (`scripted.spec.ts`) cover link and
   button names, a Tab walk (order, traps, focus on screen, uncovered, and
-  visible), reflow at 320px, and motion under reduced motion, while each
-  state opens, the drawer closes, and the sent form's label swaps in. The
-  keyboard walk runs under reduced motion so smooth scrolling and focus
-  transitions have finished when a stop is measured. axe's "needs review"
-  results are printed and attached to the report rather than failing the run.
+  visible), reflow at 320px, and motion under reduced motion, while each state
+  opens, the drawer closes, and the sent form's label swaps in. The keyboard
+  walk runs under reduced motion so smooth scrolling and focus transitions have
+  finished when a stop is measured. axe's "needs review" results are printed
+  and attached to the report rather than failing the run.
 - `npm run test:interaction`: checks the interaction feedback rule on every
   state (every reachable link and button changes on hover and on press, has a
-  transition longer than zero, and transitions its focus ring, every form
-  field changes when focused and has a transition longer than zero, the first
+  transition longer than zero, and transitions its focus ring, every form field
+  changes when focused and has a transition longer than zero, the first
   keyboard stop, or the control a state's action left focused, draws a 2px
   ring, and reduced motion keeps the changes with no transitions), then the
   site's behavior: the section, Home, hero, estimate, back to top, and logo
   links (landing on their targets without ever putting a hash in the address,
-  each section link's address naming the home page's path, and a Ctrl, Cmd,
-  or middle click opening a section in a new tab, and a Ctrl or Cmd click on
-  a drawer link leaving the drawer open), every way the drawer opens and
-  closes, the contact form's sent label and mailto link (the mailto test is
-  Chromium-only, through the DevTools Protocol), and the 404 page, whose
-  Return home opens the home page at its top and whose estimate, section, and
-  Home links reach their targets, all inside the router without a full page
-  load, and whose back to top scrolls the 404 page itself.
+  each section link's address naming the home page's path, and a Ctrl, Cmd, or
+  middle click opening a section in a new tab, and a Ctrl or Cmd click on a
+  drawer link leaving the drawer open), every way the drawer opens and closes,
+  the contact form's sent label and mailto link (the mailto test is
+  Chromium-only, through the DevTools Protocol), and the 404 page, whose Return
+  home opens the home page at its top and whose estimate, section, and Home
+  links reach their targets, all inside the router without a full page load,
+  and whose back to top scrolls the 404 page itself.
 - `npm run test:rendering`: compares a full-page screenshot of every state
   with its baseline in `tests/rendering/baselines/`, with zero tolerance,
   since each engine renders identically from run to run here and even a
