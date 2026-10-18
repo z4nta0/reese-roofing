@@ -66,9 +66,6 @@
 
 }
 
-
-/* #region herGriSvg */
-
 .herGriSvg { /* What: Hero Grid SVG. Why: The grid drawing should fill the whole background. How: This stretches it to the background's full size. */
 
 
@@ -77,8 +74,6 @@
 
 
 }
-
-/* #endregion herGriSvg */
 
 /* #endregion herBacDiv */
 
@@ -90,7 +85,7 @@
 
 
 	margin         : 0 auto;
-	max-width      : var( --con-max-wid ); /* Container Maximum Width, about 1,449.4px */
+	max-width      : var( --con-max-wid ); /* Container Maximum Width ~= 1,449.4px */
 	padding-inline : var( --gut-sid-pad ); /* Gutter Side Padding, about 19.304px - 44.876px */
 	position       : relative;
 	width          : 100%;
@@ -186,7 +181,7 @@
 	font-size      : var( --fon-siz-bas );                   /* Font Size Base = 11px */
 	font-weight    : 500;
 	gap            : var( --spa-hor-m01 );                   /* Spacing Horizontal Base Minus 1 = 11px */
-	letter-spacing : calc( var( --cdn-pow-006-rec ) * 1em ); /* Core-Design-Number to the Power of 6 Reciprocal ~= 0.185 */
+	letter-spacing : calc( var( --cdn-pow-006-rec ) * 1em ); /* Core-Design-Number to the Power of 6 Reciprocal ~= 0.185em */
 	margin-bottom  : var( --spa-ver-p04 );                   /* Spacing Vertical Base Plus 4 ~= 44.876px */
 	text-transform : uppercase;
 
@@ -214,7 +209,7 @@
 	font-size               : clamp( var( --fon-siz-p05 ), 6.5vw, var( --fon-siz-p08 ) ); /* Font Size Base Plus 5 ~= 44.876px, Font Size Base Plus 8 ~= 104.323px */
 	font-variation-settings : 'opsz' 144;
 	font-weight             : 400;
-	letter-spacing          : calc( var( --cdn-pow-013-rec ) * -1em );                    /* Core-Design-Number to the Power of 13 Reciprocal ~= 0.026 */
+	letter-spacing          : calc( var( --cdn-pow-013-rec ) * -1em );                    /* Core-Design-Number to the Power of 13 Reciprocal ~= -0.026em */
 	line-height             : var( --ver-rhy-m01 );                                       /* Vertical Rhythm Base Minus 1 = 1 */
 
 
@@ -432,7 +427,7 @@
 	font-size      : var( --fon-siz-p01 );                                                        /* Font Size Base Plus 1 ~= 14.572px */
 	font-weight    : 500;
 	gap            : var( --spa-hor-m01 );                                                        /* Spacing Horizontal Base Minus 1 = 11px */
-	letter-spacing : calc( var( --cdn-pow-014-rec ) * 1em );                                      /* Core-Design-Number to the Power of 14 Reciprocal ~= 0.020 */
+	letter-spacing : calc( var( --cdn-pow-014-rec ) * 1em );                                      /* Core-Design-Number to the Power of 14 Reciprocal ~= 0.020em */
 	line-height    : calc( var( --ver-rhy-p04 ) * 1rem );                                         /* Vertical Rhythm Base Plus 4 ~= 44.876px */
 	padding        : 0 clamp( var( --spa-hor-p01 ), var( --hor-rhy-012 ), var( --spa-hor-p03 ) ); /* Spacing Horizontal Base Plus 1 ~= 19.304px, Horizontal Rhythm 12 ~= 28.278px @ 1,920px width, Spacing Horizontal Base Plus 3 ~= 33.876px */
 	transition     : background-color var( --dur-tra-p02 ) var( --mot-dec-eas ), border-color var( --dur-tra-p02 ) var( --mot-dec-eas ), color var( --dur-tra-p02 ) var( --mot-dec-eas ), outline-offset var( --dur-tra-p01 ) var( --mot-dec-eas ), outline-width var( --dur-tra-p01 ) var( --mot-dec-eas ), transform var( --dur-tra-p02 ) var( --mot-dec-eas ); /* Duration Transition Base Plus 2 ~= 277.0ms, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ), Duration Transition Base Plus 1 ~= 209.1ms */
@@ -601,7 +596,7 @@
 	font-size               : clamp( var( --fon-siz-p04 ), 4vw, var( --fon-siz-p05 ) ); /* Font Size Base Plus 4 ~= 33.876px, Font Size Base Plus 5 ~= 44.876px */
 	font-variation-settings : 'opsz' 144;
 	font-weight             : 400;
-	letter-spacing          : calc( var( --cdn-pow-014-rec ) * -1em );                  /* Core-Design-Number to the Power of 14 Reciprocal ~= 0.020 */
+	letter-spacing          : calc( var( --cdn-pow-014-rec ) * -1em );                  /* Core-Design-Number to the Power of 14 Reciprocal ~= -0.020em */
 	line-height             : var( --ver-rhy-m01 );                                     /* Vertical Rhythm Base Minus 1 = 1 */
 	margin-bottom           : var( --spa-ver-m02 );                                     /* Spacing Vertical Base Minus 2 ~= 8.304px */
 
@@ -612,9 +607,9 @@
 
 
 	color          : var( --tex-mut-col );                   /* Text Muted Color = #636871 */
-	font-size      : calc( var( --cdn-pow-002-rec ) * 1em ); /* Core-Design-Number to the Power of 2 Reciprocal ~= 0.570 */
-	margin-left    : calc( var( --cdn-pow-008-rec ) * 1em ); /* Core-Design-Number to the Power of 8 Reciprocal ~= 0.105 */
-	vertical-align : calc( var( --cdn-pow-003-rec ) * 1em ); /* Core-Design-Number to the Power of 3 Reciprocal ~= 0.430 */
+	font-size      : calc( var( --cdn-pow-002-rec ) * 1em ); /* Core-Design-Number to the Power of 2 Reciprocal ~= 0.570em */
+	margin-left    : calc( var( --cdn-pow-008-rec ) * 1em ); /* Core-Design-Number to the Power of 8 Reciprocal ~= 0.105em */
+	vertical-align : calc( var( --cdn-pow-003-rec ) * 1em ); /* Core-Design-Number to the Power of 3 Reciprocal ~= 0.430em */
 
 
 }
@@ -623,10 +618,10 @@
 
 
 	color          : var( --acc-mai-col );                   /* Accent Main Color = #1f4e7a */
-	font-size      : calc( var( --cdn-pow-002-rec ) * 1em ); /* Core-Design-Number to the Power of 2 Reciprocal ~= 0.570 */
+	font-size      : calc( var( --cdn-pow-002-rec ) * 1em ); /* Core-Design-Number to the Power of 2 Reciprocal ~= 0.570em */
 	font-style     : italic;
-	margin-left    : calc( var( --cdn-pow-008-rec ) * 1em ); /* Core-Design-Number to the Power of 8 Reciprocal ~= 0.105 */
-	vertical-align : calc( var( --cdn-pow-003-rec ) * 1em ); /* Core-Design-Number to the Power of 3 Reciprocal ~= 0.430 */
+	margin-left    : calc( var( --cdn-pow-008-rec ) * 1em ); /* Core-Design-Number to the Power of 8 Reciprocal ~= 0.105em */
+	vertical-align : calc( var( --cdn-pow-003-rec ) * 1em ); /* Core-Design-Number to the Power of 3 Reciprocal ~= 0.430em */
 
 
 }

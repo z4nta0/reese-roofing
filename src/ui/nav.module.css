@@ -133,7 +133,7 @@
 	gap             : var( --spa-hor-p03 ); /* Spacing Horizontal Base Plus 3 ~= 33.876px */
 	justify-content : space-between;
 	margin          : 0 auto;
-	max-width       : var( --con-max-wid ); /* Container Maximum Width, about 1,449.4px */
+	max-width       : var( --con-max-wid ); /* Container Maximum Width ~= 1,449.4px */
 	padding-inline  : var( --gut-sid-pad ); /* Gutter Side Padding, about 19.304px - 44.876px */
 	width           : 100%;
 
@@ -254,7 +254,7 @@
 
 
 	background       : var( --tex-mai-col );                                /* Text Main Color = #1a1f24 */
-	bottom           : calc( var( --spa-ver-m05 ) * -1 );                   /* Spacing Vertical Base Minus 5 ~= 3.572px */
+	bottom           : calc( var( --spa-ver-m05 ) * -1 );                   /* Spacing Vertical Base Minus 5 ~= -3.572px */
 	content          : '';
 	height           : var( --bor-wid-bas );                                /* Border Width Base ~= 1.160px */
 	left             : 0;
@@ -384,7 +384,7 @@
 	font-size      : var( --fon-siz-p01 );                                                        /* Font Size Base Plus 1 ~= 14.572px */
 	font-weight    : 500;
 	gap            : var( --spa-hor-m01 );                                                        /* Spacing Horizontal Base Minus 1 = 11px */
-	letter-spacing : calc( var( --cdn-pow-014-rec ) * 1em );                                      /* Core-Design-Number to the Power of 14 Reciprocal ~= 0.020 */
+	letter-spacing : calc( var( --cdn-pow-014-rec ) * 1em );                                      /* Core-Design-Number to the Power of 14 Reciprocal ~= 0.020em */
 	line-height    : calc( var( --ver-rhy-p04 ) * 1rem );                                         /* Vertical Rhythm Base Plus 4 ~= 44.876px */
 	padding        : 0 clamp( var( --spa-hor-bas ), var( --hor-rhy-011 ), var( --spa-hor-p02 ) ); /* Spacing Horizontal Base ~= 14.572px, Horizontal Rhythm 11 ~= 21.346px @ 1,920px width, Spacing Horizontal Base Plus 2 ~= 25.572px */
 	transition     : background-color var( --dur-tra-p02 ) var( --mot-dec-eas ), outline-offset var( --dur-tra-p01 ) var( --mot-dec-eas ), outline-width var( --dur-tra-p01 ) var( --mot-dec-eas ), transform var( --dur-tra-p02 ) var( --mot-dec-eas ); /* Duration Transition Base Plus 2 ~= 277.0ms, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ), Duration Transition Base Plus 1 ~= 209.1ms */
@@ -484,7 +484,7 @@
 .navTogBut:active { /* What: Pressed Navigation Toggle Button. Why: A press should register before the page responds. How: This presses the button in slightly. */
 
 
-	transform : scale( 0.97 ); /* What: Press Scale. Why: A press should be felt before anything else happens. How: This shrinks the button by 3% and drops its hover lift, a literal since no scale step lands near it. */
+	transform : scale( 0.97 ); /* What: Press Scale. Why: A press should be felt before anything else happens. How: This shrinks the button by 3%, a literal since no scale step lands near it. */
 
 
 }
@@ -561,7 +561,7 @@
 	background     : var( --bac-pag-col );                             /* Background Page Color = #f5f2ec */
 	border-bottom  : 0 solid var( --bor-mai-col );                     /* Border Main Color = #1a1f24 @ 0.12 opacity */
 	box-shadow     : var( --ele-lar-sha );                             /* Elevation Large Shadow, about 0 19px 45px -15px plus 0 6px 15px -4px */
-	clip-path      : inset( 0 0 calc( var( --spa-ver-p06 ) * -1 ) 0 ); /* Spacing Vertical Base Plus 6 ~= 78.751px */ /* What: Shadow Clip Path. Why: The shadow's upper layer would otherwise bleed a grey line onto the bar above the drawer. How: This clips everything above the drawer's top edge while leaving room below for the shadow's full reach. */
+	clip-path      : inset( 0 0 calc( var( --spa-ver-p06 ) * -1 ) 0 ); /* Spacing Vertical Base Plus 6 ~= -78.751px */ /* What: Shadow Clip Path. Why: The shadow's upper layer would otherwise bleed a grey line onto the bar above the drawer. How: This clips everything above the drawer's top edge while leaving room below for the shadow's full reach. */
 	display        : flex;
 	flex-direction : column;
 	max-height     : 0;
@@ -665,7 +665,7 @@
 	font-size            : var( --fon-siz-bas );                   /* Font Size Base = 11px */
 	font-variant-numeric : tabular-nums;
 	font-weight          : 500;
-	letter-spacing       : calc( var( --cdn-pow-006-rec ) * 1em ); /* Core-Design-Number to the Power of 6 Reciprocal ~= 0.185 */
+	letter-spacing       : calc( var( --cdn-pow-006-rec ) * 1em ); /* Core-Design-Number to the Power of 6 Reciprocal ~= 0.185em */
 
 
 }
@@ -708,6 +708,7 @@
 
 }
 
+/* What: Arrow Icon Span Pointer. Why: The drawer row's arrow shares the arrow class. How: Its rule is written once in the navEstAnc region. */
 .draLinAnc:hover .arrIcoSpa,
 .draLinAnc:active .arrIcoSpa,
 .draLinAnc:focus-visible .arrIcoSpa { /* What: Hovered Drawer Arrow Icon Span. Why: The arrow points the visitor onward when its row is hovered, pressed, or focused. How: This nudges it right by a few pixels, kept literal since no spacing step lands within 10% of the 4px nudge. */
@@ -765,7 +766,7 @@
 	font-size      : var( --fon-siz-bas );                   /* Font Size Base = 11px */
 	font-weight    : 500;
 	gap            : var( --spa-hor-m01 );                   /* Spacing Horizontal Base Minus 1 = 11px */
-	letter-spacing : calc( var( --cdn-pow-006-rec ) * 1em ); /* Core-Design-Number to the Power of 6 Reciprocal ~= 0.185 */
+	letter-spacing : calc( var( --cdn-pow-006-rec ) * 1em ); /* Core-Design-Number to the Power of 6 Reciprocal ~= 0.185em */
 	text-transform : uppercase;
 
 
@@ -845,7 +846,7 @@
 	font-weight     : 500;
 	gap             : var( --spa-hor-m01 );                   /* Spacing Horizontal Base Minus 1 = 11px */
 	justify-content : center;
-	letter-spacing  : calc( var( --cdn-pow-014-rec ) * 1em ); /* Core-Design-Number to the Power of 14 Reciprocal ~= 0.020 */
+	letter-spacing  : calc( var( --cdn-pow-014-rec ) * 1em ); /* Core-Design-Number to the Power of 14 Reciprocal ~= 0.020em */
 	line-height     : calc( var( --ver-rhy-p04 ) * 1rem );    /* Vertical Rhythm Base Plus 4 ~= 44.876px */
 	margin-top      : var( --spa-ver-m01 );                   /* Spacing Vertical Base Minus 1 = 11px */
 	padding         : 0 var( --spa-hor-p01 );                 /* Spacing Horizontal Base Plus 1 ~= 19.304px */
@@ -883,6 +884,7 @@
 
 }
 
+/* What: Arrow Icon Span Pointer. Why: The drawer estimate button's arrow shares the arrow class. How: Its rule is written once in the navEstAnc region. */
 .draEstAnc:hover .arrIcoSpa { /* What: Hovered Drawer Estimate Arrow Icon Span. Why: The arrow points the visitor onward when the button is hovered. How: This nudges it right by a few pixels, kept literal since no spacing step lands within 10% of the 4px nudge. */
 
 

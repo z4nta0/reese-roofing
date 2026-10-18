@@ -44,7 +44,7 @@
 	gap             : var( --spa-ver-p03 ) clamp( var( --spa-hor-p01 ), var( --hor-rhy-012 ), var( --spa-hor-p03 ) ); /* Spacing Vertical Base Plus 3 ~= 33.876px, Spacing Horizontal Base Plus 1 ~= 19.304px, Horizontal Rhythm 12 ~= 28.278px @ 1,920px width, Spacing Horizontal Base Plus 3 ~= 33.876px */
 	justify-content : space-between;
 	margin          : 0 auto;
-	max-width       : var( --con-max-wid );                                                                           /* Container Maximum Width, about 1,449.4px */
+	max-width       : var( --con-max-wid );                                                                           /* Container Maximum Width ~= 1,449.4px */
 	padding-inline  : var( --gut-sid-pad );                                                                           /* Gutter Side Padding, about 19.304px - 44.876px */
 	width           : 100%;
 
@@ -171,7 +171,7 @@
 
 	color                 : var( --bac-pag-col );                   /* Background Page Color = #f5f2ec */
 	text-decoration       : underline;
-	text-underline-offset : calc( var( --cdn-pow-005-rec ) * 1em ); /* Core-Design-Number to the Power of 5 Reciprocal ~= 0.245 */
+	text-underline-offset : calc( var( --cdn-pow-005-rec ) * 1em ); /* Core-Design-Number to the Power of 5 Reciprocal ~= 0.245em */
 	transition            : color var( --dur-tra-p01 ) var( --mot-sta-eas ), opacity var( --dur-tra-p01 ) var( --mot-sta-eas ), outline-offset var( --dur-tra-p01 ) var( --mot-dec-eas ), outline-width var( --dur-tra-p01 ) var( --mot-dec-eas ); /* Duration Transition Base Plus 1 ~= 209.1ms, Motion Standard Easing = ease, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ) */
 
 
