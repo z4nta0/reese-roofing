@@ -60,20 +60,21 @@ const NAV_LIN_ARR = [ // What: Nav Link Array. Why: The bar and its mobile drawe
  *
  * @summary
  * Renders the site's top bar. It listens to the window's scroll position and
- * switches the bar to its scrolled style once the page is more than 24px
- * down, checking once on mount so a page reloaded mid-scroll starts in the
- * right style. On small screens a toggle button opens and closes a drawer
- * holding the same links, numbered like the sections they lead to, then a
- * contact block with the phone number, the hours, and the estimate button;
- * picking a link or the button closes it again. While the drawer is open the
- * bar takes a solid background, so the two read as one panel, and a scrim
- * dims the page below; clicking the scrim closes the drawer. The open drawer
- * also acts as a modal layer: the page's content beside the bar turns inert,
- * so Tab and screen readers stay in the bar and drawer, Escape closes it and
- * returns focus to the toggle, and widening the screen until the toggle
- * disappears closes it too. Every section link and estimate button goes
- * through secCliFun, scrolling to its section without leaving a hash in the
- * address, while a Ctrl, Cmd, or middle click still opens it in a new tab.
+ * switches the bar to its scrolled style once the page is more than 24px down,
+ * checking once on mount so a page reloaded mid-scroll starts in the right
+ * style. On small screens a toggle button opens and closes a drawer holding
+ * the same links, numbered like the sections they lead to, then a contact
+ * block with the phone number, the hours, and the estimate button; picking a
+ * link or the button closes it again. While the drawer is open the bar takes a
+ * solid background, so the two read as one panel, and a scrim dims the page
+ * below; clicking the scrim closes the drawer. The open drawer also acts as a
+ * modal layer: the page's content beside the bar turns inert, so Tab and
+ * screen readers stay in the bar and drawer, Escape closes it and returns
+ * focus to the toggle, and widening the screen until the toggle disappears
+ * closes it too. Every section link and estimate button goes through
+ * secCliFun, scrolling to its section, or navigating home to it from another
+ * page, without leaving a hash in the address, while a Ctrl, Cmd, or middle
+ * click still opens it in a new tab.
  *
  * @author z4nta0 <https://github.com/z4nta0>
  *
@@ -100,7 +101,7 @@ function NavBarCom () : React.JSX.Element {
 
 
 
-	const secCliFun = useSecCliFun(); // What: Section Click Function. Why: Every section link in the bar and drawer reaches its section the same way. How: This leaves a modified click to the browser and otherwise scrolls to the section without a hash.
+	const secCliFun = useSecCliFun(); // What: Section Click Function. Why: Every section link in the bar and drawer reaches its section the same way. How: This leaves a modified click to the browser and otherwise scrolls to the section, or navigates home to it from another page, without a hash.
 
 
 
@@ -259,7 +260,7 @@ function NavBarCom () : React.JSX.Element {
 								href={ `/#${ navLinObj.ideStr }` }
 
 								onClick={ ( cliEveObj ) => secCliFun( cliEveObj, navLinObj.ideStr ) }
-							>{ /* What: Navigation Link Anchor Element. Why: Each link takes the visitor to its section. How: Its address points at the home page's section, which a Ctrl, Cmd, or middle click opens in a new tab, while a plain click scrolls there without a hash. */ }
+							>{ /* What: Navigation Link Anchor Element. Why: Each link takes the visitor to its section. How: Its address points at the home page's section, which a Ctrl, Cmd, or middle click opens in a new tab, while a plain click scrolls there, or navigates home to it from another page, without a hash. */ }
 								{ navLinObj.labStr }
 							</a>
 
@@ -345,7 +346,7 @@ function NavBarCom () : React.JSX.Element {
 							href={ `/#${ navLinObj.ideStr }` }
 
 							onClick={ ( cliEveObj ) => { if ( secCliFun( cliEveObj, navLinObj.ideStr ) ) setDraOpeBoo( false ); } } // What: Drawer Link Click Handler. Why: A chosen link should close the drawer on the way to its section, but a link opened in a new tab leaves the drawer as it was. How: This closes the drawer only when secCliFun handled the click.
-						>{ /* What: Drawer Link Anchor Element. Why: Each link takes the visitor to its section. How: Its address points at the home page's section, which a modified click opens in a new tab, while a plain click scrolls there without a hash and closes the drawer behind it. */ }
+						>{ /* What: Drawer Link Anchor Element. Why: Each link takes the visitor to its section. How: Its address points at the home page's section, which a modified click opens in a new tab, while a plain click scrolls there, or navigates home to it from another page, without a hash, and closes the drawer behind it. */ }
 
 
 							<span
