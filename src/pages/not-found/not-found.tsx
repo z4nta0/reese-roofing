@@ -6,9 +6,10 @@
 import cssModObj from './not-found.module.css'; // What: CSS Module Object. Why: The page's layout and its label, heading, paragraph, and buttons are styled in its own module. How: Each element reads its hashed class name from this object.
 
 
-import { Link      } from 'react-router';        // What: Link. Why: The way home should navigate inside the site without a full page load. How: This renders the return button.
-import { NavBarCom } from '../../ui/nav.tsx';    // What: Navigation Bar Component. Why: The 404 page keeps the site's top bar, so every section stays one tap away. How: This is rendered first inside the page.
-import { SitFooCom } from '../../ui/footer.tsx'; // What: Site Footer Component. Why: The 404 page ends with the site's footer like every page. How: This is rendered last inside the page.
+import { Link         } from 'react-router';             // What: Link. Why: The way home should navigate inside the site without a full page load. How: This renders the return button.
+import { NavBarCom    } from '../../ui/nav.tsx';         // What: Navigation Bar Component. Why: The 404 page keeps the site's top bar, so every section stays one tap away. How: This is rendered first inside the page.
+import { SitFooCom    } from '../../ui/footer.tsx';      // What: Site Footer Component. Why: The 404 page ends with the site's footer like every page. How: This is rendered last inside the page.
+import { useSecCliFun } from '../../ui/section-link.ts'; // What: Use Section Click Function. Why: The estimate button reaches the contact section the same way the bar's does. How: This returns secCliFun, the shared click handler that navigates home to a section without leaving a hash in the address.
 
 // #endregion Imports
 
@@ -46,8 +47,10 @@ import { SitFooCom } from '../../ui/footer.tsx'; // What: Site Footer Component.
  * navigation bar, then a main element holding a centered column with an
  * error label, the heading, a short explanation, and two buttons, then the
  * footer. The return button navigates home inside the site; the estimate
- * button is a plain link to the home page's contact anchor, so the browser
- * loads the home page and scrolls to the form. The main element carries the
+ * button goes through secCliFun, which navigates home inside the site to the
+ * contact section, where the home page scrolls to the form and clears the
+ * hash, while a Ctrl, Cmd, or middle click opens its /#contact address in a
+ * new tab. The main element carries the
  * top anchor, so the footer's back-to-top link works here too. app.tsx
  * renders it for every path no other route claims.
  *
@@ -65,6 +68,10 @@ import { SitFooCom } from '../../ui/footer.tsx'; // What: Site Footer Component.
 */
 
 function NotFouCom () : React.JSX.Element {
+
+
+	const secCliFun = useSecCliFun(); // What: Section Click Function. Why: The estimate button reaches its section the same way the bar's does. How: This leaves a modified click to the browser and otherwise navigates home to the section without a hash.
+
 
 
 	return (
@@ -113,7 +120,9 @@ function NotFouCom () : React.JSX.Element {
 						className={` ${ cssModObj.butBasAnc }   ${ cssModObj.butBasAncGhost } `}
 
 						href='/#contact'
-					>{ /* What: Estimate Button Anchor Element. Why: A visitor who came looking for a service can still request an estimate in one step. How: This links to the home page's contact section, loading the home page and scrolling to the form. */ }
+
+						onClick={ ( cliEveObj ) => secCliFun( cliEveObj, 'contact' ) }
+					>{ /* What: Estimate Button Anchor Element. Why: A visitor who came looking for a service can still request an estimate in one step. How: This navigates home to the contact section without a hash, while a Ctrl, Cmd, or middle click opens it in a new tab. */ }
 						Get an estimate
 					</a>
 

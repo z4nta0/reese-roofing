@@ -59,7 +59,9 @@ src/
   assets/                images and fonts used by 2 or more pages
   pages/
     home/  not-found/    one folder per route
-  ui/                    components used by 2 or more pages (Nav, Footer)
+  ui/                    components and helpers used by 2 or more pages (Nav,
+                         Footer, the section link helper)
+  utils/                 app-agnostic pure helpers (the reduced-motion check)
   styles/                global CSS only (fonts.css, styles.css)
 ```
 Outside `src/` (added 2026-10-08): `tests/` holds the Playwright suites (see
@@ -121,7 +123,9 @@ suite reads the head of each route instead.
   state (every reachable link and button changes on hover and on press and
   transitions its focus ring, the first keyboard stop draws a 2px ring, and
   reduced motion keeps the changes with no transitions), then the site's
-  behavior: the section, Home, and back to top links, every way the drawer
+  behavior: the section, Home, and back to top links (landing on their
+  targets with no hash left in the address, and a Ctrl, Cmd, or middle click
+  opening a section in a new tab), every way the drawer
   opens and closes, the contact form's sent label and mailto link (the
   mailto test is Chromium-only, through the DevTools Protocol), and the 404
   page.
@@ -196,6 +200,16 @@ Design system choices (decided 2026-10-07):
   as ease-my-life.
 - **Breakpoints**: 500, 540, 600, 640, 880, and 960px, measured against the
   `app` container on AppRooCom's root element.
+
+Section links (decided 2026-10-17, matching tonys-toppers and hair-designs):
+every link to a home page section keeps its real `/#section` address but goes
+through `ui/section-link.ts`'s `secCliFun`, which leaves a Ctrl, Cmd, Shift,
+Alt, or middle click to the browser and otherwise scrolls to the section (or,
+from the 404 page, navigates home to it) without a hash. The home page clears
+any hash it arrives with once it has scrolled to it. Unlike hair-designs', the
+helper scrolls in place only on the home page path, since the 404 page has a
+`top` anchor of its own; the footer's back to top link scrolls to whichever
+page's `top` is showing through its own handler.
 
 Node on Netlify (confirmed 2026-10-08): the live site builds on Node 24.x,
 which meets React Router 8's minimum of 22.22.

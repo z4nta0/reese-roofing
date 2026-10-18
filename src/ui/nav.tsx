@@ -7,6 +7,9 @@ import cssModObj from './nav.module.css';        // What: CSS Module Object. Why
 import lomSvgUrl from '../assets/logo-mark.svg'; // What: Logo-Mark SVG URL. Why: The bar's brand link shows the simple logo mark. How: Vite resolves the import to the file's fingerprinted URL, used as the image's src.
 import React     from 'react';                   // What: React. Why: The bar tracks its scroll and drawer state with React's hooks. How: This is read for its hooks (React.useState, React.useEffect, and React.useRef) and its types.
 
+
+import { useSecCliFun } from './section-link.ts'; // What: Use Section Click Function. Why: Every section link in the bar and drawer reaches its section the same way, leaving no hash in the address. How: This returns secCliFun, the shared click handler.
+
 // #endregion Imports
 
 
@@ -33,13 +36,13 @@ import React     from 'react';                   // What: React. Why: The bar tr
 
 // #region Constants
 
-const NAV_LIN_ARR = [ // What: Nav Link Array. Why: The bar and its mobile drawer list the same section links. How: Each row pairs a home page section's anchor, written with the root path so it works from any page, with its label, and both lists map over it, the drawer numbering the rows in order to match the sections' own numbered labels.
+const NAV_LIN_ARR = [ // What: Nav Link Array. Why: The bar and its mobile drawer list the same section links. How: Each row pairs a home page section's id, which its link's address names with the root path so a modified click opens it from any page, with its label, and both lists map over it, the drawer numbering the rows in order to match the sections' own numbered labels.
 
 
-	{ hreStr : '/#top',      labStr : 'Home'     }, // What: Home Link Row. Why: Not every visitor knows the logo leads home, so the bar spells it out. How: This links to the hero's top anchor.
-	{ hreStr : '/#services', labStr : 'Services' }, // What: Services Link Row. Why: The services section is the first stop for most visitors. How: This links to its anchor.
-	{ hreStr : '/#about',    labStr : 'About'    }, // What: About Link Row. Why: Visitors check who they'd be hiring. How: This links to its anchor.
-	{ hreStr : '/#contact',  labStr : 'Contact'  }  // What: Contact Link Row. Why: The contact section is where an estimate is requested. How: This links to its anchor.
+	{ ideStr : 'top',      labStr : 'Home'     }, // What: Home Link Row. Why: Not every visitor knows the logo leads home, so the bar spells it out. How: This names the hero's top anchor.
+	{ ideStr : 'services', labStr : 'Services' }, // What: Services Link Row. Why: The services section is the first stop for most visitors. How: This names its anchor.
+	{ ideStr : 'about',    labStr : 'About'    }, // What: About Link Row. Why: Visitors check who they'd be hiring. How: This names its anchor.
+	{ ideStr : 'contact',  labStr : 'Contact'  }  // What: Contact Link Row. Why: The contact section is where an estimate is requested. How: This names its anchor.
 
 
 ];
@@ -68,7 +71,9 @@ const NAV_LIN_ARR = [ // What: Nav Link Array. Why: The bar and its mobile drawe
  * also acts as a modal layer: the page's content beside the bar turns inert,
  * so Tab and screen readers stay in the bar and drawer, Escape closes it and
  * returns focus to the toggle, and widening the screen until the toggle
- * disappears closes it too.
+ * disappears closes it too. Every section link and estimate button goes
+ * through secCliFun, scrolling to its section without leaving a hash in the
+ * address, while a Ctrl, Cmd, or middle click still opens it in a new tab.
  *
  * @author z4nta0 <https://github.com/z4nta0>
  *
@@ -92,6 +97,11 @@ function NavBarCom () : React.JSX.Element {
 	const heaBarRef = React.useRef< HTMLElement >( null );       // What: Header Bar Reference. Why: The open drawer makes everything beside the bar inert. How: This points at the bar, whose parent holds the page's other content.
 	const scrDivRef = React.useRef< HTMLDivElement >( null );    // What: Scrim Div Reference. Why: The scrim has to stay clickable while the rest of the page is inert. How: This points at the scrim, so it's left out.
 	const togButRef = React.useRef< HTMLButtonElement >( null ); // What: Toggle Button Reference. Why: Escape hands focus back to the button that opened the drawer, and a hidden toggle means the drawer no longer applies. How: This points at the menu toggle.
+
+
+
+	const secCliFun = useSecCliFun(); // What: Section Click Function. Why: Every section link in the bar and drawer reaches its section the same way. How: This leaves a modified click to the browser and otherwise scrolls to the section without a hash.
+
 
 
 	React.useEffect( () => { // What: Scroll Listener Effect. Why: The bar's style depends on the window's scroll position. How: This checks the position once, then again on every scroll until unmount.
@@ -242,12 +252,14 @@ function NavBarCom () : React.JSX.Element {
 
 
 							<a
-								key={ navLinObj.hreStr }
+								key={ navLinObj.ideStr }
 
 								className={ cssModObj.navLinAnc }
 
-								href={ navLinObj.hreStr }
-							>{ /* What: Navigation Link Anchor Element. Why: Each link jumps to its section. How: This links to the row's anchor. */ }
+								href={ `/#${ navLinObj.ideStr }` }
+
+								onClick={ ( cliEveObj ) => secCliFun( cliEveObj, navLinObj.ideStr ) }
+							>{ /* What: Navigation Link Anchor Element. Why: Each link takes the visitor to its section. How: Its address points at the home page's section, which a Ctrl, Cmd, or middle click opens in a new tab, while a plain click scrolls there without a hash. */ }
 								{ navLinObj.labStr }
 							</a>
 
@@ -274,7 +286,9 @@ function NavBarCom () : React.JSX.Element {
 							className={ cssModObj.navEstAnc }
 
 							href='/#contact'
-						>{ /* What: Navigation Estimate Anchor Element. Why: The bar's main action is requesting an estimate. How: This links to the home page's contact section, which works from any page. */ }
+
+							onClick={ ( cliEveObj ) => secCliFun( cliEveObj, 'contact' ) }
+						>{ /* What: Navigation Estimate Anchor Element. Why: The bar's main action is requesting an estimate. How: Its address points at the home page's contact section, which a modified click opens in a new tab, while a plain click scrolls there, or navigates home to it from another page, without a hash. */ }
 							Get an estimate
 							<span
 								className={ cssModObj.arrIcoSpa }
@@ -322,16 +336,16 @@ function NavBarCom () : React.JSX.Element {
 
 
 						<a
-							key={ navLinObj.hreStr }
+							key={ navLinObj.ideStr }
 
 							className={ cssModObj.draLinAnc }
 
 							style={ { '--dra-ite-ind' : linIndNum } as React.CSSProperties } // What: Drawer Item Index Style. Why: Each row enters a beat after the one above it. How: This hands the row its position, which its stylesheet multiplies into an animation delay. // What: Type Assertion Note. Why: React's CSSProperties type has no entry for custom properties. How: The object holds one custom property and nothing else, so reading it as CSSProperties is safe.
 
-							href={ navLinObj.hreStr }
+							href={ `/#${ navLinObj.ideStr }` }
 
-							onClick={ () => setDraOpeBoo( false ) }
-						>{ /* What: Drawer Link Anchor Element. Why: Each link jumps to its section. How: This links to the row's anchor and closes the drawer behind it. */ }
+							onClick={ ( cliEveObj ) => { if ( secCliFun( cliEveObj, navLinObj.ideStr ) ) setDraOpeBoo( false ); } } // What: Drawer Link Click Handler. Why: A chosen link should close the drawer on the way to its section, but a link opened in a new tab leaves the drawer as it was. How: This closes the drawer only when secCliFun handled the click.
+						>{ /* What: Drawer Link Anchor Element. Why: Each link takes the visitor to its section. How: Its address points at the home page's section, which a modified click opens in a new tab, while a plain click scrolls there without a hash and closes the drawer behind it. */ }
 
 
 							<span
@@ -384,8 +398,8 @@ function NavBarCom () : React.JSX.Element {
 
 							href='/#contact'
 
-							onClick={ () => setDraOpeBoo( false ) }
-						>{ /* What: Drawer Estimate Anchor Element. Why: Requesting an estimate is the site's main action, and the bar's button is hidden on small screens. How: This links to the contact section as a full-width pill and closes the drawer behind it. */ }
+							onClick={ ( cliEveObj ) => { if ( secCliFun( cliEveObj, 'contact' ) ) setDraOpeBoo( false ); } } // What: Drawer Estimate Click Handler. Why: The estimate button should close the drawer on the way to the form, but a button opened in a new tab leaves the drawer as it was. How: This closes the drawer only when secCliFun handled the click.
+						>{ /* What: Drawer Estimate Anchor Element. Why: Requesting an estimate is the site's main action, and the bar's button is hidden on small screens. How: This takes the visitor to the contact section as a full-width pill, without a hash, and closes the drawer behind it, while a modified click opens it in a new tab. */ }
 							Get an estimate
 							<span
 								className={ cssModObj.arrIcoSpa }

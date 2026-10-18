@@ -29,6 +29,8 @@ The preview card is drawn from the site's own logo and fonts by `design/og-image
 - **ESLint 9** with typescript-eslint, and **Playwright** with axe-core for the test suites
 - Deployed on **Netlify**, which serves `index.html` for every path (`public/_redirects`) so the router can show the 404 page
 
+Section links scroll to their section without putting a hash in the address bar, while a Ctrl, Cmd, or middle click still opens the section in a new tab (`src/ui/section-link.ts`).
+
 ## Getting started
 
 ```bash
@@ -50,7 +52,7 @@ npm run typecheck  # TypeScript across src/, the configs, tests/, and design/
 ```bash
 npm test                    # every suite
 npm run test:accessibility  # axe-core plus scripted keyboard, naming, reflow, and motion checks
-npm run test:interaction    # hover, press, and focus feedback on every control, plus navigation, the drawer, the form, and the 404 page
+npm run test:interaction    # hover, press, and focus feedback on every control, plus hash-free section links and new tabs, the drawer, the form, and the 404 page
 npm run test:rendering      # full-page screenshots of each page state against approved baselines
 npm run test:responsive     # both pages and the drawer from 320 to 1,920px: no sideways scroll, spill, or overlap
 npm run test:seo            # head tags, structured data, robots.txt, _headers (robots and security), and the preview image

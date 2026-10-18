@@ -7,7 +7,8 @@ import { expect } from '@playwright/test'; // What: Expect. Why: Each behavior p
 import { test   } from '@playwright/test'; // What: Test. Why: Each behavior is its own test. How: This declares them.
 
 
-import type { Page } from '@playwright/test'; // What: Page. Why: Every helper drives a Playwright page. How: This types their page parameters.
+import type { Locator } from '@playwright/test'; // What: Locator. Why: The new tab checks hand a link's click its options. How: This types those options from the click method's own parameter.
+import type { Page    } from '@playwright/test'; // What: Page. Why: Every helper drives a Playwright page. How: This types their page parameters.
 
 // #endregion Imports
 
@@ -19,12 +20,14 @@ import type { Page } from '@playwright/test'; // What: Page. Why: Every helper d
  * @summary
  * Checks what the site's controls actually do, in whichever engine the
  * project runs. The nav's section links, the Home link, and back to top land
- * on their targets; the mobile drawer opens and closes every way it can
+ * on their targets without leaving a hash in the address, while a Ctrl, Cmd,
+ * or middle click on a section link opens the section in a new tab instead;
+ * the mobile drawer opens and closes every way it can
  * (the toggle, Escape, a tap on the dimmed page, a drawer link, and a wider
  * screen) and makes the page behind it inert while open; the contact form
  * swaps its button label when sent and builds a mailto link carrying the
  * request; and the 404 page answers an unknown address and leads back home
- * and to the contact section. Pages open under reduced motion, so scrolling
+ * and to the contact section, its nav links included. Pages open under reduced motion, so scrolling
  * jumps straight to its target and each position can be read at once; how
  * things move is the feedback spec's job. Reading the mailto link needs
  * Chromium's DevTools Protocol, so that one test runs in Chromium only.
@@ -41,6 +44,8 @@ import type { Page } from '@playwright/test'; // What: Page. Why: Every helper d
 
 
 // #region Constants
+
+const CLI_KIN_ARR : Array< [ string, Parameters< Locator[ 'click' ] >[ 0 ] ] > = [ [ 'Ctrl or Cmd', { modifiers : [ 'ControlOrMeta' ] } ], [ 'middle', { button : 'middle' } ] ]; // What: Click Kind Array. Why: Both ways of asking for a new tab have to keep working now that plain clicks scroll in place. How: Each row pairs a click kind's name with the click options that make it, ControlOrMeta pressing Cmd on a Mac and Ctrl elsewhere.
 
 const DES_VIE_OBJ = { height : 900, width : 1440 }; // What: Desktop Viewport Object. Why: The bar's own links show only on wide screens. How: This is the desktop size the navigation checks use.
 const PHO_VIE_OBJ = { height : 844, width : 390 };  // What: Phone Viewport Object. Why: The drawer exists only on small screens. How: This is the phone size the drawer checks use.
@@ -181,7 +186,7 @@ async function opeDraFun ( curPagObj : Page ) : Promise< void > {
 for ( const [ labStr, ideStr ] of [ [ 'Services', 'services' ], [ 'About', 'about' ], [ 'Contact', 'contact' ] ] ) { // What: Section Link Loop. Why: Each of the bar's section links has its own target. How: This declares one test per link, pairing its label with its section's id.
 
 
-	test( `the ${ labStr } link scrolls to its section`, async ( { page : curPagObj } ) => { // What: Section Link Test. Why: A section link has to take the visitor to its section. How: This clicks the link and checks the address and the section's position.
+	test( `the ${ labStr } link scrolls to its section`, async ( { page : curPagObj } ) => { // What: Section Link Test. Why: A section link has to take the visitor to its section. How: This clicks the link and checks the section's position and the address.
 
 
 		await opeRouFun( curPagObj, '/', DES_VIE_OBJ ); // What: Home Open Call. Why: The bar's own links show on wide screens. How: This opens the home page at desktop size.
@@ -189,9 +194,45 @@ for ( const [ labStr, ideStr ] of [ [ 'Services', 'services' ], [ 'About', 'abou
 		await curPagObj.getByRole( 'banner' ).getByRole( 'link', { exact : true, name : labStr } ).click(); // What: Section Link Click Call. Why: This is the action under test. How: This clicks the bar's link by its label.
 
 
-		await expect( curPagObj ).toHaveURL( new RegExp( `#${ ideStr }$` ) ); // What: Section Address Assertion. Why: The address should name the section, so it can be shared. How: This checks the URL ends with the section's anchor.
+		await expect.poll( async () => Math.abs( await secTopFun( curPagObj, ideStr ) ) ).toBeLessThan( 2 ); // What: Section Position Assertion. Why: The section should start at the top of the screen. How: This waits until its top edge sits within a pixel of the viewport's top.
 
-		expect( Math.abs( await secTopFun( curPagObj, ideStr ) ) ).toBeLessThan( 2 ); // What: Section Position Assertion. Why: The section should start at the top of the screen. How: This checks its top edge sits within a pixel of the viewport's top.
+		await expect( curPagObj ).toHaveURL( /\/$/ ); // What: Clean Address Assertion. Why: The address bar should stay free of hashes. How: This checks the URL still ends at the root.
+
+
+	} );
+
+
+}
+
+
+
+for ( const [ kinStr, cliOptObj ] of CLI_KIN_ARR ) { // What: Modified Click Loop. Why: Each way of asking for a new tab gets its own check. How: This declares one test per row of CLI_KIN_ARR.
+
+
+	test( `a ${ kinStr } click opens a section in a new tab`, async ( { page : curPagObj } ) => { // What: New Tab Test. Why: A visitor opening a section in a new tab should land on it there, and the page they clicked from should stay put. How: This makes the click, then checks the new tab's section and address and the old page's scroll and address.
+
+
+		await opeRouFun( curPagObj, '/', DES_VIE_OBJ ); // What: Home Open Call. Why: The bar's own links show on wide screens. How: This opens the home page at desktop size.
+
+
+		const newTabPro = curPagObj.context().waitForEvent( 'page' ); // What: New Tab Promise. Why: The click opens its page in a new tab. How: This waits for the browser context to report a new page, set up before the click so it can't be missed.
+
+
+		await curPagObj.getByRole( 'banner' ).getByRole( 'link', { exact : true, name : 'About' } ).click( cliOptObj ); // What: Modified Click Call. Why: This is the action under test. How: This clicks the bar's About link the way the loop's row says.
+
+
+		const newTabObj = await newTabPro; // What: New Tab Object. Why: The section should open in the new tab. How: This is the page the click opened.
+
+
+		await expect( newTabObj.locator( '#about' ) ).toBeVisible(); // What: Section Render Wait. Why: The new tab loads the page from scratch, so the section has to exist before it's measured. How: This waits until the About section is on the page.
+
+		await expect.poll( async () => Math.abs( await secTopFun( newTabObj, 'about' ) ) ).toBeLessThan( 2 ); // What: New Tab Position Assertion. Why: The new tab should land on the section. How: This waits until the About section's top edge sits within a pixel of the viewport's top.
+
+		await expect( newTabObj ).toHaveURL( /\/$/ ); // What: New Tab Address Assertion. Why: The new tab's hash should be cleared once used. How: This checks its URL ends at the root.
+
+		expect( await curPagObj.evaluate( () => window.scrollY ) ).toBe( 0 ); // What: Original Scroll Assertion. Why: The page clicked from should stay where it was. How: This checks it's still at the top.
+
+		await expect( curPagObj ).toHaveURL( /\/$/ ); // What: Original Address Assertion. Why: The page clicked from shouldn't navigate. How: This checks its URL still ends at the root.
 
 
 	} );
@@ -213,6 +254,8 @@ test( 'the Home link returns to the top', async ( { page : curPagObj } ) => { //
 
 	await expect.poll( () => curPagObj.evaluate( () => window.scrollY ) ).toBe( 0 ); // What: Top Position Assertion. Why: The visitor should end up back at the top. How: This waits until the page has scrolled all the way up.
 
+	await expect( curPagObj ).toHaveURL( /\/$/ ); // What: Clean Address Assertion. Why: The address bar should stay free of hashes. How: This checks the URL still ends at the root.
+
 
 } );
 
@@ -227,6 +270,8 @@ test( 'back to top returns to the top', async ( { page : curPagObj } ) => { // W
 
 
 	await expect.poll( () => curPagObj.evaluate( () => window.scrollY ) ).toBe( 0 ); // What: Top Position Assertion. Why: The visitor should end up back at the top. How: This waits until the page has scrolled all the way up.
+
+	await expect( curPagObj ).toHaveURL( /\/$/ ); // What: Clean Address Assertion. Why: The address bar should stay free of hashes. How: This checks the URL still ends at the root.
 
 
 } );
@@ -322,6 +367,8 @@ test( 'a drawer link closes the drawer and scrolls to its section', async ( { pa
 	await expect( curPagObj.getByRole( 'button', { name : 'Toggle menu' } ) ).toHaveAttribute( 'aria-expanded', 'false' ); // What: Drawer Closed Assertion. Why: The drawer should close once a section is picked. How: This checks the button reports it collapsed.
 
 	await expect.poll( async () => Math.abs( await secTopFun( curPagObj, 'about' ) ) ).toBeLessThan( 2 ); // What: Section Position Assertion. Why: The visitor should land on the section. How: This waits until its top edge sits within a pixel of the viewport's top.
+
+	await expect( curPagObj ).toHaveURL( /\/$/ ); // What: Clean Address Assertion. Why: The address bar should stay free of hashes. How: This checks the URL still ends at the root.
 
 
 } );
@@ -453,11 +500,28 @@ test( 'the 404 page leads to the contact section', async ( { page : curPagObj } 
 	await curPagObj.getByRole( 'main' ).getByRole( 'link', { name : 'Get an estimate' } ).click(); // What: Estimate Click Call. Why: This is the action under test. How: This clicks the page's own estimate button rather than the bar's.
 
 
-	await expect( curPagObj ).toHaveURL( /\/#contact$/ ); // What: Contact Address Assertion. Why: The button names the home page's contact section. How: This checks the URL.
-
 	await expect( curPagObj.locator( '#contact' ) ).toBeVisible(); // What: Contact Render Wait. Why: The address changes before the home page has rendered, so the section has to exist before it's measured. How: This waits until the contact section is on the page.
 
 	await expect.poll( async () => Math.abs( await secTopFun( curPagObj, 'contact' ) ) ).toBeLessThan( 2 ); // What: Contact Position Assertion. Why: The visitor should land on the form. How: This waits until the section's top edge sits within a pixel of the viewport's top.
+
+	await expect( curPagObj ).toHaveURL( /\/$/ ); // What: Clean Address Assertion. Why: The home page clears the hash once it has scrolled to the section. How: This checks the URL ends at the root.
+
+
+} );
+
+
+
+test( 'the 404 page\'s Home link leads to the home page', async ( { page : curPagObj } ) => { // What: Not Found Home Link Test. Why: The 404 page has a top anchor of its own, which the nav's Home link mustn't settle for. How: This clicks Home on the 404 page and checks the visitor reaches the home page's hero.
+
+
+	await opeRouFun( curPagObj, '/missing', DES_VIE_OBJ ); // What: Not Found Open Call. Why: The bar's Home link is under test away from the home page. How: This opens the 404 page at desktop size.
+
+	await curPagObj.getByRole( 'banner' ).getByRole( 'link', { exact : true, name : 'Home' } ).click(); // What: Home Link Click Call. Why: This is the action under test. How: This clicks the bar's Home link.
+
+
+	await expect( curPagObj ).toHaveTitle( 'Reese Roofing | Portfolio Demo by techgeek.support' ); // What: Home Title Assertion. Why: The visitor should reach the home page, not stay on the 404 page. How: This checks the home page's title.
+
+	await expect( curPagObj ).toHaveURL( /\/$/ ); // What: Clean Address Assertion. Why: The home page clears the hash once it has scrolled to the top. How: This checks the URL ends at the root.
 
 
 } );

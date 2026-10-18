@@ -6,6 +6,9 @@
 import cssModObj from './hero.module.css'; // What: CSS Module Object. Why: The hero's grid background, two-row layout, and stats are styled in its own module. How: Each element reads its hashed class name from this object.
 import lofSvgUrl from './logo-full.svg';   // What: Logo-Full SVG URL. Why: The hero's main visual is the full logo. How: Vite resolves the import to the file's fingerprinted URL, used as the image's src.
 
+
+import { useSecCliFun } from '../../ui/section-link.ts'; // What: Use Section Click Function. Why: The hero's buttons reach their sections the same way the bar does. How: This returns secCliFun, the shared click handler that scrolls to a section without leaving a hash in the address.
+
 // #endregion Imports
 
 
@@ -57,6 +60,10 @@ import lofSvgUrl from './logo-full.svg';   // What: Logo-Full SVG URL. Why: The 
 */
 
 function HerSecCom () : React.JSX.Element {
+
+
+	const secCliFun = useSecCliFun(); // What: Section Click Function. Why: The hero's buttons reach their sections the same way the bar does. How: This leaves a modified click to the browser and otherwise scrolls to the section without a hash.
+
 
 
 	return (
@@ -180,8 +187,10 @@ function HerSecCom () : React.JSX.Element {
 						<a
 							className={` ${ cssModObj.butBasAnc }   ${ cssModObj.butBasAncPrimary } `}
 
-							href='#contact'
-						>{ /* What: Estimate Button Anchor Element. Why: The page's main action is requesting an estimate. How: This links to the contact section. */ }
+							href='/#contact'
+
+							onClick={ ( cliEveObj ) => secCliFun( cliEveObj, 'contact' ) }
+						>{ /* What: Estimate Button Anchor Element. Why: The page's main action is requesting an estimate. How: This scrolls to the contact section without a hash, while a Ctrl, Cmd, or middle click opens it in a new tab. */ }
 							Request an estimate
 							<span
 								className={ cssModObj.arrIcoSpa }
@@ -195,8 +204,10 @@ function HerSecCom () : React.JSX.Element {
 						<a
 							className={` ${ cssModObj.butBasAnc }   ${ cssModObj.butBasAncGhost } `}
 
-							href='#services'
-						>{ /* What: Services Button Anchor Element. Why: Visitors not ready for an estimate can browse first. How: This links to the services section. */ }
+							href='/#services'
+
+							onClick={ ( cliEveObj ) => secCliFun( cliEveObj, 'services' ) }
+						>{ /* What: Services Button Anchor Element. Why: Visitors not ready for an estimate can browse first. How: This scrolls to the services section without a hash, while a Ctrl, Cmd, or middle click opens it in a new tab. */ }
 							Explore services
 						</a>
 

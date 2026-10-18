@@ -6,6 +6,10 @@
 import cssModObj from './footer.module.css';     // What: CSS Module Object. Why: The footer's layout and type are styled in its own module. How: Each element reads its hashed class name from this object.
 import lomSvgUrl from '../assets/logo-mark.svg'; // What: Logo-Mark SVG URL. Why: The footer's brand shows the simple logo mark. How: Vite resolves the import to the file's fingerprinted URL, used as the image's src.
 
+
+import { modCliFun } from './section-link.ts';  // What: Modified Click Function. Why: A Ctrl, Cmd, or middle click on back to top should still open the page in a new tab. How: The link's handler steps aside when this reports a modified click.
+import { redMotFun } from '../utils/motion.ts'; // What: Reduce Motion Function. Why: The smooth scroll back up has to respect the reduced-motion preference. How: The link's handler asks it before choosing the scroll behavior.
+
 // #endregion Imports
 
 
@@ -41,7 +45,11 @@ import lomSvgUrl from '../assets/logo-mark.svg'; // What: Logo-Mark SVG URL. Why
  * the current year read from the visitor's clock on each render, so it never
  * needs a yearly edit, the licensing and location line, the line saying the
  * company is fictional and the site a portfolio demo by techgeek.support, and
- * a link back to the top of the page.
+ * a link back to the top of the page, which scrolls up without leaving a hash
+ * in the address, while a Ctrl, Cmd, or middle click opens it in a new tab.
+ * It scrolls to whichever page's top anchor is showing, the hero's or the 404
+ * page's, rather than through the section links' shared handler, which
+ * always heads for the home page.
  *
  * @author z4nta0 <https://github.com/z4nta0>
  *
@@ -60,6 +68,22 @@ function SitFooCom () : React.JSX.Element {
 
 
 	const curYeaNum = new Date().getFullYear(); // What: Current Year Number. Why: The copyright line should always show this year. How: This reads the year from the visitor's clock on each render.
+
+
+
+	const topCliFun = ( cliEveObj : React.MouseEvent< HTMLAnchorElement > ) => { // What: Top Click Function. Why: Back to top should scroll up without leaving a hash in the address. How: This leaves a modified click to the browser and otherwise cancels the jump and scrolls the page's top anchor into view.
+
+
+		if ( modCliFun( cliEveObj ) ) return; // What: Modified Click Guard. Why: A Ctrl, Cmd, Shift, Alt, or middle click asks the browser to open the link its own way. How: This leaves the click alone.
+
+
+
+		cliEveObj.preventDefault(); // What: Default Navigation Cancel. Why: The browser would otherwise jump and leave the hash in the address. How: This stops the link's own navigation.
+
+		document.getElementById( 'top' )?.scrollIntoView( { behavior : redMotFun() ? 'auto' : 'smooth' } ); // What: Top Scroll Call. Why: The visitor should glide back up to the start of the page. How: This scrolls the page's top anchor into view, jumping instead of gliding under reduced motion.
+
+
+	};
 
 
 
@@ -116,7 +140,9 @@ function SitFooCom () : React.JSX.Element {
 					href='#top'
 
 					aria-label='Back to top'
-				>{ /* What: Footer Top Anchor Element. Why: A long page should offer a quick way back up. How: This links to the page's top anchor. */ }
+
+					onClick={ topCliFun }
+				>{ /* What: Footer Top Anchor Element. Why: A long page should offer a quick way back up. How: This scrolls to the page's top anchor through topCliFun, leaving no hash in the address, while its own address still opens the page's top in a new tab on a modified click. */ }
 					Back to top <span className={ cssModObj.arrIcoSpa } aria-hidden='true'>↑</span>
 				</a>
 
