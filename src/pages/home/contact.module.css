@@ -370,10 +370,10 @@
 
 }
 .forFieInp::placeholder,
-.forFieTex::placeholder { /* What: Form Field Placeholder. Why: Placeholder text should read as a hint, not an answer. How: This fades it well below the typed text. */
+.forFieTex::placeholder { /* What: Form Field Placeholder. Why: Placeholder text should read as a hint, not an answer. How: This fades it to the field labels' strength, below the full-strength typed text, while keeping 4.5:1 contrast on the band. */
 
 
-	color : oklch( from var( --bac-pag-col ) l c h / var( --cdn-pow-004-rec ) ); /* Background Page Color = #f5f2ec, Core-Design-Number to the Power of 4 Reciprocal ~= 0.325 */
+	color : oklch( from var( --bac-pag-col ) l c h / var( --cdn-pow-002-rec ) ); /* Background Page Color = #f5f2ec, Core-Design-Number to the Power of 2 Reciprocal ~= 0.570 */
 
 
 }

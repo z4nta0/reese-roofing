@@ -227,7 +227,7 @@ function HerSecCom () : React.JSX.Element {
 					<div className={ cssModObj.staIteDiv }>{ /* What: Stat Item Div Element. Why: Longevity is a reason to trust a roofer. How: This is the years stat, pairing the number with its label. */ }
 
 
-						<div className={ cssModObj.staNumDiv }>17+</div>{ /* What: Stat Number Div Element. Why: The number leads each stat. How: This is the years stat's number, set in the display style. */ }
+						<div className={ cssModObj.staNumDiv }>17<span className={ cssModObj.staSufSpa }>+</span></div>{ /* What: Stat Number Div Element. Why: The number leads each stat. How: This is the years stat's number, whose plus sign takes a separate style. */ }
 
 						<div className={ cssModObj.staLabDiv }>Years serving Douglas County</div>{ /* What: Stat Label Div Element. Why: Each number needs to say what it counts. How: This is the years stat's label, below its number. */ }
 
