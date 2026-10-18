@@ -22,10 +22,10 @@ import { test   } from '@playwright/test'; // What: Test. Why: Each route and ea
  * website rather than a local business, the footer says the company is
  * fictional, robots.txt lets search crawlers read the noindex while the named
  * AI crawlers' group disallows the site, and Netlify's _headers sends noindex
- * with every file. It also checks the social preview tags are complete and the
- * image is the 1,200x630 card under 300 KB the tags promise, and that _headers
- * sends the security headers a header checker looks for, since the dev server
- * never applies them.
+ * with every file. It also checks the social preview tags are complete and
+ * call it a demo, and the image is the 1,200x630 card under 300 KB the tags
+ * promise, and that _headers sends each of the security headers a header
+ * checker looks for, once, since the dev server never applies them.
  *
  * Sections:
  *  - Constants
@@ -208,7 +208,7 @@ test( '_headers hardens every response', async ( { page : curPagObj } ) => { // 
 
 
 
-test( 'the social preview tags are complete', async ( { page : curPagObj } ) => { // What: Social Tags Test. Why: A link shared anywhere should show a full, honest card. How: This loads the home page and checks every social tag, its absolute URLs, the image's type and size, the copy's lengths, that every title, summary, and image description calls it a demo, and the theme color and icons beside the card.
+test( 'the social preview tags are complete', async ( { page : curPagObj } ) => { // What: Social Tags Test. Why: A link shared anywhere should show a full, honest card. How: This loads the home page and checks every social tag, its absolute URLs, the image's type and size, the copy's lengths, that every title, summary, and image description calls it a demo or the company fictional, and the theme color and icons beside the card.
 
 
 	await curPagObj.goto( '/' ); // What: Home Load Call. Why: Link scrapers read the page every route shares. How: This opens the home page.
@@ -232,6 +232,7 @@ test( 'the social preview tags are complete', async ( { page : curPagObj } ) => 
 	expect( socTagObj[ 'og:site_name' ] ).toMatch( /Portfolio Demo/ );                              // What: Demo Site Name Assertion. Why: The site name shows beside the card, so it has to name the demo rather than the company. How: This checks it says portfolio demo.
 	expect( socTagObj[ 'og:title' ] ).toMatch( /Portfolio Demo/ );                                  // What: Demo Title Assertion. Why: A shared card must never present the fictional company as real. How: This checks the card's title calls it a portfolio demo.
 	expect( socTagObj[ 'twitter:description' ] ).toMatch( /fictional/ );                            // What: Demo Twitter Description Assertion. Why: X's card shows its own summary. How: This checks it says the company is fictional.
+	expect( socTagObj[ 'twitter:image:alt' ] ).toMatch( /portfolio demo/i );                        // What: Demo Twitter Image Alt Assertion. Why: X's card describes its own image to screen readers. How: This checks the image's description says it's a portfolio demo.
 	expect( socTagObj[ 'twitter:title' ] ).toMatch( /Portfolio Demo/ );                             // What: Demo Twitter Title Assertion. Why: X's card shows its own title. How: This checks it calls the site a portfolio demo.
 	expect( socTagObj[ 'og:image:height' ] ).toBe( '630' );                                         // What: Image Height Assertion. Why: The tag has to promise the card's real height. How: This checks it says 630, the height the image test reads from the file.
 	expect( socTagObj[ 'og:image:width' ] ).toBe( '1200' );                                         // What: Image Width Assertion. Why: The tag has to promise the card's real width. How: This checks it says 1,200, the width the image test reads from the file.
