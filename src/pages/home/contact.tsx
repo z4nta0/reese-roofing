@@ -295,10 +295,10 @@ function ConSecCom () : React.JSX.Element {
 						<img
 							className={ cssModObj.conSigIma }
 
-							height='536' // What: Intrinsic Size Note. Why: The page shouldn't shift while the logo loads. How: This matches the SVG's 518 by 536 viewBox, which the stylesheet scales to the column.
+							height='536' // What: Intrinsic Size Note. Why: The page shouldn't shift while the logo loads. How: This matches the SVG's 518 by 536 viewBox, which the stylesheet scales to the signature card's capped width.
 							loading='lazy' // What: Lazy Loading Attribute. Why: The image starts below the fold. How: This lets the browser fetch it only as it nears the screen.
 							src={ lofSvgUrl }
-							width='518' // What: Intrinsic Size Note. Why: The page shouldn't shift while the logo loads. How: This matches the SVG's 518 by 536 viewBox, which the stylesheet scales to the column.
+							width='518' // What: Intrinsic Size Note. Why: The page shouldn't shift while the logo loads. How: This matches the SVG's 518 by 536 viewBox, which the stylesheet scales to the signature card's capped width.
 
 							alt='Reese Roofing: Commercial & Residential'
 						/>{ /* What: Contact Signature Image Element. Why: The card shows the full logo. How: Its alt text reads the logo's wording for screen readers. */ }

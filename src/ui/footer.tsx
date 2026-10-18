@@ -80,7 +80,7 @@ function SitFooCom () : React.JSX.Element {
 
 		cliEveObj.preventDefault(); // What: Default Navigation Cancel. Why: The browser would otherwise scroll to the hash itself and leave it in the address. How: This stops the link's own navigation.
 
-		document.getElementById( 'top' )?.scrollIntoView( { behavior : redMotFun() ? 'auto' : 'smooth' } ); // What: Top Scroll Call. Why: The visitor should glide back up to the start of the page. How: This scrolls the page's top anchor into view, jumping instead of gliding under reduced motion.
+		document.getElementById( 'top' )?.scrollIntoView( { behavior : redMotFun() ? 'auto' : 'smooth' } ); // What: Top Scroll Call. Why: The visitor should be taken back up to the start of the page. How: This scrolls the page's top anchor into view, jumping instead of gliding under reduced motion.
 
 
 	};
