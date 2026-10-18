@@ -13,7 +13,7 @@
  * with a step within 10%, with 1rem set to an 11px base. Colors are named by
  * role. Every component's own styles are in its CSS module, and each
  * transition and animation turns itself off for reduced motion there; only the
- * page's smooth scrolling is handled here.
+ * page's smooth scrolling and the focus ring's ease are handled here.
  *
  * Sections:
  *  - Tokens
@@ -146,7 +146,7 @@
 	--att-rin-col : ;                                                         /* What: Attention Ring Color. Why: The standard role set includes an attention ring. How: This site doesn't use one, so it stays empty. */
 	--bac-hov-col : ;                                                         /* What: Background Hover Color. Why: The standard role set includes a hover overlay. How: This site's hovers use their own colors, so it stays empty. */
 	--bac-inv-col : #1a1f24;                                                  /* What: Background Inverse Color. Why: Dark bands, the footer, primary buttons, and the ghost buttons' hover fill need one dark surface color. How: Those surfaces, the select's options, and selected text read it, with paper-colored text on top, and the scrim and shadow roles take their color from it. */
-	--bac-pag-col : #f5f2ec;                                                  /* What: Background Page Color. Why: The page sits on a warm off-white rather than pure white. How: The page background and the paper surfaces (the scrolled bar, the drawer, the services cards, the signature card, the submit button) read it, and so do the text and faint rules on dark surfaces, at full strength or faded. */
+	--bac-pag-col : #f5f2ec;                                                  /* What: Background Page Color. Why: The page sits on a warm off-white rather than pure white. How: The page background and every paper surface read it, and so do the text and faint rules on dark surfaces, at full strength or faded. */
 	--bac-sur-col : #ebe7df;                                                  /* What: Background Surface Color. Why: Some bands and hovers need a slightly darker paper. How: The about section and hovered service cards read it. */
 	--bor-mai-col : oklch( from var( --tex-mai-col ) l c h / 0.12 );          /* What: Border Main Color. Why: Dividers should be barely there. How: Section edges and hairline rules read it. */
 	--bor-str-col : oklch( from var( --bor-mai-col ) l c h / 0.22 );          /* What: Border Strong Color. Why: A few dividers need to hold up as structure. How: This raises the main border's opacity to 0.22 for the service grid, principles rule, logo ring, and ghost buttons. */
@@ -162,7 +162,7 @@
 	--tex-acc-col : var( --bac-pag-col );                                     /* What: Text Accent Color. Why: Text on an accent background needs to stay readable. How: This reads the page color; nothing on this site reads it yet. */
 	--tex-mai-col : #1a1f24;                                                  /* What: Text Main Color. Why: Body text and headings share one near-black. How: Text on the paper surfaces reads it, along with the lines and rules drawn in ink, and the main border color is built from it. */
 	--tex-mut-col : #636871;                                                  /* What: Text Muted Color. Why: Labels and secondary details should recede. How: Eyebrows, captions, labels, and supporting lines read it, dark enough to reach WCAG AA's 4.5:1 contrast on both the page and surface backgrounds. */
-	--tex-sec-col : #2a3138;                                                  /* What: Text Secondary Color. Why: Long paragraphs read more gently than full ink. How: Ledes, descriptions, and links read it. */
+	--tex-sec-col : #2a3138;                                                  /* What: Text Secondary Color. Why: Long paragraphs read more gently than full ink. How: Ledes, longer paragraphs, card descriptions, and the bar's links read it. */
 	--war-dar-col : ;                                                         /* What: Warning Dark Color. Why: The standard role set includes the warning family. How: This site has no warnings to show, so it stays empty. */
 	--war-mai-col : ;                                                         /* What: Warning Main Color. Why: The standard role set includes the warning family. How: This site has no warnings to show, so it stays empty. */
 	--war-tin-col : ;                                                         /* What: Warning Tint Color. Why: The standard role set includes the warning family. How: This site has no warnings to show, so it stays empty. */
@@ -380,7 +380,7 @@
 	--ver-rhy-m02 : var( --cdn-pow-001-rec ); /* What: Vertical Rhythm Base Minus 2 ~= 0.755. Why: This is 2 steps below the base step, for tight vertical spacing. How: This is the reciprocal of the first power of the core design number, multiplied by 1rem where a length is needed. */
 	--ver-rhy-m01 : var( --cdn-pow-000 );     /* What: Vertical Rhythm Base Minus 1 = 1. Why: Headings and single-line elements need no breathing room between lines. How: This is read unitless as line-height, so each line is exactly its own font size tall, or multiplied by 1rem where a length is needed. */
 	--ver-rhy-bas : var( --cdn-pow-001 );     /* What: Vertical Rhythm Base ~= 1.325. Why: Line height and every other height-related value share one base rhythm drawn from the core design number. How: This is read unitless as line-height, so each element multiplies it by its own font size, and other vertical values can build on it. */
-	--ver-rhy-p01 : var( --cdn-pow-002 );     /* What: Vertical Rhythm Base Plus 1 ~= 1.755. Why: Body text, ledes, and detail values need a roomy line. How: This is read unitless as line-height (about 19.3px on base-size text), or multiplied by 1rem where a fixed height is needed. */
+	--ver-rhy-p01 : var( --cdn-pow-002 );     /* What: Vertical Rhythm Base Plus 1 ~= 1.755. Why: Body text, ledes, and detail values need a roomy line. How: This is read unitless as line-height (about 19.3px on base-size text), or multiplied by 1rem where a length is needed. */
 	--ver-rhy-p02 : var( --cdn-pow-003 );     /* What: Vertical Rhythm Base Plus 2 ~= 2.325. Why: This is 2 steps above the base step, for roomy vertical spacing. How: This is the third power of the core design number, multiplied by 1rem where a length is needed. */
 	--ver-rhy-p03 : var( --cdn-pow-004 );     /* What: Vertical Rhythm Base Plus 3 ~= 3.080. Why: This is 3 steps above the base step, for the roomiest vertical spacing. How: This is the fourth power of the core design number, multiplied by 1rem where a length is needed. */
 	--ver-rhy-p04 : var( --cdn-pow-005 );     /* What: Vertical Rhythm Base Plus 4 ~= 4.080. Why: This is 4 steps above the base step, for the roomiest vertical spacing. How: This is the fifth power of the core design number, multiplied by 1rem where a length is needed. */

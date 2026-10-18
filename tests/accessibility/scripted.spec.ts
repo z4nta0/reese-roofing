@@ -29,8 +29,9 @@ import type { Page } from '@playwright/test'; // What: Page. Why: Every helper d
  * width, nothing scrolls sideways. Motion: with reduced motion requested, no
  * animation or transition the page still holds once the state has opened lasts
  * longer than 1ms. The name and keyboard checks list every problem found, by
- * element, the motion check lists each one it finds, and the reflow check
- * reports how far the page reaches past the viewport.
+ * element (the positive tabindex check as a count), the motion check lists
+ * each one it finds, and the reflow check reports how far the page reaches
+ * past the viewport.
  *
  * Sections:
  *  - Constants
@@ -316,19 +317,18 @@ function stoInfFun () : StoInfTyp | null {
  * keyProFun = Keyboard Problems Function
  *
  * @summary
- * Walks the page with the Tab key from the top and returns every problem:
- * any element with a positive tabindex, which overrides the document order,
- * and every stop that comes earlier in the document than the stop before
- * it, sits off screen, is covered by something else, or looks the same
- * focused and unfocused. The walk ends when focus leaves the page, comes
- * back to the first stop, or stays on the same stop after a press, which is
- * how Firefox leaves its last stop; one that hasn't ended within TAB_MAX_NUM
- * presses counts as a keyboard trap. WebKit only tabs to links with Alt
- * held, the way Safari does by default, so the walk presses Alt+Tab there.
- * The caller requests reduced motion first, so the page jumps to each stop
- * instead of gliding and focus styles appear at once, and each press waits
- * for scrolling to settle, so every stop is measured where and how it ends
- * up.
+ * Walks the page with the Tab key from the top and returns every problem: a
+ * count of the elements with a positive tabindex, which overrides the document
+ * order, and every stop that comes earlier in the document than the stop
+ * before it, sits off screen, is covered by something else, or looks the same
+ * focused and unfocused. The walk ends when focus leaves the page, comes back
+ * to the first stop, or stays on the same stop after a press, which is how
+ * Firefox leaves its last stop; one that hasn't ended within TAB_MAX_NUM
+ * presses counts as a keyboard trap. WebKit only tabs to links with Alt held,
+ * the way Safari does by default, so the walk presses Alt+Tab there. The
+ * caller requests reduced motion first, so the page jumps to each stop instead
+ * of gliding and focus styles appear at once, and each press waits for
+ * scrolling to settle, so every stop is measured where and how it ends up.
  *
  * @author z4nta0 <https://github.com/z4nta0>
  *
@@ -470,7 +470,7 @@ for ( const staRecObj of STA_REC_ARR ) { // What: State Test Loop. Why: Every ch
 		await opeStaFun( curPagObj, staRecObj ); // What: State Open Call. Why: Entrance animations and the state's own action are the motion being checked. How: This loads the state and runs its action.
 
 
-		expect( await curPagObj.evaluate( () => document.getAnimations().filter( ( aniCurObj ) => ( Number( aniCurObj.effect?.getTiming().duration ) || 0 ) > 1 ).map( ( aniCurObj ) => ( aniCurObj as CSSAnimation ).animationName || ( aniCurObj as CSSTransition ).transitionProperty || 'script animation' ) ) ).toEqual( [] ); // What: No Motion Assertion. Why: The state passes only when nothing animated as it opened. How: This lists every animation or transition the page still holds that lasts longer than 1ms, which should be none. // What: Type Assertion Note. Why: getAnimations returns plain Animation objects, which don't type their CSS names. How: Each one is read as a CSS animation, then a CSS transition, falling back to a generic label when neither name exists.
+		expect( await curPagObj.evaluate( () => document.getAnimations().filter( ( aniCurObj ) => ( Number( aniCurObj.effect?.getTiming().duration ) || 0 ) > 1 ).map( ( aniCurObj ) => ( aniCurObj as CSSAnimation ).animationName || ( aniCurObj as CSSTransition ).transitionProperty || 'script animation' ) ) ).toEqual( [] ); // What: No Motion Assertion. Why: The state passes only when no animation or transition it still holds lasts longer than 1ms. How: This lists every animation or transition the page still holds that lasts longer than 1ms, which should be none. // What: Type Assertion Note. Why: getAnimations returns plain Animation objects, which don't type their CSS names. How: Each one is read as a CSS animation, then a CSS transition, falling back to a generic label when neither name exists.
 
 
 	} );

@@ -4,7 +4,7 @@
 // #region Imports
 
 import cssModObj from './about.module.css'; // What: CSS Module Object. Why: The section's two-column story, seal, quote, and principles row are styled in its own module. How: Each element reads its hashed class name from this object.
-import lofSvgUrl from './logo-full.svg';    // What: Logo-Full SVG URL. Why: The section's sticky seal is the full logo. How: Vite resolves the import to the file's fingerprinted URL, used as the image's src.
+import lofSvgUrl from './logo-full.svg';    // What: Logo-Full SVG URL. Why: The section's seal is the full logo. How: Vite resolves the import to the file's fingerprinted URL, used as the image's src.
 
 // #endregion Imports
 
@@ -14,10 +14,10 @@ import lofSvgUrl from './logo-full.svg';    // What: Logo-Full SVG URL. Why: The
  * about.tsx = About Section
  *
  * @summary
- * The home page's third section, telling the company's story. The heading
- * and a sticky logo seal sit beside three paragraphs and a quote from the
- * family, and a row of four numbered principles follows underneath, driven
- * by PRI_REC_ARR.
+ * The home page's third section, telling the company's story. The label,
+ * heading, and logo seal, which stay in view as the story scrolls on wide
+ * screens, sit beside three paragraphs and a quote from the family, and a row
+ * of four numbered principles follows underneath, driven by PRI_REC_ARR.
  *
  * Sections:
  *  - Constants
