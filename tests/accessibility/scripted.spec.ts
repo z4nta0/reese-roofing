@@ -22,16 +22,17 @@ import type { Page } from '@playwright/test'; // What: Page. Why: Every helper d
  * The accessibility checks axe-core can't make, run on every page state in
  * whichever engine the project runs. Names: every link and button in the
  * accessibility tree has a name, and no name carries a decorative glyph such
- * as an arrow. Keyboard: a Tab walk from the top of the page reaches its end
- * without getting trapped, never moves backwards through the document, and
- * lands only on stops that are on screen, not covered by anything else, and
- * visibly changed by focus. Reflow: at 320px wide, WCAG's narrowest reflow
- * width, nothing scrolls sideways. Motion: with reduced motion requested, no
- * animation or transition longer than 1ms starts while the state opens, or is
- * still held once it has. The name and keyboard checks list every problem
- * found, by element (the positive tabindex check as a count), the motion check
- * lists each one it finds, and the reflow check reports how far the page
- * reaches past the viewport.
+ * as an arrow. Keyboard: a Tab walk from the top of the page, or from the
+ * control a state's action left focused, reaches its end without getting
+ * trapped, never moves backwards through the document, and lands only on stops
+ * that are on screen, not covered by anything else, and visibly changed by
+ * focus. Reflow: at 320px wide, WCAG's narrowest reflow width, nothing scrolls
+ * sideways. Motion: with reduced motion requested, no animation or transition
+ * longer than 1ms starts while the state opens, or is still held once it has.
+ * The name and keyboard checks list every problem found, by element (the
+ * positive tabindex check as a count), the motion check lists each one it
+ * finds, and the reflow check reports how far the page reaches past the
+ * viewport.
  *
  * Sections:
  *  - Constants
@@ -317,18 +318,20 @@ function stoInfFun () : StoInfTyp | null {
  * keyProFun = Keyboard Problems Function
  *
  * @summary
- * Walks the page with the Tab key from the top and returns every problem: a
- * count of the elements with a positive tabindex, which overrides the document
- * order, and every stop that comes earlier in the document than the stop
- * before it, sits off screen, is covered by something else, or looks the same
- * focused and unfocused. The walk ends when focus leaves the page, comes back
- * to the first stop, or stays on the same stop after a press, which is how
- * Firefox leaves its last stop; one that hasn't ended within TAB_MAX_NUM
- * presses counts as a keyboard trap. WebKit only tabs to links with Alt held,
- * the way Safari does by default, so the walk presses Alt+Tab there. The
- * caller requests reduced motion first, so the page jumps to each stop instead
- * of gliding and focus styles appear at once, and each press waits for
- * scrolling to settle, so every stop is measured where and how it ends up.
+ * Walks the page with the Tab key from the top, or from the control a state's
+ * action left focused, which it first moves onto by keyboard so its focus ring
+ * shows and it's checked like any stop, and returns every problem: a count of
+ * the elements with a positive tabindex, which overrides the document order,
+ * and every stop that comes earlier in the document than the stop before it,
+ * sits off screen, is covered by something else, or looks the same focused and
+ * unfocused. The walk ends when focus leaves the page, comes back to the first
+ * stop, or stays on the same stop after a press, which is how Firefox leaves
+ * its last stop; one that hasn't ended within TAB_MAX_NUM presses counts as a
+ * keyboard trap. WebKit only tabs to links with Alt held, the way Safari does
+ * by default, so the walk presses Alt+Tab there. The caller requests reduced
+ * motion first, so the page jumps to each stop instead of gliding and focus
+ * styles appear at once, and each press waits for scrolling to settle, so
+ * every stop is measured where and how it ends up.
  *
  * @author z4nta0 <https://github.com/z4nta0>
  *
@@ -359,11 +362,17 @@ async function keyProFun ( curPagObj : Page, engNamStr : string ) : Promise< str
 	let firStoStr = ''; // What: First Stop String. Why: Focus coming back to the first stop means the walk went all the way around. How: This holds the first stop's description.
 	let preOrdNum = -1; // What: Previous Order Number. Why: Each stop must come later in the document than the last. How: This holds the previous stop's position among every element.
 
+	const staFocBoo = await curPagObj.evaluate( () => document.activeElement !== document.body ); // What: Start Focused Boolean. Why: A state's action can leave a control focused by a click, such as the drawer's toggle, which a plain Tab would step past unchecked. How: This is true when something other than the body holds focus before the walk.
+
 
 	for ( let tabCouNum = 0; tabCouNum < TAB_MAX_NUM; tabCouNum++ ) { // What: Tab Walk Loop. Why: Every stop is checked in the order a keyboard user meets it. How: This presses Tab once per pass, up to the cap.
 
 
-		await curPagObj.keyboard.press( tabKeyStr ); // What: Tab Press Call. Why: Each pass moves focus to the next stop. How: This presses the engine's Tab key.
+		if ( tabCouNum === 0 && staFocBoo ) await curPagObj.keyboard.press( tabKeyStr ); // What: Focused Start Step. Why: A control focused by a click shows no focus ring, so the walk has to reach it by keyboard. How: On the first pass only, this tabs one stop past it, so the press below can come back.
+
+
+
+		await curPagObj.keyboard.press( tabCouNum === 0 && staFocBoo ? `Shift+${ tabKeyStr }` : tabKeyStr ); // What: Tab Press Call. Why: Each pass moves focus to the next stop. How: This presses the engine's Tab key, or on a focused start's first pass, Shift with it, landing back on the control the action left focused.
 
 		await curPagObj.evaluate( scrSetFun ); // What: Scroll Settled Wait. Why: Some engines scroll a focused field into view a few frames late. How: This waits until the page has stopped scrolling.
 
