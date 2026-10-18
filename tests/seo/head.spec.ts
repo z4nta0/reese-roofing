@@ -84,7 +84,7 @@ const SEC_HEA_ARR = [ // What: Security Header Array. Why: A header security che
 
 
 
-const SOC_KEY_ARR = [ // What: Social Key Array. Why: The social preview rule lists every tag a complete card needs. How: Each entry names one Open Graph or Twitter tag the page must carry.
+const SOC_KEY_ARR = [ // What: Social Key Array. Why: The social preview rule lists every Open Graph and Twitter tag a complete card needs. How: Each entry names one tag the page must carry, while the theme color and icons are checked by their own selectors.
 
 
 	'og:description',      // What: Open Graph Description Key. Why: Every card needs the summary under the title. How: This names the tag.
@@ -202,7 +202,7 @@ test( '_headers hardens every response', async ( { page : curPagObj } ) => { // 
 
 
 
-test( 'the social preview tags are complete', async ( { page : curPagObj } ) => { // What: Social Tags Test. Why: A link shared anywhere should show a full, honest card. How: This loads the home page and checks every social tag, its absolute URLs, and the copy's lengths.
+test( 'the social preview tags are complete', async ( { page : curPagObj } ) => { // What: Social Tags Test. Why: A link shared anywhere should show a full, honest card. How: This loads the home page and checks every social tag, its absolute URLs, the copy's lengths, and the theme color and icons beside the card.
 
 
 	await curPagObj.goto( '/' ); // What: Home Load Call. Why: Link scrapers read the page every route shares. How: This opens the home page.
@@ -210,6 +210,10 @@ test( 'the social preview tags are complete', async ( { page : curPagObj } ) => 
 
 	const socTagArr = await curPagObj.locator( 'meta[property^="og:"], meta[name^="twitter:"]' ).evaluateAll( ( tagEleArr ) => tagEleArr.map( ( tagCurEle ) => [ tagCurEle.getAttribute( 'property' ) || tagCurEle.getAttribute( 'name' ) || '', tagCurEle.getAttribute( 'content' ) || '' ] ) ); // What: Social Tag Array. Why: Every social tag is checked by its key and value. How: This reads each Open Graph and Twitter tag as a key and content pair.
 	const socTagObj = Object.fromEntries( socTagArr ); // What: Social Tag Object. Why: Tags are easier to check by key. How: This turns the pairs into an object.
+
+	await expect( curPagObj.locator( 'link[rel="apple-touch-icon"]' ) ).toHaveCount( 1 ); // What: Touch Icon Assertion. Why: Some apps show the site's icon beside its card. How: This checks the page links its apple-touch-icon.
+	await expect( curPagObj.locator( 'link[rel="icon"]' ).first() ).toBeAttached();       // What: Favicon Assertion. Why: Some apps show the favicon beside the card. How: This checks the page links at least one favicon.
+	await expect( curPagObj.locator( 'meta[name="theme-color"]' ) ).toHaveCount( 1 );     // What: Theme Color Assertion. Why: Discord colors its embed's edge from this tag. How: This checks the page carries it.
 
 
 	expect( Object.keys( socTagObj ) ).toEqual( expect.arrayContaining( SOC_KEY_ARR ) );       // What: Complete Tags Assertion. Why: A missing tag leaves part of the card blank. How: This checks every required key is present, allowing optional extras.
