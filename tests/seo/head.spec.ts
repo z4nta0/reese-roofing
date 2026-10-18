@@ -18,18 +18,19 @@ import { test   } from '@playwright/test'; // What: Test. Why: Each route and ea
  * is a portfolio demo for a fictional company, so beyond the usual title,
  * description, canonical, and social tags, the checks confirm it stays out of
  * search and never passes as a real business: each route carries a noindex
- * robots meta and says it's a demo, the structured data describes a demo
- * website rather than a local business, the footer says the company is
- * fictional and links to its builder, robots.txt lets search crawlers read the
- * noindex while the named AI crawlers' group disallows the site and no sitemap
- * is served, and Netlify's _headers sends noindex with every file. It also
- * checks the social preview tags are complete and call it a demo, and the
- * image is the 1,200x630 card under 300 KB the tags promise, that every route
- * has exactly one description of 120 to 125 characters, that the raw home
- * page, fetched without a browser, carries its full title and description, and
- * that _headers sends each of the security headers a header checker looks for,
- * once, and that _redirects sends every unknown path to the app, since the dev
- * server never applies either file.
+ * robots meta, says it's a demo, and shows only reserved phone numbers and
+ * .example email addresses, the structured data describes a demo website
+ * rather than a local business, the footer says the company is fictional and
+ * links to its builder, robots.txt lets search crawlers read the noindex while
+ * the named AI crawlers' group disallows the site and no sitemap is served,
+ * and Netlify's _headers sends noindex with every file. It also checks the
+ * social preview tags are complete and call it a demo, and the image is the
+ * 1,200x630 card under 300 KB the tags promise, that every route has exactly
+ * one description of 120 to 125 characters, that the raw home page, fetched
+ * without a browser, carries its full title and description, and that _headers
+ * sends each of the security headers a header checker looks for, once, and
+ * that _redirects sends every unknown path to the app, since the dev server
+ * never applies either file.
  *
  * Sections:
  *  - Constants
@@ -152,6 +153,27 @@ for ( const rouRecObj of ROU_REC_ARR ) { // What: Route Test Loop. Why: Every ro
 
 		expect( jsoScrArr.map( ( jsoTexStr ) => JSON.parse( jsoTexStr )[ '@type' ] ) ).toEqual( [ 'WebSite' ] );   // What: Website Type Assertion. Why: The page should describe exactly one demo website. How: This parses each script, which also fails on invalid JSON, and checks there's one, typed WebSite.
 		expect( jsoScrArr.join( '' ) ).not.toMatch( /Business"|Contractor"|PostalAddress|"address"|"telephone"/ ); // What: No Business Data Assertion. Why: Structured data must never present the fictional company as a real business. How: This checks no business or contractor type, address, or phone appears in it, matching quoted keys and values so its prose can still say it isn't a real business.
+
+
+	} );
+
+
+	test( `${ rouRecObj.patStr } shows only reserved contact details`, async ( { page : curPagObj } ) => { // What: Reserved Contact Test. Why: A demo must never show a phone number or email address someone could really reach. How: This reads every phone and email the route links to, shows, or offers as a sample, and checks each is a reserved one.
+
+
+		await curPagObj.goto( rouRecObj.patStr ); // What: Route Load Call. Why: The details are read as a visitor sees them. How: This opens the route on the suite's dev server.
+
+
+		const conTexStr = await curPagObj.evaluate( () => [ ...[ ...document.querySelectorAll( 'a[href^="tel:"], a[href^="mailto:"]' ) ].map( ( ancCurEle ) => ancCurEle.getAttribute( 'href' ) ?? '' ), ...[ ...document.querySelectorAll( 'input, textarea' ) ].map( ( fieCurEle ) => fieCurEle.getAttribute( 'placeholder' ) ?? '' ), document.body.innerText ].join( '\n' ) ); // What: Contact Text String. Why: A phone or email can sit in a link's address, a field's sample, or the page's text. How: This joins every phone and email link's address, every field's placeholder, and the page's visible text.
+
+
+		const emaLisArr = conTexStr.match( /[\w.+-]+@[\w.-]+\.[a-z]+/gi ) ?? [];                    // What: Email List Array. Why: Every email address the route shows has to be checked. How: This finds each one in the joined text.
+		const phoLisArr = conTexStr.match( /\+1\d{10}|\(?\d{3}\)?[\s.-]?\d{3}[\s.-]\d{4}/g ) ?? []; // What: Phone List Array. Why: Every phone number the route shows has to be checked. How: This finds each one, written as a tel address or as a displayed number.
+
+
+		expect( phoLisArr.length ).toBeGreaterThan( 0 );                                                                   // What: Phones Found Assertion. Why: An empty list would pass the check below without reading anything. How: This checks the bar's phone number was found.
+		expect( emaLisArr.filter( ( emaCurStr ) => !/\.example$/i.test( emaCurStr ) ) ).toEqual( [] );                     // What: Reserved Email Assertion. Why: The .example domain can never belong to anyone. How: This lists every address on another domain, which should be none.
+		expect( phoLisArr.filter( ( phoCurStr ) => !/55501\d\d$/.test( phoCurStr.replace( /\D/g, '' ) ) ) ).toEqual( [] ); // What: Reserved Phone Assertion. Why: The 555-0100 to 555-0199 range is set aside for fiction. How: This lists every number outside that range, which should be none.
 
 
 	} );
