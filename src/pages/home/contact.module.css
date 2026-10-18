@@ -506,11 +506,11 @@
 
 
 }
-.forSubBut:hover { /* What: Hovered Form Submit Button. Why: The button should respond to the pointer. How: This turns it the soft accent with paper text and lifts it a pixel. */
+.forSubBut:hover { /* What: Hovered Form Submit Button. Why: The button should respond to the pointer. How: This turns it the soft accent with ink text, which keeps 4.5:1 contrast where paper text wouldn't, and lifts it a pixel. */
 
 
 	background : var( --acc-lig-col ); /* Accent Light Color, the accent lightened by 0.204 */
-	color      : var( --bac-pag-col ); /* Background Page Color = #f5f2ec */
+	color      : var( --tex-mai-col ); /* Text Main Color = #1a1f24 */
 	transform  : translateY( -1px );
 
 
