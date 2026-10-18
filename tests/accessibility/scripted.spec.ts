@@ -22,20 +22,20 @@ import type { Page } from '@playwright/test'; // What: Page. Why: Every helper d
  * The accessibility checks axe-core can't make, run on every page state in
  * whichever engine the project runs. Names: every link and button in the
  * accessibility tree has a name, and no name carries a decorative glyph such
- * as an arrow. Keyboard: a Tab walk from the top of the page, or from the
- * control a state's action left focused, reaches its end without getting
- * trapped, never moves backwards through the document, and lands only on stops
- * that are on screen, not covered by anything else, and visibly changed by
- * focus. Reflow: at 320px wide, WCAG's narrowest reflow width, nothing scrolls
- * sideways. Motion: with reduced motion requested, no animation or transition
- * longer than 1ms starts while the state opens, or is still held once it has,
- * and the same holds while the drawer closes and while the sent form's label
- * swaps in. Announcement: sending the form fills a status region that sat in
- * the page, empty, from the start, so screen readers are told the email is
- * opening. The name and keyboard checks list every problem found, by element
- * (the positive tabindex check as a count), the motion check lists each one it
- * finds, and the reflow check reports how far the page reaches past the
- * viewport.
+ * as an arrow. Keyboard: no element takes a positive tabindex, and a Tab walk
+ * from the top of the page, or from the control a state's action left focused,
+ * reaches its end without getting trapped, never moves backwards through the
+ * document, and lands only on stops that are on screen, not covered by
+ * anything else, and visibly changed by focus. Reflow: at 320px wide, WCAG's
+ * narrowest reflow width, nothing scrolls sideways. Motion: with reduced
+ * motion requested, no animation or transition longer than 1ms starts while
+ * the state opens, or is still held once it has, and the same holds while the
+ * drawer closes and while the sent form's label swaps in. Announcement:
+ * sending the form fills a status region that sat in the page, empty, from the
+ * start, so screen readers are told the email is opening. The name and
+ * keyboard checks list every problem found, by element (the positive tabindex
+ * check as a count), the motion check lists each one it finds, and the reflow
+ * check reports how far the page reaches past the viewport.
  *
  * Sections:
  *  - Constants
