@@ -31,8 +31,8 @@ import type { Page          } from '@playwright/test'; // What: Page. Why: Every
  * motion every control keeps its hover and press changes, and every field its
  * focus change, but nothing transitions, the parts inside a control and their
  * pseudo-elements included. Real clicks are blocked during the checks, so
- * pressing a link or the drawer's rows never navigates or closes anything mid-
- * check.
+ * pressing a link or the drawer's rows never navigates or closes anything
+ * mid-check.
  *
  * Sections:
  *  - Constants
@@ -219,8 +219,9 @@ function sigEleFun ( eleCurEle : Element ) : string {
  * looks the same at rest and hovered, or hovered and pressed, is a problem.
  * Normally its transition list must include both of the focus ring's outline
  * properties, offset and width, so the ring eases in; under reduced motion
- * every one of its transition durations must be zero instead. Outside reduced
- * motion, a control whose every transition duration is zero is a problem too.
+ * every transition duration on it, every element inside it, and their before
+ * and after pseudo-elements must be zero instead. Outside reduced motion, a
+ * control whose every transition duration is zero is a problem too.
  * The caller blocks real clicks first, so releasing the mouse does nothing.
  *
  * @author z4nta0 <https://github.com/z4nta0>

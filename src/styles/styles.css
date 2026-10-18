@@ -419,7 +419,7 @@
 
 }
 
-html { /* What: HTML. Why: One rem should equal the 11px base font size, the page should glide when the browser scrolls it on its own (to a control focused off screen, or a hash it follows before the script runs), and phones shouldn't inflate the text. How: This sets the root to 68.75% (11/16) of the browser's own default, so 1rem is 11px at the usual 16px default and still follows any size a person sets, turns on smooth scrolling, and turns off automatic text resizing. */
+html { /* What: HTML. Why: One rem should equal the 11px base font size, the page should glide when the browser scrolls it on its own, as it does to a control focused off screen, and phones shouldn't inflate the text. How: This sets the root to 68.75% (11/16) of the browser's own default, so 1rem is 11px at the usual 16px default and still follows any size a person sets, turns on smooth scrolling, and turns off automatic text resizing. */
 
 
 	-webkit-text-size-adjust : 100%;

@@ -20,11 +20,10 @@ isn't a real business, so it gets the demo treatment rather than local SEO:
   left alone, since the page itself tells them it's a demo.
 - **Says what it is**: the title, description (between 120 and 125
   characters: mobile cards show 125 in full, and preview checkers flag under
-  120 as short), Open Graph and Twitter tags, and
-  `public/og-image.png` (1200x630) call it a portfolio demo by
-  techgeek.support, the author meta names techgeek.support, and the footer
-  says the company is fictional, linking to techgeek.support. The 404 page
-  renders its own `<title>`.
+  120 as short), Open Graph and Twitter tags, and `public/og-image.png`
+  (1200x630) call it a portfolio demo by techgeek.support, the author meta
+  names techgeek.support, and the footer says the company is fictional,
+  linking to techgeek.support. The 404 page renders its own `<title>`.
 - **Social preview card**: per the user-level "## Social Previews" rule,
   `design/og-image/card.html` (outside the served tree) is captured by `npm
   run og-image` (`design/og-image/render.mts`, type checked through
@@ -199,8 +198,8 @@ rule overrode them. Each was applied as its own commit:
 - `6c97153`: the about story's bottom margin before the principles.
 - `a39b331`: the contact heading's soft accent italic word.
 - `281265f`: the paper contact submit button on the dark band.
-- `8a5f993`: the mobile drawer's open and close animation (made
-  cross-browser in a later commit).
+- `8a5f993`: the mobile drawer's open and close animation (made cross-browser
+  in a later commit).
 
 Horizontal sizes (decided 2026-10-07): after comparing both options from the
 user-level "Width is decided per project" rule, the user chose the
