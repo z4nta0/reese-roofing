@@ -501,16 +501,15 @@
 	line-height    : calc( var( --ver-rhy-p04 ) * 1rem );                                         /* Vertical Rhythm Base Plus 4 ~= 44.876px */
 	margin-top     : var( --spa-ver-m02 );                                                        /* Spacing Vertical Base Minus 2 ~= 8.304px */
 	padding        : 0 clamp( var( --spa-hor-p01 ), var( --hor-rhy-012 ), var( --spa-hor-p03 ) ); /* Spacing Horizontal Base Plus 1 ~= 19.304px, Horizontal Rhythm 12 ~= 28.278px @ 1,920px width, Spacing Horizontal Base Plus 3 ~= 33.876px */
-	transition     : background-color var( --dur-tra-p02 ) var( --mot-dec-eas ), color var( --dur-tra-p02 ) var( --mot-dec-eas ), outline-offset var( --dur-tra-p01 ) var( --mot-dec-eas ), outline-width var( --dur-tra-p01 ) var( --mot-dec-eas ), transform var( --dur-tra-p02 ) var( --mot-dec-eas ); /* Duration Transition Base Plus 2 ~= 277.0ms, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ), Duration Transition Base Plus 1 ~= 209.1ms */
+	transition     : background-color var( --dur-tra-p02 ) var( --mot-dec-eas ), outline-offset var( --dur-tra-p01 ) var( --mot-dec-eas ), outline-width var( --dur-tra-p01 ) var( --mot-dec-eas ), transform var( --dur-tra-p02 ) var( --mot-dec-eas ); /* Duration Transition Base Plus 2 ~= 277.0ms, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ), Duration Transition Base Plus 1 ~= 209.1ms */
 	white-space    : nowrap;
 
 
 }
-.forSubBut:hover { /* What: Hovered Form Submit Button. Why: The button should respond to the pointer. How: This turns it the soft accent with ink text, which keeps 4.5:1 contrast where paper text wouldn't, and lifts it a pixel. */
+.forSubBut:hover { /* What: Hovered Form Submit Button. Why: The button should respond to the pointer. How: This turns it the soft accent, its ink text keeping 4.5:1 contrast where paper text wouldn't, and lifts it a pixel. */
 
 
 	background : var( --acc-lig-col ); /* Accent Light Color, the accent lightened by 0.204 */
-	color      : var( --tex-mai-col ); /* Text Main Color = #1a1f24 */
 	transform  : translateY( -1px );
 
 

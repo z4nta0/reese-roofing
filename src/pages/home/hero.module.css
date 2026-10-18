@@ -87,7 +87,6 @@
 	margin         : 0 auto;
 	max-width      : var( --con-max-wid ); /* Container Maximum Width ~= 1,449.4px */
 	padding-inline : var( --gut-sid-pad ); /* Gutter Side Padding, about 19.304px - 44.876px */
-	position       : relative;
 	width          : 100%;
 	z-index        : 1;                    /* What: Content Stack Level. Why: The content has to sit over the grid at 0. How: This is the lowest level that clears it, and the navigation bar sits at 2 above it. */
 
