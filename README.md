@@ -87,7 +87,7 @@ tests/
 ├── interaction/       control feedback and site behavior checks
 ├── rendering/         screenshot comparisons and their baselines/
 ├── responsive/        layout checks across screen widths
-├── seo/               head, structured data, crawler file, and preview image checks
+├── seo/               head, structured data, crawler and Netlify file, and preview image checks
 ├── support/           the page states the suites visit
 └── playwright.config.ts
 design/

@@ -152,13 +152,13 @@ the same helper, and the seo suite reads the head of each route instead.
   ring, and reduced motion keeps the changes with no transitions), then the
   site's behavior: the section, Home, hero, estimate, back to top, and logo
   links (landing on their targets without ever putting a hash in the address,
-  each section link's address naming the home page's path, and a Ctrl, Cmd, or
-  middle click opening a section in a new tab), every way
-  the drawer opens and closes, the contact form's sent label and mailto link
-  (the mailto test is Chromium-only, through the DevTools Protocol), and the
-  404 page, whose Return home opens the home page at its top and whose
-  estimate, section, and Home links reach their targets, all inside the router
-  without a full page load.
+  each section link's address naming the home page's path, and a Ctrl, Cmd,
+  or middle click opening a section in a new tab), every way the drawer opens
+  and closes, the contact form's sent label and mailto link (the mailto test
+  is Chromium-only, through the DevTools Protocol), and the 404 page, whose
+  Return home opens the home page at its top and whose estimate, section, and
+  Home links reach their targets, all inside the router without a full page
+  load.
 - `npm run test:rendering`: compares a full-page screenshot of every state
   with its baseline in `tests/rendering/baselines/`, with zero tolerance,
   since each engine renders identically from run to run here and even a

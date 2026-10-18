@@ -22,10 +22,11 @@ import type { Page    } from '@playwright/test'; // What: Page. Why: Every helpe
  * runs. The nav's section links, the Home link, the hero's buttons, the
  * estimate buttons in the bar and the drawer, and back to top land on their
  * targets without ever putting a hash in the address, while a Ctrl, Cmd, or
- * middle click on a section link opens the section in a new tab instead; the
- * logo links to the root address; the mobile drawer opens and closes every way
- * it can (the toggle, Escape, a tap on the dimmed page, a drawer link, and a
- * wider screen) and makes the page behind it inert while open; the contact
+ * middle click on a section link opens the section in a new tab instead; every
+ * section link on the home page and the 404 page names the home page's path;
+ * the logo links to the root address; the mobile drawer opens and closes every
+ * way it can (the toggle, Escape, a tap on the dimmed page, a drawer link, and
+ * a wider screen) and makes the page behind it inert while open; the contact
  * form swaps its button label when sent and builds a mailto link carrying the
  * request; and the 404 page answers an unknown address and leads back home and
  * to the contact section, its nav links included. Pages open under reduced
