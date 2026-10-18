@@ -26,7 +26,7 @@ import type { Page    } from '@playwright/test'; // What: Page. Why: Every helpe
  * Ctrl or Cmd click on a drawer link leaving an open drawer as it was; every
  * section link on the home page and the 404 page names the home page's path;
  * the logo links to the root address; the bar takes its scrolled style once
- * the page moves and drops it at the top; the mobile drawer opens and closes
+ * the page moves and drops it at the top; the bar's drawer opens and closes
  * every way it can (the toggle, Escape, a tap on the dimmed page, a drawer
  * link, and a wider screen) and makes the page behind it inert while open; the
  * contact form swaps its button label when sent and builds a mailto link
@@ -53,7 +53,7 @@ import type { Page    } from '@playwright/test'; // What: Page. Why: Every helpe
 const CLI_KIN_ARR : Array< [ string, Parameters< Locator[ 'click' ] >[ 0 ] ] > = [ [ 'Ctrl or Cmd', { modifiers : [ 'ControlOrMeta' ] } ], [ 'middle', { button : 'middle' } ] ]; // What: Click Kind Array. Why: Both ways of asking for a new tab have to keep working now that plain clicks scroll in place. How: Each row pairs a click kind's name with the click options that make it, ControlOrMeta pressing Cmd on a Mac and Ctrl elsewhere.
 
 const DES_VIE_OBJ = { height : 900, width : 1440 }; // What: Desktop Viewport Object. Why: The bar's own links show only on wide screens. How: This is the desktop size the navigation checks use.
-const PHO_VIE_OBJ = { height : 844, width : 390  }; // What: Phone Viewport Object. Why: The drawer exists only on small screens. How: This is the phone size the drawer checks use.
+const PHO_VIE_OBJ = { height : 844, width : 390  }; // What: Phone Viewport Object. Why: The drawer exists only at 880px wide and below. How: This is the phone size the drawer checks use.
 const SMA_VIE_OBJ = { height : 568, width : 320  }; // What: Small Viewport Object. Why: The 404 page only scrolls on the smallest phones. How: This is the 320 by 568 size the Return home and back to top checks open it at.
 
 // #endregion Constants
@@ -68,9 +68,9 @@ const SMA_VIE_OBJ = { height : 568, width : 320  }; // What: Small Viewport Obje
  * opeDraFun = Open Drawer Function
  *
  * @summary
- * Opens the mobile drawer through its toggle and waits until the toggle
- * reports it open, so a drawer check always starts from the drawer showing.
- * The caller has to be on a phone-sized viewport, where the toggle exists.
+ * Opens the bar's drawer through its toggle and waits until the toggle reports
+ * it open, so a drawer check always starts from the drawer showing. The caller
+ * has to be at 880px wide or below, where the toggle exists.
  *
  * @author z4nta0 <https://github.com/z4nta0>
  *
@@ -421,7 +421,7 @@ for ( const rouPatStr of [ '/', '/missing' ] ) { // What: Section Address Loop. 
 test( 'the menu toggle opens and closes the drawer', async ( { page : curPagObj } ) => { // What: Toggle Test. Why: The menu button is the drawer's main control. How: This opens the drawer, checks the page behind it is inert, then closes it again.
 
 
-	await opeRouFun( curPagObj, '/', PHO_VIE_OBJ ); // What: Home Open Call. Why: The drawer exists on small screens. How: This opens the home page at phone size.
+	await opeRouFun( curPagObj, '/', PHO_VIE_OBJ ); // What: Home Open Call. Why: The drawer exists at 880px wide and below. How: This opens the home page at phone size.
 
 	await opeDraFun( curPagObj ); // What: Drawer Open Call. Why: The open state comes first. How: This opens the drawer through its toggle.
 
@@ -448,7 +448,7 @@ test( 'the menu toggle opens and closes the drawer', async ( { page : curPagObj 
 test( 'Escape closes the drawer and returns focus to the toggle', async ( { page : curPagObj } ) => { // What: Escape Test. Why: Escape is the expected way out of a layer over the page. How: This opens the drawer, focuses one of its links, presses Escape, and checks the drawer and focus.
 
 
-	await opeRouFun( curPagObj, '/', PHO_VIE_OBJ ); // What: Home Open Call. Why: The drawer exists on small screens. How: This opens the home page at phone size.
+	await opeRouFun( curPagObj, '/', PHO_VIE_OBJ ); // What: Home Open Call. Why: The drawer exists at 880px wide and below. How: This opens the home page at phone size.
 
 	await opeDraFun( curPagObj ); // What: Drawer Open Call. Why: Escape only matters with the drawer open. How: This opens it.
 
@@ -475,7 +475,7 @@ test( 'Escape closes the drawer and returns focus to the toggle', async ( { page
 test( 'a tap on the dimmed page closes the drawer', async ( { page : curPagObj } ) => { // What: Scrim Test. Why: Tapping outside the drawer is a natural way to dismiss it. How: This opens the drawer, taps near the bottom of the screen, and checks it closed.
 
 
-	await opeRouFun( curPagObj, '/', PHO_VIE_OBJ ); // What: Home Open Call. Why: The drawer exists on small screens. How: This opens the home page at phone size.
+	await opeRouFun( curPagObj, '/', PHO_VIE_OBJ ); // What: Home Open Call. Why: The drawer exists at 880px wide and below. How: This opens the home page at phone size.
 
 	await opeDraFun( curPagObj ); // What: Drawer Open Call. Why: The scrim shows only while the drawer is open. How: This opens it.
 
@@ -495,7 +495,7 @@ for ( const [ linLabStr, secIdeStr ] of [ [ 'Home', 'top' ], [ 'Services', 'serv
 	test( `the drawer's ${ linLabStr } link closes the drawer and scrolls to its section`, async ( { page : curPagObj } ) => { // What: Drawer Link Test. Why: Picking a section should both take the visitor there and get the drawer out of the way. How: This opens the drawer, picks the link, and checks the drawer, the section, and the address.
 
 
-		await opeRouFun( curPagObj, '/', PHO_VIE_OBJ ); // What: Home Open Call. Why: The drawer exists on small screens. How: This opens the home page at phone size.
+		await opeRouFun( curPagObj, '/', PHO_VIE_OBJ ); // What: Home Open Call. Why: The drawer exists at 880px wide and below. How: This opens the home page at phone size.
 
 
 		if ( secIdeStr === 'top' ) await curPagObj.evaluate( () => window.scrollTo( 0, document.documentElement.scrollHeight ) ); // What: Home Row Scroll Call. Why: The page opens at its top, where the Home row's target already sits, so that row would pass without scrolling. How: This sends the page to its bottom first, for the Home row only.
@@ -526,7 +526,7 @@ for ( const [ linLabStr, secIdeStr ] of [ [ 'Home', 'top' ], [ 'Services', 'serv
 test( "the drawer's estimate button closes the drawer and scrolls to the contact section", async ( { page : curPagObj } ) => { // What: Drawer Estimate Test. Why: On a phone the drawer's estimate button is the main action, and it should both reach the form and get the drawer out of the way. How: This opens the drawer, clicks its estimate button, and checks the drawer, the section, and the address.
 
 
-	await opeRouFun( curPagObj, '/', PHO_VIE_OBJ ); // What: Home Open Call. Why: The drawer exists on small screens. How: This opens the home page at phone size.
+	await opeRouFun( curPagObj, '/', PHO_VIE_OBJ ); // What: Home Open Call. Why: The drawer exists at 880px wide and below. How: This opens the home page at phone size.
 
 	await opeDraFun( curPagObj ); // What: Drawer Open Call. Why: The drawer's estimate button shows only while it's open. How: This opens it.
 
@@ -549,7 +549,7 @@ test( "the drawer's estimate button closes the drawer and scrolls to the contact
 test( 'a Ctrl or Cmd click on a drawer link leaves the drawer open', async ( { page : curPagObj } ) => { // What: Drawer New Tab Test. Why: A drawer link opened in a new tab hasn't taken the visitor anywhere, so the drawer should stay as it was. How: This makes the click from the open drawer, then checks the new tab opened and the drawer, scroll, and address stayed put.
 
 
-	await opeRouFun( curPagObj, '/', PHO_VIE_OBJ ); // What: Home Open Call. Why: The drawer exists on small screens. How: This opens the home page at phone size.
+	await opeRouFun( curPagObj, '/', PHO_VIE_OBJ ); // What: Home Open Call. Why: The drawer exists at 880px wide and below. How: This opens the home page at phone size.
 
 	await opeDraFun( curPagObj ); // What: Drawer Open Call. Why: The drawer's links show only while it's open. How: This opens it.
 
@@ -579,7 +579,7 @@ test( 'a Ctrl or Cmd click on a drawer link leaves the drawer open', async ( { p
 test( 'widening the screen closes the drawer', async ( { page : curPagObj } ) => { // What: Widen Test. Why: Past the breakpoint the toggle disappears, so an open drawer would leave the page inert with no way out. How: This opens the drawer, widens the viewport, and checks the drawer closed.
 
 
-	await opeRouFun( curPagObj, '/', PHO_VIE_OBJ ); // What: Home Open Call. Why: The drawer exists on small screens. How: This opens the home page at phone size.
+	await opeRouFun( curPagObj, '/', PHO_VIE_OBJ ); // What: Home Open Call. Why: The drawer exists at 880px wide and below. How: This opens the home page at phone size.
 
 	await opeDraFun( curPagObj ); // What: Drawer Open Call. Why: Widening only matters with the drawer open. How: This opens it.
 

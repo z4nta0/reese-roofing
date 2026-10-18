@@ -58,7 +58,7 @@
 
 
 }
-@container app ( max-width : 960px ) { /* What: Narrow Services Head Div. Why: Small screens are too narrow for two columns. How: This applies below 960px wide. */
+@container app ( max-width : 960px ) { /* What: Narrow Services Head Div. Why: Small screens are too narrow for two columns. How: This applies at 960px wide and below. */
 
 
 	.serHeaDiv { /* What: Stacked Services Head Div. Why: The lede reads best under the heading. How: This turns the grid into one column with a smaller gap. */
@@ -144,7 +144,7 @@
 
 
 }
-@container app ( max-width : 960px ) { /* What: Narrow Section Lede Paragraph. Why: The stacked head has one column. How: This applies below 960px wide. */
+@container app ( max-width : 960px ) { /* What: Narrow Section Lede Paragraph. Why: The stacked head has one column. How: This applies at 960px wide and below. */
 
 
 	.secLedPar { /* What: Stacked Section Lede Paragraph. Why: The lede moves under the heading. How: This puts it in column 1. */
@@ -174,7 +174,7 @@
 
 
 }
-@container app ( max-width : 960px ) { /* What: Narrow Services Grid Div. Why: Three cards don't fit across a tablet. How: This applies below 960px wide. */
+@container app ( max-width : 960px ) { /* What: Narrow Services Grid Div. Why: Three cards don't fit across a tablet. How: This applies at 960px wide and below. */
 
 
 	.serGriDiv { /* What: Two Column Services Grid Div. Why: The cards fit two to a row. How: This sets two columns. */
@@ -187,7 +187,7 @@
 
 
 }
-@container app ( max-width : 640px ) { /* What: Phone Services Grid Div. Why: Two cards don't fit across a phone. How: This applies below 640px wide. */
+@container app ( max-width : 640px ) { /* What: Phone Services Grid Div. Why: Two cards don't fit across a phone. How: This applies at 640px wide and below. */
 
 
 	.serGriDiv { /* What: One Column Services Grid Div. Why: The cards stack on a phone. How: This sets one column. */
@@ -250,7 +250,7 @@
 
 
 }
-@container app ( max-width : 640px ) { /* What: Phone Card Head Div. Why: Stacked cards don't need matching head heights. How: This applies below 640px wide. */
+@container app ( max-width : 640px ) { /* What: Phone Card Head Div. Why: Stacked cards don't need matching head heights. How: This applies at 640px wide and below. */
 
 
 	.carHeaDiv { /* What: Auto Height Card Head Div. Why: Each head can take only the height it needs. How: This drops the minimum height. */

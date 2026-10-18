@@ -43,7 +43,7 @@
 
 
 }
-@container app ( max-width : 880px ) { /* What: Narrow Navigation Scrim Div. Why: Only screens with the drawer need the scrim. How: This applies below 880px wide. */
+@container app ( max-width : 880px ) { /* What: Narrow Navigation Scrim Div. Why: Only screens with the drawer need the scrim. How: This applies at 880px wide and below. */
 
 
 	.navSciDiv { /* What: Shown Navigation Scrim Div. Why: The scrim has to exist where the drawer can open. How: This turns its display on, leaving it hidden until the drawer opens. */
@@ -288,7 +288,7 @@
 
 
 }
-@container app ( max-width : 880px ) { /* What: Narrow Navigation Links Nav. Why: Small screens have no room for the links in the bar. How: This applies below 880px wide. */
+@container app ( max-width : 880px ) { /* What: Narrow Navigation Links Nav. Why: Small screens have no room for the links in the bar. How: This applies at 880px wide and below. */
 
 
 	.navLinNav { /* What: Hidden Navigation Links Nav. Why: The drawer shows the links instead. How: This hides the row. */
@@ -380,7 +380,7 @@
 
 
 }
-@container app ( max-width : 880px ) { /* What: Narrow Navigation Call-To-Action Div. Why: Small screens have no room for the actions in the bar. How: This applies below 880px wide. */
+@container app ( max-width : 880px ) { /* What: Narrow Navigation Call-To-Action Div. Why: Small screens have no room for the actions in the bar. How: This applies at 880px wide and below. */
 
 
 	.navCtaDiv { /* What: Hidden Navigation Call-To-Action Div. Why: The drawer carries the phone number instead. How: This hides the row. */
@@ -520,7 +520,7 @@
 
 /* #region navTogBut */
 
-.navTogBut { /* What: Navigation Toggle Button. Why: The menu button only appears on small screens. How: This hides it by default and stacks its two lines when shown. */
+.navTogBut { /* What: Navigation Toggle Button. Why: The menu button only appears at 880px wide and below. How: This hides it by default and stacks its two lines when shown. */
 
 
 	display        : none;
@@ -531,7 +531,7 @@
 
 
 }
-@container app ( max-width : 880px ) { /* What: Narrow Navigation Toggle Button. Why: Small screens need the menu button in place of the links. How: This applies below 880px wide. */
+@container app ( max-width : 880px ) { /* What: Narrow Navigation Toggle Button. Why: Small screens need the menu button in place of the links. How: This applies at 880px wide and below. */
 
 
 	.navTogBut { /* What: Shown Navigation Toggle Button. Why: The drawer needs a way to open. How: This shows the button. */
@@ -618,7 +618,7 @@
 
 /* #region navDraDiv */
 
-.navDraDiv { /* What: Navigation Drawer Div. Why: Small screens show the links in a panel under the bar. How: This stacks the links on the page color, collapsed to nothing and hidden until opened, growing and shrinking as it opens and closes, and casting a large elevation shadow onto the page below it. */
+.navDraDiv { /* What: Navigation Drawer Div. Why: At 880px wide and below the links show in a panel under the bar. How: This stacks the links on the page color, collapsed to nothing and hidden until opened, growing and shrinking as it opens and closes, and casting a large elevation shadow onto the page below it. */
 
 
 	background     : var( --bac-pag-col );                             /* Background Page Color = #f5f2ec */

@@ -17,10 +17,10 @@ import type { Page } from '@playwright/test'; // What: Page. Why: Opening a stat
  * and the helper that opens one; the responsive suite opens its own widths
  * through the same helper. A state is a page at a width, sometimes with
  * something opened on it: the home page and the 404 page at phone and desktop
- * widths, and the mobile drawer open on a phone. opeStaFun sizes the viewport,
- * loads the page, waits for the fonts, runs the state's own action, such as
- * opening the drawer, and then waits for any animations to settle so nothing
- * is measured mid-fade.
+ * widths, and the drawer open on a phone. opeStaFun sizes the viewport, loads
+ * the page, waits for the fonts, runs the state's own action, such as opening
+ * the drawer, and then waits for any animations to settle so nothing is
+ * measured mid-fade.
  *
  * Sections:
  *  - Types
@@ -61,17 +61,16 @@ type StaRecTyp = { // What: State Record Type. Why: Every check reads the same d
  *
  * @summary
  * Every state the checks visit: each route at a phone width (390px) and a
- * desktop width (1,440px), plus the mobile drawer open at the phone width,
- * since the drawer is only reachable there. The 404 page is reached through
- * an address the site doesn't have, the way a visitor would land on it.
- * Every row shares the {@link StaRecTyp} shape, so its fields carry no
- * comments of their own:
- * - `actFun` (Function): Action Function, run after the page loads to open
- *   something on it, such as the drawer. Only the drawer row has one.
- * - `heiNum` (Number): Height Number, the viewport height in CSS pixels.
- * - `ideStr` (String): Identifier String, the state's name in test titles.
- * - `patStr` (String): Path String, the route loaded from the dev server.
- * - `widNum` (Number): Width Number, the viewport width in CSS pixels.
+ * desktop width (1,440px), plus the drawer open at the phone width, since of
+ * the two widths only that one shows the bar's menu toggle. The 404 page is
+ * reached through an address the site doesn't have, the way a visitor would
+ * land on it. Every row shares the {@link StaRecTyp} shape, so its fields
+ * carry no comments of their own: - `actFun` (Function): Action Function, run
+ * after the page loads to open   something on it, such as the drawer. Only the
+ * drawer row has one. - `heiNum` (Number): Height Number, the viewport height
+ * in CSS pixels. - `ideStr` (String): Identifier String, the state's name in
+ * test titles. - `patStr` (String): Path String, the route loaded from the dev
+ * server. - `widNum` (Number): Width Number, the viewport width in CSS pixels.
  *
  * @author z4nta0 <https://github.com/z4nta0>
  *

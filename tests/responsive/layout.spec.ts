@@ -15,17 +15,17 @@ import { test      } from '@playwright/test';     // What: Test. Why: Each page 
  * layout.spec.ts = Layout Spec
  *
  * @summary
- * Measures the home page, the 404 page, and the open mobile drawer across a
- * range of screen widths, in whichever engine the project runs, and fails a
- * width whose layout breaks: the page scrolling sideways, a visible element
- * reaching past either edge of the screen (unless it's decoration an ancestor
- * clips, like the hero's background grid), text spilling out of its own box,
- * two controls a visitor can reach overlapping each other, or a grid of cards
- * leaving uneven rows. The widths run from 320px, WCAG's narrowest reflow
- * width, to 1,920px, and include a pixel either side of each of the site's
- * breakpoints, where a layout switches and is most likely to crowd. Pages open
- * under reduced motion, which changes nothing about the layout but skips the
- * wait for entrance animations.
+ * Measures the home page, the 404 page, and the open drawer across a range of
+ * screen widths, in whichever engine the project runs, and fails a width whose
+ * layout breaks: the page scrolling sideways, a visible element reaching past
+ * either edge of the screen (unless it's decoration an ancestor clips, like
+ * the hero's background grid), text spilling out of its own box, two controls
+ * a visitor can reach overlapping each other, or a grid of cards leaving
+ * uneven rows. The widths run from 320px, WCAG's narrowest reflow width, to
+ * 1,920px, and include a pixel either side of each of the site's breakpoints,
+ * where a layout switches and is most likely to crowd. Pages open under
+ * reduced motion, which changes nothing about the layout but skips the wait
+ * for entrance animations.
  *
  * Sections:
  *  - Constants

@@ -53,7 +53,7 @@
 
 
 }
-@container app ( max-width : 960px ) { /* What: Narrow Contact Layout Div. Why: Small screens are too narrow for two columns. How: This applies below 960px wide. */
+@container app ( max-width : 960px ) { /* What: Narrow Contact Layout Div. Why: Small screens are too narrow for two columns. How: This applies at 960px wide and below. */
 
 
 	.conLayDiv { /* What: Stacked Contact Layout Div. Why: The form reads best under the details. How: This turns the grid into one column with a smaller gap. */
@@ -165,7 +165,7 @@
 
 
 }
-@container app ( max-width : 540px ) { /* What: Phone Contact Row Div. Why: A phone has no room for the label column. How: This applies below 540px wide. */
+@container app ( max-width : 540px ) { /* What: Phone Contact Row Div. Why: A phone has no room for the label column. How: This applies at 540px wide and below. */
 
 
 	.conRowDiv { /* What: Stacked Contact Row Div. Why: The label reads best above its value on a phone. How: This turns the row into one column with a small gap. */
@@ -273,7 +273,7 @@
 
 
 }
-@container app ( max-width : 500px ) { /* What: Phone Contact Signature Div. Why: On a phone the details stack full width, so a card hugging the left edge looks unbalanced. How: This applies below 500px wide. */
+@container app ( max-width : 500px ) { /* What: Phone Contact Signature Div. Why: On a phone the details stack full width, so a card hugging the left edge looks unbalanced. How: This applies at 500px wide and below. */
 
 
 	.conSigDiv { /* What: Centered Contact Signature Div. Why: The logo card should sit in the middle of the narrow column. How: This centers it with auto side margins. */
@@ -455,7 +455,7 @@
 
 
 }
-@container app ( max-width : 540px ) { /* What: Phone Form Row Div. Why: A phone has no room for two fields side by side. How: This applies below 540px wide. */
+@container app ( max-width : 540px ) { /* What: Phone Form Row Div. Why: A phone has no room for two fields side by side. How: This applies at 540px wide and below. */
 
 
 	.forRowDiv { /* What: Stacked Form Row Div. Why: The fields stack on a phone. How: This turns the row into one column. */

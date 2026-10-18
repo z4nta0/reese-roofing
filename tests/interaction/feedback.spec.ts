@@ -542,7 +542,7 @@ for ( const redMotBoo of [ false, true ] ) { // What: Brand Motion Loop. Why: Th
 test( 'the drawer and its scrim animate open and closed', async ( { page : curPagObj } ) => { // What: Drawer Motion Test. Why: Opening and closing should slide and fade rather than snap, the very thing a browser can silently drop, as Firefox once did here. How: This opens and closes the drawer at phone size with motion on, checking each time that the drawer and its scrim are really transitioning.
 
 
-	const phoRecObj = STA_REC_ARR.find( ( staCurObj ) => staCurObj.ideStr === 'home-phone' )!; // What: Phone Record Object. Why: The drawer exists only on small screens. How: This finds the home phone state's row. // What: Non-Null Note. Why: find types its result as possibly undefined. How: STA_REC_ARR always lists the home-phone state.
+	const phoRecObj = STA_REC_ARR.find( ( staCurObj ) => staCurObj.ideStr === 'home-phone' )!; // What: Phone Record Object. Why: The drawer exists only at 880px wide and below. How: This finds the home phone state's row. // What: Non-Null Note. Why: find types its result as possibly undefined. How: STA_REC_ARR always lists the home-phone state.
 
 
 	await opeStaFun( curPagObj, phoRecObj ); // What: Phone State Open Call. Why: The drawer is toggled with the page settled. How: This loads the home page at phone size, with motion on.
