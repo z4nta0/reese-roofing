@@ -46,8 +46,10 @@ import { useSecCliFun } from './section-link.ts'; // What: Use Section Click Fun
  * The section links the bar and its drawer both list, in the order the bar
  * shows them and the drawer numbers them. Every row shares one shape, so its
  * fields carry no comments of their own:
+ *
  * - `ideStr` (String): Identifier String, the home page section's id, which
  *   the link's address names after the root path.
+ *
  * - `labStr` (String): Label String, the link's visible text.
  *
  * @author z4nta0 <https://github.com/z4nta0>

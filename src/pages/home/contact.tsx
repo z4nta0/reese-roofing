@@ -22,7 +22,7 @@ import React     from 'react';                // What: React. Why: The form trac
  * the details at 960px and below. The site has no backend, so submitting the
  * form opens the visitor's own email app with a message built from the fields,
  * addressed to the company, and a hidden status region tells screen readers
- * it's opening.
+ * the email app is opening.
  *
  * Sections:
  *  - Types

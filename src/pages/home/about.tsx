@@ -131,7 +131,7 @@ function AboSecCom () : React.JSX.Element {
 						className={ cssModObj.aboSeaDiv }
 
 						aria-hidden='true'
-					>{ /* What: About Seal Div Element. Why: The full logo works as a seal beside the story. How: This holds it at a capped, slightly faded size and hides it from screen readers, since it's decorative, and the seal is hidden entirely at 960px wide and below. */ }
+					>{ /* What: About Seal Div Element. Why: The full logo works as a seal beside the story. How: This holds it at a capped size, slightly faded, and hides it from screen readers, since it's decorative, and the seal is hidden entirely at 960px wide and below. */ }
 
 
 						<img
