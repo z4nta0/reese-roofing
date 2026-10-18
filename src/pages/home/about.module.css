@@ -384,7 +384,7 @@
 
 }
 
-.priNumSpa { /* What: Principle Number Span. Why: Each principle's number reads as a small accent above its title. How: This sets it in light accent italic with room below. */
+.priNumSpa { /* What: Principle Number Span. Why: Each principle's number reads as a small accent above its title. How: This sets it in the accent, light and italic, with room below. */
 
 
 	color         : var( --acc-mai-col ); /* Accent Main Color = #1f4e7a */

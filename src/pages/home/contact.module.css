@@ -536,7 +536,7 @@
 
 }
 
-.subLabSpa { /* What: Submit Label Span. Why: The sent label should arrive with a small flourish, so the visitor sees their press worked. How: This rises it into place and fades it in once, with a gentle overshoot. */
+.subLabSpa { /* What: Submit Label Span. Why: The sent label should arrive with a small flourish, so the visitor sees their press worked. How: This raises it into place and fades it in once, with a gentle overshoot. */
 
 
 	animation : subLabSpaSwapFadeIn var( --dur-ani-p02 ) var( --mot-ove-eas ) both; /* Duration Animation Base Plus 2 ~= 277.0ms, Motion Overshoot Easing = cubic-bezier( .34, 1.2, .5, 1 ) */

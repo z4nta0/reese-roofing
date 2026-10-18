@@ -99,7 +99,7 @@ function NotFouCom () : React.JSX.Element {
 
 				<span className={ cssModObj.eyeLabSpa }>Error 404</span>{ /* What: Eyebrow Label Span Element. Why: A small label names the error before the heading. How: This is the page's error label, set in the site's eyebrow style. */ }
 
-				<h1 className={ cssModObj.nofTitHea }>{ /* What: Not-Found Title Heading Element. Why: The page's heading states the problem plainly. How: This sets it in the display style, sized to the viewport between two bounds by its module class, with one word in light accent italic. */ }
+				<h1 className={ cssModObj.nofTitHea }>{ /* What: Not-Found Title Heading Element. Why: The page's heading states the problem plainly. How: This sets it in the display style, sized to the viewport between two bounds by its module class, with one word in the accent, light and italic. */ }
 					Page not <em className={ cssModObj.titAccEmp }>found</em>.
 				</h1>
 
