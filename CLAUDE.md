@@ -32,10 +32,12 @@ isn't a real business, so it gets the demo treatment rather than local SEO:
   tokens; only its 1200x630 size, its 40px lines, their 1.2 line height and
   weights, and the title's -0.01em letter spacing stay literal, since the scale
   has no step within 10% of them.
-- **Canonical in `index.html`** (decided 2026-10-17): the site counts as a
-  one-page site for the canonical rule, since its only other route is the
-  `noindex` 404 page, so the canonical stays in `index.html` and the 404 page
-  reports the home page's, which the SEO suite checks.
+- **Canonical in `index.html`** (decided 2026-10-17, and a user-level rule
+  since 2026-10-18): the site counts as one indexed page for the canonical
+  rule, since its only other route is the `noindex` 404 page, so the canonical
+  stays in `index.html`, where crawlers that never run scripts read it, and the
+  404 page reports the home page's beside its `noindex`, which the SEO suite
+  checks.
 - **Structured data**: one `WebSite` JSON-LD block about a fictional company,
   created by techgeek.dev. Never `LocalBusiness`, an address, or a phone.
 - **Placeholders stay reserved**: the phone is a 555-01xx number and the
@@ -143,13 +145,13 @@ the production suite opens its own pages on a build it serves itself.
   checks each state against WCAG 2.2 A and AA plus best practices
   (`axe.spec.ts`), and scripted checks (`scripted.spec.ts`) cover link and
   button names, a Tab walk (order, traps, focus on screen, uncovered, and
-  visible), reflow at 320px, and motion under reduced motion, while each state
-  opens, the drawer closes, and the sent form's label swaps in, plus the sent
-  form's announcement to screen readers through a status region that's in the
-  page from the start. The keyboard walk runs under reduced motion so smooth
-  scrolling and focus transitions have finished when a stop is measured. axe's
-  "needs review" results are printed and attached to the report rather than
-  failing the run.
+  visible), reflow at 320px, motion under reduced motion (while each state
+  opens, the drawer closes, and the sent form's label swaps in), and the sent
+  form's announcement to screen readers, through a status region that's in the
+  page, empty, from the start. The keyboard walk runs under reduced motion so
+  smooth scrolling and focus transitions have finished when a stop is measured.
+  axe's "needs review" results are printed and attached to the report rather
+  than failing the run.
 - `npm run test:interaction`: checks the interaction feedback rule on every
   state (every reachable link and button changes on hover and on press, has a
   transition longer than zero, and transitions its focus ring, every form field
