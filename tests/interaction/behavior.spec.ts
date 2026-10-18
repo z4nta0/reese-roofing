@@ -389,19 +389,27 @@ test( 'the menu toggle opens and closes the drawer', async ( { page : curPagObj 
 
 
 
-test( 'Escape closes the drawer and returns focus to the toggle', async ( { page : curPagObj } ) => { // What: Escape Test. Why: Escape is the expected way out of a layer over the page. How: This opens the drawer, presses Escape, and checks the drawer and focus.
+test( 'Escape closes the drawer and returns focus to the toggle', async ( { page : curPagObj } ) => { // What: Escape Test. Why: Escape is the expected way out of a layer over the page. How: This opens the drawer, focuses one of its links, presses Escape, and checks the drawer and focus.
 
 
 	await opeRouFun( curPagObj, '/', PHO_VIE_OBJ ); // What: Home Open Call. Why: The drawer exists on small screens. How: This opens the home page at phone size.
 
 	await opeDraFun( curPagObj ); // What: Drawer Open Call. Why: Escape only matters with the drawer open. How: This opens it.
 
+
+	const draLinObj = curPagObj.getByRole( 'banner' ).getByRole( 'link', { exact : true, name : 'Services' } ); // What: Drawer Link Object. Why: A keyboard user presses Escape from inside the drawer, and the click that opened it left focus on the toggle already. How: This finds the drawer's Services link, the only one visible at phone size.
+
+
+	await draLinObj.focus(); // What: Drawer Link Focus Call. Why: Focus has to start inside the drawer, so the check below can see Escape move it. How: This focuses the link.
+
+	await expect( draLinObj ).toBeFocused(); // What: Drawer Link Focus Assertion. Why: The test only proves something if focus really left the toggle. How: This checks the link holds focus.
+
 	await curPagObj.keyboard.press( 'Escape' ); // What: Escape Press Call. Why: This is the action under test. How: This presses Escape.
 
 
 	await expect( curPagObj.getByRole( 'button', { name : 'Toggle menu' } ) ).toHaveAttribute( 'aria-expanded', 'false' ); // What: Drawer Closed Assertion. Why: Escape should close the drawer. How: This checks the button reports it collapsed.
 
-	await expect( curPagObj.getByRole( 'button', { name : 'Toggle menu' } ) ).toBeFocused(); // What: Toggle Focus Assertion. Why: Focus shouldn't be left inside the closed drawer. How: This checks it moved to the toggle.
+	await expect( curPagObj.getByRole( 'button', { name : 'Toggle menu' } ) ).toBeFocused(); // What: Toggle Focus Assertion. Why: Focus shouldn't be left inside the closed drawer. How: This checks it moved from the drawer link to the toggle.
 
 
 } );
