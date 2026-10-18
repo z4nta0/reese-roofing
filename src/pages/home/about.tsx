@@ -173,11 +173,11 @@ function AboSecCom () : React.JSX.Element {
 					<blockquote className={ cssModObj.aboQuoBlo }>{ /* What: About Quote Blockquote Element. Why: A line from the family puts the company's approach in its own words. How: This holds the quote mark, the quote, and its attribution. */ }
 
 
-						<span className={ cssModObj.quoMarSpa }>&ldquo;</span>{ /* What: Quote Mark Span Element. Why: An oversized opening quote mark sets the quote apart. How: This draws it as its own styled character. */ }
+						<span className={ cssModObj.quoMarSpa }>“</span>{ /* What: Quote Mark Span Element. Why: An oversized opening quote mark sets the quote apart. How: This draws it as its own styled character. */ }
 
 						<p className={ cssModObj.aboQuoPar }>{ /* What: About Quote Paragraph Element. Why: This is the quote itself. How: This sets it in large display italic, indented past the quote mark. */ }
 							The roof above your operation is not the place to cut corners, and
-							it&apos;s not the place to overspend. Our job is to find the line.
+							it's not the place to overspend. Our job is to find the line.
 						</p>
 
 						<footer className={ cssModObj.aboQuoFoo }>The Reese family</footer>{ /* What: About Quote Footer Element. Why: The quote names who said it. How: This sets it in tracked, muted capitals at body size, indented to line up with the quote. */ }
