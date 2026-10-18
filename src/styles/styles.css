@@ -233,7 +233,7 @@
 	/* #region Font Family Tokens */
 
 	--fon-fam-mai : 'Inter Tight', -apple-system, BlinkMacSystemFont, sans-serif; /* What: Font Family Main. Why: Paragraphs and the interface share one clean sans serif. How: This names Inter Tight, falling back to the system sans-serif. */
-	--fon-fam-sec : 'Fraunces', 'Times New Roman', serif;                         /* What: Font Family Secondary. Why: Headings, numbers, the brand name, accents, the drawer's rows, and the About story's lead and quote read in an expressive serif. How: This names Fraunces, falling back to a system serif. */
+	--fon-fam-sec : 'Fraunces', 'Times New Roman', serif;                         /* What: Font Family Secondary. Why: Headings, the stat, card, and principle numbers, the brand name, accents, the drawer's row labels and phone number, and the About story's lead and quote read in an expressive serif. How: This names Fraunces, falling back to a system serif. */
 
 	/* #endregion Font Family Tokens */
 
