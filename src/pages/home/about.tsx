@@ -150,7 +150,7 @@ function AboSecCom () : React.JSX.Element {
 				<div>{ /* What: About Right Div Element. Why: The story itself sits beside the heading. How: This stacks the paragraphs and the quote. */ }
 
 
-					<p className={` ${ cssModObj.aboStoPar }   ${ cssModObj.aboStoParLead } `}>{ /* What: Lead About Story Paragraph Element. Why: The first paragraph states the founding idea. How: This is the story's first paragraph, whose lead modifier sets it larger than the rest. */ }
+					<p className={` ${ cssModObj.aboStoPar }   ${ cssModObj.aboStoParLead } `}>{ /* What: Lead About Story Paragraph Element. Why: The first paragraph states the founding idea. How: This is the story's first paragraph, whose lead modifier sets it larger, in the display font and full ink. */ }
 						Reese Roofing was founded on a simple idea: commercial roofing should be a
 						straightforward business. A clear scope, a fair price, a roof installed by
 						people who care whether it holds up.

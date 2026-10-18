@@ -26,8 +26,8 @@ import { useNavigate } from 'react-router';       // What: Use Navigate. Why: A 
  * left to the browser, which opens the home page at that section. Adapted from
  * hair-designs' own, which decides by whether the section's element is on the
  * page; here it decides by the path instead, since the 404 page has a top
- * anchor of its own, and the nav's Home link there has to go home rather than
- * scroll to it.
+ * anchor of its own, and the bar's and drawer's Home links and its Return
+ * home button there have to go home rather than scroll to it.
  *
  * Sections:
  *  - Helpers

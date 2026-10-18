@@ -51,7 +51,7 @@ import { Routes    } from 'react-router';                    // What: Routes. Wh
  *
  * @param props - This component does not use any props.
  *
- * @returns The page matching the current URL path.
+ * @returns The app container holding the page matching the current URL path.
  *
  * @example
  * ```tsx
