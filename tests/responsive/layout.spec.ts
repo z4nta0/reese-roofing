@@ -28,7 +28,6 @@ import { test      } from '@playwright/test';     // What: Test. Why: Each page 
  * entrance animations.
  *
  * Sections:
- *  - Types
  *  - Constants
  *  - Helpers
  *  - Module Init
@@ -39,7 +38,12 @@ import { test      } from '@playwright/test';     // What: Test. Why: Each page 
 
 
 
-// #region Types
+// #region Constants
+
+const DRA_MAX_NUM = 880; // What: Drawer Maximum Number. Why: The drawer exists only up to the site's 880px breakpoint. How: The drawer case is measured only at widths up to this.
+const WID_LIS_ARR = [ 320, 360, 390, 414, 500, 501, 540, 541, 600, 601, 640, 641, 768, 880, 881, 960, 961, 1024, 1280, 1440, 1920 ]; // What: Width List Array. Why: Layouts crowd at the narrowest widths and switch at the breakpoints. How: This lists common screen widths plus each breakpoint and the pixel past it.
+
+
 
 type LayCasTyp = { // What: Layout Case Type. Why: Each test measures one page in one state. How: This names the case, its path, and whether it opens the drawer.
 
@@ -51,14 +55,6 @@ type LayCasTyp = { // What: Layout Case Type. Why: Each test measures one page i
 
 };
 
-// #endregion Types
-
-
-
-// #region Constants
-
-const DRA_MAX_NUM = 880; // What: Drawer Maximum Number. Why: The drawer exists only up to the site's 880px breakpoint. How: The drawer case is measured only at widths up to this.
-
 const LAY_CAS_ARR : LayCasTyp[] = [ // What: Layout Case Array. Why: Every page and the drawer are measured the same way. How: Each row names a case, its path, and whether it opens the drawer.
 
 
@@ -68,8 +64,6 @@ const LAY_CAS_ARR : LayCasTyp[] = [ // What: Layout Case Array. Why: Every page 
 
 
 ];
-
-const WID_LIS_ARR = [ 320, 360, 390, 414, 500, 501, 540, 541, 600, 601, 640, 641, 768, 880, 881, 960, 961, 1024, 1280, 1440, 1920 ]; // What: Width List Array. Why: Layouts crowd at the narrowest widths and switch at the breakpoints. How: This lists common screen widths plus each breakpoint and the pixel past it.
 
 // #endregion Constants
 
@@ -118,7 +112,9 @@ function layProFun () : string[] {
 	const vieWidNum = document.documentElement.clientWidth; // What: Viewport Width Number. Why: Edges and sideways scrolling are measured against the visible width. How: This reads the root's width without its scrollbar.
 
 
+
 	const desEleFun = ( desCurEle : Element ) => `${ desCurEle.tagName.toLowerCase() }${ desCurEle.classList.length ? '.' + ( desCurEle.classList[ 0 ].split( '_' )[ 1 ] || desCurEle.classList[ 0 ] ) : '' }`; // What: Describe Element Function. Why: A problem should name the element in terms of the source. How: This joins the tag with the readable part of its hashed module class.
+
 
 	const cliAncFun = ( cliCurEle : Element ) => { // What: Clipped Ancestor Function. Why: An element an ancestor clips can reach past the edge without showing there. How: This reports whether any ancestor hides, clips, or scrolls its overflow.
 
@@ -144,9 +140,14 @@ function layProFun () : string[] {
 		const recCurObj = layCurEle.getBoundingClientRect(); // What: Rect Current Object. Why: Edges are judged from the element's box. How: This measures it.
 		const styCurObj = getComputedStyle( layCurEle );     // What: Style Current Object. Why: Hidden and inline elements are judged differently. How: This reads its computed styles.
 
+		const heiZerBoo = !recCurObj.height;                  // What: Height Zero Boolean. Why: An element with no height takes no room. How: This is true when its height is zero.
+		const visHidBoo = styCurObj.visibility !== 'visible'; // What: Visibility Hidden Boolean. Why: A hidden element doesn't show. How: This is true when its computed visibility isn't visible.
+		const widZerBoo = !recCurObj.width;                   // What: Width Zero Boolean. Why: An element with no width takes no room. How: This is true when its width is zero.
+
+		const invEleBoo = widZerBoo || heiZerBoo || visHidBoo; // What: Invisible Element Boolean. Why: Any of the three means the element can't break the layout. How: This combines them.
 
 
-		if ( !recCurObj.width || !recCurObj.height || styCurObj.visibility !== 'visible' ) continue; // What: Invisible Element Guard. Why: An element that takes no room or doesn't show can't break the layout. How: This skips it.
+		if ( invEleBoo ) continue; // What: Invisible Element Guard. Why: An element that takes no room or doesn't show can't break the layout. How: This skips it.
 
 
 
@@ -169,22 +170,41 @@ function layProFun () : string[] {
 
 
 
-	const conEleArr = [ ...document.querySelectorAll( 'a, button' ) ].filter( ( conCurEle ) => conCurEle.getAttribute( 'tabindex' ) !== '-1' && !conCurEle.closest( '[inert]' ) && getComputedStyle( conCurEle ).visibility === 'visible' && conCurEle.getBoundingClientRect().width > 0 ); // What: Control Element Array. Why: Only controls a visitor can see and reach have to stay apart. How: This keeps every link and button that's visible, in the tab order, and outside inert content.
+	const conEleArr = [ ...document.querySelectorAll( 'a, button' ) ].filter( ( conCurEle ) => { // What: Control Element Array. Why: Only controls a visitor can see and reach have to stay apart. How: This keeps every link and button that's visible, in the tab order, and outside inert content.
+
+
+		const outIneBoo = !conCurEle.closest( '[inert]' );                        // What: Outside Inert Boolean. Why: A control inside inert content can't be reached. How: This is true when no ancestor is inert.
+		const tabReaBoo = conCurEle.getAttribute( 'tabindex' ) !== '-1';          // What: Tab Reachable Boolean. Why: A control taken out of the tab order isn't reached by keyboard. How: This is true unless its tabindex is -1.
+		const visStyBoo = getComputedStyle( conCurEle ).visibility === 'visible'; // What: Visible Style Boolean. Why: A hidden control can't be seen or tapped. How: This is true when its computed visibility is visible.
+		const widPosBoo = conCurEle.getBoundingClientRect().width > 0;            // What: Width Positive Boolean. Why: A control with no width takes no room on screen. How: This is true when it has some width.
+
+		const conReaBoo = tabReaBoo && outIneBoo && visStyBoo && widPosBoo; // What: Control Reachable Boolean. Why: All four together mean a visitor can see and reach the control. How: This combines them.
+
+
+
+		return conReaBoo;
+
+
+	} );
 
 
 	conEleArr.forEach( ( oneCurEle, oneIndNum ) => conEleArr.slice( oneIndNum + 1 ).forEach( ( twoCurEle ) => { // What: Control Pair Loop. Why: Overlap is a property of two controls. How: This visits every pair once.
 
 
-		const oneRecObj = oneCurEle.getBoundingClientRect(); // What: One Rect Object. Why: The pair's overlap is measured from both boxes. How: This measures the first.
-		const twoRecObj = twoCurEle.getBoundingClientRect(); // What: Two Rect Object. Why: The pair's overlap is measured from both boxes. How: This measures the second.
-
+		const oneRecObj = oneCurEle.getBoundingClientRect();                                                         // What: One Rect Object. Why: The pair's overlap is measured from both boxes. How: This measures the first.
+		const twoRecObj = twoCurEle.getBoundingClientRect();                                                         // What: Two Rect Object. Why: The pair's overlap is measured from both boxes. How: This measures the second.
 		const oveWidNum = Math.min( oneRecObj.right, twoRecObj.right ) - Math.max( oneRecObj.left, twoRecObj.left ); // What: Overlap Width Number. Why: Two boxes overlap only where both their spans cross. How: This measures how far their horizontal spans cross.
 		const oveHeiNum = Math.min( oneRecObj.bottom, twoRecObj.bottom ) - Math.max( oneRecObj.top, twoRecObj.top ); // What: Overlap Height Number. Why: Two boxes overlap only where both their spans cross. How: This measures how far their vertical spans cross.
 
+		const areOveBoo = oveWidNum * oveHeiNum > 1;                                          // What: Area Overlap Boolean. Why: Boxes that only touch along an edge don't really overlap. How: This is true when the shared area is more than a pixel.
+		const heiOveBoo = oveHeiNum > 0;                                                      // What: Height Overlap Boolean. Why: Two boxes overlap only where their vertical spans cross. How: This is true when the shared height is positive.
 		const nesConBoo = oneCurEle.contains( twoCurEle ) || twoCurEle.contains( oneCurEle ); // What: Nested Control Boolean. Why: A control inside another overlaps it by design. How: This checks whether either holds the other.
+		const widOveBoo = oveWidNum > 0;                                                      // What: Width Overlap Boolean. Why: Two boxes overlap only where their horizontal spans cross. How: This is true when the shared width is positive.
+
+		const paiOveBoo = widOveBoo && heiOveBoo && areOveBoo && !nesConBoo; // What: Pair Overlap Boolean. Why: All four together mean two separate controls cover each other. How: This combines them.
 
 
-		if ( oveWidNum > 0 && oveHeiNum > 0 && oveWidNum * oveHeiNum > 1 && !nesConBoo ) proLisArr.push( `${ desEleFun( oneCurEle ) } overlaps ${ desEleFun( twoCurEle ) }` ); // What: Overlap Check. Why: Overlapping controls are hard to read and to tap. How: This records a pair sharing more than a pixel of area.
+		if ( paiOveBoo ) proLisArr.push( `${ desEleFun( oneCurEle ) } overlaps ${ desEleFun( twoCurEle ) }` ); // What: Overlap Check. Why: Overlapping controls are hard to read and to tap. How: This records a pair sharing more than a pixel of area.
 
 
 	} ) );

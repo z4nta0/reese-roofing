@@ -127,11 +127,12 @@ const STA_REC_ARR : StaRecTyp[] = [ // What: State Record Array. Why: Every chec
  * @param curPagObj - Current Page Object: The page to open the state on.
  * @param staRecObj - State Record Object: {@link StaRecTyp}
  *
- * @returns This function does not return anything.
+ * @returns A promise that settles once the state is open and settled, with no
+ *          value.
  *
  * @example
  * ```ts
- * opeStaFun(page, staRecObj) // => void
+ * opeStaFun(page, staRecObj) // => Promise<void>
  * ```
  *
 */

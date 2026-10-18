@@ -18,19 +18,19 @@ import type { Page    } from '@playwright/test'; // What: Page. Why: Every helpe
  * behavior.spec.ts = Behavior Spec
  *
  * @summary
- * Checks what the site's controls actually do, in whichever engine the
- * project runs. The nav's section links, the Home link, and back to top land
- * on their targets without leaving a hash in the address, while a Ctrl, Cmd,
- * or middle click on a section link opens the section in a new tab instead;
- * the mobile drawer opens and closes every way it can
- * (the toggle, Escape, a tap on the dimmed page, a drawer link, and a wider
- * screen) and makes the page behind it inert while open; the contact form
- * swaps its button label when sent and builds a mailto link carrying the
- * request; and the 404 page answers an unknown address and leads back home
- * and to the contact section, its nav links included. Pages open under reduced motion, so scrolling
- * jumps straight to its target and each position can be read at once; how
- * things move is the feedback spec's job. Reading the mailto link needs
- * Chromium's DevTools Protocol, so that one test runs in Chromium only.
+ * Checks what the site's controls actually do, in whichever engine the project
+ * runs. The nav's section links, the Home link, and back to top land on their
+ * targets without leaving a hash in the address, while a Ctrl, Cmd, or middle
+ * click on a section link opens the section in a new tab instead; the mobile
+ * drawer opens and closes every way it can (the toggle, Escape, a tap on the
+ * dimmed page, a drawer link, and a wider screen) and makes the page behind it
+ * inert while open; the contact form swaps its button label when sent and
+ * builds a mailto link carrying the request; and the 404 page answers an
+ * unknown address and leads back home and to the contact section, its nav
+ * links included. Pages open under reduced motion, so scrolling jumps straight
+ * to its target and each position can be read at once; how things move is the
+ * feedback spec's job. Reading the mailto link needs Chromium's DevTools
+ * Protocol, so that one test runs in Chromium only.
  *
  * Sections:
  *  - Constants
@@ -48,7 +48,7 @@ import type { Page    } from '@playwright/test'; // What: Page. Why: Every helpe
 const CLI_KIN_ARR : Array< [ string, Parameters< Locator[ 'click' ] >[ 0 ] ] > = [ [ 'Ctrl or Cmd', { modifiers : [ 'ControlOrMeta' ] } ], [ 'middle', { button : 'middle' } ] ]; // What: Click Kind Array. Why: Both ways of asking for a new tab have to keep working now that plain clicks scroll in place. How: Each row pairs a click kind's name with the click options that make it, ControlOrMeta pressing Cmd on a Mac and Ctrl elsewhere.
 
 const DES_VIE_OBJ = { height : 900, width : 1440 }; // What: Desktop Viewport Object. Why: The bar's own links show only on wide screens. How: This is the desktop size the navigation checks use.
-const PHO_VIE_OBJ = { height : 844, width : 390 };  // What: Phone Viewport Object. Why: The drawer exists only on small screens. How: This is the phone size the drawer checks use.
+const PHO_VIE_OBJ = { height : 844, width : 390  }; // What: Phone Viewport Object. Why: The drawer exists only on small screens. How: This is the phone size the drawer checks use.
 
 // #endregion Constants
 
@@ -70,27 +70,28 @@ const PHO_VIE_OBJ = { height : 844, width : 390 };  // What: Phone Viewport Obje
  * @author z4nta0 <https://github.com/z4nta0>
  *
  * @param curPagObj - Current Page Object: The page to open the route on.
- * @param patStr    - Path String: The route to load.
+ * @param rouPatStr - Route Path String: The route to load.
  * @param vieSizObj - Viewport Size Object: {@link DES_VIE_OBJ} or
  *                    {@link PHO_VIE_OBJ}.
  *
- * @returns This function does not return anything.
+ * @returns A promise that settles once the route is loaded and its fonts are
+ *          ready, with no value.
  *
  * @example
  * ```ts
- * opeRouFun(page, '/', DES_VIE_OBJ) // => void
+ * opeRouFun(page, '/', DES_VIE_OBJ) // => Promise<void>
  * ```
  *
 */
 
-async function opeRouFun ( curPagObj : Page, patStr : string, vieSizObj : { height : number, width : number } ) : Promise< void > {
+async function opeRouFun ( curPagObj : Page, rouPatStr : string, vieSizObj : { height : number, width : number } ) : Promise< void > {
 
 
 	await curPagObj.emulateMedia( { reducedMotion : 'reduce' } ); // What: Reduced Motion Emulation. Why: Scrolling should land at once, so its target can be read right away. How: This makes the page match prefers-reduced-motion, which turns smooth scrolling off.
 
 	await curPagObj.setViewportSize( vieSizObj ); // What: Viewport Size Call. Why: The bar's links and the drawer depend on the width. How: This sizes the page before it loads.
 
-	await curPagObj.goto( patStr ); // What: Route Load Call. Why: Each check starts from a fresh load. How: This opens the path on the suite's dev server.
+	await curPagObj.goto( rouPatStr ); // What: Route Load Call. Why: Each check starts from a fresh load. How: This opens the path on the suite's dev server.
 
 	await curPagObj.evaluate( () => document.fonts.ready ); // What: Fonts Ready Wait. Why: Positions measured before the fonts load would shift. How: This waits until every font face has loaded.
 
@@ -114,7 +115,8 @@ async function opeRouFun ( curPagObj : Page, patStr : string, vieSizObj : { heig
  * @author z4nta0 <https://github.com/z4nta0>
  *
  * @param curPagObj - Current Page Object: The page to measure.
- * @param ideStr    - Identifier String: The id of the element to measure.
+ * @param eleIdeStr - Element Identifier String: The id of the element to
+ *                    measure.
  *
  * @returns The element's top edge, in pixels from the viewport's top.
  *
@@ -125,10 +127,10 @@ async function opeRouFun ( curPagObj : Page, patStr : string, vieSizObj : { heig
  *
 */
 
-async function secTopFun ( curPagObj : Page, ideStr : string ) : Promise< number > {
+async function secTopFun ( curPagObj : Page, eleIdeStr : string ) : Promise< number > {
 
 
-	return curPagObj.evaluate( ( secIdeStr ) => ( document.getElementById( secIdeStr ) as HTMLElement ).getBoundingClientRect().top, ideStr ); // What: Section Top Return. Why: A check compares where the section landed with the top of the screen. How: This reads the element's top edge inside the page. // What: Type Assertion Note. Why: getElementById types as possibly null. How: Every id a check passes exists on the page it loaded.
+	return curPagObj.evaluate( ( secIdeStr ) => ( document.getElementById( secIdeStr ) as HTMLElement ).getBoundingClientRect().top, eleIdeStr ); // What: Section Top Return. Why: A check compares where the section landed with the top of the screen. How: This reads the element's top edge inside the page. // What: Type Assertion Note. Why: getElementById types as possibly null. How: Every id a check passes exists on the page it loaded.
 
 
 }
@@ -151,11 +153,12 @@ async function secTopFun ( curPagObj : Page, ideStr : string ) : Promise< number
  *
  * @param curPagObj - Current Page Object: The page whose drawer to open.
  *
- * @returns This function does not return anything.
+ * @returns A promise that settles once the drawer reports itself open, with no
+ *          value.
  *
  * @example
  * ```ts
- * opeDraFun(page) // => void
+ * opeDraFun(page) // => Promise<void>
  * ```
  *
 */
@@ -183,18 +186,18 @@ async function opeDraFun ( curPagObj : Page ) : Promise< void > {
 
 // #region Navigation Checks
 
-for ( const [ labStr, ideStr ] of [ [ 'Services', 'services' ], [ 'About', 'about' ], [ 'Contact', 'contact' ] ] ) { // What: Section Link Loop. Why: Each of the bar's section links has its own target. How: This declares one test per link, pairing its label with its section's id.
+for ( const [ linLabStr, secIdeStr ] of [ [ 'Services', 'services' ], [ 'About', 'about' ], [ 'Contact', 'contact' ] ] ) { // What: Section Link Loop. Why: Each of the bar's section links has its own target. How: This declares one test per link, pairing its label with its section's id.
 
 
-	test( `the ${ labStr } link scrolls to its section`, async ( { page : curPagObj } ) => { // What: Section Link Test. Why: A section link has to take the visitor to its section. How: This clicks the link and checks the section's position and the address.
+	test( `the ${ linLabStr } link scrolls to its section`, async ( { page : curPagObj } ) => { // What: Section Link Test. Why: A section link has to take the visitor to its section. How: This clicks the link and checks the section's position and the address.
 
 
 		await opeRouFun( curPagObj, '/', DES_VIE_OBJ ); // What: Home Open Call. Why: The bar's own links show on wide screens. How: This opens the home page at desktop size.
 
-		await curPagObj.getByRole( 'banner' ).getByRole( 'link', { exact : true, name : labStr } ).click(); // What: Section Link Click Call. Why: This is the action under test. How: This clicks the bar's link by its label.
+		await curPagObj.getByRole( 'banner' ).getByRole( 'link', { exact : true, name : linLabStr } ).click(); // What: Section Link Click Call. Why: This is the action under test. How: This clicks the bar's link by its label.
 
 
-		await expect.poll( async () => Math.abs( await secTopFun( curPagObj, ideStr ) ) ).toBeLessThan( 2 ); // What: Section Position Assertion. Why: The section should start at the top of the screen. How: This waits until its top edge sits within a pixel of the viewport's top.
+		await expect.poll( async () => Math.abs( await secTopFun( curPagObj, secIdeStr ) ) ).toBeLessThan( 2 ); // What: Section Position Assertion. Why: The section should start at the top of the screen. How: This waits until its top edge sits within a pixel of the viewport's top.
 
 		await expect( curPagObj ).toHaveURL( /\/$/ ); // What: Clean Address Assertion. Why: The address bar should stay free of hashes. How: This checks the URL still ends at the root.
 
@@ -206,10 +209,10 @@ for ( const [ labStr, ideStr ] of [ [ 'Services', 'services' ], [ 'About', 'abou
 
 
 
-for ( const [ kinStr, cliOptObj ] of CLI_KIN_ARR ) { // What: Modified Click Loop. Why: Each way of asking for a new tab gets its own check. How: This declares one test per row of CLI_KIN_ARR.
+for ( const [ cliKinStr, cliOptObj ] of CLI_KIN_ARR ) { // What: Modified Click Loop. Why: Each way of asking for a new tab gets its own check. How: This declares one test per row of CLI_KIN_ARR.
 
 
-	test( `a ${ kinStr } click opens a section in a new tab`, async ( { page : curPagObj } ) => { // What: New Tab Test. Why: A visitor opening a section in a new tab should land on it there, and the page they clicked from should stay put. How: This makes the click, then checks the new tab's section and address and the old page's scroll and address.
+	test( `a ${ cliKinStr } click opens a section in a new tab`, async ( { page : curPagObj } ) => { // What: New Tab Test. Why: A visitor opening a section in a new tab should land on it there, and the page they clicked from should stay put. How: This makes the click, then checks the new tab's section and address and the old page's scroll and address.
 
 
 		await opeRouFun( curPagObj, '/', DES_VIE_OBJ ); // What: Home Open Call. Why: The bar's own links show on wide screens. How: This opens the home page at desktop size.

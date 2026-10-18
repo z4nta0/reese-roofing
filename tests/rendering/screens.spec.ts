@@ -60,7 +60,16 @@ for ( const staRecObj of STA_REC_ARR ) { // What: State Test Loop. Why: Every pa
 		await opeStaFun( curPagObj, staRecObj ); // What: State Open Call. Why: The state is captured settled. How: This loads and settles it.
 
 
-		await expect( curPagObj ).toHaveScreenshot( `${ staRecObj.ideStr }.png`, { animations : 'disabled', fullPage : true, mask : [ curPagObj.getByRole( 'contentinfo' ).getByText( /©/ ) ], maxDiffPixelRatio : MAX_DIF_NUM } ); // What: Baseline Comparison Assertion. Why: The state should look exactly as approved. How: This captures the whole page with animations stopped and the copyright year masked, and compares it with the state's baseline.
+		await expect( curPagObj ).toHaveScreenshot( `${ staRecObj.ideStr }.png`, { // What: Baseline Comparison Assertion. Why: The state should look exactly as approved. How: This captures the whole page with animations stopped and the copyright year masked, and compares it with the state's baseline.
+
+
+			animations        : 'disabled',                                                // What: Animations Option. Why: An animation caught partway would differ from run to run. How: This stops every animation before the capture.
+			fullPage          : true,                                                      // What: Full Page Option. Why: Changes below the fold matter as much as those above it. How: This captures the whole scrollable page, not just the viewport.
+			mask              : [ curPagObj.getByRole( 'contentinfo' ).getByText( /©/ ) ], // What: Mask Option. Why: The footer's copyright year changes every January without any real change to the page. How: This covers the footer's copyright line in the capture.
+			maxDiffPixelRatio : MAX_DIF_NUM                                                // What: Maximum Difference Pixel Ratio Option. Why: Even a small tolerance can hide a real change. How: This passes MAX_DIF_NUM, so any differing pixel fails the comparison.
+
+
+		} );
 
 
 	} );

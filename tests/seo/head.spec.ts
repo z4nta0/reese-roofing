@@ -167,7 +167,7 @@ test( '_headers hardens every response', async ( { page : curPagObj } ) => { // 
 	const heaTexStr = await ( await curPagObj.request.get( '/_headers' ) ).text(); // What: Headers Text String. Why: Netlify reads its header rules from this file, and the dev server doesn't apply them. How: This fetches the file itself.
 
 
-	for ( const heaPatObj of SEC_HEA_ARR ) expect( heaTexStr ).toMatch( heaPatObj ); // What: Header Line Assertion Loop. Why: Each missing header is its own failure. How: This checks every pattern against the file.
+	for ( const heaPatReg of SEC_HEA_ARR ) expect( heaTexStr ).toMatch( heaPatReg ); // What: Header Line Assertion Loop. Why: Each missing header is its own failure. How: This checks every pattern against the file.
 
 
 } );
