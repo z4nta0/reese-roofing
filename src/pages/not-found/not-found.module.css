@@ -39,9 +39,9 @@
 	display         : flex;
 	flex            : 1;
 	flex-direction  : column;
-	gap             : var( --spa-ver-p02 ); /* Spacing Vertical Base Plus 2 ~= 25.572px */
+	gap             : var( --spa-ver-p02 );                                                                          /* Spacing Vertical Base Plus 2 ~= 25.572px */
 	justify-content : center;
-	padding         : calc( var( --sec-ver-pad ) + var( --spa-ver-p04 ) ) clamp( var( --spa-hor-p01 ), var( --hor-rhy-012 ), var( --spa-hor-p03 ) ) var( --sec-ver-pad ); /* Section Vertical Padding, about 78.751px - 138.199px, Spacing Vertical Base Plus 4 ~= 44.876px, Spacing Horizontal Base Plus 1 ~= 19.304px, Horizontal Rhythm 12 ~= 28.278px @ 1,920px width, Spacing Horizontal Base Plus 3 ~= 33.876px */
+	padding         : calc( var( --sec-ver-pad ) + var( --spa-ver-p04 ) ) var( --gut-sid-pad ) var( --sec-ver-pad ); /* Section Vertical Padding, about 78.751px - 138.199px, Spacing Vertical Base Plus 4 ~= 44.876px, Gutter Side Padding, about 19.304px - 44.876px */
 	text-align      : center;
 
 
