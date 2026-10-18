@@ -9,7 +9,7 @@ Live at [reese-roofing.netlify.app](https://reese-roofing.netlify.app/). Its pho
 Since the company isn't real, the site is set up to stay out of search results and AI answers, and to say what it is wherever it's read:
 
 - **Kept out of search:** a `noindex` robots meta tag on every page and an `X-Robots-Tag: noindex` header on every file (`public/_headers`), with no sitemap. `public/robots.txt` lets search crawlers in so they can read the `noindex`, and disallows AI training and AI answer crawlers.
-- **Says it's a demo:** the page title, description, author tag (naming techgeek.support), Open Graph and Twitter card tags, and the 1200x630 preview card (`public/og-image.png`) all call it a portfolio demo by techgeek.support, so shared links preview honestly. A line in the footer says the company is fictional.
+- **Says it's a demo:** the page title, description, author tag (naming techgeek.support), Open Graph and Twitter card tags, and the 1200x630 preview card (`public/og-image.png`) all call it a portfolio demo by techgeek.support, so shared links preview honestly. A line in the footer says the company is fictional, linking to techgeek.support.
 - **No business data:** the JSON-LD structured data describes a `WebSite` about a fictional company, with no `LocalBusiness` type, address, or phone.
 
 `npm run test:seo` checks all of this in Chromium, Firefox, and WebKit.
@@ -55,7 +55,7 @@ npm run test:accessibility  # axe-core plus scripted keyboard, naming, reflow, a
 npm run test:interaction    # hover, press, and focus feedback on every control and form field, plus hash-free section links and new tabs, the drawer, the form, and the 404 page
 npm run test:rendering      # full-page screenshots of each page state against approved baselines
 npm run test:responsive     # both pages and the drawer from 320 to 1,920px: no sideways scroll, spill, overlap, or uneven card rows
-npm run test:seo            # head tags, structured data, robots.txt, _headers (robots and security), and the preview image
+npm run test:seo            # head tags, structured data, the footer's demo notice and builder link, robots.txt and no sitemap, _headers (robots and security), and the preview image
 ```
 
 Each suite runs in Chromium (as Chrome's full headless mode), Firefox, and WebKit against its own dev server on port 5191, so a dev server already running on 5173 is left alone. Reports land in `tests/output/` (git-ignored); `npx playwright show-report tests/output/report` opens the HTML report. The rendering suite's approved screenshots live in `tests/rendering/baselines/` and match to the pixel, so after a change meant to alter how a page looks, review the diff in the report, then run `npm run test:rendering -- --update-snapshots` and commit the new baselines with the change. The baselines were captured on Linux, and font rendering differs between systems, so on macOS or Windows refresh them locally before relying on the comparison. If a browser is missing, `npx playwright install chromium firefox webkit` installs all three.

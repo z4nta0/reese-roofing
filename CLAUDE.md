@@ -175,9 +175,10 @@ the same helper, and the seo suite reads the head of each route instead.
   found the bar's links running into the phone number just above the drawer
   breakpoint, fixed by returning the links to the bar's flex row.
 - `npm run test:seo`: checks each route's title, description, robots,
-  canonical, social tags, and structured data, the footer's demo line,
-  `robots.txt`, `_headers` (its robots rule and every security header, each
-  set once), and the preview image's size.
+  canonical, social tags, and structured data, the footer's demo line and its
+  techgeek.support link, `robots.txt` and that no `sitemap.xml` is served,
+  `_headers` (its robots rule and every security header, each set once), and
+  the preview image's size.
 - `npm test` runs every suite.
 
 Next (planned 2026-10-07):
