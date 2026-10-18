@@ -43,9 +43,9 @@ import { useSecCliFun } from '../../ui/section-link.ts'; // What: Use Section Cl
  * Renders the hero: a decorative grid drawn as a repeating SVG pattern behind
  * everything, the location label and headline beside the full logo, the pitch
  * paragraph with the estimate and services buttons, and the stats row. The
- * section carries the page's top anchor, so the navigation bar's Home link,
- * the footer's back-to-top link, and the 404 page's Return home button all
- * land here.
+ * section carries the page's top anchor, so the navigation bar's and
+ * drawer's Home links, the footer's back-to-top link, and the 404 page's
+ * Return home button all land here.
  *
  * @author z4nta0 <https://github.com/z4nta0>
  *
@@ -143,7 +143,7 @@ function HerSecCom () : React.JSX.Element {
 
 						<span className={ cssModObj.eyeLabSpa }>Lawrence, Kansas · Est. 2008</span>{ /* What: Eyebrow Label Span Element. Why: Visitors should see where the company works and how long it's been there. How: This is the hero's location label, set in the site's eyebrow style. */ }
 
-						<h1 className={ cssModObj.herTitHea }>{ /* What: Hero Title Heading Element. Why: The headline is the page's main heading. How: Its line breaks start each new line, so it reads as three lines wherever the first one fits, with one word in accent italic. */ }
+						<h1 className={ cssModObj.herTitHea }>{ /* What: Hero Title Heading Element. Why: The headline is the page's main heading. How: Its line breaks start each new line, so it reads as three lines wherever the first one fits, with one word in light accent italic. */ }
 							Commercial roofing,<br />
 							built to <em className={ cssModObj.titAccEmp }>weather</em><br />
 							every season.
@@ -260,7 +260,7 @@ function HerSecCom () : React.JSX.Element {
 					<div className={ cssModObj.staIteDiv }>{ /* What: Stat Item Div Element. Why: Accreditation and insurance are the usual checks before hiring. How: This is the rating stat, pairing the rating with its label. */ }
 
 
-						<div className={ cssModObj.staNumDiv }>A<span className={ cssModObj.staPluSpa }>+</span></div>{ /* What: Stat Number Div Element. Why: The number leads each stat. How: This is the rating stat's number, whose plus sign is raised like the other suffixes but set in accent italic. */ }
+						<div className={ cssModObj.staNumDiv }>A<span className={ cssModObj.staPluSpa }>+</span></div>{ /* What: Stat Number Div Element. Why: The number leads each stat. How: This is the rating stat's number, whose plus sign is set smaller and raised like the other suffixes, but in accent italic. */ }
 
 						<div className={ cssModObj.staLabDiv }>BBB accredited & fully insured</div>{ /* What: Stat Label Div Element. Why: Each number needs to say what it counts. How: This is the rating stat's label, below its number. */ }
 

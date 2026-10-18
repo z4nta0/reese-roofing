@@ -119,7 +119,7 @@
 
 }
 
-.titAccEmp { /* What: Title Accent Emphasis. Why: One word in each heading is set apart in color and italic. How: This draws it in the accent, light and italic. */
+.titAccEmp { /* What: Title Accent Emphasis. Why: One word in the section's heading is set apart in color and italic. How: This draws it in the accent, light and italic. */
 
 
 	color       : var( --acc-mai-col ); /* Accent Main Color = #1f4e7a */
@@ -132,7 +132,7 @@
 /* #endregion serTitHea */
 
 
-.secLedPar { /* What: Section Lede Paragraph. Why: The lede says how every project starts, beside the heading. How: This sets it in the body font, at body size on narrower screens, growing to a step larger on wide ones, in the second column. */
+.secLedPar { /* What: Section Lede Paragraph. Why: The lede says how every project starts, beside the heading. How: This sets it in the body font, at body size on narrower screens, growing to a step larger on wide ones, at a comfortable measure, in the second column with a little room below. */
 
 
 	color          : var( --tex-sec-col );                                       /* Text Secondary Color = #2a3138 */

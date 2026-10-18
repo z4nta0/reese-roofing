@@ -114,7 +114,7 @@
 
 }
 
-.titAccEmp { /* What: Title Accent Emphasis. Why: One word in each heading is set apart in color and italic. How: This draws it in the soft accent, light and italic, since the darker accent would sink into the dark band. */
+.titAccEmp { /* What: Title Accent Emphasis. Why: One word in the section's heading is set apart in color and italic. How: This draws it in the soft accent, light and italic, since the darker accent would sink into the dark band. */
 
 
 	color       : var( --acc-lig-col ); /* Accent Light Color, the accent lightened by 0.204 */
@@ -127,7 +127,7 @@
 /* #endregion conTitHea */
 
 
-.secLedPar { /* What: Section Lede Paragraph. Why: The lede says what happens after the visitor reaches out. How: This sets it in the body font, at body size on narrower screens, growing to a step larger on wide ones, in faded paper with room below. */
+.secLedPar { /* What: Section Lede Paragraph. Why: The lede says what happens after the visitor reaches out. How: This sets it in the body font, at body size on narrower screens, growing to a step larger on wide ones, in faded paper at a comfortable measure, with room below. */
 
 
 	color         : oklch( from var( --bac-pag-col ) l c h / var( --cdn-pow-001-rec ) ); /* Background Page Color = #f5f2ec, Core-Design-Number to the Power of 1 Reciprocal ~= 0.755 */

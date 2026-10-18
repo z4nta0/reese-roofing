@@ -215,7 +215,7 @@
 
 }
 
-.titAccEmp { /* What: Title Accent Emphasis. Why: One word in each heading is set apart in color and italic. How: This draws it in the accent, light and italic. */
+.titAccEmp { /* What: Title Accent Emphasis. Why: One word in the headline is set apart in color and italic. How: This draws it in the accent, light and italic. */
 
 
 	color       : var( --acc-mai-col ); /* Accent Main Color = #1f4e7a */
@@ -615,7 +615,7 @@
 
 }
 
-.staPluSpa { /* What: Stat Plus Span. Why: The rating's plus sign is set apart in the accent. How: This raises it like the other suffixes, but in accent italic. */
+.staPluSpa { /* What: Stat Plus Span. Why: The rating's plus sign is set apart in the accent. How: This sets it smaller and raised like the other suffixes, but in accent italic. */
 
 
 	color          : var( --acc-mai-col );                   /* Accent Main Color = #1f4e7a */

@@ -182,7 +182,7 @@ function ConSecCom () : React.JSX.Element {
 
 					<span className={ cssModObj.eyeLabSpa }>04 · Get in touch</span>{ /* What: Eyebrow Label Span Element. Why: Each section is numbered in order down the page. How: This is the section's numbered label, set in the site's eyebrow style. */ }
 
-					<h2 className={ cssModObj.conTitHea }>{ /* What: Contact Title Heading Element. Why: The heading invites the visitor in. How: Its line break sets the two-line shape, with one word in accent italic. */ }
+					<h2 className={ cssModObj.conTitHea }>{ /* What: Contact Title Heading Element. Why: The heading invites the visitor in. How: Its line break sets the two-line shape, with one word in light italic in the soft accent. */ }
 						Let's talk about<br />
 						your <em className={ cssModObj.titAccEmp }>roof</em>.
 					</h2>
@@ -264,7 +264,7 @@ function ConSecCom () : React.JSX.Element {
 
 							<dd className={ cssModObj.rowValDet }>{ /* What: Row Value Details Element. Why: The hours row's value gives the office hours and the emergency exception. How: Its line break puts the emergency note on its own line. */ }
 								Mon–Fri, 7:00 AM – 5:00 PM<br />
-								<span className={ cssModObj.rowNotSpa }>24/7 emergency response</span>{ /* What: Row Note Span Element. Why: Storm damage can't wait for office hours. How: This notes the round-the-clock response in a muted style. */ }
+								<span className={ cssModObj.rowNotSpa }>24/7 emergency response</span>{ /* What: Row Note Span Element. Why: Storm damage can't wait for office hours. How: This notes the round-the-clock response in faded paper. */ }
 							</dd>
 
 
@@ -405,7 +405,7 @@ function ConSecCom () : React.JSX.Element {
 									value={ forValObj.emaStr }
 
 									onChange={ updFieFun( 'emaStr' ) }
-								/>{ /* What: Form Field Input Element. Why: This takes the visitor's email address. How: Its value lives in forValObj.emaStr, with an email keyboard on phones and a sample address on the reserved example domain as its placeholder. */ }
+								/>{ /* What: Form Field Input Element. Why: This takes the visitor's email address. How: Its value lives in forValObj.emaStr, and the browser can fill it in, with an email keyboard on phones and a sample address on the reserved example domain as its placeholder. */ }
 
 
 							</div>
@@ -432,7 +432,7 @@ function ConSecCom () : React.JSX.Element {
 									value={ forValObj.phoStr }
 
 									onChange={ updFieFun( 'phoStr' ) }
-								/>{ /* What: Form Field Input Element. Why: This takes the visitor's phone number. How: Its value lives in forValObj.phoStr, with a number pad on phones and a reserved 555-01xx sample number as its placeholder. */ }
+								/>{ /* What: Form Field Input Element. Why: This takes the visitor's phone number. How: Its value lives in forValObj.phoStr, and the browser can fill it in, with a number pad on phones and a reserved 555-01xx sample number as its placeholder. */ }
 
 
 							</div>

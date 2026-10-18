@@ -134,7 +134,7 @@
 
 }
 
-.titAccEmp { /* What: Title Accent Emphasis. Why: One word in each heading is set apart in color and italic. How: This draws it in the accent, light and italic. */
+.titAccEmp { /* What: Title Accent Emphasis. Why: One word in the section's heading is set apart in color and italic. How: This draws it in the accent, light and italic. */
 
 
 	color       : var( --acc-mai-col ); /* Accent Main Color = #1f4e7a */
@@ -286,7 +286,7 @@
 
 }
 
-.aboQuoFoo { /* What: About Quote Footer. Why: The attribution reads as a small label under the quote. How: This sets it in tracked capitals at body size, indented to line up with the quote. */
+.aboQuoFoo { /* What: About Quote Footer. Why: The attribution reads as a small label under the quote. How: This sets it in tracked, muted capitals at body size, indented to line up with the quote. */
 
 
 	color          : var( --tex-mut-col );                   /* Text Muted Color = #636871 */
