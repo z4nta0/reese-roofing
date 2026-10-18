@@ -525,10 +525,8 @@ for ( const redMotBoo of [ false, true ] ) { // What: Brand Motion Loop. Why: Th
 		await curPagObj.mouse.up(); // What: Mouse Up Call. Why: The press has to end. How: This releases the button, whose click is blocked.
 
 
-		expect( hovSigStr ).not.toBe( resSigStr ); // What: Hover Change Assertion. Why: A hovered link has to respond. How: This checks the hovered look differs from the resting one.
-
-		expect( preSigStr ).not.toBe( hovSigStr ); // What: Press Change Assertion. Why: A press has to register before anything happens. How: This checks the pressed look differs from the hovered one.
-
+		expect( hovSigStr ).not.toBe( resSigStr );                   // What: Hover Change Assertion. Why: A hovered link has to respond. How: This checks the hovered look differs from the resting one.
+		expect( preSigStr ).not.toBe( hovSigStr );                   // What: Press Change Assertion. Why: A press has to register before anything happens. How: This checks the pressed look differs from the hovered one.
 		expect( /^0s(, 0s)*$/.test( allDurStr ) ).toBe( redMotBoo ); // What: Motion Assertion. Why: The changes should ease normally and switch at once under reduced motion. How: This checks every duration is zero exactly when reduced motion is on.
 
 
