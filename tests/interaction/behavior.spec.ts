@@ -441,6 +441,7 @@ for ( const [ linLabStr, secIdeStr ] of [ [ 'Home', 'top' ], [ 'Services', 'serv
 
 		await opeRouFun( curPagObj, '/', PHO_VIE_OBJ ); // What: Home Open Call. Why: The drawer exists on small screens. How: This opens the home page at phone size.
 
+
 		if ( secIdeStr === 'top' ) await curPagObj.evaluate( () => window.scrollTo( 0, document.documentElement.scrollHeight ) ); // What: Home Row Scroll Call. Why: The page opens at its top, where the Home row's target already sits, so that row would pass without scrolling. How: This sends the page to its bottom first, for the Home row only.
 
 
