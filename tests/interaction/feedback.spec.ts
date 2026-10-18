@@ -24,13 +24,14 @@ import type { Page          } from '@playwright/test'; // What: Page. Why: Every
  * engine the project runs. Every link and button in the Tab order has to look
  * different while hovered than at rest, look different again while pressed,
  * have a transition longer than zero, and transition both of its focus ring's
- * outline properties, offset and width, and the first keyboard stop has to
- * draw that ring at full width once it has eased in. Every form field a
- * visitor can reach has to look different once focused and have a transition
- * longer than zero. Under reduced motion every control keeps its hover and
- * press changes, and every field its focus change, but transitions nothing.
- * Real clicks are blocked during the checks, so pressing a link or the
- * drawer's rows never navigates or closes anything mid-check.
+ * outline properties, offset and width, and the first keyboard stop (or the
+ * control a state's action left focused) has to draw that ring at full width
+ * once it has eased in. Every form field a visitor can reach has to look
+ * different once focused and have a transition longer than zero. Under
+ * reduced motion every control keeps its hover and press changes, and every
+ * field its focus change, but transitions nothing. Real clicks are blocked
+ * during the checks, so pressing a link or the drawer's rows never navigates
+ * or closes anything mid-check.
  *
  * Sections:
  *  - Constants
@@ -422,17 +423,26 @@ for ( const staRecObj of STA_REC_ARR ) { // What: State Test Loop. Why: Every pa
 
 
 
-	test( `${ staRecObj.ideStr } draws its focus ring at full width`, async ( { browserName : engNamStr, page : curPagObj } ) => { // What: Focus Ring Test. Why: A keyboard user has to see where focus lands. How: This tabs to the first stop and reads its ring once it has eased in.
+	test( `${ staRecObj.ideStr } draws its focus ring at full width`, async ( { browserName : engNamStr, page : curPagObj } ) => { // What: Focus Ring Test. Why: A keyboard user has to see where focus lands. How: This tabs to the first stop, or back onto the control the state's action left focused, and reads its ring once it has eased in.
 
 
 		await opeStaFun( curPagObj, staRecObj ); // What: State Open Call. Why: The walk starts from the state settled. How: This loads and settles it.
 
-		await curPagObj.keyboard.press( engNamStr === 'webkit' ? 'Alt+Tab' : 'Tab' ); // What: First Tab Press Call. Why: The ring shows only for keyboard focus. How: This tabs to the first stop, holding Alt in WebKit, which otherwise skips links the way Safari does.
+
+		const staFocBoo = await curPagObj.evaluate( () => document.activeElement !== document.body ); // What: Start Focused Boolean. Why: A state's action can leave a control focused by a click, such as the drawer's toggle, which a plain Tab would step past unchecked. How: This is true when something other than the body holds focus.
+		const tabKeyStr = engNamStr === 'webkit' ? 'Alt+Tab' : 'Tab';                                 // What: Tab Key String. Why: WebKit skips links on a plain Tab, the way Safari does. How: This holds Alt with Tab in WebKit and a plain Tab elsewhere.
+
+
+		if ( staFocBoo ) await curPagObj.keyboard.press( tabKeyStr ); // What: Focused Start Step. Why: A control focused by a click shows no focus ring, so the test has to reach it by keyboard. How: This tabs one stop past it, so the press below can come back.
+
+
+
+		await curPagObj.keyboard.press( staFocBoo ? `Shift+${ tabKeyStr }` : tabKeyStr ); // What: First Stop Press Call. Why: The ring shows only for keyboard focus. How: This tabs to the first stop, or with Shift lands back on the control the state's action left focused.
 
 		await curPagObj.waitForTimeout( SET_WAI_NUM ); // What: Ring Settle Wait. Why: The ring is read once it has grown in. How: This pauses for the settle time.
 
 
-		expect( await curPagObj.evaluate( () => getComputedStyle( document.activeElement! ).outlineWidth ) ).toBe( '2px' ); // What: Full Ring Assertion. Why: The ring has to reach its full width. How: This reads the focused stop's outline width, which the large border width token snaps to 2px. // What: Non-Null Note. Why: activeElement types as possibly null. How: The Tab press just put focus on a stop.
+		expect( await curPagObj.evaluate( () => getComputedStyle( document.activeElement! ).outlineWidth ) ).toBe( '2px' ); // What: Full Ring Assertion. Why: The ring has to reach its full width. How: This reads the focused stop's outline width, which the large border width token snaps to 2px. // What: Non-Null Note. Why: activeElement types as possibly null. How: The press just put focus on a stop.
 
 
 	} );
