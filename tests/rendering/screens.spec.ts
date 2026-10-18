@@ -41,7 +41,7 @@ import { test        } from '@playwright/test';     // What: Test. Why: Each sta
 
 // #region Constants
 
-const MAX_DIF_NUM = 0; // What: Maximum Difference Number. Why: Each engine renders a state identically from run to run on the machine that captured its baseline, and even a small tolerance can hide a real change, as it once hid the nav links moving. How: This fails a comparison on any differing pixel.
+const MAX_DIF_NUM = 0; // What: Maximum Difference Number. Why: Each engine renders a state identically from run to run on the machine that captured its baseline, and even a small tolerance can hide a real change, as it once hid the nav links moving. How: This allows no differing pixels and no color drift within a pixel, so any change at all fails a comparison.
 
 // #endregion Constants
 
@@ -66,7 +66,8 @@ for ( const staRecObj of STA_REC_ARR ) { // What: State Test Loop. Why: Every pa
 			animations        : 'disabled',                                                // What: Animations Option. Why: An animation caught partway would differ from run to run. How: This stops every animation before the capture.
 			fullPage          : true,                                                      // What: Full Page Option. Why: Changes below the fold matter as much as those above it. How: This captures the whole scrollable page, not just the viewport.
 			mask              : [ curPagObj.getByRole( 'contentinfo' ).getByText( /©/ ) ], // What: Mask Option. Why: The footer's copyright year changes every January without any real change to the page. How: This covers the footer's copyright line in the capture.
-			maxDiffPixelRatio : MAX_DIF_NUM                                                // What: Maximum Difference Pixel Ratio Option. Why: Even a small tolerance can hide a real change. How: This passes MAX_DIF_NUM, so any differing pixel fails the comparison.
+			maxDiffPixelRatio : MAX_DIF_NUM,                                               // What: Maximum Difference Pixel Ratio Option. Why: Even a small tolerance can hide a real change. How: This passes MAX_DIF_NUM, so any differing pixel fails the comparison.
+			threshold         : MAX_DIF_NUM                                                // What: Threshold Option. Why: Playwright's default lets a pixel's color drift by up to 0.2 before it counts as different, which could hide a subtle change. How: This passes MAX_DIF_NUM, so a pixel counts as different the moment its color changes at all.
 
 
 		} );
