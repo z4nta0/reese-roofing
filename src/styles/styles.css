@@ -140,7 +140,7 @@
 	/* #region Color Tokens */
 
 	--acc-lig-col : oklch( from var( --acc-mai-col ) calc( l + 0.204 ) c h ); /* What: Accent Light Color. Why: Hover text, focus lines, the contact heading's italic word, and the submit button's hover fill on the dark band need a lighter accent that stays readable there. How: This lightens the main accent, so it follows the accent if it changes. */
-	--acc-mai-col : #1f4e7a;                                                  /* What: Accent Main Color. Why: Actions, emphasis, and numbering share the navy from the logo. How: Buttons, italic accents, and numbers read it. */
+	--acc-mai-col : #1f4e7a;                                                  /* What: Accent Main Color. Why: Actions, emphasis, and numbering share the navy from the logo. How: Buttons, italic accents, numbers, link and toggle hovers, and the small accent marks read it, and the focus ring and the light accent are built from it. */
 	--acc-sec-col : ;                                                         /* What: Accent Secondary Color. Why: The standard role set includes a second accent. How: This site has no second accent, so it stays empty. */
 	--acc-tin-col : ;                                                         /* What: Accent Tint Color. Why: The standard role set includes a pale accent tint. How: This site doesn't use one, so it stays empty. */
 	--att-rin-col : ;                                                         /* What: Attention Ring Color. Why: The standard role set includes an attention ring. How: This site doesn't use one, so it stays empty. */
@@ -160,7 +160,7 @@
 	--suc-mai-col : ;                                                         /* What: Success Main Color. Why: The standard role set includes the success family. How: This site has no success states, so it stays empty. */
 	--suc-tin-col : ;                                                         /* What: Success Tint Color. Why: The standard role set includes the success family. How: This site has no success states, so it stays empty. */
 	--tex-acc-col : var( --bac-pag-col );                                     /* What: Text Accent Color. Why: Text on an accent background needs to stay readable. How: This reads the page color; nothing on this site reads it yet. */
-	--tex-mai-col : #1a1f24;                                                  /* What: Text Main Color. Why: Body text and headings share one near-black. How: The body and every heading read it. */
+	--tex-mai-col : #1a1f24;                                                  /* What: Text Main Color. Why: Body text and headings share one near-black. How: Text on the paper surfaces reads it, along with the lines and rules drawn in ink, and the main border color is built from it. */
 	--tex-mut-col : #636871;                                                  /* What: Text Muted Color. Why: Labels and secondary details should recede. How: Eyebrows, captions, labels, and supporting lines read it, dark enough to reach WCAG AA's 4.5:1 contrast on both the page and surface backgrounds. */
 	--tex-sec-col : #2a3138;                                                  /* What: Text Secondary Color. Why: Long paragraphs read more gently than full ink. How: Ledes, descriptions, and links read it. */
 	--war-dar-col : ;                                                         /* What: Warning Dark Color. Why: The standard role set includes the warning family. How: This site has no warnings to show, so it stays empty. */
@@ -233,7 +233,7 @@
 	/* #region Font Family Tokens */
 
 	--fon-fam-mai : 'Inter Tight', -apple-system, BlinkMacSystemFont, sans-serif; /* What: Font Family Main. Why: Paragraphs and the interface share one clean sans serif. How: This names Inter Tight, falling back to the system sans-serif. */
-	--fon-fam-sec : 'Fraunces', 'Times New Roman', serif;                         /* What: Font Family Secondary. Why: Headings, numbers, the brand name, and accents read in an expressive serif. How: This names Fraunces, falling back to a system serif. */
+	--fon-fam-sec : 'Fraunces', 'Times New Roman', serif;                         /* What: Font Family Secondary. Why: Headings, numbers, the brand name, accents, the drawer's rows, and the About story's lead and quote read in an expressive serif. How: This names Fraunces, falling back to a system serif. */
 
 	/* #endregion Font Family Tokens */
 

@@ -202,15 +202,19 @@ viewport-based horizontal rhythm, ease-my-life's `--hor-rhy-*` tokens, but only
 for layout values; everything inside a component stays on fixed rem steps. The
 split:
 - **Fluid (horizontal rhythm)**: layout values only, the gutter, the column
-  gaps between section columns, the contact label column, and the logos. Each
-  is a `clamp()` between two `--spa-hor-*` (or rhythm width) steps, so it never
+  gaps between section columns and between grid cards (the services,
+  principles, hero bottom row and stats, footer, and contact rows and form
+  fields), the contact label column, the side padding of the contact signature
+  card, the form panel, and the 404 page's main column, and the logos. Each is
+  a `clamp()` between two `--spa-hor-*` (or rhythm width) steps, so it never
   shrinks below a workable size on a phone or grows past its step on a very
   wide screen. The logos use `max()` with a rhythm step floor instead, since
   their column already caps them.
-- **Fixed (rem steps)**: everything inside a component, small gaps, card and
-  quote padding, the nav mark and menu lines, the eyebrow lines. Gaps and
-  padding read `--spa-hor-*`, widths a vertical rhythm step times `1rem`. The
-  4px arrow nudge stays literal, since no step lands within 10% of it.
+- **Fixed (rem steps)**: everything inside a component, small gaps, the
+  service cards' and the quote's padding, the nav mark and menu lines, the
+  eyebrow lines. Gaps and padding read `--spa-hor-*`, widths a vertical rhythm
+  step times `1rem`. The 4px arrow nudge stays literal, since no step lands
+  within 10% of it.
 - **Content column**: capped at a fixed `1920px / ρ` (about 1449.4px), so below
   that width only the gutter limits it.
 - **Buttons**: height comes from line height alone, the p04 rhythm step times

@@ -476,6 +476,8 @@
 
 /* What: Form Field Div Pointer. Why: The email and phone fields share the form field class. How: Its rule is written once in the first forFieDiv region, directly under estReqFor. */
 
+/* What: Form Field Label And Form Field Input Pointer. Why: The email and phone fields' labels and inputs share the form field classes. How: Their rules are written once in the first forFieDiv region, directly under estReqFor. */
+
 /* #endregion forFieDiv */
 
 /* #endregion forRowDiv */
