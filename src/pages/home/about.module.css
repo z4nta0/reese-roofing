@@ -320,7 +320,7 @@
 
 /* #region pagConDiv */
 
-.pagConDiv { /* What: Page Container Div. Why: The principles row should line up with the page's content width. How: This centers a full-width column with the page's side gutter. */
+.pagConDiv { /* What: Page Container Div. Why: The principles should line up with the page's content width. How: This centers a full-width column with the page's side gutter. */
 
 
 	margin         : 0 auto;

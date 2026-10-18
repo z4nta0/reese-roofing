@@ -3,7 +3,7 @@
 
 // #region Imports
 
-import cssModObj from './about.module.css'; // What: CSS Module Object. Why: The section's two-column story, seal, quote, and principles row are styled in its own module. How: Each element reads its hashed class name from this object.
+import cssModObj from './about.module.css'; // What: CSS Module Object. Why: The section's two-column story, seal, quote, and principles grid are styled in its own module. How: Each element reads its hashed class name from this object.
 import lofSvgUrl from './logo-full.svg';    // What: Logo-Full SVG URL. Why: The section's seal is the full logo. How: Vite resolves the import to the file's fingerprinted URL, used as the image's src.
 
 // #endregion Imports
@@ -54,7 +54,7 @@ import lofSvgUrl from './logo-full.svg';    // What: Logo-Full SVG URL. Why: The
  *
 */
 
-const PRI_REC_ARR = [ // What: Principle Record Array. Why: The principles row is data, not markup, so a principle changes in one place. How: AboSecCom maps over it, numbering each row by its position.
+const PRI_REC_ARR = [ // What: Principle Record Array. Why: The principles are data, not markup, so a principle changes in one place. How: AboSecCom maps over it, numbering each row by its position.
 
 
 	{ bodStr : 'Every project is led by an owner-operator who walks the roof, signs the proposal, and stays reachable from kickoff to close-out.',      titStr : 'Local, accountable, on-site' }, // What: Local Principle Row. Why: Clients want one accountable person. How: This is principle 01.
