@@ -101,7 +101,7 @@ design/
 - **Interaction:** Every hover, press, and focus visibly registers, subtly: buttons lift on hover and press in when held, text links dim while pressed, arrows nudge forward, keyboard focus draws a ring that eases in (navy on paper, light blue on the dark bands), and the contact button's sent label rises in. Reduced motion keeps the changes and drops the movement.
 - **Layout:** Editorial grid, generous negative space, hairline dividers, numbered section labels (02 to 04, after the hero). Hover states are intentional but never showy.
 - **Logo usage:**
-  - The **full logo** (`src/pages/home/logo-full.svg`) anchors the hero as the primary visual, doubles as a "seal" in the sticky left column of the About section, and appears on a paper-colored signature card in the Contact section. It's a two-color SVG (navy mark + grey subtext).
+  - The **full logo** (`src/pages/home/logo-full.svg`) anchors the hero as the primary visual, doubles as a "seal" in the About section's sticky left column on wide screens, and appears on a paper-colored signature card in the Contact section. It's a two-color SVG (navy mark + grey subtext).
   - The **simple mark** (`src/assets/logo-mark.svg`) is used in the nav bar and the footer.
   - The **favicon** uses an SVG (`/public/favicon.svg`), a centered, padded version of the simple mark, with raster `.ico` and PNG fallbacks (16/32/192/512) plus a 180×180 Apple touch icon on a paper-colored background.
   - All logos are vector SVG: crisp at any size, tiny payloads, and the brand navy `#1f4e7a` is set as the `fill` attribute so you can edit it directly in the SVG files if you ever want a different color treatment.
@@ -112,7 +112,7 @@ If this design is ever reused for a real business, update the placeholders below
 
 - **Phone number:** `(785) 555-0199`. Search the repo for it and for its link form, `+17855550199` (the `tel:` links); both appear in the Nav (bar and drawer) and the Contact section
 - **Email:** `hello@reeseroofing.example`. Same; it appears in the Contact section's contact details and in the mailto link the form opens on submit (`subForFun` in `src/pages/home/contact.tsx`)
-- **Address and location:** placeholder Lawrence, Kansas 66044, in the Contact section, plus the city in the hero's label and intro, the About heading, the footer's licensing line, and the Contact section's service area list. Search the repo for "Lawrence" and "Kansas"
+- **Address and location:** placeholder Lawrence, Kansas 66044, in the Contact section, plus the city in the hero's label and intro, the About heading, the footer's licensing line, and the Contact section's service area list, plus the county in the hero's first stat and the About story. Search the repo for "Lawrence", "Kansas", and "Douglas"
 - **Form placeholders:** the sample name, property, email (`jane@company.example`), and phone (`(785) 555-0100`) shown in the contact form's empty fields, in `src/pages/home/contact.tsx`
 - **Footer:** the company's legal name, licensing line, and the demo notice in `src/ui/footer.tsx`
 - **Stats in Hero:** 17+ years, 400+ roofs, etc. Replace them with real numbers
