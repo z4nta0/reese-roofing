@@ -15,11 +15,12 @@ import lofSvgUrl from './logo-full.svg';    // What: Logo-Full SVG URL. Why: The
  *
  * @summary
  * The home page's third section, telling the company's story. The label,
- * heading, and logo seal, which stay in view as the story scrolls, sit beside
- * three paragraphs and a quote from the family above 960px wide; at 960px and
- * below the seal is hidden and the story stacks below them. A row of numbered
- * principles follows underneath, four across, two at 960px wide and below, and
- * one at 540px and below, driven by PRI_REC_ARR.
+ * heading, and logo seal sit beside three paragraphs and a quote from the
+ * family above 960px wide, staying in view as the story scrolls; at 960px and
+ * below the seal is hidden, the story stacks below the label and heading, and
+ * they scroll away with the page. A row of numbered principles follows
+ * underneath, four across, two at 960px wide and below, and one at 540px and
+ * below, driven by PRI_REC_ARR.
  *
  * Sections:
  *  - Constants
