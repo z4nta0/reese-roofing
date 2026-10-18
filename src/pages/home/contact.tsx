@@ -383,7 +383,7 @@ function ConSecCom () : React.JSX.Element {
 						</div>
 
 
-						<div className={ cssModObj.forRowDiv }>{ /* What: Form Row Div Element. Why: Email and phone are short enough to share a row. How: This sets the two fields side by side, stacking them at 540px wide and below. */ }
+						<div className={ cssModObj.forRowDiv }>{ /* What: Form Row Div Element. Why: Email and phone are short enough to share a row where there's room. How: This sets the two fields side by side, stacking them at 540px wide and below. */ }
 
 
 							<div className={ cssModObj.forFieDiv }>{ /* What: Form Field Div Element. Why: The company replies by email. How: This is the email field, which pairs the label with its input. */ }

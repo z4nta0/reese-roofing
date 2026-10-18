@@ -269,10 +269,10 @@ function NavBarCom () : React.JSX.Element {
 						className={ cssModObj.navLinNav }
 
 						aria-label='Primary'
-					>{ /* What: Navigation Links Nav Element. Why: The section links form the site's primary navigation landmark. How: This lists one link per row of NAV_LIN_ARR, and hides at 880px wide and below, where the drawer repeats the links. */ }
+					>{ /* What: Navigation Links Nav Element. Why: The section links form the site's primary navigation landmark. How: This lists a link for each row of NAV_LIN_ARR, and hides at 880px wide and below, where the drawer repeats the links. */ }
 
 
-						{ NAV_LIN_ARR.map( ( navLinObj ) => ( // What: Nav Link Map. Why: The bar lists every section link. How: This renders one anchor per row.
+						{ NAV_LIN_ARR.map( ( navLinObj ) => ( // What: Nav Link Map. Why: The bar lists every section link. How: This renders an anchor for each row.
 
 
 							<a

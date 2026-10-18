@@ -18,9 +18,9 @@ import lofSvgUrl from './logo-full.svg';    // What: Logo-Full SVG URL. Why: The
  * heading, and logo seal sit beside three paragraphs and a quote from the
  * family above 960px wide, staying in view as the story scrolls; at 960px and
  * below the seal is hidden, the story stacks below the label and heading, and
- * they scroll away with the page. A row of numbered principles follows
- * underneath, four across, two at 960px wide and below, and one at 540px and
- * below, driven by PRI_REC_ARR.
+ * they scroll away with the page. The numbered principles follow underneath,
+ * four across, two at 960px wide and below, and one at 540px and below, driven
+ * by PRI_REC_ARR.
  *
  * Sections:
  *  - Constants
@@ -83,9 +83,9 @@ const PRI_REC_ARR = [ // What: Principle Record Array. Why: The principles are d
  * decorative logo seal; on the right, the company's story in three paragraphs
  * and a pull quote from the family, stacking at 960px wide and below, where
  * the seal is hidden. Below, the principles, four across, two at 960px wide
- * and below, and one at 540px and below, number each row of PRI_REC_ARR by its
- * position, padded to two digits. The section carries the about anchor the
- * navigation links lead to.
+ * and below, and one at 540px and below, are each numbered by their position
+ * in PRI_REC_ARR, padded to two digits. The section carries the about anchor
+ * the navigation links lead to.
  *
  * @author z4nta0 <https://github.com/z4nta0>
  *
@@ -201,10 +201,10 @@ function AboSecCom () : React.JSX.Element {
 			<div className={ cssModObj.pagConDiv }>{ /* What: Page Container Div Element. Why: The principles should line up with the page's content width. How: This holds their grid. */ }
 
 
-				<div className={ cssModObj.aboPriDiv }>{ /* What: About Principles Div Element. Why: The company's four principles read best side by side. How: This lays out one principle per row of PRI_REC_ARR, four across, two across at 960px wide and below, and one at 540px and below. */ }
+				<div className={ cssModObj.aboPriDiv }>{ /* What: About Principles Div Element. Why: The company's four principles read best side by side where there's room. How: This lays out a block for each row of PRI_REC_ARR, four across, two across at 960px wide and below, and one at 540px and below. */ }
 
 
-					{ PRI_REC_ARR.map( ( priRecObj, priIndNum ) => ( // What: Principle Map. Why: Every principle gets its own block. How: This renders one block per row, passing along its position for numbering.
+					{ PRI_REC_ARR.map( ( priRecObj, priIndNum ) => ( // What: Principle Map. Why: Every principle gets its own block. How: This renders a block for each row, passing along its position for numbering.
 
 
 						<div

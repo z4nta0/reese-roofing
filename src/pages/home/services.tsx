@@ -57,7 +57,7 @@ type SerRecTyp = { desStr : string, detArr : string[], ideStr : string, titStr :
  *
 */
 
-const SER_REC_ARR : SerRecTyp[] = [ // What: Service Record Array. Why: The section's cards are data, not markup, so a service changes in one place. How: SerSecCom maps over it, rendering one card per row.
+const SER_REC_ARR : SerRecTyp[] = [ // What: Service Record Array. Why: The section's cards are data, not markup, so a service changes in one place. How: SerSecCom maps over it, rendering a card for each row.
 
 
 	{ // What: Single-Ply Membrane Service. Why: Most flat commercial roofs are single-ply membranes. How: This is the first card.
@@ -149,8 +149,8 @@ const SER_REC_ARR : SerRecTyp[] = [ // What: Service Record Array. Why: The sect
  * SerSecCom = Services Section Component
  *
  * @summary
- * Renders the services section: the numbered label, heading, and lede, then
- * a grid with one card per row of SER_REC_ARR, each listing its details as
+ * Renders the services section: the numbered label, heading, and lede, then a
+ * grid with a card for each row of SER_REC_ARR, each listing its details as
  * bullets. The section carries the services anchor the navigation links and
  * the hero's services button lead to.
  *
@@ -207,7 +207,7 @@ function SerSecCom () : React.JSX.Element {
 				<div className={ cssModObj.serGriDiv }>{ /* What: Services Grid Div Element. Why: The services read best as a grid of cards. How: This lays out one card per service, three across, two across at 960px wide and below, and one at 640px and below. */ }
 
 
-					{ SER_REC_ARR.map( ( serRecObj ) => ( // What: Service Card Map. Why: Every service gets its own card. How: This renders one article per row of SER_REC_ARR.
+					{ SER_REC_ARR.map( ( serRecObj ) => ( // What: Service Card Map. Why: Every service gets its own card. How: This renders an article for each row of SER_REC_ARR.
 
 
 						<article
