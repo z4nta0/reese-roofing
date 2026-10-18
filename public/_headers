@@ -4,9 +4,9 @@
 # Hardening headers applied to every response. The site has no backend,
 # accounts, or third-party code: every script, style, font, and image is
 # self-hosted, the contact form never posts anywhere (it hands the request to
-# the visitor's email app through a mailto link), and its one outside link,
-# to techgeek.dev, only navigates away. That lets the
-# Content-Security-Policy be strict rather than needing broad allowances.
+# the visitor's email app through a mailto link), and its one outside link, to
+# techgeek.dev, only navigates away. That lets the Content-Security-Policy be
+# strict rather than needing broad allowances.
 #
 # default-src 'self' is the fallback every unlisted directive inherits, so
 # connect-src, font-src, and manifest-src need no lines of their own. The
@@ -23,13 +23,13 @@
 # which the policy doesn't restrict. The structured data script is a data block
 # that never runs, so script-src doesn't need to allow it either.
 #
-# Strict-Transport-Security keeps browsers on HTTPS for two years across
-# every subdomain, leaving out preload, which commits the domain to the
-# browsers' built-in HTTPS list and is slow to undo. Referrer-Policy is
+# Strict-Transport-Security keeps browsers on HTTPS for two years across every
+# subdomain, leaving out preload, which commits the domain to the browsers'
+# built-in HTTPS list and is slow to undo. Referrer-Policy is
 # strict-origin-when-cross-origin, as on the-bernie-bears and
-# tech-geek-support: techgeek.dev sees that a visit came from this demo,
-# never a page's full address. Permissions-Policy turns off every powerful
-# browser feature the site never uses.
+# tech-geek-support: techgeek.dev sees that a visit came from this demo, never
+# a page's full address. Permissions-Policy turns off every powerful browser
+# feature the site never uses.
 #
 # @author z4nta0 <https://github.com/z4nta0>
 
