@@ -116,7 +116,7 @@ If this design is ever reused for a real business, update the placeholders below
 - **Form placeholders:** the sample name, property, email (`jane@company.example`), and phone (`(785) 555-0100`) shown in the contact form's empty fields, in `src/pages/home/contact.tsx`
 - **Footer:** the company's legal name, licensing line, and the demo notice in `src/ui/footer.tsx`
 - **Stats in Hero:** 17+ years, 400+ roofs, etc. Replace them with real numbers
-- **Services list:** edit the `SER_RCD_ARR` array in `src/pages/home/services.tsx`
+- **Services list:** edit the `SER_REC_ARR` array in `src/pages/home/services.tsx`
 - **About copy & quote:** `src/pages/home/about.tsx`
 - **Form backend:** the form currently uses `mailto:` as a no-backend fallback. To wire up a real backend, replace the `subForFun` handler in `src/pages/home/contact.tsx` with a `fetch` POST to your endpoint (Formspree, Netlify Forms, your own API, etc.). The Content-Security-Policy in `public/_headers` blocks that until it's updated: change `form-action 'none'` to `'self'` (or the endpoint's origin), and add a `connect-src` naming any outside endpoint the script posts to.
 

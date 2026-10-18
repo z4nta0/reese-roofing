@@ -36,7 +36,7 @@ import type { Page } from '@playwright/test'; // What: Page. Why: Opening a stat
 
 // #region Types
 
-type StaRcdTyp = { // What: State Record Type. Why: Every check reads the same description of a state. How: This names a state, its path, its viewport, and an optional action that opens something on it.
+type StaRecTyp = { // What: State Record Type. Why: Every check reads the same description of a state. How: This names a state, its path, its viewport, and an optional action that opens something on it.
 
 
 	actFun? : ( curPagObj : Page ) => Promise< void >, // What: Action Function. Why: Some states need something opened after the page loads. How: This runs against the loaded page, e.g. clicking the menu toggle.
@@ -54,17 +54,17 @@ type StaRcdTyp = { // What: State Record Type. Why: Every check reads the same d
 
 // #region Constants
 
-// #region STA_RCD_ARR
+// #region STA_REC_ARR
 
 /**
- * STA_RCD_ARR = State Record Array
+ * STA_REC_ARR = State Record Array
  *
  * @summary
  * Every state the checks visit: each route at a phone width (390px) and a
  * desktop width (1,440px), plus the mobile drawer open at the phone width,
  * since the drawer is only reachable there. The 404 page is reached through
  * an address the site doesn't have, the way a visitor would land on it.
- * Every row shares the {@link StaRcdTyp} shape, so its fields carry no
+ * Every row shares the {@link StaRecTyp} shape, so its fields carry no
  * comments of their own:
  * - `actFun` (Function): Action Function, run after the page loads to open
  *   something on it, such as the drawer. Only the drawer row has one.
@@ -77,7 +77,7 @@ type StaRcdTyp = { // What: State Record Type. Why: Every check reads the same d
  *
 */
 
-const STA_RCD_ARR : StaRcdTyp[] = [ // What: State Record Array. Why: Every check walks the same list of states, so a new state is added in one place. How: Each row names a state, its path, and its viewport, and the drawer row adds the action that opens it.
+const STA_REC_ARR : StaRecTyp[] = [ // What: State Record Array. Why: Every check walks the same list of states, so a new state is added in one place. How: Each row names a state, its path, and its viewport, and the drawer row adds the action that opens it.
 
 
 	{ heiNum : 900, ideStr : 'home-desktop',      patStr : '/',        widNum : 1440 }, // What: Home Desktop State. Why: Most visitors on a computer land here. How: This loads the home page at 1,440px.
@@ -101,7 +101,7 @@ const STA_RCD_ARR : StaRcdTyp[] = [ // What: State Record Array. Why: Every chec
 
 ];
 
-// #endregion STA_RCD_ARR
+// #endregion STA_REC_ARR
 
 // #endregion Constants
 
@@ -125,29 +125,29 @@ const STA_RCD_ARR : StaRcdTyp[] = [ // What: State Record Array. Why: Every chec
  * @author z4nta0 <https://github.com/z4nta0>
  *
  * @param curPagObj - Current Page Object: The page to open the state on.
- * @param staRcdObj - State Record Object: {@link StaRcdTyp}
+ * @param staRecObj - State Record Object: {@link StaRecTyp}
  *
  * @returns This function does not return anything.
  *
  * @example
  * ```ts
- * opeStaFun(page, staRcdObj) // => void
+ * opeStaFun(page, staRecObj) // => void
  * ```
  *
 */
 
-async function opeStaFun ( curPagObj : Page, staRcdObj : StaRcdTyp ) : Promise< void > {
+async function opeStaFun ( curPagObj : Page, staRecObj : StaRecTyp ) : Promise< void > {
 
 
-	await curPagObj.setViewportSize( { height : staRcdObj.heiNum, width : staRcdObj.widNum } ); // What: Viewport Size Call. Why: The state's layout depends on its width. How: This sizes the page before it loads, so breakpoints apply from the first paint.
+	await curPagObj.setViewportSize( { height : staRecObj.heiNum, width : staRecObj.widNum } ); // What: Viewport Size Call. Why: The state's layout depends on its width. How: This sizes the page before it loads, so breakpoints apply from the first paint.
 
-	await curPagObj.goto( staRcdObj.patStr ); // What: Page Load Call. Why: Each state starts from a fresh load of its route. How: This opens the path on the suite's dev server.
+	await curPagObj.goto( staRecObj.patStr ); // What: Page Load Call. Why: Each state starts from a fresh load of its route. How: This opens the path on the suite's dev server.
 
 	await curPagObj.evaluate( () => document.fonts.ready ); // What: Fonts Ready Wait. Why: Text measured before its web font loads would have the wrong size and wrapping. How: This waits until every font face has loaded.
 
 
 
-	if ( staRcdObj.actFun ) await staRcdObj.actFun( curPagObj ); // What: State Action Call. Why: Some states need something opened first. How: This runs the state's action, if it has one.
+	if ( staRecObj.actFun ) await staRecObj.actFun( curPagObj ); // What: State Action Call. Why: Some states need something opened first. How: This runs the state's action, if it has one.
 
 
 
@@ -164,7 +164,7 @@ async function opeStaFun ( curPagObj : Page, staRcdObj : StaRcdTyp ) : Promise< 
 
 // #region Exports
 
-export { opeStaFun, STA_RCD_ARR, type StaRcdTyp }; // What: Named Exports. Why: The accessibility, interaction, rendering, and responsive specs share these states and their opener. How: This exports the state list, its type, and the helper that opens one.
+export { opeStaFun, STA_REC_ARR, type StaRecTyp }; // What: Named Exports. Why: The accessibility, interaction, rendering, and responsive specs share these states and their opener. How: This exports the state list, its type, and the helper that opens one.
 
 // #endregion Exports
 

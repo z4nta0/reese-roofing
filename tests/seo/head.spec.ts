@@ -83,7 +83,7 @@ const SOC_KEY_ARR = [ // What: Social Key Array. Why: The social preview rule li
 
 
 /**
- * ROU_RCD_ARR = Route Record Array
+ * ROU_REC_ARR = Route Record Array
  *
  * @summary
  * Every route the head checks visit, each with the title it must show. Every
@@ -95,7 +95,7 @@ const SOC_KEY_ARR = [ // What: Social Key Array. Why: The social preview rule li
  *
 */
 
-const ROU_RCD_ARR = [ // What: Route Record Array. Why: Each route has its own title to check. How: Each row pairs a path with its expected title.
+const ROU_REC_ARR = [ // What: Route Record Array. Why: Each route has its own title to check. How: Each row pairs a path with its expected title.
 
 
 	{ patStr : '/',        titStr : 'Reese Roofing | Portfolio Demo by techgeek.support' }, // What: Home Route Row. Why: The home page carries index.html's own title. How: This expects it unchanged.
@@ -110,16 +110,16 @@ const ROU_RCD_ARR = [ // What: Route Record Array. Why: Each route has its own t
 
 // #region Module Init
 
-for ( const rouRcdObj of ROU_RCD_ARR ) { // What: Route Test Loop. Why: Every route gets the same head checks. How: This declares one test per route.
+for ( const rouRecObj of ROU_REC_ARR ) { // What: Route Test Loop. Why: Every route gets the same head checks. How: This declares one test per route.
 
 
-	test( `${ rouRcdObj.patStr } has a demo-only head`, async ( { page : curPagObj } ) => { // What: Head Test. Why: Every route has to describe itself honestly and stay out of search. How: This loads the route and checks its title, meta tags, structured data, and footer.
+	test( `${ rouRecObj.patStr } has a demo-only head`, async ( { page : curPagObj } ) => { // What: Head Test. Why: Every route has to describe itself honestly and stay out of search. How: This loads the route and checks its title, meta tags, structured data, and footer.
 
 
-		await curPagObj.goto( rouRcdObj.patStr ); // What: Route Load Call. Why: The head is read as a browser builds it. How: This opens the route on the suite's dev server.
+		await curPagObj.goto( rouRecObj.patStr ); // What: Route Load Call. Why: The head is read as a browser builds it. How: This opens the route on the suite's dev server.
 
 
-		await expect( curPagObj ).toHaveTitle( rouRcdObj.titStr );                                                                     // What: Title Assertion. Why: Each route names itself, saying it's a demo. How: This waits for the route's exact title.
+		await expect( curPagObj ).toHaveTitle( rouRecObj.titStr );                                                                     // What: Title Assertion. Why: Each route names itself, saying it's a demo. How: This waits for the route's exact title.
 		await expect( curPagObj.locator( 'meta[name="robots"]' ) ).toHaveAttribute( 'content', /noindex/ );                            // What: Robots Assertion. Why: A fictional company must stay out of search results. How: This checks the robots meta asks for noindex.
 		await expect( curPagObj.locator( 'meta[name="author"]' ) ).toHaveAttribute( 'content', 'techgeek.support' );                   // What: Author Assertion. Why: The page should name its real builder rather than the fictional company. How: This checks the author meta names techgeek.support.
 		await expect( curPagObj.locator( 'meta[name="description"]' ) ).toHaveAttribute( 'content', /fictional/ );                     // What: Description Assertion. Why: Any summary of the page should say the company isn't real. How: This checks the description calls it fictional.

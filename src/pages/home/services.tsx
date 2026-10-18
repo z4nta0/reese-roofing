@@ -15,7 +15,7 @@ import cssModObj from './services.module.css'; // What: CSS Module Object. Why: 
  * @summary
  * The home page's second section, listing the company's six commercial
  * roofing services. Each service is a card with its number, title, a short
- * description, and a list of what it covers, all driven by SER_RCD_ARR, so
+ * description, and a list of what it covers, all driven by SER_REC_ARR, so
  * adding or editing a service only touches that array.
  *
  * Sections:
@@ -31,12 +31,12 @@ import cssModObj from './services.module.css'; // What: CSS Module Object. Why: 
 
 // #region Constants
 
-type SerRcdTyp = { desStr : string, detArr : string[], ideStr : string, titStr : string }; // What: Service Record Type. Why: Every service card reads the same four fields. How: This types each row of SER_RCD_ARR.
+type SerRecTyp = { desStr : string, detArr : string[], ideStr : string, titStr : string }; // What: Service Record Type. Why: Every service card reads the same four fields. How: This types each row of SER_REC_ARR.
 
-// #region SER_RCD_ARR
+// #region SER_REC_ARR
 
 /**
- * SER_RCD_ARR = Service Record Array
+ * SER_REC_ARR = Service Record Array
  *
  * @summary
  * The six services, in the order their cards appear. Every row shares the
@@ -57,7 +57,7 @@ type SerRcdTyp = { desStr : string, detArr : string[], ideStr : string, titStr :
  *
 */
 
-const SER_RCD_ARR : SerRcdTyp[] = [ // What: Service Record Array. Why: The section's cards are data, not markup, so a service changes in one place. How: SerSecCom maps over it, rendering one card per row.
+const SER_REC_ARR : SerRecTyp[] = [ // What: Service Record Array. Why: The section's cards are data, not markup, so a service changes in one place. How: SerSecCom maps over it, rendering one card per row.
 
 
 	{ // What: Single-Ply Membrane Service. Why: Most flat commercial roofs are single-ply membranes. How: This is the first card.
@@ -129,7 +129,7 @@ const SER_RCD_ARR : SerRcdTyp[] = [ // What: Service Record Array. Why: The sect
 
 ];
 
-// #endregion SER_RCD_ARR
+// #endregion SER_REC_ARR
 
 // #endregion Constants
 
@@ -144,7 +144,7 @@ const SER_RCD_ARR : SerRcdTyp[] = [ // What: Service Record Array. Why: The sect
  *
  * @summary
  * Renders the services section: the numbered label, heading, and lede, then
- * a grid with one card per row of SER_RCD_ARR, each listing its details as
+ * a grid with one card per row of SER_REC_ARR, each listing its details as
  * bullets. The section carries the services anchor the navigation links and
  * the hero's services button jump to.
  *
@@ -201,11 +201,11 @@ function SerSecCom () : React.JSX.Element {
 				<div className={ cssModObj.serGriDiv }>{ /* What: Services Grid Div Element. Why: The services read best as a grid of cards. How: This lays out one card per service. */ }
 
 
-					{ SER_RCD_ARR.map( ( serRcdObj ) => ( // What: Service Card Map. Why: Every service gets its own card. How: This renders one article per row of SER_RCD_ARR.
+					{ SER_REC_ARR.map( ( serRecObj ) => ( // What: Service Card Map. Why: Every service gets its own card. How: This renders one article per row of SER_REC_ARR.
 
 
 						<article
-							key={ serRcdObj.ideStr }
+							key={ serRecObj.ideStr }
 
 							className={ cssModObj.serCarArt }
 						>{ /* What: Service Article Element. Why: Each service is a self-contained card. How: This holds the card's head, description, and detail list. */ }
@@ -214,19 +214,19 @@ function SerSecCom () : React.JSX.Element {
 							<div className={ cssModObj.carHeaDiv }>{ /* What: Service Head Div Element. Why: The number and title lead each card. How: This sets them together. */ }
 
 
-								<span className={ cssModObj.carIdeSpa }>{ serRcdObj.ideStr }</span>{ /* What: Service Identifier Span Element. Why: The cards are numbered in order. How: This shows the row's two-digit number. */ }
+								<span className={ cssModObj.carIdeSpa }>{ serRecObj.ideStr }</span>{ /* What: Service Identifier Span Element. Why: The cards are numbered in order. How: This shows the row's two-digit number. */ }
 
-								<h3 className={ cssModObj.carTitHea }>{ serRcdObj.titStr }</h3>{ /* What: Service Title Heading Element. Why: Each card names its service. How: This shows the row's title. */ }
+								<h3 className={ cssModObj.carTitHea }>{ serRecObj.titStr }</h3>{ /* What: Service Title Heading Element. Why: Each card names its service. How: This shows the row's title. */ }
 
 
 							</div>
 
-							<p className={ cssModObj.carDesPar }>{ serRcdObj.desStr }</p>{ /* What: Service Description Paragraph Element. Why: Each card summarizes its service in a sentence. How: This shows the row's description. */ }
+							<p className={ cssModObj.carDesPar }>{ serRecObj.desStr }</p>{ /* What: Service Description Paragraph Element. Why: Each card summarizes its service in a sentence. How: This shows the row's description. */ }
 
 							<ul className={ cssModObj.carDetUno }>{ /* What: Service List Unordered Element. Why: The specific work a service covers reads best as bullets. How: This lists the row's details. */ }
 
 
-								{ serRcdObj.detArr.map( ( detIteStr ) => ( // What: Detail Item Map. Why: Every detail gets its own bullet. How: This renders one list item per entry.
+								{ serRecObj.detArr.map( ( detIteStr ) => ( // What: Detail Item Map. Why: Every detail gets its own bullet. How: This renders one list item per entry.
 
 
 									<li

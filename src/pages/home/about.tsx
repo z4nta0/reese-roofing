@@ -17,7 +17,7 @@ import lofSvgUrl from './logo-full.svg';    // What: Logo-Full SVG URL. Why: The
  * The home page's third section, telling the company's story. The heading
  * and a sticky logo seal sit beside three paragraphs and a quote from the
  * family, and a row of four numbered principles follows underneath, driven
- * by PRI_RCD_ARR.
+ * by PRI_REC_ARR.
  *
  * Sections:
  *  - Constants
@@ -32,10 +32,10 @@ import lofSvgUrl from './logo-full.svg';    // What: Logo-Full SVG URL. Why: The
 
 // #region Constants
 
-// #region PRI_RCD_ARR
+// #region PRI_REC_ARR
 
 /**
- * PRI_RCD_ARR = Principle Record Array
+ * PRI_REC_ARR = Principle Record Array
  *
  * @summary
  * The four principles, in the order they're numbered. Every row shares the
@@ -51,7 +51,7 @@ import lofSvgUrl from './logo-full.svg';    // What: Logo-Full SVG URL. Why: The
  *
 */
 
-const PRI_RCD_ARR = [ // What: Principle Record Array. Why: The principles row is data, not markup, so a principle changes in one place. How: AboSecCom maps over it, numbering each row by its position.
+const PRI_REC_ARR = [ // What: Principle Record Array. Why: The principles row is data, not markup, so a principle changes in one place. How: AboSecCom maps over it, numbering each row by its position.
 
 
 	{ bodStr : 'Every project is led by an owner-operator who walks the roof, signs the proposal, and stays reachable from kickoff to close-out.',      titStr : 'Local, accountable, on-site' }, // What: Local Principle Row. Why: Clients want one accountable person. How: This is principle 01.
@@ -62,7 +62,7 @@ const PRI_RCD_ARR = [ // What: Principle Record Array. Why: The principles row i
 
 ];
 
-// #endregion PRI_RCD_ARR
+// #endregion PRI_REC_ARR
 
 // #endregion Constants
 
@@ -79,7 +79,7 @@ const PRI_RCD_ARR = [ // What: Principle Record Array. Why: The principles row i
  * Renders the about section: on the left, the numbered label, heading, and a
  * decorative logo seal; on the right, the company's story in three
  * paragraphs and a pull quote from the family. Below, the principles row
- * numbers each row of PRI_RCD_ARR by its position, padded to two digits. The
+ * numbers each row of PRI_REC_ARR by its position, padded to two digits. The
  * section carries the about anchor the navigation links jump to.
  *
  * @author z4nta0 <https://github.com/z4nta0>
@@ -193,14 +193,14 @@ function AboSecCom () : React.JSX.Element {
 			<div className={ cssModObj.pagConDiv }>{ /* What: Principles Container Div Element. Why: The principles row should line up with the page's content width. How: This holds the row. */ }
 
 
-				<div className={ cssModObj.aboPriDiv }>{ /* What: About Principles Div Element. Why: The company's four principles read best side by side. How: This lays out one principle per row of PRI_RCD_ARR. */ }
+				<div className={ cssModObj.aboPriDiv }>{ /* What: About Principles Div Element. Why: The company's four principles read best side by side. How: This lays out one principle per row of PRI_REC_ARR. */ }
 
 
-					{ PRI_RCD_ARR.map( ( priRcdObj, priIndNum ) => ( // What: Principle Map. Why: Every principle gets its own block. How: This renders one block per row, passing along its position for numbering.
+					{ PRI_REC_ARR.map( ( priRecObj, priIndNum ) => ( // What: Principle Map. Why: Every principle gets its own block. How: This renders one block per row, passing along its position for numbering.
 
 
 						<div
-							key={ priRcdObj.titStr }
+							key={ priRecObj.titStr }
 
 							className={ cssModObj.priIteDiv }
 						>{ /* What: Principle Div Element. Why: Each principle is a self-contained block. How: This holds its number, title, and body. */ }
@@ -208,9 +208,9 @@ function AboSecCom () : React.JSX.Element {
 
 							<span className={ cssModObj.priNumSpa }>{ String( priIndNum + 1 ).padStart( 2, '0' ) }</span>{ /* What: Principle Number Span Element. Why: The principles are numbered in order. How: This turns the row's zero-based position into a two-digit number starting at 01. */ }
 
-							<h3 className={ cssModObj.priTitHea }>{ priRcdObj.titStr }</h3>{ /* What: Principle Title Heading Element. Why: Each principle has a short name. How: This shows the row's title. */ }
+							<h3 className={ cssModObj.priTitHea }>{ priRecObj.titStr }</h3>{ /* What: Principle Title Heading Element. Why: Each principle has a short name. How: This shows the row's title. */ }
 
-							<p className={ cssModObj.priBodPar }>{ priRcdObj.bodStr }</p>{ /* What: Principle Body Paragraph Element. Why: Each principle is explained in a sentence. How: This shows the row's body. */ }
+							<p className={ cssModObj.priBodPar }>{ priRecObj.bodStr }</p>{ /* What: Principle Body Paragraph Element. Why: Each principle is explained in a sentence. How: This shows the row's body. */ }
 
 
 						</div>
