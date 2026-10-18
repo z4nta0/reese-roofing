@@ -229,6 +229,7 @@ test( '_headers hardens every response', async ( { page : curPagObj } ) => { // 
 	for ( const heaPatReg of SEC_HEA_ARR ) expect( sitRulStr ).toMatch( heaPatReg ); // What: Header Line Assertion Loop. Why: Each missing header is its own failure. How: This checks every pattern against the site-wide rules' header lines.
 
 
+
 	expect( heaNamArr ).toEqual( [ ...new Set( heaNamArr ) ] ); // What: Unique Header Assertion. Why: Each header should be set once, so no later line can weaken it. How: This checks no header name repeats.
 
 

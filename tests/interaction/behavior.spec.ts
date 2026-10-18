@@ -215,10 +215,8 @@ for ( const [ linLabStr, secIdeStr ] of [ [ 'Services', 'services' ], [ 'About',
 
 
 		await expect.poll( async () => Math.abs( await secTopFun( curPagObj, secIdeStr ) ) ).toBeLessThan( 2 ); // What: Section Position Assertion. Why: The section should start at the top of the screen. How: This waits until its top edge sits less than 2 pixels from the viewport's top.
-
-		await expect( curPagObj ).toHaveURL( /\/$/ ); // What: Clean Address Assertion. Why: The address bar should stay free of hashes. How: This checks the URL still ends at the root.
-
-		expect( await curPagObj.evaluate( () => Reflect.get( window, 'hasChaNum' ) ) ).toBe( 0 ); // What: No Hash Jump Assertion. Why: A plain jump would have put a hash in the address before the home page cleared it. How: This checks the page never fired a hashchange event.
+		await expect( curPagObj ).toHaveURL( /\/$/ );                                                           // What: Clean Address Assertion. Why: The address bar should stay free of hashes. How: This checks the URL still ends at the root.
+		expect( await curPagObj.evaluate( () => Reflect.get( window, 'hasChaNum' ) ) ).toBe( 0 );               // What: No Hash Jump Assertion. Why: A plain jump would have put a hash in the address before the home page cleared it. How: This checks the page never fired a hashchange event.
 
 
 	} );
@@ -246,15 +244,11 @@ for ( const [ cliKinStr, cliOptObj ] of CLI_KIN_ARR ) { // What: Modified Click 
 		const newTabObj = await newTabPro; // What: New Tab Object. Why: The section should open in the new tab. How: This is the page the click opened.
 
 
-		await expect( newTabObj.locator( '#about' ) ).toBeVisible(); // What: Section Render Wait. Why: The new tab loads the page from scratch, so the section has to exist before it's measured. How: This waits until the About section is on the page.
-
+		await expect( newTabObj.locator( '#about' ) ).toBeVisible();                                          // What: Section Render Wait. Why: The new tab loads the page from scratch, so the section has to exist before it's measured. How: This waits until the About section is on the page.
 		await expect.poll( async () => Math.abs( await secTopFun( newTabObj, 'about' ) ) ).toBeLessThan( 2 ); // What: New Tab Position Assertion. Why: The new tab should land on the section. How: This waits until the About section's top edge sits less than 2 pixels from the viewport's top.
-
-		await expect( newTabObj ).toHaveURL( /\/$/ ); // What: New Tab Address Assertion. Why: The new tab's hash should be cleared once used. How: This checks its URL ends at the root.
-
-		expect( await curPagObj.evaluate( () => window.scrollY ) ).toBe( 0 ); // What: Original Scroll Assertion. Why: The page clicked from should stay where it was. How: This checks it's still at the top.
-
-		await expect( curPagObj ).toHaveURL( /\/$/ ); // What: Original Address Assertion. Why: The page clicked from shouldn't navigate. How: This checks its URL still ends at the root.
+		await expect( newTabObj ).toHaveURL( /\/$/ );                                                         // What: New Tab Address Assertion. Why: The new tab's hash should be cleared once used. How: This checks its URL ends at the root.
+		expect( await curPagObj.evaluate( () => window.scrollY ) ).toBe( 0 );                                 // What: Original Scroll Assertion. Why: The page clicked from should stay where it was. How: This checks it's still at the top.
+		await expect( curPagObj ).toHaveURL( /\/$/ );                                                         // What: Original Address Assertion. Why: The page clicked from shouldn't navigate. How: This checks its URL still ends at the root.
 
 
 	} );
@@ -276,10 +270,8 @@ for ( const [ butLabStr, secIdeStr ] of [ [ 'Request an estimate', 'contact' ], 
 
 
 		await expect.poll( async () => Math.abs( await secTopFun( curPagObj, secIdeStr ) ) ).toBeLessThan( 2 ); // What: Section Position Assertion. Why: The section should start at the top of the screen. How: This waits until its top edge sits less than 2 pixels from the viewport's top.
-
-		await expect( curPagObj ).toHaveURL( /\/$/ ); // What: Clean Address Assertion. Why: The address bar should stay free of hashes. How: This checks the URL still ends at the root.
-
-		expect( await curPagObj.evaluate( () => Reflect.get( window, 'hasChaNum' ) ) ).toBe( 0 ); // What: No Hash Jump Assertion. Why: A plain jump would have put a hash in the address before the home page cleared it. How: This checks the page never fired a hashchange event.
+		await expect( curPagObj ).toHaveURL( /\/$/ );                                                           // What: Clean Address Assertion. Why: The address bar should stay free of hashes. How: This checks the URL still ends at the root.
+		expect( await curPagObj.evaluate( () => Reflect.get( window, 'hasChaNum' ) ) ).toBe( 0 );               // What: No Hash Jump Assertion. Why: A plain jump would have put a hash in the address before the home page cleared it. How: This checks the page never fired a hashchange event.
 
 
 	} );
@@ -298,10 +290,8 @@ test( "the bar's estimate button scrolls to the contact section", async ( { page
 
 
 	await expect.poll( async () => Math.abs( await secTopFun( curPagObj, 'contact' ) ) ).toBeLessThan( 2 ); // What: Contact Position Assertion. Why: The visitor should land on the form. How: This waits until the section's top edge sits less than 2 pixels from the viewport's top.
-
-	await expect( curPagObj ).toHaveURL( /\/$/ ); // What: Clean Address Assertion. Why: The address bar should stay free of hashes. How: This checks the URL still ends at the root.
-
-	expect( await curPagObj.evaluate( () => Reflect.get( window, 'hasChaNum' ) ) ).toBe( 0 ); // What: No Hash Jump Assertion. Why: A plain jump would have put a hash in the address before the home page cleared it. How: This checks the page never fired a hashchange event.
+	await expect( curPagObj ).toHaveURL( /\/$/ );                                                           // What: Clean Address Assertion. Why: The address bar should stay free of hashes. How: This checks the URL still ends at the root.
+	expect( await curPagObj.evaluate( () => Reflect.get( window, 'hasChaNum' ) ) ).toBe( 0 );               // What: No Hash Jump Assertion. Why: A plain jump would have put a hash in the address before the home page cleared it. How: This checks the page never fired a hashchange event.
 
 
 } );
@@ -318,10 +308,8 @@ test( 'the Home link returns to the top', async ( { page : curPagObj } ) => { //
 	await curPagObj.getByRole( 'banner' ).getByRole( 'link', { exact : true, name : 'Home' } ).click(); // What: Home Link Click Call. Why: This is the action under test. How: This clicks the bar's Home link.
 
 
-	await expect.poll( () => curPagObj.evaluate( () => window.scrollY ) ).toBe( 0 ); // What: Top Position Assertion. Why: The visitor should end up back at the top. How: This waits until the page has scrolled all the way up.
-
-	await expect( curPagObj ).toHaveURL( /\/$/ ); // What: Clean Address Assertion. Why: The address bar should stay free of hashes. How: This checks the URL still ends at the root.
-
+	await expect.poll( () => curPagObj.evaluate( () => window.scrollY ) ).toBe( 0 );          // What: Top Position Assertion. Why: The visitor should end up back at the top. How: This waits until the page has scrolled all the way up.
+	await expect( curPagObj ).toHaveURL( /\/$/ );                                             // What: Clean Address Assertion. Why: The address bar should stay free of hashes. How: This checks the URL still ends at the root.
 	expect( await curPagObj.evaluate( () => Reflect.get( window, 'hasChaNum' ) ) ).toBe( 0 ); // What: No Hash Jump Assertion. Why: A plain jump would have put a hash in the address before the home page cleared it. How: This checks the page never fired a hashchange event.
 
 
@@ -337,10 +325,8 @@ test( 'back to top returns to the top', async ( { page : curPagObj } ) => { // W
 	await curPagObj.getByRole( 'link', { name : 'Back to top' } ).click(); // What: Back To Top Click Call. Why: This is the action under test. How: This clicks the footer's link, which Playwright scrolls into view first.
 
 
-	await expect.poll( () => curPagObj.evaluate( () => window.scrollY ) ).toBe( 0 ); // What: Top Position Assertion. Why: The visitor should end up back at the top. How: This waits until the page has scrolled all the way up.
-
-	await expect( curPagObj ).toHaveURL( /\/$/ ); // What: Clean Address Assertion. Why: The address bar should stay free of hashes. How: This checks the URL still ends at the root.
-
+	await expect.poll( () => curPagObj.evaluate( () => window.scrollY ) ).toBe( 0 );          // What: Top Position Assertion. Why: The visitor should end up back at the top. How: This waits until the page has scrolled all the way up.
+	await expect( curPagObj ).toHaveURL( /\/$/ );                                             // What: Clean Address Assertion. Why: The address bar should stay free of hashes. How: This checks the URL still ends at the root.
 	expect( await curPagObj.evaluate( () => Reflect.get( window, 'hasChaNum' ) ) ).toBe( 0 ); // What: No Hash Jump Assertion. Why: A plain jump would have put a hash in the address before the home page cleared it. How: This checks the page never fired a hashchange event.
 
 
@@ -357,20 +343,17 @@ test( 'the bar takes its scrolled style once the page moves', async ( { page : c
 	const barHeaObj = curPagObj.getByRole( 'banner' ); // What: Bar Header Object. Why: The scrolled style sits on the bar itself. How: This finds the page's banner landmark.
 
 
-	await expect( barHeaObj ).not.toHaveAttribute( 'data-page-scroll-past' ); // What: Top Attribute Assertion. Why: The bar should start without its scrolled style. How: This checks the attribute is absent at the top.
-
+	await expect( barHeaObj ).not.toHaveAttribute( 'data-page-scroll-past' );      // What: Top Attribute Assertion. Why: The bar should start without its scrolled style. How: This checks the attribute is absent at the top.
 	await expect( barHeaObj ).toHaveCSS( 'background-color', 'rgba(0, 0, 0, 0)' ); // What: Top Background Assertion. Why: At the top the bar sits over the hero with no background of its own. How: This checks its background is transparent.
 
 	await curPagObj.evaluate( () => window.scrollTo( 0, 400 ) ); // What: Scroll Down Call. Why: The scrolled style switches on past the top. How: This scrolls the page well past the 24px threshold.
 
-	await expect( barHeaObj ).toHaveAttribute( 'data-page-scroll-past' ); // What: Scrolled Attribute Assertion. Why: The bar should mark itself scrolled. How: This waits until the attribute is set.
-
+	await expect( barHeaObj ).toHaveAttribute( 'data-page-scroll-past' );              // What: Scrolled Attribute Assertion. Why: The bar should mark itself scrolled. How: This waits until the attribute is set.
 	await expect( barHeaObj ).not.toHaveCSS( 'background-color', 'rgba(0, 0, 0, 0)' ); // What: Scrolled Background Assertion. Why: The attribute only matters if the bar really draws its background. How: This checks the background is no longer transparent.
 
 	await curPagObj.evaluate( () => window.scrollTo( 0, 0 ) ); // What: Scroll Up Call. Why: The style should leave again at the top. How: This scrolls back to the top.
 
-	await expect( barHeaObj ).not.toHaveAttribute( 'data-page-scroll-past' ); // What: Returned Attribute Assertion. Why: Back at the top the bar should drop its scrolled style. How: This waits until the attribute is gone.
-
+	await expect( barHeaObj ).not.toHaveAttribute( 'data-page-scroll-past' );      // What: Returned Attribute Assertion. Why: Back at the top the bar should drop its scrolled style. How: This waits until the attribute is gone.
 	await expect( barHeaObj ).toHaveCSS( 'background-color', 'rgba(0, 0, 0, 0)' ); // What: Returned Background Assertion. Why: The bar should turn transparent again at the top. How: This checks its background is transparent once more.
 
 
@@ -426,8 +409,7 @@ test( 'the menu toggle opens and closes the drawer', async ( { page : curPagObj 
 	await opeDraFun( curPagObj ); // What: Drawer Open Call. Why: The open state comes first. How: This opens the drawer through its toggle.
 
 
-	await expect( curPagObj.locator( 'main' ) ).toHaveAttribute( 'inert', '' ); // What: Inert Page Assertion. Why: The page under the dimmed scrim shouldn't take focus. How: This checks the main content is inert while the drawer is open.
-
+	await expect( curPagObj.locator( 'main' ) ).toHaveAttribute( 'inert', '' );          // What: Inert Page Assertion. Why: The page under the dimmed scrim shouldn't take focus. How: This checks the main content is inert while the drawer is open.
 	await expect( curPagObj.getByRole( 'contentinfo' ) ).toHaveAttribute( 'inert', '' ); // What: Inert Footer Assertion. Why: Everything behind the open drawer, not just the main content, should stay out of reach. How: This checks the footer is inert too.
 
 
@@ -435,10 +417,8 @@ test( 'the menu toggle opens and closes the drawer', async ( { page : curPagObj 
 
 
 	await expect( curPagObj.getByRole( 'button', { name : 'Toggle menu' } ) ).toHaveAttribute( 'aria-expanded', 'false' ); // What: Drawer Closed Assertion. Why: The drawer should close. How: This checks the button reports it collapsed.
-
-	await expect( curPagObj.locator( 'main' ) ).not.toHaveAttribute( 'inert' ); // What: Live Page Assertion. Why: The page has to be usable again. How: This checks the main content is no longer inert.
-
-	await expect( curPagObj.getByRole( 'contentinfo' ) ).not.toHaveAttribute( 'inert' ); // What: Live Footer Assertion. Why: The footer has to be usable again too. How: This checks it's no longer inert.
+	await expect( curPagObj.locator( 'main' ) ).not.toHaveAttribute( 'inert' );                                            // What: Live Page Assertion. Why: The page has to be usable again. How: This checks the main content is no longer inert.
+	await expect( curPagObj.getByRole( 'contentinfo' ) ).not.toHaveAttribute( 'inert' );                                   // What: Live Footer Assertion. Why: The footer has to be usable again too. How: This checks it's no longer inert.
 
 
 } );
@@ -464,8 +444,7 @@ test( 'Escape closes the drawer and returns focus to the toggle', async ( { page
 
 
 	await expect( curPagObj.getByRole( 'button', { name : 'Toggle menu' } ) ).toHaveAttribute( 'aria-expanded', 'false' ); // What: Drawer Closed Assertion. Why: Escape should close the drawer. How: This checks the button reports it collapsed.
-
-	await expect( curPagObj.getByRole( 'button', { name : 'Toggle menu' } ) ).toBeFocused(); // What: Toggle Focus Assertion. Why: Focus shouldn't be left inside the closed drawer. How: This checks it moved from the drawer link to the toggle.
+	await expect( curPagObj.getByRole( 'button', { name : 'Toggle menu' } ) ).toBeFocused();                               // What: Toggle Focus Assertion. Why: Focus shouldn't be left inside the closed drawer. How: This checks it moved from the drawer link to the toggle.
 
 
 } );
@@ -508,12 +487,9 @@ for ( const [ linLabStr, secIdeStr ] of [ [ 'Home', 'top' ], [ 'Services', 'serv
 
 
 		await expect( curPagObj.getByRole( 'button', { name : 'Toggle menu' } ) ).toHaveAttribute( 'aria-expanded', 'false' ); // What: Drawer Closed Assertion. Why: The drawer should close once a section is picked. How: This checks the toggle reports it collapsed.
-
-		await expect.poll( async () => Math.abs( await secTopFun( curPagObj, secIdeStr ) ) ).toBeLessThan( 2 ); // What: Section Position Assertion. Why: The visitor should land on the section. How: This waits until its top edge sits less than 2 pixels from the viewport's top.
-
-		await expect( curPagObj ).toHaveURL( /\/$/ ); // What: Clean Address Assertion. Why: The address bar should stay free of hashes. How: This checks the URL still ends at the root.
-
-		expect( await curPagObj.evaluate( () => Reflect.get( window, 'hasChaNum' ) ) ).toBe( 0 ); // What: No Hash Jump Assertion. Why: A plain jump would have put a hash in the address before the home page cleared it. How: This checks the page never fired a hashchange event.
+		await expect.poll( async () => Math.abs( await secTopFun( curPagObj, secIdeStr ) ) ).toBeLessThan( 2 );                // What: Section Position Assertion. Why: The visitor should land on the section. How: This waits until its top edge sits less than 2 pixels from the viewport's top.
+		await expect( curPagObj ).toHaveURL( /\/$/ );                                                                          // What: Clean Address Assertion. Why: The address bar should stay free of hashes. How: This checks the URL still ends at the root.
+		expect( await curPagObj.evaluate( () => Reflect.get( window, 'hasChaNum' ) ) ).toBe( 0 );                              // What: No Hash Jump Assertion. Why: A plain jump would have put a hash in the address before the home page cleared it. How: This checks the page never fired a hashchange event.
 
 
 	} );
@@ -534,12 +510,9 @@ test( "the drawer's estimate button closes the drawer and scrolls to the contact
 
 
 	await expect( curPagObj.getByRole( 'button', { name : 'Toggle menu' } ) ).toHaveAttribute( 'aria-expanded', 'false' ); // What: Drawer Closed Assertion. Why: The drawer should close once the button is used. How: This checks the toggle reports it collapsed.
-
-	await expect.poll( async () => Math.abs( await secTopFun( curPagObj, 'contact' ) ) ).toBeLessThan( 2 ); // What: Contact Position Assertion. Why: The visitor should land on the form. How: This waits until the section's top edge sits less than 2 pixels from the viewport's top.
-
-	await expect( curPagObj ).toHaveURL( /\/$/ ); // What: Clean Address Assertion. Why: The address bar should stay free of hashes. How: This checks the URL still ends at the root.
-
-	expect( await curPagObj.evaluate( () => Reflect.get( window, 'hasChaNum' ) ) ).toBe( 0 ); // What: No Hash Jump Assertion. Why: A plain jump would have put a hash in the address before the home page cleared it. How: This checks the page never fired a hashchange event.
+	await expect.poll( async () => Math.abs( await secTopFun( curPagObj, 'contact' ) ) ).toBeLessThan( 2 );                // What: Contact Position Assertion. Why: The visitor should land on the form. How: This waits until the section's top edge sits less than 2 pixels from the viewport's top.
+	await expect( curPagObj ).toHaveURL( /\/$/ );                                                                          // What: Clean Address Assertion. Why: The address bar should stay free of hashes. How: This checks the URL still ends at the root.
+	expect( await curPagObj.evaluate( () => Reflect.get( window, 'hasChaNum' ) ) ).toBe( 0 );                              // What: No Hash Jump Assertion. Why: A plain jump would have put a hash in the address before the home page cleared it. How: This checks the page never fired a hashchange event.
 
 
 } );
@@ -563,13 +536,10 @@ test( 'a Ctrl or Cmd click on a drawer link leaves the drawer open', async ( { p
 	const newTabObj = await newTabPro; // What: New Tab Object. Why: The section should open in the new tab. How: This is the page the click opened.
 
 
-	await expect( newTabObj.locator( '#about' ) ).toBeVisible(); // What: New Tab Section Assertion. Why: The click should still have opened the section. How: This waits until the About section is on the new tab's page.
-
+	await expect( newTabObj.locator( '#about' ) ).toBeVisible();                                                          // What: New Tab Section Assertion. Why: The click should still have opened the section. How: This waits until the About section is on the new tab's page.
 	await expect( curPagObj.getByRole( 'button', { name : 'Toggle menu' } ) ).toHaveAttribute( 'aria-expanded', 'true' ); // What: Drawer Open Assertion. Why: A click the browser handled shouldn't close the drawer. How: This checks the toggle still reports it open.
-
-	expect( await curPagObj.evaluate( () => window.scrollY ) ).toBe( 0 ); // What: Original Scroll Assertion. Why: The page clicked from should stay where it was. How: This checks it's still at the top.
-
-	await expect( curPagObj ).toHaveURL( /\/$/ ); // What: Original Address Assertion. Why: The page clicked from shouldn't navigate. How: This checks its URL still ends at the root.
+	expect( await curPagObj.evaluate( () => window.scrollY ) ).toBe( 0 );                                                 // What: Original Scroll Assertion. Why: The page clicked from should stay where it was. How: This checks it's still at the top.
+	await expect( curPagObj ).toHaveURL( /\/$/ );                                                                         // What: Original Address Assertion. Why: The page clicked from shouldn't navigate. How: This checks its URL still ends at the root.
 
 
 } );
@@ -587,10 +557,8 @@ test( 'widening the screen closes the drawer', async ( { page : curPagObj } ) =>
 
 
 	await expect( curPagObj.locator( 'button[aria-label="Toggle menu"]' ) ).toHaveAttribute( 'aria-expanded', 'false' ); // What: Drawer Closed Assertion. Why: The drawer should close once the toggle is gone. How: This checks the hidden toggle reports the drawer collapsed, found by its label since a hidden button drops out of the accessibility tree.
-
-	await expect( curPagObj.locator( 'main' ) ).not.toHaveAttribute( 'inert' ); // What: Live Page Assertion. Why: The page has to stay usable once the toggle is gone. How: This checks the main content is no longer inert.
-
-	await expect( curPagObj.getByRole( 'contentinfo' ) ).not.toHaveAttribute( 'inert' ); // What: Live Footer Assertion. Why: The footer has to be usable again too. How: This checks it's no longer inert.
+	await expect( curPagObj.locator( 'main' ) ).not.toHaveAttribute( 'inert' );                                          // What: Live Page Assertion. Why: The page has to stay usable once the toggle is gone. How: This checks the main content is no longer inert.
+	await expect( curPagObj.getByRole( 'contentinfo' ) ).not.toHaveAttribute( 'inert' );                                 // What: Live Footer Assertion. Why: The footer has to be usable again too. How: This checks it's no longer inert.
 
 
 } );
@@ -672,8 +640,7 @@ test( 'an unknown address shows the 404 page', async ( { page : curPagObj } ) =>
 
 
 	await expect( curPagObj.getByRole( 'heading', { level : 1 } ) ).toHaveText( 'Page not found.' ); // What: Not Found Heading Assertion. Why: The page should say plainly what happened. How: This checks its heading.
-
-	await expect( curPagObj ).toHaveTitle( 'Page Not Found | Reese Roofing Portfolio Demo' ); // What: Not Found Title Assertion. Why: The tab should name the problem too. How: This checks the page's own title.
+	await expect( curPagObj ).toHaveTitle( 'Page Not Found | Reese Roofing Portfolio Demo' );        // What: Not Found Title Assertion. Why: The tab should name the problem too. How: This checks the page's own title.
 
 
 } );
@@ -695,12 +662,9 @@ test( 'Return home leads to the top of the home page', async ( { page : curPagOb
 
 
 	await expect( curPagObj ).toHaveTitle( 'Reese Roofing | Portfolio Demo by techgeek.support' ); // What: Home Title Assertion. Why: The 404 page's title should give way to the home page's. How: This checks the title changed back.
-
-	await expect.poll( () => curPagObj.evaluate( () => window.scrollY ) ).toBe( 0 ); // What: Top Position Assertion. Why: The home page should open at its top. How: This waits until the page sits at the top.
-
-	await expect( curPagObj ).toHaveURL( /\/$/ ); // What: Home Address Assertion. Why: The visitor should land on the home page with no hash left. How: This checks the URL ends at the root.
-
-	expect( await curPagObj.evaluate( () => Reflect.get( window, 'samDocBoo' ) ) ).toBe( true ); // What: Router Navigation Assertion. Why: The home page should open inside the router, without a full page load. How: This checks the marker set before the click survived.
+	await expect.poll( () => curPagObj.evaluate( () => window.scrollY ) ).toBe( 0 );               // What: Top Position Assertion. Why: The home page should open at its top. How: This waits until the page sits at the top.
+	await expect( curPagObj ).toHaveURL( /\/$/ );                                                  // What: Home Address Assertion. Why: The visitor should land on the home page with no hash left. How: This checks the URL ends at the root.
+	expect( await curPagObj.evaluate( () => Reflect.get( window, 'samDocBoo' ) ) ).toBe( true );   // What: Router Navigation Assertion. Why: The home page should open inside the router, without a full page load. How: This checks the marker set before the click survived.
 
 
 } );
@@ -717,13 +681,10 @@ test( 'the 404 page leads to the contact section', async ( { page : curPagObj } 
 	await curPagObj.getByRole( 'main' ).getByRole( 'link', { name : 'Get an estimate' } ).click(); // What: Estimate Click Call. Why: This is the action under test. How: This clicks the page's own estimate button rather than the bar's.
 
 
-	await expect( curPagObj.locator( '#contact' ) ).toBeVisible(); // What: Contact Render Wait. Why: The address changes before the home page has rendered, so the section has to exist before it's measured. How: This waits until the contact section is on the page.
-
+	await expect( curPagObj.locator( '#contact' ) ).toBeVisible();                                          // What: Contact Render Wait. Why: The address changes before the home page has rendered, so the section has to exist before it's measured. How: This waits until the contact section is on the page.
 	await expect.poll( async () => Math.abs( await secTopFun( curPagObj, 'contact' ) ) ).toBeLessThan( 2 ); // What: Contact Position Assertion. Why: The visitor should land on the form. How: This waits until the section's top edge sits less than 2 pixels from the viewport's top.
-
-	await expect( curPagObj ).toHaveURL( /\/$/ ); // What: Clean Address Assertion. Why: The home page clears the hash once it has scrolled to the section. How: This checks the URL ends at the root.
-
-	expect( await curPagObj.evaluate( () => Reflect.get( window, 'samDocBoo' ) ) ).toBe( true ); // What: Router Navigation Assertion. Why: The home page should open inside the router, without a full page load. How: This checks the marker set before the click survived.
+	await expect( curPagObj ).toHaveURL( /\/$/ );                                                           // What: Clean Address Assertion. Why: The home page clears the hash once it has scrolled to the section. How: This checks the URL ends at the root.
+	expect( await curPagObj.evaluate( () => Reflect.get( window, 'samDocBoo' ) ) ).toBe( true );            // What: Router Navigation Assertion. Why: The home page should open inside the router, without a full page load. How: This checks the marker set before the click survived.
 
 
 } );
@@ -743,13 +704,10 @@ for ( const [ linLabStr, secIdeStr ] of [ [ 'Services', 'services' ], [ 'About',
 		await curPagObj.getByRole( 'banner' ).getByRole( 'link', { exact : true, name : linLabStr } ).click(); // What: Section Link Click Call. Why: This is the action under test. How: This clicks the bar's link by its label.
 
 
-		await expect( curPagObj.locator( `#${ secIdeStr }` ) ).toBeVisible(); // What: Section Render Wait. Why: The address changes before the home page has rendered, so the section has to exist before it's measured. How: This waits until the section is on the page.
-
+		await expect( curPagObj.locator( `#${ secIdeStr }` ) ).toBeVisible();                                   // What: Section Render Wait. Why: The address changes before the home page has rendered, so the section has to exist before it's measured. How: This waits until the section is on the page.
 		await expect.poll( async () => Math.abs( await secTopFun( curPagObj, secIdeStr ) ) ).toBeLessThan( 2 ); // What: Section Position Assertion. Why: The visitor should land on the section. How: This waits until its top edge sits less than 2 pixels from the viewport's top.
-
-		await expect( curPagObj ).toHaveURL( /\/$/ ); // What: Clean Address Assertion. Why: The home page clears the hash once it has scrolled to the section. How: This checks the URL ends at the root.
-
-		expect( await curPagObj.evaluate( () => Reflect.get( window, 'samDocBoo' ) ) ).toBe( true ); // What: Router Navigation Assertion. Why: The home page should open inside the router, without a full page load. How: This checks the marker set before the click survived.
+		await expect( curPagObj ).toHaveURL( /\/$/ );                                                           // What: Clean Address Assertion. Why: The home page clears the hash once it has scrolled to the section. How: This checks the URL ends at the root.
+		expect( await curPagObj.evaluate( () => Reflect.get( window, 'samDocBoo' ) ) ).toBe( true );            // What: Router Navigation Assertion. Why: The home page should open inside the router, without a full page load. How: This checks the marker set before the click survived.
 
 
 	} );
@@ -770,10 +728,8 @@ test( "the 404 page's Home link leads to the home page", async ( { page : curPag
 
 
 	await expect( curPagObj ).toHaveTitle( 'Reese Roofing | Portfolio Demo by techgeek.support' ); // What: Home Title Assertion. Why: The visitor should reach the home page, not stay on the 404 page. How: This checks the home page's title.
-
-	await expect( curPagObj ).toHaveURL( /\/$/ ); // What: Clean Address Assertion. Why: The home page clears the hash once it has scrolled to the top. How: This checks the URL ends at the root.
-
-	expect( await curPagObj.evaluate( () => Reflect.get( window, 'samDocBoo' ) ) ).toBe( true ); // What: Router Navigation Assertion. Why: The home page should open inside the router, without a full page load. How: This checks the marker set before the click survived.
+	await expect( curPagObj ).toHaveURL( /\/$/ );                                                  // What: Clean Address Assertion. Why: The home page clears the hash once it has scrolled to the top. How: This checks the URL ends at the root.
+	expect( await curPagObj.evaluate( () => Reflect.get( window, 'samDocBoo' ) ) ).toBe( true );   // What: Router Navigation Assertion. Why: The home page should open inside the router, without a full page load. How: This checks the marker set before the click survived.
 
 
 } );
@@ -792,12 +748,9 @@ test( 'back to top scrolls the 404 page to its own top', async ( { page : curPag
 	await curPagObj.getByRole( 'link', { name : 'Back to top' } ).click(); // What: Back To Top Click Call. Why: This is the action under test. How: This clicks the footer's link.
 
 
-	await expect.poll( () => curPagObj.evaluate( () => window.scrollY ) ).toBe( 0 ); // What: Top Position Assertion. Why: The visitor should end up back at the 404 page's top. How: This waits until the page has scrolled all the way up.
-
+	await expect.poll( () => curPagObj.evaluate( () => window.scrollY ) ).toBe( 0 );          // What: Top Position Assertion. Why: The visitor should end up back at the 404 page's top. How: This waits until the page has scrolled all the way up.
 	await expect( curPagObj ).toHaveTitle( 'Page Not Found | Reese Roofing Portfolio Demo' ); // What: Same Page Assertion. Why: The link shouldn't leave the 404 page. How: This checks the 404 page's title is still showing.
-
-	await expect( curPagObj ).toHaveURL( /\/missing$/ ); // What: Same Address Assertion. Why: The address should stay the 404 page's own, with no hash. How: This checks the URL still ends at the missing path.
-
+	await expect( curPagObj ).toHaveURL( /\/missing$/ );                                      // What: Same Address Assertion. Why: The address should stay the 404 page's own, with no hash. How: This checks the URL still ends at the missing path.
 	expect( await curPagObj.evaluate( () => Reflect.get( window, 'hasChaNum' ) ) ).toBe( 0 ); // What: No Hash Jump Assertion. Why: A plain jump would have put a hash in the address. How: This checks the page never fired a hashchange event.
 
 

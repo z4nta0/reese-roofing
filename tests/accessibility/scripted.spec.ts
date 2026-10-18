@@ -579,8 +579,7 @@ for ( const staRecObj of STA_REC_ARR ) { // What: State Test Loop. Why: Every ch
 
 
 		expect( await curPagObj.evaluate( () => Reflect.get( window, 'motLisArr' ) ) ).toEqual( [] ); // What: No Motion Started Assertion. Why: Nothing should have moved while the state opened, including transitions that already finished. How: This checks the recorder caught no motion longer than 1ms.
-
-		expect( await curPagObj.evaluate( lonAniFun ) ).toEqual( [] ); // What: No Motion Assertion. Why: The state passes only when no animation or transition it still holds lasts longer than 1ms. How: This lists every one through lonAniFun, which should find none.
+		expect( await curPagObj.evaluate( lonAniFun ) ).toEqual( [] );                                // What: No Motion Assertion. Why: The state passes only when no animation or transition it still holds lasts longer than 1ms. How: This lists every one through lonAniFun, which should find none.
 
 
 	} );
@@ -608,10 +607,8 @@ test( 'closing the drawer plays no motion under reduced motion', async ( { page 
 
 
 	await expect( curPagObj.getByRole( 'button', { name : 'Toggle menu' } ) ).toHaveAttribute( 'aria-expanded', 'false' ); // What: Drawer Closed Assertion. Why: The check only means something once the drawer has closed. How: This waits until the toggle reports it collapsed.
-
-	expect( await curPagObj.evaluate( () => Reflect.get( window, 'motLisArr' ) ) ).toEqual( [] ); // What: No Motion Started Assertion. Why: Nothing should have moved while the drawer closed, including transitions that already finished. How: This checks the recorder heard nothing.
-
-	expect( await curPagObj.evaluate( lonAniFun ) ).toEqual( [] ); // What: No Motion Assertion. Why: Nothing should still be moving once the drawer has closed. How: This lists every animation or transition longer than 1ms the page still holds, which should be none.
+	expect( await curPagObj.evaluate( () => Reflect.get( window, 'motLisArr' ) ) ).toEqual( [] );                          // What: No Motion Started Assertion. Why: Nothing should have moved while the drawer closed, including transitions that already finished. How: This checks the recorder heard nothing.
+	expect( await curPagObj.evaluate( lonAniFun ) ).toEqual( [] );                                                         // What: No Motion Assertion. Why: Nothing should still be moving once the drawer has closed. How: This lists every animation or transition longer than 1ms the page still holds, which should be none.
 
 
 } );
@@ -640,10 +637,8 @@ test( 'sending the form plays no motion under reduced motion', async ( { page : 
 
 
 	await expect( curPagObj.locator( 'form button[type="submit"]' ) ).toHaveText( /Opening your email/ ); // What: Sent Label Assertion. Why: The check only means something once the label has swapped. How: This waits until the button's text has changed.
-
-	expect( await curPagObj.evaluate( () => Reflect.get( window, 'motLisArr' ) ) ).toEqual( [] ); // What: No Motion Started Assertion. Why: Nothing should have moved while the label swapped, including an animation that already finished. How: This checks the recorder heard nothing.
-
-	expect( await curPagObj.evaluate( lonAniFun ) ).toEqual( [] ); // What: No Motion Assertion. Why: Nothing should still be moving once the label has swapped. How: This lists every animation or transition longer than 1ms the page still holds, which should be none.
+	expect( await curPagObj.evaluate( () => Reflect.get( window, 'motLisArr' ) ) ).toEqual( [] );         // What: No Motion Started Assertion. Why: Nothing should have moved while the label swapped, including an animation that already finished. How: This checks the recorder heard nothing.
+	expect( await curPagObj.evaluate( lonAniFun ) ).toEqual( [] );                                        // What: No Motion Assertion. Why: Nothing should still be moving once the label has swapped. How: This lists every animation or transition longer than 1ms the page still holds, which should be none.
 
 
 } );
