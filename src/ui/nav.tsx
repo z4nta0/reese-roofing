@@ -452,7 +452,7 @@ function NavBarCom () : React.JSX.Element {
 
 // #region Exports
 
-export { NavBarCom }; // What: Named Exports. Why: Every page renders the shared navigation bar. How: This exports NavBarCom.
+export { NavBarCom }; // What: Named Export. Why: Every page renders the shared navigation bar. How: This exports NavBarCom.
 
 // #endregion Exports
 

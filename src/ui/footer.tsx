@@ -166,7 +166,7 @@ function SitFooCom () : React.JSX.Element {
 
 // #region Exports
 
-export { SitFooCom }; // What: Named Exports. Why: Every page renders the shared site footer. How: This exports SitFooCom.
+export { SitFooCom }; // What: Named Export. Why: Every page renders the shared site footer. How: This exports SitFooCom.
 
 // #endregion Exports
 

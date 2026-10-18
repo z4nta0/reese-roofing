@@ -154,7 +154,7 @@ function NotFouCom () : React.JSX.Element {
 
 // #region Exports
 
-export { NotFouCom }; // What: Named Exports. Why: app.tsx renders the 404 page for unknown paths. How: This exports NotFouCom.
+export { NotFouCom }; // What: Named Export. Why: app.tsx renders the 404 page for unknown paths. How: This exports NotFouCom.
 
 // #endregion Exports
 

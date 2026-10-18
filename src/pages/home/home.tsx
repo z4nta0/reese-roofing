@@ -149,7 +149,7 @@ function HomPagCom () : React.JSX.Element {
 
 // #region Exports
 
-export { HomPagCom }; // What: Named Exports. Why: app.tsx renders the home page at the root path. How: This exports HomPagCom.
+export { HomPagCom }; // What: Named Export. Why: app.tsx renders the home page at the root path. How: This exports HomPagCom.
 
 // #endregion Exports
 
