@@ -106,10 +106,11 @@ async function opeDraFun ( curPagObj : Page ) : Promise< void > {
  * opeRouFun = Open Route Function
  *
  * @summary
- * Opens one route at one viewport size, ready to be used: it turns on
- * reduced motion so in-page scrolling jumps rather than glides, sizes the
- * viewport, loads the path, and waits for the web fonts, so positions read
- * afterwards are final.
+ * Opens one route at one viewport size, ready to be used: it turns on reduced
+ * motion so in-page scrolling jumps rather than glides, sizes the viewport,
+ * counts every hashchange event the page will fire, so a check can tell that
+ * no plain jump to a section ever put a hash in the address, loads the path,
+ * and waits for the web fonts, so positions read afterwards are final.
  *
  * @author z4nta0 <https://github.com/z4nta0>
  *
@@ -134,6 +135,16 @@ async function opeRouFun ( curPagObj : Page, rouPatStr : string, vieSizObj : { h
 	await curPagObj.emulateMedia( { reducedMotion : 'reduce' } ); // What: Reduced Motion Emulation. Why: Scrolling should land at once, so its target can be read right away. How: This makes the page match prefers-reduced-motion, which turns smooth scrolling off.
 
 	await curPagObj.setViewportSize( vieSizObj ); // What: Viewport Size Call. Why: The bar's links and the drawer depend on the width. How: This sizes the page before it loads.
+
+	await curPagObj.addInitScript( () => { // What: Hash Change Counter. Why: A plain jump to a section adds a hash, and a history entry, that the home page then clears, so the address alone can't show it happened. How: This counts every hashchange event, which a jump fires and a router push or replace never does.
+
+
+		Reflect.set( window, 'hasChaNum', 0 ); // What: Hash Change Number Set. Why: The count starts at zero on every load. How: This puts the counter on the window, where a check reads it.
+
+		window.addEventListener( 'hashchange', () => Reflect.set( window, 'hasChaNum', Number( Reflect.get( window, 'hasChaNum' ) ) + 1 ) ); // What: Hash Change Listener. Why: Each jump has to be counted. How: This adds one to the counter whenever the hash changes.
+
+
+	} );
 
 	await curPagObj.goto( rouPatStr ); // What: Route Load Call. Why: Each check starts from a fresh load. How: This opens the path on the suite's dev server.
 
@@ -204,6 +215,8 @@ for ( const [ linLabStr, secIdeStr ] of [ [ 'Services', 'services' ], [ 'About',
 
 		await expect( curPagObj ).toHaveURL( /\/$/ ); // What: Clean Address Assertion. Why: The address bar should stay free of hashes. How: This checks the URL still ends at the root.
 
+		expect( await curPagObj.evaluate( () => Reflect.get( window, 'hasChaNum' ) ) ).toBe( 0 ); // What: No Hash Jump Assertion. Why: A plain jump would have put a hash in the address before the home page cleared it. How: This checks the page never fired a hashchange event.
+
 
 	} );
 
@@ -263,6 +276,8 @@ for ( const [ butLabStr, secIdeStr ] of [ [ 'Request an estimate', 'contact' ], 
 
 		await expect( curPagObj ).toHaveURL( /\/$/ ); // What: Clean Address Assertion. Why: The address bar should stay free of hashes. How: This checks the URL still ends at the root.
 
+		expect( await curPagObj.evaluate( () => Reflect.get( window, 'hasChaNum' ) ) ).toBe( 0 ); // What: No Hash Jump Assertion. Why: A plain jump would have put a hash in the address before the home page cleared it. How: This checks the page never fired a hashchange event.
+
 
 	} );
 
@@ -283,6 +298,8 @@ test( "the bar's estimate button scrolls to the contact section", async ( { page
 
 	await expect( curPagObj ).toHaveURL( /\/$/ ); // What: Clean Address Assertion. Why: The address bar should stay free of hashes. How: This checks the URL still ends at the root.
 
+	expect( await curPagObj.evaluate( () => Reflect.get( window, 'hasChaNum' ) ) ).toBe( 0 ); // What: No Hash Jump Assertion. Why: A plain jump would have put a hash in the address before the home page cleared it. How: This checks the page never fired a hashchange event.
+
 
 } );
 
@@ -302,6 +319,8 @@ test( 'the Home link returns to the top', async ( { page : curPagObj } ) => { //
 
 	await expect( curPagObj ).toHaveURL( /\/$/ ); // What: Clean Address Assertion. Why: The address bar should stay free of hashes. How: This checks the URL still ends at the root.
 
+	expect( await curPagObj.evaluate( () => Reflect.get( window, 'hasChaNum' ) ) ).toBe( 0 ); // What: No Hash Jump Assertion. Why: A plain jump would have put a hash in the address before the home page cleared it. How: This checks the page never fired a hashchange event.
+
 
 } );
 
@@ -318,6 +337,8 @@ test( 'back to top returns to the top', async ( { page : curPagObj } ) => { // W
 	await expect.poll( () => curPagObj.evaluate( () => window.scrollY ) ).toBe( 0 ); // What: Top Position Assertion. Why: The visitor should end up back at the top. How: This waits until the page has scrolled all the way up.
 
 	await expect( curPagObj ).toHaveURL( /\/$/ ); // What: Clean Address Assertion. Why: The address bar should stay free of hashes. How: This checks the URL still ends at the root.
+
+	expect( await curPagObj.evaluate( () => Reflect.get( window, 'hasChaNum' ) ) ).toBe( 0 ); // What: No Hash Jump Assertion. Why: A plain jump would have put a hash in the address before the home page cleared it. How: This checks the page never fired a hashchange event.
 
 
 } );
@@ -351,6 +372,8 @@ test( 'the menu toggle opens and closes the drawer', async ( { page : curPagObj 
 
 	await expect( curPagObj.locator( 'main' ) ).toHaveAttribute( 'inert', '' ); // What: Inert Page Assertion. Why: The page under the dimmed scrim shouldn't take focus. How: This checks the main content is inert while the drawer is open.
 
+	await expect( curPagObj.getByRole( 'contentinfo' ) ).toHaveAttribute( 'inert', '' ); // What: Inert Footer Assertion. Why: Everything behind the open drawer, not just the main content, should stay out of reach. How: This checks the footer is inert too.
+
 
 	await curPagObj.getByRole( 'button', { name : 'Toggle menu' } ).click(); // What: Toggle Close Call. Why: The same button closes the drawer. How: This clicks it again.
 
@@ -358,6 +381,8 @@ test( 'the menu toggle opens and closes the drawer', async ( { page : curPagObj 
 	await expect( curPagObj.getByRole( 'button', { name : 'Toggle menu' } ) ).toHaveAttribute( 'aria-expanded', 'false' ); // What: Drawer Closed Assertion. Why: The drawer should close. How: This checks the button reports it collapsed.
 
 	await expect( curPagObj.locator( 'main' ) ).not.toHaveAttribute( 'inert' ); // What: Live Page Assertion. Why: The page has to be usable again. How: This checks the main content is no longer inert.
+
+	await expect( curPagObj.getByRole( 'contentinfo' ) ).not.toHaveAttribute( 'inert' ); // What: Live Footer Assertion. Why: The footer has to be usable again too. How: This checks it's no longer inert.
 
 
 } );
@@ -419,6 +444,8 @@ for ( const [ linLabStr, secIdeStr ] of [ [ 'Home', 'top' ], [ 'Services', 'serv
 
 		await expect( curPagObj ).toHaveURL( /\/$/ ); // What: Clean Address Assertion. Why: The address bar should stay free of hashes. How: This checks the URL still ends at the root.
 
+		expect( await curPagObj.evaluate( () => Reflect.get( window, 'hasChaNum' ) ) ).toBe( 0 ); // What: No Hash Jump Assertion. Why: A plain jump would have put a hash in the address before the home page cleared it. How: This checks the page never fired a hashchange event.
+
 
 	} );
 
@@ -443,6 +470,8 @@ test( "the drawer's estimate button closes the drawer and scrolls to the contact
 
 	await expect( curPagObj ).toHaveURL( /\/$/ ); // What: Clean Address Assertion. Why: The address bar should stay free of hashes. How: This checks the URL still ends at the root.
 
+	expect( await curPagObj.evaluate( () => Reflect.get( window, 'hasChaNum' ) ) ).toBe( 0 ); // What: No Hash Jump Assertion. Why: A plain jump would have put a hash in the address before the home page cleared it. How: This checks the page never fired a hashchange event.
+
 
 } );
 
@@ -461,6 +490,8 @@ test( 'widening the screen closes the drawer', async ( { page : curPagObj } ) =>
 	await expect( curPagObj.locator( 'button[aria-label="Toggle menu"]' ) ).toHaveAttribute( 'aria-expanded', 'false' ); // What: Drawer Closed Assertion. Why: The drawer should close once the toggle is gone. How: This checks the hidden toggle reports the drawer collapsed, found by its label since a hidden button drops out of the accessibility tree.
 
 	await expect( curPagObj.locator( 'main' ) ).not.toHaveAttribute( 'inert' ); // What: Live Page Assertion. Why: The page has to stay usable once the toggle is gone. How: This checks the main content is no longer inert.
+
+	await expect( curPagObj.getByRole( 'contentinfo' ) ).not.toHaveAttribute( 'inert' ); // What: Live Footer Assertion. Why: The footer has to be usable again too. How: This checks it's no longer inert.
 
 
 } );
@@ -585,6 +616,8 @@ test( 'the 404 page leads to the contact section', async ( { page : curPagObj } 
 
 	await expect( curPagObj ).toHaveURL( /\/$/ ); // What: Clean Address Assertion. Why: The home page clears the hash once it has scrolled to the section. How: This checks the URL ends at the root.
 
+	expect( await curPagObj.evaluate( () => Reflect.get( window, 'hasChaNum' ) ) ).toBe( 0 ); // What: No Hash Jump Assertion. Why: A plain jump would have put a hash in the address before the home page cleared it. How: This checks the page never fired a hashchange event.
+
 
 } );
 
@@ -607,6 +640,8 @@ for ( const [ linLabStr, secIdeStr ] of [ [ 'Services', 'services' ], [ 'About',
 
 		await expect( curPagObj ).toHaveURL( /\/$/ ); // What: Clean Address Assertion. Why: The home page clears the hash once it has scrolled to the section. How: This checks the URL ends at the root.
 
+		expect( await curPagObj.evaluate( () => Reflect.get( window, 'hasChaNum' ) ) ).toBe( 0 ); // What: No Hash Jump Assertion. Why: A plain jump would have put a hash in the address before the home page cleared it. How: This checks the page never fired a hashchange event.
+
 
 	} );
 
@@ -626,6 +661,8 @@ test( "the 404 page's Home link leads to the home page", async ( { page : curPag
 	await expect( curPagObj ).toHaveTitle( 'Reese Roofing | Portfolio Demo by techgeek.support' ); // What: Home Title Assertion. Why: The visitor should reach the home page, not stay on the 404 page. How: This checks the home page's title.
 
 	await expect( curPagObj ).toHaveURL( /\/$/ ); // What: Clean Address Assertion. Why: The home page clears the hash once it has scrolled to the top. How: This checks the URL ends at the root.
+
+	expect( await curPagObj.evaluate( () => Reflect.get( window, 'hasChaNum' ) ) ).toBe( 0 ); // What: No Hash Jump Assertion. Why: A plain jump would have put a hash in the address before the home page cleared it. How: This checks the page never fired a hashchange event.
 
 
 } );
