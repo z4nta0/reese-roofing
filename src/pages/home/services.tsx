@@ -204,7 +204,7 @@ function SerSecCom () : React.JSX.Element {
 
 
 
-				<div className={ cssModObj.serGriDiv }>{ /* What: Services Grid Div Element. Why: The services read best as a grid of cards. How: This lays out one card per service. */ }
+				<div className={ cssModObj.serGriDiv }>{ /* What: Services Grid Div Element. Why: The services read best as a grid of cards. How: This lays out one card per service, three across, two across at 960px wide and below, and one at 640px and below. */ }
 
 
 					{ SER_REC_ARR.map( ( serRecObj ) => ( // What: Service Card Map. Why: Every service gets its own card. How: This renders one article per row of SER_REC_ARR.
