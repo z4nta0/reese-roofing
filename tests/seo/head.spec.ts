@@ -180,10 +180,10 @@ test( 'robots.txt and _headers keep the demo out of search and away from AI craw
 	const heaTexStr = await ( await curPagObj.request.get( '/_headers' ) ).text();   // What: Headers Text String. Why: Netlify reads its header rules from this file. How: This fetches it, which Vite serves as a plain file from public/.
 
 
-	expect( robTexStr ).toMatch( /User-agent: \*\nAllow: \// );                // What: Search Crawlers Assertion. Why: Search engines must reach the page to read its noindex. How: This checks the wildcard group allows the site.
-	expect( robTexStr ).toMatch( /User-agent: GPTBot\n[\s\S]*?Disallow: \// ); // What: AI Crawlers Assertion. Why: AI training crawlers shouldn't learn the fictional company. How: This checks a named AI crawler's group disallows the site.
-	expect( robTexStr ).not.toMatch( /Sitemap:/i );                            // What: No Sitemap Assertion. Why: A site kept out of search has nothing to list. How: This checks robots.txt names no sitemap.
-	expect( heaTexStr ).toMatch( /\/\*\n\tX-Robots-Tag: noindex/ );            // What: Robots Header Assertion. Why: Every file, the preview image included, should carry noindex. How: This checks the site-wide header rule.
+	expect( robTexStr ).toMatch( /^User-agent: \*\nAllow: \/$/m );                                 // What: Search Crawlers Assertion. Why: Search engines must reach the page to read its noindex. How: This checks the wildcard group allows the whole site, its rule ending at the bare slash.
+	expect( robTexStr ).toMatch( /^User-agent: GPTBot\n(?:User-agent: [^\n]*\n)*Disallow: \/$/m ); // What: AI Crawlers Assertion. Why: AI training crawlers shouldn't learn the fictional company. How: This checks a named AI crawler's group, read only through its run of user agents, disallows the whole site, its rule ending at the bare slash.
+	expect( robTexStr ).not.toMatch( /Sitemap:/i );                                                // What: No Sitemap Assertion. Why: A site kept out of search has nothing to list. How: This checks robots.txt names no sitemap.
+	expect( heaTexStr ).toMatch( /\/\*\n\tX-Robots-Tag: noindex/ );                                // What: Robots Header Assertion. Why: Every file, the preview image included, should carry noindex. How: This checks the site-wide header rule.
 
 
 } );
