@@ -16,15 +16,14 @@ import { useNavigate } from 'react-router';       // What: Use Navigate. Why: A 
  *
  * @summary
  * The one way the bar, its drawer, the hero, and the 404 page reach a home
- * page section, from any page.
- * On the home page the section is already there, so the link scrolls to it in
- * place, smoothly unless the visitor asked for reduced motion. On any other
- * page, such as the 404 page, the section doesn't exist yet, so the link
- * navigates to the home page with the section's id as the hash, and the home
- * page scrolls to it on arrival and then clears the hash, so the address bar
- * stays free of hashes either way. Each link keeps its real address
- * (/#about), so a Ctrl, Cmd, Shift, Alt, or middle click is left to the
- * browser, which opens the home page at that section. Adapted from
+ * page section, from any page. On the home page the section is already there,
+ * so the link scrolls to it in place, smoothly unless the visitor asked for
+ * reduced motion. On any other page, such as the 404 page, the section doesn't
+ * exist yet, so the link navigates to the home page with the section's id as
+ * the hash, and the home page scrolls to it on arrival and then clears the
+ * hash, so the address bar stays free of hashes either way. Each link keeps
+ * its real address (/#about), so a Ctrl, Cmd, Shift, Alt, or middle click is
+ * left to the browser, which opens the home page at that section. Adapted from
  * hair-designs' own, which decides by whether the section's element is on the
  * page; here it decides by the path instead, since the 404 page has a top
  * anchor of its own, and the nav's Home link there has to go home rather than
