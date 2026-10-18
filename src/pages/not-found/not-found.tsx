@@ -50,7 +50,7 @@ import { useSecCliFun } from '../../ui/section-link.ts'; // What: Use Section Cl
  * estimate button), where the home page scrolls to it and clears the hash,
  * while a Ctrl, Cmd, or middle click opens its address in a new tab. Since no
  * link moves within the site to another page without a section hash (the bar's
- * brand link reloads the home page in full, at its top), the site needs no
+ * brand link loads the home page in full, at its top), the site needs no
  * scroll-to-top hook, the same exception hair-designs records. The main
  * element carries a top anchor of its own, so the footer's back-to-top link
  * works here too. app.tsx renders it for every path no other route claims.
