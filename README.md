@@ -104,7 +104,7 @@ design/
   - The **full logo** (`src/pages/home/logo-full.svg`) anchors the hero as the primary visual, doubles as a "seal" in the About section's sticky left column on wide screens, and appears on a paper-colored signature card in the Contact section. It's a two-color SVG (navy mark + grey subtext).
   - The **simple mark** (`src/assets/logo-mark.svg`) is used in the nav bar and the footer.
   - The **favicon** uses an SVG (`/public/favicon.svg`), a centered, padded version of the simple mark, with raster `.ico` and PNG fallbacks (16/32/192/512) plus a 180×180 Apple touch icon on a paper-colored background.
-  - All logos are vector SVG: crisp at any size, tiny payloads, and the brand navy `#1f4e7a` is set as the `fill` attribute so you can edit it directly in the SVG files if you ever want a different color treatment.
+  - All logos are vector SVG: crisp at any size, with tiny payloads. The brand navy `#1f4e7a` is set as a `fill` attribute in the mark and the favicon, but the full logo also writes it as `rgb(31, 78, 122)` in two paths' `style` attributes, and its grey as both `#6b7079` and `rgb(107, 112, 121)`, so a different color treatment has to change both forms.
 
 ## Customization checklist
 

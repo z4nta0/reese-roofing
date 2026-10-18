@@ -486,7 +486,7 @@
 
 /* #region forSubBut */
 
-.forSubBut { /* What: Form Submit Button. Why: Sending the request is the form's one action. How: This draws the site's pill button, its height set by its line height alone, inverted to paper on the dark band, at the start of the row, lifting and turning the soft accent on hover. */
+.forSubBut { /* What: Form Submit Button. Why: Sending the request is the form's one action. How: This draws the site's pill button, its height set by its line height alone, inverted to paper on the dark band, at the form's left edge rather than stretched across it, lifting and turning the soft accent on hover. */
 
 
 	align-items    : center;

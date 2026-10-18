@@ -19,7 +19,7 @@
 
 /* #region nofPagDiv */
 
-.nofPagDiv { /* What: Not-Found Page Div. Why: The footer should sit at the bottom of the screen on a page this short. How: This stacks the bar, main content, and footer in a column at least the viewport's height. */
+.nofPagDiv { /* What: Not-Found Page Div. Why: The footer should sit at the bottom of the screen on a page this short. How: This stacks the main content and footer in a column at least the viewport's height, under the fixed bar. */
 
 
 	display        : flex;

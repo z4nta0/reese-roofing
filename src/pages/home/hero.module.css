@@ -111,7 +111,7 @@
 @container app ( max-width : 960px ) { /* What: Narrow Hero Top Div. Why: Small screens are too narrow for two columns. How: This applies below 960px wide. */
 
 
-	.herTopDiv { /* What: Stacked Hero Top Div. Why: The copy and logo read best stacked. How: This turns the grid into one column with smaller gaps. */
+	.herTopDiv { /* What: Stacked Hero Top Div. Why: The copy and logo read best stacked. How: This turns the grid into one column and shortens its bottom margin. */
 
 
 		gap                   : var( --spa-ver-p04 ); /* Spacing Vertical Base Plus 4 ~= 44.876px */
@@ -362,7 +362,7 @@
 @container app ( max-width : 960px ) { /* What: Narrow Hero Bottom Div. Why: Small screens are too narrow for the pitch and buttons side by side. How: This applies below 960px wide. */
 
 
-	.herBotDiv { /* What: Stacked Hero Bottom Div. Why: The buttons read best under the pitch. How: This turns the grid into one column with a smaller gap. */
+	.herBotDiv { /* What: Stacked Hero Bottom Div. Why: The buttons read best under the pitch. How: This turns the grid into one column. */
 
 
 		gap                   : var( --spa-ver-p03 ); /* Spacing Vertical Base Plus 3 ~= 33.876px */
