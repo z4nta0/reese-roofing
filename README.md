@@ -75,7 +75,8 @@ src/
 ├── pages/
 │   ├── home/          Home page and its sections (Hero, Services, About, Contact), each with its own .module.css, plus logo-full.svg
 │   └── not-found/     404 page and its .module.css
-├── ui/                Shared components (Nav, Footer), each with its own .module.css
+├── ui/                Shared components (Nav, Footer), each with its own .module.css, and section-link.ts, the hash-free section link handler
+├── utils/             App-agnostic helpers (motion.ts, the reduced-motion check)
 ├── styles/            fonts.css (@font-face) + styles.css (design tokens and base element styles)
 ├── app.tsx            React Router setup, with app.module.css for the root's container
 ├── main.tsx           Entry point
@@ -112,11 +113,12 @@ If this design is ever reused for a real business, update the placeholders below
 - **Phone number:** `(785) 555-0199`. Search the repo for it; it appears in the Nav (bar and drawer) and the Contact section
 - **Email:** `hello@reeseroofing.example`. Same; it appears in the Contact section's contact details and in the mailto link the form opens on submit (`subForFun` in `src/pages/home/contact.tsx`)
 - **Address:** placeholder Lawrence, Kansas 66044, in the Contact section
+- **Form placeholders:** the sample name, property, email (`jane@company.example`), and phone (`(785) 555-0100`) shown in the contact form's empty fields, in `src/pages/home/contact.tsx`
 - **Footer:** the company's legal name, licensing line, and the demo notice in `src/ui/footer.tsx`
 - **Stats in Hero:** 17+ years, 400+ roofs, etc. Replace them with real numbers
 - **Services list:** edit the `SER_RCD_ARR` array in `src/pages/home/services.tsx`
 - **About copy & quote:** `src/pages/home/about.tsx`
-- **Form backend:** the form currently uses `mailto:` as a no-backend fallback. To wire up a real backend, replace the `subForFun` handler in `src/pages/home/contact.tsx` with a `fetch` POST to your endpoint (Formspree, Netlify Forms, your own API, etc.).
+- **Form backend:** the form currently uses `mailto:` as a no-backend fallback. To wire up a real backend, replace the `subForFun` handler in `src/pages/home/contact.tsx` with a `fetch` POST to your endpoint (Formspree, Netlify Forms, your own API, etc.). The Content-Security-Policy in `public/_headers` blocks that until it's updated: change `form-action 'none'` to `'self'` (or the endpoint's origin), and add a `connect-src` naming any outside endpoint the script posts to.
 
 ## Routing
 

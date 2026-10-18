@@ -36,7 +36,8 @@ isn't a real business, so it gets the demo treatment rather than local SEO:
 - **Structured data**: one `WebSite` JSON-LD block about a fictional company,
   created by techgeek.support. Never `LocalBusiness`, an address, or a phone.
 - **Placeholders stay reserved**: the phone is a 555-01xx number and the
-  email an `.example` domain.
+  email an `.example` domain, and so are the contact form's sample phone
+  and email (added 2026-10-17, with a sample name and property).
 - **Security headers** (added 2026-10-17): `public/_headers` also sends the
   same hardening block as the sibling sites (a strict Content-Security-Policy,
   HSTS, nosniff, a framing deny, and the referrer and permissions policies),
