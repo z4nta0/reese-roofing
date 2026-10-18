@@ -317,7 +317,7 @@ test( 'the Home link returns to the top', async ( { page : curPagObj } ) => { //
 
 
 
-test( 'back to top returns to the top', async ( { page : curPagObj } ) => { // What: Back To Top Test. Why: The footer's link has to bring the visitor back up. How: This scrolls to the bottom, clicks the link, and checks the scroll position.
+test( 'back to top returns to the top', async ( { page : curPagObj } ) => { // What: Back To Top Test. Why: The footer's link has to bring the visitor back up. How: This clicks the link, which Playwright first scrolls into view at the bottom of the page, and checks the scroll position.
 
 
 	await opeRouFun( curPagObj, '/', DES_VIE_OBJ ); // What: Home Open Call. Why: Back to top sits at the bottom of the home page. How: This opens it at desktop size.
@@ -334,7 +334,7 @@ test( 'back to top returns to the top', async ( { page : curPagObj } ) => { // W
 
 
 
-test( 'the bar takes its scrolled style once the page moves', async ( { page : curPagObj } ) => { // What: Scrolled Bar Test. Why: Once the page moves, the bar needs its frosted background to stay readable over the content. How: This scrolls the home page down and back up, checking the bar's attribute and background each time.
+test( 'the bar takes its scrolled style once the page moves and drops it back at the top', async ( { page : curPagObj } ) => { // What: Scrolled Bar Test. Why: Once the page moves, the bar needs its frosted background to stay readable over the content. How: This scrolls the home page down and back up, checking the bar's attribute and background each time.
 
 
 	await opeRouFun( curPagObj, '/', DES_VIE_OBJ ); // What: Home Open Call. Why: The bar starts transparent at the top of the home page. How: This opens it at desktop size.
