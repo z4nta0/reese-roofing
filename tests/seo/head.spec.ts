@@ -208,7 +208,7 @@ test( '_headers hardens every response', async ( { page : curPagObj } ) => { // 
 
 
 
-test( 'the social preview tags are complete', async ( { page : curPagObj } ) => { // What: Social Tags Test. Why: A link shared anywhere should show a full, honest card. How: This loads the home page and checks every social tag, its absolute URLs, the image's type and size, the copy's lengths, and the theme color and icons beside the card.
+test( 'the social preview tags are complete', async ( { page : curPagObj } ) => { // What: Social Tags Test. Why: A link shared anywhere should show a full, honest card. How: This loads the home page and checks every social tag, its absolute URLs, the image's type and size, the copy's lengths, that every title, summary, and image description calls it a demo, and the theme color and icons beside the card.
 
 
 	await curPagObj.goto( '/' ); // What: Home Load Call. Why: Link scrapers read the page every route shares. How: This opens the home page.
@@ -227,6 +227,12 @@ test( 'the social preview tags are complete', async ( { page : curPagObj } ) => 
 	expect( [ socTagObj[ 'og:image' ], socTagObj[ 'og:url' ], socTagObj[ 'twitter:image' ] ] ).toEqual( [ `${ LIV_URL_STR }og-image.png`, LIV_URL_STR, `${ LIV_URL_STR }og-image.png` ] ); // What: Absolute URLs Assertion. Why: Scrapers can't resolve a relative address. How: This checks each URL tag names the live https address.
 	expect( socTagObj[ 'og:image:type' ] ).toBe( 'image/png' );                                     // What: Image Type Assertion. Why: The tag has to match the file. How: This checks it names a PNG.
 	expect( socTagObj[ 'og:type' ] ).toBe( 'website' );                                             // What: Page Type Assertion. Why: The social preview rule calls every site a website, never an article. How: This checks the type tag says so.
+	expect( socTagObj[ 'og:description' ] ).toMatch( /fictional/ );                                 // What: Demo Description Assertion. Why: A shared card must never present the fictional company as real. How: This checks the summary says the company is fictional.
+	expect( socTagObj[ 'og:image:alt' ] ).toMatch( /portfolio demo/i );                             // What: Demo Image Alt Assertion. Why: A screen reader user hears the card's image described, so it has to call the site a demo too. How: This checks the image's description says it's a portfolio demo.
+	expect( socTagObj[ 'og:site_name' ] ).toMatch( /Portfolio Demo/ );                              // What: Demo Site Name Assertion. Why: The site name shows beside the card, so it has to name the demo rather than the company. How: This checks it says portfolio demo.
+	expect( socTagObj[ 'og:title' ] ).toMatch( /Portfolio Demo/ );                                  // What: Demo Title Assertion. Why: A shared card must never present the fictional company as real. How: This checks the card's title calls it a portfolio demo.
+	expect( socTagObj[ 'twitter:description' ] ).toMatch( /fictional/ );                            // What: Demo Twitter Description Assertion. Why: X's card shows its own summary. How: This checks it says the company is fictional.
+	expect( socTagObj[ 'twitter:title' ] ).toMatch( /Portfolio Demo/ );                             // What: Demo Twitter Title Assertion. Why: X's card shows its own title. How: This checks it calls the site a portfolio demo.
 	expect( socTagObj[ 'og:image:height' ] ).toBe( '630' );                                         // What: Image Height Assertion. Why: The tag has to promise the card's real height. How: This checks it says 630, the height the image test reads from the file.
 	expect( socTagObj[ 'og:image:width' ] ).toBe( '1200' );                                         // What: Image Width Assertion. Why: The tag has to promise the card's real width. How: This checks it says 1,200, the width the image test reads from the file.
 	expect( socTagObj[ 'og:title' ].length ).toBeLessThanOrEqual( 60 );                             // What: Title Length Assertion. Why: Longer titles are cut off in most cards. How: This checks it stays at 60 characters or fewer.
