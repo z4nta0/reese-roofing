@@ -36,6 +36,8 @@ import { useSecCliFun } from './section-link.ts'; // What: Use Section Click Fun
 
 // #region Constants
 
+// #region NAV_LIN_ARR
+
 /**
  * NAV_LIN_ARR = Nav Link Array
  *
@@ -61,6 +63,8 @@ const NAV_LIN_ARR = [ // What: Nav Link Array. Why: The bar and its mobile drawe
 
 
 ];
+
+// #endregion NAV_LIN_ARR
 
 // #endregion Constants
 
