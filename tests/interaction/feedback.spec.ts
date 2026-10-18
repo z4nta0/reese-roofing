@@ -318,12 +318,12 @@ async function feeProFun ( curPagObj : Page, redMotBoo : boolean ) : Promise< st
  * Probes every form field a visitor can reach for the feedback the rule asks
  * of a field, a visible change when it takes focus, and returns what's
  * missing. Each field is read at rest, then focused and read again once its
- * transition has had time to finish, along with its transition durations,
- * then blurred. A field that looks the same focused is a problem, and so is
- * one whose change doesn't ease outside reduced motion, or still eases under
- * it. Fields aren't held to the hover and press checks, which the rule asks
- * of links, buttons, and cards. A field that's hidden, or inert behind the
- * open drawer, is skipped.
+ * transition has had time to finish, along with its transition durations, then
+ * blurred. A field that looks the same focused is a problem, and so is one
+ * whose change doesn't ease outside reduced motion, or still eases under it.
+ * Fields aren't held to the hover and press checks, which the rule asks of
+ * links, buttons, and cards. A field that's hidden, or inert behind the open
+ * drawer, is skipped.
  *
  * @author z4nta0 <https://github.com/z4nta0>
  *
@@ -332,7 +332,7 @@ async function feeProFun ( curPagObj : Page, redMotBoo : boolean ) : Promise< st
  *                    reduced motion, which decides whether a field should
  *                    ease.
  *
- * @returns A promise that resolves with every problem found.
+ * @returns Every field focus problem found.
  * @see {@link proLisArr}
  *
  * @example
@@ -346,7 +346,6 @@ async function fieProFun ( curPagObj : Page, redMotBoo : boolean ) : Promise< st
 
 
 	const proLisArr : string[] = []; // What: Problem List Array. Why: Every problem should be reported, not just the first. How: This collects them.
-
 
 
 	for ( const fieCurObj of await curPagObj.$$( 'input, select, textarea' ) ) { // What: Field Probe Loop. Why: Every field has to show it took focus. How: This reads each one at rest and focused.
@@ -405,7 +404,7 @@ async function fieProFun ( curPagObj : Page, redMotBoo : boolean ) : Promise< st
 for ( const staRecObj of STA_REC_ARR ) { // What: State Test Loop. Why: Every page state is checked. How: This declares each check once per state.
 
 
-	test( `${ staRecObj.ideStr } gives every control hover, press, and focus feedback`, async ( { page : curPagObj } ) => { // What: Feedback Test. Why: Every interaction should visibly register. How: This opens the state, blocks clicks, and probes every control.
+	test( `${ staRecObj.ideStr } gives every control hover, press, and focus feedback`, async ( { page : curPagObj } ) => { // What: Feedback Test. Why: Every interaction should visibly register. How: This opens the state, blocks clicks, and probes every field and control.
 
 
 		await opeStaFun( curPagObj, staRecObj ); // What: State Open Call. Why: The controls are probed with the state settled. How: This loads and settles it.
@@ -438,7 +437,7 @@ for ( const staRecObj of STA_REC_ARR ) { // What: State Test Loop. Why: Every pa
 
 
 
-	test( `${ staRecObj.ideStr } keeps feedback without motion under reduced motion`, async ( { page : curPagObj } ) => { // What: Reduced Motion Feedback Test. Why: Visitors who ask for less motion still need to see their actions register. How: This probes every control with reduced motion on.
+	test( `${ staRecObj.ideStr } keeps feedback without motion under reduced motion`, async ( { page : curPagObj } ) => { // What: Reduced Motion Feedback Test. Why: Visitors who ask for less motion still need to see their actions register. How: This probes every field and control with reduced motion on.
 
 
 		await curPagObj.emulateMedia( { reducedMotion : 'reduce' } ); // What: Reduced Motion Emulation. Why: The preference has to be set before the page loads. How: This makes the page match prefers-reduced-motion: reduce.

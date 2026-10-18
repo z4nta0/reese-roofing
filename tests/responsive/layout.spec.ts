@@ -218,8 +218,8 @@ function layProFun () : string[] {
 
 		const carEleArr = [ ...griCurEle.children ].filter( ( carCurEle ) => carCurEle.getBoundingClientRect().width > 0 ); // What: Card Element Array. Why: Only cards on screen make up the rows. How: This keeps the grid's children that take up room.
 
-		const carCouBoo = carEleArr.length >= 3;                            // What: Card Count Boolean. Why: A grid of one or two items is a layout, not a run of cards. How: This is true when at least three children show.
-		const griDisBoo = getComputedStyle( griCurEle ).display === 'grid'; // What: Grid Display Boolean. Why: Only a grid lays its children out in rows of columns. How: This is true when the element displays as a grid.
+		const carCouBoo = carEleArr.length >= 3; // What: Card Count Boolean. Why: A grid of one or two items is a layout, not a run of cards. How: This is true when at least three children show.
+		const griDisBoo = getComputedStyle( griCurEle ).display === 'grid';                                                                                   // What: Grid Display Boolean. Why: Only a grid lays its children out in rows of columns. How: This is true when the element displays as a grid.
 		const samClaBoo = !!carEleArr[ 0 ]?.classList[ 0 ] && carEleArr.every( ( carCurEle ) => carCurEle.classList[ 0 ] === carEleArr[ 0 ].classList[ 0 ] ); // What: Same Class Boolean. Why: Cards are children of one kind, which share a class. How: This is true when every shown child carries the first child's class.
 
 		const griCarBoo = griDisBoo && carCouBoo && samClaBoo; // What: Grid Card Boolean. Why: All three together mean the element is a grid of cards. How: This combines them.
@@ -250,8 +250,8 @@ function layProFun () : string[] {
 		const rowCouArr = [ ...rowCouMap.values() ];                                 // What: Row Count Array. Why: The rows are compared by their card counts. How: This lists them top to bottom.
 
 		const cenOddBoo = rowCouArr[ rowCouArr.length - 1 ] === 1 && Math.abs( ( lasRecObj.left + lasRecObj.right ) / 2 - ( griRecObj.left + griRecObj.right ) / 2 ) <= 1; // What: Centered Odd Boolean. Why: The rules allow one leftover card sitting centered in its own row. How: This is true when the last row holds one card whose center is within a pixel of the grid's.
-		const lasShoBoo = rowCouArr[ rowCouArr.length - 1 ] !== rowCouArr[ 0 ];                                                                                                // What: Last Short Boolean. Why: A last row unlike the first leaves the grid uneven. How: This compares the last row's count with the first's.
-		const uneRowBoo = rowCouArr.slice( 0, -1 ).some( ( rowCouNum ) => rowCouNum !== rowCouArr[ 0 ] );                                                                      // What: Uneven Rows Boolean. Why: Every row above the last should match the first. How: This is true when any of them differs.
+		const lasShoBoo = rowCouArr[ rowCouArr.length - 1 ] !== rowCouArr[ 0 ];                                                                                            // What: Last Short Boolean. Why: A last row unlike the first leaves the grid uneven. How: This compares the last row's count with the first's.
+		const uneRowBoo = rowCouArr.slice( 0, -1 ).some( ( rowCouNum ) => rowCouNum !== rowCouArr[ 0 ] );                                                                  // What: Uneven Rows Boolean. Why: Every row above the last should match the first. How: This is true when any of them differs.
 
 		const shoRowBoo = uneRowBoo || ( lasShoBoo && !cenOddBoo ); // What: Short Row Boolean. Why: Uneven rows, or a short last row that isn't one centered card, break the card grid rule. How: This combines them.
 

@@ -208,12 +208,13 @@ test( 'the social preview tags are complete', async ( { page : curPagObj } ) => 
 	await curPagObj.goto( '/' ); // What: Home Load Call. Why: Link scrapers read the page every route shares. How: This opens the home page.
 
 
-	const socTagArr = await curPagObj.locator( 'meta[property^="og:"], meta[name^="twitter:"]' ).evaluateAll( ( tagEleArr ) => tagEleArr.map( ( tagCurEle ) => [ tagCurEle.getAttribute( 'property' ) || tagCurEle.getAttribute( 'name' ) || '', tagCurEle.getAttribute( 'content' ) || '' ] ) ); // What: Social Tag Array. Why: Every social tag is checked by its key and value. How: This reads each Open Graph and Twitter tag as a key and content pair.
-	const socTagObj = Object.fromEntries( socTagArr ); // What: Social Tag Object. Why: Tags are easier to check by key. How: This turns the pairs into an object.
-
 	await expect( curPagObj.locator( 'link[rel="apple-touch-icon"]' ) ).toHaveCount( 1 ); // What: Touch Icon Assertion. Why: Some apps show the site's icon beside its card. How: This checks the page links its apple-touch-icon.
 	await expect( curPagObj.locator( 'link[rel="icon"]' ).first() ).toBeAttached();       // What: Favicon Assertion. Why: Some apps show the favicon beside the card. How: This checks the page links at least one favicon.
 	await expect( curPagObj.locator( 'meta[name="theme-color"]' ) ).toHaveCount( 1 );     // What: Theme Color Assertion. Why: Discord colors its embed's edge from this tag. How: This checks the page carries it.
+
+
+	const socTagArr = await curPagObj.locator( 'meta[property^="og:"], meta[name^="twitter:"]' ).evaluateAll( ( tagEleArr ) => tagEleArr.map( ( tagCurEle ) => [ tagCurEle.getAttribute( 'property' ) || tagCurEle.getAttribute( 'name' ) || '', tagCurEle.getAttribute( 'content' ) || '' ] ) ); // What: Social Tag Array. Why: Every social tag is checked by its key and value. How: This reads each Open Graph and Twitter tag as a key and content pair.
+	const socTagObj = Object.fromEntries( socTagArr ); // What: Social Tag Object. Why: Tags are easier to check by key. How: This turns the pairs into an object.
 
 
 	expect( Object.keys( socTagObj ) ).toEqual( expect.arrayContaining( SOC_KEY_ARR ) );       // What: Complete Tags Assertion. Why: A missing tag leaves part of the card blank. How: This checks every required key is present, allowing optional extras.
