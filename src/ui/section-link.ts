@@ -23,11 +23,13 @@ import { useNavigate } from 'react-router';       // What: Use Navigate. Why: A 
  * the hash, and the home page scrolls to it on arrival and then clears the
  * hash, so the address bar stays free of hashes either way. Each link keeps
  * its real address (/#about), so a Ctrl, Cmd, Shift, Alt, or middle click is
- * left to the browser, which opens the home page at that section. Adapted from
- * hair-designs' own, which decides by whether the section's element is on the
- * page; here it decides by the path instead, since the 404 page has a top
- * anchor of its own, and the bar's and drawer's Home links and its Return
- * home button there have to go home rather than scroll to it.
+ * left to the browser, which handles it its own way: a Ctrl, Cmd, or middle
+ * click opens the home page at that section in a new tab, a Shift click in a
+ * new window, and an Alt click downloads it. Adapted from hair-designs' own,
+ * which decides by whether the section's element is on the page; here it
+ * decides by the path instead, since the 404 page has a top anchor of its own,
+ * and the bar's and drawer's Home links and its Return home button there have
+ * to go home rather than scroll to it.
  *
  * Sections:
  *  - Helpers
@@ -157,13 +159,13 @@ function useSecLinFun () : ( secIdeStr : string ) => void {
  * useSecCliFun = Use Section Click Function
  *
  * @summary
- * Returns secCliFun, the click handler every section link shares. A Ctrl,
- * Cmd, Shift, Alt, or middle click is left to the browser, which opens the
- * link's own address. Any other click stops the browser's jump to the hash
- * and hands the section's id to visSecFun, which scrolls to it on the home
- * page or navigates home to it from any other page. It reports whether it
- * handled the click, so a caller such as the phone menu can close itself
- * only then.
+ * Returns secCliFun, the click handler every section link shares. A Ctrl, Cmd,
+ * Shift, Alt, or middle click is left to the browser, which handles the link's
+ * own address its usual way (a new tab or window, or a download). Any other
+ * click stops the browser's jump to the hash and hands the section's id to
+ * visSecFun, which scrolls to it on the home page or navigates home to it from
+ * any other page. It reports whether it handled the click, so a caller such as
+ * the phone menu can close itself only then.
  *
  * @author z4nta0 <https://github.com/z4nta0>
  *
@@ -189,7 +191,7 @@ function useSecCliFun () : ( cliEveObj : React.MouseEvent< HTMLAnchorElement >, 
 	return ( cliEveObj : React.MouseEvent< HTMLAnchorElement >, secIdeStr : string ) => { // What: Section Click Function. Why: Every section link handles a click the same way. How: This leaves a modified click to the browser and otherwise cancels the jump and visits the section.
 
 
-		if ( modCliFun( cliEveObj ) ) return false; // What: Modified Click Guard. Why: A Ctrl, Cmd, Shift, Alt, or middle click asks the browser to open the link its own way. How: This leaves the click alone and reports it unhandled.
+		if ( modCliFun( cliEveObj ) ) return false; // What: Modified Click Guard. Why: A Ctrl, Cmd, Shift, Alt, or middle click asks the browser to handle the link its own way. How: This leaves the click alone and reports it unhandled.
 
 
 
