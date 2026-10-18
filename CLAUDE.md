@@ -161,10 +161,11 @@ suite reads the head of each route instead.
 - `npm run test:responsive`: measures the home page, the 404 page, and the
   open drawer at 21 widths from 320 to 1,920px (a pixel either side of each
   breakpoint included), failing on sideways scrolling, an unclipped element
-  past either edge, text spilling its box, or two reachable controls
-  overlapping. It found the bar's links running into the phone number just
-  above the drawer breakpoint, fixed by returning the links to the bar's
-  flex row.
+  past either edge, text spilling its box, two reachable controls overlapping,
+  or a card grid leaving uneven rows (the hero stats, the services, and the
+  principles), apart from the Card Grids rule's single centered card. It found
+  the bar's links running into the phone number just above the drawer
+  breakpoint, fixed by returning the links to the bar's flex row.
 - `npm run test:seo`: checks each route's title, description, robots,
   canonical, social tags, and structured data, the footer's demo line,
   `robots.txt`, `_headers` (its robots rule and every security header), and
