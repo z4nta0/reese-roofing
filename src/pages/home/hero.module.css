@@ -459,12 +459,13 @@
 
 
 }
-.butBasAnc--ghost:hover { /* What: Hovered Ghost Button Base Anchor. Why: The button should respond to the pointer. How: This fills it with ink and turns its text paper-colored. */
+.butBasAnc--ghost:hover { /* What: Hovered Ghost Button Base Anchor. Why: The button should respond to the pointer. How: This fills it with ink and turns its text paper-colored, and lifts it a pixel like the primary button. */
 
 
 	background   : var( --bac-inv-col ); /* Background Inverse Color = #1a1f24 */
 	border-color : var( --bac-inv-col ); /* Background Inverse Color = #1a1f24 */
 	color        : var( --bac-pag-col ); /* Background Page Color = #f5f2ec */
+	transform    : translateY( -1px );
 
 
 }

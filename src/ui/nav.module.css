@@ -143,7 +143,7 @@
 
 /* #region navBraAnc */
 
-.navBraAnc { /* What: Navigation Brand Anchor. Why: The logo and name form one link home. How: This sets them side by side in the display font. */
+.navBraAnc { /* What: Navigation Brand Anchor. Why: The logo and name form one link home. How: This sets them side by side in the display font, easing its press and focus ring. */
 
 
 	align-items    : center;
@@ -152,6 +152,27 @@
 	font-size      : var( --fon-siz-p02 ); /* Font Size Base Plus 2 ~= 19.304px */
 	gap            : var( --spa-hor-m01 ); /* Spacing Horizontal Base Minus 1 = 11px */
 	letter-spacing : -0.01em;
+	transition     : opacity var( --dur-tra-p01 ) var( --mot-sta-eas ), outline-offset var( --dur-tra-p01 ) var( --mot-dec-eas ), outline-width var( --dur-tra-p01 ) var( --mot-dec-eas ); /* Duration Transition Base Plus 1 ~= 209.1ms, Motion Standard Easing = ease, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ) */
+
+
+}
+.navBraAnc:active { /* What: Pressed Navigation Brand Anchor. Why: A press should register before the page responds. How: This dims the brand slightly while it's held, the way the bar's text links press. */
+
+
+	opacity : var( --cdn-pow-001-rec ); /* Core-Design-Number to the Power of 1 Reciprocal ~= 0.755 */
+
+
+}
+@media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Navigation Brand Anchor. Why: Someone who asked for less motion shouldn't see the brand fade. How: This applies only when the reduced-motion preference is set. */
+
+
+	.navBraAnc { /* What: Motionless Navigation Brand Anchor. Why: The press and focus changes should appear at once. How: This turns the transition off. */
+
+
+		transition : none;
+
+
+	}
 
 
 }
@@ -191,20 +212,62 @@
 
 /* #region navNamSpa */
 
-.navNamSpa { /* What: Navigation Name Span. Why: The company's first word reads as the stronger half. How: This sets it at medium weight. */
+.navNamSpa { /* What: Navigation Name Span. Why: The company's first word reads as the stronger half. How: This sets it at medium weight, easing its hover color. */
 
 
 	font-weight : 500;
+	transition  : color var( --dur-tra-p01 ) var( --mot-sta-eas ); /* Duration Transition Base Plus 1 ~= 209.1ms, Motion Standard Easing = ease */
+
+
+}
+.navBraAnc:hover .navNamSpa { /* What: Hovered Navigation Name Span. Why: The brand should respond to the pointer like the bar's links. How: This turns the name the accent navy. */
+
+
+	color : var( --acc-mai-col ); /* Accent Main Color = #1f4e7a */
+
+
+}
+@media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Navigation Name Span. Why: Someone who asked for less motion shouldn't see the color fade. How: This applies only when the reduced-motion preference is set. */
+
+
+	.navNamSpa { /* What: Motionless Navigation Name Span. Why: The hover color should switch at once. How: This turns the transition off. */
+
+
+		transition : none;
+
+
+	}
 
 
 }
 
-.namLigSpa { /* What: Name Light Span. Why: The second word reads as the softer half. How: This sets it light, italic, and muted. */
+.namLigSpa { /* What: Name Light Span. Why: The second word reads as the softer half. How: This sets it light, italic, and muted, easing its hover color. */
 
 
-	color       : var( --tex-mut-col ); /* Text Muted Color = #636871 */
+	color       : var( --tex-mut-col );                            /* Text Muted Color = #636871 */
 	font-style  : italic;
 	font-weight : 300;
+	transition  : color var( --dur-tra-p01 ) var( --mot-sta-eas ); /* Duration Transition Base Plus 1 ~= 209.1ms, Motion Standard Easing = ease */
+
+
+}
+.navBraAnc:hover .namLigSpa { /* What: Hovered Name Light Span. Why: The name's second word should change with the first. How: This turns it the accent navy too, its own muted color otherwise holding through the hover. */
+
+
+	color : var( --acc-mai-col ); /* Accent Main Color = #1f4e7a */
+
+
+}
+@media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Name Light Span. Why: Someone who asked for less motion shouldn't see the color fade. How: This applies only when the reduced-motion preference is set. */
+
+
+	.namLigSpa { /* What: Motionless Name Light Span. Why: The hover color should switch at once. How: This turns the transition off. */
+
+
+		transition : none;
+
+
+	}
 
 
 }
