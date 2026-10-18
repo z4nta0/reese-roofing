@@ -253,7 +253,7 @@
 	border         : var( --bor-wid-bas ) solid var( --bor-str-col ); /* Border Width Base ~= 1.160px, Border Strong Color = #1a1f24 @ 0.22 opacity */
 	border-radius  : 50%;
 	content        : '';
-	height         : calc( 100% + var( --her-rin-off ) * 2 );         /* Hero Ring Offset, about 33.876px, or 14.572px in the stacked hero */
+	height         : calc( 100% + var( --her-rin-off ) * 2 );         /* Hero Ring Offset ~= 33.876px, or ~= 14.572px in the stacked hero */
 	left           : 50%;
 	opacity        : var( --cdn-pow-003-rec );                        /* Core-Design-Number to the Power of 3 Reciprocal ~= 0.430 */
 	pointer-events : none;

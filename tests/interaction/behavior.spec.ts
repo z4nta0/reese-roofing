@@ -270,7 +270,7 @@ for ( const [ butLabStr, secIdeStr ] of [ [ 'Request an estimate', 'contact' ], 
 
 
 
-test( 'the bar\'s estimate button scrolls to the contact section', async ( { page : curPagObj } ) => { // What: Bar Estimate Test. Why: The bar's main action has to reach the form without a hash. How: This clicks the bar's estimate button and checks the section's position and the address.
+test( "the bar's estimate button scrolls to the contact section", async ( { page : curPagObj } ) => { // What: Bar Estimate Test. Why: The bar's main action has to reach the form without a hash. How: This clicks the bar's estimate button and checks the section's position and the address.
 
 
 	await opeRouFun( curPagObj, '/', DES_VIE_OBJ ); // What: Home Open Call. Why: The bar's estimate button shows on wide screens. How: This opens the home page at desktop size.
@@ -426,7 +426,7 @@ for ( const [ linLabStr, secIdeStr ] of [ [ 'Home', 'top' ], [ 'Services', 'serv
 
 
 
-test( 'the drawer\'s estimate button closes the drawer and scrolls to the contact section', async ( { page : curPagObj } ) => { // What: Drawer Estimate Test. Why: On a phone the drawer's estimate button is the main action, and it should both reach the form and get the drawer out of the way. How: This opens the drawer, clicks its estimate button, and checks the drawer, the section, and the address.
+test( "the drawer's estimate button closes the drawer and scrolls to the contact section", async ( { page : curPagObj } ) => { // What: Drawer Estimate Test. Why: On a phone the drawer's estimate button is the main action, and it should both reach the form and get the drawer out of the way. How: This opens the drawer, clicks its estimate button, and checks the drawer, the section, and the address.
 
 
 	await opeRouFun( curPagObj, '/', PHO_VIE_OBJ ); // What: Home Open Call. Why: The drawer exists on small screens. How: This opens the home page at phone size.
@@ -492,7 +492,7 @@ test( 'sending the form swaps the button label', async ( { page : curPagObj } ) 
 test( 'sending the form opens a mailto link carrying the request', async ( { browserName : engNamStr, page : curPagObj } ) => { // What: Mailto Test. Why: The request reaches the company through the visitor's email app. How: This reads the mailto link the page navigates to and checks its address, subject, and body.
 
 
-	test.skip( engNamStr !== 'chromium', 'Reading a mailto navigation needs Chromium\'s DevTools Protocol.' ); // What: Chromium Only Skip. Why: Only Chromium reports a mailto navigation to the test, through its DevTools Protocol. How: This skips the test in the other engines.
+	test.skip( engNamStr !== 'chromium', "Reading a mailto navigation needs Chromium's DevTools Protocol." ); // What: Chromium Only Skip. Why: Only Chromium reports a mailto navigation to the test, through its DevTools Protocol. How: This skips the test in the other engines.
 
 
 	await opeRouFun( curPagObj, '/', DES_VIE_OBJ ); // What: Home Open Call. Why: The form sits at the bottom of the home page. How: This opens it at desktop size.
@@ -614,7 +614,7 @@ for ( const [ linLabStr, secIdeStr ] of [ [ 'Services', 'services' ], [ 'About',
 
 
 
-test( 'the 404 page\'s Home link leads to the home page', async ( { page : curPagObj } ) => { // What: Not Found Home Link Test. Why: The 404 page has a top anchor of its own, which the nav's Home link mustn't settle for. How: This clicks Home on the 404 page and checks the home page's title and a clean address.
+test( "the 404 page's Home link leads to the home page", async ( { page : curPagObj } ) => { // What: Not Found Home Link Test. Why: The 404 page has a top anchor of its own, which the nav's Home link mustn't settle for. How: This clicks Home on the 404 page and checks the home page's title and a clean address.
 
 
 	await opeRouFun( curPagObj, '/missing', DES_VIE_OBJ ); // What: Not Found Open Call. Why: The bar's Home link is under test away from the home page. How: This opens the 404 page at desktop size.

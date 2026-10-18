@@ -231,7 +231,7 @@ test( 'the social preview tags are complete', async ( { page : curPagObj } ) => 
 
 
 
-test( 'the social preview image is a 1200x630 png under 300 KB', async ( { page : curPagObj } ) => { // What: Preview Image Test. Why: The social tags promise a 1,200x630 card. How: This fetches the image, checks its byte count, and reads its size from the PNG header.
+test( 'the social preview image is a 1,200x630 PNG under 300 KB', async ( { page : curPagObj } ) => { // What: Preview Image Test. Why: The social tags promise a 1,200x630 card. How: This fetches the image, checks its byte count, and reads its size from the PNG header.
 
 
 	const resImaObj = await curPagObj.request.get( '/og-image.png' ); // What: Response Image Object. Why: The image has to exist where the tags point. How: This fetches it from the dev server.
