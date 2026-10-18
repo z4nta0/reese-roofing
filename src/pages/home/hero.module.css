@@ -589,7 +589,7 @@
 
 /* #region staNumDiv */
 
-.staNumDiv { /* What: Stat Number Div. Why: The number leads each stat in large display type. How: This sets it in the display font at its largest optical size, scaling with the viewport, with its line height set to its font size like the headings and slightly looser tracking than the headings. */
+.staNumDiv { /* What: Stat Number Div. Why: The number leads each stat in large display type. How: This sets it in the display font at its largest optical size, scaling with the viewport, with its line height set to its font size like the headings and slightly looser tracking than the section headings. */
 
 
 	color                   : var( --tex-mai-col );                                     /* Text Main Color = #1a1f24 */

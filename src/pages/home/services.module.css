@@ -320,7 +320,7 @@
 
 }
 
-.serDetIte { /* What: Service Detail Item. Why: Each detail reads as a small muted line with its own dot. How: This sets the text beside a custom bullet. */
+.serDetIte { /* What: Service Detail Item. Why: Each detail reads as a short muted line with its own dot. How: This sets the text beside a custom bullet. */
 
 
 	align-items : center;
