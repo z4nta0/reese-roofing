@@ -130,7 +130,7 @@
 .herCopDiv { /* What: Hero Copy Div. Why: The label and headline enter first. How: This plays the entrance animation with no delay. */
 
 
-	animation : divEnterFadeIn var( --dur-ani-p06 ) var( --mot-dec-eas ) both; /* Duration Animation Base Plus 6 ~= 853.0ms, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ) */
+	animation : blockEnterFadeIn var( --dur-ani-p06 ) var( --mot-dec-eas ) both; /* Duration Animation Base Plus 6 ~= 853.0ms, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ) */
 
 
 }
@@ -147,7 +147,7 @@
 
 
 }
-@keyframes divEnterFadeIn { /* What: Div Enter Fade In. Why: Each hero block slides up and fades in as the page opens. How: This moves from a rhythm step below and transparent to its place, fully shown. */
+@keyframes blockEnterFadeIn { /* What: Block Enter Fade In. Why: Each hero block slides up and fades in as the page opens. How: This moves from a rhythm step below and transparent to its place, fully shown. */
 
 
 	from {
@@ -237,7 +237,7 @@
 
 
 	align-items     : center;
-	animation       : divEnterFadeIn var( --dur-ani-p07 ) var( --mot-dec-eas ) var( --dur-ani-bas ) both; /* Duration Animation Base Plus 7 ~= 1,130.0ms, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ), Duration Animation Base ~= 157.8ms */
+	animation       : blockEnterFadeIn var( --dur-ani-p07 ) var( --mot-dec-eas ) var( --dur-ani-bas ) both; /* Duration Animation Base Plus 7 ~= 1,130.0ms, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ), Duration Animation Base ~= 157.8ms */
 	display         : flex;
 	justify-content : center;
 	position        : relative;
@@ -348,7 +348,7 @@
 
 
 	align-items           : end;
-	animation             : divEnterFadeIn var( --dur-ani-p06 ) var( --mot-dec-eas ) var( --dur-ani-p02 ) both;             /* Duration Animation Base Plus 6 ~= 853.0ms, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ), Duration Animation Base Plus 2 ~= 277.0ms */
+	animation             : blockEnterFadeIn var( --dur-ani-p06 ) var( --mot-dec-eas ) var( --dur-ani-p02 ) both;           /* Duration Animation Base Plus 6 ~= 853.0ms, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ), Duration Animation Base Plus 2 ~= 277.0ms */
 	border-bottom         : var( --bor-wid-bas ) solid var( --bor-mai-col );                                                /* Border Width Base ~= 1.160px, Border Main Color = #1a1f24 @ 0.12 opacity */
 	border-top            : var( --bor-wid-bas ) solid var( --bor-mai-col );                                                /* Border Width Base ~= 1.160px, Border Main Color = #1a1f24 @ 0.12 opacity */
 	display               : grid;
@@ -531,7 +531,7 @@
 .herStaDiv { /* What: Hero Stats Div. Why: The four numbers read as one row, rising in last. How: This sets a four-column grid and plays the entrance animation after the longest delay. */
 
 
-	animation             : divEnterFadeIn var( --dur-ani-p06 ) var( --mot-dec-eas ) var( --dur-ani-p04 ) both;             /* Duration Animation Base Plus 6 ~= 853.0ms, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ), Duration Animation Base Plus 4 ~= 486.1ms */
+	animation             : blockEnterFadeIn var( --dur-ani-p06 ) var( --mot-dec-eas ) var( --dur-ani-p04 ) both;           /* Duration Animation Base Plus 6 ~= 853.0ms, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ), Duration Animation Base Plus 4 ~= 486.1ms */
 	display               : grid;
 	gap                   : var( --spa-ver-p03 ) clamp( var( --spa-hor-p01 ), var( --hor-rhy-012 ), var( --spa-hor-p03 ) ); /* Spacing Vertical Base Plus 3 ~= 33.876px, Spacing Horizontal Base Plus 1 ~= 19.304px, Horizontal Rhythm 12 ~= 28.278px @ 1,920px width, Spacing Horizontal Base Plus 3 ~= 33.876px */
 	grid-template-columns : repeat( 4, 1fr );

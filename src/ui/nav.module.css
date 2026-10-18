@@ -680,7 +680,7 @@
 .navDraDiv[data-drawer-menu-open] .draLinAnc { /* What: Entering Drawer Link Anchor. Why: The rows should arrive one after another as the drawer opens. How: This plays the entrance, delayed by one stagger step per row above it, with one extra step so the drawer has started opening first. */
 
 
-	animation : drawerItemOpenFadeIn var( --dur-ani-p02 ) var( --mot-dec-eas ) calc( var( --dur-ani-m03 ) * ( var( --dra-ite-ind ) + 1 ) ) both; /* Duration Animation Base Plus 2 ~= 277.0ms, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ), Duration Animation Base Minus 3 ~= 67.9ms, Drawer Item Index, set on each drawer item by its own style attribute */
+	animation : menuItemOpenFadeIn var( --dur-ani-p02 ) var( --mot-dec-eas ) calc( var( --dur-ani-m03 ) * ( var( --dra-ite-ind ) + 1 ) ) both; /* Duration Animation Base Plus 2 ~= 277.0ms, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ), Duration Animation Base Minus 3 ~= 67.9ms, Drawer Item Index, set on each drawer item by its own style attribute */
 
 
 }
@@ -697,7 +697,7 @@
 
 
 }
-@keyframes drawerItemOpenFadeIn { /* What: Drawer Item Open Fade In. Why: Each drawer row rises and fades in as the drawer opens. How: This moves from a small rhythm step below and transparent to its place, fully shown. */
+@keyframes menuItemOpenFadeIn { /* What: Menu Item Open Fade In. Why: Each drawer row rises and fades in as the drawer opens. How: This moves from a small rhythm step below and transparent to its place, fully shown. */
 
 
 	from {
@@ -802,7 +802,7 @@
 .navDraDiv[data-drawer-menu-open] .draConDiv { /* What: Entering Drawer Contact Div. Why: The contact block should arrive after the last row. How: This plays the drawer's entrance, delayed by one stagger step per row above it, with one extra step so the drawer has started opening first. */
 
 
-	animation : drawerItemOpenFadeIn var( --dur-ani-p02 ) var( --mot-dec-eas ) calc( var( --dur-ani-m03 ) * ( var( --dra-ite-ind ) + 1 ) ) both; /* Duration Animation Base Plus 2 ~= 277.0ms, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ), Duration Animation Base Minus 3 ~= 67.9ms, Drawer Item Index, set on each drawer item by its own style attribute */
+	animation : menuItemOpenFadeIn var( --dur-ani-p02 ) var( --mot-dec-eas ) calc( var( --dur-ani-m03 ) * ( var( --dra-ite-ind ) + 1 ) ) both; /* Duration Animation Base Plus 2 ~= 277.0ms, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ), Duration Animation Base Minus 3 ~= 67.9ms, Drawer Item Index, set on each drawer item by its own style attribute */
 
 
 }

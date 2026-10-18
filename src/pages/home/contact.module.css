@@ -541,7 +541,7 @@
 .subLabSpa { /* What: Submit Label Span. Why: The sent label should arrive with a small flourish, so the visitor sees their press worked. How: This rises it into place and fades it in once, with a gentle overshoot. */
 
 
-	animation : subLabSpaSentFadeIn var( --dur-ani-p02 ) var( --mot-ove-eas ) both; /* Duration Animation Base Plus 2 ~= 277.0ms, Motion Overshoot Easing = cubic-bezier( .34, 1.2, .5, 1 ) */
+	animation : subLabSpaSwapFadeIn var( --dur-ani-p02 ) var( --mot-ove-eas ) both; /* Duration Animation Base Plus 2 ~= 277.0ms, Motion Overshoot Easing = cubic-bezier( .34, 1.2, .5, 1 ) */
 	display   : inline-block;                                                       /* What: Inline Block Display. Why: A transform has no effect on a plain inline box. How: This keeps the label a box its rise-in can move, though inside the inline-flex button it's already a flex item and computes to block. */
 
 
@@ -559,7 +559,7 @@
 
 
 }
-@keyframes subLabSpaSentFadeIn { /* What: Submit Label Span Sent Fade In. Why: The sent label rises in once when the request is sent. How: This starts a small step below and transparent, then settles in place. */
+@keyframes subLabSpaSwapFadeIn { /* What: Submit Label Span Swap Fade In. Why: The sent label rises in once when the request is sent. How: This starts a small step below and transparent, then settles in place. */
 
 
 	from {
