@@ -168,7 +168,7 @@ function useSecLinFun () : ( secIdeStr : string ) => void {
  * click stops the browser's own navigation to the hash and hands the section's
  * id to visSecFun, which scrolls to it on the home page or navigates home to
  * it from any other page. It reports whether it handled the click, so a caller
- * such as the phone menu can close itself only then.
+ * such as the bar's drawer can close itself only then.
  *
  * @author z4nta0 <https://github.com/z4nta0>
  *

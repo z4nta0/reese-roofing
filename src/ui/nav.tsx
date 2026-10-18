@@ -205,7 +205,7 @@ function NavBarCom () : React.JSX.Element {
 	return (
 
 
-		<>{ /* What: Navigation Fragment Element. Why: The scrim and the bar render side by side, the scrim first so the bar, at the same stack level, paints above it. How: This groups them without adding a wrapper element. */ }
+		<>{ /* What: Navigation Fragment Element. Why: The scrim and the bar render as siblings, the scrim first so the bar, at the same stack level, paints above it. How: This groups them without adding a wrapper element. */ }
 
 
 			<div
@@ -332,7 +332,7 @@ function NavBarCom () : React.JSX.Element {
 						aria-label='Toggle menu'
 
 						onClick={ () => setDraOpeBoo( ( preOpeBoo ) => !preOpeBoo ) }
-					>{ /* What: Navigation Toggle Button Element. Why: Small screens hide the links behind a menu button. How: This flips the drawer open or closed, and its aria-expanded both reports the state to screen readers and styles the open icon. */ }
+					>{ /* What: Navigation Toggle Button Element. Why: At 880px wide and below the links hide behind a menu button. How: This flips the drawer open or closed, and its aria-expanded both reports the state to screen readers and styles the open icon. */ }
 
 
 						<span className={ cssModObj.togLinSpa } />{ /* What: Toggle Line Span Element. Why: The button draws its icon from two lines, and this is the top one. How: Its stylesheet drops it to the middle and turns it 45 degrees while the drawer is open, forming one stroke of the cross. */ }
@@ -350,7 +350,7 @@ function NavBarCom () : React.JSX.Element {
 					className={ cssModObj.navDraDiv }
 
 					data-drawer-menu-open={ draOpeBoo || undefined } // What: Drawer Menu Open Attribute. Why: The drawer's stylesheet opens it while this is present. How: This is set only while draOpeBoo is true, and React drops it otherwise.
-				>{ /* What: Navigation Drawer Div Element. Why: Small screens show the links in a drawer below the bar. How: This opens while draOpeBoo is true. */ }
+				>{ /* What: Navigation Drawer Div Element. Why: At 880px wide and below the links show in a drawer below the bar. How: This opens while draOpeBoo is true. */ }
 
 
 					{ NAV_LIN_ARR.map( ( navLinObj, linIndNum ) => ( // What: Drawer Link Map. Why: The drawer repeats every section link, numbered like the sections. How: This renders one numbered anchor per row, handing each its position for the staggered entrance.
