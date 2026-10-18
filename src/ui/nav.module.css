@@ -569,10 +569,10 @@
 .togLinSpa { /* What: Toggle Line Span. Why: The menu icon is drawn from two thin lines. How: This draws each line and animates it into the close icon. */
 
 
-	background : var( --tex-mai-col );                /* Text Main Color = #1a1f24 */
-	height     : calc( var( --ver-rhy-m08 ) * 1rem ); /* Vertical Rhythm Base Minus 8 ~= 1.536px */
-	transition : background-color var( --dur-tra-p01 ) var( --mot-sta-eas ), opacity var( --dur-tra-p02 ) var( --mot-sta-eas ), transform var( --dur-tra-p02 ) var( --mot-sta-eas ); /* Duration Transition Base Plus 1 ~= 209.1ms, Motion Standard Easing = ease, Duration Transition Base Plus 2 ~= 277.0ms */
-	width      : calc( var( --ver-rhy-p01 ) * 1rem ); /* Vertical Rhythm Base Plus 1 ~= 19.304px */
+	background : var( --tex-mai-col );                                                                                            /* Text Main Color = #1a1f24 */
+	height     : calc( var( --ver-rhy-m08 ) * 1rem );                                                                             /* Vertical Rhythm Base Minus 8 ~= 1.536px */
+	transition : background-color var( --dur-tra-p01 ) var( --mot-sta-eas ), transform var( --dur-tra-p02 ) var( --mot-sta-eas ); /* Duration Transition Base Plus 1 ~= 209.1ms, Motion Standard Easing = ease, Duration Transition Base Plus 2 ~= 277.0ms */
+	width      : calc( var( --ver-rhy-p01 ) * 1rem );                                                                             /* Vertical Rhythm Base Plus 1 ~= 19.304px */
 
 
 }
