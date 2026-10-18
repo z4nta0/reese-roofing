@@ -51,7 +51,7 @@ import { useSecCliFun } from './section-link.ts'; // What: Use Section Click Fun
  *
 */
 
-const NAV_LIN_ARR = [ // What: Nav Link Array. Why: The bar and its mobile drawer list the same section links. How: Each row pairs a home page section's id, which its link's address names with the root path so a modified click opens it from any page, with its label, and both lists map over it, the drawer numbering the rows in order to match the sections' own numbered labels.
+const NAV_LIN_ARR = [ // What: Nav Link Array. Why: The bar and its mobile drawer list the same section links. How: Each row pairs a home page section's id, which its link's address names with the root path so a Ctrl, Cmd, or middle click opens it from any page, with its label, and both lists map over it, the drawer numbering the rows in order to match the sections' own numbered labels.
 
 
 	{ ideStr : 'top',      labStr : 'Home'     }, // What: Home Link Row. Why: Not every visitor knows the logo leads home, so the bar spells it out. How: This names the hero's top anchor.

@@ -18,7 +18,7 @@ The preview card is drawn from the site's own logo and fonts by `design/og-image
 
 ## Security headers
 
-`public/_headers` also sends the hardening headers a header security checker looks for on every response: a strict Content-Security-Policy (the site loads only its own files, plus `data:` images for the inlined logo mark and the form's select arrow), HSTS, `nosniff`, a deny on framing, a Referrer-Policy that shows linked sites only this site's origin, and a Permissions-Policy that turns off every browser feature the site doesn't use. Netlify applies them, so they only show up on the live site; `npm run test:seo` checks the file sends each one.
+`public/_headers` also sends the hardening headers a header security checker looks for on every response: a strict Content-Security-Policy (the site loads only its own files, plus `data:` images for the inlined logo mark and the form's select arrow), HSTS, `nosniff`, a deny on framing, a Referrer-Policy that shows linked sites only this site's origin, and a Permissions-Policy that turns off every browser feature the site doesn't use. Netlify applies them, so they only show up on the live site; `npm run test:seo` checks the file sends each one, once.
 
 ## Stack
 
