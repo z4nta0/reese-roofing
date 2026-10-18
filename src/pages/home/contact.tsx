@@ -175,10 +175,10 @@ function ConSecCom () : React.JSX.Element {
 		>{ /* What: Home Contact Section Element. Why: This is where visitors reach the company. How: Its contact id is the anchor the navigation links and estimate buttons lead to, kept as is since it appears in the page's URL. */ }
 
 
-			<div className={ cssModObj.conLayDiv }>{ /* What: Contact Layout Div Element. Why: The section's two columns should line up with the page's content width. How: This sets the intro and the form side by side. */ }
+			<div className={ cssModObj.conLayDiv }>{ /* What: Contact Layout Div Element. Why: The section's two columns should line up with the page's content width. How: This sets the intro and the form side by side, stacking them at 960px wide and below. */ }
 
 
-				<div>{ /* What: Contact Intro Div Element. Why: The company's details sit beside the form. How: This stacks the label, heading, lede, details, and signature. */ }
+				<div>{ /* What: Contact Intro Div Element. Why: The company's details sit beside the form, or above it at 960px wide and below. How: This stacks the label, heading, lede, details, and signature. */ }
 
 
 					<span className={ cssModObj.eyeLabSpa }>04 · Get in touch</span>{ /* What: Eyebrow Label Span Element. Why: Each section is numbered in order down the page. How: This is the section's numbered label, set in the site's eyebrow style. */ }
@@ -380,7 +380,7 @@ function ConSecCom () : React.JSX.Element {
 						</div>
 
 
-						<div className={ cssModObj.forRowDiv }>{ /* What: Form Row Div Element. Why: Email and phone are short enough to share a row. How: This sets the two fields side by side. */ }
+						<div className={ cssModObj.forRowDiv }>{ /* What: Form Row Div Element. Why: Email and phone are short enough to share a row. How: This sets the two fields side by side, stacking them at 540px wide and below. */ }
 
 
 							<div className={ cssModObj.forFieDiv }>{ /* What: Form Field Div Element. Why: The company replies by email. How: This is the email field, which pairs the label with its input. */ }

@@ -135,7 +135,7 @@ function HerSecCom () : React.JSX.Element {
 			<div className={ cssModObj.pagConDiv }>{ /* What: Page Container Div Element. Why: The hero's content should line up with the page's content width. How: This stacks the top row, the bottom row, and the stats. */ }
 
 
-				<div className={ cssModObj.herTopDiv }>{ /* What: Hero Top Div Element. Why: The headline and logo share the first row. How: This sets the copy on the left and the logo on the right. */ }
+				<div className={ cssModObj.herTopDiv }>{ /* What: Hero Top Div Element. Why: The headline and logo share the first row. How: This sets the copy on the left and the logo on the right, stacking them at 960px wide and below. */ }
 
 
 					<div className={ cssModObj.herCopDiv }>{ /* What: Hero Copy Div Element. Why: The location label sits directly above the headline. How: This stacks the two. */ }
@@ -174,7 +174,7 @@ function HerSecCom () : React.JSX.Element {
 
 
 
-				<div className={ cssModObj.herBotDiv }>{ /* What: Hero Bottom Div Element. Why: The pitch and the calls to action share the second row. How: This sets them side by side. */ }
+				<div className={ cssModObj.herBotDiv }>{ /* What: Hero Bottom Div Element. Why: The pitch and the calls to action share the second row. How: This sets them side by side, stacking them at 960px wide and below. */ }
 
 
 					<p className={ cssModObj.secLedPar }>{ /* What: Section Lede Paragraph Element. Why: The pitch says who the company serves and what it promises. How: This uses the site's lede style. */ }
@@ -221,7 +221,7 @@ function HerSecCom () : React.JSX.Element {
 
 
 
-				<div className={ cssModObj.herStaDiv }>{ /* What: Hero Stats Div Element. Why: A few numbers make the company's track record concrete. How: This lays out four stats in a row. */ }
+				<div className={ cssModObj.herStaDiv }>{ /* What: Hero Stats Div Element. Why: A few numbers make the company's track record concrete. How: This lays out four stats in a row, two to a row at 960px wide and below. */ }
 
 
 					<div className={ cssModObj.staIteDiv }>{ /* What: Stat Item Div Element. Why: Longevity is a reason to trust a roofer. How: This is the years stat, pairing the number with its label. */ }

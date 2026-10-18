@@ -108,7 +108,7 @@ function AboSecCom () : React.JSX.Element {
 		>{ /* What: Home About Section Element. Why: This tells the company's story. How: Its about id is the anchor the navigation links lead to, kept as is since it appears in the page's URL. */ }
 
 
-			<div className={ cssModObj.aboStoDiv }>{ /* What: About Story Div Element. Why: The story's two columns should line up with the page's content width. How: This sets the left and right columns side by side. */ }
+			<div className={ cssModObj.aboStoDiv }>{ /* What: About Story Div Element. Why: The story's two columns should line up with the page's content width. How: This sets the left and right columns side by side, stacking them at 960px wide and below. */ }
 
 
 				<div className={ cssModObj.aboLefDiv }>{ /* What: About Left Div Element. Why: The heading and seal anchor the story. How: This stacks the label, heading, and seal. */ }
@@ -126,7 +126,7 @@ function AboSecCom () : React.JSX.Element {
 						className={ cssModObj.aboSeaDiv }
 
 						aria-hidden='true'
-					>{ /* What: About Seal Div Element. Why: The full logo works as a seal beside the story. How: This holds it at a capped, slightly faded size and hides it from screen readers, since it's decorative. */ }
+					>{ /* What: About Seal Div Element. Why: The full logo works as a seal beside the story. How: This holds it at a capped, slightly faded size and hides it from screen readers, since it's decorative, and the seal is hidden entirely at 960px wide and below. */ }
 
 
 						<img
@@ -147,7 +147,7 @@ function AboSecCom () : React.JSX.Element {
 				</div>
 
 
-				<div>{ /* What: About Right Div Element. Why: The story itself sits beside the heading. How: This stacks the paragraphs and the quote. */ }
+				<div>{ /* What: About Right Div Element. Why: The story itself sits beside the heading, or below it at 960px wide and below. How: This stacks the paragraphs and the quote. */ }
 
 
 					<p className={` ${ cssModObj.aboStoPar }   ${ cssModObj.aboStoParLead } `}>{ /* What: Lead About Story Paragraph Element. Why: The first paragraph states the founding idea. How: This is the story's first paragraph, whose lead modifier sets it larger, in the display font and full ink. */ }
@@ -196,7 +196,7 @@ function AboSecCom () : React.JSX.Element {
 			<div className={ cssModObj.pagConDiv }>{ /* What: Page Container Div Element. Why: The principles row should line up with the page's content width. How: This holds the row. */ }
 
 
-				<div className={ cssModObj.aboPriDiv }>{ /* What: About Principles Div Element. Why: The company's four principles read best side by side. How: This lays out one principle per row of PRI_REC_ARR. */ }
+				<div className={ cssModObj.aboPriDiv }>{ /* What: About Principles Div Element. Why: The company's four principles read best side by side. How: This lays out one principle per row of PRI_REC_ARR, four across, two across at 960px wide and below, and one at 540px and below. */ }
 
 
 					{ PRI_REC_ARR.map( ( priRecObj, priIndNum ) => ( // What: Principle Map. Why: Every principle gets its own block. How: This renders one block per row, passing along its position for numbering.

@@ -232,7 +232,7 @@ function NavBarCom () : React.JSX.Element {
 			>{ /* What: Navigation Bar Header Element. Why: This is the site's top bar landmark. How: This takes its scrolled style once scrPasBoo is true. */ }
 
 
-				<div className={ cssModObj.navInnDiv }>{ /* What: Navigation Inner Div Element. Why: The bar's contents should line up with the page's content width. How: This holds the brand, links, actions, and toggle in one row. */ }
+				<div className={ cssModObj.navInnDiv }>{ /* What: Navigation Inner Div Element. Why: The bar's contents should line up with the page's content width. How: This holds the brand, links, actions, and toggle in one row, where the links and actions give way to the toggle at 880px wide and below. */ }
 
 
 					<a
