@@ -127,7 +127,7 @@
 
 /* #region navInnDiv */
 
-.navInnDiv { /* What: Navigation Inner Div. Why: The bar's contents should line up with the page's content width. How: This spreads the brand, links, actions, and toggle across one centered row. */
+.navInnDiv { /* What: Navigation Inner Div. Why: The bar's contents should line up with the page's content width. How: This spreads the bar's items across one centered row: the brand, links, and actions, or the brand and toggle at 880px wide and below. */
 
 
 	align-items     : center;
@@ -532,7 +532,7 @@
 
 
 }
-@container app ( max-width : 880px ) { /* What: Narrow Navigation Toggle Button. Why: Small screens need the menu button in place of the links. How: This applies at 880px wide and below. */
+@container app ( max-width : 880px ) { /* What: Narrow Navigation Toggle Button. Why: Small screens need the menu button in place of the links and actions. How: This applies at 880px wide and below. */
 
 
 	.navTogBut { /* What: Shown Navigation Toggle Button. Why: The drawer needs a way to open. How: This shows the button. */
@@ -619,7 +619,7 @@
 
 /* #region navDraDiv */
 
-.navDraDiv { /* What: Navigation Drawer Div. Why: At 880px wide and below the links show in a panel under the bar. How: This stacks the links on the page color, collapsed to nothing and hidden until opened, growing and shrinking as it opens and closes, and casting a large elevation shadow onto the page below it. */
+.navDraDiv { /* What: Navigation Drawer Div. Why: At 880px wide and below the links, phone number, and estimate button show in a panel under the bar. How: This stacks the links and the contact block on the page color, collapsed to nothing and hidden until opened, growing and shrinking as it opens and closes, and casting a large elevation shadow onto the page below it. */
 
 
 	background     : var( --bac-pag-col );                             /* Background Page Color = #f5f2ec */
