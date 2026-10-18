@@ -85,7 +85,6 @@ function ConSecCom () : React.JSX.Element {
 	const [ senReqBoo, setSenReqBoo ] = React.useState( false );                    // What: Sent Request Boolean And Setter. Why: The submit button should confirm the email is on its way. How: This flips true once the form is submitted.
 
 
-
 	// #region updFieFun
 
 	/**
@@ -114,7 +113,6 @@ function ConSecCom () : React.JSX.Element {
 	const updFieFun = ( fieKeyStr : keyof ConForTyp ) : ( chaEveObj : React.ChangeEvent< HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement > ) => void => ( chaEveObj ) => setForValObj( ( preForObj ) => ({ ...preForObj, [ fieKeyStr ] : chaEveObj.target.value }) ); // What: Update Field Function. Why: Every field writes to its own key in the same record. How: This returns a handler that copies the event's value into that key.
 
 	// #endregion updFieFun
-
 
 
 	// #region subForFun
