@@ -108,9 +108,9 @@ design/
 
 ## Customization checklist
 
-If this design is ever reused for a real business, update the placeholders below, and swap the demo SEO for real local SEO: remove the `noindex` meta tag, the `X-Robots-Tag` rule in `public/_headers`, and AI crawler block, add a sitemap, replace the `WebSite` JSON-LD with `LocalBusiness` (`RoofingContractor`) data matching the real details, rewrite the title, description, social tags, and preview card, and drop the footer's demo line.
+If this design is ever reused for a real business, update the placeholders below, and swap the demo SEO for real local SEO: remove the `noindex` meta tag, the `X-Robots-Tag` rule in `public/_headers`, and the AI crawler block in `public/robots.txt`, add a sitemap, replace the `WebSite` JSON-LD with `LocalBusiness` (`RoofingContractor`) data matching the real details, rewrite the title, description, social tags, and preview card, and drop the footer's demo line.
 
-- **Phone number:** `(785) 555-0199`. Search the repo for it; it appears in the Nav (bar and drawer) and the Contact section
+- **Phone number:** `(785) 555-0199`. Search the repo for it and for its link form, `+17855550199` (the `tel:` links); both appear in the Nav (bar and drawer) and the Contact section
 - **Email:** `hello@reeseroofing.example`. Same; it appears in the Contact section's contact details and in the mailto link the form opens on submit (`subForFun` in `src/pages/home/contact.tsx`)
 - **Address and location:** placeholder Lawrence, Kansas 66044, in the Contact section, plus the city in the hero's label and intro, the About heading, the footer's licensing line, and the Contact section's service area list. Search the repo for "Lawrence" and "Kansas"
 - **Form placeholders:** the sample name, property, email (`jane@company.example`), and phone (`(785) 555-0100`) shown in the contact form's empty fields, in `src/pages/home/contact.tsx`

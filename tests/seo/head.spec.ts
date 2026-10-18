@@ -20,11 +20,12 @@ import { test   } from '@playwright/test'; // What: Test. Why: Each route and ea
  * search and never passes as a real business: each route carries a noindex
  * robots meta and says it's a demo, the structured data describes a demo
  * website rather than a local business, the footer says the company is
- * fictional, robots.txt lets search crawlers read the noindex while keeping AI
- * crawlers out, and Netlify's _headers sends noindex with every file. It also
- * checks the social preview tags are complete and the image is the 1,200x630
- * card under 300 KB the tags promise, and that _headers sends the security
- * headers a header checker looks for, since the dev server never applies them.
+ * fictional, robots.txt lets search crawlers read the noindex while the named
+ * AI crawlers' group disallows the site, and Netlify's _headers sends noindex
+ * with every file. It also checks the social preview tags are complete and the
+ * image is the 1,200x630 card under 300 KB the tags promise, and that _headers
+ * sends the security headers a header checker looks for, since the dev server
+ * never applies them.
  *
  * Sections:
  *  - Constants

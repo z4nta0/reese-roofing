@@ -76,7 +76,7 @@ function HomPagCom () : React.JSX.Element {
 	const navRouFun = useNavigate(); // What: Navigate Router Function. Why: The hash should be cleared once the page has used it. How: This is the router's navigate function.
 
 
-	React.useEffect( () => { // What: Hash Arrival Effect. Why: Chromium and WebKit don't scroll to a section's anchor that's rendered after load, so a link or bookmark to /#services would land at the top, and the hash should leave the address once used. How: Once the fonts have loaded and the layout has settled, this jumps straight to the hash's element, the way the browser itself would have, then replaces the address with one without it.
+	React.useEffect( () => { // What: Hash Arrival Effect. Why: Chromium and WebKit don't scroll to a section's anchor that's rendered after load, so a link or bookmark to /#services would land at the top, and the hash should leave the address once used. How: Once the fonts have loaded, this jumps straight to the hash's element, the way the browser itself would have, then replaces the address with one without it.
 
 
 		if ( !hasValStr ) return; // What: No Hash Guard. Why: Most visits arrive without a hash. How: This does nothing when the hash is empty, including right after it's been cleared.

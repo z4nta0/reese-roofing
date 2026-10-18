@@ -122,7 +122,7 @@ const STA_REC_ARR : StaRecTyp[] = [ // What: State Record Array. Why: Every chec
  * scroll position and the keyboard's starting point alone, runs the state's
  * action if it has one, then waits until no animation is still running, so a
  * check never measures a heading halfway through its entrance fade or a drawer
- * halfway open. The animation wait gives up after 5 seconds rather than
+ * halfway open. The animation wait fails the check after 5 seconds rather than
  * hanging on a looping animation.
  *
  * @author z4nta0 <https://github.com/z4nta0>

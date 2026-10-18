@@ -168,7 +168,14 @@ function layProFun () : string[] {
 
 
 
-		if ( ( recCurObj.right > vieWidNum + 1 || recCurObj.left < -1 ) && !cliAncFun( layCurEle ) ) proLisArr.push( `${ desEleFun( layCurEle ) } spills past the ${ recCurObj.right > vieWidNum + 1 ? 'right' : 'left' } edge` ); // What: Edge Spill Check. Why: Content past the edge is cut off or forces sideways scrolling. How: This records an unclipped element that reaches more than a pixel beyond the viewport.
+		const cliAncBoo = cliAncFun( layCurEle );          // What: Clipped Ancestor Boolean. Why: A box an ancestor clips can sit past the edge without showing there. How: This asks cliAncFun whether any ancestor clips it.
+		const lefSpiBoo = recCurObj.left < -1;             // What: Left Spill Boolean. Why: A box past the left edge is cut off. How: This checks its left edge sits more than a pixel left of the viewport, allowing for rounding.
+		const rigSpiBoo = recCurObj.right > vieWidNum + 1; // What: Right Spill Boolean. Why: A box past the right edge is cut off or forces sideways scrolling. How: This checks its right edge sits more than a pixel past the viewport's width, allowing for rounding.
+
+		const edgSpiBoo = ( rigSpiBoo || lefSpiBoo ) && !cliAncBoo; // What: Edge Spill Boolean. Why: A box past either edge spills unless a clipping ancestor hides the overflow. How: This combines the three.
+
+
+		if ( edgSpiBoo ) proLisArr.push( `${ desEleFun( layCurEle ) } spills past the ${ rigSpiBoo ? 'right' : 'left' } edge` ); // What: Edge Spill Check. Why: Content past the edge is cut off or forces sideways scrolling. How: This records an unclipped element that reaches more than a pixel beyond the viewport.
 
 
 
@@ -297,7 +304,7 @@ for ( const layCasObj of LAY_CAS_ARR ) { // What: Case Loop. Why: Every page and
 	for ( const widCurNum of WID_LIS_ARR.filter( ( widFilNum ) => !layCasObj.draBoo || widFilNum <= DRA_MAX_NUM ) ) { // What: Width Loop. Why: Each case is measured at every width it exists at. How: This declares one test per width, skipping drawer widths past the breakpoint.
 
 
-		test( `${ layCasObj.ideStr } holds its layout at ${ widCurNum }px`, async ( { page : curPagObj } ) => { // What: Layout Test. Why: The layout should hold together at every width. How: This opens the case at the width and lists its layout problems.
+		test( `${ layCasObj.ideStr } holds its layout at ${ widCurNum.toLocaleString( 'en-US' ) }px`, async ( { page : curPagObj } ) => { // What: Layout Test. Why: The layout should hold together at every width. How: This opens the case at the width and lists its layout problems.
 
 
 			await curPagObj.emulateMedia( { reducedMotion : 'reduce' } ); // What: Reduced Motion Emulation. Why: Entrance animations don't change the layout, so waiting on them only slows the run. How: This makes the page match prefers-reduced-motion, which turns them off.

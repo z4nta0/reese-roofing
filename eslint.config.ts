@@ -72,12 +72,12 @@ const ESL_CON_ARR = [ // What: ESLint Config Array. Why: ESLint reads its flat c
 		plugins : { react },                          // What: Plugins. Why: react/jsx-no-undef comes from the React plugin. How: This registers it.
 		rules   : { 'react/jsx-no-undef' : 'error' }, // What: Rules. Why: An undefined component in a JSX tag is always a bug, and TypeScript reports every other undefined name. How: This makes the JSX rule an error.
 
-		languageOptions : { // What: Language Options. Why: The parser has to know the syntax the source uses. How: This sets the TypeScript parser and modern module syntax with JSX.
+		languageOptions : { // What: Language Options. Why: The parser has to know the syntax the source uses. How: This sets the TypeScript parser and modern module syntax.
 
 
 			ecmaVersion   : 'latest',                          // What: Ecma Version. Why: The source uses current JavaScript syntax. How: This parses the latest version.
 			parser        : tseslint.parser,                   // What: Parser. Why: The source is TypeScript, which ESLint's default parser can't read. How: This sets typescript-eslint's parser.
-			parserOptions : { ecmaFeatures : { jsx : true } }, // What: Parser Options. Why: The .tsx files contain JSX. How: This turns on JSX parsing.
+			parserOptions : { ecmaFeatures : { jsx : true } }, // What: Parser Options. Why: ease-my-life's config sets it, and this one starts from that config. How: This sets the JSX flag, which typescript-eslint ignores for .ts and .tsx files, since TypeScript reads JSX from the .tsx extension itself.
 			sourceType    : 'module'                           // What: Source Type. Why: Every source file is an ES module. How: This parses import and export.
 
 
@@ -92,11 +92,11 @@ const ESL_CON_ARR = [ // What: ESLint Config Array. Why: ESLint reads its flat c
 		files   : [ 'src/**/*.ts', '**/*.tsx' ],         // What: Files. Why: Components live in .tsx files, but a custom hook with no JSX lives in a .ts file (section-link.ts), and its calls need the same checks; the tests and configs stay out, since Playwright's test.use would read as React's use hook. How: This matches every .tsx file and the .ts files under src/.
 		plugins : { react, 'react-hooks' : reactHooks }, // What: Plugins. Why: The hooks rules come from the React Hooks plugin. How: This registers it beside the React plugin.
 
-		languageOptions : { // What: Language Options. Why: These files are TypeScript, the .tsx ones with JSX. How: This sets the TypeScript parser and turns on JSX parsing, which the parser applies only to .tsx files.
+		languageOptions : { // What: Language Options. Why: These files are TypeScript, the .tsx ones with JSX. How: This sets the TypeScript parser, which reads JSX from the .tsx extension.
 
 
 			parser        : tseslint.parser,                   // What: Parser. Why: ESLint's default parser can't read TypeScript. How: This sets typescript-eslint's parser.
-			parserOptions : { ecmaFeatures : { jsx : true } }  // What: Parser Options. Why: The .tsx files contain JSX. How: This turns on JSX parsing.
+			parserOptions : { ecmaFeatures : { jsx : true } }  // What: Parser Options. Why: ease-my-life's config sets it, and this one starts from that config. How: This sets the JSX flag, which typescript-eslint ignores for .ts and .tsx files, since TypeScript reads JSX from the .tsx extension itself.
 
 
 		},
