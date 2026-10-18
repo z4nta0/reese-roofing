@@ -27,11 +27,11 @@ import type { Page } from '@playwright/test'; // What: Page. Why: Every helper d
  * lands only on stops that are on screen, not covered by anything else, and
  * visibly changed by focus. Reflow: at 320px wide, WCAG's narrowest reflow
  * width, nothing scrolls sideways. Motion: with reduced motion requested, no
- * animation or transition the page still holds once the state has opened lasts
- * longer than 1ms. The name and keyboard checks list every problem found, by
- * element (the positive tabindex check as a count), the motion check lists
- * each one it finds, and the reflow check reports how far the page reaches
- * past the viewport.
+ * animation or transition longer than 1ms starts while the state opens, or is
+ * still held once it has. The name and keyboard checks list every problem
+ * found, by element (the positive tabindex check as a count), the motion check
+ * lists each one it finds, and the reflow check reports how far the page
+ * reaches past the viewport.
  *
  * Sections:
  *  - Constants
@@ -462,12 +462,40 @@ for ( const staRecObj of STA_REC_ARR ) { // What: State Test Loop. Why: Every ch
 
 
 
-	test( `${ staRecObj.ideStr } plays no motion under reduced motion`, async ( { page : curPagObj } ) => { // What: Reduced Motion Test. Why: Visitors who ask for less motion shouldn't see the page animate. How: This requests reduced motion, opens the state, and lists any animation or transition it still holds that lasts longer than 1ms.
+	test( `${ staRecObj.ideStr } plays no motion under reduced motion`, async ( { page : curPagObj } ) => { // What: Reduced Motion Test. Why: Visitors who ask for less motion shouldn't see the page animate. How: This requests reduced motion, records any animation or transition over 1ms that starts while the state opens, and lists any the page still holds once it has.
 
 
 		await curPagObj.emulateMedia( { reducedMotion : 'reduce' } ); // What: Reduced Motion Emulation. Why: The preference has to be set before the page loads. How: This makes the page match prefers-reduced-motion: reduce.
 
+		await curPagObj.addInitScript( () => { // What: Motion Start Recorder. Why: A transition the state's action sets off can finish before the page settles, and a finished one drops out of getAnimations. How: This records every animation or transition that starts with a duration over 1ms, from the moment the page loads.
+
+
+			const motLisArr : string[] = []; // What: Motion List Array. Why: Each motion that starts has to be kept until the check reads it. How: This collects one name per motion.
+
+
+			Reflect.set( window, 'motLisArr', motLisArr ); // What: Motion List Global Set. Why: The check reads the list from outside the page. How: This puts the array on the window.
+
+
+			for ( const eveTypStr of [ 'animationstart', 'transitionrun' ] ) window.addEventListener( eveTypStr, ( motEveObj ) => { // What: Motion Event Loop. Why: Animations and transitions announce themselves with different events. How: This listens for each on the window, catching every element's events as they bubble.
+
+
+				const tarEleObj = motEveObj.target as Element;                                                                                       // What: Target Element Object. Why: The motion's duration is read from the element running it. How: This reads the event's target. // What: Type Assertion Note. Why: Event targets type as EventTarget. How: Both events only fire on elements.
+				const motStyObj = getComputedStyle( tarEleObj );                                                                                     // What: Motion Style Object. Why: The event doesn't carry the motion's duration. How: This reads the element's computed styles.
+				const durStrArr = ( motEveObj.type === 'transitionrun' ? motStyObj.transitionDuration : motStyObj.animationDuration ).split( ',' );  // What: Duration String Array. Why: An element can list several durations. How: This splits the duration that matches the event's kind.
+				const lonDurBoo = durStrArr.some( ( durCurStr ) => parseFloat( durCurStr ) * ( durCurStr.trim().endsWith( 'ms' ) ? 1 : 1000 ) > 1 ); // What: Long Duration Boolean. Why: Only motion longer than 1ms counts. How: This converts each duration to milliseconds and checks for one over 1ms.
+
+
+				if ( lonDurBoo ) motLisArr.push( `${ tarEleObj.tagName.toLowerCase() } ${ motEveObj.type }` ); // What: Long Motion Push. Why: Each long motion should be named in the failure. How: This records the element's tag and the event's kind.
+
+
+			}, true );
+
+
+		} );
+
 		await opeStaFun( curPagObj, staRecObj ); // What: State Open Call. Why: Entrance animations and the state's own action are the motion being checked. How: This loads the state and runs its action.
+
+		expect( await curPagObj.evaluate( () => Reflect.get( window, 'motLisArr' ) ) ).toEqual( [] ); // What: No Motion Started Assertion. Why: Nothing should have moved while the state opened, including transitions that already finished. How: This checks the recorder caught no motion longer than 1ms.
 
 
 		expect( await curPagObj.evaluate( () => document.getAnimations().filter( ( aniCurObj ) => ( Number( aniCurObj.effect?.getTiming().duration ) || 0 ) > 1 ).map( ( aniCurObj ) => ( aniCurObj as CSSAnimation ).animationName || ( aniCurObj as CSSTransition ).transitionProperty || 'script animation' ) ) ).toEqual( [] ); // What: No Motion Assertion. Why: The state passes only when no animation or transition it still holds lasts longer than 1ms. How: This lists every animation or transition the page still holds that lasts longer than 1ms, which should be none. // What: Type Assertion Note. Why: getAnimations returns plain Animation objects, which don't type their CSS names. How: Each one is read as a CSS animation, then a CSS transition, falling back to a generic label when neither name exists.
