@@ -36,6 +36,21 @@ import { useSecCliFun } from './section-link.ts'; // What: Use Section Click Fun
 
 // #region Constants
 
+/**
+ * NAV_LIN_ARR = Nav Link Array
+ *
+ * @summary
+ * The section links the bar and its drawer both list, in the order the bar
+ * shows them and the drawer numbers them. Every row shares one shape, so its
+ * fields carry no comments of their own:
+ * - `ideStr` (String): Identifier String, the home page section's id, which
+ *   the link's address names after the root path.
+ * - `labStr` (String): Label String, the link's visible text.
+ *
+ * @author z4nta0 <https://github.com/z4nta0>
+ *
+*/
+
 const NAV_LIN_ARR = [ // What: Nav Link Array. Why: The bar and its mobile drawer list the same section links. How: Each row pairs a home page section's id, which its link's address names with the root path so a modified click opens it from any page, with its label, and both lists map over it, the drawer numbering the rows in order to match the sections' own numbered labels.
 
 

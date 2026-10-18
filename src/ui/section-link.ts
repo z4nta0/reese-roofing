@@ -48,15 +48,16 @@ import { useNavigate } from 'react-router';       // What: Use Navigate. Why: A 
  * modCliFun = Modified Click Function
  *
  * @summary
- * Whether a click on a section link should be left to the browser: one made
- * with a modifier key held (Ctrl or Cmd to open a new tab, Shift for a new
- * window, Alt to download) or with any button but the main one. A section
- * link's handler returns early when this is true, so the link's own address
- * opens the home page at the section, where the home page scrolls to it.
+ * Whether a click on a section link, or on the footer's back to top link,
+ * should be left to the browser: one made with a modifier key held (Ctrl or
+ * Cmd to open a new tab, Shift for a new window, Alt to download) or with any
+ * button but the main one. A link's handler returns early when this is true,
+ * so the link's own address opens in the browser's usual way, where a home
+ * page section's address has the home page scroll to it.
  *
  * @author z4nta0 <https://github.com/z4nta0>
  *
- * @param cliEveObj - Click Event Object: The section link's click event.
+ * @param cliEveObj - Click Event Object: The link's click event.
  *
  * @returns Whether the browser should handle the click itself.
  * @see {@link modCliBoo}
@@ -214,7 +215,7 @@ function useSecCliFun () : ( cliEveObj : React.MouseEvent< HTMLAnchorElement >, 
 
 // #region Exports
 
-export { modCliFun, useSecCliFun, useSecLinFun }; // What: Named Exports. Why: The bar, the hero, the footer, and the 404 page reach sections through these. How: This exports the modified-click check, the shared click handler, and useSecLinFun.
+export { modCliFun, useSecCliFun, useSecLinFun }; // What: Named Exports. Why: The bar, the hero, and the 404 page reach sections through these, and the footer's back to top link shares the modified-click check. How: This exports the modified-click check, the shared click handler, and useSecLinFun.
 
 // #endregion Exports
 
