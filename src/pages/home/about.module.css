@@ -22,7 +22,7 @@
 
 /* #region homAboSec */
 
-.homAboSec { /* What: Home About Section. Why: The section sits on a slightly darker paper band with the standard section padding. How: This sets the soft paper color, the top rule, and the vertical padding. */
+.homAboSec { /* What: Home About Section. Why: The section sits on a slightly darker paper band with the standard section padding. How: This sets the surface color, the top rule, and the vertical padding. */
 
 
 	background    : var( --bac-sur-col );                            /* Background Surface Color = #ebe7df */

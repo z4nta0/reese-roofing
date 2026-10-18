@@ -215,7 +215,7 @@
 
 
 }
-.serCarArt:hover { /* What: Hovered Service Card Article. Why: The hovered card should stand out from its neighbors. How: This tints it with the soft paper color. */
+.serCarArt:hover { /* What: Hovered Service Card Article. Why: The hovered card should stand out from its neighbors. How: This tints it with the surface color, a slightly darker paper. */
 
 
 	background : var( --bac-sur-col ); /* Background Surface Color = #ebe7df */
