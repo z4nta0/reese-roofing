@@ -16,8 +16,10 @@ import lofSvgUrl from './logo-full.svg';    // What: Logo-Full SVG URL. Why: The
  * @summary
  * The home page's third section, telling the company's story. The label,
  * heading, and logo seal, which stay in view as the story scrolls on wide
- * screens, sit beside three paragraphs and a quote from the family, and a row
- * of four numbered principles follows underneath, driven by PRI_REC_ARR.
+ * screens, sit beside three paragraphs and a quote from the family above 960px
+ * wide, where the seal is hidden and the story stacks below them, and a row of
+ * numbered principles follows underneath, four across, two at 960px wide and
+ * below, and one at 540px and below, driven by PRI_REC_ARR.
  *
  * Sections:
  *  - Constants
@@ -77,10 +79,11 @@ const PRI_REC_ARR = [ // What: Principle Record Array. Why: The principles row i
  *
  * @summary
  * Renders the about section: on the left, the numbered label, heading, and a
- * decorative logo seal; on the right, the company's story in three
- * paragraphs and a pull quote from the family. Below, the principles row
- * numbers each row of PRI_REC_ARR by its position, padded to two digits. The
- * section carries the about anchor the navigation links lead to.
+ * decorative logo seal; on the right, the company's story in three paragraphs
+ * and a pull quote from the family, stacking at 960px wide and below, where
+ * the seal is hidden. Below, the principles row numbers each row of
+ * PRI_REC_ARR by its position, padded to two digits. The section carries the
+ * about anchor the navigation links lead to.
  *
  * @author z4nta0 <https://github.com/z4nta0>
  *

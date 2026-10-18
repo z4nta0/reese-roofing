@@ -20,7 +20,8 @@ import { useSecCliFun } from '../../ui/section-link.ts'; // What: Use Section Cl
  * The home page's opening section, and the target of every link to the home
  * page's top anchor. It pairs the headline with the full logo over a faint
  * grid, follows with the company's pitch and its two calls to action, and ends
- * with a row of four headline numbers.
+ * with four headline numbers, in one row above 960px wide and two to a row at
+ * 960px and below.
  *
  * Sections:
  *  - Components
@@ -41,11 +42,12 @@ import { useSecCliFun } from '../../ui/section-link.ts'; // What: Use Section Cl
  *
  * @summary
  * Renders the hero: a decorative grid drawn as a repeating SVG pattern behind
- * everything, the location label and headline beside the full logo, the pitch
- * paragraph with the estimate and services buttons, and the stats row. The
- * section carries the page's top anchor, so the navigation bar's and
- * drawer's Home links, the home page footer's back-to-top link, and the 404
- * page's Return home button all land here.
+ * everything, the location label and headline beside the full logo, which
+ * moves above them at 960px wide and below, the pitch paragraph with the
+ * estimate and services buttons, and the stats row. The section carries the
+ * page's top anchor, so the navigation bar's and drawer's Home links, the home
+ * page footer's back-to-top link, and the 404 page's Return home button all
+ * land here.
  *
  * @author z4nta0 <https://github.com/z4nta0>
  *

@@ -104,7 +104,7 @@ function NotFouCom () : React.JSX.Element {
 
 				<p className={ cssModObj.secLedPar }>The page you're looking for doesn't exist. Let's get you back home.</p>{ /* What: Section Lede Paragraph Element. Why: Visitors should know what happened and what to do next. How: This uses the site's lede style. */ }
 
-				<div className={ cssModObj.nofActDiv }>{ /* What: Not-Found Actions Div Element. Why: The page's two ways onward sit together. How: This holds the return and estimate buttons side by side, wrapping if needed. */ }
+				<div className={ cssModObj.nofActDiv }>{ /* What: Not-Found Actions Div Element. Why: The page's two ways onward sit together. How: This holds the return and estimate buttons side by side, wrapping them onto two lines at about 345px wide and below. */ }
 
 
 					<a

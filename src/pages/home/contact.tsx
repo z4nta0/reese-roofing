@@ -18,9 +18,10 @@ import React     from 'react';                // What: React. Why: The form trac
  * The home page's last section, where visitors reach the company. The left
  * column gives the office, phone, email, hours, and service area, with a
  * signature card carrying the full logo below them; the right column is an
- * estimate request form. The site has no backend, so submitting the form opens
- * the visitor's own email app with a message built from the fields, addressed
- * to the company.
+ * estimate request form, side by side above 960px wide, with the form below
+ * the details at 960px and below. The site has no backend, so submitting the
+ * form opens the visitor's own email app with a message built from the fields,
+ * addressed to the company.
  *
  * Sections:
  *  - Types
