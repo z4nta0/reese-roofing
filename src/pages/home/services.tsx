@@ -57,7 +57,7 @@ type SerRecTyp = { desStr : string, detArr : string[], ideStr : string, titStr :
  *
 */
 
-const SER_REC_ARR : SerRecTyp[] = [ // What: Service Record Array. Why: The section's cards are data, not markup, so a service changes in one place. How: SerSecCom maps over it, rendering a card for each row.
+const SER_REC_ARR : SerRecTyp[] = [ // What: Service Record Array. Why: The section's cards are data, not markup, so a service changes in one place. How: SerSecCom maps over it, rendering a card for each service.
 
 
 	{ // What: Single-Ply Membrane Service. Why: Most flat commercial roofs are single-ply membranes. How: This is the first card.
@@ -220,16 +220,16 @@ function SerSecCom () : React.JSX.Element {
 							<div className={ cssModObj.carHeaDiv }>{ /* What: Card Head Div Element. Why: The number and title lead each card. How: This sets them together. */ }
 
 
-								<span className={ cssModObj.carIdeSpa }>{ serRecObj.ideStr }</span>{ /* What: Card Identifier Span Element. Why: The cards are numbered in order. How: This shows the row's two-digit number. */ }
+								<span className={ cssModObj.carIdeSpa }>{ serRecObj.ideStr }</span>{ /* What: Card Identifier Span Element. Why: The cards are numbered in order. How: This shows the service's two-digit number. */ }
 
-								<h3 className={ cssModObj.carTitHea }>{ serRecObj.titStr }</h3>{ /* What: Card Title Heading Element. Why: Each card names its service. How: This shows the row's title. */ }
+								<h3 className={ cssModObj.carTitHea }>{ serRecObj.titStr }</h3>{ /* What: Card Title Heading Element. Why: Each card names its service. How: This shows the service's title. */ }
 
 
 							</div>
 
-							<p className={ cssModObj.carDesPar }>{ serRecObj.desStr }</p>{ /* What: Card Description Paragraph Element. Why: Each card summarizes its service in a sentence. How: This shows the row's description. */ }
+							<p className={ cssModObj.carDesPar }>{ serRecObj.desStr }</p>{ /* What: Card Description Paragraph Element. Why: Each card summarizes its service in a sentence. How: This shows the service's description. */ }
 
-							<ul className={ cssModObj.carDetUno }>{ /* What: Card Detail Unordered List Element. Why: The specific work a service covers reads best as bullets. How: This lists the row's details. */ }
+							<ul className={ cssModObj.carDetUno }>{ /* What: Card Detail Unordered List Element. Why: The specific work a service covers reads best as bullets. How: This lists the service's details. */ }
 
 
 								{ serRecObj.detArr.map( ( detIteStr ) => ( // What: Detail Item Map. Why: Every detail gets its own bullet. How: This renders one list item per entry.

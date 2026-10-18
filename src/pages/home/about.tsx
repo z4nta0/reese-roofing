@@ -3,7 +3,7 @@
 
 // #region Imports
 
-import cssModObj from './about.module.css'; // What: CSS Module Object. Why: The section's two-column story, seal, quote, and principles grid are styled in its own module. How: Each element reads its hashed class name from this object.
+import cssModObj from './about.module.css'; // What: CSS Module Object. Why: The section's story, seal, quote, and principles grid are styled in its own module. How: Each element reads its hashed class name from this object.
 import lofSvgUrl from './logo-full.svg';    // What: Logo-Full SVG URL. Why: The section's seal is the full logo. How: Vite resolves the import to the file's fingerprinted URL, used as the image's src.
 
 // #endregion Imports
@@ -113,10 +113,10 @@ function AboSecCom () : React.JSX.Element {
 		>{ /* What: Home About Section Element. Why: This tells the company's story. How: Its about id is the anchor the navigation links lead to, kept as is since it appears in the page's URL. */ }
 
 
-			<div className={ cssModObj.aboStoDiv }>{ /* What: About Story Div Element. Why: The story's two columns should line up with the page's content width. How: This sets the left and right columns side by side, stacking them at 960px wide and below. */ }
+			<div className={ cssModObj.aboStoDiv }>{ /* What: About Story Div Element. Why: The story should line up with the page's content width. How: This sets the left and right columns side by side, stacking them at 960px wide and below. */ }
 
 
-				<div className={ cssModObj.aboLefDiv }>{ /* What: About Left Div Element. Why: The heading and seal anchor the story. How: This stacks the label, heading, and seal, staying in view as the story beside it scrolls, while at 960px wide and below the seal is hidden and the column scrolls away with the page. */ }
+				<div className={ cssModObj.aboLefDiv }>{ /* What: About Left Div Element. Why: The heading anchors the story, with the seal under it where there's room. How: This stacks the label, heading, and seal, staying in view as the story beside it scrolls, while at 960px wide and below the seal is hidden and the column scrolls away with the page. */ }
 
 
 					<span className={ cssModObj.eyeLabSpa }>03 · About</span>{ /* What: Eyebrow Label Span Element. Why: Each section is numbered in order down the page. How: This is the section's numbered label, set in the site's eyebrow style. */ }
@@ -214,11 +214,11 @@ function AboSecCom () : React.JSX.Element {
 						>{ /* What: Principle Item Div Element. Why: Each principle is a self-contained block. How: This holds its number, title, and body. */ }
 
 
-							<span className={ cssModObj.priNumSpa }>{ String( priIndNum + 1 ).padStart( 2, '0' ) }</span>{ /* What: Principle Number Span Element. Why: The principles are numbered in order. How: This turns the row's zero-based position into a two-digit number starting at 01. */ }
+							<span className={ cssModObj.priNumSpa }>{ String( priIndNum + 1 ).padStart( 2, '0' ) }</span>{ /* What: Principle Number Span Element. Why: The principles are numbered in order. How: This turns the principle's zero-based position in PRI_REC_ARR into a two-digit number starting at 01. */ }
 
-							<h3 className={ cssModObj.priTitHea }>{ priRecObj.titStr }</h3>{ /* What: Principle Title Heading Element. Why: Each principle has a short name. How: This shows the row's title. */ }
+							<h3 className={ cssModObj.priTitHea }>{ priRecObj.titStr }</h3>{ /* What: Principle Title Heading Element. Why: Each principle has a short name. How: This shows the principle's title. */ }
 
-							<p className={ cssModObj.priBodPar }>{ priRecObj.bodStr }</p>{ /* What: Principle Body Paragraph Element. Why: Each principle is explained in a sentence. How: This shows the row's body. */ }
+							<p className={ cssModObj.priBodPar }>{ priRecObj.bodStr }</p>{ /* What: Principle Body Paragraph Element. Why: Each principle is explained in a sentence. How: This shows the principle's body. */ }
 
 
 						</div>

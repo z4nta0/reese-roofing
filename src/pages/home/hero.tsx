@@ -3,7 +3,7 @@
 
 // #region Imports
 
-import cssModObj from './hero.module.css'; // What: CSS Module Object. Why: The hero's grid background, two-row layout, and stats are styled in its own module. How: Each element reads its hashed class name from this object.
+import cssModObj from './hero.module.css'; // What: CSS Module Object. Why: The hero's grid background, top and bottom blocks, and stats are styled in its own module. How: Each element reads its hashed class name from this object.
 import lofSvgUrl from './logo-full.svg';   // What: Logo-Full SVG URL. Why: The hero's main visual is the full logo. How: Vite resolves the import to the file's fingerprinted URL, used as the image's src.
 
 
@@ -135,10 +135,10 @@ function HerSecCom () : React.JSX.Element {
 
 
 
-			<div className={ cssModObj.pagConDiv }>{ /* What: Page Container Div Element. Why: The hero's content should line up with the page's content width. How: This stacks the top row, the bottom row, and the stats. */ }
+			<div className={ cssModObj.pagConDiv }>{ /* What: Page Container Div Element. Why: The hero's content should line up with the page's content width. How: This stacks the top block, the bottom block, and the stats. */ }
 
 
-				<div className={ cssModObj.herTopDiv }>{ /* What: Hero Top Div Element. Why: The headline and logo share the first row. How: This sets the copy on the left and the logo on the right, stacking them, logo first, at 960px wide and below. */ }
+				<div className={ cssModObj.herTopDiv }>{ /* What: Hero Top Div Element. Why: The headline and logo open the hero side by side where there's room. How: This sets the copy on the left and the logo on the right, stacking them, logo first, at 960px wide and below. */ }
 
 
 					<div className={ cssModObj.herCopDiv }>{ /* What: Hero Copy Div Element. Why: The location label sits directly above the headline. How: This stacks the two. */ }
@@ -177,7 +177,7 @@ function HerSecCom () : React.JSX.Element {
 
 
 
-				<div className={ cssModObj.herBotDiv }>{ /* What: Hero Bottom Div Element. Why: The pitch and the calls to action share the second row. How: This sets them side by side, stacking them at 960px wide and below. */ }
+				<div className={ cssModObj.herBotDiv }>{ /* What: Hero Bottom Div Element. Why: The pitch and the calls to action follow the headline side by side where there's room. How: This sets them side by side, stacking them at 960px wide and below. */ }
 
 
 					<p className={ cssModObj.secLedPar }>{ /* What: Section Lede Paragraph Element. Why: The pitch says who the company serves and what it promises. How: This uses the site's lede style. */ }
