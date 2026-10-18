@@ -175,12 +175,12 @@ function AboSecCom () : React.JSX.Element {
 
 						<span className={ cssModObj.quoMarSpa }>“</span>{ /* What: Quote Mark Span Element. Why: An oversized opening quote mark sets the quote apart. How: This draws it as its own styled character. */ }
 
-						<p className={ cssModObj.aboQuoPar }>{ /* What: About Quote Paragraph Element. Why: This is the quote itself. How: This sets it in large display italic, indented past the quote mark. */ }
+						<p className={ cssModObj.aboQuoPar }>{ /* What: About Quote Paragraph Element. Why: This is the quote itself. How: This sets it in large display italic, indented past the quote mark, or unindented under it at 540px wide and below. */ }
 							The roof above your operation is not the place to cut corners, and
 							it's not the place to overspend. Our job is to find the line.
 						</p>
 
-						<footer className={ cssModObj.aboQuoFoo }>The Reese family</footer>{ /* What: About Quote Footer Element. Why: The quote names who said it. How: This sets it in tracked, muted capitals at body size, indented to line up with the quote. */ }
+						<footer className={ cssModObj.aboQuoFoo }>The Reese family</footer>{ /* What: About Quote Footer Element. Why: The quote names who said it. How: This sets it in tracked, muted capitals at body size, lined up with the quote, indented with it until 540px wide and below. */ }
 
 
 					</blockquote>

@@ -266,7 +266,10 @@ from the 404 page, navigates home to it) without a hash. The home page clears
 any hash it arrives with once it has scrolled to it. Unlike hair-designs', the
 helper scrolls in place only on the home page path, since the 404 page has a
 `top` anchor of its own; the footer's back to top link scrolls to whichever
-page's `top` is showing through its own handler.
+page's `top` is showing through its own handler. The helper exports only
+`modCliFun` and `useSecCliFun` (decided 2026-10-18): `useSecLinFun`, which the
+user-level rule lists among its exports, stays private, since only the shared
+click handler in its own file calls it.
 
 Scroll position (decided 2026-10-17, following hair-designs' recorded
 exception): the 404 page makes this a two-route site, but `useScrTopFun` from

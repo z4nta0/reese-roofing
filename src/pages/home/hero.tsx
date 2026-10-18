@@ -135,7 +135,7 @@ function HerSecCom () : React.JSX.Element {
 			<div className={ cssModObj.pagConDiv }>{ /* What: Page Container Div Element. Why: The hero's content should line up with the page's content width. How: This stacks the top row, the bottom row, and the stats. */ }
 
 
-				<div className={ cssModObj.herTopDiv }>{ /* What: Hero Top Div Element. Why: The headline and logo share the first row. How: This sets the copy on the left and the logo on the right, stacking them at 960px wide and below. */ }
+				<div className={ cssModObj.herTopDiv }>{ /* What: Hero Top Div Element. Why: The headline and logo share the first row. How: This sets the copy on the left and the logo on the right, stacking them, logo first, at 960px wide and below. */ }
 
 
 					<div className={ cssModObj.herCopDiv }>{ /* What: Hero Copy Div Element. Why: The location label sits directly above the headline. How: This stacks the two. */ }

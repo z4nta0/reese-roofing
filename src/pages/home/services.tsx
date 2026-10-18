@@ -183,7 +183,7 @@ function SerSecCom () : React.JSX.Element {
 			<div className={ cssModObj.pagConDiv }>{ /* What: Page Container Div Element. Why: The section's content should line up with the page's content width. How: This holds the heading block and the card grid. */ }
 
 
-				<div className={ cssModObj.serHeaDiv }>{ /* What: Services Head Div Element. Why: The label, heading, and lede introduce the cards. How: Its grid sets the heading and lede side by side on wide screens and stacks all three on small ones. */ }
+				<div className={ cssModObj.serHeaDiv }>{ /* What: Services Head Div Element. Why: The label, heading, and lede introduce the cards. How: Its grid sets the heading and lede side by side, stacking all three at 960px wide and below. */ }
 
 
 					<span className={ cssModObj.eyeLabSpa }>02 · What we do</span>{ /* What: Eyebrow Label Span Element. Why: Each section is numbered in order down the page. How: This is the section's numbered label, set in the site's eyebrow style. */ }
