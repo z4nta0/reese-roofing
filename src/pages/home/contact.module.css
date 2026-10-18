@@ -181,7 +181,7 @@
 
 }
 
-.rowLabTer { /* What: Row Label Term. Why: Each row's label reads as a small tracked caption. How: This sets it in faded uppercase, nudged down to line up with the value beside it above 540px wide, where the row has a label column. */
+.rowLabTer { /* What: Row Label Term. Why: Each row's label reads as a small tracked caption. How: This sets it in faded uppercase, nudged down at every width, which lines it up with the value beside it above 540px wide, where the row has a label column. */
 
 
 	color          : oklch( from var( --bac-pag-col ) l c h / 0.5 ); /* Background Page Color = #f5f2ec @ 0.5 opacity */
