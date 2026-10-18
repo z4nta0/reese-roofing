@@ -29,11 +29,13 @@ import type { Page          } from '@playwright/test'; // What: Page. Why: Every
  * once it has eased in. Every form field a visitor can reach has to look
  * different once focused and have a transition longer than zero. The brand
  * link, which the Tab order skips, has to change on hover and again on press
- * too. Under reduced motion every control keeps its hover and press changes,
- * and every field its focus change, but nothing transitions, the parts inside
- * a control and their pseudo-elements included. Real clicks are blocked during
- * the checks, so pressing a link or the drawer's rows never navigates or
- * closes anything mid-check.
+ * too. With motion on, the drawer and its scrim have to really transition as
+ * the drawer opens and closes, and the sent label has to rise in. Under
+ * reduced motion every control keeps its hover and press changes, and every
+ * field its focus change, but nothing transitions, the parts inside a control
+ * and their pseudo-elements included. Real clicks are blocked during the
+ * checks, so pressing a link or the drawer's rows never navigates or closes
+ * anything mid-check.
  *
  * Sections:
  *  - Constants
@@ -533,6 +535,64 @@ for ( const redMotBoo of [ false, true ] ) { // What: Brand Motion Loop. Why: Th
 
 
 }
+
+
+test( 'the drawer and its scrim animate open and closed', async ( { page : curPagObj } ) => { // What: Drawer Motion Test. Why: Opening and closing should slide and fade rather than snap, the very thing a browser can silently drop, as Firefox once did here. How: This opens and closes the drawer at phone size with motion on, checking each time that the drawer and its scrim are really transitioning.
+
+
+	const phoRecObj = STA_REC_ARR.find( ( staCurObj ) => staCurObj.ideStr === 'home-phone' )!; // What: Phone Record Object. Why: The drawer exists only on small screens. How: This finds the home phone state's row. // What: Non-Null Note. Why: find types its result as possibly undefined. How: STA_REC_ARR always lists the home-phone state.
+
+
+	await opeStaFun( curPagObj, phoRecObj ); // What: Phone State Open Call. Why: The drawer is toggled with the page settled. How: This loads the home page at phone size, with motion on.
+
+
+	const sciDivObj = curPagObj.locator( 'header' ).locator( 'xpath=preceding-sibling::div[1]' );                                                     // What: Scrim Div Object. Why: The scrim fades behind the drawer. How: This finds the element rendered just before the bar.
+	const togButObj = curPagObj.getByRole( 'button', { name : 'Toggle menu' } );                                                                      // What: Toggle Button Object. Why: The drawer opens and closes from its menu button. How: This finds the button by its name.
+	const traLisFun = ( eleCurEle : Element ) => eleCurEle.getAnimations().map( ( aniCurObj ) => ( aniCurObj as CSSTransition ).transitionProperty ); // What: Transition List Function. Why: A transition that really runs shows up among the element's animations. How: This lists the property each running transition animates. // What: Type Assertion Note. Why: getAnimations returns plain Animation objects, which don't type a transition's property. How: Each one is read as a CSS transition.
+
+
+	await togButObj.click(); // What: Open Click Call. Why: Opening is the first motion under test. How: This clicks the toggle.
+
+
+	const draDivHan = ( await curPagObj.locator( 'header [data-drawer-menu-open]' ).elementHandle() )!; // What: Drawer Div Handle. Why: The drawer is checked while it opens and again while it closes, after it loses the attribute that finds it. How: This holds on to the element carrying the open attribute inside the bar. // What: Non-Null Note. Why: elementHandle types its result as possibly null. How: The click just opened the drawer, which carries the attribute.
+
+
+	await expect.poll( () => draDivHan.evaluate( traLisFun ) ).toContain( 'max-height' ); // What: Drawer Open Motion Assertion. Why: The drawer should grow open rather than appear at once. How: This waits until a max-height transition is running on it.
+	await expect.poll( () => sciDivObj.evaluate( traLisFun ) ).toContain( 'opacity' );    // What: Scrim Open Motion Assertion. Why: The page should dim gradually. How: This waits until an opacity transition is running on the scrim.
+	await expect( togButObj ).toHaveAttribute( 'aria-expanded', 'true' );                 // What: Drawer Opened Assertion. Why: The open motion only counts if the drawer ends open. How: This checks the toggle reports it open.
+	await expect.poll( () => draDivHan.evaluate( traLisFun ) ).toEqual( [] );             // What: Open Motion Settled Wait. Why: The closing check has to see a fresh transition, not the end of the opening one. How: This waits until nothing is running on the drawer.
+
+
+	await togButObj.click(); // What: Close Click Call. Why: Closing is the second motion under test. How: This clicks the toggle again.
+
+
+	await expect.poll( () => draDivHan.evaluate( traLisFun ) ).toContain( 'max-height' ); // What: Drawer Close Motion Assertion. Why: The drawer should shrink closed rather than vanish. How: This waits until a max-height transition is running on it.
+	await expect.poll( () => sciDivObj.evaluate( traLisFun ) ).toContain( 'opacity' );    // What: Scrim Close Motion Assertion. Why: The dimming should lift gradually. How: This waits until an opacity transition is running on the scrim.
+
+
+} );
+
+
+
+test( 'the sent label rises in when the form is sent', async ( { page : curPagObj } ) => { // What: Sent Label Motion Test. Why: The visitor's confirmation should arrive with its small flourish rather than simply swap. How: This sends the form with motion on and checks the label's entrance animation is running.
+
+
+	const homRecObj = STA_REC_ARR.find( ( staCurObj ) => staCurObj.ideStr === 'home-desktop' )!; // What: Home Record Object. Why: The form sits on the home page. How: This finds the home desktop state's row. // What: Non-Null Note. Why: find types its result as possibly undefined. How: STA_REC_ARR always lists the home-desktop state.
+
+
+	await opeStaFun( curPagObj, homRecObj ); // What: Home State Open Call. Why: The form is sent from the home page. How: This loads it at desktop size, with motion on.
+
+	await curPagObj.locator( '#conNamInp' ).fill( 'Pat Doe' ); // What: Name Fill Call. Why: A real request carries a name. How: This types one into the name field.
+
+	await curPagObj.locator( '#conEmaInp' ).fill( 'pat@example.com' ); // What: Email Fill Call. Why: A real request carries an email. How: This types one into the email field.
+
+	await curPagObj.getByRole( 'button', { name : 'Send request' } ).click(); // What: Send Click Call. Why: This is the action under test. How: This clicks the submit button.
+
+
+	await expect.poll( () => curPagObj.locator( 'form button[type="submit"] span' ).first().evaluate( ( spaCurEle ) => spaCurEle.getAnimations().map( ( aniCurObj ) => ( aniCurObj as CSSAnimation ).animationName ).join( ' ' ) ) ).toContain( 'subLabSpaSwapFadeIn' ); // What: Label Motion Assertion. Why: The sent label should rise in. How: This waits until its entrance animation, whose module-scoped name still contains its own, is running. // What: Type Assertion Note. Why: getAnimations returns plain Animation objects, which don't type an animation's name. How: Each one is read as a CSS animation.
+
+
+} );
 
 // #endregion Module Init
 
