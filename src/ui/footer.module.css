@@ -140,7 +140,7 @@
 
 
 }
-@container app ( max-width : 880px ) { /* What: Narrow Footer Meta Div. Why: The stacked footer is left-aligned on small screens. How: This applies at 880px wide and below. */
+@container app ( max-width : 880px ) { /* What: Narrow Footer Meta Div. Why: The stacked footer's items share a left edge on small screens. How: This applies at 880px wide and below. */
 
 
 	.fooMetDiv { /* What: Left Footer Meta Div. Why: The lines should line up with the stacked brand and link. How: This aligns them to the left. */
