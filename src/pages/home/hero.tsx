@@ -108,7 +108,7 @@ function HerSecCom () : React.JSX.Element {
 								fill='none'
 								stroke='currentColor'
 								strokeWidth='0.5'
-							/>{ /* What: Grid Tile Path Element. Why: Each tile draws its top and left edges, so the tiles together form the grid. How: This strokes the two edges in the section's text color. */ }
+							/>{ /* What: Grid Tile Path Element. Why: Each tile draws its top and left edges, so the tiles together form the grid. How: This strokes the two edges in the background div's main text color, which the div's opacity fades. */ }
 
 
 						</pattern>
@@ -259,7 +259,7 @@ function HerSecCom () : React.JSX.Element {
 					<div className={ cssModObj.staIteDiv }>{ /* What: Stat Item Div Element. Why: Accreditation and insurance are the usual checks before hiring. How: This is the rating stat, pairing the rating with its label. */ }
 
 
-						<div className={ cssModObj.staNumDiv }>A<span className={ cssModObj.staPluSpa }>+</span></div>{ /* What: Stat Number Div Element. Why: The number leads each stat. How: This is the rating stat's number, whose plus sign takes its own class. */ }
+						<div className={ cssModObj.staNumDiv }>A<span className={ cssModObj.staPluSpa }>+</span></div>{ /* What: Stat Number Div Element. Why: The number leads each stat. How: This is the rating stat's number, whose plus sign is raised like the other suffixes but set in accent italic. */ }
 
 						<div className={ cssModObj.staLabDiv }>BBB accredited & fully insured</div>{ /* What: Stat Label Div Element. Why: Each number needs to say what it counts. How: This is the rating stat's label, below its number. */ }
 

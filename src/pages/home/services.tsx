@@ -177,7 +177,7 @@ function SerSecCom () : React.JSX.Element {
 			id='services'
 
 			className={ cssModObj.homSerSec }
-		>{ /* What: Home Services Section Element. Why: This lists what the company does. How: Its services id is the anchor the navigation links jump to, kept as is since it appears in the page's URL. */ }
+		>{ /* What: Home Services Section Element. Why: This lists what the company does. How: Its services id is the anchor the navigation links and the hero's services button jump to, kept as is since it appears in the page's URL. */ }
 
 
 			<div className={ cssModObj.pagConDiv }>{ /* What: Page Container Div Element. Why: The section's content should line up with the page's content width. How: This holds the heading block and the card grid. */ }

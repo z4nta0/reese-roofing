@@ -147,15 +147,15 @@ the same helper, and the seo suite reads the head of each route instead.
 - `npm run test:interaction`: checks the interaction feedback rule on every
   state (every reachable link and button changes on hover and on press, has a
   transition longer than zero, and transitions its focus ring, every form
-  field changes when focused, easing in, the first keyboard stop draws a 2px
-  ring, and reduced motion keeps the changes with no transitions), then the
-  site's behavior: the section, Home, hero, estimate, back to top, and logo
-  links (landing on their targets with no hash left in the address, and a
-  Ctrl, Cmd, or middle click opening a section in a new tab), every way the
-  drawer opens and closes, the contact form's sent label and mailto link (the
-  mailto test is Chromium-only, through the DevTools Protocol), and the 404
-  page, whose Return home opens the home page at its top and whose estimate,
-  section, and Home links reach their targets.
+  field changes when focused and has a transition longer than zero, the first
+  keyboard stop draws a 2px ring, and reduced motion keeps the changes with no
+  transitions), then the site's behavior: the section, Home, hero, estimate,
+  back to top, and logo links (landing on their targets without ever putting a
+  hash in the address, and a Ctrl, Cmd, or middle click opening a section in a
+  new tab), every way the drawer opens and closes, the contact form's sent
+  label and mailto link (the mailto test is Chromium-only, through the
+  DevTools Protocol), and the 404 page, whose Return home opens the home page
+  at its top and whose estimate, section, and Home links reach their targets.
 - `npm run test:rendering`: compares a full-page screenshot of every state
   with its baseline in `tests/rendering/baselines/`, with zero tolerance,
   since each engine renders identically from run to run here and even a
