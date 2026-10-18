@@ -215,5 +215,19 @@ helper scrolls in place only on the home page path, since the 404 page has a
 `top` anchor of its own; the footer's back to top link scrolls to whichever
 page's `top` is showing through its own handler.
 
+Scroll position (decided 2026-10-17, following hair-designs' recorded
+exception): the 404 page makes this a two-route site, but `useScrTopFun` from
+the user-level "## Multi-Page React Sites: Scroll Position" rule is left out.
+Every link off the 404 page goes through `secCliFun` with a section hash
+(Return home to `/#top`, the estimate button to `/#contact`, the bar's links
+to theirs), which the home page scrolls to on arrival, so no navigation opens
+a page without a hash, the one case the hook covers. The hook would also
+fight the home page's hash clearing, a REPLACE with no hash, which it would
+answer by jumping to the top. Return home was a plain `Link` until this
+audit, which opened the home page as far down as a scrolled 404 page; the
+interaction suite now checks it lands at the top. If a hash-free link
+between pages is ever added, the hook comes in with a guard that skips the
+hash-clearing REPLACE.
+
 Node on Netlify (confirmed 2026-10-08): the live site builds on Node 24.x,
 which meets React Router 8's minimum of 22.22.

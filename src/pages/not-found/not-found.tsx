@@ -6,10 +6,9 @@
 import cssModObj from './not-found.module.css'; // What: CSS Module Object. Why: The page's layout and its label, heading, paragraph, and buttons are styled in its own module. How: Each element reads its hashed class name from this object.
 
 
-import { Link         } from 'react-router';             // What: Link. Why: The way home should navigate inside the site without a full page load. How: This renders the return button.
 import { NavBarCom    } from '../../ui/nav.tsx';         // What: Navigation Bar Component. Why: The 404 page keeps the site's top bar, so every section stays one tap away. How: This is rendered first inside the page.
 import { SitFooCom    } from '../../ui/footer.tsx';      // What: Site Footer Component. Why: The 404 page ends with the site's footer like every page. How: This is rendered last inside the page.
-import { useSecCliFun } from '../../ui/section-link.ts'; // What: Use Section Click Function. Why: The estimate button reaches the contact section the same way the bar's does. How: This returns secCliFun, the shared click handler that navigates home to a section without leaving a hash in the address.
+import { useSecCliFun } from '../../ui/section-link.ts'; // What: Use Section Click Function. Why: Both buttons reach their sections the same way the bar's links do. How: This returns secCliFun, the shared click handler that navigates home to a section without leaving a hash in the address.
 
 // #endregion Imports
 
@@ -44,15 +43,16 @@ import { useSecCliFun } from '../../ui/section-link.ts'; // What: Use Section Cl
  *
  * @summary
  * Renders the 404 page: its own title, which React moves into the head, the
- * navigation bar, then a main element holding a centered column with an
- * error label, the heading, a short explanation, and two buttons, then the
- * footer. The return button navigates home inside the site; the estimate
- * button goes through secCliFun, which navigates home inside the site to the
- * contact section, where the home page scrolls to the form and clears the
- * hash, while a Ctrl, Cmd, or middle click opens its /#contact address in a
- * new tab. The main element carries the
- * top anchor, so the footer's back-to-top link works here too. app.tsx
- * renders it for every path no other route claims.
+ * navigation bar, then a main element holding a centered column with an error
+ * label, the heading, a short explanation, and two buttons, then the footer.
+ * Both buttons go through secCliFun, which navigates home inside the site to a
+ * section (the hero's top for the return button, the contact section for the
+ * estimate button), where the home page scrolls to it and clears the hash,
+ * while a Ctrl, Cmd, or middle click opens its address in a new tab. Since no
+ * link leaves this page without a section hash, the site needs no
+ * scroll-to-top hook, the same exception hair-designs records. The main
+ * element carries a top anchor of its own, so the footer's back-to-top link
+ * works here too. app.tsx renders it for every path no other route claims.
  *
  * @author z4nta0 <https://github.com/z4nta0>
  *
@@ -70,7 +70,7 @@ import { useSecCliFun } from '../../ui/section-link.ts'; // What: Use Section Cl
 function NotFouCom () : React.JSX.Element {
 
 
-	const secCliFun = useSecCliFun(); // What: Section Click Function. Why: The estimate button reaches its section the same way the bar's does. How: This leaves a modified click to the browser and otherwise navigates home to the section without a hash.
+	const secCliFun = useSecCliFun(); // What: Section Click Function. Why: Both buttons reach their sections the same way the bar's links do. How: This leaves a modified click to the browser and otherwise navigates home to the section without a hash.
 
 
 
@@ -106,15 +106,15 @@ function NotFouCom () : React.JSX.Element {
 				<div className={ cssModObj.nofActDiv }>{ /* What: Not-Found Actions Div Element. Why: The page's two ways onward sit together. How: This holds the return and estimate buttons side by side, wrapping if needed. */ }
 
 
-					<Link
+					<a
 						className={` ${ cssModObj.butBasAnc }   ${ cssModObj.butBasAncPrimary } `}
 
-						to='/'
-					>{ /* What: Return Home Link. Why: The page's main action is going back home. How: This navigates to the root path inside the site. */ }
+						href='/#top'
+
+						onClick={ ( cliEveObj ) => secCliFun( cliEveObj, 'top' ) }
+					>{ /* What: Primary Button Base Anchor Element. Why: The page's main action is going back home. How: This navigates home to the hero's top without a hash, so the home page opens at its top, while a Ctrl, Cmd, or middle click opens it in a new tab. */ }
 						Return home <span className={ cssModObj.arrIcoSpa } aria-hidden='true'>→</span>
-					</Link>
-
-
+					</a>
 
 					<a
 						className={` ${ cssModObj.butBasAnc }   ${ cssModObj.butBasAncGhost } `}

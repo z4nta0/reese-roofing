@@ -49,6 +49,7 @@ const CLI_KIN_ARR : Array< [ string, Parameters< Locator[ 'click' ] >[ 0 ] ] > =
 
 const DES_VIE_OBJ = { height : 900, width : 1440 }; // What: Desktop Viewport Object. Why: The bar's own links show only on wide screens. How: This is the desktop size the navigation checks use.
 const PHO_VIE_OBJ = { height : 844, width : 390  }; // What: Phone Viewport Object. Why: The drawer exists only on small screens. How: This is the phone size the drawer checks use.
+const SMA_VIE_OBJ = { height : 568, width : 320  }; // What: Small Viewport Object. Why: The 404 page only scrolls on the smallest phones. How: This is the 320 by 568 size the Return home check opens it at.
 
 // #endregion Constants
 
@@ -478,17 +479,21 @@ test( 'an unknown address shows the 404 page', async ( { page : curPagObj } ) =>
 
 
 
-test( 'Return home leads to the home page', async ( { page : curPagObj } ) => { // What: Return Home Test. Why: The 404 page's main action has to work. How: This clicks Return home and checks the address and title.
+test( 'Return home leads to the top of the home page', async ( { page : curPagObj } ) => { // What: Return Home Test. Why: The 404 page's main action has to work, and with no scroll-to-top hook, the home page has to open at its top even when the 404 page was scrolled. How: This scrolls a small 404 page down, clicks Return home, and checks the address, title, and scroll position.
 
 
-	await opeRouFun( curPagObj, '/missing', DES_VIE_OBJ ); // What: Not Found Open Call. Why: Return home lives on the 404 page. How: This opens it.
+	await opeRouFun( curPagObj, '/missing', SMA_VIE_OBJ ); // What: Not Found Open Call. Why: The 404 page only scrolls on the smallest phones. How: This opens it at 320 by 568.
+
+	await curPagObj.evaluate( () => window.scrollTo( 0, document.documentElement.scrollHeight ) ); // What: Scroll Down Call. Why: A router push keeps the old scroll position unless something resets it. How: This scrolls the 404 page to its bottom.
 
 	await curPagObj.getByRole( 'link', { name : 'Return home' } ).click(); // What: Return Home Click Call. Why: This is the action under test. How: This clicks the button.
 
 
-	await expect( curPagObj ).toHaveURL( /\/$/ ); // What: Home Address Assertion. Why: The visitor should land on the home page. How: This checks the URL ends at the root.
-
 	await expect( curPagObj ).toHaveTitle( 'Reese Roofing | Portfolio Demo by techgeek.support' ); // What: Home Title Assertion. Why: The 404 page's title should give way to the home page's. How: This checks the title changed back.
+
+	await expect.poll( () => curPagObj.evaluate( () => window.scrollY ) ).toBe( 0 ); // What: Top Position Assertion. Why: The home page should open at its top. How: This waits until the page sits at the top.
+
+	await expect( curPagObj ).toHaveURL( /\/$/ ); // What: Home Address Assertion. Why: The visitor should land on the home page with no hash left. How: This checks the URL ends at the root.
 
 
 } );
