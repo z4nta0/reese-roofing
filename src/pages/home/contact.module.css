@@ -127,7 +127,7 @@
 /* #endregion conTitHea */
 
 
-.secLedPar { /* What: Section Lede Paragraph. Why: The lede says what happens after the visitor reaches out. How: This sets it in the body font, a little larger than body text, in faded paper with room below. */
+.secLedPar { /* What: Section Lede Paragraph. Why: The lede says what happens after the visitor reaches out. How: This sets it in the body font, at body size on narrower screens, growing to a step larger on wide ones, in faded paper with room below. */
 
 
 	color         : oklch( from var( --bac-pag-col ) l c h / var( --cdn-pow-001-rec ) ); /* Background Page Color = #f5f2ec, Core-Design-Number to the Power of 1 Reciprocal ~= 0.755 */
@@ -542,7 +542,7 @@
 
 
 	animation : subLabSpaSentFadeIn var( --dur-ani-p02 ) var( --mot-ove-eas ) both; /* Duration Animation Base Plus 2 ~= 277.0ms, Motion Overshoot Easing = cubic-bezier( .34, 1.2, .5, 1 ) */
-	display   : inline-block;                                                       /* What: Inline Block Display. Why: A transform has no effect on a plain inline box. How: This lets the label move while it stays in its line. */
+	display   : inline-block;                                                       /* What: Inline Block Display. Why: A transform has no effect on a plain inline box. How: This keeps the label a box its rise-in can move, though inside the inline-flex button it's already a flex item and computes to block. */
 
 
 }

@@ -387,7 +387,7 @@
 
 }
 
-.secLedPar { /* What: Section Lede Paragraph. Why: The pitch reads as the hero's lead paragraph. How: This sets it in the body font, a little larger than body text, at a comfortable measure. */
+.secLedPar { /* What: Section Lede Paragraph. Why: The pitch reads as the hero's lead paragraph. How: This sets it in the body font, at body size on narrower screens, growing to a step larger on wide ones, at a comfortable measure. */
 
 
 	color       : var( --tex-sec-col );                                       /* Text Secondary Color = #2a3138 */
@@ -589,7 +589,7 @@
 
 /* #region staNumDiv */
 
-.staNumDiv { /* What: Stat Number Div. Why: The number leads each stat in large display type. How: This sets it in the display font at its largest optical size, scaling with the viewport, with its line height trimmed to the glyphs and slightly looser tracking than the headings. */
+.staNumDiv { /* What: Stat Number Div. Why: The number leads each stat in large display type. How: This sets it in the display font at its largest optical size, scaling with the viewport, with its line height set to its font size like the headings and slightly looser tracking than the headings. */
 
 
 	color                   : var( --tex-mai-col );                                     /* Text Main Color = #1a1f24 */

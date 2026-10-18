@@ -26,10 +26,10 @@ import type { Page          } from '@playwright/test'; // What: Page. Why: Every
  * have a transition longer than zero, and transition its focus ring's outline,
  * and the first keyboard stop has to draw that ring at full width once it has
  * eased in. Every form field a visitor can reach has to look different once
- * focused, easing in. Under reduced motion every control keeps its hover
- * change, and every field its focus change, but transitions nothing. Real
- * clicks are blocked during the checks, so pressing a link or the drawer's
- * rows never navigates or closes anything mid-check.
+ * focused, easing in. Under reduced motion every control keeps its hover and
+ * press changes, and every field its focus change, but transitions nothing.
+ * Real clicks are blocked during the checks, so pressing a link or the
+ * drawer's rows never navigates or closes anything mid-check.
  *
  * Sections:
  *  - Constants

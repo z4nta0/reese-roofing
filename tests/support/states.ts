@@ -116,14 +116,15 @@ const STA_REC_ARR : StaRecTyp[] = [ // What: State Record Array. Why: Every chec
  *
  * @summary
  * Opens one state on a page and waits until it's settled: sizes the viewport,
- * loads the path, waits for the web fonts, loads every lazy image on the page
- * (Firefox only fetches one once it's scrolled near, which a full-page
- * screenshot never does) by switching it to eager loading, which leaves the
- * scroll position and the keyboard's starting point alone, runs the state's
- * action if it has one, then waits until no animation is still running, so a
- * check never measures a heading halfway through its entrance fade or a drawer
- * halfway open. The animation wait fails the check after 5 seconds rather than
- * hanging on a looping animation.
+ * loads the path, waits for the web fonts, loads every rendered lazy image on
+ * the page (Firefox only fetches one once it's scrolled near, which a
+ * full-page screenshot never does) by switching it to eager loading, which
+ * leaves the scroll position and the keyboard's starting point alone (a hidden
+ * one, which never loads, is skipped), runs the state's action if it has one,
+ * then waits until no animation is still running, so a check never measures a
+ * heading halfway through its entrance fade or a drawer halfway open. The
+ * animation wait fails the check after 5 seconds rather than hanging on a
+ * looping animation.
  *
  * @author z4nta0 <https://github.com/z4nta0>
  *
@@ -154,7 +155,7 @@ async function opeStaFun ( curPagObj : Page, staRecObj : StaRecTyp ) : Promise< 
 	await curPagObj.evaluate( async () => { // What: Lazy Images Load Call. Why: Firefox leaves a lazy image unfetched until it's scrolled near, so a full-page screenshot would show it blank. How: This switches each unloaded lazy image to eager loading and waits for it, rather than scrolling to it, which in Chromium would also move where the first Tab lands.
 
 
-		for ( const imaCurEle of document.querySelectorAll< HTMLImageElement >( 'img[loading="lazy"]' ) ) { // What: Lazy Image Loop. Why: Every lazy image on the page has to load before the state is measured. How: This visits each one in page order.
+		for ( const imaCurEle of document.querySelectorAll< HTMLImageElement >( 'img[loading="lazy"]' ) ) { // What: Lazy Image Loop. Why: Every rendered lazy image on the page has to load before the state is measured. How: This visits each one in page order.
 
 
 			if ( imaCurEle.complete || !imaCurEle.getClientRects().length ) continue; // What: Loaded Or Hidden Guard. Why: A loaded image needs nothing, and a hidden one (the about seal on a phone) never loads, so waiting on it would hang. How: This skips an image that's already complete or isn't rendered.
