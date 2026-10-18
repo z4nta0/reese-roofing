@@ -3,7 +3,7 @@
 
 // #region Imports
 
-import { expect } from '@playwright/test'; // What: Expect. Why: Each check passes only when the page says what it should. How: This asserts on the page's head, files, and footer.
+import { expect } from '@playwright/test'; // What: Expect. Why: Each check passes only when the page says what it should. How: This asserts on the page's head, contact details, files, and footer.
 import { test   } from '@playwright/test'; // What: Test. Why: Each route and each file is its own test. How: This declares them.
 
 // #endregion Imports
@@ -16,14 +16,21 @@ import { test   } from '@playwright/test'; // What: Test. Why: Each route and ea
  * @summary
  * Checks the site's SEO setup in whichever engine the project runs. The site
  * is a portfolio demo for a fictional company, so beyond the usual title,
- * description, canonical, and social tags, every check confirms it stays out
- * of search and never passes as a real business: each route carries a
- * noindex robots meta and says it's a demo, the structured data describes a
- * demo website rather than a local business, the footer says the company is
- * fictional, robots.txt lets search crawlers read the noindex while keeping
- * AI crawlers out, Netlify's _headers sends noindex with every file, and the
- * social preview tags are complete and the image is the 1,200x630 card under
- * 300 KB the tags promise.
+ * description, canonical, and social tags, the checks confirm it stays out of
+ * search and never passes as a real business: each route carries a noindex
+ * robots meta, says it's a demo, and shows only reserved phone numbers and
+ * .example email addresses, the structured data describes a demo website
+ * rather than a local business, the footer says the company is fictional and
+ * links to its builder, robots.txt lets search crawlers read the noindex while
+ * the named AI crawlers' group disallows the site and no sitemap is served,
+ * and Netlify's _headers sends noindex with every file. It also checks the
+ * social preview tags are complete and call it a demo, and the image is the
+ * 1,200x630 card under 300 KB the tags promise, that every route has exactly
+ * one description of 120 to 125 characters, that the raw home page, fetched
+ * without a browser, carries its full title and description, and that _headers
+ * sends each of the security headers a header checker looks for, once, and
+ * that _redirects sends every unknown path to the app, since the dev server
+ * never applies either file.
  *
  * Sections:
  *  - Constants
@@ -37,11 +44,55 @@ import { test   } from '@playwright/test'; // What: Test. Why: Each route and ea
 
 // #region Constants
 
-const LIV_URL_STR = 'https://reese-roofing.netlify.app/'; // What: Live URL String. Why: The canonical and social tags must name the live address. How: This is the address they're compared with.
+const DES_MAX_NUM = 125;                                                             // What: Description Maximum Number. Why: Mobile cards cut a summary off around 125 characters. How: Every description's length is checked against this.
+const DES_MIN_NUM = 120;                                                             // What: Description Minimum Number. Why: Link preview checkers flag a summary under 120 characters as short. How: Every description's length is checked against this.
+const LIV_URL_STR = 'https://reese-roofing.netlify.app/';                            // What: Live URL String. Why: The canonical and social tags must name the live address. How: This is the address they're compared with.
+const RAW_TIT_STR = '<title>Reese Roofing | Portfolio Demo by techgeek.dev</title>'; // What: Raw Title String. Why: Link checkers and many crawlers read the raw page without running its script. How: This is the home page's title tag as index.html must carry it.
 
 
 
-const SOC_KEY_ARR = [ // What: Social Key Array. Why: The social preview rule lists every tag a complete card needs. How: Each entry names one Open Graph or Twitter tag the page must carry.
+/**
+ * ROU_REC_ARR = Route Record Array
+ *
+ * @summary
+ * Every route the head checks visit, each with the title it must show. Every
+ * row shares one shape, so its fields carry no comments of their own:
+ *
+ * - `patStr` (String): Path String, the route loaded from the dev server.
+ *
+ * - `titStr` (String): Title String, the exact title the route must show.
+ *
+ * @author z4nta0 <https://github.com/z4nta0>
+ *
+*/
+
+const ROU_REC_ARR = [ // What: Route Record Array. Why: Each route has its own title to check. How: Each row pairs a path with its expected title.
+
+
+	{ patStr : '/',        titStr : 'Reese Roofing | Portfolio Demo by techgeek.dev' }, // What: Home Route Row. Why: The home page carries index.html's own title. How: This expects it unchanged.
+	{ patStr : '/missing', titStr : 'Page Not Found | Reese Roofing Portfolio Demo'  }  // What: Not Found Route Row. Why: The 404 page sets its own title. How: This expects the title the page renders.
+
+
+];
+
+
+
+const SEC_HEA_ARR = [ // What: Security Header Array. Why: A header security checker fails the site when any of these is missing. How: Each entry is one header line the site-wide rule must send, matched from its name up to the value that matters, or in full where an added value could weaken it.
+
+
+	/^\tContent-Security-Policy: default-src 'self'; base-uri 'self'; form-action 'none'; frame-ancestors 'none'; frame-src 'none'; img-src 'self' data:; object-src 'none'; script-src 'self'; style-src 'self'$/m, // What: Content Security Policy Pattern. Why: The page should only load what the site itself serves. How: This checks the whole policy line, so no directive can be loosened or added.
+	/\tPermissions-Policy: accelerometer=\(\)/,              // What: Permissions Policy Pattern. Why: Browser features the site never uses should stay off. How: This checks the policy opens with its first disabled feature.
+	/^\tReferrer-Policy: strict-origin-when-cross-origin$/m, // What: Referrer Policy Pattern. Why: Other sites should see only where a visit came from, never the full address. How: This checks the policy is exactly that one, since a later value would win.
+	/\tStrict-Transport-Security: max-age=63072000/,         // What: Strict Transport Security Pattern. Why: Browsers should never fall back to plain HTTP. How: This checks the two-year HTTPS rule.
+	/\tX-Content-Type-Options: nosniff/,                     // What: Content Type Options Pattern. Why: Browsers shouldn't guess a file's type. How: This checks the nosniff rule.
+	/\tX-Frame-Options: DENY/                                // What: Frame Options Pattern. Why: No other site should frame this one. How: This checks the deny rule, which older browsers read in place of frame-ancestors.
+
+
+];
+
+
+
+const SOC_KEY_ARR = [ // What: Social Key Array. Why: The social preview rule lists every Open Graph and Twitter tag a complete card needs. How: Each entry names one tag the page must carry, while the theme color and icons are checked by their own selectors.
 
 
 	'og:description',      // What: Open Graph Description Key. Why: Every card needs the summary under the title. How: This names the tag.
@@ -64,61 +115,66 @@ const SOC_KEY_ARR = [ // What: Social Key Array. Why: The social preview rule li
 
 ];
 
-
-
-/**
- * ROU_RCD_ARR = Route Record Array
- *
- * @summary
- * Every route the head checks visit, each with the title it must show. Every
- * row shares one shape, so its fields carry no comments of their own:
- * - `patStr` (String): Path String, the route loaded from the dev server.
- * - `titStr` (String): Title String, the exact title the route must show.
- *
- * @author z4nta0 <https://github.com/z4nta0>
- *
-*/
-
-const ROU_RCD_ARR = [ // What: Route Record Array. Why: Each route has its own title to check. How: Each row pairs a path with its expected title.
-
-
-	{ patStr : '/',        titStr : 'Reese Roofing | Portfolio Demo by techgeek.support' }, // What: Home Route Row. Why: The home page carries index.html's own title. How: This expects it unchanged.
-	{ patStr : '/missing', titStr : 'Page Not Found | Reese Roofing Portfolio Demo'      }  // What: Not Found Route Row. Why: The 404 page sets its own title. How: This expects the title the page renders.
-
-
-];
-
 // #endregion Constants
 
 
 
 // #region Module Init
 
-for ( const rouRcdObj of ROU_RCD_ARR ) { // What: Route Test Loop. Why: Every route gets the same head checks. How: This declares one test per route.
+for ( const rouRecObj of ROU_REC_ARR ) { // What: Route Test Loop. Why: Every route gets the same head checks. How: This declares one test per route.
 
 
-	test( `${ rouRcdObj.patStr } has a demo-only head`, async ( { page : curPagObj } ) => { // What: Head Test. Why: Every route has to describe itself honestly and stay out of search. How: This loads the route and checks its title, meta tags, structured data, and footer.
+	test( `${ rouRecObj.patStr } has a demo-only head and footer`, async ( { page : curPagObj } ) => { // What: Head Test. Why: Every route has to describe itself honestly and stay out of search. How: This loads the route and checks its title, meta tags, canonical link, structured data, and footer.
 
 
-		await curPagObj.goto( rouRcdObj.patStr ); // What: Route Load Call. Why: The head is read as a browser builds it. How: This opens the route on the suite's dev server.
+		await curPagObj.goto( rouRecObj.patStr ); // What: Route Load Call. Why: The head is read as a browser builds it. How: This opens the route on the suite's dev server.
 
 
-		await expect( curPagObj ).toHaveTitle( rouRcdObj.titStr );                                                                     // What: Title Assertion. Why: Each route names itself, saying it's a demo. How: This waits for the route's exact title.
-		await expect( curPagObj.locator( 'meta[name="robots"]' ) ).toHaveAttribute( 'content', /noindex/ );                            // What: Robots Assertion. Why: A fictional company must stay out of search results. How: This checks the robots meta asks for noindex.
-		await expect( curPagObj.locator( 'meta[name="author"]' ) ).toHaveAttribute( 'content', 'techgeek.support' );                   // What: Author Assertion. Why: The page should name its real builder rather than the fictional company. How: This checks the author meta names techgeek.support.
-		await expect( curPagObj.locator( 'meta[name="description"]' ) ).toHaveAttribute( 'content', /fictional/ );                     // What: Description Assertion. Why: Any summary of the page should say the company isn't real. How: This checks the description calls it fictional.
-		await expect( curPagObj.locator( 'link[rel="canonical"]' ) ).toHaveAttribute( 'href', LIV_URL_STR );                           // What: Canonical Assertion. Why: Every address the site answers at should point at the live one. How: This checks the canonical link names it.
-		await expect( curPagObj.locator( 'meta[property="og:url"]' ) ).toHaveAttribute( 'content', LIV_URL_STR );                      // What: Open Graph URL Assertion. Why: Shared links should count as one page. How: This checks the social URL names the live address.
-		await expect( curPagObj.locator( 'meta[property="og:image"]' ) ).toHaveAttribute( 'content', `${ LIV_URL_STR }og-image.png` ); // What: Open Graph Image Assertion. Why: Link previews need an absolute image address. How: This checks it points at the live preview card.
-		await expect( curPagObj.locator( 'meta[name="twitter:card"]' ) ).toHaveAttribute( 'content', 'summary_large_image' );          // What: Twitter Card Assertion. Why: The preview card should show at its full size. How: This checks the large image layout is asked for.
-		await expect( curPagObj.getByRole( 'contentinfo' ) ).toContainText( 'Reese Roofing is a fictional company.' );                 // What: Footer Notice Assertion. Why: Visitors and AI agents reading the page itself should learn the company isn't real. How: This checks the footer's demo line.
+		await expect( curPagObj ).toHaveTitle( rouRecObj.titStr );                                                                                              // What: Title Assertion. Why: Each route names itself, saying it's a demo. How: This waits for the route's exact title.
+		await expect( curPagObj.locator( 'meta[name="robots"]' ) ).toHaveAttribute( 'content', /noindex/ );                                                     // What: Robots Assertion. Why: A fictional company must stay out of search results. How: This checks the robots meta asks for noindex.
+		await expect( curPagObj.locator( 'meta[name="author"]' ) ).toHaveAttribute( 'content', 'techgeek.dev' );                                                // What: Author Assertion. Why: The page should name its real builder rather than the fictional company. How: This checks the author meta names techgeek.dev.
+		await expect( curPagObj.locator( 'meta[name="description"]' ) ).toHaveAttribute( 'content', /fictional/ );                                              // What: Description Assertion. Why: Any summary of the page should say the company isn't real. How: This checks the description calls it fictional.
+		await expect( curPagObj.locator( 'link[rel="canonical"]' ) ).toHaveAttribute( 'href', LIV_URL_STR );                                                    // What: Canonical Assertion. Why: Every address the site answers at should point at the live one. How: This checks the canonical link names it.
+		await expect( curPagObj.locator( 'meta[property="og:url"]' ) ).toHaveAttribute( 'content', LIV_URL_STR );                                               // What: Open Graph URL Assertion. Why: Shared links should count as one page. How: This checks the social URL names the live address.
+		await expect( curPagObj.locator( 'meta[property="og:image"]' ) ).toHaveAttribute( 'content', `${ LIV_URL_STR }og-image-2.png` );                        // What: Open Graph Image Assertion. Why: Link previews need an absolute image address. How: This checks it points at the live preview card.
+		await expect( curPagObj.locator( 'meta[name="twitter:card"]' ) ).toHaveAttribute( 'content', 'summary_large_image' );                                   // What: Twitter Card Assertion. Why: The preview card should show at its full size. How: This checks the large image layout is asked for.
+		await expect( curPagObj.getByRole( 'contentinfo' ) ).toContainText( 'Reese Roofing is a fictional company.' );                                          // What: Footer Notice Assertion. Why: Visitors and AI agents reading the page itself should learn the company isn't real. How: This checks the footer's demo line.
+		await expect( curPagObj.getByRole( 'contentinfo' ).getByRole( 'link', { name : 'techgeek.dev' } ) ).toHaveAttribute( 'href', 'https://techgeek.dev/' ); // What: Footer Builder Link Assertion. Why: The footer's notice has to lead to whoever built the demo. How: This checks its techgeek.dev link points at the builder's site.
+		await expect( curPagObj.locator( 'meta[name="description"]' ) ).toHaveCount( 1 );                                                                       // What: Single Description Assertion. Why: React 19 adds a rendered description beside index.html's rather than replacing it, which would leave two. How: This checks the route has exactly one.
+
+
+		const desTexStr = await curPagObj.locator( 'meta[name="description"]' ).getAttribute( 'content' ); // What: Description Text String. Why: The description's length is checked against the preview copy's bounds. How: This reads the tag's content.
+
+
+		expect( desTexStr?.length ).toBeGreaterThanOrEqual( DES_MIN_NUM ); // What: Description Minimum Assertion. Why: A short summary is flagged by link preview checkers. How: This checks it reaches DES_MIN_NUM characters.
+		expect( desTexStr?.length ).toBeLessThanOrEqual( DES_MAX_NUM );    // What: Description Maximum Assertion. Why: Mobile cards cut a long summary off. How: This checks it stays within DES_MAX_NUM characters.
 
 
 		const jsoScrArr = await curPagObj.locator( 'script[type="application/ld+json"]' ).allTextContents(); // What: JSON Script Array. Why: The structured data decides what search engines and agents think the page is. How: This reads every JSON-LD script's text.
 
 
-		expect( jsoScrArr.map( ( jsoTexStr ) => JSON.parse( jsoTexStr )[ '@type' ] ) ).toEqual( [ 'WebSite' ] ); // What: Website Type Assertion. Why: The page should describe exactly one demo website. How: This parses each script, which also fails on invalid JSON, and checks there's one, typed WebSite.
-		expect( jsoScrArr.join( '' ) ).not.toMatch( /LocalBusiness|RoofingContractor|PostalAddress|telephone/ ); // What: No Business Data Assertion. Why: Structured data must never present the fictional company as a real business. How: This checks no local business type, address, or phone appears in it.
+		expect( jsoScrArr.map( ( jsoTexStr ) => JSON.parse( jsoTexStr )[ '@type' ] ) ).toEqual( [ 'WebSite' ] );   // What: Website Type Assertion. Why: The page should describe exactly one demo website. How: This parses each script, which also fails on invalid JSON, and checks there's one, typed WebSite.
+		expect( jsoScrArr.join( '' ) ).not.toMatch( /Business"|Contractor"|PostalAddress|"address"|"telephone"/ ); // What: No Business Data Assertion. Why: Structured data must never present the fictional company as a real business. How: This checks no business or contractor type, address, or phone appears in it, matching quoted keys and values so its prose can still say it isn't a real business.
+
+
+	} );
+
+
+
+	test( `${ rouRecObj.patStr } shows only reserved contact details`, async ( { page : curPagObj } ) => { // What: Reserved Contact Test. Why: A demo must never show a phone number or email address someone could really reach. How: This reads every phone and email the route links to, shows, or offers as a sample, checks at least one phone was found, and checks each is a reserved one.
+
+
+		await curPagObj.goto( rouRecObj.patStr ); // What: Route Load Call. Why: The details are read as a visitor sees them. How: This opens the route on the suite's dev server.
+
+
+		const conTexStr = await curPagObj.evaluate( () => [ ...[ ...document.querySelectorAll( 'a[href^="tel:"], a[href^="mailto:"]' ) ].map( ( ancCurEle ) => ancCurEle.getAttribute( 'href' ) ?? '' ), ...[ ...document.querySelectorAll( 'input, textarea' ) ].map( ( fieCurEle ) => fieCurEle.getAttribute( 'placeholder' ) ?? '' ), document.body.innerText ].join( '\n' ) ); // What: Contact Text String. Why: A phone or email can sit in a link's address, a field's sample, or the page's text. How: This joins every phone and email link's address, every field's placeholder, and the page's visible text.
+		const emaLisArr = conTexStr.match( /[\w.+-]+@[\w.-]+\.[a-z]+/gi ) ?? [];                    // What: Email List Array. Why: Every email address the route shows has to be checked. How: This finds each one in the joined text.
+		const phoLisArr = conTexStr.match( /\+1\d{10}|\(?\d{3}\)?[\s.-]?\d{3}[\s.-]\d{4}/g ) ?? []; // What: Phone List Array. Why: Every phone number the route shows has to be checked. How: This finds each one, written as a tel address or as a displayed number.
+
+
+		expect( phoLisArr.length ).toBeGreaterThan( 0 );                                                                   // What: Phones Found Assertion. Why: An empty list would pass the check below without reading anything. How: This checks at least one phone number was found.
+		expect( emaLisArr.filter( ( emaCurStr ) => !/\.example$/i.test( emaCurStr ) ) ).toEqual( [] );                     // What: Reserved Email Assertion. Why: The .example domain can never belong to anyone. How: This lists every address on another domain, which should be none.
+		expect( phoLisArr.filter( ( phoCurStr ) => !/55501\d\d$/.test( phoCurStr.replace( /\D/g, '' ) ) ) ).toEqual( [] ); // What: Reserved Phone Assertion. Why: The 555-0100 to 555-0199 range is set aside for fiction. How: This lists every number outside that range, which should be none.
 
 
 	} );
@@ -128,50 +184,119 @@ for ( const rouRcdObj of ROU_RCD_ARR ) { // What: Route Test Loop. Why: Every ro
 
 
 
-test( 'robots.txt and _headers keep the demo out of search', async ( { page : curPagObj } ) => { // What: Crawler Files Test. Why: The page's own noindex only works when crawlers can read it, and AI crawlers should stay away. How: This reads both files from the dev server and checks their rules.
+test( 'the raw page carries the home title and description', async ( { page : curPagObj } ) => { // What: Raw Head Test. Why: Link checkers and many crawlers read the HTML without running its script, so anything only React sets is invisible to them. How: This fetches the home page without a browser and checks its title and description.
 
 
-	const robTexStr = await ( await curPagObj.request.get( '/robots.txt' ) ).text(); // What: Robots Text String. Why: Crawlers read robots.txt before the page. How: This fetches it.
-	const heaTexStr = await ( await curPagObj.request.get( '/_headers' ) ).text();   // What: Headers Text String. Why: Netlify reads its header rules from this file. How: This fetches it, which Vite serves as a plain file from public/.
+	const rawHtmStr = await ( await curPagObj.request.get( '/' ) ).text();                            // What: Raw HTML String. Why: The page has to be read the way a script-free crawler reads it. How: This fetches the home page's HTML from the dev server without rendering it.
+	const rawDesStr = rawHtmStr.match( /<meta name='description'\s+content='([^']*)'/ )?.[ 1 ] ?? ''; // What: Raw Description String. Why: The description has to be in the raw page, not added later by a script. How: This reads the description tag's content from the HTML, or an empty string when it's missing.
 
 
-	expect( robTexStr ).toMatch( /User-agent: \*\nAllow: \// );                // What: Search Crawlers Assertion. Why: Search engines must reach the page to read its noindex. How: This checks the wildcard group allows the site.
-	expect( robTexStr ).toMatch( /User-agent: GPTBot\n[\s\S]*?Disallow: \// ); // What: AI Crawlers Assertion. Why: AI training crawlers shouldn't learn the fictional company. How: This checks a named AI crawler's group disallows the site.
-	expect( robTexStr ).not.toMatch( /Sitemap:/i );                            // What: No Sitemap Assertion. Why: A site kept out of search has nothing to list. How: This checks robots.txt names no sitemap.
-	expect( heaTexStr ).toMatch( /\/\*\n\tX-Robots-Tag: noindex/ );            // What: Robots Header Assertion. Why: Every file, the preview image included, should carry noindex. How: This checks the site-wide header rule.
+	expect( rawHtmStr ).toContain( RAW_TIT_STR );                     // What: Raw Title Assertion. Why: A crawler should see the home page's full title, not a bare site name. How: This checks the HTML holds the exact title tag.
+	expect( rawDesStr ).toMatch( /fictional/ );                       // What: Raw Description Assertion. Why: A crawler should see the summary that calls the company fictional. How: This checks the raw description says so.
+	expect( rawDesStr.length ).toBeGreaterThanOrEqual( DES_MIN_NUM ); // What: Raw Description Minimum Assertion. Why: The raw description is the one link previews show. How: This checks it reaches DES_MIN_NUM characters.
+	expect( rawDesStr.length ).toBeLessThanOrEqual( DES_MAX_NUM );    // What: Raw Description Maximum Assertion. Why: Mobile cards cut a long summary off. How: This checks it stays within DES_MAX_NUM characters.
 
 
 } );
 
 
 
-test( 'the social preview tags are complete', async ( { page : curPagObj } ) => { // What: Social Tags Test. Why: A link shared anywhere should show a full, honest card. How: This loads the home page and checks every social tag, its absolute URLs, and the copy's lengths.
+test( 'robots.txt and _headers keep the demo out of search and away from AI crawlers', async ( { page : curPagObj } ) => { // What: Crawler Files Test. Why: The page's own noindex only works when crawlers can read it, and AI crawlers should stay away. How: This reads both files from the dev server and checks their rules, and that no sitemap.xml is served.
+
+
+	const robTexStr = await ( await curPagObj.request.get( '/robots.txt' ) ).text();                 // What: Robots Text String. Why: Crawlers read robots.txt before the page. How: This fetches it.
+	const heaTexStr = await ( await curPagObj.request.get( '/_headers' ) ).text();                   // What: Headers Text String. Why: Netlify reads its header rules from this file. How: This fetches it, which Vite serves as a plain file from public/.
+	const sitTypStr = ( await curPagObj.request.get( '/sitemap.xml' ) ).headers()[ 'content-type' ]; // What: Sitemap Type String. Why: A sitemap file in public/ would be served as XML, while a missing one falls back to the page's HTML. How: This reads the type the server answers /sitemap.xml with.
+
+
+	expect( robTexStr ).toMatch( /^User-agent: \*\nAllow: \/$/m );                                                         // What: Search Crawlers Assertion. Why: Search engines must reach the page to read its noindex. How: This checks the wildcard group allows the whole site, its rule ending at the bare slash.
+	expect( robTexStr ).toMatch( /^User-agent: GPTBot\n(?:User-agent: [^\n]*\n)*Disallow: \/(?:\n\s*\n|\n?(?![\s\S]))/m ); // What: AI Crawlers Assertion. Why: AI training crawlers shouldn't learn the fictional company. How: This checks a named AI crawler's group, read only through its run of user agents, disallows the whole site, its rule ending at the bare slash with no rule after it, since a later Allow of the same path would win.
+	expect( robTexStr ).not.toMatch( /Sitemap:/i );                                                                        // What: No Sitemap Assertion. Why: A site kept out of search has nothing to list. How: This checks robots.txt names no sitemap.
+	expect( sitTypStr ).not.toMatch( /xml/ );                                                                              // What: No Sitemap File Assertion. Why: A site kept out of search shouldn't serve a sitemap at all. How: This checks /sitemap.xml isn't answered with an XML file.
+	expect( heaTexStr ).toMatch( /^\/\*\n\tX-Robots-Tag: noindex$/m );                                                     // What: Robots Header Assertion. Why: Every file, the preview image included, should carry noindex. How: This checks the site-wide header rule, its path the bare /* and its value exactly noindex.
+
+
+} );
+
+
+
+test( '_headers hardens every response', async ( { page : curPagObj } ) => { // What: Security Headers Test. Why: Every response should carry the security headers a checker looks for. How: This reads _headers from the dev server and checks each header line, and that no header is set twice.
+
+
+	const heaTexStr = await ( await curPagObj.request.get( '/_headers' ) ).text();                                              // What: Headers Text String. Why: Netlify reads its header rules from this file, and the dev server doesn't apply them. How: This fetches the file itself.
+	const sitRulStr = [ ...heaTexStr.matchAll( /^\/\*\n((?:\t.*\n?)+)/gm ) ].map( ( matCurObj ) => matCurObj[ 1 ] ).join( '' ); // What: Site Rule String. Why: A header only reaches every response when it sits under a site-wide /* rule. How: This gathers the header lines of every /* block in the file.
+	const heaNamArr = sitRulStr.match( /^\t[^:]+/gm ) ?? [];                                                                    // What: Header Name Array. Why: Netlify joins a header repeated across /* blocks into one list, where a later value can win. How: This lists the name of every site-wide header line.
+
+
+	for ( const heaPatReg of SEC_HEA_ARR ) expect( sitRulStr ).toMatch( heaPatReg ); // What: Header Line Assertion Loop. Why: Each missing header is its own failure. How: This checks every pattern against the site-wide rules' header lines.
+
+
+
+	expect( heaNamArr ).toEqual( [ ...new Set( heaNamArr ) ] ); // What: Unique Header Assertion. Why: Each header should be set once, so no later line can weaken it. How: This checks no header name repeats.
+
+
+} );
+
+
+
+test( '_redirects sends every unknown path to the app', async ( { page : curPagObj } ) => { // What: Redirects Test. Why: The dev server answers every unknown path with the page on its own, so only this file makes Netlify do the same, letting the router show the 404 page. How: This reads the file and checks its fallback rule.
+
+
+	const redTexStr = await ( await curPagObj.request.get( '/_redirects' ) ).text(); // What: Redirects Text String. Why: Netlify reads its rewrite rules from this file. How: This fetches it, which Vite serves as a plain file from public/.
+
+
+	expect( redTexStr ).toMatch( /^\/\*\s+\/index\.html\s+200$/m ); // What: Fallback Rule Assertion. Why: Every path without a file of its own has to load the app with a 200, not a redirect or the host's own 404. How: This checks the rule rewrites every path to index.html with a 200 status.
+
+
+} );
+
+
+
+test( 'the social preview tags are complete', async ( { page : curPagObj } ) => { // What: Social Tags Test. Why: A link shared anywhere should show a full, honest card. How: This loads the home page and checks every social tag, its absolute URLs, the image's type and size, the page type, the copy's lengths, that every title, site name, summary, and image description calls it a demo or the company fictional, and the theme color and icons beside the card.
 
 
 	await curPagObj.goto( '/' ); // What: Home Load Call. Why: Link scrapers read the page every route shares. How: This opens the home page.
+
+
+	await expect( curPagObj.locator( 'link[rel="apple-touch-icon"]' ) ).toHaveCount( 1 ); // What: Touch Icon Assertion. Why: Some apps show the site's icon beside its card. How: This checks the page links its apple-touch-icon.
+	await expect( curPagObj.locator( 'link[rel="icon"]' ).first() ).toBeAttached();       // What: Favicon Assertion. Why: Some apps show the favicon beside the card. How: This checks the page links at least one favicon.
+	await expect( curPagObj.locator( 'meta[name="theme-color"]' ) ).toHaveCount( 1 );     // What: Theme Color Assertion. Why: Discord colors its embed's edge from this tag. How: This checks the page carries it.
 
 
 	const socTagArr = await curPagObj.locator( 'meta[property^="og:"], meta[name^="twitter:"]' ).evaluateAll( ( tagEleArr ) => tagEleArr.map( ( tagCurEle ) => [ tagCurEle.getAttribute( 'property' ) || tagCurEle.getAttribute( 'name' ) || '', tagCurEle.getAttribute( 'content' ) || '' ] ) ); // What: Social Tag Array. Why: Every social tag is checked by its key and value. How: This reads each Open Graph and Twitter tag as a key and content pair.
 	const socTagObj = Object.fromEntries( socTagArr ); // What: Social Tag Object. Why: Tags are easier to check by key. How: This turns the pairs into an object.
 
 
-	expect( Object.keys( socTagObj ) ).toEqual( expect.arrayContaining( SOC_KEY_ARR ) ); // What: Complete Tags Assertion. Why: A missing tag leaves part of the card blank. How: This checks every required key is present, allowing optional extras.
-	expect( [ socTagObj[ 'og:image' ], socTagObj[ 'og:url' ], socTagObj[ 'twitter:image' ] ] ).toEqual( [ `${ LIV_URL_STR }og-image.png`, LIV_URL_STR, `${ LIV_URL_STR }og-image.png` ] ); // What: Absolute URLs Assertion. Why: Scrapers can't resolve a relative address. How: This checks each URL tag names the live https address.
-	expect( socTagObj[ 'og:image:type' ] ).toBe( 'image/png' );                          // What: Image Type Assertion. Why: The tag has to match the file. How: This checks it names a PNG.
-	expect( socTagObj[ 'og:title' ].length ).toBeLessThanOrEqual( 60 );                  // What: Title Length Assertion. Why: Longer titles are cut off in most cards. How: This checks it stays at 60 characters or fewer.
-	expect( socTagObj[ 'og:description' ].length ).toBeGreaterThanOrEqual( 100 );        // What: Description Minimum Assertion. Why: A very short summary wastes the card's space. How: This checks it reaches 100 characters.
-	expect( socTagObj[ 'og:description' ].length ).toBeLessThanOrEqual( 125 );           // What: Description Maximum Assertion. Why: Mobile cards cut a summary off around 125 characters. How: This checks it stays at 125 characters or fewer.
+	expect( SOC_KEY_ARR.filter( ( socKeyStr ) => !socTagObj[ socKeyStr ]?.trim() ) ).toEqual( [] ); // What: Complete Tags Assertion. Why: A missing or empty tag leaves part of the card blank. How: This lists every required tag that's missing or empty, which should be none, allowing optional extras.
+	expect( [ socTagObj[ 'og:image' ], socTagObj[ 'og:url' ], socTagObj[ 'twitter:image' ] ] ).toEqual( [ `${ LIV_URL_STR }og-image-2.png`, LIV_URL_STR, `${ LIV_URL_STR }og-image-2.png` ] ); // What: Absolute URLs Assertion. Why: Scrapers can't resolve a relative address. How: This checks each URL tag names the live https address.
+	expect( socTagObj[ 'og:image:type' ] ).toBe( 'image/png' );                                     // What: Image Type Assertion. Why: The tag has to match the file. How: This checks it names a PNG.
+	expect( socTagObj[ 'og:type' ] ).toBe( 'website' );                                             // What: Page Type Assertion. Why: The social preview rule calls every site a website, never an article. How: This checks the type tag says so.
+	expect( socTagObj[ 'og:description' ] ).toMatch( /fictional/ );                                 // What: Demo Description Assertion. Why: A shared card must never present the fictional company as real. How: This checks the summary says the company is fictional.
+	expect( socTagObj[ 'og:image:alt' ] ).toMatch( /portfolio demo/i );                             // What: Demo Image Alt Assertion. Why: A screen reader user hears the card's image described, so it has to call the site a demo too. How: This checks the image's description says it's a portfolio demo.
+	expect( socTagObj[ 'og:site_name' ] ).toMatch( /Portfolio Demo/ );                              // What: Demo Site Name Assertion. Why: The site name shows beside the card, so it has to name the demo rather than the company. How: This checks it says portfolio demo.
+	expect( socTagObj[ 'og:title' ] ).toMatch( /Portfolio Demo/ );                                  // What: Demo Title Assertion. Why: A shared card must never present the fictional company as real. How: This checks the card's title calls it a portfolio demo.
+	expect( socTagObj[ 'twitter:description' ] ).toMatch( /fictional/ );                            // What: Demo Twitter Description Assertion. Why: X's card shows its own summary. How: This checks it says the company is fictional.
+	expect( socTagObj[ 'twitter:image:alt' ] ).toMatch( /portfolio demo/i );                        // What: Demo Twitter Image Alt Assertion. Why: X's card describes its own image to screen readers. How: This checks the image's description says it's a portfolio demo.
+	expect( socTagObj[ 'twitter:title' ] ).toMatch( /Portfolio Demo/ );                             // What: Demo Twitter Title Assertion. Why: X's card shows its own title. How: This checks it calls the site a portfolio demo.
+	expect( socTagObj[ 'og:image:height' ] ).toBe( '630' );                                         // What: Image Height Assertion. Why: The tag has to promise the card's real height. How: This checks it says 630, the height the image test reads from the file.
+	expect( socTagObj[ 'og:image:width' ] ).toBe( '1200' );                                         // What: Image Width Assertion. Why: The tag has to promise the card's real width. How: This checks it says 1,200, the width the image test reads from the file.
+	expect( socTagObj[ 'og:title' ].length ).toBeLessThanOrEqual( 60 );                             // What: Title Length Assertion. Why: Longer titles are cut off in most cards. How: This checks it stays at 60 characters or fewer.
+	expect( socTagObj[ 'twitter:title' ].length ).toBeLessThanOrEqual( 60 );                        // What: Twitter Title Length Assertion. Why: X's card cuts a long title off too. How: This checks it stays at 60 characters or fewer.
+	expect( socTagObj[ 'og:description' ].length ).toBeGreaterThanOrEqual( DES_MIN_NUM );           // What: Description Minimum Assertion. Why: Link preview checkers flag a summary under 120 characters as short. How: This checks it reaches DES_MIN_NUM characters.
+	expect( socTagObj[ 'og:description' ].length ).toBeLessThanOrEqual( DES_MAX_NUM );              // What: Description Maximum Assertion. Why: Mobile cards cut a summary off around 125 characters. How: This checks it stays within DES_MAX_NUM characters.
+	expect( socTagObj[ 'twitter:description' ].length ).toBeGreaterThanOrEqual( DES_MIN_NUM );      // What: Twitter Description Minimum Assertion. Why: X's card shows the same summary, held to the same bounds. How: This checks it reaches DES_MIN_NUM characters.
+	expect( socTagObj[ 'twitter:description' ].length ).toBeLessThanOrEqual( DES_MAX_NUM );         // What: Twitter Description Maximum Assertion. Why: X's card cuts a long summary off too. How: This checks it stays within DES_MAX_NUM characters.
 
 
 } );
 
 
 
-test( 'the social preview image is a 1200x630 png under 300 KB', async ( { page : curPagObj } ) => { // What: Preview Image Test. Why: The social tags promise a 1,200x630 card. How: This fetches the image, checks its byte count, and reads its size from the PNG header.
+test( 'the social preview image is a 1,200x630 PNG under 300 KB', async ( { page : curPagObj } ) => { // What: Preview Image Test. Why: The social tags promise a 1,200x630 card. How: This fetches the image, checks its served type and byte count, and reads its size from the PNG header.
 
 
-	const resImaObj = await curPagObj.request.get( '/og-image.png' ); // What: Response Image Object. Why: The image has to exist where the tags point. How: This fetches it from the dev server.
-	const pngBufObj = await resImaObj.body();                         // What: PNG Buffer Object. Why: The image's size is written in its header. How: This reads the response bytes.
+	const resImaObj = await curPagObj.request.get( '/og-image-2.png' ); // What: Response Image Object. Why: The image has to exist where the tags point. How: This fetches it from the dev server.
+	const pngBufObj = await resImaObj.body();                           // What: PNG Buffer Object. Why: The image's size is written in its header. How: This reads the response bytes.
 
 
 	expect( resImaObj.headers()[ 'content-type' ] ).toBe( 'image/png' );                               // What: PNG Type Assertion. Why: The tags promise a PNG. How: This checks the served type.

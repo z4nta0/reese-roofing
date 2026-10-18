@@ -21,7 +21,7 @@
 
 		<!-- #region Card Styles -->
 
-		<style>/* What: Card Style Element. Why: The card is one fixed-size image, styled here from the site's own fonts and tokens. How: This imports the site's font faces and global stylesheet, then lays the card out on the site's scale, keeping literal pixels only where the scale has no step within 10%. */
+		<style>/* What: Card Style Element. Why: The card is one fixed-size image, styled here from the site's own fonts and tokens. How: This imports the site's font faces and global stylesheet, then lays the card out on the site's scale, keeping literal values only for the card's fixed 1,200x630 size and where the scale has no step within 10%. */
 
 
 			@import url( '../../src/styles/fonts.css' );  /* What: Site Fonts Import. Why: The card should be set in the site's own typefaces. How: This loads the site's font faces, whose file paths resolve from fonts.css itself. */
@@ -78,7 +78,7 @@
 
 
 				display : block;
-				height  : calc( var( --ver-rhy-p10 ) * 1rem ); /* Vertical Rhythm Base Plus 10 ~= 242.517px */
+				height  : calc( var( --ver-rhy-p10 ) * 1rem ); /* Vertical Rhythm Base Plus 10 ~= 242.522px */
 
 
 			}
@@ -164,7 +164,7 @@
 
 			<p class='carNotPar'>Not a real business</p><!-- What: Card Notice Paragraph Element. Why: Nobody seeing the card should take Reese Roofing for a real roofer. How: This says so directly. -->
 
-			<p class='carBuiPar'>by techgeek.support</p><!-- What: Card Builder Paragraph Element. Why: The card credits who built the site. How: This names techgeek.support. -->
+			<p class='carBuiPar'>by techgeek.dev</p><!-- What: Card Builder Paragraph Element. Why: The card credits who built the site. How: This names techgeek.dev. -->
 
 
 		</div>

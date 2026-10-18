@@ -1,3 +1,49 @@
+# _headers = Security Headers Policy
+#
+# @summary
+# Hardening headers applied to every response. The site has no backend,
+# accounts, or third-party code: every script, style, font, and image is
+# self-hosted, the contact form never posts anywhere (it hands the request to
+# the visitor's email app through a mailto link), and its one outside link, to
+# techgeek.dev, only navigates away. That lets the Content-Security-Policy be
+# strict rather than needing broad allowances.
+#
+# default-src 'self' is the fallback every unlisted directive inherits, so
+# connect-src, font-src, and manifest-src need no lines of their own. The
+# directives listed either need a different value than 'self' (form-action,
+# frame-src, img-src, object-src), are never covered by default-src at all
+# (base-uri, frame-ancestors), or just state the default for clarity
+# (script-src, style-src). img-src adds data: for the logo mark, small enough
+# that Vite inlines it into the bundle as a data URI, and for the contact
+# form's select arrow, a small SVG written into the stylesheet. Without it
+# every engine blocks the bar's and footer's marks and the arrow. form-action
+# is 'none', since the form's script always stops the browser's own submit and
+# opens the email instead. style-src needs no 'unsafe-inline': the build ships
+# no inline styles, and React sets its few dynamic styles through the DOM,
+# which the policy doesn't restrict. The structured data script is a data block
+# that never runs, so script-src doesn't need to allow it either.
+#
+# Strict-Transport-Security keeps browsers on HTTPS for two years across every
+# subdomain, leaving out preload, which commits the domain to the browsers'
+# built-in HTTPS list and is slow to undo. Referrer-Policy is
+# strict-origin-when-cross-origin, as on the-bernie-bears and
+# tech-geek-support: techgeek.dev sees that a visit came from this demo, never
+# a page's full address. Permissions-Policy turns off every powerful browser
+# feature the site never uses.
+#
+# @author z4nta0 <https://github.com/z4nta0>
+
+# What: Security Headers Rule. Why: Every response should refuse framing, sniffing, plain HTTP, unused browser features, and anything loaded from another origin. How: This applies the Content-Security-Policy, the permissions and referrer policies, HSTS, a nosniff content type, and a deny on framing to every path.
+/*
+	Content-Security-Policy: default-src 'self'; base-uri 'self'; form-action 'none'; frame-ancestors 'none'; frame-src 'none'; img-src 'self' data:; object-src 'none'; script-src 'self'; style-src 'self'
+	Permissions-Policy: accelerometer=(), autoplay=(), browsing-topics=(), camera=(), display-capture=(), encrypted-media=(), fullscreen=(), geolocation=(), gyroscope=(), hid=(), idle-detection=(), magnetometer=(), microphone=(), midi=(), payment=(), picture-in-picture=(), publickey-credentials-get=(), screen-wake-lock=(), serial=(), usb=(), xr-spatial-tracking=()
+	Referrer-Policy: strict-origin-when-cross-origin
+	Strict-Transport-Security: max-age=63072000; includeSubDomains
+	X-Content-Type-Options: nosniff
+	X-Frame-Options: DENY
+
+
+
 # What: Site-Wide Robots Header Block. Why: A fictional company shouldn't turn up in search results, and a header covers files a robots meta tag can't, such as the preview image. How: This sends X-Robots-Tag noindex with every file Netlify serves, matching the page's robots meta.
 /*
 	X-Robots-Tag: noindex

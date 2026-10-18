@@ -6,7 +6,7 @@
 import react from '@vitejs/plugin-react'; // What: React. Why: Vite needs the React plugin to compile JSX. How: This is called first in the plugins array.
 
 
-import { defineConfig } from 'vite'; // What: Define Config. Why: Vite's config helper passes the config through with its types. How: This wraps vitConObj.
+import { defineConfig } from 'vite'; // What: Define Config. Why: Vite's config helper passes the config through with its types. How: This wraps VIT_CON_OBJ.
 
 
 import type { Plugin } from 'vite'; // What: Plugin. Why: The page minifier is a Vite plugin. How: This types minHtmFun's return, which types its hook.
@@ -80,7 +80,7 @@ const minHtmFun = () : Plugin => ({ // What: Minify HTML Function. Why: index.ht
 
 		order : 'post', // What: Order. Why: The page should be compacted only after Vite has injected the bundle's script and stylesheet tags. How: This runs after Vite's own transforms.
 
-		handler : ( htmTexStr ) => { // What: Handler. Why: This is the plugin's actual work. How: This strips comments, then drops indentation and blank lines.
+		handler : ( htmTexStr ) => { // What: Handler. Why: This is the plugin's actual work. How: This rewrites the JSON-LD on one line, strips comments, then drops indentation and blank lines.
 
 
 			return htmTexStr                                                                               // What: Compacted Page Return. Why: Vite writes whatever this returns as the shipped page. How: This chains each compaction over the page's text.
@@ -105,10 +105,10 @@ const minHtmFun = () : Plugin => ({ // What: Minify HTML Function. Why: index.ht
 
 
 
-const vitConObj = defineConfig({ // What: Vite Config Object. Why: Vite reads its whole configuration from this file's default export. How: This builds the config, including the minHtmFun plugin above.
+const VIT_CON_OBJ = defineConfig({ // What: Vite Config Object. Why: Vite reads its whole configuration from this file's default export. How: This builds the config, including the minHtmFun plugin above.
 
 
-	css     : { modules : { localsConvention : 'camelCaseOnly' } }, // What: CSS. Why: CSS modules expose each class name as a camelCase key only, so the modifier class .navBarHed--scrolled is read as cssModObj.navBarHedScrolled, per the CSS modules rules. How: This sets the locals convention.
+	css     : { modules : { localsConvention : 'camelCaseOnly' } }, // What: CSS. Why: CSS modules expose each class name as a camelCase key only, so the modifier class .aboStoPar--lead is read as cssModObj.aboStoParLead, per the CSS modules rules. How: This sets the locals convention.
 	plugins : [ react(), minHtmFun() ]                              // What: Plugins. Why: Vite builds the site through these plugins, in this order. How: This lists React and the page minifier.
 
 
@@ -120,7 +120,7 @@ const vitConObj = defineConfig({ // What: Vite Config Object. Why: Vite reads it
 
 // #region Exports
 
-export default vitConObj; // What: Default Export. Why: Vite reads its config from this file's default export. How: This exports vitConObj.
+export default VIT_CON_OBJ; // What: Default Export. Why: Vite reads its config from this file's default export. How: This exports VIT_CON_OBJ.
 
 // #endregion Exports
 

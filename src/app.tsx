@@ -51,7 +51,7 @@ import { Routes    } from 'react-router';                    // What: Routes. Wh
  *
  * @param props - This component does not use any props.
  *
- * @returns The page matching the current URL path.
+ * @returns The app container holding the page matching the current URL path.
  *
  * @example
  * ```tsx
@@ -69,7 +69,7 @@ function AppRooCom () : React.JSX.Element {
 		<div className={ cssModObj.appRooDiv }>{ /* What: App Root Div Element. Why: Every page's layout queries measure one shared container. How: This wraps the routes in the element named the app container. */ }
 
 
-			<Routes>{ /* What: Routes. Why: Only one page should render for any path. How: This renders the first route below whose path matches. */ }
+			<Routes>{ /* What: Site Routes. Why: Only one page should render for any path. How: This renders the first route below whose path matches. */ }
 
 
 				<Route
@@ -104,7 +104,7 @@ function AppRooCom () : React.JSX.Element {
 
 // #region Exports
 
-export { AppRooCom }; // What: Named Exports. Why: main.tsx is the sole consumer, mounting this as the site's root. How: This exports AppRooCom.
+export { AppRooCom }; // What: Named Export. Why: main.tsx is the sole consumer, mounting this as the site's root. How: This exports AppRooCom.
 
 // #endregion Exports
 

@@ -14,16 +14,20 @@ import { fileURLToPath } from 'node:url';         // What: File URL To Path. Why
  * playwright.config.ts = Playwright Config
  *
  * @summary
- * The config behind npm test and its suites, each run against the real site
- * in all three of Playwright's engines (Chromium, Firefox, and WebKit), one
- * project per suite and engine, since a check that passes in one engine
- * proves nothing about the others. The suites are accessibility, which the
- * pre-commit check runs, interaction, rendering, responsive, and seo.
+ * The config behind npm test and its suites, each run against the real site in
+ * all three of Playwright's engines (Chromium, Firefox, and WebKit), one
+ * project per suite and engine, since a check that passes in one engine proves
+ * nothing about the others. Chromium runs as Chrome's full headless mode
+ * rather than Playwright's lighter headless shell, which sometimes lost track
+ * of a tab a click opened. The suites are accessibility, which the pre-commit
+ * check runs, interaction, production, rendering, responsive, and seo.
  * Playwright starts the Vite dev server on port 5191 for the run and stops it
  * afterwards, so a dev server already running on the usual 5173 is never
- * touched. Reports and failure screenshots land in tests/output, which git
- * ignores, while the rendering suite's approved screenshots live in
- * tests/rendering/baselines and are committed.
+ * touched. The production suite builds the site itself and serves the build
+ * through request routing, so it never uses that server. Reports and failure
+ * screenshots land in tests/output, which git ignores, while the rendering
+ * suite's approved screenshots live in tests/rendering/baselines and are
+ * committed.
  *
  * Sections:
  *  - Constants
@@ -59,6 +63,7 @@ const SUI_NAM_ARR = [ // What: Suite Name Array. Why: Each suite lives in its ow
 
 	'accessibility', // What: Accessibility Suite. Why: The pre-commit accessibility scan runs from here. How: This names tests/accessibility.
 	'interaction',   // What: Interaction Suite. Why: Every control's feedback and the site's behavior are checked from here. How: This names tests/interaction.
+	'production',    // What: Production Suite. Why: The production build is checked under the live site's headers from here. How: This names tests/production.
 	'rendering',     // What: Rendering Suite. Why: Each page state is compared with its approved screenshot from here. How: This names tests/rendering.
 	'responsive',    // What: Responsive Suite. Why: Each page is measured across screen widths from here. How: This names tests/responsive.
 	'seo'            // What: SEO Suite. Why: The site's search and link preview setup is checked from here. How: This names tests/seo.
@@ -82,7 +87,15 @@ const PLA_CON_OBJ = defineConfig({ // What: Playwright Config Object. Why: Playw
 
 		name      : `${ suiNamStr }-${ engNamStr }`, // What: Name. Why: A failure has to say which suite and engine it came from. How: This names the project after both.
 		testMatch : `${ suiNamStr }/**/*.spec.ts`,   // What: Test Match. Why: Each suite lives in its own folder. How: This runs every spec in the suite's folder under tests/.
-		use       : { browserName : engNamStr }      // What: Use. Why: The project has to launch its own engine. How: This sets the browser it runs in.
+
+		use : { // What: Use. Why: The project has to launch its own engine. How: This sets the browser it runs in, and which build of it.
+
+
+			browserName : engNamStr,                                        // What: Browser Name. Why: Each project runs in one engine. How: This names that engine's Playwright browser.
+			channel     : engNamStr === 'chromium' ? 'chromium' : undefined // What: Channel. Why: Chromium's default headless shell sometimes opened a modified click's new tab without Playwright ever reporting it, failing about 1 run in 10 once every engine was busy. How: This runs Chromium as Chrome's full headless mode instead, which reported the tab in all 240 runs tried, and leaves Firefox and WebKit on their only builds.
+
+
+		}
 
 
 	}))),

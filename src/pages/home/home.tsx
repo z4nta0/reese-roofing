@@ -3,15 +3,17 @@
 
 // #region Imports
 
-import React from 'react'; // What: React. Why: The page scrolls to a linked section once it has rendered. How: This is read as React.useEffect, and as React.JSX.Element for the page's return type.
+import React from 'react'; // What: React. Why: The page scrolls to a linked section once it has rendered. How: This is read for its React.useEffect hook.
 
 
-import { AboSecCom } from './about.tsx';         // What: About Section Component. Why: The page tells the company's story third. How: This is rendered inside main, after the services.
-import { ConSecCom } from './contact.tsx';       // What: Contact Section Component. Why: The page ends where visitors reach the company. How: This is rendered last inside main.
-import { HerSecCom } from './hero.tsx';          // What: Hero Section Component. Why: The page opens with the headline and pitch. How: This is rendered first inside main.
-import { NavBarCom } from '../../ui/nav.tsx';    // What: Navigation Bar Component. Why: Every page starts with the shared top bar. How: This is rendered above main.
-import { SerSecCom } from './services.tsx';      // What: Services Section Component. Why: The page lists what the company does second. How: This is rendered inside main, after the hero.
-import { SitFooCom } from '../../ui/footer.tsx'; // What: Site Footer Component. Why: Every page ends with the shared footer. How: This is rendered below main.
+import { AboSecCom   } from './about.tsx';         // What: About Section Component. Why: The page tells the company's story third. How: This is rendered inside main, after the services.
+import { ConSecCom   } from './contact.tsx';       // What: Contact Section Component. Why: The page ends where visitors reach the company. How: This is rendered last inside main.
+import { HerSecCom   } from './hero.tsx';          // What: Hero Section Component. Why: The page opens with the headline and pitch. How: This is rendered first inside main.
+import { NavBarCom   } from '../../ui/nav.tsx';    // What: Navigation Bar Component. Why: Every page starts with the shared top bar. How: This is rendered above main.
+import { SerSecCom   } from './services.tsx';      // What: Services Section Component. Why: The page lists what the company does second. How: This is rendered inside main, after the hero.
+import { SitFooCom   } from '../../ui/footer.tsx'; // What: Site Footer Component. Why: Every page ends with the shared footer. How: This is rendered below main.
+import { useLocation } from 'react-router';        // What: Use Location. Why: The page needs the hash a section link or a shared address arrived with. How: This reads the current location.
+import { useNavigate } from 'react-router';        // What: Use Navigate. Why: The hash should leave the address once the page has scrolled to it. How: This returns the router's navigate function.
 
 // #endregion Imports
 
@@ -47,9 +49,12 @@ import { SitFooCom } from '../../ui/footer.tsx'; // What: Site Footer Component.
  * Renders the home page: the navigation bar, then a main element holding the
  * hero, services, about, and contact sections in reading order, then the
  * footer. app.tsx renders it at the root path. When the address carries a
- * section's hash (a link from another page, or a bookmark), it scrolls that
- * section into view once the fonts have loaded, since Chromium and WebKit
- * look for the anchor before the page has rendered it and stay at the top.
+ * section's hash (a section link from the 404 page, a link opened in a new
+ * tab, or a bookmark), it scrolls that section into view once the fonts have
+ * loaded, since a navigation inside the site never scrolls to a hash, and on
+ * a full page load Chromium and WebKit look for the anchor before the page
+ * has rendered it and stay at the top, then clears the hash, so the address
+ * bar stays as clean as it does after an in-page section link.
  *
  * @author z4nta0 <https://github.com/z4nta0>
  *
@@ -67,27 +72,37 @@ import { SitFooCom } from '../../ui/footer.tsx'; // What: Site Footer Component.
 function HomPagCom () : React.JSX.Element {
 
 
-	React.useEffect( () => { // What: Hash Scroll Effect. Why: Chromium and WebKit don't scroll to a section's anchor that's rendered after load, so a link or bookmark to /#services would land at the top. How: Once the fonts have loaded and the layout has settled, this jumps straight to the hash's element, the way the browser itself would have.
+	const { hash : hasValStr } = useLocation(); // What: Hash Value String. Why: A visitor can arrive with a section's id as the hash. How: This reads the hash, e.g. #contact, or an empty string, renaming the router's hash key.
+
+	const navRouFun = useNavigate(); // What: Navigate Router Function. Why: The hash should be cleared once the page has used it. How: This is the router's navigate function.
 
 
-		const hasIdeStr = window.location.hash.slice( 1 ); // What: Hash Identifier String. Why: The address's hash names the section to show. How: This drops the leading # to leave the element's id.
+	React.useEffect( () => { // What: Hash Arrival Effect. Why: A navigation inside the site never scrolls to a hash, and on a full page load Chromium and WebKit don't scroll to a section's anchor that's rendered after load, so a link or bookmark to /#services would land at the top, and the hash should leave the address once used. How: Once the fonts have loaded, this jumps straight to the hash's element, the way the browser itself would have, then replaces the address with one without it.
 
 
-		if ( !hasIdeStr ) return; // What: No Hash Guard. Why: An address without a hash should start at the top as usual. How: This exits before scheduling any scroll.
+		if ( !hasValStr ) return; // What: No Hash Guard. Why: Most visits arrive without a hash. How: This does nothing when the hash is empty, including right after it's been cleared.
 
 
 
-		document.fonts.ready.then( () => document.getElementById( hasIdeStr )?.scrollIntoView( { behavior : 'instant' } ) ); // What: Hash Section Scroll Call. Why: The jump should land where the section sits once the fonts have reflowed the page above it. How: This waits for the fonts, then scrolls the section into view instantly rather than smoothly, as an arrival rather than a movement.
+		void document.fonts.ready.then( () => { // What: Fonts Ready Callback. Why: The jump should land where the section sits once the fonts have reflowed the page above it. How: This waits for the fonts, then scrolls and clears the hash; void marks the returned promise as deliberately unawaited.
 
 
-	}, [] ); // What: Effect Dependency Array. Why: The page should only jump to its hash once, when it first renders. How: An empty array means there is no dependency that could ever change to trigger a re-run.
+			document.getElementById( hasValStr.slice( 1 ) )?.scrollIntoView( { behavior : 'instant' } ); // What: Arrival Scroll Call. Why: The visitor should land on the section, as a normal link arrival would. How: This jumps to the element the hash names, instantly rather than smoothly, as an arrival rather than a movement.
+
+			void navRouFun( { hash : '' }, { replace : true } ); // What: Hash Clear Call. Why: The address should stay as clean as it does for in-page links. How: This replaces the current history entry with the same path and no hash; void marks the returned promise as deliberately unawaited.
+
+
+		} );
+
+
+	}, [ hasValStr, navRouFun ] ); // What: Effect Dependency Array. Why: Each new hash has to be handled once. How: hasValStr changes when a visitor arrives with a hash, and navRouFun is listed because the effect calls it, though it stays the same between renders.
 
 
 
 	return (
 
 
-		<>{ /* What: Home Page Fragment. Why: The bar, main content, and footer sit side by side with no wrapper of their own. How: This groups them without adding an element. */ }
+		<>{ /* What: Home Page Fragment. Why: The bar, main content, and footer render as siblings with no wrapper of their own. How: This groups them without adding an element. */ }
 
 
 			<NavBarCom />{ /* What: Navigation Bar Component. Why: The page starts with the shared top bar. How: This renders it above the content. */ }
@@ -135,7 +150,7 @@ function HomPagCom () : React.JSX.Element {
 
 // #region Exports
 
-export { HomPagCom }; // What: Named Exports. Why: app.tsx renders the home page at the root path. How: This exports HomPagCom.
+export { HomPagCom }; // What: Named Export. Why: app.tsx renders the home page at the root path. How: This exports HomPagCom.
 
 // #endregion Exports
 

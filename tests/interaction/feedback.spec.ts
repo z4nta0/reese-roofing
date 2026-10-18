@@ -3,9 +3,9 @@
 
 // #region Imports
 
-import { expect      } from '@playwright/test';     // What: Expect. Why: Each state passes only when every control responds. How: This asserts each problem list is empty.
+import { expect      } from '@playwright/test';     // What: Expect. Why: Each check passes only when the page responds as it should. How: This asserts each problem list is empty, and checks the focus ring's width, the brand link's looks and durations, and the drawer's, scrim's, and sent label's motion.
 import { opeStaFun   } from '../support/states.ts'; // What: Open State Function. Why: Each check opens and settles its state first. How: This loads it and waits for it.
-import { STA_RCD_ARR } from '../support/states.ts'; // What: State Record Array. Why: Every page state is checked. How: This lists them.
+import { STA_REC_ARR } from '../support/states.ts'; // What: State Record Array. Why: Every page state is checked. How: This lists them, and the brand link and motion tests find their starting rows in it.
 import { test        } from '@playwright/test';     // What: Test. Why: Each check of each state is its own test. How: This declares them.
 
 
@@ -21,13 +21,22 @@ import type { Page          } from '@playwright/test'; // What: Page. Why: Every
  *
  * @summary
  * Checks the interaction feedback rule on every page state, in whichever
- * engine the project runs. Every visible link and button has to look
+ * engine the project runs. Every link and button in the Tab order has to look
  * different while hovered than at rest, look different again while pressed,
- * and transition its focus ring's outline, and the first keyboard stop has to
- * draw that ring at full width once it has eased in. Under reduced motion
- * every control keeps its hover change but transitions nothing. Real clicks
- * are blocked during the checks, so pressing a link or the drawer's rows
- * never navigates or closes anything mid-check.
+ * have a transition longer than zero, and transition both of its focus ring's
+ * outline properties, offset and width, and the first keyboard stop (or the
+ * control a state's action left focused) has to draw that ring at full width
+ * once it has eased in. Every form field a visitor can reach has to look
+ * different once focused and have a transition longer than zero. The brand
+ * link, which the Tab order skips, has to change on hover and again on press
+ * too, with a transition longer than zero on itself or something inside it,
+ * and none under reduced motion. With motion on, the drawer and its scrim have
+ * to really transition as the drawer opens and closes, and the sent label has
+ * to rise in. Under reduced motion every control in the Tab order keeps its
+ * hover and press changes, and every field its focus change, but nothing
+ * transitions, the parts inside a control and their pseudo-elements included.
+ * Real clicks are blocked while controls are probed, so pressing a link or the
+ * drawer's rows never navigates or closes anything mid-check.
  *
  * Sections:
  *  - Constants
@@ -49,57 +58,6 @@ const SET_WAI_NUM = 400; // What: Settle Wait Number. Why: Each look is read onc
 
 
 // #region Helpers
-
-// #region sigEleFun
-
-/**
- * sigEleFun = Signature Element Function
- *
- * @summary
- * Runs inside the page and describes how a control looks right now, as one
- * string of the styles feedback usually changes (color, background, border
- * color, transform, and opacity) for the control and every element inside
- * it, so a change to its arrow or its label counts as the control's own.
- * Passed to Playwright's evaluate, so it can't read anything from this file.
- *
- * @author z4nta0 <https://github.com/z4nta0>
- *
- * @param eleCurEle - Element Current Element: The control to describe.
- *
- * @returns The control's look, as one string to compare.
- *
- * @example
- * ```ts
- * handle.evaluate(sigEleFun) // => 'rgb(...),rgba(...),none,1,...|...'
- * ```
- *
-*/
-
-function sigEleFun ( eleCurEle : Element ) : string {
-
-
-	const sigStyFun = ( sigCurEle : Element ) => { // What: Signature Style Function. Why: Each element's look is read the same way. How: This joins one element's feedback styles into one string.
-
-
-		const styCurObj = getComputedStyle( sigCurEle ); // What: Style Current Object. Why: The element's styles are read as they're drawn now. How: This reads its computed styles.
-
-
-
-		return [ styCurObj.color, styCurObj.backgroundColor, styCurObj.borderColor, styCurObj.transform, styCurObj.opacity ].join( ',' ); // What: Element Signature Return. Why: One element's look compares as one string. How: This joins its feedback styles.
-
-
-	};
-
-
-
-	return [ eleCurEle, ...eleCurEle.querySelectorAll( '*' ) ].map( sigStyFun ).join( '|' ); // What: Signature Return. Why: Two looks compare as one string. How: This joins the signatures of the control and everything inside it.
-
-
-}
-
-// #endregion sigEleFun
-
-
 
 // #region cliBloFun
 
@@ -185,7 +143,6 @@ async function conLisFun ( curPagObj : Page ) : Promise< ElementHandle< Element 
 		const conReaBoo = await conCurObj.evaluate( ( conCurEle ) => conCurEle.getAttribute( 'tabindex' ) !== '-1' && !conCurEle.closest( '[inert]' ) ); // What: Control Reachable Boolean. Why: A control outside the tab order or inside inert content can't be reached. How: This checks both inside the page.
 
 
-
 		if ( conReaBoo && await conCurObj.isVisible() ) conHanArr.push( conCurObj ); // What: Reachable Control Record. Why: Only controls a visitor can see and reach are checked. How: This keeps the control when it's both.
 
 
@@ -193,12 +150,63 @@ async function conLisFun ( curPagObj : Page ) : Promise< ElementHandle< Element 
 
 
 
-	return conHanArr;
+	return conHanArr; // What: Control Handle Return. Why: The probes run on the controls a visitor can reach. How: This hands back their handles.
 
 
 }
 
 // #endregion conLisFun
+
+
+
+// #region sigEleFun
+
+/**
+ * sigEleFun = Signature Element Function
+ *
+ * @summary
+ * Runs inside the page and describes how a control looks right now, as one
+ * string of the styles feedback usually changes (color, background, border
+ * color, transform, and opacity) for the control and every element inside
+ * it, so a change to its arrow or its label counts as the control's own.
+ * Passed to Playwright's evaluate, so it can't read anything from this file.
+ *
+ * @author z4nta0 <https://github.com/z4nta0>
+ *
+ * @param eleCurEle - Element Current Element: The control to describe.
+ *
+ * @returns The control's look, as one string to compare.
+ *
+ * @example
+ * ```ts
+ * handle.evaluate(sigEleFun) // => 'rgb(...),rgba(...),rgb(...),none,1|...'
+ * ```
+ *
+*/
+
+function sigEleFun ( eleCurEle : Element ) : string {
+
+
+	const sigStyFun = ( sigCurEle : Element ) => { // What: Signature Style Function. Why: Each element's look is read the same way. How: This joins one element's feedback styles into one string.
+
+
+		const styCurObj = getComputedStyle( sigCurEle ); // What: Style Current Object. Why: The element's styles are read as they're drawn now. How: This reads its computed styles.
+
+
+
+		return [ styCurObj.color, styCurObj.backgroundColor, styCurObj.borderColor, styCurObj.transform, styCurObj.opacity ].join( ',' ); // What: Element Signature Return. Why: One element's look compares as one string. How: This joins its feedback styles.
+
+
+	};
+
+
+
+	return [ eleCurEle, ...eleCurEle.querySelectorAll( '*' ) ].map( sigStyFun ).join( '|' ); // What: Signature Return. Why: Two looks compare as one string. How: This joins the signatures of the control and everything inside it.
+
+
+}
+
+// #endregion sigEleFun
 
 
 
@@ -208,15 +216,17 @@ async function conLisFun ( curPagObj : Page ) : Promise< ElementHandle< Element 
  * feeProFun = Feedback Problems Function
  *
  * @summary
- * Probes every reachable control and returns a problem for each one that
- * gives no feedback. Each control is scrolled into view, read at rest with
- * the pointer away, read again while hovered, and again while the mouse
- * button is held on it, every look read once its transition has settled. A
- * control that looks the same at rest and hovered, or hovered and pressed,
- * is a problem. Normally its transition list must include the focus ring's
- * outline-width, so the ring eases in; under reduced motion every one of its
- * transition durations must be zero instead. The caller blocks real clicks
- * first, so releasing the mouse does nothing.
+ * Probes every reachable control and returns a problem for each one that gives
+ * no feedback. Each control is scrolled into view, read at rest with the
+ * pointer away, read again while hovered, and again while the mouse button is
+ * held on it, every look read once its transition has settled. A control that
+ * looks the same at rest and hovered, or hovered and pressed, is a problem.
+ * Normally its transition list must include both of the focus ring's outline
+ * properties, offset and width, so the ring eases in; under reduced motion
+ * every transition duration on it, every element inside it, and their before
+ * and after pseudo-elements must be zero instead. Outside reduced motion, a
+ * control whose every transition duration is zero is a problem too.
+ * The caller blocks real clicks first, so releasing the mouse does nothing.
  *
  * @author z4nta0 <https://github.com/z4nta0>
  *
@@ -269,9 +279,10 @@ async function feeProFun ( curPagObj : Page, redMotBoo : boolean ) : Promise< st
 		await curPagObj.waitForTimeout( SET_WAI_NUM ); // What: Press Settle Wait. Why: The pressed look is read once it has eased in. How: This pauses for the settle time.
 
 
+		const allDurStr = await conCurObj.evaluate( ( conCurEle ) => [ conCurEle, ...conCurEle.querySelectorAll( '*' ) ].flatMap( ( eleCurEle ) => [ null, '::before', '::after' ].map( ( pseCurStr ) => getComputedStyle( eleCurEle, pseCurStr ).transitionDuration ) ).join( ', ' ) ); // What: All Duration String. Why: A control often moves through its own parts, such as an arrow, a label, or an underline drawn by a pseudo-element, each with its own transition. How: This reads the transition durations of the control, every element inside it, and their before and after pseudo-elements.
 		const preSigStr = await conCurObj.evaluate( sigEleFun );                                                         // What: Press Signature String. Why: The pressed look is compared with hovered. How: This reads it.
 		const traLisStr = await conCurObj.evaluate( ( conCurEle ) => getComputedStyle( conCurEle ).transitionProperty ); // What: Transition List String. Why: The focus ring's ease depends on the control listing its outline. How: This reads the control's transitioned properties.
-		const traDurStr = await conCurObj.evaluate( ( conCurEle ) => getComputedStyle( conCurEle ).transitionDuration ); // What: Transition Duration String. Why: Reduced motion should leave nothing moving. How: This reads the control's transition durations.
+		const traDurStr = await conCurObj.evaluate( ( conCurEle ) => getComputedStyle( conCurEle ).transitionDuration ); // What: Transition Duration String. Why: Normal motion should ease every change of the control itself. How: This reads the control's own transition durations.
 
 
 		await curPagObj.mouse.up(); // What: Mouse Up Call. Why: The press has to end before the next control. How: This releases the button, whose click the caller has blocked.
@@ -286,21 +297,113 @@ async function feeProFun ( curPagObj : Page, redMotBoo : boolean ) : Promise< st
 
 
 
-		if ( redMotBoo && !/^0s(, 0s)*$/.test( traDurStr ) ) proLisArr.push( `${ conDesStr } still transitions under reduced motion (${ traDurStr })` ); // What: Reduced Motion Check. Why: Asking for less motion should stop every transition. How: This records a control with any duration above zero.
+		if ( redMotBoo && !/^0s(, 0s)*$/.test( allDurStr ) ) proLisArr.push( `${ conDesStr } still transitions under reduced motion (${ allDurStr })` ); // What: Reduced Motion Check. Why: Asking for less motion should stop every transition. How: This records a control with any duration above zero on itself, an element inside it, or their pseudo-elements.
 
-		else if ( !redMotBoo && !traLisStr.includes( 'outline-width' ) ) proLisArr.push( `${ conDesStr } doesn't transition its focus ring` ); // What: Focus Ease Check. Why: The focus ring should ease in rather than snap. How: This records a control whose transition list leaves out the outline.
+		else if ( !redMotBoo && !( traLisStr.includes( 'outline-offset' ) && traLisStr.includes( 'outline-width' ) ) ) proLisArr.push( `${ conDesStr } doesn't transition its focus ring` ); // What: Focus Ease Check. Why: The focus ring should ease in rather than snap. How: This records a control whose transition list leaves out either outline property.
+
+
+
+		if ( !redMotBoo && /^0s(, 0s)*$/.test( traDurStr ) ) proLisArr.push( `${ conDesStr } has no transition` ); // What: Transition Duration Check. Why: Every hover, press, and focus change should ease rather than snap. How: This records a control whose every transition duration is zero outside reduced motion.
 
 
 	}
 
 
 
-	return proLisArr;
+	return proLisArr; // What: Problem List Return. Why: The feedback tests fail on any recorded problem. How: This hands back every control whose feedback fell short.
 
 
 }
 
 // #endregion feeProFun
+
+
+
+// #region fieProFun
+
+/**
+ * fieProFun = Field Problems Function
+ *
+ * @summary
+ * Probes every form field a visitor can reach for the feedback the rule asks
+ * of a field, a visible change when it takes focus, and returns what's
+ * missing. Each field is read at rest, then focused and read again once its
+ * transition has had time to finish, along with its transition durations, then
+ * blurred. A field that looks the same focused is a problem, and so is one
+ * with no transition at all outside reduced motion, or any transition under
+ * it. Fields aren't held to the hover and press checks, which the rule asks of
+ * links, buttons, and cards. A field that's hidden, or inert behind the open
+ * drawer, is skipped.
+ *
+ * @author z4nta0 <https://github.com/z4nta0>
+ *
+ * @param curPagObj - Current Page Object: The page whose fields are probed.
+ * @param redMotBoo - Reduced Motion Boolean: Whether the page is emulating
+ *                    reduced motion, which decides whether a field should
+ *                    ease.
+ *
+ * @returns Every field focus problem found.
+ * @see {@link proLisArr}
+ *
+ * @example
+ * ```ts
+ * fieProFun(page, false) // => [ 'input "conNamInp" looks the same focused' ]
+ * ```
+ *
+*/
+
+async function fieProFun ( curPagObj : Page, redMotBoo : boolean ) : Promise< string[] > {
+
+
+	const proLisArr : string[] = []; // What: Problem List Array. Why: Every problem should be reported, not just the first. How: This collects them.
+
+
+	for ( const fieCurObj of await curPagObj.$$( 'input, select, textarea' ) ) { // What: Field Probe Loop. Why: Every field has to show it took focus. How: This reads each one at rest and focused.
+
+
+		const fieReaBoo = await fieCurObj.evaluate( ( fieCurEle ) => fieCurEle.getClientRects().length > 0 && !fieCurEle.closest( '[inert]' ) ); // What: Field Reachable Boolean. Why: A hidden or inert field can't take focus. How: This is true when the field is rendered outside inert content.
+
+
+		if ( !fieReaBoo ) continue; // What: Unreachable Field Guard. Why: Only fields a visitor can reach are judged. How: This skips the rest.
+
+
+
+		const fieDesStr = await fieCurObj.evaluate( ( fieCurEle ) => `${ fieCurEle.tagName.toLowerCase() } "${ fieCurEle.id }"` );                              // What: Field Description String. Why: A problem should name the field. How: This joins its tag and its id.
+		const resSigStr = await fieCurObj.evaluate( sigEleFun ) + await fieCurObj.evaluate( ( fieCurEle ) => getComputedStyle( fieCurEle ).borderBottomColor ); // What: Rest Signature String. Why: The focused look is compared with the field at rest. How: This reads its signature plus its underline color, which a field's focus changes.
+
+
+		await fieCurObj.focus(); // What: Field Focus Call. Why: The focused look is the one being checked. How: This moves focus onto the field.
+
+		await curPagObj.waitForTimeout( SET_WAI_NUM ); // What: Focus Settle Wait. Why: The focused look is read once its transition has finished. How: This pauses for the settle time.
+
+
+		const focSigStr = await fieCurObj.evaluate( sigEleFun ) + await fieCurObj.evaluate( ( fieCurEle ) => getComputedStyle( fieCurEle ).borderBottomColor ); // What: Focus Signature String. Why: The field should look different once it has focus. How: This reads the same signature while it's focused.
+		const traDurStr = await fieCurObj.evaluate( ( fieCurEle ) => getComputedStyle( fieCurEle ).transitionDuration );                                        // What: Transition Duration String. Why: The change should ease, or switch at once under reduced motion. How: This reads the field's transition durations.
+
+
+		await fieCurObj.evaluate( ( fieCurEle ) => ( fieCurEle as HTMLElement ).blur() ); // What: Field Blur Call. Why: The next field starts from a page with nothing focused. How: This takes focus off the field. // What: Type Assertion Note. Why: The handle types as a plain Element. How: Every element the selector matches is a form field, an HTMLElement.
+
+
+
+		if ( resSigStr === focSigStr ) proLisArr.push( `${ fieDesStr } looks the same focused` ); // What: Focus Change Check. Why: A focused field has to show it. How: This records one that doesn't change.
+
+
+
+		if ( redMotBoo && !/^0s(, 0s)*$/.test( traDurStr ) ) proLisArr.push( `${ fieDesStr } still transitions under reduced motion (${ traDurStr })` ); // What: Reduced Motion Check. Why: Asking for less motion should stop every transition. How: This records a field with any duration above zero.
+
+		else if ( !redMotBoo && /^0s(, 0s)*$/.test( traDurStr ) ) proLisArr.push( `${ fieDesStr } has no transition` ); // What: Field Ease Check. Why: A field's focus change should ease rather than snap. How: This records a field whose every transition duration is zero.
+
+
+	}
+
+
+
+	return proLisArr; // What: Problem List Return. Why: The feedback tests fail on any recorded problem. How: This hands back every field whose focus feedback fell short.
+
+
+}
+
+// #endregion fieProFun
 
 // #endregion Helpers
 
@@ -308,17 +411,18 @@ async function feeProFun ( curPagObj : Page, redMotBoo : boolean ) : Promise< st
 
 // #region Module Init
 
-for ( const staRcdObj of STA_RCD_ARR ) { // What: State Test Loop. Why: Every page state is checked. How: This declares each check once per state.
+for ( const staRecObj of STA_REC_ARR ) { // What: State Test Loop. Why: Every page state is checked. How: This declares each check once per state.
 
 
-	test( `${ staRcdObj.ideStr } gives every control hover, press, and focus feedback`, async ( { page : curPagObj } ) => { // What: Feedback Test. Why: Every interaction should visibly register. How: This opens the state, blocks clicks, and probes every control.
+	test( `${ staRecObj.ideStr } gives every control hover, press, and focus feedback`, async ( { page : curPagObj } ) => { // What: Feedback Test. Why: Every interaction should visibly register. How: This opens the state, blocks clicks, and probes every field and control.
 
 
-		await opeStaFun( curPagObj, staRcdObj ); // What: State Open Call. Why: The controls are probed with the state settled. How: This loads and settles it.
+		await opeStaFun( curPagObj, staRecObj ); // What: State Open Call. Why: The controls are probed with the state settled. How: This loads and settles it.
 
 		await curPagObj.evaluate( cliBloFun ); // What: Click Block Call. Why: Pressing a control shouldn't navigate or close anything. How: This cancels every click from here on.
 
 
+		expect( await fieProFun( curPagObj, false ) ).toEqual( [] ); // What: No Field Problems Assertion. Why: Every field has to show it took focus and have a transition longer than zero. How: This compares the field problems with an empty list.
 		expect( await feeProFun( curPagObj, false ) ).toEqual( [] ); // What: No Feedback Problems Assertion. Why: The state passes only when every control responds. How: This compares the problems with an empty list, so a failure prints each one.
 
 
@@ -326,33 +430,43 @@ for ( const staRcdObj of STA_RCD_ARR ) { // What: State Test Loop. Why: Every pa
 
 
 
-	test( `${ staRcdObj.ideStr } eases its focus ring in to full width`, async ( { browserName : engNamStr, page : curPagObj } ) => { // What: Focus Ring Test. Why: A keyboard user has to see where focus lands. How: This tabs to the first stop and reads its ring once it has eased in.
+	test( `${ staRecObj.ideStr } draws its focus ring at full width`, async ( { browserName : engNamStr, page : curPagObj } ) => { // What: Focus Ring Test. Why: A keyboard user has to see where focus lands. How: This tabs to the first stop, or back onto the control the state's action left focused, and reads its ring once it has eased in.
 
 
-		await opeStaFun( curPagObj, staRcdObj ); // What: State Open Call. Why: The walk starts from the state settled. How: This loads and settles it.
+		await opeStaFun( curPagObj, staRecObj ); // What: State Open Call. Why: The walk starts from the state settled. How: This loads and settles it.
 
-		await curPagObj.keyboard.press( engNamStr === 'webkit' ? 'Alt+Tab' : 'Tab' ); // What: First Tab Press Call. Why: The ring shows only for keyboard focus. How: This tabs to the first stop, holding Alt in WebKit, which otherwise skips links the way Safari does.
+
+		const staFocBoo = await curPagObj.evaluate( () => document.activeElement !== document.body ); // What: Start Focused Boolean. Why: A state's action can leave a control focused by a click, such as the drawer's toggle, which a plain Tab would step past unchecked. How: This is true when something other than the body holds focus.
+		const tabKeyStr = engNamStr === 'webkit' ? 'Alt+Tab' : 'Tab';                                 // What: Tab Key String. Why: WebKit skips links on a plain Tab, the way Safari does. How: This holds Alt with Tab in WebKit and a plain Tab elsewhere.
+
+
+		if ( staFocBoo ) await curPagObj.keyboard.press( tabKeyStr ); // What: Focused Start Step. Why: A control focused by a click shows no focus ring, so the test has to reach it by keyboard. How: This tabs one stop past it, so the press below can come back.
+
+
+
+		await curPagObj.keyboard.press( staFocBoo ? `Shift+${ tabKeyStr }` : tabKeyStr ); // What: First Stop Press Call. Why: The ring shows only for keyboard focus. How: This tabs to the first stop, or with Shift lands back on the control the state's action left focused.
 
 		await curPagObj.waitForTimeout( SET_WAI_NUM ); // What: Ring Settle Wait. Why: The ring is read once it has grown in. How: This pauses for the settle time.
 
 
-		expect( await curPagObj.evaluate( () => getComputedStyle( document.activeElement as Element ).outlineWidth ) ).toBe( '2px' ); // What: Full Ring Assertion. Why: The ring has to reach its full width. How: This reads the focused stop's outline width, which the large border width token snaps to 2px. // What: Type Assertion Note. Why: activeElement types as possibly null. How: The Tab press just put focus on a stop.
+		expect( await curPagObj.evaluate( () => getComputedStyle( document.activeElement! ).outlineWidth ) ).toBe( '2px' ); // What: Full Ring Assertion. Why: The ring has to reach its full width. How: This reads the focused stop's outline width, which the large border width token snaps to 2px. // What: Non-Null Note. Why: activeElement types as possibly null. How: The press just put focus on a stop.
 
 
 	} );
 
 
 
-	test( `${ staRcdObj.ideStr } keeps feedback without motion under reduced motion`, async ( { page : curPagObj } ) => { // What: Reduced Motion Feedback Test. Why: Visitors who ask for less motion still need to see their actions register. How: This probes every control with reduced motion on.
+	test( `${ staRecObj.ideStr } keeps feedback without motion under reduced motion`, async ( { page : curPagObj } ) => { // What: Reduced Motion Feedback Test. Why: Visitors who ask for less motion still need to see their actions register. How: This probes every field and control with reduced motion on.
 
 
 		await curPagObj.emulateMedia( { reducedMotion : 'reduce' } ); // What: Reduced Motion Emulation. Why: The preference has to be set before the page loads. How: This makes the page match prefers-reduced-motion: reduce.
 
-		await opeStaFun( curPagObj, staRcdObj ); // What: State Open Call. Why: The controls are probed with the state settled. How: This loads and settles it.
+		await opeStaFun( curPagObj, staRecObj ); // What: State Open Call. Why: The controls are probed with the state settled. How: This loads and settles it.
 
 		await curPagObj.evaluate( cliBloFun ); // What: Click Block Call. Why: Pressing a control shouldn't navigate or close anything. How: This cancels every click from here on.
 
 
+		expect( await fieProFun( curPagObj, true ) ).toEqual( [] ); // What: No Reduced Motion Field Problems Assertion. Why: Every field has to show it took focus without easing. How: This compares the field problems with an empty list.
 		expect( await feeProFun( curPagObj, true ) ).toEqual( [] ); // What: No Reduced Motion Problems Assertion. Why: Every control has to respond without moving. How: This compares the problems with an empty list, so a failure prints each one.
 
 
@@ -360,6 +474,125 @@ for ( const staRcdObj of STA_RCD_ARR ) { // What: State Test Loop. Why: Every pa
 
 
 }
+
+
+
+for ( const redMotBoo of [ false, true ] ) { // What: Brand Motion Loop. Why: The brand link's feedback has to hold with and without reduced motion. How: This declares the brand check once for each preference.
+
+
+	test( `the brand link responds to hover and press${ redMotBoo ? ' under reduced motion' : '' }`, async ( { page : curPagObj } ) => { // What: Brand Feedback Test. Why: The brand link is hidden from screen readers and out of the Tab order, so the control checks never reach it, though a pointer still can. How: This hovers and presses the brand link on the home page and checks its look changes each time, easing normally and switching at once under reduced motion.
+
+
+		if ( redMotBoo ) await curPagObj.emulateMedia( { reducedMotion : 'reduce' } ); // What: Reduced Motion Emulation. Why: The reduced-motion run needs the preference before the page loads. How: This makes the page match prefers-reduced-motion: reduce.
+
+
+
+		const homRecObj = STA_REC_ARR.find( ( staCurObj ) => staCurObj.ideStr === 'home-desktop' )!; // What: Home Record Object. Why: The brand link sits in the bar on every page, and the home page is its usual one. How: This finds the home desktop state's row. // What: Non-Null Note. Why: find types its result as possibly undefined. How: STA_REC_ARR always lists the home-desktop state.
+
+
+		await opeStaFun( curPagObj, homRecObj ); // What: Home State Open Call. Why: The brand link is probed with the page settled. How: This loads the home page at desktop size.
+
+		await curPagObj.evaluate( cliBloFun ); // What: Click Block Call. Why: Pressing the brand link shouldn't load the home page mid-check. How: This cancels every click from here on.
+
+
+		const braAncObj = curPagObj.locator( 'header a[aria-hidden="true"]' ); // What: Brand Anchor Object. Why: The brand link is the one link the bar hides from screen readers. How: This finds it by that attribute.
+
+
+		await curPagObj.mouse.move( 700, 600 ); // What: Pointer Away Call. Why: The resting look is read with nothing hovered. How: This moves the pointer into the page, away from the bar.
+
+		await curPagObj.waitForTimeout( SET_WAI_NUM ); // What: Rest Settle Wait. Why: The resting look is read once any transition has finished. How: This pauses for the settle time.
+
+
+		const resSigStr = await braAncObj.evaluate( sigEleFun ); // What: Rest Signature String. Why: The hovered look is compared with this one. How: This reads the brand link's look at rest.
+
+
+		await braAncObj.hover(); // What: Hover Call. Why: This is the first action under test. How: This moves the pointer onto the brand link.
+
+		await curPagObj.waitForTimeout( SET_WAI_NUM ); // What: Hover Settle Wait. Why: The hovered look is read once it has eased in. How: This pauses for the settle time.
+
+
+		const hovSigStr = await braAncObj.evaluate( sigEleFun ); // What: Hover Signature String. Why: The pressed look is compared with this one. How: This reads the brand link's hovered look.
+
+
+		await curPagObj.mouse.down(); // What: Mouse Down Call. Why: A press shows while the button is held. How: This holds the mouse button down on the brand link.
+
+		await curPagObj.waitForTimeout( SET_WAI_NUM ); // What: Press Settle Wait. Why: The pressed look is read once it has eased in. How: This pauses for the settle time.
+
+
+		const allDurStr = await braAncObj.evaluate( ( braCurEle ) => [ braCurEle, ...braCurEle.querySelectorAll( '*' ) ].map( ( eleCurEle ) => getComputedStyle( eleCurEle ).transitionDuration ).join( ', ' ) ); // What: All Duration String. Why: The brand link changes through its mark and name as well as itself. How: This reads the transition durations of the link and every element inside it.
+		const preSigStr = await braAncObj.evaluate( sigEleFun ); // What: Press Signature String. Why: The pressed look is compared with the hovered one. How: This reads the brand link's pressed look.
+
+
+		await curPagObj.mouse.up(); // What: Mouse Up Call. Why: The press has to end. How: This releases the button, whose click is blocked.
+
+
+		expect( hovSigStr ).not.toBe( resSigStr );                   // What: Hover Change Assertion. Why: A hovered link has to respond. How: This checks the hovered look differs from the resting one.
+		expect( preSigStr ).not.toBe( hovSigStr );                   // What: Press Change Assertion. Why: A press has to register before anything happens. How: This checks the pressed look differs from the hovered one.
+		expect( /^0s(, 0s)*$/.test( allDurStr ) ).toBe( redMotBoo ); // What: Motion Assertion. Why: The changes should ease normally and switch at once under reduced motion. How: This checks every duration is zero exactly when reduced motion is on.
+
+
+	} );
+
+
+}
+
+
+
+test( 'the drawer and its scrim animate open and closed', async ( { page : curPagObj } ) => { // What: Drawer Motion Test. Why: Opening and closing should slide and fade rather than snap, the very thing a browser can silently drop, as Firefox once did here. How: This opens and closes the drawer at phone size with motion on, checking each time that the drawer and its scrim are really transitioning, and that the drawer ends open after opening.
+
+
+	const phoRecObj = STA_REC_ARR.find( ( staCurObj ) => staCurObj.ideStr === 'home-phone' )!; // What: Phone Record Object. Why: The drawer exists only at 880px wide and below. How: This finds the home phone state's row. // What: Non-Null Note. Why: find types its result as possibly undefined. How: STA_REC_ARR always lists the home-phone state.
+
+
+	await opeStaFun( curPagObj, phoRecObj ); // What: Phone State Open Call. Why: The drawer is toggled with the page settled. How: This loads the home page at phone size, with motion on.
+
+
+	const sciDivObj = curPagObj.locator( 'header' ).locator( 'xpath=preceding-sibling::div[1]' );                                                     // What: Scrim Div Object. Why: The scrim fades behind the drawer. How: This finds the element rendered just before the bar.
+	const togButObj = curPagObj.getByRole( 'button', { name : 'Toggle menu' } );                                                                      // What: Toggle Button Object. Why: The drawer opens and closes from its menu button. How: This finds the button by its name.
+	const traLisFun = ( eleCurEle : Element ) => eleCurEle.getAnimations().map( ( aniCurObj ) => ( aniCurObj as CSSTransition ).transitionProperty ); // What: Transition List Function. Why: A transition that really runs shows up among the element's animations. How: This lists the property each running transition animates. // What: Type Assertion Note. Why: getAnimations returns plain Animation objects, which don't type a transition's property. How: Each one is read as a CSS transition.
+
+
+	await togButObj.click(); // What: Open Click Call. Why: Opening is the first motion under test. How: This clicks the toggle.
+
+
+	const draDivHan = ( await curPagObj.locator( 'header [data-drawer-menu-open]' ).elementHandle() )!; // What: Drawer Div Handle. Why: The drawer is checked while it opens and again while it closes, after it loses the attribute that finds it. How: This holds on to the element carrying the open attribute inside the bar. // What: Non-Null Note. Why: elementHandle types its result as possibly null. How: The click just opened the drawer, which carries the attribute.
+
+
+	await expect.poll( () => draDivHan.evaluate( traLisFun ) ).toContain( 'max-height' ); // What: Drawer Open Motion Assertion. Why: The drawer should grow open rather than appear at once. How: This waits until a max-height transition is running on it.
+	await expect.poll( () => sciDivObj.evaluate( traLisFun ) ).toContain( 'opacity' );    // What: Scrim Open Motion Assertion. Why: The page should dim gradually. How: This waits until an opacity transition is running on the scrim.
+	await expect( togButObj ).toHaveAttribute( 'aria-expanded', 'true' );                 // What: Drawer Opened Assertion. Why: The open motion only counts if the drawer ends open. How: This checks the toggle reports it open.
+	await expect.poll( () => draDivHan.evaluate( traLisFun ) ).toEqual( [] );             // What: Open Motion Settled Wait. Why: The closing check has to see a fresh transition, not the end of the opening one. How: This waits until nothing is running on the drawer.
+
+
+	await togButObj.click(); // What: Close Click Call. Why: Closing is the second motion under test. How: This clicks the toggle again.
+
+
+	await expect.poll( () => draDivHan.evaluate( traLisFun ) ).toContain( 'max-height' ); // What: Drawer Close Motion Assertion. Why: The drawer should shrink closed rather than vanish. How: This waits until a max-height transition is running on it.
+	await expect.poll( () => sciDivObj.evaluate( traLisFun ) ).toContain( 'opacity' );    // What: Scrim Close Motion Assertion. Why: The dimming should lift gradually. How: This waits until an opacity transition is running on the scrim.
+
+
+} );
+
+
+
+test( 'the sent label rises in when the form is sent', async ( { page : curPagObj } ) => { // What: Sent Label Motion Test. Why: The visitor's confirmation should arrive with its small flourish rather than simply swap. How: This sends the form with motion on and checks the label's entrance animation is running.
+
+
+	const homRecObj = STA_REC_ARR.find( ( staCurObj ) => staCurObj.ideStr === 'home-desktop' )!; // What: Home Record Object. Why: The form sits on the home page. How: This finds the home desktop state's row. // What: Non-Null Note. Why: find types its result as possibly undefined. How: STA_REC_ARR always lists the home-desktop state.
+
+
+	await opeStaFun( curPagObj, homRecObj ); // What: Home State Open Call. Why: The form is sent from the home page. How: This loads it at desktop size, with motion on.
+
+	await curPagObj.locator( '#conNamInp' ).fill( 'Pat Doe' );         // What: Name Fill Call. Why: A real request carries a name. How: This types one into the name field.
+	await curPagObj.locator( '#conEmaInp' ).fill( 'pat@example.com' ); // What: Email Fill Call. Why: A real request carries an email. How: This types one into the email field.
+
+	await curPagObj.getByRole( 'button', { name : 'Send request' } ).click(); // What: Send Click Call. Why: This is the action under test. How: This clicks the submit button.
+
+
+	await expect.poll( () => curPagObj.locator( 'form button[type="submit"] span' ).first().evaluate( ( spaCurEle ) => spaCurEle.getAnimations().map( ( aniCurObj ) => ( aniCurObj as CSSAnimation ).animationName ).join( ' ' ) ) ).toContain( 'subLabSpaSwapFadeIn' ); // What: Label Motion Assertion. Why: The sent label should rise in. How: This waits until its entrance animation, whose module-scoped name still contains its own, is running. // What: Type Assertion Note. Why: getAnimations returns plain Animation objects, which don't type an animation's name. How: Each one is read as a CSS animation.
+
+
+} );
 
 // #endregion Module Init
 

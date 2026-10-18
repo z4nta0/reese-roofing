@@ -8,12 +8,13 @@
  * The site's one global stylesheet, holding only what can't belong to a single
  * component: the design tokens every module reads, and the reset and base
  * element styles every page relies on. The tokens start from the core design
- * numbers, the plastic ratio and its powers, and every font size, vertical
- * length, and duration is a step drawn from them, as is every transparency
- * with a step within 10%, with 1rem set to an 11px base. Colors are named by
- * role. Every component's own styles are in its CSS module, and each
- * transition and animation turns itself off for reduced motion there; only the
- * page's smooth scrolling is handled here.
+ * numbers, the plastic ratio and its powers, and every duration, fixed font
+ * size, vertical length, and transparency with a step within 10% is a step
+ * drawn from them, while a clamped fluid size runs between two steps, with
+ * 1rem set to an 11px base. Colors are named by role. Every component's own
+ * styles are in its CSS module, and each transition and animation turns itself
+ * off for reduced motion there; only the page's smooth scrolling and the focus
+ * ring's ease are handled here.
  *
  * Sections:
  *  - Tokens
@@ -130,7 +131,7 @@
 
 	--bor-wid-sma : calc( var( --ver-rhy-m12 ) * 1rem ); /* What: Border Width Small ~= 0.499px. Why: This is the scale's hairline step, which nothing on this site draws yet. How: This multiplies the m12 rhythm step by 1rem, which browsers snap to whole pixels. */
 	--bor-wid-bas : calc( var( --ver-rhy-m09 ) * 1rem ); /* What: Border Width Base ~= 1.160px. Why: This is the border width every border and divider on the site uses. How: This multiplies the m09 rhythm step by 1rem, which browsers snap to whole pixels. */
-	--bor-wid-lar : calc( var( --ver-rhy-m07 ) * 1rem ); /* What: Border Width Large ~= 2.035px. Why: This is the scale's step for heavier lines, which nothing on this site draws yet. How: This multiplies the m07 rhythm step by 1rem, which browsers snap to whole pixels. */
+	--bor-wid-lar : calc( var( --ver-rhy-m07 ) * 1rem ); /* What: Border Width Large ~= 2.035px. Why: This is the scale's step for heavier lines, which every focus ring draws. How: This multiplies the m07 rhythm step by 1rem, which browsers snap to whole pixels. */
 	--bor-wid-xla : calc( var( --ver-rhy-m05 ) * 1rem ); /* What: Border Width Extra Large ~= 3.572px. Why: This is the scale's heaviest step, which nothing on this site draws yet. How: This multiplies the m05 rhythm step by 1rem, which browsers snap to whole pixels. */
 
 	/* #endregion Border Width Tokens */
@@ -139,14 +140,14 @@
 
 	/* #region Color Tokens */
 
-	--acc-lig-col : oklch( from var( --acc-mai-col ) calc( l + 0.204 ) c h ); /* What: Accent Light Color. Why: Hover text, focus lines, and the submit button's hover fill on the dark band need a lighter accent that stays readable there. How: This lightens the main accent, so it follows the accent if it changes. */
-	--acc-mai-col : #1f4e7a;                                                  /* What: Accent Main Color. Why: Actions, emphasis, and numbering share the navy from the logo. How: Buttons, italic accents, and numbers read it. */
+	--acc-lig-col : oklch( from var( --acc-mai-col ) calc( l + 0.204 ) c h ); /* What: Accent Light Color. Why: Hover text, focus lines, the contact heading's italic word, and the submit button's hover fill on the dark band need a lighter accent that stays readable there. How: This lightens the main accent, so it follows the accent if it changes. */
+	--acc-mai-col : #1f4e7a;                                                  /* What: Accent Main Color. Why: Actions, emphasis, and numbering share the navy from the logo. How: Buttons, italic accents, numbers, link and toggle hovers, and the small accent marks read it, and the focus ring and the light accent are built from it. */
 	--acc-sec-col : ;                                                         /* What: Accent Secondary Color. Why: The standard role set includes a second accent. How: This site has no second accent, so it stays empty. */
 	--acc-tin-col : ;                                                         /* What: Accent Tint Color. Why: The standard role set includes a pale accent tint. How: This site doesn't use one, so it stays empty. */
 	--att-rin-col : ;                                                         /* What: Attention Ring Color. Why: The standard role set includes an attention ring. How: This site doesn't use one, so it stays empty. */
 	--bac-hov-col : ;                                                         /* What: Background Hover Color. Why: The standard role set includes a hover overlay. How: This site's hovers use their own colors, so it stays empty. */
-	--bac-inv-col : #1a1f24;                                                  /* What: Background Inverse Color. Why: Dark bands, the footer, and primary buttons need one dark surface color. How: Those surfaces read it, with paper-colored text on top. */
-	--bac-pag-col : #f5f2ec;                                                  /* What: Background Page Color. Why: The page sits on a warm off-white rather than pure white. How: The page background reads it, and text on dark surfaces reads it, at full strength or faded. */
+	--bac-inv-col : #1a1f24;                                                  /* What: Background Inverse Color. Why: Dark bands, the footer, primary buttons, and the ghost buttons' hover fill need one dark surface color. How: Those surfaces, the select's options, and selected text read it, with paper-colored text on top, and the scrim and shadow roles take their color from it. */
+	--bac-pag-col : #f5f2ec;                                                  /* What: Background Page Color. Why: The page sits on a warm off-white rather than pure white. How: The page background and every paper surface read it, and so do the text and faint rules on dark surfaces, at full strength or faded. */
 	--bac-sur-col : #ebe7df;                                                  /* What: Background Surface Color. Why: Some bands and hovers need a slightly darker paper. How: The about section and hovered service cards read it. */
 	--bor-mai-col : oklch( from var( --tex-mai-col ) l c h / 0.12 );          /* What: Border Main Color. Why: Dividers should be barely there. How: Section edges and hairline rules read it. */
 	--bor-str-col : oklch( from var( --bor-mai-col ) l c h / 0.22 );          /* What: Border Strong Color. Why: A few dividers need to hold up as structure. How: This raises the main border's opacity to 0.22 for the service grid, principles rule, logo ring, and ghost buttons. */
@@ -154,15 +155,15 @@
 	--err-mai-col : ;                                                         /* What: Error Main Color. Why: The standard role set includes the error family. How: This site has no errors to show, so it stays empty. */
 	--err-tin-col : ;                                                         /* What: Error Tint Color. Why: The standard role set includes the error family. How: This site has no errors to show, so it stays empty. */
 	--foc-rin-col : var( --acc-mai-col );                                     /* What: Focus Ring Color. Why: Keyboard focus needs one ring color that stands out on the page, kept apart from the accent so dark bands can swap it. How: Links and buttons draw their focus ring in it, and the contact band and footer set it to the light accent. */
-	--scr-mai-col : var( --bac-inv-col );                                     /* What: Scrim Main Color. Why: The open mobile drawer dims the page behind it with one shade, the site's ink. How: The scrim reads it with its own alpha through relative color syntax. */
+	--scr-mai-col : var( --bac-inv-col );                                     /* What: Scrim Main Color. Why: The open drawer dims the page behind it with one shade, the site's ink. How: The scrim reads it with its own alpha through relative color syntax. */
 	--sha-mai-col : var( --bac-inv-col );                                     /* What: Shadow Main Color. Why: Every elevation shadow casts one color, a soft ink that suits the warm paper better than pure black. How: The --ele-* shadows read it with each layer's own alpha through relative color syntax. */
 	--suc-dar-col : ;                                                         /* What: Success Dark Color. Why: The standard role set includes the success family. How: This site has no success states, so it stays empty. */
 	--suc-mai-col : ;                                                         /* What: Success Main Color. Why: The standard role set includes the success family. How: This site has no success states, so it stays empty. */
 	--suc-tin-col : ;                                                         /* What: Success Tint Color. Why: The standard role set includes the success family. How: This site has no success states, so it stays empty. */
 	--tex-acc-col : var( --bac-pag-col );                                     /* What: Text Accent Color. Why: Text on an accent background needs to stay readable. How: This reads the page color; nothing on this site reads it yet. */
-	--tex-mai-col : #1a1f24;                                                  /* What: Text Main Color. Why: Body text and headings share one near-black. How: The body and every heading read it. */
+	--tex-mai-col : #1a1f24;                                                  /* What: Text Main Color. Why: Body text and headings share one near-black. How: Text on the paper surfaces reads it, along with the lines and rules drawn in ink, and the main border color is built from it. */
 	--tex-mut-col : #636871;                                                  /* What: Text Muted Color. Why: Labels and secondary details should recede. How: Eyebrows, captions, labels, and supporting lines read it, dark enough to reach WCAG AA's 4.5:1 contrast on both the page and surface backgrounds. */
-	--tex-sec-col : #2a3138;                                                  /* What: Text Secondary Color. Why: Long paragraphs read more gently than full ink. How: Ledes, descriptions, and links read it. */
+	--tex-sec-col : #2a3138;                                                  /* What: Text Secondary Color. Why: Long paragraphs read more gently than full ink. How: Ledes, longer paragraphs, card descriptions, and the bar's links read it. */
 	--war-dar-col : ;                                                         /* What: Warning Dark Color. Why: The standard role set includes the warning family. How: This site has no warnings to show, so it stays empty. */
 	--war-mai-col : ;                                                         /* What: Warning Main Color. Why: The standard role set includes the warning family. How: This site has no warnings to show, so it stays empty. */
 	--war-tin-col : ;                                                         /* What: Warning Tint Color. Why: The standard role set includes the warning family. How: This site has no warnings to show, so it stays empty. */
@@ -208,10 +209,10 @@
 
 	/* #region Easing Tokens */
 
-	--mot-acc-eas : cubic-bezier( .4, 0, 1, 1 );      /* What: Motion Accelerate Easing. Why: Things leaving the screen should speed up as they go, which this site doesn't use yet. How: Transitions and animations read it as their timing function. */
+	--mot-acc-eas : cubic-bezier( .4, 0, 1, 1 );      /* What: Motion Accelerate Easing. Why: Things leaving the screen should speed up as they go, as the drawer and its scrim do when they close. How: Transitions and animations read it as their timing function. */
 	--mot-bou-eas : cubic-bezier( .34, 1.56, .5, 1 ); /* What: Motion Bounce Easing. Why: The easing set includes a strong spring past the target for playful motion, which this site doesn't use yet. How: Transitions and animations read it as their timing function. */
 	--mot-dec-eas : cubic-bezier( .2, .7, .3, 1 );    /* What: Motion Decelerate Easing. Why: Things arriving should start fast and land softly. How: Transitions and animations read it as their timing function. */
-	--mot-ove-eas : cubic-bezier( .34, 1.2, .5, 1 );  /* What: Motion Overshoot Easing. Why: The easing set includes a gentle overshoot past the target, which this site doesn't use yet. How: Transitions and animations read it as their timing function. */
+	--mot-ove-eas : cubic-bezier( .34, 1.2, .5, 1 );  /* What: Motion Overshoot Easing. Why: The easing set includes a gentle overshoot past the target, which the submit button's sent label rises in with. How: Transitions and animations read it as their timing function. */
 	--mot-sta-eas : ease;                             /* What: Motion Standard Easing. Why: Most hovers, toggles, and fades need one ordinary, smooth curve. How: Transitions and animations read it as their timing function. */
 
 	/* #endregion Easing Tokens */
@@ -222,7 +223,7 @@
 
 	--ele-sma-sha : 0 calc( var( --ver-rhy-m09 ) * 1rem ) calc( var( --ver-rhy-m07 ) * 1rem ) oklch( from var( --sha-mai-col ) l c h / var( --cdn-pow-007-rec ) ); /* What: Elevation Small Shadow, about 0 1.2px 2px. Why: Small raised controls would sit just above their surface; nothing on this site uses this level yet. How: This is one tight contact shadow. */
 	--ele-med-sha : 0 calc( var( --ver-rhy-m02 ) * 1rem ) calc( var( --ver-rhy-p02 ) * 1rem ) oklch( from var( --sha-mai-col ) l c h / var( --cdn-pow-006-rec ) ), 0 calc( var( --ver-rhy-m05 ) * 1rem ) calc( var( --ver-rhy-m02 ) * 1rem ) calc( var( --ver-rhy-m07 ) * -1rem ) oklch( from var( --sha-mai-col ) l c h / var( --cdn-pow-008-rec ) );                  /* What: Elevation Medium Shadow, about 0 8px 26px plus 0 3.6px 8px -2px. Why: Small floating surfaces such as tooltips would hover just off the page; none exist on this site yet. How: This pairs a soft key shadow with a crisp contact layer. */
-	--ele-lar-sha : 0 calc( var( --ver-rhy-p01 ) * 1rem ) calc( var( --ver-rhy-p04 ) * 1rem ) calc( var( --ver-rhy-bas ) * -1rem ) oklch( from var( --sha-mai-col ) l c h / var( --cdn-pow-004-rec ) ), 0 calc( var( --ver-rhy-m03 ) * 1rem ) calc( var( --ver-rhy-bas ) * 1rem ) calc( var( --ver-rhy-m05 ) * -1rem ) oklch( from var( --sha-mai-col ) l c h / 0.16 ); /* What: Elevation Large Shadow, about 0 19px 45px -15px plus 0 6px 15px -4px. Why: The mobile drawer lifts well clear of the page it drops over. How: This pairs a deep key shadow with a crisp contact layer. */
+	--ele-lar-sha : 0 calc( var( --ver-rhy-p01 ) * 1rem ) calc( var( --ver-rhy-p04 ) * 1rem ) calc( var( --ver-rhy-bas ) * -1rem ) oklch( from var( --sha-mai-col ) l c h / var( --cdn-pow-004-rec ) ), 0 calc( var( --ver-rhy-m03 ) * 1rem ) calc( var( --ver-rhy-bas ) * 1rem ) calc( var( --ver-rhy-m05 ) * -1rem ) oklch( from var( --sha-mai-col ) l c h / 0.16 ); /* What: Elevation Large Shadow, about 0 19px 45px -15px plus 0 6px 15px -4px. Why: The drawer lifts well clear of the page it drops over. How: This pairs a deep key shadow with a crisp contact layer. */
 	--ele-xla-sha : 0 calc( var( --ver-rhy-p02 ) * 1rem ) calc( var( --ver-rhy-p05 ) * 1rem ) calc( var( --ver-rhy-p01 ) * -1rem ) oklch( from var( --sha-mai-col ) l c h / var( --cdn-pow-003-rec ) ), 0 calc( var( --ver-rhy-m02 ) * 1rem ) calc( var( --ver-rhy-p01 ) * 1rem ) calc( var( --ver-rhy-m04 ) * -1rem ) oklch( from var( --sha-mai-col ) l c h / 0.16 ); /* What: Elevation Extra Large Shadow, about 0 26px 59px -19px plus 0 8px 19px -5px. Why: Modals would float highest, above a scrim; this site has none yet. How: This pairs the deepest key shadow with a crisp contact layer. */
 	--ele-sid-sha : calc( var( --ver-rhy-p01 ) * 1rem ) 0 calc( var( --ver-rhy-p04 ) * 1rem ) calc( var( --ver-rhy-bas ) * -1rem ) oklch( from var( --sha-mai-col ) l c h / var( --cdn-pow-004-rec ) ), calc( var( --ver-rhy-m03 ) * 1rem ) 0 calc( var( --ver-rhy-bas ) * 1rem ) calc( var( --ver-rhy-m05 ) * -1rem ) oklch( from var( --sha-mai-col ) l c h / 0.16 ); /* What: Elevation Side Shadow, about 19px 0 45px -15px plus 6px 0 15px -4px. Why: A drawer sliding in from a side edge would cast its shadow sideways; this site's drawer drops from the top, so nothing uses it yet. How: This is the large shadow with its x and y offsets swapped, so it falls to the right. */
 
@@ -233,7 +234,7 @@
 	/* #region Font Family Tokens */
 
 	--fon-fam-mai : 'Inter Tight', -apple-system, BlinkMacSystemFont, sans-serif; /* What: Font Family Main. Why: Paragraphs and the interface share one clean sans serif. How: This names Inter Tight, falling back to the system sans-serif. */
-	--fon-fam-sec : 'Fraunces', 'Times New Roman', serif;                         /* What: Font Family Secondary. Why: Headings, numbers, the brand name, and accents read in an expressive serif. How: This names Fraunces, falling back to a system serif. */
+	--fon-fam-sec : 'Fraunces', 'Times New Roman', serif;                         /* What: Font Family Secondary. Why: Headings, the stat, card, and principle numbers, the brand name, accents, the drawer's row labels and phone number, and the About story's lead and quote read in an expressive serif. How: This names Fraunces, falling back to a system serif. */
 
 	/* #endregion Font Family Tokens */
 
@@ -378,9 +379,9 @@
 	--ver-rhy-m04 : var( --cdn-pow-003-rec ); /* What: Vertical Rhythm Base Minus 4 ~= 0.430. Why: This is 4 steps below the base step, for the finest vertical spacing. How: This is the reciprocal of the third power of the core design number, multiplied by 1rem where a length is needed. */
 	--ver-rhy-m03 : var( --cdn-pow-002-rec ); /* What: Vertical Rhythm Base Minus 3 ~= 0.570. Why: This is 3 steps below the base step, for the finest vertical spacing. How: This is the reciprocal of the second power of the core design number, multiplied by 1rem where a length is needed. */
 	--ver-rhy-m02 : var( --cdn-pow-001-rec ); /* What: Vertical Rhythm Base Minus 2 ~= 0.755. Why: This is 2 steps below the base step, for tight vertical spacing. How: This is the reciprocal of the first power of the core design number, multiplied by 1rem where a length is needed. */
-	--ver-rhy-m01 : var( --cdn-pow-000 );     /* What: Vertical Rhythm Base Minus 1 = 1. Why: Headings and single-line elements need no breathing room between lines. How: This is read unitless as line-height, so each line is exactly its own font size tall. */
+	--ver-rhy-m01 : var( --cdn-pow-000 );     /* What: Vertical Rhythm Base Minus 1 = 1. Why: Headings and single-line elements need no breathing room between lines. How: This is read unitless as line-height, so each line is exactly its own font size tall, or multiplied by 1rem where a length is needed. */
 	--ver-rhy-bas : var( --cdn-pow-001 );     /* What: Vertical Rhythm Base ~= 1.325. Why: Line height and every other height-related value share one base rhythm drawn from the core design number. How: This is read unitless as line-height, so each element multiplies it by its own font size, and other vertical values can build on it. */
-	--ver-rhy-p01 : var( --cdn-pow-002 );     /* What: Vertical Rhythm Base Plus 1 ~= 1.755. Why: Body text, ledes, and detail values need a roomy line. How: This is read unitless as line-height (about 19.3px on base-size text), or multiplied by 1rem where a fixed height is needed. */
+	--ver-rhy-p01 : var( --cdn-pow-002 );     /* What: Vertical Rhythm Base Plus 1 ~= 1.755. Why: Body text, ledes, and detail values need a roomy line. How: This is read unitless as line-height (about 19.3px on base-size text), or multiplied by 1rem where a length is needed. */
 	--ver-rhy-p02 : var( --cdn-pow-003 );     /* What: Vertical Rhythm Base Plus 2 ~= 2.325. Why: This is 2 steps above the base step, for roomy vertical spacing. How: This is the third power of the core design number, multiplied by 1rem where a length is needed. */
 	--ver-rhy-p03 : var( --cdn-pow-004 );     /* What: Vertical Rhythm Base Plus 3 ~= 3.080. Why: This is 3 steps above the base step, for the roomiest vertical spacing. How: This is the fourth power of the core design number, multiplied by 1rem where a length is needed. */
 	--ver-rhy-p04 : var( --cdn-pow-005 );     /* What: Vertical Rhythm Base Plus 4 ~= 4.080. Why: This is 4 steps above the base step, for the roomiest vertical spacing. How: This is the fifth power of the core design number, multiplied by 1rem where a length is needed. */
@@ -393,7 +394,7 @@
 	--ver-rhy-p11 : var( --cdn-pow-012 );     /* What: Vertical Rhythm Base Plus 11 ~= 29.207. Why: This is 11 steps above the base step, for maximum widths. How: This is the twelfth power of the core design number, multiplied by 1rem where a length is needed. */
 	--ver-rhy-p12 : var( --cdn-pow-013 );     /* What: Vertical Rhythm Base Plus 12 ~= 38.691. Why: This is 12 steps above the base step, for maximum widths. How: This is the thirteenth power of the core design number, multiplied by 1rem where a length is needed. */
 	--ver-rhy-p13 : var( --cdn-pow-014 );     /* What: Vertical Rhythm Base Plus 13 ~= 51.254. Why: This is 13 steps above the base step, for maximum widths. How: This is the fourteenth power of the core design number, multiplied by 1rem where a length is needed. */
-	--ver-rhy-p14 : var( --cdn-pow-015 );     /* What: Vertical Rhythm Base Plus 14 ~= 67.897. Why: This is 14 steps above the base step, for maximum widths. How: This is the fifteenth power of the core design number, multiplied by 1rem where a length is needed. */
+	--ver-rhy-p14 : var( --cdn-pow-015 );     /* What: Vertical Rhythm Base Plus 14 ~= 67.897. Why: This is 14 steps above the base step, for maximum heights. How: This is the fifteenth power of the core design number, multiplied by 1rem where a length is needed. */
 	--ver-rhy-p15 : var( --cdn-pow-016 );     /* What: Vertical Rhythm Base Plus 15 ~= 89.945. Why: This is 15 steps above the base step, for maximum widths. How: This is the sixteenth power of the core design number, multiplied by 1rem where a length is needed. */
 
 	/* #endregion Vertical Rhythm Tokens */
@@ -419,7 +420,7 @@
 
 }
 
-html { /* What: HTML. Why: One rem should equal the 11px base font size, in-page links should glide to their sections, and phones shouldn't inflate the text. How: This sets the root to 68.75% (11/16) of the browser's own default, so 1rem is 11px at the usual 16px default and still follows any size a person sets, turns on smooth scrolling, and turns off automatic text resizing. */
+html { /* What: HTML. Why: One rem should equal the 11px base font size, the page should glide when the browser scrolls it on its own, as it does to a control focused off screen, and phones shouldn't inflate the text. How: This sets the root to 68.75% (11/16) of the browser's own default, so 1rem is 11px at the usual 16px default and still follows any size a person sets, turns on smooth scrolling, and turns off automatic text resizing. */
 
 
 	-webkit-text-size-adjust : 100%;
@@ -458,7 +459,7 @@ body { /* What: Body. Why: The page's default text sets the tone everything else
 }
 
 img,
-svg { /* What: Images And Svgs. Why: Images shouldn't leave inline gaps or overflow their containers. How: This makes them blocks capped at their container's width. */
+svg { /* What: Images And SVGs. Why: Images shouldn't leave inline gaps or overflow their containers. How: This makes them blocks capped at their container's width. */
 
 
 	display   : block;
@@ -495,13 +496,13 @@ select,
 textarea { /* What: Focusable Controls. Why: Tabbing to a control scrolls it into view, and without room for the fixed bar it can stop right under the bar, hidden while focused. How: This keeps a scroll margin above every control, so the browser stops scrolling with the control below the bar. */
 
 
-	scroll-margin-top : var( --spa-ver-p06 ); /* Spacing Vertical Base Plus 6 ~= 78.751px */ /* What: Bar Clearance Margin. Why: The scrolled bar is about 69.9px tall on wide screens and 56.9px on phones. How: This is the smallest spacing step taller than both, leaving a little room below the bar. */
+	scroll-margin-top : var( --spa-ver-p06 ); /* Spacing Vertical Base Plus 6 ~= 78.751px */ /* What: Bar Clearance Margin. Why: The scrolled bar is about 69.9px tall above 880px wide and 56.9px at 880px and below. How: This is the smallest spacing step taller than both, leaving a little room below the bar. */
 
 
 }
 
 a,
-button { /* What: Focus Ring Controls. Why: Keyboard focus should ease in rather than snap, in a ring that suits the site. How: This gives every link and button a zero-width outline in the focus ring color, held a little away from it, ready to grow in on focus. */
+button { /* What: Focus Ring Controls. Why: Keyboard focus should ease in rather than snap, in a ring that suits the site. How: This gives every link and button a zero-width outline in the focus ring color, held a little away from the control, ready to grow in on focus. */
 
 
 	outline        : 0 solid var( --foc-rin-col );                                                                                      /* Focus Ring Color = #1f4e7a */ /* What: Zero Width Outline. Why: A zero width stays invisible, even in forced colors mode, until something is focused. How: The focused rule below grows it. */

@@ -5,12 +5,12 @@
  * services.module.css = Services Section Module
  *
  * @summary
- * Styles for SerSecCom: the section's two-column heading block, then the
- * grid of service cards sharing hairline borders, three across on wide
- * screens, two on tablets, and one on phones, each card tinting on hover. The
- * shared section, container, eyebrow, display, and lede declarations the
- * section used to borrow from the global stylesheet are copied onto its own
- * classes here.
+ * Styles for SerSecCom: the section's two-column heading block, stacking at
+ * 960px wide and below, then the grid of service cards sharing hairline
+ * borders, each tinting on hover, three across above 960px wide, two at 960px
+ * and below, and one at 640px and below. The shared section, container,
+ * eyebrow, display, and lede declarations the section used to borrow from the
+ * global stylesheet are copied onto its own classes here.
  *
  * @author z4nta0 <https://github.com/z4nta0>
  *
@@ -26,7 +26,6 @@
 	background    : var( --bac-pag-col );                            /* Background Page Color = #f5f2ec */
 	border-top    : var( --bor-wid-bas ) solid var( --bor-mai-col ); /* Border Width Base ~= 1.160px, Border Main Color = #1a1f24 @ 0.12 opacity */
 	padding-block : var( --sec-ver-pad );                            /* Section Vertical Padding, about 78.751px - 138.199px */
-	position      : relative;
 
 
 }
@@ -38,7 +37,7 @@
 
 
 	margin         : 0 auto;
-	max-width      : var( --con-max-wid ); /* Container Maximum Width, about 1,449.4px */
+	max-width      : var( --con-max-wid ); /* Container Maximum Width ~= 1,449.4px */
 	padding-inline : var( --gut-sid-pad ); /* Gutter Side Padding, about 19.304px - 44.876px */
 	width          : 100%;
 
@@ -48,7 +47,7 @@
 
 /* #region serHeaDiv */
 
-.serHeaDiv { /* What: Services Head Div. Why: The heading and lede share a row above the cards. How: This sets a two-column grid aligned to the bottom. */
+.serHeaDiv { /* What: Services Head Div. Why: The label, heading, and lede open the section above the cards. How: This sets a two-column grid aligned to the bottom. */
 
 
 	align-items           : end;
@@ -59,7 +58,7 @@
 
 
 }
-@container app ( max-width : 960px ) { /* What: Narrow Services Head Div. Why: Small screens are too narrow for two columns. How: This applies below 960px wide. */
+@container app ( max-width : 960px ) { /* What: Narrow Services Head Div. Why: Small screens are too narrow for two columns. How: This applies at 960px wide and below. */
 
 
 	.serHeaDiv { /* What: Stacked Services Head Div. Why: The lede reads best under the heading. How: This turns the grid into one column with a smaller gap. */
@@ -84,7 +83,7 @@
 	font-size      : var( --fon-siz-bas );                   /* Font Size Base = 11px */
 	font-weight    : 500;
 	gap            : var( --spa-hor-m01 );                   /* Spacing Horizontal Base Minus 1 = 11px */
-	letter-spacing : calc( var( --cdn-pow-006-rec ) * 1em ); /* Core-Design-Number to the Power of 6 Reciprocal ~= 0.185 */
+	letter-spacing : calc( var( --cdn-pow-006-rec ) * 1em ); /* Core-Design-Number to the Power of 6 Reciprocal ~= 0.185em */
 	text-transform : uppercase;
 
 
@@ -112,14 +111,14 @@
 	font-variation-settings : 'opsz' 144;
 	font-weight             : 400;
 	grid-column             : 1;
-	letter-spacing          : calc( var( --cdn-pow-013-rec ) * -1em );                  /* Core-Design-Number to the Power of 13 Reciprocal ~= 0.026 */
+	letter-spacing          : calc( var( --cdn-pow-013-rec ) * -1em );                  /* Core-Design-Number to the Power of 13 Reciprocal ~= -0.026em */
 	line-height             : var( --ver-rhy-m01 );                                     /* Vertical Rhythm Base Minus 1 = 1 */
 	margin-top              : var( --spa-ver-p02 );                                     /* Spacing Vertical Base Plus 2 ~= 25.572px */
 
 
 }
 
-.titAccEmp { /* What: Title Accent Emphasis. Why: One word in each heading is set apart in color and italic. How: This draws it in the accent, light and italic. */
+.titAccEmp { /* What: Title Accent Emphasis. Why: One word in the section's heading is set apart in color and italic. How: This draws it in the accent, light and italic. */
 
 
 	color       : var( --acc-mai-col ); /* Accent Main Color = #1f4e7a */
@@ -132,7 +131,7 @@
 /* #endregion serTitHea */
 
 
-.secLedPar { /* What: Section Lede Paragraph. Why: The lede says how every project starts, beside the heading. How: This sets it in the body font, a little larger than body text, in the second column. */
+.secLedPar { /* What: Section Lede Paragraph. Why: The lede says how every project starts, beside the heading. How: This sets it in the body font, at body size on narrower screens, growing to a step larger on wide ones, at a comfortable measure, in the second column with a little room below. */
 
 
 	color          : var( --tex-sec-col );                                       /* Text Secondary Color = #2a3138 */
@@ -145,7 +144,7 @@
 
 
 }
-@container app ( max-width : 960px ) { /* What: Narrow Section Lede Paragraph. Why: The stacked head has one column. How: This applies below 960px wide. */
+@container app ( max-width : 960px ) { /* What: Narrow Section Lede Paragraph. Why: The stacked head has one column. How: This applies at 960px wide and below. */
 
 
 	.secLedPar { /* What: Stacked Section Lede Paragraph. Why: The lede moves under the heading. How: This puts it in column 1. */
@@ -175,7 +174,7 @@
 
 
 }
-@container app ( max-width : 960px ) { /* What: Narrow Services Grid Div. Why: Three cards don't fit across a tablet. How: This applies below 960px wide. */
+@container app ( max-width : 960px ) { /* What: Narrow Services Grid Div. Why: Three cards don't fit across a tablet. How: This applies at 960px wide and below. */
 
 
 	.serGriDiv { /* What: Two Column Services Grid Div. Why: The cards fit two to a row. How: This sets two columns. */
@@ -188,7 +187,7 @@
 
 
 }
-@container app ( max-width : 640px ) { /* What: Phone Services Grid Div. Why: Two cards don't fit across a phone. How: This applies below 640px wide. */
+@container app ( max-width : 640px ) { /* What: Phone Services Grid Div. Why: Two cards don't fit across a phone. How: This applies at 640px wide and below. */
 
 
 	.serGriDiv { /* What: One Column Services Grid Div. Why: The cards stack on a phone. How: This sets one column. */
@@ -212,12 +211,11 @@
 	border-bottom : var( --bor-wid-bas ) solid var( --bor-str-col );                /* Border Width Base ~= 1.160px, Border Strong Color = #1a1f24 @ 0.22 opacity */
 	border-right  : var( --bor-wid-bas ) solid var( --bor-str-col );                /* Border Width Base ~= 1.160px, Border Strong Color = #1a1f24 @ 0.22 opacity */
 	padding       : var( --spa-ver-p04 ) var( --spa-hor-p03 ) var( --spa-ver-p04 ); /* Spacing Vertical Base Plus 4 ~= 44.876px, Spacing Horizontal Base Plus 3 ~= 33.876px */
-	position      : relative;
 	transition    : background-color var( --dur-tra-p02 ) var( --mot-sta-eas );     /* Duration Transition Base Plus 2 ~= 277.0ms, Motion Standard Easing = ease */
 
 
 }
-.serCarArt:hover { /* What: Hovered Service Card Article. Why: The hovered card should stand out from its neighbors. How: This tints it with the soft paper color. */
+.serCarArt:hover { /* What: Hovered Service Card Article. Why: The hovered card should stand out from its neighbors. How: This tints it with the surface color, a slightly darker paper. */
 
 
 	background : var( --bac-sur-col ); /* Background Surface Color = #ebe7df */
@@ -252,7 +250,7 @@
 
 
 }
-@container app ( max-width : 640px ) { /* What: Phone Card Head Div. Why: Stacked cards don't need matching head heights. How: This applies below 640px wide. */
+@container app ( max-width : 640px ) { /* What: Phone Card Head Div. Why: Stacked cards don't need matching head heights. How: This applies at 640px wide and below. */
 
 
 	.carHeaDiv { /* What: Auto Height Card Head Div. Why: Each head can take only the height it needs. How: This drops the minimum height. */
@@ -274,7 +272,7 @@
 	font-size      : var( --fon-siz-p02 );                    /* Font Size Base Plus 2 ~= 19.304px */
 	font-style     : italic;
 	font-weight    : 300;
-	letter-spacing : calc( var( --cdn-pow-014-rec ) * -1em ); /* Core-Design-Number to the Power of 14 Reciprocal ~= 0.020 */
+	letter-spacing : calc( var( --cdn-pow-014-rec ) * -1em ); /* Core-Design-Number to the Power of 14 Reciprocal ~= -0.020em */
 
 
 }
@@ -286,7 +284,7 @@
 	font-family    : var( --fon-fam-sec );                    /* Font Family Secondary = 'Fraunces', 'Times New Roman', serif */
 	font-size      : var( --fon-siz-p03 );                    /* Font Size Base Plus 3 ~= 25.572px */
 	font-weight    : 400;
-	letter-spacing : calc( var( --cdn-pow-015-rec ) * -1em ); /* Core-Design-Number to the Power of 15 Reciprocal ~= 0.015 */
+	letter-spacing : calc( var( --cdn-pow-015-rec ) * -1em ); /* Core-Design-Number to the Power of 15 Reciprocal ~= -0.015em */
 	line-height    : var( --ver-rhy-m01 );                    /* Vertical Rhythm Base Minus 1 = 1 */
 
 
@@ -295,13 +293,14 @@
 /* #endregion carHeaDiv */
 
 
-.carDesPar { /* What: Card Description Paragraph. Why: The card's sentence sits under its head. How: This sets it in soft body text with room below. */
+.carDesPar { /* What: Card Description Paragraph. Why: The card's sentence sits under its head. How: This sets it in soft body text with room below, capped at the paragraph measure. */
 
 
 	color         : var( --tex-sec-col ); /* Text Secondary Color = #2a3138 */
 	font-size     : var( --fon-siz-p01 ); /* Font Size Base Plus 1 ~= 14.572px */
 	line-height   : var( --ver-rhy-p01 ); /* Vertical Rhythm Base Plus 1 ~= 1.755 */
 	margin-bottom : var( --spa-ver-p02 ); /* Spacing Vertical Base Plus 2 ~= 25.572px */
+	max-width     : var( --tex-wid-bas ); /* Text Width Base Maximum ~= 29.207em */
 
 
 }
@@ -309,7 +308,7 @@
 
 /* #region carDetUno */
 
-.carDetUno { /* What: Card Detail Unordered. Why: The card's details sit below a hairline. How: This drops the default bullets and draws the rule above. */
+.carDetUno { /* What: Card Detail Unordered List. Why: The card's details sit below a hairline. How: This drops the default bullets and draws the rule above. */
 
 
 	border-top  : var( --bor-wid-bas ) solid var( --bor-mai-col ); /* Border Width Base ~= 1.160px, Border Main Color = #1a1f24 @ 0.12 opacity */
@@ -319,7 +318,7 @@
 
 }
 
-.serDetIte { /* What: Service Detail Item. Why: Each detail reads as a small muted line with its own dot. How: This sets the text beside a custom bullet. */
+.serDetIte { /* What: Service Detail Item. Why: Each detail reads as a short muted line with its own dot. How: This sets the text beside a custom bullet. */
 
 
 	align-items : center;

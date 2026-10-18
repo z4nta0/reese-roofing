@@ -5,7 +5,7 @@
 
 import cssModObj from './contact.module.css'; // What: CSS Module Object. Why: The section's details list, signature card, and estimate form are styled in its own module. How: Each element reads its hashed class name from this object.
 import lofSvgUrl from './logo-full.svg';      // What: Logo-Full SVG URL. Why: The section's signature card shows the full logo. How: Vite resolves the import to the file's fingerprinted URL, used as the image's src.
-import React from 'react';                    // What: React. Why: The form tracks its fields and sent state with React's hooks and types its events with React's types. How: This is read as React.useState, React.ChangeEvent, React.FormEvent, and React.JSX.Element.
+import React     from 'react';                // What: React. Why: The form tracks its fields and sent state with React's hooks. How: This is read for its React.useState hook.
 
 // #endregion Imports
 
@@ -16,11 +16,13 @@ import React from 'react';                    // What: React. Why: The form trac
  *
  * @summary
  * The home page's last section, where visitors reach the company. The left
- * column gives the office, phone, email, hours, and service area beside a
- * signature card with the full logo; the right column is an estimate request
- * form. The site has no backend, so submitting the form opens the visitor's
- * own email app with a message built from the fields, addressed to the
- * company.
+ * column gives the office, phone, email, hours, and service area, with a
+ * signature card carrying the full logo below them; the right column is an
+ * estimate request form, side by side above 960px wide, with the form below
+ * the details at 960px and below. The site has no backend, so submitting the
+ * form opens the visitor's own email app with a message built from the fields,
+ * addressed to the company, and a hidden status region tells screen readers
+ * the email app is opening.
  *
  * Sections:
  *  - Types
@@ -36,7 +38,7 @@ import React from 'react';                    // What: React. Why: The form trac
 
 // #region Types
 
-type ConForTyp = { comStr : string, emaStr : string, mesStr : string, namStr : string, phoStr : string, serStr : string }; // What: Contact Form Type. Why: The form's six fields are read and written together as one record. How: This types the initial values, the form's state, and the field key each input updates.
+type ConForTyp = { comStr : string, emaStr : string, mesStr : string, namStr : string, phoStr : string, serStr : string }; // What: Contact Form Type. Why: The form's six fields are read and written together as one record. How: This types the initial values, the form's state, and the key each field updates.
 
 // #endregion Types
 
@@ -59,11 +61,12 @@ const INI_FOR_OBJ : ConForTyp = { comStr : '', emaStr : '', mesStr : '', namStr 
  *
  * @summary
  * Renders the contact section and owns its estimate form. Every field is
- * controlled by one record in state, each input updating its own key through
+ * controlled by one record in state, each field updating its own key through
  * updFieFun. Submitting builds an email from the fields and hands it to the
- * visitor's email app through a mailto link, then switches the submit
- * button's label to say the email is opening. The section carries the
- * contact anchor the navigation links and estimate buttons jump to.
+ * visitor's email app through a mailto link, then switches the submit button's
+ * label to say the email is opening and announces the same to screen readers
+ * through a hidden status region. The section carries the contact anchor the
+ * navigation links and estimate buttons lead to.
  *
  * @author z4nta0 <https://github.com/z4nta0>
  *
@@ -82,8 +85,7 @@ function ConSecCom () : React.JSX.Element {
 
 
 	const [ forValObj, setForValObj ] = React.useState< ConForTyp >( INI_FOR_OBJ ); // What: Form Value Object And Setter. Why: Every field's current text lives in one record. How: This starts from INI_FOR_OBJ and is updated one key at a time by updFieFun.
-	const [ senReqBoo, setSenReqBoo ] = React.useState( false );                    // What: Sent Request Boolean And Setter. Why: The submit button should confirm the email is on its way. How: This flips true once the form is submitted.
-
+	const [ senReqBoo, setSenReqBoo ] = React.useState( false );                    // What: Sent Request Boolean And Setter. Why: The submit button and the status region should confirm the email is opening. How: This flips true once the form is submitted.
 
 
 	// #region updFieFun
@@ -128,7 +130,8 @@ function ConSecCom () : React.JSX.Element {
 	 * visitor's name (or a generic inquiry label when it's blank) and a body
 	 * listing every field, and sends the browser to a mailto link carrying
 	 * both, which opens the visitor's email app. It then marks the request
-	 * sent so the button's label changes.
+	 * sent, so the button's label changes and the status region announces that
+	 * the email app is opening.
 	 *
 	 * @author z4nta0 <https://github.com/z4nta0>
 	 *
@@ -151,13 +154,13 @@ function ConSecCom () : React.JSX.Element {
 
 
 		const bodEncStr = encodeURIComponent( `Name: ${ forValObj.namStr }\nCompany: ${ forValObj.comStr }\nEmail: ${ forValObj.emaStr }\nPhone: ${ forValObj.phoStr }\nService: ${ forValObj.serStr }\n\nMessage:\n${ forValObj.mesStr }` ); // What: Body Encoded String. Why: The email should list every field so nothing is lost. How: This writes one labeled line per field, then the message, encoded for a URL.
-		const subEncStr = encodeURIComponent( `Estimate request: ${ forValObj.namStr || 'Reese Roofing inquiry' }` ); // What: Subject Encoded String. Why: The company should see who's asking at a glance. How: This names the visitor, falling back to a generic label when the name is blank, encoded for a URL.
+		const sujEncStr = encodeURIComponent( `Estimate request: ${ forValObj.namStr || 'Reese Roofing inquiry' }` ); // What: Subject Encoded String. Why: The company should see who's asking at a glance. How: This names the visitor, falling back to a generic label when the name is blank, encoded for a URL.
 
 
-		window.location.href = `mailto:hello@reeseroofing.example?subject=${ subEncStr }&body=${ bodEncStr }`; // What: Mailto Navigation Assignment. Why: The visitor's email app sends the request. How: This opens a new email to the company with the subject and body filled in.
+		window.location.href = `mailto:hello@reeseroofing.example?subject=${ sujEncStr }&body=${ bodEncStr }`; // What: Mailto Navigation Assignment. Why: The visitor's email app sends the request. How: This opens a new email to the company with the subject and body filled in.
 
 
-		setSenReqBoo( true ); // What: Sent Request Set Call. Why: The button should confirm the email is opening. How: This switches its label.
+		setSenReqBoo( true ); // What: Sent Request Set Call. Why: The button and the status region should confirm the email is opening. How: This switches the button's label and gives the status region its message.
 
 
 	};
@@ -173,18 +176,18 @@ function ConSecCom () : React.JSX.Element {
 			id='contact'
 
 			className={ cssModObj.homConSec }
-		>{ /* What: Contact Section Element. Why: This is where visitors reach the company. How: Its contact id is the anchor the navigation links and estimate buttons jump to, kept as is since it appears in the page's URL. */ }
+		>{ /* What: Home Contact Section Element. Why: This is where visitors reach the company. How: Its contact id is the anchor the navigation links and estimate buttons lead to, kept as is since it appears in the page's URL. */ }
 
 
-			<div className={ cssModObj.conLayDiv }>{ /* What: Contact Container Div Element. Why: The section's two columns should line up with the page's content width. How: This sets the intro and the form side by side. */ }
+			<div className={ cssModObj.conLayDiv }>{ /* What: Contact Layout Div Element. Why: The section should line up with the page's content width. How: This sets the intro and the form side by side, stacking them at 960px wide and below. */ }
 
 
-				<div>{ /* What: Contact Intro Div Element. Why: The company's details sit beside the form. How: This stacks the label, heading, lede, details, and signature. */ }
+				<div>{ /* What: Contact Intro Div Element. Why: The company's details sit beside the form, or above it at 960px wide and below. How: This stacks the label, heading, lede, details, and signature. */ }
 
 
-					<span className={ cssModObj.eyeLabSpa }>04 · Get in touch</span>{ /* What: Section Label Span Element. Why: Each section is numbered in order down the page. How: This uses the site's eyebrow style. */ }
+					<span className={ cssModObj.eyeLabSpa }>04 · Get in touch</span>{ /* What: Eyebrow Label Span Element. Why: Each section is numbered in order down the page. How: This is the section's numbered label, set in the site's eyebrow style. */ }
 
-					<h2 className={ cssModObj.conTitHea }>{ /* What: Contact Title Heading Element. Why: The heading invites the visitor in. How: Its line break sets the two-line shape, with one word in italic. */ }
+					<h2 className={ cssModObj.conTitHea }>{ /* What: Contact Title Heading Element. Why: The heading invites the visitor in. How: Its line break sets the two-line shape, with one word in the soft accent, light and italic. */ }
 						Let's talk about<br />
 						your <em className={ cssModObj.titAccEmp }>roof</em>.
 					</h2>
@@ -199,12 +202,12 @@ function ConSecCom () : React.JSX.Element {
 					<dl className={ cssModObj.conDetDes }>{ /* What: Contact Details Description List Element. Why: The company's contact details read as labeled pairs. How: This holds one row per detail. */ }
 
 
-						<div className={ cssModObj.conRowDiv }>{ /* What: Office Row Div Element. Why: Visitors want to know where the company is. How: This pairs the label with the address. */ }
+						<div className={ cssModObj.conRowDiv }>{ /* What: Contact Row Div Element. Why: Visitors want to know where the company is. How: This is the office row, which pairs the label with the address. */ }
 
 
-							<dt className={ cssModObj.rowLabTer }>Office</dt>{ /* What: Detail Term Element. Why: Each row is labeled. How: This names the detail. */ }
+							<dt className={ cssModObj.rowLabTer }>Office</dt>{ /* What: Row Label Term Element. Why: Each row is labeled. How: This names the office row's detail. */ }
 
-							<dd className={ cssModObj.rowValDet }>{ /* What: Office Detail Element. Why: This is the company's location. How: Its line break puts the city on its own line. */ }
+							<dd className={ cssModObj.rowValDet }>{ /* What: Row Value Details Element. Why: The office row's value is the company's location. How: Its line break puts the city on its own line. */ }
 								Reese Roofing<br />
 								Lawrence, Kansas 66044
 							</dd>
@@ -213,19 +216,19 @@ function ConSecCom () : React.JSX.Element {
 						</div>
 
 
-						<div className={ cssModObj.conRowDiv }>{ /* What: Phone Row Div Element. Why: Many visitors would rather call. How: This pairs the label with the number. */ }
+						<div className={ cssModObj.conRowDiv }>{ /* What: Contact Row Div Element. Why: Many visitors would rather call. How: This is the phone row, which pairs the label with the number. */ }
 
 
-							<dt className={ cssModObj.rowLabTer }>Phone</dt>{ /* What: Detail Term Element. Why: Each row is labeled. How: This names the detail. */ }
+							<dt className={ cssModObj.rowLabTer }>Phone</dt>{ /* What: Row Label Term Element. Why: Each row is labeled. How: This names the phone row's detail. */ }
 
-							<dd className={ cssModObj.rowValDet }>{ /* What: Phone Detail Element. Why: This holds the company's number. How: The number is a link that dials it. */ }
+							<dd className={ cssModObj.rowValDet }>{ /* What: Row Value Details Element. Why: The phone row's value holds the company's number. How: The number is a link that dials it. */ }
 
 
 								<a
 									className={ cssModObj.rowValAnc }
 
 									href='tel:+17855550199'
-								>{ /* What: Phone Anchor Element. Why: Phone visitors should be able to call in one tap. How: This dials the company's number. */ }
+								>{ /* What: Row Value Anchor Element. Why: Phone visitors should be able to call in one tap. How: This is the phone link, which dials the company's number. */ }
 									(785) 555-0199
 								</a>
 
@@ -236,19 +239,19 @@ function ConSecCom () : React.JSX.Element {
 						</div>
 
 
-						<div className={ cssModObj.conRowDiv }>{ /* What: Email Row Div Element. Why: Some visitors would rather write. How: This pairs the label with the address. */ }
+						<div className={ cssModObj.conRowDiv }>{ /* What: Contact Row Div Element. Why: Some visitors would rather write. How: This is the email row, which pairs the label with the address. */ }
 
 
-							<dt className={ cssModObj.rowLabTer }>Email</dt>{ /* What: Detail Term Element. Why: Each row is labeled. How: This names the detail. */ }
+							<dt className={ cssModObj.rowLabTer }>Email</dt>{ /* What: Row Label Term Element. Why: Each row is labeled. How: This names the email row's detail. */ }
 
-							<dd className={ cssModObj.rowValDet }>{ /* What: Email Detail Element. Why: This holds the company's email address. How: The address is a link that starts an email. */ }
+							<dd className={ cssModObj.rowValDet }>{ /* What: Row Value Details Element. Why: The email row's value holds the company's email address. How: The address is a link that starts an email. */ }
 
 
 								<a
 									className={ cssModObj.rowValAnc }
 
 									href='mailto:hello@reeseroofing.example'
-								>{ /* What: Email Anchor Element. Why: Visitors should be able to start an email in one click. How: This opens a new email to the company. */ }
+								>{ /* What: Row Value Anchor Element. Why: Visitors should be able to start an email in one click. How: This is the email link, which opens a new email to the company. */ }
 									hello@reeseroofing.example
 								</a>
 
@@ -259,26 +262,26 @@ function ConSecCom () : React.JSX.Element {
 						</div>
 
 
-						<div className={ cssModObj.conRowDiv }>{ /* What: Hours Row Div Element. Why: Visitors want to know when someone will answer. How: This pairs the label with the hours. */ }
+						<div className={ cssModObj.conRowDiv }>{ /* What: Contact Row Div Element. Why: Visitors want to know when someone will answer. How: This is the hours row, which pairs the label with the hours. */ }
 
 
-							<dt className={ cssModObj.rowLabTer }>Hours</dt>{ /* What: Detail Term Element. Why: Each row is labeled. How: This names the detail. */ }
+							<dt className={ cssModObj.rowLabTer }>Hours</dt>{ /* What: Row Label Term Element. Why: Each row is labeled. How: This names the hours row's detail. */ }
 
-							<dd className={ cssModObj.rowValDet }>{ /* What: Hours Detail Element. Why: This gives the office hours and the emergency exception. How: Its line break puts the emergency note on its own line. */ }
+							<dd className={ cssModObj.rowValDet }>{ /* What: Row Value Details Element. Why: The hours row's value gives the office hours and the emergency exception. How: Its line break puts the emergency note on its own line. */ }
 								Mon–Fri, 7:00 AM – 5:00 PM<br />
-								<span className={ cssModObj.rowNotSpa }>24/7 emergency response</span>{ /* What: Emergency Note Span Element. Why: Storm damage can't wait for office hours. How: This notes the round-the-clock response in a muted style. */ }
+								<span className={ cssModObj.rowNotSpa }>24/7 emergency response</span>{ /* What: Row Note Span Element. Why: Storm damage can't wait for office hours. How: This notes the round-the-clock response in faded paper. */ }
 							</dd>
 
 
 						</div>
 
 
-						<div className={ cssModObj.conRowDiv }>{ /* What: Service-Area Row Div Element. Why: Visitors check whether the company works where they are. How: This pairs the label with the area. */ }
+						<div className={ cssModObj.conRowDiv }>{ /* What: Contact Row Div Element. Why: Visitors check whether the company works where they are. How: This is the service area row, which pairs the label with the area. */ }
 
 
-							<dt className={ cssModObj.rowLabTer }>Service area</dt>{ /* What: Detail Term Element. Why: Each row is labeled. How: This names the detail. */ }
+							<dt className={ cssModObj.rowLabTer }>Service area</dt>{ /* What: Row Label Term Element. Why: Each row is labeled. How: This names the service area row's detail. */ }
 
-							<dd className={ cssModObj.rowValDet }>{ /* What: Service-Area Detail Element. Why: This lists the towns the company covers. How: This names them in one sentence. */ }
+							<dd className={ cssModObj.rowValDet }>{ /* What: Row Value Details Element. Why: The service area row's value lists the towns the company covers. How: This names them in one sentence. */ }
 								Lawrence, Eudora, Baldwin City, Tonganoxie, Topeka, Kansas City metro,
 								and surrounding counties.
 							</dd>
@@ -291,16 +294,19 @@ function ConSecCom () : React.JSX.Element {
 
 
 
-					<div className={ cssModObj.conSigDiv }>{ /* What: Contact Signature Div Element. Why: The full logo signs off the company's details. How: This sets it on a paper-colored card. */ }
+					<div className={ cssModObj.conSigDiv }>{ /* What: Contact Signature Div Element. Why: The full logo signs off the company's details. How: This sets it on a paper-colored card at the column's left edge, or centered at 500px wide and below. */ }
 
 
 						<img
 							className={ cssModObj.conSigIma }
 
+							height='536' // What: Intrinsic Size Note. Why: The page shouldn't shift while the logo loads. How: This matches the SVG's 518 by 536 viewBox, which the stylesheet scales to the signature card's capped width.
+							loading='lazy' // What: Lazy Loading Attribute. Why: The image starts below the fold. How: This holds the image back until it nears the screen, though the hero has already fetched the same file, so it saves no download.
 							src={ lofSvgUrl }
+							width='518' // What: Intrinsic Size Note. Why: The page shouldn't shift while the logo loads. How: This matches the SVG's 518 by 536 viewBox, which the stylesheet scales to the signature card's capped width.
 
 							alt='Reese Roofing: Commercial & Residential'
-						/>{ /* What: Signature Image Element. Why: The card shows the full logo. How: Its alt text reads the logo's wording for screen readers. */ }
+						/>{ /* What: Contact Signature Image Element. Why: The card shows the full logo. How: Its alt text reads the logo's wording for screen readers. */ }
 
 
 					</div>
@@ -319,17 +325,17 @@ function ConSecCom () : React.JSX.Element {
 						noValidate // What: No Validate Attribute. Why: The browser's built-in validation popups would interrupt the form's own styling. How: This turns them off, so required fields don't block the mailto handoff.
 
 						onSubmit={ subForFun }
-					>{ /* What: Contact Form Element. Why: Visitors request an estimate here. How: This hands the fields to subForFun on submit. */ }
+					>{ /* What: Estimate Request Form Element. Why: Visitors request an estimate here. How: This hands the fields to subForFun on submit. */ }
 
 
-						<div className={ cssModObj.forFieDiv }>{ /* What: Name Field Div Element. Why: The company needs to know who's asking. How: This pairs the label with its input. */ }
+						<div className={ cssModObj.forFieDiv }>{ /* What: Form Field Div Element. Why: The company needs to know who's asking. How: This is the name field, which pairs the label with its input. */ }
 
 
 							<label
 								className={ cssModObj.forFieLab }
 
 								htmlFor='conNamInp'
-							>{ /* What: Name Label Element. Why: The input needs a visible, clickable label. How: This points at conNamInp. */ }
+							>{ /* What: Form Field Label Element. Why: The name field's input needs a visible, clickable label. How: This points at conNamInp. */ }
 								Full name
 							</label>
 
@@ -339,24 +345,25 @@ function ConSecCom () : React.JSX.Element {
 								className={ cssModObj.forFieInp }
 
 								autoComplete='name'
+								placeholder='Jane Smith'
 								required
 								type='text'
 								value={ forValObj.namStr }
 
 								onChange={ updFieFun( 'namStr' ) }
-							/>{ /* What: Contact Name Input Element. Why: This takes the visitor's name. How: Its value lives in forValObj.namStr, and the browser can fill it in. */ }
+							/>{ /* What: Form Field Input Element. Why: This takes the visitor's name. How: Its value lives in forValObj.namStr, and the browser can fill it in, with a sample name as its placeholder. */ }
 
 
 						</div>
 
-						<div className={ cssModObj.forFieDiv }>{ /* What: Company Field Div Element. Why: Commercial jobs are usually tied to a business or property. How: This pairs the label with its input. */ }
+						<div className={ cssModObj.forFieDiv }>{ /* What: Form Field Div Element. Why: Commercial jobs are usually tied to a business or property. How: This is the company field, which pairs the label with its input. */ }
 
 
 							<label
 								className={ cssModObj.forFieLab }
 
 								htmlFor='conComInp'
-							>{ /* What: Company Label Element. Why: The input needs a visible, clickable label. How: This points at conComInp. */ }
+							>{ /* What: Form Field Label Element. Why: The company field's input needs a visible, clickable label. How: This points at conComInp. */ }
 								Company / property
 							</label>
 
@@ -366,27 +373,28 @@ function ConSecCom () : React.JSX.Element {
 								className={ cssModObj.forFieInp }
 
 								autoComplete='organization'
+								placeholder='Smith Property Management'
 								type='text'
 								value={ forValObj.comStr }
 
 								onChange={ updFieFun( 'comStr' ) }
-							/>{ /* What: Contact Company Input Element. Why: This takes the business or property name. How: Its value lives in forValObj.comStr, and the browser can fill it in. */ }
+							/>{ /* What: Form Field Input Element. Why: This takes the business or property name. How: Its value lives in forValObj.comStr, and the browser can fill it in, with a sample property name as its placeholder. */ }
 
 
 						</div>
 
 
-						<div className={ cssModObj.forRowDiv }>{ /* What: Field Row Div Element. Why: Email and phone are short enough to share a row. How: This sets the two fields side by side. */ }
+						<div className={ cssModObj.forRowDiv }>{ /* What: Form Row Div Element. Why: Email and phone are short enough to share a row where there's room. How: This sets the two fields side by side, stacking them at 540px wide and below. */ }
 
 
-							<div className={ cssModObj.forFieDiv }>{ /* What: Email Field Div Element. Why: The company replies by email. How: This pairs the label with its input. */ }
+							<div className={ cssModObj.forFieDiv }>{ /* What: Form Field Div Element. Why: The company replies by email. How: This is the email field, which pairs the label with its input. */ }
 
 
 								<label
 									className={ cssModObj.forFieLab }
 
 									htmlFor='conEmaInp'
-								>{ /* What: Email Label Element. Why: The input needs a visible, clickable label. How: This points at conEmaInp. */ }
+								>{ /* What: Form Field Label Element. Why: The email field's input needs a visible, clickable label. How: This points at conEmaInp. */ }
 									Email
 								</label>
 
@@ -396,24 +404,25 @@ function ConSecCom () : React.JSX.Element {
 									className={ cssModObj.forFieInp }
 
 									autoComplete='email'
+									placeholder='jane@company.example'
 									required
 									type='email'
 									value={ forValObj.emaStr }
 
 									onChange={ updFieFun( 'emaStr' ) }
-								/>{ /* What: Contact Email Input Element. Why: This takes the visitor's email address. How: Its value lives in forValObj.emaStr, with an email keyboard on phones. */ }
+								/>{ /* What: Form Field Input Element. Why: This takes the visitor's email address. How: Its value lives in forValObj.emaStr, and the browser can fill it in, with an email keyboard on phones and a sample address on the reserved example domain as its placeholder. */ }
 
 
 							</div>
 
-							<div className={ cssModObj.forFieDiv }>{ /* What: Phone Field Div Element. Why: Some visitors would rather get a call back. How: This pairs the label with its input. */ }
+							<div className={ cssModObj.forFieDiv }>{ /* What: Form Field Div Element. Why: Some visitors would rather get a call back. How: This is the phone field, which pairs the label with its input. */ }
 
 
 								<label
 									className={ cssModObj.forFieLab }
 
 									htmlFor='conPhoInp'
-								>{ /* What: Phone Label Element. Why: The input needs a visible, clickable label. How: This points at conPhoInp. */ }
+								>{ /* What: Form Field Label Element. Why: The phone field's input needs a visible, clickable label. How: This points at conPhoInp. */ }
 									Phone
 								</label>
 
@@ -423,11 +432,12 @@ function ConSecCom () : React.JSX.Element {
 									className={ cssModObj.forFieInp }
 
 									autoComplete='tel'
+									placeholder='(785) 555-0100'
 									type='tel'
 									value={ forValObj.phoStr }
 
 									onChange={ updFieFun( 'phoStr' ) }
-								/>{ /* What: Contact Phone Input Element. Why: This takes the visitor's phone number. How: Its value lives in forValObj.phoStr, with a number pad on phones. */ }
+								/>{ /* What: Form Field Input Element. Why: This takes the visitor's phone number. How: Its value lives in forValObj.phoStr, and the browser can fill it in, with a number pad on phones and a reserved 555-01xx sample number as its placeholder. */ }
 
 
 							</div>
@@ -436,14 +446,14 @@ function ConSecCom () : React.JSX.Element {
 						</div>
 
 
-						<div className={ cssModObj.forFieDiv }>{ /* What: Service Field Div Element. Why: Knowing the kind of job helps the company prepare. How: This pairs the label with its dropdown. */ }
+						<div className={ cssModObj.forFieDiv }>{ /* What: Form Field Div Element. Why: Knowing the kind of job helps the company prepare. How: This is the service field, which pairs the label with its dropdown. */ }
 
 
 							<label
 								className={ cssModObj.forFieLab }
 
 								htmlFor='conSerSel'
-							>{ /* What: Service Label Element. Why: The dropdown needs a visible, clickable label. How: This points at conSerSel. */ }
+							>{ /* What: Form Field Label Element. Why: The service field's dropdown needs a visible, clickable label. How: This points at conSerSel. */ }
 								Service of interest
 							</label>
 
@@ -455,30 +465,30 @@ function ConSecCom () : React.JSX.Element {
 								value={ forValObj.serStr }
 
 								onChange={ updFieFun( 'serStr' ) }
-							>{ /* What: Contact Service Select Element. Why: Visitors pick the kind of work they need. How: Its value lives in forValObj.serStr. */ }
+							>{ /* What: Form Field Select Element. Why: Visitors pick the kind of work they need. How: Its value lives in forValObj.serStr. */ }
 
 
 								<option
 									className={ cssModObj.forSelOpt }
 
 									value=''
-								>{ /* What: Placeholder Option Element. Why: The dropdown should start without a choice made. How: Its empty value matches the field's empty start. */ }
+								>{ /* What: Form Select Option Element. Why: The dropdown should start without a choice made. How: This is the empty placeholder option, whose empty value matches the field's empty start. */ }
 									Select one…
 								</option>
 
-								<option className={ cssModObj.forSelOpt }>New installation</option>{ /* What: Service Option Element. Why: Each option is one kind of job. How: Its text is also its value. */ }
+								<option className={ cssModObj.forSelOpt }>New installation</option>{ /* What: Form Select Option Element. Why: Each option is one kind of job. How: This is the new installation option, whose text is also its value. */ }
 
-								<option className={ cssModObj.forSelOpt }>Repair / leak</option>{ /* What: Service Option Element. Why: Each option is one kind of job. How: Its text is also its value. */ }
+								<option className={ cssModObj.forSelOpt }>Repair / leak</option>{ /* What: Form Select Option Element. Why: Each option is one kind of job. How: This is the repair option, whose text is also its value. */ }
 
-								<option className={ cssModObj.forSelOpt }>Restoration & coatings</option>{ /* What: Service Option Element. Why: Each option is one kind of job. How: Its text is also its value. */ }
+								<option className={ cssModObj.forSelOpt }>Restoration & coatings</option>{ /* What: Form Select Option Element. Why: Each option is one kind of job. How: This is the restoration option, whose text is also its value. */ }
 
-								<option className={ cssModObj.forSelOpt }>Inspection</option>{ /* What: Service Option Element. Why: Each option is one kind of job. How: Its text is also its value. */ }
+								<option className={ cssModObj.forSelOpt }>Inspection</option>{ /* What: Form Select Option Element. Why: Each option is one kind of job. How: This is the inspection option, whose text is also its value. */ }
 
-								<option className={ cssModObj.forSelOpt }>Storm / hail damage</option>{ /* What: Service Option Element. Why: Each option is one kind of job. How: Its text is also its value. */ }
+								<option className={ cssModObj.forSelOpt }>Storm / hail damage</option>{ /* What: Form Select Option Element. Why: Each option is one kind of job. How: This is the storm damage option, whose text is also its value. */ }
 
-								<option className={ cssModObj.forSelOpt }>Maintenance program</option>{ /* What: Service Option Element. Why: Each option is one kind of job. How: Its text is also its value. */ }
+								<option className={ cssModObj.forSelOpt }>Maintenance program</option>{ /* What: Form Select Option Element. Why: Each option is one kind of job. How: This is the maintenance option, whose text is also its value. */ }
 
-								<option className={ cssModObj.forSelOpt }>Not sure yet</option>{ /* What: Service Option Element. Why: Each option is one kind of job. How: Its text is also its value. */ }
+								<option className={ cssModObj.forSelOpt }>Not sure yet</option>{ /* What: Form Select Option Element. Why: Each option is one kind of job. How: This is the not sure yet option, whose text is also its value. */ }
 
 
 							</select>
@@ -486,14 +496,14 @@ function ConSecCom () : React.JSX.Element {
 
 						</div>
 
-						<div className={ cssModObj.forFieDiv }>{ /* What: Message Field Div Element. Why: The details of the job help the company quote it. How: This pairs the label with its text area. */ }
+						<div className={ cssModObj.forFieDiv }>{ /* What: Form Field Div Element. Why: The details of the job help the company quote it. How: This is the message field, which pairs the label with its text area. */ }
 
 
 							<label
 								className={ cssModObj.forFieLab }
 
 								htmlFor='conMesTex'
-							>{ /* What: Message Label Element. Why: The text area needs a visible, clickable label. How: This points at conMesTex. */ }
+							>{ /* What: Form Field Label Element. Why: The message field's text area needs a visible, clickable label. How: This points at conMesTex. */ }
 								Project details
 							</label>
 
@@ -507,7 +517,7 @@ function ConSecCom () : React.JSX.Element {
 								value={ forValObj.mesStr }
 
 								onChange={ updFieFun( 'mesStr' ) }
-							/>{ /* What: Contact Message Textarea Element. Why: This takes the project's details. How: Its value lives in forValObj.mesStr, with a placeholder suggesting what to include. */ }
+							/>{ /* What: Form Field Textarea Element. Why: This takes the project's details. How: Its value lives in forValObj.mesStr, with a placeholder suggesting what to include. */ }
 
 
 						</div>
@@ -516,18 +526,26 @@ function ConSecCom () : React.JSX.Element {
 							className={ cssModObj.forSubBut }
 
 							type='submit'
-						>{ /* What: Contact Submit Button Element. Why: This sends the request. How: It submits the form, which runs subForFun. */ }
+						>{ /* What: Form Submit Button Element. Why: This sends the request. How: It submits the form, which runs subForFun. */ }
 							{ senReqBoo ? <span className={ cssModObj.subLabSpa }>Opening your email…</span> : 'Send request' }{ /* What: Submit Label Text. Why: The button should confirm the email is opening once it's pressed. How: This switches its label when senReqBoo turns true, the new label in a span that rises in so the change registers. */ }
 							<span
 								className={ cssModObj.arrIcoSpa }
 
 								aria-hidden='true'
-							>{ /* What: Arrow Icon Span Element. Why: The arrow marks the button as moving the visitor onward. How: This sits right after the label, hidden from screen readers since it only decorates the label. */ }
+							>{ /* What: Arrow Icon Span Element. Why: The arrow marks the button as moving the visitor onward. How: This sits right after the label and nudges right when the button is hovered, hidden from screen readers since it only decorates the label. */ }
 								→
 							</span>
 						</button>
 
-						<p className={ cssModObj.forFinPar }>{ /* What: Contact Fine-Print Paragraph Element. Why: Visitors should know they'll be contacted. How: This states it under the button. */ }
+						<p
+							className={ cssModObj.forStaPar }
+
+							role='status'
+						>{ /* What: Form Status Paragraph Element. Why: A screen reader isn't told when a focused button's label changes, so the sent request needs an announcement of its own. How: This live region is in the page from the start, hidden from sight, and gains its message once senReqBoo turns true, which screen readers announce without moving focus. */ }
+							{ senReqBoo && 'Your email app is opening with the request filled in.' }{ /* What: Form Status Message Text. Why: The announcement should say what happens next. How: This renders only once the form is sent, so the region starts empty and its change is what gets announced. */ }
+						</p>
+
+						<p className={ cssModObj.forFinPar }>{ /* What: Form Fine Paragraph Element. Why: Visitors should know they'll be contacted. How: This states it under the button. */ }
 							By submitting, you agree to be contacted by Reese Roofing regarding your inquiry.
 						</p>
 
@@ -557,7 +575,7 @@ function ConSecCom () : React.JSX.Element {
 
 // #region Exports
 
-export { ConSecCom }; // What: Named Exports. Why: The home page renders the contact section last. How: This exports ConSecCom.
+export { ConSecCom }; // What: Named Export. Why: The home page renders the contact section last. How: This exports ConSecCom.
 
 // #endregion Exports
 

@@ -7,10 +7,12 @@
  * @summary
  * Styles for AboSecCom: the two-column story, with the heading and a faded
  * logo seal held in place on the left while the paragraphs and pull quote
- * scroll past on the right, then the row of four numbered principles under a
- * rule, stacking on smaller screens. The shared section, container, eyebrow,
- * display, and emphasis declarations the section used to borrow from the
- * global stylesheet are copied onto its own classes here.
+ * scroll past on the right, then the numbered principles under a rule, four
+ * across. At 960px wide and below the story stacks with the seal hidden, the
+ * heading scrolls away with the page instead of holding in place, and the
+ * principles go two across, then one at 540px and below. The shared section,
+ * container, eyebrow, display, and emphasis declarations the section used to
+ * borrow from the global stylesheet are copied onto its own classes here.
  *
  * @author z4nta0 <https://github.com/z4nta0>
  *
@@ -20,13 +22,12 @@
 
 /* #region homAboSec */
 
-.homAboSec { /* What: Home About Section. Why: The section sits on a slightly darker paper band with the standard section padding. How: This sets the soft paper color, the top rule, and the vertical padding. */
+.homAboSec { /* What: Home About Section. Why: The section sits on a slightly darker paper band with the standard section padding. How: This sets the surface color, the top rule, and the vertical padding. */
 
 
 	background    : var( --bac-sur-col );                            /* Background Surface Color = #ebe7df */
 	border-top    : var( --bor-wid-bas ) solid var( --bor-mai-col ); /* Border Width Base ~= 1.160px, Border Main Color = #1a1f24 @ 0.12 opacity */
 	padding-block : var( --sec-ver-pad );                            /* Section Vertical Padding, about 78.751px - 138.199px */
-	position      : relative;
 
 
 }
@@ -42,13 +43,13 @@
 	grid-template-columns : 1fr 1.2fr;
 	margin                : 0 auto;
 	margin-bottom         : var( --spa-ver-p07 );                                                                           /* Spacing Vertical Base Plus 7 ~= 104.323px */
-	max-width             : var( --con-max-wid );                                                                           /* Container Maximum Width, about 1,449.4px */
+	max-width             : var( --con-max-wid );                                                                           /* Container Maximum Width ~= 1,449.4px */
 	padding-inline        : var( --gut-sid-pad );                                                                           /* Gutter Side Padding, about 19.304px - 44.876px */
 	width                 : 100%;
 
 
 }
-@container app ( max-width : 960px ) { /* What: Narrow About Story Div. Why: Small screens are too narrow for two columns. How: This applies below 960px wide. */
+@container app ( max-width : 960px ) { /* What: Narrow About Story Div. Why: Small screens are too narrow for two columns. How: This applies at 960px wide and below. */
 
 
 	.aboStoDiv { /* What: Stacked About Story Div. Why: The story reads best in one column. How: This turns the grid into one column with a smaller gap and less room below. */
@@ -76,7 +77,7 @@
 
 
 }
-@container app ( max-width : 960px ) { /* What: Narrow About Left Div. Why: A stacked column has nothing beside it to scroll past. How: This applies below 960px wide. */
+@container app ( max-width : 960px ) { /* What: Narrow About Left Div. Why: A stacked column has nothing beside it to scroll past. How: This applies at 960px wide and below. */
 
 
 	.aboLefDiv { /* What: Static About Left Div. Why: The heading should scroll away normally once stacked. How: This turns off the sticking. */
@@ -100,7 +101,7 @@
 	font-size      : var( --fon-siz-bas );                   /* Font Size Base = 11px */
 	font-weight    : 500;
 	gap            : var( --spa-hor-m01 );                   /* Spacing Horizontal Base Minus 1 = 11px */
-	letter-spacing : calc( var( --cdn-pow-006-rec ) * 1em ); /* Core-Design-Number to the Power of 6 Reciprocal ~= 0.185 */
+	letter-spacing : calc( var( --cdn-pow-006-rec ) * 1em ); /* Core-Design-Number to the Power of 6 Reciprocal ~= 0.185em */
 	text-transform : uppercase;
 
 
@@ -127,14 +128,14 @@
 	font-size               : clamp( var( --fon-siz-p04 ), 5.5vw, var( --fon-siz-p07 ) ); /* Font Size Base Plus 4 ~= 33.876px, Font Size Base Plus 7 ~= 78.751px */
 	font-variation-settings : 'opsz' 144;
 	font-weight             : 400;
-	letter-spacing          : calc( var( --cdn-pow-013-rec ) * -1em );                    /* Core-Design-Number to the Power of 13 Reciprocal ~= 0.026 */
+	letter-spacing          : calc( var( --cdn-pow-013-rec ) * -1em );                    /* Core-Design-Number to the Power of 13 Reciprocal ~= -0.026em */
 	line-height             : var( --ver-rhy-m01 );                                       /* Vertical Rhythm Base Minus 1 = 1 */
 	margin-top              : var( --spa-ver-p02 );                                       /* Spacing Vertical Base Plus 2 ~= 25.572px */
 
 
 }
 
-.titAccEmp { /* What: Title Accent Emphasis. Why: One word in each heading is set apart in color and italic. How: This draws it in the accent, light and italic. */
+.titAccEmp { /* What: Title Accent Emphasis. Why: One word in the section's heading is set apart in color and italic. How: This draws it in the accent, light and italic. */
 
 
 	color       : var( --acc-mai-col ); /* Accent Main Color = #1f4e7a */
@@ -158,7 +159,7 @@
 
 
 }
-@container app ( max-width : 960px ) { /* What: Narrow About Seal Div. Why: The stacked story has no spare column for the seal. How: This applies below 960px wide. */
+@container app ( max-width : 960px ) { /* What: Narrow About Seal Div. Why: The stacked story has no spare column for the seal. How: This applies at 960px wide and below. */
 
 
 	.aboSeaDiv { /* What: Hidden About Seal Div. Why: The seal would only push the story down on a small screen. How: This hides it. */
@@ -187,17 +188,18 @@
 
 
 
-.aboStoPar { /* What: About Story Paragraph. Why: The story's paragraphs read comfortably in soft body text. How: This sets their size, leading, and spacing. */
+.aboStoPar { /* What: About Story Paragraph. Why: The story's paragraphs read comfortably in soft body text. How: This sets their size, leading, and spacing, capped at the paragraph measure. */
 
 
 	color         : var( --tex-sec-col ); /* Text Secondary Color = #2a3138 */
 	font-size     : var( --fon-siz-p01 ); /* Font Size Base Plus 1 ~= 14.572px */
 	line-height   : var( --ver-rhy-p01 ); /* Vertical Rhythm Base Plus 1 ~= 1.755 */
 	margin-bottom : var( --spa-ver-p02 ); /* Spacing Vertical Base Plus 2 ~= 25.572px */
+	max-width     : var( --tex-wid-bas ); /* Text Width Base Maximum ~= 29.207em */
 
 
 }
-.aboStoPar--lead { /* What: Lead About Story Paragraph. Why: The founding idea opens the story larger, in display type. How: This sets it in the display font at a larger size in full ink. */
+.aboStoPar--lead { /* What: About Story Paragraph Lead. Why: The founding idea opens the story larger, in display type. How: This sets it in the display font at a larger size in full ink. */
 
 
 	color          : var( --tex-mai-col ); /* Text Main Color = #1a1f24 */
@@ -240,7 +242,7 @@
 
 
 }
-@container app ( max-width : 540px ) { /* What: Phone Quote Mark Span. Why: A phone has no room to hang the mark beside the quote. How: This applies below 540px wide. */
+@container app ( max-width : 540px ) { /* What: Phone Quote Mark Span. Why: A phone has no room to hang the mark beside the quote. How: This applies at 540px wide and below. */
 
 
 	.quoMarSpa { /* What: Stacked Quote Mark Span. Why: The mark should sit above the quote instead. How: This puts it back in the flow as its own line. */
@@ -256,7 +258,7 @@
 
 }
 
-.aboQuoPar { /* What: About Quote Paragraph. Why: The quote itself reads as large display italic. How: This sets it in the display font, indented past the quote mark. */
+.aboQuoPar { /* What: About Quote Paragraph. Why: The quote itself reads as large display italic. How: This sets it in the display font, indented past the quote mark, capped at the paragraph measure. */
 
 
 	color         : var( --tex-mai-col ); /* Text Main Color = #1a1f24 */
@@ -266,11 +268,12 @@
 	font-weight   : 400;
 	line-height   : var( --ver-rhy-bas ); /* Vertical Rhythm Base ~= 1.325 */
 	margin-bottom : var( --spa-ver-bas ); /* Spacing Vertical Base ~= 14.572px */
+	max-width     : var( --tex-wid-bas ); /* Text Width Base Maximum ~= 29.207em */
 	padding-left  : var( --spa-hor-p04 ); /* Spacing Horizontal Base Plus 4 ~= 44.876px */
 
 
 }
-@container app ( max-width : 540px ) { /* What: Phone About Quote Paragraph. Why: The mark no longer hangs beside the quote on a phone. How: This applies below 540px wide. */
+@container app ( max-width : 540px ) { /* What: Phone About Quote Paragraph. Why: The mark no longer hangs beside the quote on a phone. How: This applies at 540px wide and below. */
 
 
 	.aboQuoPar { /* What: Unindented About Quote Paragraph. Why: The quote can use the full width. How: This drops the indent. */
@@ -284,18 +287,18 @@
 
 }
 
-.aboQuoFoo { /* What: About Quote Footer. Why: The attribution reads as a small label under the quote. How: This sets it in tracked capitals at body size, indented to line up with the quote. */
+.aboQuoFoo { /* What: About Quote Footer. Why: The attribution reads as a small label under the quote. How: This sets it in tracked, muted capitals at body size, indented to line up with the quote. */
 
 
 	color          : var( --tex-mut-col );                   /* Text Muted Color = #636871 */
 	font-size      : var( --fon-siz-p01 );                   /* Font Size Base Plus 1 ~= 14.572px */
-	letter-spacing : calc( var( --cdn-pow-011-rec ) * 1em ); /* Core-Design-Number to the Power of 11 Reciprocal ~= 0.045 */
+	letter-spacing : calc( var( --cdn-pow-011-rec ) * 1em ); /* Core-Design-Number to the Power of 11 Reciprocal ~= 0.045em */
 	padding-left   : var( --spa-hor-p04 );                   /* Spacing Horizontal Base Plus 4 ~= 44.876px */
 	text-transform : uppercase;
 
 
 }
-@container app ( max-width : 540px ) { /* What: Phone About Quote Footer. Why: The quote is unindented on a phone. How: This applies below 540px wide. */
+@container app ( max-width : 540px ) { /* What: Phone About Quote Footer. Why: The quote is unindented on a phone. How: This applies at 540px wide and below. */
 
 
 	.aboQuoFoo { /* What: Unindented About Quote Footer. Why: The attribution should line up with the quote. How: This drops the indent. */
@@ -317,11 +320,11 @@
 
 /* #region pagConDiv */
 
-.pagConDiv { /* What: Page Container Div. Why: The principles row should line up with the page's content width. How: This centers a full-width column with the page's side gutter. */
+.pagConDiv { /* What: Page Container Div. Why: The principles should line up with the page's content width. How: This centers a full-width column with the page's side gutter. */
 
 
 	margin         : 0 auto;
-	max-width      : var( --con-max-wid ); /* Container Maximum Width, about 1,449.4px */
+	max-width      : var( --con-max-wid ); /* Container Maximum Width ~= 1,449.4px */
 	padding-inline : var( --gut-sid-pad ); /* Gutter Side Padding, about 19.304px - 44.876px */
 	width          : 100%;
 
@@ -342,7 +345,7 @@
 
 
 }
-@container app ( max-width : 960px ) { /* What: Narrow About Principles Div. Why: Four columns don't fit a tablet. How: This applies below 960px wide. */
+@container app ( max-width : 960px ) { /* What: Narrow About Principles Div. Why: Four columns don't fit a tablet. How: This applies at 960px wide and below. */
 
 
 	.aboPriDiv { /* What: Two Column About Principles Div. Why: The principles fit two to a row. How: This sets two columns with a tighter column gap. */
@@ -356,7 +359,7 @@
 
 
 }
-@container app ( max-width : 540px ) { /* What: Phone About Principles Div. Why: Two columns don't fit a phone. How: This applies below 540px wide. */
+@container app ( max-width : 540px ) { /* What: Phone About Principles Div. Why: Two columns don't fit a phone. How: This applies at 540px wide and below. */
 
 
 	.aboPriDiv { /* What: One Column About Principles Div. Why: The principles stack on a phone. How: This sets one column. */
@@ -373,7 +376,7 @@
 
 /* #region priIteDiv */
 
-.priIteDiv { /* What: Principle Item Div. Why: Each principle needs a little room on its right before the next. How: This pads its right side. */
+.priIteDiv { /* What: Principle Item Div. Why: Each principle's text should stop a little short of its column's right edge, keeping clear of the principle beside it where they sit side by side above 540px wide. How: This pads its right side. */
 
 
 	padding-right : var( --spa-hor-bas ); /* Spacing Horizontal Base ~= 14.572px */
@@ -381,7 +384,7 @@
 
 }
 
-.priNumSpa { /* What: Principle Number Span. Why: Each principle's number reads as a small accent above its title. How: This sets it in light accent italic with room below. */
+.priNumSpa { /* What: Principle Number Span. Why: Each principle's number reads as a small accent above its title. How: This sets it in the accent, light and italic, with room below. */
 
 
 	color         : var( --acc-mai-col ); /* Accent Main Color = #1f4e7a */
@@ -403,7 +406,7 @@
 	font-size      : var( --fon-siz-p02 ); /* Font Size Base Plus 2 ~= 19.304px */
 	font-weight    : 400;
 	letter-spacing : -0.01em;
-	line-height    : var( --ver-rhy-bas ); /* Vertical Rhythm Base ~= 1.325 */
+	line-height    : var( --ver-rhy-m01 ); /* Vertical Rhythm Base Minus 1 = 1 */
 	margin-bottom  : var( --spa-ver-bas ); /* Spacing Vertical Base ~= 14.572px */
 
 

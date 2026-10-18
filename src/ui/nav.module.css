@@ -6,13 +6,14 @@
  *
  * @summary
  * Styles for NavBarCom: the fixed top bar, which turns frosted once the page
- * scrolls, with the brand, the centered section links, the phone link and
- * estimate button, and on small screens the menu toggle, its drop-down drawer,
- * and the scrim that dims the page behind the drawer. The shared container,
- * button, and arrow styles the bar used to borrow from the global stylesheet
- * are copied onto its own classes here. The estimate button is a version of
- * the site's primary button with slightly narrower side padding to suit the
- * bar.
+ * scrolls, with the brand, the section links, the phone link, and the estimate
+ * button, the links centered between the brand and those two. At 880px wide
+ * and below, the links, the phone link, and the button give way to the menu
+ * toggle, its drop-down drawer repeating them, and the scrim that dims the
+ * page behind the drawer. The shared container, button, and arrow styles the
+ * bar used to borrow from the global stylesheet are copied onto its own
+ * classes here. The estimate button is a version of the site's primary button
+ * with slightly narrower side padding to suit the bar.
  *
  * @author z4nta0 <https://github.com/z4nta0>
  *
@@ -20,7 +21,7 @@
 
 
 
-.navScrDiv { /* What: Navigation Scrim Div. Why: The open drawer should stand apart from a dimmed page, and the page should only dim on screens that have the drawer. How: This covers the viewport in the scrim color at the bar's stack level, hidden by default and shown below 880px, fading in while the drawer is open. */
+.navSciDiv { /* What: Navigation Scrim Div. Why: The open drawer should stand apart from a dimmed page, and the page should only dim on screens that have the drawer. How: This covers the viewport in the scrim color at the bar's stack level, out of the layout by default and back in it at 880px wide and below, where it stays invisible until it fades in while the drawer is open, then fades out, speeding up, as it closes. */
 
 
 	background : oklch( from var( --scr-mai-col ) l c h / var( --cdn-pow-003-rec ) );                          /* Scrim Main Color = #1a1f24, Core-Design-Number to the Power of 3 Reciprocal ~= 0.430 */
@@ -28,13 +29,13 @@
 	inset      : 0;
 	opacity    : 0;
 	position   : fixed;
-	transition : opacity var( --dur-tra-p03 ) var( --mot-dec-eas ), visibility 0s linear var( --dur-tra-p03 ); /* Duration Transition Base Plus 3 ~= 366.9ms, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ) */
+	transition : opacity var( --dur-tra-p03 ) var( --mot-acc-eas ), visibility 0s linear var( --dur-tra-p03 ); /* Duration Transition Base Plus 3 ~= 366.9ms, Motion Accelerate Easing = cubic-bezier( .4, 0, 1, 1 ) */
 	visibility : hidden;
 	z-index    : 2;                                                                                            /* What: Scrim Stack Level. Why: The scrim has to cover the hero's content, which sits at 1, while staying under the bar, also at 2. How: This matches the bar's level, and the scrim comes first in the markup, so the bar paints above it. */
 
 
 }
-.navScrDiv[data-drawer-menu-open] { /* What: Open Navigation Scrim Div. Why: The page dims while the drawer is open. How: This shows the scrim at once, then fades it in. */
+.navSciDiv[data-drawer-menu-open] { /* What: Open Navigation Scrim Div. Why: The page dims while the drawer is open. How: This shows the scrim at once, then fades it in. */
 
 
 	opacity    : 1;
@@ -43,10 +44,10 @@
 
 
 }
-@container app ( max-width : 880px ) { /* What: Narrow Navigation Scrim Div. Why: Only screens with the drawer need the scrim. How: This applies below 880px wide. */
+@container app ( max-width : 880px ) { /* What: Narrow Navigation Scrim Div. Why: Only screens with the drawer need the scrim. How: This applies at 880px wide and below. */
 
 
-	.navScrDiv { /* What: Shown Navigation Scrim Div. Why: The scrim has to exist where the drawer can open. How: This turns its display on, leaving it hidden until the drawer opens. */
+	.navSciDiv { /* What: Shown Navigation Scrim Div. Why: The scrim has to exist where the drawer can open. How: This turns its display on, leaving it hidden until the drawer opens. */
 
 
 		display : block;
@@ -59,8 +60,8 @@
 @media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Navigation Scrim Div. Why: Someone who asked for less motion shouldn't see the page fade. How: This applies only when the reduced-motion preference is set. */
 
 
-	.navScrDiv,
-	.navScrDiv[data-drawer-menu-open] { /* What: Motionless Navigation Scrim Div. Why: The dimming should simply switch on and off. How: This turns the transitions off in both states, matching the open state's own selector so it wins there too. */
+	.navSciDiv,
+	.navSciDiv[data-drawer-menu-open] { /* What: Motionless Navigation Scrim Div. Why: The dimming should simply switch on and off. How: This turns the transitions off in both states, matching the open state's own selector so it wins there too. */
 
 
 		transition : none;
@@ -78,18 +79,19 @@
 .navBarHed { /* What: Navigation Bar Header. Why: The bar stays at the top of the screen over the page. How: This fixes it to the top edge, transparent until the page scrolls. */
 
 
-	background    : transparent;
-	left          : 0;
-	padding-block : var( --spa-ver-p01 ); /* Spacing Vertical Base Plus 1 ~= 19.304px */
-	position      : fixed;
-	right         : 0;
-	top           : 0;
-	transition    : backdrop-filter var( --dur-tra-p03 ) var( --mot-dec-eas ), background-color var( --dur-tra-p03 ) var( --mot-dec-eas ), border-bottom-color var( --dur-tra-p03 ) var( --mot-dec-eas ), padding-block var( --dur-tra-p03 ) var( --mot-dec-eas ); /* Duration Transition Base Plus 3 ~= 366.9ms, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ) */ /* What: Scroll Style Transition. Why: The bar should ease into its scrolled style. How: This animates each property the scrolled modifier changes; padding is a layout property, but the bar's height really does shrink, which no transform can reproduce. */
-	z-index       : 2;                    /* What: Navigation Stack Level. Why: The bar has to stay above the hero's content, which sits at 1. How: This is the lowest level that clears it. */
+	background          : transparent;
+	border-bottom-color : transparent;          /* What: Divider Start Color. Why: The scrolled bar's hairline should fade in from nothing, not start fully dark. How: The bar carries no border until it scrolls, so this gives its border color a clear starting point for the transition. */
+	left                : 0;
+	padding-block       : var( --spa-ver-p01 ); /* Spacing Vertical Base Plus 1 ~= 19.304px */
+	position            : fixed;
+	right               : 0;
+	top                 : 0;
+	transition          : backdrop-filter var( --dur-tra-p02 ) var( --mot-dec-eas ), background-color var( --dur-tra-p02 ) var( --mot-dec-eas ), border-bottom-color var( --dur-tra-p02 ) var( --mot-dec-eas ), padding-block var( --dur-tra-p02 ) var( --mot-dec-eas ); /* Duration Transition Base Plus 2 ~= 277.0ms, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ) */ /* What: Scroll Style Transition. Why: The bar should ease into its scrolled style. How: This animates the blur, background, divider color, and padding the scrolled style changes; padding is a layout property, but the bar's height really does shrink, which no transform can reproduce. */
+	z-index             : 2;                    /* What: Navigation Stack Level. Why: The bar has to stay above the hero's content, which sits at 1. How: This is the lowest level that clears it. */
 
 
 }
-.navBarHed--scrolled { /* What: Scrolled Navigation Bar Header. Why: Once the page moves, the bar needs a background to stay readable over content. How: This frosts it, tightens its padding, and adds a hairline below. */
+.navBarHed[data-page-scroll-past] { /* What: Scrolled Navigation Bar Header. Why: Once the page moves, the bar needs a background to stay readable over content. How: This frosts it, tightens its padding, and adds a hairline below. */
 
 
 	-webkit-backdrop-filter : saturate( 180% ) blur( calc( var( --ver-rhy-bas ) * 1rem ) ); /* Vertical Rhythm Base ~= 14.572px */
@@ -125,7 +127,7 @@
 
 /* #region navInnDiv */
 
-.navInnDiv { /* What: Navigation Inner Div. Why: The bar's contents should line up with the page's content width. How: This spreads the brand, links, actions, and toggle across one centered row. */
+.navInnDiv { /* What: Navigation Inner Div. Why: The bar's contents should line up with the page's content width. How: This spreads the bar's items across one centered row: the brand, links, and actions, or the brand and toggle at 880px wide and below. */
 
 
 	align-items     : center;
@@ -133,7 +135,7 @@
 	gap             : var( --spa-hor-p03 ); /* Spacing Horizontal Base Plus 3 ~= 33.876px */
 	justify-content : space-between;
 	margin          : 0 auto;
-	max-width       : var( --con-max-wid ); /* Container Maximum Width, about 1,449.4px */
+	max-width       : var( --con-max-wid ); /* Container Maximum Width ~= 1,449.4px */
 	padding-inline  : var( --gut-sid-pad ); /* Gutter Side Padding, about 19.304px - 44.876px */
 	width           : 100%;
 
@@ -143,7 +145,7 @@
 
 /* #region navBraAnc */
 
-.navBraAnc { /* What: Navigation Brand Anchor. Why: The logo and name form one link home. How: This sets them side by side in the display font. */
+.navBraAnc { /* What: Navigation Brand Anchor. Why: The logo and name form one link home. How: This sets them side by side in the display font, easing its press and focus ring. */
 
 
 	align-items    : center;
@@ -152,6 +154,27 @@
 	font-size      : var( --fon-siz-p02 ); /* Font Size Base Plus 2 ~= 19.304px */
 	gap            : var( --spa-hor-m01 ); /* Spacing Horizontal Base Minus 1 = 11px */
 	letter-spacing : -0.01em;
+	transition     : opacity var( --dur-tra-p01 ) var( --mot-sta-eas ), outline-offset var( --dur-tra-p01 ) var( --mot-dec-eas ), outline-width var( --dur-tra-p01 ) var( --mot-dec-eas ); /* Duration Transition Base Plus 1 ~= 209.1ms, Motion Standard Easing = ease, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ) */
+
+
+}
+.navBraAnc:active { /* What: Pressed Navigation Brand Anchor. Why: A press should register before the page responds. How: This dims the brand slightly while it's held, the way the bar's text links press. */
+
+
+	opacity : var( --cdn-pow-001-rec ); /* Core-Design-Number to the Power of 1 Reciprocal ~= 0.755 */
+
+
+}
+@media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Navigation Brand Anchor. Why: Someone who asked for less motion shouldn't see the brand fade. How: This applies only when the reduced-motion preference is set. */
+
+
+	.navBraAnc { /* What: Motionless Navigation Brand Anchor. Why: The press and focus changes should appear at once. How: This turns the transition off. */
+
+
+		transition : none;
+
+
+	}
 
 
 }
@@ -159,10 +182,9 @@
 .navMarIma { /* What: Navigation Mark Image. Why: The logo mark should keep its shape at a fixed width. How: This sizes it one rhythm step wide and lifts it slightly when the brand is hovered. */
 
 
-	display    : block;
 	height     : auto;
 	object-fit : contain;
-	transition : transform var( --dur-tra-p03 ) var( --mot-dec-eas ); /* Duration Transition Base Plus 3 ~= 366.9ms, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ) */
+	transition : transform var( --dur-tra-p02 ) var( --mot-dec-eas ); /* Duration Transition Base Plus 2 ~= 277.0ms, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ) */
 	width      : calc( var( --ver-rhy-p03 ) * 1rem );                 /* Vertical Rhythm Base Plus 3 ~= 33.876px */
 
 
@@ -191,20 +213,62 @@
 
 /* #region navNamSpa */
 
-.navNamSpa { /* What: Navigation Name Span. Why: The company's first word reads as the stronger half. How: This sets it at medium weight. */
+.navNamSpa { /* What: Navigation Name Span. Why: The company's name reads with its first word as the stronger half. How: This sets the whole name at medium weight, which the second word's own span lightens, easing its hover color. */
 
 
 	font-weight : 500;
+	transition  : color var( --dur-tra-p01 ) var( --mot-sta-eas ); /* Duration Transition Base Plus 1 ~= 209.1ms, Motion Standard Easing = ease */
+
+
+}
+.navBraAnc:hover .navNamSpa { /* What: Hovered Navigation Name Span. Why: The brand should respond to the pointer like the bar's links. How: This turns the name the accent navy. */
+
+
+	color : var( --acc-mai-col ); /* Accent Main Color = #1f4e7a */
+
+
+}
+@media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Navigation Name Span. Why: Someone who asked for less motion shouldn't see the color fade. How: This applies only when the reduced-motion preference is set. */
+
+
+	.navNamSpa { /* What: Motionless Navigation Name Span. Why: The hover color should switch at once. How: This turns the transition off. */
+
+
+		transition : none;
+
+
+	}
 
 
 }
 
-.namLigSpa { /* What: Name Light Span. Why: The second word reads as the softer half. How: This sets it light, italic, and muted. */
+.namLigSpa { /* What: Name Light Span. Why: The second word reads as the softer half. How: This sets it light, italic, and muted, easing its hover color. */
 
 
-	color       : var( --tex-mut-col ); /* Text Muted Color = #636871 */
+	color       : var( --tex-mut-col );                            /* Text Muted Color = #636871 */
 	font-style  : italic;
 	font-weight : 300;
+	transition  : color var( --dur-tra-p01 ) var( --mot-sta-eas ); /* Duration Transition Base Plus 1 ~= 209.1ms, Motion Standard Easing = ease */
+
+
+}
+.navBraAnc:hover .namLigSpa { /* What: Hovered Name Light Span. Why: The name's second word should change with the first. How: This turns it the accent navy too, its own muted color otherwise holding through the hover. */
+
+
+	color : var( --acc-mai-col ); /* Accent Main Color = #1f4e7a */
+
+
+}
+@media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Name Light Span. Why: Someone who asked for less motion shouldn't see the color fade. How: This applies only when the reduced-motion preference is set. */
+
+
+	.namLigSpa { /* What: Motionless Name Light Span. Why: The hover color should switch at once. How: This turns the transition off. */
+
+
+		transition : none;
+
+
+	}
 
 
 }
@@ -225,7 +289,7 @@
 
 
 }
-@container app ( max-width : 880px ) { /* What: Narrow Navigation Links Nav. Why: Small screens have no room for the links in the bar. How: This applies below 880px wide. */
+@container app ( max-width : 880px ) { /* What: Narrow Navigation Links Nav. Why: Small screens have no room for the links in the bar. How: This applies at 880px wide and below. */
 
 
 	.navLinNav { /* What: Hidden Navigation Links Nav. Why: The drawer shows the links instead. How: This hides the row. */
@@ -254,7 +318,7 @@
 
 
 	background       : var( --tex-mai-col );                                /* Text Main Color = #1a1f24 */
-	bottom           : calc( var( --spa-ver-m05 ) * -1 );                   /* Spacing Vertical Base Minus 5 ~= 3.572px */
+	bottom           : calc( var( --spa-ver-m05 ) * -1 );                   /* Spacing Vertical Base Minus 5 ~= -3.572px */
 	content          : '';
 	height           : var( --bor-wid-bas );                                /* Border Width Base ~= 1.160px */
 	left             : 0;
@@ -317,10 +381,10 @@
 
 
 }
-@container app ( max-width : 880px ) { /* What: Narrow Navigation Call-To-Action Div. Why: Small screens have no room for the actions in the bar. How: This applies below 880px wide. */
+@container app ( max-width : 880px ) { /* What: Narrow Navigation Call-To-Action Div. Why: Small screens have no room for the actions in the bar. How: This applies at 880px wide and below. */
 
 
-	.navCtaDiv { /* What: Hidden Navigation Call-To-Action Div. Why: The drawer carries the phone number instead. How: This hides the row. */
+	.navCtaDiv { /* What: Hidden Navigation Call-To-Action Div. Why: The drawer carries the phone number and estimate button instead. How: This hides the row. */
 
 
 		display : none;
@@ -384,7 +448,7 @@
 	font-size      : var( --fon-siz-p01 );                                                        /* Font Size Base Plus 1 ~= 14.572px */
 	font-weight    : 500;
 	gap            : var( --spa-hor-m01 );                                                        /* Spacing Horizontal Base Minus 1 = 11px */
-	letter-spacing : calc( var( --cdn-pow-014-rec ) * 1em );                                      /* Core-Design-Number to the Power of 14 Reciprocal ~= 0.020 */
+	letter-spacing : calc( var( --cdn-pow-014-rec ) * 1em );                                      /* Core-Design-Number to the Power of 14 Reciprocal ~= 0.020em */
 	line-height    : calc( var( --ver-rhy-p04 ) * 1rem );                                         /* Vertical Rhythm Base Plus 4 ~= 44.876px */
 	padding        : 0 clamp( var( --spa-hor-bas ), var( --hor-rhy-011 ), var( --spa-hor-p02 ) ); /* Spacing Horizontal Base ~= 14.572px, Horizontal Rhythm 11 ~= 21.346px @ 1,920px width, Spacing Horizontal Base Plus 2 ~= 25.572px */
 	transition     : background-color var( --dur-tra-p02 ) var( --mot-dec-eas ), outline-offset var( --dur-tra-p01 ) var( --mot-dec-eas ), outline-width var( --dur-tra-p01 ) var( --mot-dec-eas ), transform var( --dur-tra-p02 ) var( --mot-dec-eas ); /* Duration Transition Base Plus 2 ~= 277.0ms, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ), Duration Transition Base Plus 1 ~= 209.1ms */
@@ -421,7 +485,7 @@
 
 }
 
-.arrIcoSpa { /* What: Arrow Icon Span. Why: The arrow slides forward as the button is hovered. How: This animates its position. */
+.arrIcoSpa { /* What: Arrow Icon Span. Why: The arrow slides forward as its button is hovered, or as its drawer row is hovered, pressed, or focused. How: This animates its position. */
 
 
 	transition : transform var( --dur-tra-p02 ) var( --mot-dec-eas ); /* Duration Transition Base Plus 2 ~= 277.0ms, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ) */
@@ -457,7 +521,7 @@
 
 /* #region navTogBut */
 
-.navTogBut { /* What: Navigation Toggle Button. Why: The menu button only appears on small screens. How: This hides it by default and stacks its two lines when shown. */
+.navTogBut { /* What: Navigation Toggle Button. Why: The menu button only appears at 880px wide and below. How: This hides it by default and stacks its two lines when shown. */
 
 
 	display        : none;
@@ -468,7 +532,7 @@
 
 
 }
-@container app ( max-width : 880px ) { /* What: Narrow Navigation Toggle Button. Why: Small screens need the menu button in place of the links. How: This applies below 880px wide. */
+@container app ( max-width : 880px ) { /* What: Narrow Navigation Toggle Button. Why: Small screens need the menu button in place of the links and actions. How: This applies at 880px wide and below. */
 
 
 	.navTogBut { /* What: Shown Navigation Toggle Button. Why: The drawer needs a way to open. How: This shows the button. */
@@ -484,7 +548,7 @@
 .navTogBut:active { /* What: Pressed Navigation Toggle Button. Why: A press should register before the page responds. How: This presses the button in slightly. */
 
 
-	transform : scale( 0.97 ); /* What: Press Scale. Why: A press should be felt before anything else happens. How: This shrinks the button by 3% and drops its hover lift, a literal since no scale step lands near it. */
+	transform : scale( 0.97 ); /* What: Press Scale. Why: A press should be felt before anything else happens. How: This shrinks the button by 3%, a literal since no scale step lands near it. */
 
 
 }
@@ -505,21 +569,21 @@
 .togLinSpa { /* What: Toggle Line Span. Why: The menu icon is drawn from two thin lines. How: This draws each line and animates it into the close icon. */
 
 
-	background : var( --tex-mai-col );                /* Text Main Color = #1a1f24 */
-	height     : calc( var( --ver-rhy-m08 ) * 1rem ); /* Vertical Rhythm Base Minus 8 ~= 1.536px */
-	transition : background-color var( --dur-tra-p01 ) var( --mot-sta-eas ), opacity var( --dur-tra-p02 ) var( --mot-sta-eas ), transform var( --dur-tra-p02 ) var( --mot-sta-eas ); /* Duration Transition Base Plus 1 ~= 209.1ms, Motion Standard Easing = ease, Duration Transition Base Plus 2 ~= 277.0ms */
-	width      : calc( var( --ver-rhy-p01 ) * 1rem ); /* Vertical Rhythm Base Plus 1 ~= 19.304px */
+	background : var( --tex-mai-col );                                                                                            /* Text Main Color = #1a1f24 */
+	height     : calc( var( --ver-rhy-m08 ) * 1rem );                                                                             /* Vertical Rhythm Base Minus 8 ~= 1.536px */
+	transition : background-color var( --dur-tra-p01 ) var( --mot-sta-eas ), transform var( --dur-tra-p02 ) var( --mot-sta-eas ); /* Duration Transition Base Plus 1 ~= 209.1ms, Motion Standard Easing = ease, Duration Transition Base Plus 2 ~= 277.0ms */
+	width      : calc( var( --ver-rhy-p01 ) * 1rem );                                                                             /* Vertical Rhythm Base Plus 1 ~= 19.304px */
 
 
 }
-.navTogBut[aria-expanded='true'] .togLinSpa:first-child { /* What: Open Top Toggle Line Span. Why: The open menu's icon becomes a close cross. How: This drops the top line to the middle and turns it 45 degrees. */
+.navTogBut[aria-expanded='true'] .togLinSpa:first-child { /* What: Open Toggle Line Span Top. Why: The open menu's icon becomes a close cross. How: This drops the top line to the middle and turns it 45 degrees. */
 
 
 	transform : translateY( calc( ( var( --spa-ver-m04 ) + calc( var( --ver-rhy-m08 ) * 1rem ) ) / 2 ) ) rotate( 45deg ); /* Spacing Vertical Base Minus 4 ~= 4.732px, Vertical Rhythm Base Minus 8 ~= 1.536px */
 
 
 }
-.navTogBut[aria-expanded='true'] .togLinSpa:last-child { /* What: Open Bottom Toggle Line Span. Why: The open menu's icon becomes a close cross. How: This lifts the bottom line to the middle and turns it the other way. */
+.navTogBut[aria-expanded='true'] .togLinSpa:last-child { /* What: Open Toggle Line Span Bottom. Why: The open menu's icon becomes a close cross. How: This lifts the bottom line to the middle and turns it the other way. */
 
 
 	transform : translateY( calc( ( var( --spa-ver-m04 ) + calc( var( --ver-rhy-m08 ) * 1rem ) ) / -2 ) ) rotate( -45deg ); /* Spacing Vertical Base Minus 4 ~= 4.732px, Vertical Rhythm Base Minus 8 ~= 1.536px */
@@ -555,19 +619,19 @@
 
 /* #region navDraDiv */
 
-.navDraDiv { /* What: Navigation Drawer Div. Why: Small screens show the links in a panel under the bar. How: This stacks the links on the page color, collapsed to nothing and hidden until opened, growing and shrinking as it opens and closes, and casting a large elevation shadow onto the page below it. */
+.navDraDiv { /* What: Navigation Drawer Div. Why: At 880px wide and below the links, phone number, and estimate button show in a panel under the bar. How: This stacks the links and the contact block on the page color, collapsed to nothing and hidden until opened, growing and shrinking as it opens and closes, and casting a large elevation shadow onto the page below it. */
 
 
 	background     : var( --bac-pag-col );                             /* Background Page Color = #f5f2ec */
 	border-bottom  : 0 solid var( --bor-mai-col );                     /* Border Main Color = #1a1f24 @ 0.12 opacity */
 	box-shadow     : var( --ele-lar-sha );                             /* Elevation Large Shadow, about 0 19px 45px -15px plus 0 6px 15px -4px */
-	clip-path      : inset( 0 0 calc( var( --spa-ver-p06 ) * -1 ) 0 ); /* Spacing Vertical Base Plus 6 ~= 78.751px */ /* What: Shadow Clip Path. Why: The shadow's upper layer would otherwise bleed a grey line onto the bar above the drawer. How: This clips everything above the drawer's top edge while leaving room below for the shadow's full reach. */
+	clip-path      : inset( 0 0 calc( var( --spa-ver-p06 ) * -1 ) 0 ); /* Spacing Vertical Base Plus 6 ~= -78.751px */ /* What: Shadow Clip Path. Why: The shadow's upper layer would otherwise bleed a grey line onto the bar above the drawer. How: This clips everything above the drawer's top edge while leaving room below for the shadow's full reach. */
 	display        : flex;
 	flex-direction : column;
 	max-height     : 0;
 	overflow       : hidden;
 	padding        : 0 var( --gut-sid-pad );                           /* Gutter Side Padding, about 19.304px - 44.876px */
-	transition     : border-bottom-width var( --dur-tra-p03 ) var( --mot-dec-eas ), max-height var( --dur-tra-p03 ) var( --mot-dec-eas ), padding-block var( --dur-tra-p03 ) var( --mot-dec-eas ), visibility 0s linear var( --dur-tra-p03 ); /* Duration Transition Base Plus 3 ~= 366.9ms, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ) */ /* What: Drawer Close Transition. Why: The drawer shrinks closed under the bar, then hides from screen readers and the keyboard once it's gone. How: This animates its height, padding, and divider width, layout properties chosen because the drawer's content has to be revealed rather than scaled, and delays hiding until the shrink ends. */
+	transition     : border-bottom-width var( --dur-tra-p03 ) var( --mot-acc-eas ), max-height var( --dur-tra-p03 ) var( --mot-acc-eas ), padding-block var( --dur-tra-p03 ) var( --mot-acc-eas ), visibility 0s linear var( --dur-tra-p03 ); /* Duration Transition Base Plus 3 ~= 366.9ms, Motion Accelerate Easing = cubic-bezier( .4, 0, 1, 1 ) */ /* What: Drawer Close Transition. Why: The drawer shrinks closed under the bar, speeding up as it leaves, then hides from screen readers and the keyboard once it's gone. How: This animates its height, padding, and divider width, layout properties chosen because the drawer's content has to be revealed rather than scaled, and delays hiding until the shrink ends. */
 	visibility     : hidden;
 
 
@@ -616,7 +680,7 @@
 .navDraDiv[data-drawer-menu-open] .draLinAnc { /* What: Entering Drawer Link Anchor. Why: The rows should arrive one after another as the drawer opens. How: This plays the entrance, delayed by one stagger step per row above it, with one extra step so the drawer has started opening first. */
 
 
-	animation : drawerItemOpenFadeIn var( --dur-ani-p02 ) var( --mot-dec-eas ) calc( var( --dur-ani-m03 ) * ( var( --dra-ite-ind ) + 1 ) ) both; /* Duration Animation Base Plus 2 ~= 277.0ms, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ), Duration Animation Base Minus 3 ~= 67.9ms, Drawer Item Index, set on each drawer item by its own style attribute */
+	animation : menuItemOpenFadeIn var( --dur-ani-p02 ) var( --mot-dec-eas ) calc( var( --dur-ani-m03 ) * ( var( --dra-ite-ind ) + 1 ) ) both; /* Duration Animation Base Plus 2 ~= 277.0ms, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ), Duration Animation Base Minus 3 ~= 67.9ms, Drawer Item Index, set on each drawer item by its own style attribute */
 
 
 }
@@ -633,7 +697,7 @@
 
 
 }
-@keyframes drawerItemOpenFadeIn { /* What: Drawer Item Open Fade In. Why: Each drawer row rises and fades in as the drawer opens. How: This moves from a small rhythm step below and transparent to its place, fully shown. */
+@keyframes menuItemOpenFadeIn { /* What: Menu Item Open Fade In. Why: Each drawer row rises and fades in as the drawer opens. How: This moves from a small rhythm step below and transparent to its place, fully shown. */
 
 
 	from {
@@ -665,7 +729,7 @@
 	font-size            : var( --fon-siz-bas );                   /* Font Size Base = 11px */
 	font-variant-numeric : tabular-nums;
 	font-weight          : 500;
-	letter-spacing       : calc( var( --cdn-pow-006-rec ) * 1em ); /* Core-Design-Number to the Power of 6 Reciprocal ~= 0.185 */
+	letter-spacing       : calc( var( --cdn-pow-006-rec ) * 1em ); /* Core-Design-Number to the Power of 6 Reciprocal ~= 0.185em */
 
 
 }
@@ -694,10 +758,10 @@
 
 
 }
-@media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Drawer Label Span. Why: Someone who asked for less motion shouldn't see it move. How: This applies only when the reduced-motion preference is set. */
+@media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Drawer Label Span. Why: Someone who asked for less motion shouldn't see the label fade. How: This applies only when the reduced-motion preference is set. */
 
 
-	.draLabSpa { /* What: Motionless Drawer Label Span. Why: The press and focus changes should appear at once. How: This turns the transition off. */
+	.draLabSpa { /* What: Motionless Drawer Label Span. Why: The hover and press changes should appear at once. How: This turns the transition off. */
 
 
 		transition : none;
@@ -708,9 +772,10 @@
 
 }
 
+/* What: Arrow Icon Span Pointer. Why: The drawer row's arrow shares the arrow class. How: Its rule is written once in the navEstAnc region. */
 .draLinAnc:hover .arrIcoSpa,
 .draLinAnc:active .arrIcoSpa,
-.draLinAnc:focus-visible .arrIcoSpa { /* What: Hovered Drawer Arrow Icon Span. Why: The arrow points the visitor onward when its row is hovered, pressed, or focused. How: This nudges it right by a few pixels, kept literal since no spacing step lands within 10% of the 4px nudge. */
+.draLinAnc:focus-visible .arrIcoSpa { /* What: Hovered Arrow Icon Span In Drawer Link. Why: The arrow points the visitor onward when its row is hovered, pressed, or focused. How: This nudges it right by a few pixels, kept literal since no spacing step lands within 10% of the 4px nudge. */
 
 
 	transform : translateX( 4px );
@@ -734,10 +799,10 @@
 
 
 }
-.navDraDiv[data-drawer-menu-open] .draConDiv { /* What: Entering Drawer Contact Div. Why: The contact block should arrive after the last row. How: This plays the drawer's entrance, delayed by one stagger step per row above it, with one extra step so the drawer has started opening first. */
+.navDraDiv[data-drawer-menu-open] .draConDiv { /* What: Entering Drawer Contact Div. Why: The contact block should arrive after the last row. How: This plays the rows' entrance, delayed by one stagger step per row above it, with one extra step so the drawer has started opening first. */
 
 
-	animation : drawerItemOpenFadeIn var( --dur-ani-p02 ) var( --mot-dec-eas ) calc( var( --dur-ani-m03 ) * ( var( --dra-ite-ind ) + 1 ) ) both; /* Duration Animation Base Plus 2 ~= 277.0ms, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ), Duration Animation Base Minus 3 ~= 67.9ms, Drawer Item Index, set on each drawer item by its own style attribute */
+	animation : menuItemOpenFadeIn var( --dur-ani-p02 ) var( --mot-dec-eas ) calc( var( --dur-ani-m03 ) * ( var( --dra-ite-ind ) + 1 ) ) both; /* Duration Animation Base Plus 2 ~= 277.0ms, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ), Duration Animation Base Minus 3 ~= 67.9ms, Drawer Item Index, set on each drawer item by its own style attribute */
 
 
 }
@@ -765,7 +830,7 @@
 	font-size      : var( --fon-siz-bas );                   /* Font Size Base = 11px */
 	font-weight    : 500;
 	gap            : var( --spa-hor-m01 );                   /* Spacing Horizontal Base Minus 1 = 11px */
-	letter-spacing : calc( var( --cdn-pow-006-rec ) * 1em ); /* Core-Design-Number to the Power of 6 Reciprocal ~= 0.185 */
+	letter-spacing : calc( var( --cdn-pow-006-rec ) * 1em ); /* Core-Design-Number to the Power of 6 Reciprocal ~= 0.185em */
 	text-transform : uppercase;
 
 
@@ -805,10 +870,10 @@
 
 
 }
-@media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Drawer Phone Anchor. Why: Someone who asked for less motion shouldn't see it move. How: This applies only when the reduced-motion preference is set. */
+@media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Drawer Phone Anchor. Why: Someone who asked for less motion shouldn't see the color fade. How: This applies only when the reduced-motion preference is set. */
 
 
-	.draPhoAnc { /* What: Motionless Drawer Phone Anchor. Why: The press and focus changes should appear at once. How: This turns the transition off. */
+	.draPhoAnc { /* What: Motionless Drawer Phone Anchor. Why: The hover, press, and focus changes should appear at once. How: This turns the transition off. */
 
 
 		transition : none;
@@ -832,7 +897,7 @@
 
 /* #region draEstAnc */
 
-.draEstAnc { /* What: Drawer Estimate Anchor. Why: Requesting an estimate is the site's main action, and the bar's button is hidden on small screens. How: This draws the site's dark pill across the drawer's full width, its height set by its line height alone, centering its label and arrow, lifting and turning accent on hover. */
+.draEstAnc { /* What: Drawer Estimate Anchor. Why: Requesting an estimate is the site's main action, and the bar's button is hidden at 880px wide and below. How: This draws the site's dark pill across the drawer's full width, its height set by its line height alone, centering its label and arrow, lifting and turning accent on hover. */
 
 
 	align-items     : center;
@@ -845,7 +910,7 @@
 	font-weight     : 500;
 	gap             : var( --spa-hor-m01 );                   /* Spacing Horizontal Base Minus 1 = 11px */
 	justify-content : center;
-	letter-spacing  : calc( var( --cdn-pow-014-rec ) * 1em ); /* Core-Design-Number to the Power of 14 Reciprocal ~= 0.020 */
+	letter-spacing  : calc( var( --cdn-pow-014-rec ) * 1em ); /* Core-Design-Number to the Power of 14 Reciprocal ~= 0.020em */
 	line-height     : calc( var( --ver-rhy-p04 ) * 1rem );    /* Vertical Rhythm Base Plus 4 ~= 44.876px */
 	margin-top      : var( --spa-ver-m01 );                   /* Spacing Vertical Base Minus 1 = 11px */
 	padding         : 0 var( --spa-hor-p01 );                 /* Spacing Horizontal Base Plus 1 ~= 19.304px */
@@ -883,7 +948,8 @@
 
 }
 
-.draEstAnc:hover .arrIcoSpa { /* What: Hovered Drawer Estimate Arrow Icon Span. Why: The arrow points the visitor onward when the button is hovered. How: This nudges it right by a few pixels, kept literal since no spacing step lands within 10% of the 4px nudge. */
+/* What: Arrow Icon Span Pointer. Why: The drawer estimate button's arrow shares the arrow class. How: Its rule is written once in the navEstAnc region. */
+.draEstAnc:hover .arrIcoSpa { /* What: Hovered Arrow Icon Span In Drawer Estimate. Why: The arrow points the visitor onward when the button is hovered. How: This nudges it right by a few pixels, kept literal since no spacing step lands within 10% of the 4px nudge. */
 
 
 	transform : translateX( 4px );

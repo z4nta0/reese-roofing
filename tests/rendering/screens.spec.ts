@@ -5,7 +5,7 @@
 
 import { expect      } from '@playwright/test';     // What: Expect. Why: Each state passes only when it matches its approved screenshot. How: This compares the page with its baseline.
 import { opeStaFun   } from '../support/states.ts'; // What: Open State Function. Why: Each state is captured settled. How: This loads it and waits for it.
-import { STA_RCD_ARR } from '../support/states.ts'; // What: State Record Array. Why: Every page state gets a baseline. How: This lists them.
+import { STA_REC_ARR } from '../support/states.ts'; // What: State Record Array. Why: Every page state gets a baseline. How: This lists them.
 import { test        } from '@playwright/test';     // What: Test. Why: Each state is its own comparison. How: This declares them.
 
 // #endregion Imports
@@ -41,7 +41,7 @@ import { test        } from '@playwright/test';     // What: Test. Why: Each sta
 
 // #region Constants
 
-const MAX_DIF_NUM = 0; // What: Maximum Difference Number. Why: Each engine renders a state identically from run to run on the machine that captured its baseline, and even a small tolerance can hide a real change, as it once hid the nav links moving. How: This fails a comparison on any differing pixel.
+const MAX_DIF_NUM = 0; // What: Maximum Difference Number. Why: Each engine renders a state identically from run to run on the machine that captured its baseline, and even a small tolerance can hide a real change, as it once hid the nav links moving. How: This allows no differing pixels and no color drift within a pixel, so any change at all fails a comparison.
 
 // #endregion Constants
 
@@ -49,18 +49,28 @@ const MAX_DIF_NUM = 0; // What: Maximum Difference Number. Why: Each engine rend
 
 // #region Module Init
 
-for ( const staRcdObj of STA_RCD_ARR ) { // What: State Test Loop. Why: Every page state has a baseline. How: This declares one comparison per state.
+for ( const staRecObj of STA_REC_ARR ) { // What: State Test Loop. Why: Every page state has a baseline. How: This declares one comparison per state.
 
 
-	test( `${ staRcdObj.ideStr } matches its approved screenshot`, async ( { page : curPagObj } ) => { // What: Screenshot Test. Why: A page should only change how it looks on purpose. How: This opens the state at rest and compares it with its baseline.
+	test( `${ staRecObj.ideStr } matches its approved screenshot`, async ( { page : curPagObj } ) => { // What: Screenshot Test. Why: A page should only change how it looks on purpose. How: This opens the state at rest and compares it with its baseline.
 
 
 		await curPagObj.emulateMedia( { reducedMotion : 'reduce' } ); // What: Reduced Motion Emulation. Why: Entrance animations would otherwise be caught partway. How: This makes the page match prefers-reduced-motion, which turns them off.
 
-		await opeStaFun( curPagObj, staRcdObj ); // What: State Open Call. Why: The state is captured settled. How: This loads and settles it.
+		await opeStaFun( curPagObj, staRecObj ); // What: State Open Call. Why: The state is captured settled. How: This loads and settles it.
 
 
-		await expect( curPagObj ).toHaveScreenshot( `${ staRcdObj.ideStr }.png`, { animations : 'disabled', fullPage : true, mask : [ curPagObj.getByRole( 'contentinfo' ).getByText( /©/ ) ], maxDiffPixelRatio : MAX_DIF_NUM } ); // What: Baseline Comparison Assertion. Why: The state should look exactly as approved. How: This captures the whole page with animations stopped and the copyright year masked, and compares it with the state's baseline.
+		await expect( curPagObj ).toHaveScreenshot( `${ staRecObj.ideStr }.png`, { // What: Baseline Comparison Assertion. Why: The state should look exactly as approved. How: This captures the whole page with animations stopped and the copyright year masked, and compares it with the state's baseline.
+
+
+			animations        : 'disabled',                                                // What: Animations Option. Why: An animation caught partway would differ from run to run. How: This stops every animation before the capture.
+			fullPage          : true,                                                      // What: Full Page Option. Why: Changes below the fold matter as much as those above it. How: This captures the whole scrollable page, not just the viewport.
+			mask              : [ curPagObj.getByRole( 'contentinfo' ).getByText( /©/ ) ], // What: Mask Option. Why: The footer's copyright year changes every January without any real change to the page. How: This covers the footer's copyright line in the capture.
+			maxDiffPixelRatio : MAX_DIF_NUM,                                               // What: Maximum Difference Pixel Ratio Option. Why: Even a small tolerance can hide a real change. How: This passes MAX_DIF_NUM, so any differing pixel fails the comparison.
+			threshold         : MAX_DIF_NUM                                                // What: Threshold Option. Why: Playwright's default lets a pixel's color drift by up to 0.2 before it counts as different, which could hide a subtle change. How: This passes MAX_DIF_NUM, so a pixel counts as different the moment its color changes at all.
+
+
+		} );
 
 
 	} );

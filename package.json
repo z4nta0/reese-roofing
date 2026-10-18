@@ -1,6 +1,6 @@
 {
 	"name": "reese-roofing",
-	"version": "1.3.0",
+	"version": "1.4.0",
 	"private": true,
 	"type": "module",
 	"scripts": {
@@ -12,6 +12,7 @@
 		"test": "playwright test --config tests/playwright.config.ts",
 		"test:accessibility": "playwright test --config tests/playwright.config.ts --project \"accessibility-*\"",
 		"test:interaction": "playwright test --config tests/playwright.config.ts --project \"interaction-*\"",
+		"test:production": "playwright test --config tests/playwright.config.ts --project \"production-*\"",
 		"test:rendering": "playwright test --config tests/playwright.config.ts --project \"rendering-*\"",
 		"test:responsive": "playwright test --config tests/playwright.config.ts --project \"responsive-*\"",
 		"test:seo": "playwright test --config tests/playwright.config.ts --project \"seo-*\"",

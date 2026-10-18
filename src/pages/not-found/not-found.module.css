@@ -19,7 +19,7 @@
 
 /* #region nofPagDiv */
 
-.nofPagDiv { /* What: Not-Found Page Div. Why: The footer should sit at the bottom of the screen on a page this short. How: This stacks the bar, main content, and footer in a column at least the viewport's height. */
+.nofPagDiv { /* What: Not-Found Page Div. Why: The footer should sit at the bottom of the screen on a page this short. How: This stacks the main content and footer in a column at least the viewport's height, under the fixed bar. */
 
 
 	display        : flex;
@@ -39,9 +39,9 @@
 	display         : flex;
 	flex            : 1;
 	flex-direction  : column;
-	gap             : var( --spa-ver-p02 ); /* Spacing Vertical Base Plus 2 ~= 25.572px */
+	gap             : var( --spa-ver-p02 );                                                                          /* Spacing Vertical Base Plus 2 ~= 25.572px */
 	justify-content : center;
-	padding         : calc( var( --sec-ver-pad ) + var( --spa-ver-p04 ) ) clamp( var( --spa-hor-p01 ), var( --hor-rhy-012 ), var( --spa-hor-p03 ) ) var( --sec-ver-pad ); /* Section Vertical Padding, about 78.751px - 138.199px, Spacing Vertical Base Plus 4 ~= 44.876px, Spacing Horizontal Base Plus 1 ~= 19.304px, Horizontal Rhythm 12 ~= 28.278px @ 1,920px width, Spacing Horizontal Base Plus 3 ~= 33.876px */
+	padding         : calc( var( --sec-ver-pad ) + var( --spa-ver-p04 ) ) var( --gut-sid-pad ) var( --sec-ver-pad ); /* Section Vertical Padding, about 78.751px - 138.199px, Spacing Vertical Base Plus 4 ~= 44.876px, Gutter Side Padding, about 19.304px - 44.876px */
 	text-align      : center;
 
 
@@ -57,7 +57,7 @@
 	font-size      : var( --fon-siz-bas );                   /* Font Size Base = 11px */
 	font-weight    : 500;
 	gap            : var( --spa-hor-m01 );                   /* Spacing Horizontal Base Minus 1 = 11px */
-	letter-spacing : calc( var( --cdn-pow-006-rec ) * 1em ); /* Core-Design-Number to the Power of 6 Reciprocal ~= 0.185 */
+	letter-spacing : calc( var( --cdn-pow-006-rec ) * 1em ); /* Core-Design-Number to the Power of 6 Reciprocal ~= 0.185em */
 	text-transform : uppercase;
 
 
@@ -84,13 +84,13 @@
 	font-size               : clamp( var( --fon-siz-p05 ), 8vw, var( --fon-siz-p08 ) ); /* Font Size Base Plus 5 ~= 44.876px, Font Size Base Plus 8 ~= 104.323px */
 	font-variation-settings : 'opsz' 144;
 	font-weight             : 400;
-	letter-spacing          : calc( var( --cdn-pow-013-rec ) * -1em );                  /* Core-Design-Number to the Power of 13 Reciprocal ~= 0.026 */
+	letter-spacing          : calc( var( --cdn-pow-013-rec ) * -1em );                  /* Core-Design-Number to the Power of 13 Reciprocal ~= -0.026em */
 	line-height             : var( --ver-rhy-m01 );                                     /* Vertical Rhythm Base Minus 1 = 1 */
 
 
 }
 
-.titAccEmp { /* What: Title Accent Emphasis. Why: One word in each heading is set apart in color and italic. How: This draws it in the accent, light and italic. */
+.titAccEmp { /* What: Title Accent Emphasis. Why: One word in the page's heading is set apart in color and italic. How: This draws it in the accent, light and italic. */
 
 
 	color       : var( --acc-mai-col ); /* Accent Main Color = #1f4e7a */
@@ -103,7 +103,7 @@
 /* #endregion nofTitHea */
 
 
-.secLedPar { /* What: Section Lede Paragraph. Why: The explanation reads as a short lead paragraph. How: This sets it in the body font, a little larger than body text, at a comfortable measure. */
+.secLedPar { /* What: Section Lede Paragraph. Why: The explanation reads as a short lead paragraph. How: This sets it in the body font, at body size on narrower screens, growing to a step larger on wide ones, at a comfortable measure. */
 
 
 	color       : var( --tex-sec-col );                                       /* Text Secondary Color = #2a3138 */
@@ -119,7 +119,7 @@
 
 /* #region nofActDiv */
 
-.nofActDiv { /* What: Not-Found Actions Div. Why: The page's two ways onward sit together. How: This sets the buttons side by side, centered, wrapping if needed. */
+.nofActDiv { /* What: Not-Found Actions Div. Why: The page's two ways onward sit together. How: This sets the buttons side by side, centered, wrapping onto two lines at about 345px wide and below. */
 
 
 	display         : flex;
@@ -144,7 +144,7 @@
 	font-size      : var( --fon-siz-p01 );                                                        /* Font Size Base Plus 1 ~= 14.572px */
 	font-weight    : 500;
 	gap            : var( --spa-hor-m01 );                                                        /* Spacing Horizontal Base Minus 1 = 11px */
-	letter-spacing : calc( var( --cdn-pow-014-rec ) * 1em );                                      /* Core-Design-Number to the Power of 14 Reciprocal ~= 0.020 */
+	letter-spacing : calc( var( --cdn-pow-014-rec ) * 1em );                                      /* Core-Design-Number to the Power of 14 Reciprocal ~= 0.020em */
 	line-height    : calc( var( --ver-rhy-p04 ) * 1rem );                                         /* Vertical Rhythm Base Plus 4 ~= 44.876px */
 	padding        : 0 clamp( var( --spa-hor-p01 ), var( --hor-rhy-012 ), var( --spa-hor-p03 ) ); /* Spacing Horizontal Base Plus 1 ~= 19.304px, Horizontal Rhythm 12 ~= 28.278px @ 1,920px width, Spacing Horizontal Base Plus 3 ~= 33.876px */
 	transition     : background-color var( --dur-tra-p02 ) var( --mot-dec-eas ), border-color var( --dur-tra-p02 ) var( --mot-dec-eas ), color var( --dur-tra-p02 ) var( --mot-dec-eas ), outline-offset var( --dur-tra-p01 ) var( --mot-dec-eas ), outline-width var( --dur-tra-p01 ) var( --mot-dec-eas ), transform var( --dur-tra-p02 ) var( --mot-dec-eas ); /* Duration Transition Base Plus 2 ~= 277.0ms, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ), Duration Transition Base Plus 1 ~= 209.1ms */
@@ -152,7 +152,7 @@
 
 
 }
-.butBasAnc--primary { /* What: Primary Button Base Anchor. Why: Going home is the page's main action. How: This fills it with ink and paper-colored text. */
+.butBasAnc--primary { /* What: Button Base Anchor Primary. Why: Going home is the page's main action. How: This fills it with ink and paper-colored text. */
 
 
 	background : var( --bac-inv-col ); /* Background Inverse Color = #1a1f24 */
@@ -160,7 +160,7 @@
 
 
 }
-.butBasAnc--primary:hover { /* What: Hovered Primary Button Base Anchor. Why: The button should respond to the pointer. How: This turns it accent and lifts it a pixel. */
+.butBasAnc--primary:hover { /* What: Hovered Button Base Anchor Primary. Why: The button should respond to the pointer. How: This turns it accent and lifts it a pixel. */
 
 
 	background : var( --acc-mai-col ); /* Accent Main Color = #1f4e7a */
@@ -168,7 +168,7 @@
 
 
 }
-.butBasAnc--ghost { /* What: Ghost Button Base Anchor. Why: The estimate button is the page's secondary action. How: This outlines it with no fill. */
+.butBasAnc--ghost { /* What: Button Base Anchor Ghost. Why: The estimate button is the page's secondary action. How: This outlines it with no fill. */
 
 
 	border-color : var( --bor-str-col ); /* Border Strong Color = #1a1f24 @ 0.22 opacity */
@@ -176,12 +176,13 @@
 
 
 }
-.butBasAnc--ghost:hover { /* What: Hovered Ghost Button Base Anchor. Why: The button should respond to the pointer. How: This fills it with ink and turns its text paper-colored. */
+.butBasAnc--ghost:hover { /* What: Hovered Button Base Anchor Ghost. Why: The button should respond to the pointer. How: This fills it with ink and turns its text paper-colored, and lifts it a pixel like the primary button. */
 
 
 	background   : var( --bac-inv-col ); /* Background Inverse Color = #1a1f24 */
 	border-color : var( --bac-inv-col ); /* Background Inverse Color = #1a1f24 */
 	color        : var( --bac-pag-col ); /* Background Page Color = #f5f2ec */
+	transform    : translateY( -1px );
 
 
 }
