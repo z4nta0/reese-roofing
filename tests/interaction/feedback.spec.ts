@@ -21,13 +21,13 @@ import type { Page          } from '@playwright/test'; // What: Page. Why: Every
  *
  * @summary
  * Checks the interaction feedback rule on every page state, in whichever
- * engine the project runs. Every visible link and button has to look
- * different while hovered than at rest, look different again while pressed,
- * and transition its focus ring's outline, and the first keyboard stop has to
- * draw that ring at full width once it has eased in. Under reduced motion
- * every control keeps its hover change but transitions nothing. Real clicks
- * are blocked during the checks, so pressing a link or the drawer's rows
- * never navigates or closes anything mid-check.
+ * engine the project runs. Every visible link and button has to look different
+ * while hovered than at rest, look different again while pressed, have a
+ * transition longer than zero, and transition its focus ring's outline, and
+ * the first keyboard stop has to draw that ring at full width once it has
+ * eased in. Under reduced motion every control keeps its hover change but
+ * transitions nothing. Real clicks are blocked during the checks, so pressing
+ * a link or the drawer's rows never navigates or closes anything mid-check.
  *
  * Sections:
  *  - Constants
@@ -270,7 +270,7 @@ async function feeProFun ( curPagObj : Page, redMotBoo : boolean ) : Promise< st
 
 		const preSigStr = await conCurObj.evaluate( sigEleFun );                                                         // What: Press Signature String. Why: The pressed look is compared with hovered. How: This reads it.
 		const traLisStr = await conCurObj.evaluate( ( conCurEle ) => getComputedStyle( conCurEle ).transitionProperty ); // What: Transition List String. Why: The focus ring's ease depends on the control listing its outline. How: This reads the control's transitioned properties.
-		const traDurStr = await conCurObj.evaluate( ( conCurEle ) => getComputedStyle( conCurEle ).transitionDuration ); // What: Transition Duration String. Why: Reduced motion should leave nothing moving. How: This reads the control's transition durations.
+		const traDurStr = await conCurObj.evaluate( ( conCurEle ) => getComputedStyle( conCurEle ).transitionDuration ); // What: Transition Duration String. Why: Reduced motion should leave nothing moving, while normal motion should ease every change. How: This reads the control's transition durations.
 
 
 		await curPagObj.mouse.up(); // What: Mouse Up Call. Why: The press has to end before the next control. How: This releases the button, whose click the caller has blocked.
@@ -288,6 +288,10 @@ async function feeProFun ( curPagObj : Page, redMotBoo : boolean ) : Promise< st
 		if ( redMotBoo && !/^0s(, 0s)*$/.test( traDurStr ) ) proLisArr.push( `${ conDesStr } still transitions under reduced motion (${ traDurStr })` ); // What: Reduced Motion Check. Why: Asking for less motion should stop every transition. How: This records a control with any duration above zero.
 
 		else if ( !redMotBoo && !traLisStr.includes( 'outline-width' ) ) proLisArr.push( `${ conDesStr } doesn't transition its focus ring` ); // What: Focus Ease Check. Why: The focus ring should ease in rather than snap. How: This records a control whose transition list leaves out the outline.
+
+
+
+		if ( !redMotBoo && /^0s(, 0s)*$/.test( traDurStr ) ) proLisArr.push( `${ conDesStr } has no transition` ); // What: Transition Duration Check. Why: Every hover, press, and focus change should ease rather than snap. How: This records a control whose every transition duration is zero outside reduced motion.
 
 
 	}

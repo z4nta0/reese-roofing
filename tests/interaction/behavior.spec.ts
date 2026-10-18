@@ -19,7 +19,8 @@ import type { Page    } from '@playwright/test'; // What: Page. Why: Every helpe
  *
  * @summary
  * Checks what the site's controls actually do, in whichever engine the project
- * runs. The nav's section links, the Home link, and back to top land on their
+ * runs. The nav's section links, the Home link, the hero's buttons, the
+ * estimate buttons in the bar and the drawer, and back to top land on their
  * targets without leaving a hash in the address, while a Ctrl, Cmd, or middle
  * click on a section link opens the section in a new tab instead; the mobile
  * drawer opens and closes every way it can (the toggle, Escape, a tap on the
@@ -246,6 +247,46 @@ for ( const [ cliKinStr, cliOptObj ] of CLI_KIN_ARR ) { // What: Modified Click 
 
 
 
+for ( const [ butLabStr, secIdeStr ] of [ [ 'Request an estimate', 'contact' ], [ 'Explore services', 'services' ] ] ) { // What: Hero Button Loop. Why: Each of the hero's buttons leads to its own section. How: This declares one test per button, pairing its label with its section's id.
+
+
+	test( `the hero's ${ butLabStr } button scrolls to its section`, async ( { page : curPagObj } ) => { // What: Hero Button Test. Why: A section button has to take the visitor to its section without a hash. How: This clicks the button and checks the section's position and the address.
+
+
+		await opeRouFun( curPagObj, '/', DES_VIE_OBJ ); // What: Home Open Call. Why: The hero opens the home page. How: This opens it at desktop size.
+
+		await curPagObj.getByRole( 'main' ).getByRole( 'link', { name : butLabStr } ).click(); // What: Hero Button Click Call. Why: This is the action under test. How: This clicks the hero's button by its label.
+
+
+		await expect.poll( async () => Math.abs( await secTopFun( curPagObj, secIdeStr ) ) ).toBeLessThan( 2 ); // What: Section Position Assertion. Why: The section should start at the top of the screen. How: This waits until its top edge sits within a pixel of the viewport's top.
+
+		await expect( curPagObj ).toHaveURL( /\/$/ ); // What: Clean Address Assertion. Why: The address bar should stay free of hashes. How: This checks the URL still ends at the root.
+
+
+	} );
+
+
+}
+
+
+
+test( 'the bar\'s estimate button scrolls to the contact section', async ( { page : curPagObj } ) => { // What: Bar Estimate Test. Why: The bar's main action has to reach the form without a hash. How: This clicks the bar's estimate button and checks the section's position and the address.
+
+
+	await opeRouFun( curPagObj, '/', DES_VIE_OBJ ); // What: Home Open Call. Why: The bar's estimate button shows on wide screens. How: This opens the home page at desktop size.
+
+	await curPagObj.getByRole( 'banner' ).getByRole( 'link', { name : 'Get an estimate' } ).click(); // What: Bar Estimate Click Call. Why: This is the action under test. How: This clicks the bar's estimate button.
+
+
+	await expect.poll( async () => Math.abs( await secTopFun( curPagObj, 'contact' ) ) ).toBeLessThan( 2 ); // What: Contact Position Assertion. Why: The visitor should land on the form. How: This waits until the section's top edge sits within a pixel of the viewport's top.
+
+	await expect( curPagObj ).toHaveURL( /\/$/ ); // What: Clean Address Assertion. Why: The address bar should stay free of hashes. How: This checks the URL still ends at the root.
+
+
+} );
+
+
+
 test( 'the Home link returns to the top', async ( { page : curPagObj } ) => { // What: Home Link Test. Why: Home has to bring a scrolled visitor back to the start. How: This scrolls down, clicks Home, and checks the scroll position.
 
 
@@ -371,6 +412,27 @@ test( 'a drawer link closes the drawer and scrolls to its section', async ( { pa
 	await expect( curPagObj.getByRole( 'button', { name : 'Toggle menu' } ) ).toHaveAttribute( 'aria-expanded', 'false' ); // What: Drawer Closed Assertion. Why: The drawer should close once a section is picked. How: This checks the button reports it collapsed.
 
 	await expect.poll( async () => Math.abs( await secTopFun( curPagObj, 'about' ) ) ).toBeLessThan( 2 ); // What: Section Position Assertion. Why: The visitor should land on the section. How: This waits until its top edge sits within a pixel of the viewport's top.
+
+	await expect( curPagObj ).toHaveURL( /\/$/ ); // What: Clean Address Assertion. Why: The address bar should stay free of hashes. How: This checks the URL still ends at the root.
+
+
+} );
+
+
+
+test( 'the drawer\'s estimate button closes the drawer and scrolls to the contact section', async ( { page : curPagObj } ) => { // What: Drawer Estimate Test. Why: On a phone the drawer's estimate button is the main action, and it should both reach the form and get the drawer out of the way. How: This opens the drawer, clicks its estimate button, and checks the drawer, the section, and the address.
+
+
+	await opeRouFun( curPagObj, '/', PHO_VIE_OBJ ); // What: Home Open Call. Why: The drawer exists on small screens. How: This opens the home page at phone size.
+
+	await opeDraFun( curPagObj ); // What: Drawer Open Call. Why: The drawer's estimate button shows only while it's open. How: This opens it.
+
+	await curPagObj.getByRole( 'banner' ).getByRole( 'link', { name : 'Get an estimate' } ).click(); // What: Drawer Estimate Click Call. Why: This is the action under test. How: This clicks the only estimate button visible at phone size, since the bar's own is hidden there.
+
+
+	await expect( curPagObj.getByRole( 'button', { name : 'Toggle menu' } ) ).toHaveAttribute( 'aria-expanded', 'false' ); // What: Drawer Closed Assertion. Why: The drawer should close once the button is used. How: This checks the toggle reports it collapsed.
+
+	await expect.poll( async () => Math.abs( await secTopFun( curPagObj, 'contact' ) ) ).toBeLessThan( 2 ); // What: Contact Position Assertion. Why: The visitor should land on the form. How: This waits until the section's top edge sits within a pixel of the viewport's top.
 
 	await expect( curPagObj ).toHaveURL( /\/$/ ); // What: Clean Address Assertion. Why: The address bar should stay free of hashes. How: This checks the URL still ends at the root.
 
