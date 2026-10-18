@@ -23,7 +23,8 @@ import { test   } from '@playwright/test'; // What: Test. Why: Each route and ea
  * fictional, robots.txt lets search crawlers read the noindex while keeping
  * AI crawlers out, Netlify's _headers sends noindex with every file, and the
  * social preview tags are complete and the image is the 1,200x630 card under
- * 300 KB the tags promise.
+ * 300 KB the tags promise. It also checks _headers sends the security headers
+ * a header checker looks for, since the dev server never applies them.
  *
  * Sections:
  *  - Constants
@@ -38,6 +39,21 @@ import { test   } from '@playwright/test'; // What: Test. Why: Each route and ea
 // #region Constants
 
 const LIV_URL_STR = 'https://reese-roofing.netlify.app/'; // What: Live URL String. Why: The canonical and social tags must name the live address. How: This is the address they're compared with.
+
+
+
+const SEC_HEA_ARR = [ // What: Security Header Array. Why: A header security checker fails the site when any of these is missing. How: Each entry is one header line the site-wide rule must send, matched from its name up to the value that matters.
+
+
+	/\tContent-Security-Policy: default-src 'self';/,     // What: Content Security Policy Pattern. Why: The page should only load what the site itself serves. How: This checks the policy falls back to the site's own origin.
+	/\tPermissions-Policy: accelerometer=\(\)/,           // What: Permissions Policy Pattern. Why: Browser features the site never uses should stay off. How: This checks the policy opens with its first disabled feature.
+	/\tReferrer-Policy: strict-origin-when-cross-origin/, // What: Referrer Policy Pattern. Why: Other sites should see only where a visit came from, never the full address. How: This checks the policy.
+	/\tStrict-Transport-Security: max-age=63072000/,      // What: Strict Transport Security Pattern. Why: Browsers should never fall back to plain HTTP. How: This checks the two-year HTTPS rule.
+	/\tX-Content-Type-Options: nosniff/,                  // What: Content Type Options Pattern. Why: Browsers shouldn't guess a file's type. How: This checks the nosniff rule.
+	/\tX-Frame-Options: DENY/                             // What: Frame Options Pattern. Why: No other site should frame this one. How: This checks the deny rule, which older browsers read in place of frame-ancestors.
+
+
+];
 
 
 
@@ -139,6 +155,19 @@ test( 'robots.txt and _headers keep the demo out of search', async ( { page : cu
 	expect( robTexStr ).toMatch( /User-agent: GPTBot\n[\s\S]*?Disallow: \// ); // What: AI Crawlers Assertion. Why: AI training crawlers shouldn't learn the fictional company. How: This checks a named AI crawler's group disallows the site.
 	expect( robTexStr ).not.toMatch( /Sitemap:/i );                            // What: No Sitemap Assertion. Why: A site kept out of search has nothing to list. How: This checks robots.txt names no sitemap.
 	expect( heaTexStr ).toMatch( /\/\*\n\tX-Robots-Tag: noindex/ );            // What: Robots Header Assertion. Why: Every file, the preview image included, should carry noindex. How: This checks the site-wide header rule.
+
+
+} );
+
+
+
+test( '_headers hardens every response', async ( { page : curPagObj } ) => { // What: Security Headers Test. Why: Every response should carry the security headers a checker looks for. How: This reads _headers from the dev server and checks each header line.
+
+
+	const heaTexStr = await ( await curPagObj.request.get( '/_headers' ) ).text(); // What: Headers Text String. Why: Netlify reads its header rules from this file, and the dev server doesn't apply them. How: This fetches the file itself.
+
+
+	for ( const heaPatObj of SEC_HEA_ARR ) expect( heaTexStr ).toMatch( heaPatObj ); // What: Header Line Assertion Loop. Why: Each missing header is its own failure. How: This checks every pattern against the file.
 
 
 } );

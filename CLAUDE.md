@@ -37,6 +37,14 @@ isn't a real business, so it gets the demo treatment rather than local SEO:
   created by techgeek.support. Never `LocalBusiness`, an address, or a phone.
 - **Placeholders stay reserved**: the phone is a 555-01xx number and the
   email an `.example` domain.
+- **Security headers** (added 2026-10-17): `public/_headers` also sends the
+  same hardening block as the sibling sites (a strict Content-Security-Policy,
+  HSTS, nosniff, a framing deny, and the referrer and permissions policies),
+  which a header checker found missing. Its CSP allows `data:` images, since
+  Vite inlines the small logo SVGs as data URIs and the select arrow is one;
+  form-action is `'none'`, since the form only opens a mailto link. Checked
+  with the built site served under the policy in all three engines, with no
+  violations.
 - **Checked by** `npm run test:seo`. No off-site work (Business Profile,
   listings, reviews) applies.
 
@@ -133,7 +141,8 @@ suite reads the head of each route instead.
   flex row.
 - `npm run test:seo`: checks each route's title, description, robots,
   canonical, social tags, and structured data, the footer's demo line,
-  `robots.txt`, `_headers`, and the preview image's size.
+  `robots.txt`, `_headers` (its robots rule and every security header), and
+  the preview image's size.
 - `npm test` runs every suite.
 
 Next (planned 2026-10-07):

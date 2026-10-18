@@ -14,6 +14,10 @@ Since the company isn't real, the site is set up to stay out of search results a
 
 `npm run test:seo` checks all of this in Chromium, Firefox, and WebKit.
 
+## Security headers
+
+`public/_headers` also sends the hardening headers a header security checker looks for on every response: a strict Content-Security-Policy (the site loads only its own files, plus `data:` images for the inlined logos and the form's select arrow), HSTS, `nosniff`, a deny on framing, a Referrer-Policy that shows linked sites only this site's origin, and a Permissions-Policy that turns off every browser feature the site doesn't use. Netlify applies them, so they only show up on the live site; `npm run test:seo` checks the file sends each one.
+
 The preview card is drawn from the site's own logo and fonts by `design/og-image/card.html` and captured by `npm run og-image`, which writes `public/og-image.png` and fails if it reaches WhatsApp's 300 KB limit. Everything on it sits inside the center square, since some apps crop previews to one. Apps cache previews for a long time, so a changed card should get a new filename, with the `og:image` and `twitter:image` tags updated to match.
 
 ## Stack
@@ -49,7 +53,7 @@ npm run test:accessibility  # axe-core plus scripted keyboard, naming, reflow, a
 npm run test:interaction    # hover, press, and focus feedback on every control, plus navigation, the drawer, the form, and the 404 page
 npm run test:rendering      # full-page screenshots of each page state against approved baselines
 npm run test:responsive     # both pages and the drawer from 320 to 1,920px: no sideways scroll, spill, or overlap
-npm run test:seo            # head tags, structured data, robots.txt, _headers, and the preview image
+npm run test:seo            # head tags, structured data, robots.txt, _headers (robots and security), and the preview image
 ```
 
 Each suite runs in Chromium, Firefox, and WebKit against its own dev server on port 5191, so a dev server already running on 5173 is left alone. Reports land in `tests/output/` (git-ignored); `npx playwright show-report tests/output/report` opens the HTML report. The rendering suite's approved screenshots live in `tests/rendering/baselines/` and match to the pixel, so after a change meant to alter how a page looks, review the diff in the report, then run `npm run test:rendering -- --update-snapshots` and commit the new baselines with the change. The baselines were captured on Linux, and font rendering differs between systems, so on macOS or Windows refresh them locally before relying on the comparison. If a browser is missing, `npx playwright install chromium firefox webkit` installs all three.
@@ -101,7 +105,7 @@ design/
 
 ## Customization checklist
 
-If this design is ever reused for a real business, update the placeholders below, and swap the demo SEO for real local SEO: remove the `noindex` meta tag, `public/_headers` rule, and AI crawler block, add a sitemap, replace the `WebSite` JSON-LD with `LocalBusiness` (`RoofingContractor`) data matching the real details, rewrite the title, description, social tags, and preview card, and drop the footer's demo line.
+If this design is ever reused for a real business, update the placeholders below, and swap the demo SEO for real local SEO: remove the `noindex` meta tag, the `X-Robots-Tag` rule in `public/_headers`, and AI crawler block, add a sitemap, replace the `WebSite` JSON-LD with `LocalBusiness` (`RoofingContractor`) data matching the real details, rewrite the title, description, social tags, and preview card, and drop the footer's demo line.
 
 - **Phone number:** `(785) 555-0199`. Search the repo for it; it appears in the Nav (bar and drawer) and the Contact section
 - **Email:** `hello@reeseroofing.example`. Same; it appears in the Contact section's contact details and in the mailto link the form opens on submit (`subForFun` in `src/pages/home/contact.tsx`)
