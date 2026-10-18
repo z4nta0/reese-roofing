@@ -187,13 +187,14 @@
 
 
 
-.aboStoPar { /* What: About Story Paragraph. Why: The story's paragraphs read comfortably in soft body text. How: This sets their size, leading, and spacing. */
+.aboStoPar { /* What: About Story Paragraph. Why: The story's paragraphs read comfortably in soft body text. How: This sets their size, leading, and spacing, capped at the paragraph measure. */
 
 
 	color         : var( --tex-sec-col ); /* Text Secondary Color = #2a3138 */
 	font-size     : var( --fon-siz-p01 ); /* Font Size Base Plus 1 ~= 14.572px */
 	line-height   : var( --ver-rhy-p01 ); /* Vertical Rhythm Base Plus 1 ~= 1.755 */
 	margin-bottom : var( --spa-ver-p02 ); /* Spacing Vertical Base Plus 2 ~= 25.572px */
+	max-width     : var( --tex-wid-bas ); /* Text Width Base Maximum ~= 29.207em */
 
 
 }
@@ -256,7 +257,7 @@
 
 }
 
-.aboQuoPar { /* What: About Quote Paragraph. Why: The quote itself reads as large display italic. How: This sets it in the display font, indented past the quote mark. */
+.aboQuoPar { /* What: About Quote Paragraph. Why: The quote itself reads as large display italic. How: This sets it in the display font, indented past the quote mark, capped at the paragraph measure. */
 
 
 	color         : var( --tex-mai-col ); /* Text Main Color = #1a1f24 */
@@ -266,6 +267,7 @@
 	font-weight   : 400;
 	line-height   : var( --ver-rhy-bas ); /* Vertical Rhythm Base ~= 1.325 */
 	margin-bottom : var( --spa-ver-bas ); /* Spacing Vertical Base ~= 14.572px */
+	max-width     : var( --tex-wid-bas ); /* Text Width Base Maximum ~= 29.207em */
 	padding-left  : var( --spa-hor-p04 ); /* Spacing Horizontal Base Plus 4 ~= 44.876px */
 
 

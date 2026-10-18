@@ -197,12 +197,13 @@
 
 /* #region rowValDet */
 
-.rowValDet { /* What: Row Value Details. Why: Each row's value reads clearly on the dark band. How: This sets it in nearly full paper. */
+.rowValDet { /* What: Row Value Details. Why: Each row's value reads clearly on the dark band. How: This sets it in nearly full paper, capped at the paragraph measure. */
 
 
 	color       : oklch( from var( --bac-pag-col ) l c h / 0.9 ); /* Background Page Color = #f5f2ec @ 0.9 opacity */
 	font-size   : var( --fon-siz-p01 );                           /* Font Size Base Plus 1 ~= 14.572px */
 	line-height : var( --ver-rhy-p01 );                           /* Vertical Rhythm Base Plus 1 ~= 1.755 */
+	max-width   : var( --tex-wid-bas );                           /* Text Width Base Maximum ~= 29.207em */
 
 
 }
@@ -474,7 +475,7 @@
 
 /* #region forFieDiv */
 
-/* What: Form Field Div Pointer. Why: The email and phone fields share the form field class. How: Its rule is written once in the estReqFor region. */
+/* What: Form Field Div Pointer. Why: The email and phone fields share the form field class. How: Its rule is written once in the first forFieDiv region, directly under estReqFor. */
 
 /* #endregion forFieDiv */
 
@@ -612,12 +613,13 @@
 /* #endregion forSubBut */
 
 
-.forFinPar { /* What: Form Fine Paragraph. Why: The consent note should read as a quiet footnote to the form. How: This sets it small and faded. */
+.forFinPar { /* What: Form Fine Paragraph. Why: The consent note should read as a quiet footnote to the form. How: This sets it small and faded, capped at the small text measure. */
 
 
 	color       : oklch( from var( --bac-pag-col ) l c h / var( --cdn-pow-002-rec ) ); /* Background Page Color = #f5f2ec, Core-Design-Number to the Power of 2 Reciprocal ~= 0.570 */
 	font-size   : var( --fon-siz-bas );                                                /* Font Size Base = 11px */
 	line-height : var( --ver-rhy-bas );                                                /* Vertical Rhythm Base ~= 1.325 */
+	max-width   : var( --tex-wid-sma );                                                /* Text Width Small Maximum ~= 22.047em */
 
 
 }

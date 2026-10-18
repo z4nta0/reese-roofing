@@ -295,13 +295,14 @@
 /* #endregion carHeaDiv */
 
 
-.carDesPar { /* What: Card Description Paragraph. Why: The card's sentence sits under its head. How: This sets it in soft body text with room below. */
+.carDesPar { /* What: Card Description Paragraph. Why: The card's sentence sits under its head. How: This sets it in soft body text with room below, capped at the paragraph measure. */
 
 
 	color         : var( --tex-sec-col ); /* Text Secondary Color = #2a3138 */
 	font-size     : var( --fon-siz-p01 ); /* Font Size Base Plus 1 ~= 14.572px */
 	line-height   : var( --ver-rhy-p01 ); /* Vertical Rhythm Base Plus 1 ~= 1.755 */
 	margin-bottom : var( --spa-ver-p02 ); /* Spacing Vertical Base Plus 2 ~= 25.572px */
+	max-width     : var( --tex-wid-bas ); /* Text Width Base Maximum ~= 29.207em */
 
 
 }
