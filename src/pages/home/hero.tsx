@@ -142,7 +142,7 @@ function HerSecCom () : React.JSX.Element {
 
 						<span className={ cssModObj.eyeLabSpa }>Lawrence, Kansas · Est. 2008</span>{ /* What: Eyebrow Label Span Element. Why: Visitors should see where the company works and how long it's been there. How: This is the hero's location label, set in the site's eyebrow style. */ }
 
-						<h1 className={ cssModObj.herTitHea }>{ /* What: Hero Title Heading Element. Why: The headline is the page's main heading. How: Its line breaks set the three-line shape, with one word in italic. */ }
+						<h1 className={ cssModObj.herTitHea }>{ /* What: Hero Title Heading Element. Why: The headline is the page's main heading. How: Its line breaks start each new line, so it reads as three lines wherever the first one fits, with one word in italic. */ }
 							Commercial roofing,<br />
 							built to <em className={ cssModObj.titAccEmp }>weather</em><br />
 							every season.

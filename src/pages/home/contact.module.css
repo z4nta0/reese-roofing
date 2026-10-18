@@ -303,7 +303,7 @@
 
 /* #region conForDiv */
 
-.conForDiv { /* What: Contact Form Div. Why: The form sits in a faint frame on the dark band. How: This draws a barely lighter panel with a faint border, its side padding scaling with the viewport between two spacing steps. */
+.conForDiv { /* What: Contact Form Div. Why: The form sits in a faint frame on the dark band. How: This draws a barely lighter panel with a faint border, its padding scaling with the viewport, each direction between two spacing steps. */
 
 
 	background    : oklch( from var( --bac-pag-col ) l c h / 0.04 );                                                                                    /* Background Page Color = #f5f2ec @ 0.04 opacity */

@@ -201,7 +201,7 @@
 
 /* #region herTitHea */
 
-.herTitHea { /* What: Hero Title Heading. Why: The headline is the page's largest type. How: This sets it in the display font at its largest optical size, scaling with the viewport between two font size steps, with no width cap since its line breaks set its shape. */
+.herTitHea { /* What: Hero Title Heading. Why: The headline is the page's largest type. How: This sets it in the display font at its largest optical size, scaling with the viewport between two font size steps, with no width cap, its line breaks starting each new line, though a long first line still wraps in the two-column layout and on the narrowest phones. */
 
 
 	color                   : var( --tex-mai-col );                                       /* Text Main Color = #1a1f24 */

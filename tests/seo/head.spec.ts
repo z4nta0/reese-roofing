@@ -117,7 +117,7 @@ const SOC_KEY_ARR = [ // What: Social Key Array. Why: The social preview rule li
 for ( const rouRecObj of ROU_REC_ARR ) { // What: Route Test Loop. Why: Every route gets the same head checks. How: This declares one test per route.
 
 
-	test( `${ rouRecObj.patStr } has a demo-only head`, async ( { page : curPagObj } ) => { // What: Head Test. Why: Every route has to describe itself honestly and stay out of search. How: This loads the route and checks its title, meta tags, structured data, and footer.
+	test( `${ rouRecObj.patStr } has a demo-only head and footer`, async ( { page : curPagObj } ) => { // What: Head Test. Why: Every route has to describe itself honestly and stay out of search. How: This loads the route and checks its title, meta tags, structured data, and footer.
 
 
 		await curPagObj.goto( rouRecObj.patStr ); // What: Route Load Call. Why: The head is read as a browser builds it. How: This opens the route on the suite's dev server.
@@ -173,7 +173,7 @@ test( 'the raw page carries the home title and description', async ( { page : cu
 
 
 
-test( 'robots.txt and _headers keep the demo out of search', async ( { page : curPagObj } ) => { // What: Crawler Files Test. Why: The page's own noindex only works when crawlers can read it, and AI crawlers should stay away. How: This reads both files from the dev server and checks their rules.
+test( 'robots.txt and _headers keep the demo out of search and away from AI crawlers', async ( { page : curPagObj } ) => { // What: Crawler Files Test. Why: The page's own noindex only works when crawlers can read it, and AI crawlers should stay away. How: This reads both files from the dev server and checks their rules.
 
 
 	const robTexStr = await ( await curPagObj.request.get( '/robots.txt' ) ).text(); // What: Robots Text String. Why: Crawlers read robots.txt before the page. How: This fetches it.

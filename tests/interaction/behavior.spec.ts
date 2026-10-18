@@ -3,7 +3,7 @@
 
 // #region Imports
 
-import { expect } from '@playwright/test'; // What: Expect. Why: Each behavior passes only when the page ends up where it should. How: This asserts on URLs, attributes, focus, and positions.
+import { expect } from '@playwright/test'; // What: Expect. Why: Each behavior passes only when the page ends up where it should. How: This asserts on URLs, titles, text, attributes, focus, visibility, and positions.
 import { test   } from '@playwright/test'; // What: Test. Why: Each behavior is its own test. How: This declares them.
 
 
