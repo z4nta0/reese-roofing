@@ -272,7 +272,7 @@ function NavBarCom () : React.JSX.Element {
 					>{ /* What: Navigation Links Nav Element. Why: The section links form the site's primary navigation landmark. How: This lists a link for each row of NAV_LIN_ARR, and hides at 880px wide and below, where the drawer repeats the links. */ }
 
 
-						{ NAV_LIN_ARR.map( ( navLinObj ) => ( // What: Nav Link Map. Why: The bar lists every section link. How: This renders an anchor for each row.
+						{ NAV_LIN_ARR.map( ( navLinObj ) => ( // What: Nav Link Map. Why: The bar lists every section link. How: This renders an anchor for each row of NAV_LIN_ARR.
 
 
 							<a
@@ -356,7 +356,7 @@ function NavBarCom () : React.JSX.Element {
 				>{ /* What: Navigation Drawer Div Element. Why: At 880px wide and below the links, the phone number, and the estimate button show in a drawer below the bar. How: This holds the links and the contact block, and opens while draOpeBoo is true. */ }
 
 
-					{ NAV_LIN_ARR.map( ( navLinObj, linIndNum ) => ( // What: Drawer Link Map. Why: The drawer repeats every section link, numbered like the sections. How: This renders one numbered anchor per row, handing each its position for the staggered entrance.
+					{ NAV_LIN_ARR.map( ( navLinObj, linIndNum ) => ( // What: Drawer Link Map. Why: The drawer repeats every section link, numbered like the sections. How: This renders a numbered anchor for each row of NAV_LIN_ARR, handing each its position for the staggered entrance.
 
 
 						<a

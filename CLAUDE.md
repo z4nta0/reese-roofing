@@ -139,8 +139,9 @@ screenshots, and traces go to `tests/output/` (git-ignored); `npx playwright
 show-report tests/output/report` opens the HTML report. The states each suite
 visits (both pages at 390px and 1,440px, plus the open drawer) are listed in
 `tests/support/states.ts`; the responsive suite opens its own widths through
-the same helper, and the seo suite reads the head of each route instead, while
-the production suite opens its own pages on a build it serves itself.
+the same helper, the behavior spec opens its own pages and sizes, and the seo
+suite reads the head of each route instead, while the production suite opens
+its own pages on a build it serves itself.
 - `npm run test:accessibility`: the pre-commit accessibility scan. axe-core
   checks each state against WCAG 2.2 A and AA plus best practices
   (`axe.spec.ts`), and scripted checks (`scripted.spec.ts`) cover link and

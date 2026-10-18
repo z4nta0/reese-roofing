@@ -54,7 +54,7 @@ import lofSvgUrl from './logo-full.svg';    // What: Logo-Full SVG URL. Why: The
  *
 */
 
-const PRI_REC_ARR = [ // What: Principle Record Array. Why: The principles are data, not markup, so a principle changes in one place. How: AboSecCom maps over it, numbering each row by its position.
+const PRI_REC_ARR = [ // What: Principle Record Array. Why: The principles are data, not markup, so a principle changes in one place. How: AboSecCom maps over it, numbering each principle by its position.
 
 
 	{ bodStr : 'Every project is led by an owner-operator who walks the roof, signs the proposal, and stays reachable from kickoff to close-out.',      titStr : 'Local, accountable, on-site' }, // What: Local Principle Row. Why: Clients want one accountable person. How: This is principle 01.
@@ -204,7 +204,7 @@ function AboSecCom () : React.JSX.Element {
 				<div className={ cssModObj.aboPriDiv }>{ /* What: About Principles Div Element. Why: The company's four principles read best side by side where there's room. How: This lays out a block for each row of PRI_REC_ARR, four across, two across at 960px wide and below, and one at 540px and below. */ }
 
 
-					{ PRI_REC_ARR.map( ( priRecObj, priIndNum ) => ( // What: Principle Map. Why: Every principle gets its own block. How: This renders a block for each row, passing along its position for numbering.
+					{ PRI_REC_ARR.map( ( priRecObj, priIndNum ) => ( // What: Principle Map. Why: Every principle gets its own block. How: This renders a block for each row of PRI_REC_ARR, passing along its position for numbering.
 
 
 						<div

@@ -104,11 +104,12 @@ const LAY_CAS_ARR : LayCasTyp[] = [ // What: Layout Case Array. Why: Every page 
  * elements are skipped, since they have no box width of their own. Two
  * reachable controls (links and buttons that are visible, in the tab order,
  * and not inside inert content) overlap when their boxes share more than a
- * pixel of area and neither holds the other. A grid of cards (three or more
- * visible children sharing one class) leaves uneven rows when its rows hold
- * different counts, unless the last row is a single card centered in the grid
- * at the others' width, as the Card Grids rule allows. Passed to Playwright's
- * evaluate, so it can't read anything from this file.
+ * pixel of area and neither holds the other. A grid of cards (an element
+ * displayed as a grid, with three or more visible children sharing one class)
+ * leaves uneven rows when its rows hold different counts, unless the last row
+ * is a single card centered in the grid at the others' width, as the Card
+ * Grids rule allows. Passed to Playwright's evaluate, so it can't read
+ * anything from this file.
  *
  * @author z4nta0 <https://github.com/z4nta0>
  *
