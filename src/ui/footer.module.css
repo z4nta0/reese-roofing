@@ -212,7 +212,7 @@
 
 /* #region fooTopAnc */
 
-.fooTopAnc { /* What: Footer Top Anchor. Why: The back-to-top link is a quiet secondary action. How: This sets it at body size with its arrow beside it, brightening on hover. */
+.fooTopAnc { /* What: Footer Top Anchor. Why: The back-to-top link is a quiet secondary action. How: This sets it at body size with its arrow beside it, turning the soft accent on hover. */
 
 
 	align-items : center;

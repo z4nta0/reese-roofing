@@ -323,7 +323,7 @@ for ( const layCasObj of LAY_CAS_ARR ) { // What: Case Loop. Why: Every page and
 			} );
 
 
-			expect( await curPagObj.evaluate( layProFun ) ).toEqual( [] ); // What: No Layout Problems Assertion. Why: The width passes only with nothing spilling or overlapping. How: This compares the problems with an empty list, so a failure prints each one.
+			expect( await curPagObj.evaluate( layProFun ) ).toEqual( [] ); // What: No Layout Problems Assertion. Why: The width passes only with nothing spilling or overlapping and every card grid's rows even. How: This compares the problems with an empty list, so a failure prints each one.
 
 
 		} );

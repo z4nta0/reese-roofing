@@ -378,7 +378,7 @@ function NavBarCom () : React.JSX.Element {
 								className={ cssModObj.arrIcoSpa }
 
 								aria-hidden='true'
-							>{ /* What: Arrow Icon Span Element. Why: The arrow marks the row as moving the visitor onward. How: This sits at the row's far end and slides when the row is hovered or pressed, hidden from screen readers since it only decorates the label. */ }
+							>{ /* What: Arrow Icon Span Element. Why: The arrow marks the row as moving the visitor onward. How: This sits at the row's far end and slides when the row is hovered, pressed, or focused, hidden from screen readers since it only decorates the label. */ }
 								→
 							</span>
 
@@ -407,7 +407,7 @@ function NavBarCom () : React.JSX.Element {
 							(785) 555-0199
 						</a>
 
-						<p className={ cssModObj.draHouPar }>Mon–Fri, 7:00 AM – 5:00 PM · 24/7 emergency response</p>{ /* What: Drawer Hours Paragraph Element. Why: Visitors want to know when someone will answer. How: This repeats the contact section's hours on one line. */ }
+						<p className={ cssModObj.draHouPar }>Mon–Fri, 7:00 AM – 5:00 PM · 24/7 emergency response</p>{ /* What: Drawer Hours Paragraph Element. Why: Visitors want to know when someone will answer. How: This repeats the contact section's hours in one paragraph, joined by a dot. */ }
 
 						<a
 							className={ cssModObj.draEstAnc }
