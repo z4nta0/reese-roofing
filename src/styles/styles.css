@@ -495,7 +495,7 @@ select,
 textarea { /* What: Focusable Controls. Why: Tabbing to a control scrolls it into view, and without room for the fixed bar it can stop right under the bar, hidden while focused. How: This keeps a scroll margin above every control, so the browser stops scrolling with the control below the bar. */
 
 
-	scroll-margin-top : var( --spa-ver-p06 ); /* Spacing Vertical Base Plus 6 ~= 78.751px */ /* What: Bar Clearance Margin. Why: The scrolled bar is about 69.9px tall on wide screens and 56.9px on phones. How: This is the smallest spacing step taller than both, leaving a little room below the bar. */
+	scroll-margin-top : var( --spa-ver-p06 ); /* Spacing Vertical Base Plus 6 ~= 78.751px */ /* What: Bar Clearance Margin. Why: The scrolled bar is about 69.9px tall above 880px wide and 56.9px at 880px and below. How: This is the smallest spacing step taller than both, leaving a little room below the bar. */
 
 
 }

@@ -20,7 +20,7 @@
 
 
 
-.navSciDiv { /* What: Navigation Scrim Div. Why: The open drawer should stand apart from a dimmed page, and the page should only dim on screens that have the drawer. How: This covers the viewport in the scrim color at the bar's stack level, hidden by default and shown below 880px, fading in while the drawer is open and out, speeding up, as it closes. */
+.navSciDiv { /* What: Navigation Scrim Div. Why: The open drawer should stand apart from a dimmed page, and the page should only dim on screens that have the drawer. How: This covers the viewport in the scrim color at the bar's stack level, hidden by default and shown at 880px wide and below, fading in while the drawer is open and out, speeding up, as it closes. */
 
 
 	background : oklch( from var( --scr-mai-col ) l c h / var( --cdn-pow-003-rec ) );                          /* Scrim Main Color = #1a1f24, Core-Design-Number to the Power of 3 Reciprocal ~= 0.430 */
