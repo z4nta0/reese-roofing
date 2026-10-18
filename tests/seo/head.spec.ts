@@ -70,15 +70,15 @@ const ROU_REC_ARR = [ // What: Route Record Array. Why: Each route has its own t
 
 
 
-const SEC_HEA_ARR = [ // What: Security Header Array. Why: A header security checker fails the site when any of these is missing. How: Each entry is one header line the site-wide rule must send, matched from its name up to the value that matters.
+const SEC_HEA_ARR = [ // What: Security Header Array. Why: A header security checker fails the site when any of these is missing. How: Each entry is one header line the site-wide rule must send, matched from its name up to the value that matters, or in full where an added value could weaken it.
 
 
-	/\tContent-Security-Policy: default-src 'self';/,     // What: Content Security Policy Pattern. Why: The page should only load what the site itself serves. How: This checks the policy falls back to the site's own origin.
-	/\tPermissions-Policy: accelerometer=\(\)/,           // What: Permissions Policy Pattern. Why: Browser features the site never uses should stay off. How: This checks the policy opens with its first disabled feature.
-	/\tReferrer-Policy: strict-origin-when-cross-origin/, // What: Referrer Policy Pattern. Why: Other sites should see only where a visit came from, never the full address. How: This checks the policy.
-	/\tStrict-Transport-Security: max-age=63072000/,      // What: Strict Transport Security Pattern. Why: Browsers should never fall back to plain HTTP. How: This checks the two-year HTTPS rule.
-	/\tX-Content-Type-Options: nosniff/,                  // What: Content Type Options Pattern. Why: Browsers shouldn't guess a file's type. How: This checks the nosniff rule.
-	/\tX-Frame-Options: DENY/                             // What: Frame Options Pattern. Why: No other site should frame this one. How: This checks the deny rule, which older browsers read in place of frame-ancestors.
+	/^\tContent-Security-Policy: default-src 'self'; base-uri 'self'; form-action 'none'; frame-ancestors 'none'; frame-src 'none'; img-src 'self' data:; object-src 'none'; script-src 'self'; style-src 'self'$/m, // What: Content Security Policy Pattern. Why: The page should only load what the site itself serves. How: This checks the whole policy line, so no directive can be loosened or added.
+	/\tPermissions-Policy: accelerometer=\(\)/,              // What: Permissions Policy Pattern. Why: Browser features the site never uses should stay off. How: This checks the policy opens with its first disabled feature.
+	/^\tReferrer-Policy: strict-origin-when-cross-origin$/m, // What: Referrer Policy Pattern. Why: Other sites should see only where a visit came from, never the full address. How: This checks the policy is exactly that one, since a later value would win.
+	/\tStrict-Transport-Security: max-age=63072000/,         // What: Strict Transport Security Pattern. Why: Browsers should never fall back to plain HTTP. How: This checks the two-year HTTPS rule.
+	/\tX-Content-Type-Options: nosniff/,                     // What: Content Type Options Pattern. Why: Browsers shouldn't guess a file's type. How: This checks the nosniff rule.
+	/\tX-Frame-Options: DENY/                                // What: Frame Options Pattern. Why: No other site should frame this one. How: This checks the deny rule, which older browsers read in place of frame-ancestors.
 
 
 ];
@@ -145,8 +145,8 @@ for ( const rouRecObj of ROU_REC_ARR ) { // What: Route Test Loop. Why: Every ro
 		const jsoScrArr = await curPagObj.locator( 'script[type="application/ld+json"]' ).allTextContents(); // What: JSON Script Array. Why: The structured data decides what search engines and agents think the page is. How: This reads every JSON-LD script's text.
 
 
-		expect( jsoScrArr.map( ( jsoTexStr ) => JSON.parse( jsoTexStr )[ '@type' ] ) ).toEqual( [ 'WebSite' ] ); // What: Website Type Assertion. Why: The page should describe exactly one demo website. How: This parses each script, which also fails on invalid JSON, and checks there's one, typed WebSite.
-		expect( jsoScrArr.join( '' ) ).not.toMatch( /LocalBusiness|RoofingContractor|PostalAddress|telephone/ ); // What: No Business Data Assertion. Why: Structured data must never present the fictional company as a real business. How: This checks no local business type, address, or phone appears in it.
+		expect( jsoScrArr.map( ( jsoTexStr ) => JSON.parse( jsoTexStr )[ '@type' ] ) ).toEqual( [ 'WebSite' ] );   // What: Website Type Assertion. Why: The page should describe exactly one demo website. How: This parses each script, which also fails on invalid JSON, and checks there's one, typed WebSite.
+		expect( jsoScrArr.join( '' ) ).not.toMatch( /Business"|Contractor"|PostalAddress|"address"|"telephone"/ ); // What: No Business Data Assertion. Why: Structured data must never present the fictional company as a real business. How: This checks no business or contractor type, address, or phone appears in it, matching quoted keys and values so its prose can still say it isn't a real business.
 
 
 	} );
@@ -183,7 +183,7 @@ test( 'robots.txt and _headers keep the demo out of search and away from AI craw
 	expect( robTexStr ).toMatch( /^User-agent: \*\nAllow: \/$/m );                                 // What: Search Crawlers Assertion. Why: Search engines must reach the page to read its noindex. How: This checks the wildcard group allows the whole site, its rule ending at the bare slash.
 	expect( robTexStr ).toMatch( /^User-agent: GPTBot\n(?:User-agent: [^\n]*\n)*Disallow: \/$/m ); // What: AI Crawlers Assertion. Why: AI training crawlers shouldn't learn the fictional company. How: This checks a named AI crawler's group, read only through its run of user agents, disallows the whole site, its rule ending at the bare slash.
 	expect( robTexStr ).not.toMatch( /Sitemap:/i );                                                // What: No Sitemap Assertion. Why: A site kept out of search has nothing to list. How: This checks robots.txt names no sitemap.
-	expect( heaTexStr ).toMatch( /\/\*\n\tX-Robots-Tag: noindex/ );                                // What: Robots Header Assertion. Why: Every file, the preview image included, should carry noindex. How: This checks the site-wide header rule.
+	expect( heaTexStr ).toMatch( /^\/\*\n\tX-Robots-Tag: noindex$/m );                             // What: Robots Header Assertion. Why: Every file, the preview image included, should carry noindex. How: This checks the site-wide header rule, its path the bare /* and its value exactly noindex.
 
 
 } );
@@ -219,17 +219,18 @@ test( 'the social preview tags are complete', async ( { page : curPagObj } ) => 
 	const socTagObj = Object.fromEntries( socTagArr ); // What: Social Tag Object. Why: Tags are easier to check by key. How: This turns the pairs into an object.
 
 
-	expect( Object.keys( socTagObj ) ).toEqual( expect.arrayContaining( SOC_KEY_ARR ) );       // What: Complete Tags Assertion. Why: A missing tag leaves part of the card blank. How: This checks every required key is present, allowing optional extras.
+	expect( SOC_KEY_ARR.filter( ( socKeyStr ) => !socTagObj[ socKeyStr ]?.trim() ) ).toEqual( [] ); // What: Complete Tags Assertion. Why: A missing or empty tag leaves part of the card blank. How: This lists every required tag that's missing or empty, which should be none, allowing optional extras.
 	expect( [ socTagObj[ 'og:image' ], socTagObj[ 'og:url' ], socTagObj[ 'twitter:image' ] ] ).toEqual( [ `${ LIV_URL_STR }og-image.png`, LIV_URL_STR, `${ LIV_URL_STR }og-image.png` ] ); // What: Absolute URLs Assertion. Why: Scrapers can't resolve a relative address. How: This checks each URL tag names the live https address.
-	expect( socTagObj[ 'og:image:type' ] ).toBe( 'image/png' );                                // What: Image Type Assertion. Why: The tag has to match the file. How: This checks it names a PNG.
-	expect( socTagObj[ 'og:image:height' ] ).toBe( '630' );                                    // What: Image Height Assertion. Why: The tag has to promise the card's real height. How: This checks it says 630, the height the image test reads from the file.
-	expect( socTagObj[ 'og:image:width' ] ).toBe( '1200' );                                    // What: Image Width Assertion. Why: The tag has to promise the card's real width. How: This checks it says 1,200, the width the image test reads from the file.
-	expect( socTagObj[ 'og:title' ].length ).toBeLessThanOrEqual( 60 );                        // What: Title Length Assertion. Why: Longer titles are cut off in most cards. How: This checks it stays at 60 characters or fewer.
-	expect( socTagObj[ 'twitter:title' ].length ).toBeLessThanOrEqual( 60 );                   // What: Twitter Title Length Assertion. Why: X's card cuts a long title off too. How: This checks it stays at 60 characters or fewer.
-	expect( socTagObj[ 'og:description' ].length ).toBeGreaterThanOrEqual( DES_MIN_NUM );      // What: Description Minimum Assertion. Why: Link preview checkers flag a summary under 120 characters as short. How: This checks it reaches DES_MIN_NUM characters.
-	expect( socTagObj[ 'og:description' ].length ).toBeLessThanOrEqual( DES_MAX_NUM );         // What: Description Maximum Assertion. Why: Mobile cards cut a summary off around 125 characters. How: This checks it stays within DES_MAX_NUM characters.
-	expect( socTagObj[ 'twitter:description' ].length ).toBeGreaterThanOrEqual( DES_MIN_NUM ); // What: Twitter Description Minimum Assertion. Why: X's card shows the same summary, held to the same bounds. How: This checks it reaches DES_MIN_NUM characters.
-	expect( socTagObj[ 'twitter:description' ].length ).toBeLessThanOrEqual( DES_MAX_NUM );    // What: Twitter Description Maximum Assertion. Why: X's card cuts a long summary off too. How: This checks it stays within DES_MAX_NUM characters.
+	expect( socTagObj[ 'og:image:type' ] ).toBe( 'image/png' );                                     // What: Image Type Assertion. Why: The tag has to match the file. How: This checks it names a PNG.
+	expect( socTagObj[ 'og:type' ] ).toBe( 'website' );                                             // What: Page Type Assertion. Why: The social preview rule calls every site a website, never an article. How: This checks the type tag says so.
+	expect( socTagObj[ 'og:image:height' ] ).toBe( '630' );                                         // What: Image Height Assertion. Why: The tag has to promise the card's real height. How: This checks it says 630, the height the image test reads from the file.
+	expect( socTagObj[ 'og:image:width' ] ).toBe( '1200' );                                         // What: Image Width Assertion. Why: The tag has to promise the card's real width. How: This checks it says 1,200, the width the image test reads from the file.
+	expect( socTagObj[ 'og:title' ].length ).toBeLessThanOrEqual( 60 );                             // What: Title Length Assertion. Why: Longer titles are cut off in most cards. How: This checks it stays at 60 characters or fewer.
+	expect( socTagObj[ 'twitter:title' ].length ).toBeLessThanOrEqual( 60 );                        // What: Twitter Title Length Assertion. Why: X's card cuts a long title off too. How: This checks it stays at 60 characters or fewer.
+	expect( socTagObj[ 'og:description' ].length ).toBeGreaterThanOrEqual( DES_MIN_NUM );           // What: Description Minimum Assertion. Why: Link preview checkers flag a summary under 120 characters as short. How: This checks it reaches DES_MIN_NUM characters.
+	expect( socTagObj[ 'og:description' ].length ).toBeLessThanOrEqual( DES_MAX_NUM );              // What: Description Maximum Assertion. Why: Mobile cards cut a summary off around 125 characters. How: This checks it stays within DES_MAX_NUM characters.
+	expect( socTagObj[ 'twitter:description' ].length ).toBeGreaterThanOrEqual( DES_MIN_NUM );      // What: Twitter Description Minimum Assertion. Why: X's card shows the same summary, held to the same bounds. How: This checks it reaches DES_MIN_NUM characters.
+	expect( socTagObj[ 'twitter:description' ].length ).toBeLessThanOrEqual( DES_MAX_NUM );         // What: Twitter Description Maximum Assertion. Why: X's card cuts a long summary off too. How: This checks it stays within DES_MAX_NUM characters.
 
 
 } );
