@@ -124,14 +124,18 @@ reorganization, ESLint setup, config rebuild, and dependency upgrades.
 
 ## Test suites
 Added 2026-10-08. Playwright suites live in `tests/`, one project per suite
-and engine in `tests/playwright.config.ts`, which starts its own dev server
-on port 5191 (never the usual 5173) and stops it afterwards. Every suite runs
-in Chromium, Firefox, and WebKit. Results, screenshots, and traces go to
-`tests/output/` (git-ignored); `npx playwright show-report tests/output/report`
-opens the HTML report. The states each suite visits (both pages at 390px and
-1440px, plus the open drawer) are listed in `tests/support/states.ts`; the
-responsive suite opens its own widths through the same helper, and the seo
-suite reads the head of each route instead.
+and engine in `tests/playwright.config.ts`, which starts its own dev server on
+port 5191 (never the usual 5173) and stops it afterwards. Every suite runs in
+Chromium, Firefox, and WebKit. Chromium runs as Chrome's full headless mode
+(`channel : 'chromium'`, decided 2026-10-17) rather than Playwright's default
+headless shell, which, with every engine busy, sometimes opened a Ctrl or
+middle click's new tab without Playwright ever reporting it, failing about 1
+run in 10; the full mode reported it in all 240 runs tried. Results,
+screenshots, and traces go to `tests/output/` (git-ignored); `npx playwright
+show-report tests/output/report` opens the HTML report. The states each suite
+visits (both pages at 390px and 1440px, plus the open drawer) are listed in
+`tests/support/states.ts`; the responsive suite opens its own widths through
+the same helper, and the seo suite reads the head of each route instead.
 - `npm run test:accessibility`: the pre-commit accessibility scan. axe-core
   checks each state against WCAG 2.2 A and AA plus best practices
   (`axe.spec.ts`), and scripted checks (`scripted.spec.ts`) cover link and
