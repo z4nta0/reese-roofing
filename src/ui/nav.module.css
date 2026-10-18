@@ -575,14 +575,14 @@
 
 
 }
-.navTogBut[aria-expanded='true'] .togLinSpa:first-child { /* What: Open Top Toggle Line Span. Why: The open menu's icon becomes a close cross. How: This drops the top line to the middle and turns it 45 degrees. */
+.navTogBut[aria-expanded='true'] .togLinSpa:first-child { /* What: Open Toggle Line Span Top. Why: The open menu's icon becomes a close cross. How: This drops the top line to the middle and turns it 45 degrees. */
 
 
 	transform : translateY( calc( ( var( --spa-ver-m04 ) + calc( var( --ver-rhy-m08 ) * 1rem ) ) / 2 ) ) rotate( 45deg ); /* Spacing Vertical Base Minus 4 ~= 4.732px, Vertical Rhythm Base Minus 8 ~= 1.536px */
 
 
 }
-.navTogBut[aria-expanded='true'] .togLinSpa:last-child { /* What: Open Bottom Toggle Line Span. Why: The open menu's icon becomes a close cross. How: This lifts the bottom line to the middle and turns it the other way. */
+.navTogBut[aria-expanded='true'] .togLinSpa:last-child { /* What: Open Toggle Line Span Bottom. Why: The open menu's icon becomes a close cross. How: This lifts the bottom line to the middle and turns it the other way. */
 
 
 	transform : translateY( calc( ( var( --spa-ver-m04 ) + calc( var( --ver-rhy-m08 ) * 1rem ) ) / -2 ) ) rotate( -45deg ); /* Spacing Vertical Base Minus 4 ~= 4.732px, Vertical Rhythm Base Minus 8 ~= 1.536px */
@@ -774,7 +774,7 @@
 /* What: Arrow Icon Span Pointer. Why: The drawer row's arrow shares the arrow class. How: Its rule is written once in the navEstAnc region. */
 .draLinAnc:hover .arrIcoSpa,
 .draLinAnc:active .arrIcoSpa,
-.draLinAnc:focus-visible .arrIcoSpa { /* What: Hovered Drawer Arrow Icon Span. Why: The arrow points the visitor onward when its row is hovered, pressed, or focused. How: This nudges it right by a few pixels, kept literal since no spacing step lands within 10% of the 4px nudge. */
+.draLinAnc:focus-visible .arrIcoSpa { /* What: Hovered Arrow Icon Span In Drawer Link. Why: The arrow points the visitor onward when its row is hovered, pressed, or focused. How: This nudges it right by a few pixels, kept literal since no spacing step lands within 10% of the 4px nudge. */
 
 
 	transform : translateX( 4px );
@@ -948,7 +948,7 @@
 }
 
 /* What: Arrow Icon Span Pointer. Why: The drawer estimate button's arrow shares the arrow class. How: Its rule is written once in the navEstAnc region. */
-.draEstAnc:hover .arrIcoSpa { /* What: Hovered Drawer Estimate Arrow Icon Span. Why: The arrow points the visitor onward when the button is hovered. How: This nudges it right by a few pixels, kept literal since no spacing step lands within 10% of the 4px nudge. */
+.draEstAnc:hover .arrIcoSpa { /* What: Hovered Arrow Icon Span In Drawer Estimate. Why: The arrow points the visitor onward when the button is hovered. How: This nudges it right by a few pixels, kept literal since no spacing step lands within 10% of the 4px nudge. */
 
 
 	transform : translateX( 4px );
