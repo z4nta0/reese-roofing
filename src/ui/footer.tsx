@@ -93,7 +93,7 @@ function SitFooCom () : React.JSX.Element {
 		<footer className={ cssModObj.sitFooFoo }>{ /* What: Site Footer Footer Element. Why: This is the page's footer landmark. How: This holds the footer's single content row. */ }
 
 
-			<div className={ cssModObj.fooInnDiv }>{ /* What: Footer Inner Div Element. Why: The footer's contents should line up with the page's content width. How: This holds the brand, the meta lines, and the back-to-top link in one row, stacking them at 600px wide and below. */ }
+			<div className={ cssModObj.fooInnDiv }>{ /* What: Footer Inner Div Element. Why: The footer's contents should line up with the page's content width. How: This holds the brand, the meta lines, and the back-to-top link in one row, stacking them at 880px wide and below. */ }
 
 
 				<div className={ cssModObj.fooBraDiv }>{ /* What: Footer Brand Div Element. Why: The footer repeats the company's mark and name. How: This sets them side by side. */ }

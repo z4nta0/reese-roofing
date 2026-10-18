@@ -185,7 +185,7 @@ the production suite opens its own pages on a build it serves itself.
   --update-snapshots` and commit the baselines with it. Baselines are
   captured on Linux.
 - `npm run test:responsive`: measures the home page, the 404 page, and the
-  open drawer at 21 widths from 320 to 1,920px (a pixel either side of each
+  open drawer at 19 widths from 320 to 1,920px (a pixel either side of each
   breakpoint included), failing on sideways scrolling, an element past either
   edge (unless it's decoration an ancestor clips, like the hero's grid), text
   spilling its box, two reachable controls overlapping, or a card grid leaving
@@ -255,7 +255,7 @@ Design system choices (decided 2026-10-07):
   numbers, the brand name, accents) is `--fon-fam-sec`. Inter Tight averages
   about 2.34 characters per em, so the text width tokens use the same powers
   as ease-my-life.
-- **Breakpoints**: 500, 540, 600, 640, 880, and 960px, measured against the
+- **Breakpoints**: 500, 540, 640, 880, and 960px, measured against the
   `app` container on AppRooCom's root element.
 
 Section links (decided 2026-10-17, matching tonys-toppers and hair-designs):

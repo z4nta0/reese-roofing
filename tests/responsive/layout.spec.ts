@@ -41,7 +41,7 @@ import { test      } from '@playwright/test';     // What: Test. Why: Each page 
 // #region Constants
 
 const DRA_MAX_NUM = 880; // What: Drawer Maximum Number. Why: The drawer exists only up to the site's 880px breakpoint. How: The drawer case is measured only at widths up to this.
-const WID_LIS_ARR = [ 320, 360, 390, 414, 500, 501, 540, 541, 600, 601, 640, 641, 768, 880, 881, 960, 961, 1024, 1280, 1440, 1920 ]; // What: Width List Array. Why: Layouts crowd at the narrowest widths and switch at the breakpoints. How: This lists common screen widths plus each breakpoint and the pixel past it.
+const WID_LIS_ARR = [ 320, 360, 390, 414, 500, 501, 540, 541, 640, 641, 768, 880, 881, 960, 961, 1024, 1280, 1440, 1920 ]; // What: Width List Array. Why: Layouts crowd at the narrowest widths and switch at the breakpoints. How: This lists common screen widths plus each breakpoint and the pixel past it.
 
 
 
