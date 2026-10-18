@@ -158,16 +158,16 @@ the production suite opens its own pages on a build it serves itself.
   press, the drawer and its scrim really transition open and closed and the
   sent label rises in, and reduced motion keeps the changes with no
   transitions), then the site's behavior: the section, Home, hero, estimate,
-  back to top, and logo links (landing on their targets without ever putting a
-  hash in the address, each section link's address naming the home page's path,
-  and a Ctrl, Cmd, or middle click opening a section in a new tab, and a Ctrl
-  or Cmd click on a drawer link leaving the drawer open), the bar's scrolled
-  style, every way the drawer opens and closes, the contact form's sent label
-  and mailto link (the mailto test is Chromium-only, through the DevTools
-  Protocol), and the 404 page, whose Return home opens the home page at its top
-  and whose estimate, section, and Home links reach their targets, all inside
-  the router without a full page load, and whose back to top scrolls the 404
-  page itself.
+  and back to top links (landing on their targets without ever putting a hash
+  in the address, each section link's address naming the home page's path, and
+  a Ctrl, Cmd, or middle click opening a section in a new tab, and a Ctrl or
+  Cmd click on a drawer link leaving the drawer open), the logo link's root
+  address, the bar's scrolled style, every way the drawer opens and closes, the
+  contact form's sent label and mailto link (the mailto test is Chromium-only,
+  through the DevTools Protocol), and the 404 page, whose Return home opens the
+  home page at its top and whose estimate, section, and Home links reach their
+  targets, all inside the router without a full page load, and whose back to
+  top scrolls the 404 page itself.
 - `npm run test:production`: builds the site once per engine into
   `tests/output/build-<engine>/` and serves the build through Playwright's
   request routing with every header the site-wide `_headers` blocks set and
