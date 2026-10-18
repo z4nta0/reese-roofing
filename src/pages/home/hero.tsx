@@ -44,7 +44,7 @@ import { useSecCliFun } from '../../ui/section-link.ts'; // What: Use Section Cl
  * behind everything, the location label and headline beside the full logo,
  * the pitch paragraph with the estimate and services buttons, and the stats
  * row. The section carries the page's top anchor, so the navigation bar's
- * brand link and the footer's back-to-top link both land here.
+ * Home link and the footer's back-to-top link both land here.
  *
  * @author z4nta0 <https://github.com/z4nta0>
  *
