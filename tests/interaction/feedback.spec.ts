@@ -3,7 +3,7 @@
 
 // #region Imports
 
-import { expect      } from '@playwright/test';     // What: Expect. Why: Each state passes only when every control responds. How: This asserts each problem list is empty.
+import { expect      } from '@playwright/test';     // What: Expect. Why: Each check passes only when the page responds as it should. How: This asserts each problem list is empty, and checks the focus ring's width, the brand link's looks and durations, and the drawer's, scrim's, and sent label's motion.
 import { opeStaFun   } from '../support/states.ts'; // What: Open State Function. Why: Each check opens and settles its state first. How: This loads it and waits for it.
 import { STA_REC_ARR } from '../support/states.ts'; // What: State Record Array. Why: Every page state is checked. How: This lists them, and the brand link and motion tests find their starting rows in it.
 import { test        } from '@playwright/test';     // What: Test. Why: Each check of each state is its own test. How: This declares them.
@@ -29,13 +29,14 @@ import type { Page          } from '@playwright/test'; // What: Page. Why: Every
  * once it has eased in. Every form field a visitor can reach has to look
  * different once focused and have a transition longer than zero. The brand
  * link, which the Tab order skips, has to change on hover and again on press
- * too. With motion on, the drawer and its scrim have to really transition as
- * the drawer opens and closes, and the sent label has to rise in. Under
- * reduced motion every control keeps its hover and press changes, and every
- * field its focus change, but nothing transitions, the parts inside a control
- * and their pseudo-elements included. Real clicks are blocked during the
- * checks, so pressing a link or the drawer's rows never navigates or closes
- * anything mid-check.
+ * too, with a transition longer than zero on itself or something inside it,
+ * and none under reduced motion. With motion on, the drawer and its scrim have
+ * to really transition as the drawer opens and closes, and the sent label has
+ * to rise in. Under reduced motion every control in the Tab order keeps its
+ * hover and press changes, and every field its focus change, but nothing
+ * transitions, the parts inside a control and their pseudo-elements included.
+ * Real clicks are blocked while controls are probed, so pressing a link or the
+ * drawer's rows never navigates or closes anything mid-check.
  *
  * Sections:
  *  - Constants
