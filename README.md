@@ -27,7 +27,7 @@ The preview card is drawn from the site's own logo and fonts by `design/og-image
 - **React 19** + **TypeScript 6**
 - **React Router 8** (set up for future expansion: it currently routes `/` to Home and everything else to a 404)
 - **ESLint 9** with typescript-eslint, and **Playwright** with axe-core for the test suites
-- Deployed on **Netlify**, which serves `index.html` for every path (`public/_redirects`) so the router can show the 404 page
+- Deployed on **Netlify**, which serves `index.html` for every path without a file of its own (`public/_redirects`) so the router can show the 404 page
 
 Section links scroll to their section without putting a hash in the address bar, while a Ctrl, Cmd, or middle click still opens the section in a new tab (`src/ui/section-link.ts`).
 

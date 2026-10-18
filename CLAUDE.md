@@ -86,7 +86,7 @@ so far the social preview card (see "## SEO").
   user-level rules exists so a quick-open search lands on a tab's main file;
   here the file already shares its folder's name, so a search finds it
   without one.
-- **Nav and Footer live in `ui/`**, since the 404 page will use them too.
+- **Nav and Footer live in `ui/`**, since the 404 page uses them too.
 
 ## Naming and formatting decisions
 Project-only decisions on top of the user-level naming and formatting rules.
@@ -247,8 +247,8 @@ split:
   eyebrow lines. Gaps and padding read `--spa-hor-*`, widths a vertical rhythm
   step times `1rem`. The 4px arrow nudge stays literal, since no step lands
   within 10% of it.
-- **Content column**: capped at a fixed `1920px / ρ` (about 1449.4px), so below
-  that width only the gutter limits it.
+- **Content column**: capped at a fixed `1920px / ρ` (about 1,449.4px), so
+  below that width only the gutter limits it.
 - **Buttons**: height comes from line height alone, the p04 rhythm step times
   `1rem` (about 44.9px), with no top or bottom padding, and side padding
   clamped between two spacing steps. The user chose it over Ease My Life's
