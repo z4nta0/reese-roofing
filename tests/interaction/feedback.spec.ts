@@ -209,15 +209,16 @@ function sigEleFun ( eleCurEle : Element ) : string {
  * feeProFun = Feedback Problems Function
  *
  * @summary
- * Probes every reachable control and returns a problem for each one that
- * gives no feedback. Each control is scrolled into view, read at rest with
- * the pointer away, read again while hovered, and again while the mouse
- * button is held on it, every look read once its transition has settled. A
- * control that looks the same at rest and hovered, or hovered and pressed,
- * is a problem. Normally its transition list must include the focus ring's
- * outline-width, so the ring eases in; under reduced motion every one of its
- * transition durations must be zero instead. The caller blocks real clicks
- * first, so releasing the mouse does nothing.
+ * Probes every reachable control and returns a problem for each one that gives
+ * no feedback. Each control is scrolled into view, read at rest with the
+ * pointer away, read again while hovered, and again while the mouse button is
+ * held on it, every look read once its transition has settled. A control that
+ * looks the same at rest and hovered, or hovered and pressed, is a problem.
+ * Normally its transition list must include the focus ring's outline-width, so
+ * the ring eases in; under reduced motion every one of its transition
+ * durations must be zero instead. Outside reduced motion, a control whose
+ * every transition duration is zero is a problem too. The caller blocks real
+ * clicks first, so releasing the mouse does nothing.
  *
  * @author z4nta0 <https://github.com/z4nta0>
  *
@@ -430,7 +431,7 @@ for ( const staRecObj of STA_REC_ARR ) { // What: State Test Loop. Why: Every pa
 		await curPagObj.waitForTimeout( SET_WAI_NUM ); // What: Ring Settle Wait. Why: The ring is read once it has grown in. How: This pauses for the settle time.
 
 
-		expect( await curPagObj.evaluate( () => getComputedStyle( document.activeElement as Element ).outlineWidth ) ).toBe( '2px' ); // What: Full Ring Assertion. Why: The ring has to reach its full width. How: This reads the focused stop's outline width, which the large border width token snaps to 2px. // What: Type Assertion Note. Why: activeElement types as possibly null. How: The Tab press just put focus on a stop.
+		expect( await curPagObj.evaluate( () => getComputedStyle( document.activeElement! ).outlineWidth ) ).toBe( '2px' ); // What: Full Ring Assertion. Why: The ring has to reach its full width. How: This reads the focused stop's outline width, which the large border width token snaps to 2px. // What: Non-Null Note. Why: activeElement types as possibly null. How: The Tab press just put focus on a stop.
 
 
 	} );

@@ -173,7 +173,7 @@ async function opeRouFun ( curPagObj : Page, rouPatStr : string, vieSizObj : { h
 async function secTopFun ( curPagObj : Page, eleIdeStr : string ) : Promise< number > {
 
 
-	return curPagObj.evaluate( ( secIdeStr ) => ( document.getElementById( secIdeStr ) as HTMLElement ).getBoundingClientRect().top, eleIdeStr ); // What: Section Top Return. Why: A check compares where the section landed with the top of the screen. How: This reads the element's top edge inside the page. // What: Type Assertion Note. Why: getElementById types as possibly null. How: Every id a check passes exists on the page it loaded.
+	return curPagObj.evaluate( ( secIdeStr ) => document.getElementById( secIdeStr )!.getBoundingClientRect().top, eleIdeStr ); // What: Section Top Return. Why: A check compares where the section landed with the top of the screen. How: This reads the element's top edge inside the page. // What: Non-Null Note. Why: getElementById types as possibly null. How: Every id a check passes exists on the page it loaded.
 
 
 }
@@ -612,7 +612,7 @@ for ( const [ linLabStr, secIdeStr ] of [ [ 'Services', 'services' ], [ 'About',
 
 
 
-test( 'the 404 page\'s Home link leads to the home page', async ( { page : curPagObj } ) => { // What: Not Found Home Link Test. Why: The 404 page has a top anchor of its own, which the nav's Home link mustn't settle for. How: This clicks Home on the 404 page and checks the visitor reaches the home page's hero.
+test( 'the 404 page\'s Home link leads to the home page', async ( { page : curPagObj } ) => { // What: Not Found Home Link Test. Why: The 404 page has a top anchor of its own, which the nav's Home link mustn't settle for. How: This clicks Home on the 404 page and checks the home page's title and a clean address.
 
 
 	await opeRouFun( curPagObj, '/missing', DES_VIE_OBJ ); // What: Not Found Open Call. Why: The bar's Home link is under test away from the home page. How: This opens the 404 page at desktop size.
