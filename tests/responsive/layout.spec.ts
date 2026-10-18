@@ -56,6 +56,8 @@ type LayCasTyp = { // What: Layout Case Type. Why: Each test measures one page i
 
 };
 
+// #region LAY_CAS_ARR
+
 /**
  * LAY_CAS_ARR = Layout Case Array
  *
@@ -83,6 +85,8 @@ const LAY_CAS_ARR : LayCasTyp[] = [ // What: Layout Case Array. Why: Every page 
 
 
 ];
+
+// #endregion LAY_CAS_ARR
 
 // #endregion Constants
 
