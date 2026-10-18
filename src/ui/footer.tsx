@@ -7,7 +7,7 @@ import cssModObj from './footer.module.css';     // What: CSS Module Object. Why
 import lomSvgUrl from '../assets/logo-mark.svg'; // What: Logo-Mark SVG URL. Why: The footer's brand shows the simple logo mark. How: Vite resolves the import to a URL for the image's src, inlining this small file into the bundle as a data URI in the build.
 
 
-import { modCliFun } from './section-link.ts';  // What: Modified Click Function. Why: A Ctrl, Cmd, or middle click on back to top should still open the page in a new tab. How: The link's handler steps aside when this reports a modified click.
+import { modCliFun } from './section-link.ts';  // What: Modified Click Function. Why: A Ctrl or Cmd click on back to top should still open the page in a new tab, the way a middle click does without reaching the handler. How: The link's handler steps aside when this reports a modified click.
 import { redMotFun } from '../utils/motion.ts'; // What: Reduce Motion Function. Why: The smooth scroll back up has to respect the reduced-motion preference. How: The link's handler asks it before choosing the scroll behavior.
 
 // #endregion Imports
@@ -74,7 +74,7 @@ function SitFooCom () : React.JSX.Element {
 	const topCliFun = ( cliEveObj : React.MouseEvent< HTMLAnchorElement > ) => { // What: Top Click Function. Why: Back to top should scroll up without leaving a hash in the address. How: This leaves a modified click to the browser and otherwise cancels the jump and scrolls the page's top anchor into view.
 
 
-		if ( modCliFun( cliEveObj ) ) return; // What: Modified Click Guard. Why: A Ctrl, Cmd, Shift, Alt, or middle click asks the browser to handle the link its own way. How: This leaves the click alone.
+		if ( modCliFun( cliEveObj ) ) return; // What: Modified Click Guard. Why: A Ctrl, Cmd, Shift, or Alt click asks the browser to handle the link its own way, and a middle click never reaches this handler at all. How: This leaves the click alone.
 
 
 
@@ -142,7 +142,7 @@ function SitFooCom () : React.JSX.Element {
 					aria-label='Back to top'
 
 					onClick={ topCliFun }
-				>{ /* What: Footer Top Anchor Element. Why: A long page should offer a quick way back up. How: This scrolls to the page's top anchor through topCliFun, leaving no hash in the address, while its own address still opens the page's top in a new tab on a modified click. */ }
+				>{ /* What: Footer Top Anchor Element. Why: A long page should offer a quick way back up. How: This scrolls to the page's top anchor through topCliFun, leaving no hash in the address, while its own address still opens the page's top in a new tab on a Ctrl, Cmd, or middle click. */ }
 					Back to top <span className={ cssModObj.arrIcoSpa } aria-hidden='true'>↑</span>
 				</a>
 

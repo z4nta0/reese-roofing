@@ -304,7 +304,7 @@ function NavBarCom () : React.JSX.Element {
 							href='/#contact'
 
 							onClick={ ( cliEveObj ) => secCliFun( cliEveObj, 'contact' ) }
-						>{ /* What: Navigation Estimate Anchor Element. Why: The bar's main action is requesting an estimate. How: Its address points at the home page's contact section, which a modified click opens in a new tab, while a plain click scrolls there, or navigates home to it from another page, without a hash. */ }
+						>{ /* What: Navigation Estimate Anchor Element. Why: The bar's main action is requesting an estimate. How: Its address points at the home page's contact section, which a Ctrl, Cmd, or middle click opens in a new tab, while a plain click scrolls there, or navigates home to it from another page, without a hash. */ }
 							Get an estimate
 							<span
 								className={ cssModObj.arrIcoSpa }
@@ -361,7 +361,7 @@ function NavBarCom () : React.JSX.Element {
 							href={ `/#${ navLinObj.ideStr }` }
 
 							onClick={ ( cliEveObj ) => { if ( secCliFun( cliEveObj, navLinObj.ideStr ) ) setDraOpeBoo( false ); } } // What: Drawer Link Click Handler. Why: A chosen link should close the drawer on the way to its section, but a link opened in a new tab leaves the drawer as it was. How: This closes the drawer only when secCliFun handled the click.
-						>{ /* What: Drawer Link Anchor Element. Why: Each link takes the visitor to its section. How: Its address points at the home page's section, which a modified click opens in a new tab, while a plain click scrolls there, or navigates home to it from another page, without a hash, and closes the drawer behind it. */ }
+						>{ /* What: Drawer Link Anchor Element. Why: Each link takes the visitor to its section. How: Its address points at the home page's section, which a Ctrl, Cmd, or middle click opens in a new tab, while a plain click scrolls there, or navigates home to it from another page, without a hash, and closes the drawer behind it. */ }
 
 
 							<span
@@ -415,7 +415,7 @@ function NavBarCom () : React.JSX.Element {
 							href='/#contact'
 
 							onClick={ ( cliEveObj ) => { if ( secCliFun( cliEveObj, 'contact' ) ) setDraOpeBoo( false ); } } // What: Drawer Estimate Click Handler. Why: The estimate button should close the drawer on the way to the form, but a button opened in a new tab leaves the drawer as it was. How: This closes the drawer only when secCliFun handled the click.
-						>{ /* What: Drawer Estimate Anchor Element. Why: Requesting an estimate is the site's main action, and the bar's button is hidden on small screens. How: This takes the visitor to the contact section as a full-width pill, without a hash, and closes the drawer behind it, while a modified click opens it in a new tab. */ }
+						>{ /* What: Drawer Estimate Anchor Element. Why: Requesting an estimate is the site's main action, and the bar's button is hidden on small screens. How: This takes the visitor to the contact section as a full-width pill, without a hash, and closes the drawer behind it, while a Ctrl, Cmd, or middle click opens it in a new tab. */ }
 							Get an estimate
 							<span
 								className={ cssModObj.arrIcoSpa }

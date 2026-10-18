@@ -53,9 +53,12 @@ import { useNavigate } from 'react-router';       // What: Use Navigate. Why: A 
  * Whether a click on a section link, or on the footer's back to top link,
  * should be left to the browser: one made with a modifier key held (Ctrl or
  * Cmd to open a new tab, Shift for a new window, Alt to download) or with any
- * button but the main one. A link's handler returns early when this is true,
- * so the link's own address opens in the browser's usual way, where a home
- * page section's address has the home page scroll to it.
+ * button but the main one. Chromium, Firefox, and WebKit send a middle click
+ * as auxclick, which never reaches a link's onClick, so the button check only
+ * guards an engine that still fires click for one. A link's handler returns
+ * early when this is true, so the browser handles the link's own address its
+ * usual way, and wherever that opens a home page section's address, the home
+ * page scrolls to it.
  *
  * @author z4nta0 <https://github.com/z4nta0>
  *
@@ -77,10 +80,10 @@ function modCliFun ( cliEveObj : React.MouseEvent< HTMLAnchorElement > ) : boole
 	const altKeyBoo = cliEveObj.altKey;       // What: Alt Key Boolean. Why: Alt-click downloads the link in some browsers. How: This reads whether Alt was held.
 	const conKeyBoo = cliEveObj.ctrlKey;      // What: Control Key Boolean. Why: Ctrl-click opens a new tab elsewhere. How: This reads whether Ctrl was held.
 	const metKeyBoo = cliEveObj.metaKey;      // What: Meta Key Boolean. Why: Cmd-click opens a new tab on a Mac. How: This reads whether Cmd was held.
-	const othButBoo = cliEveObj.button !== 0; // What: Other Button Boolean. Why: A middle click opens a new tab. How: This checks the click wasn't made with the main button.
+	const othButBoo = cliEveObj.button !== 0; // What: Other Button Boolean. Why: A click with any button but the main one belongs to the browser, though current engines send a middle click as auxclick, which never reaches here. How: This checks the click wasn't made with the main button.
 	const shiKeyBoo = cliEveObj.shiftKey;     // What: Shift Key Boolean. Why: Shift-click opens a new window. How: This reads whether Shift was held.
 
-	const modCliBoo = metKeyBoo || conKeyBoo || shiKeyBoo || altKeyBoo || othButBoo; // What: Modified Click Boolean. Why: Any one of these means the visitor asked the browser to open the link its own way. How: This combines them.
+	const modCliBoo = metKeyBoo || conKeyBoo || shiKeyBoo || altKeyBoo || othButBoo; // What: Modified Click Boolean. Why: Any one of these means the visitor asked the browser to handle the link its own way. How: This combines them.
 
 
 
@@ -191,7 +194,7 @@ function useSecCliFun () : ( cliEveObj : React.MouseEvent< HTMLAnchorElement >, 
 	return ( cliEveObj : React.MouseEvent< HTMLAnchorElement >, secIdeStr : string ) => { // What: Section Click Function. Why: Every section link handles a click the same way. How: This leaves a modified click to the browser and otherwise cancels the jump and visits the section.
 
 
-		if ( modCliFun( cliEveObj ) ) return false; // What: Modified Click Guard. Why: A Ctrl, Cmd, Shift, Alt, or middle click asks the browser to handle the link its own way. How: This leaves the click alone and reports it unhandled.
+		if ( modCliFun( cliEveObj ) ) return false; // What: Modified Click Guard. Why: A Ctrl, Cmd, Shift, or Alt click asks the browser to handle the link its own way, and a middle click never reaches this handler at all. How: This leaves the click alone and reports it unhandled.
 
 
 
