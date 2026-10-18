@@ -71,7 +71,7 @@
 
 /* #region fooBraDiv */
 
-.fooBraDiv { /* What: Footer Brand Div. Why: The footer repeats the company's mark and name. How: This sets them side by side in the display font, on the paper color. */
+.fooBraDiv { /* What: Footer Brand Div. Why: The footer repeats the company's mark and name. How: This sets them side by side, with the name in the display font and the paper color. */
 
 
 	align-items : center;
