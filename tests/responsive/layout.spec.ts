@@ -18,8 +18,8 @@ import { test      } from '@playwright/test';     // What: Test. Why: Each page 
  * Measures the home page, the 404 page, and the open mobile drawer across a
  * range of screen widths, in whichever engine the project runs, and fails a
  * width whose layout breaks: the page scrolling sideways, a visible element
- * reaching past either edge of the screen (unless an ancestor clips it on
- * purpose, like the hero's background grid), text spilling out of its own box,
+ * reaching past either edge of the screen (unless it's decoration an ancestor
+ * clips, like the hero's background grid), text spilling out of its own box,
  * two controls a visitor can reach overlapping each other, or a grid of cards
  * leaving uneven rows. The widths run from 320px, WCAG's narrowest reflow
  * width, to 1,920px, and include a pixel either side of each of the site's
@@ -95,17 +95,19 @@ const LAY_CAS_ARR : LayCasTyp[] = [ // What: Layout Case Array. Why: Every page 
  * Runs inside the page and returns every layout problem it finds, each naming
  * the element by its tag and its module class's readable part. The page
  * scrolling sideways is one problem. A visible element counts as spilling past
- * an edge when it reaches more than a pixel beyond the viewport and no
- * ancestor clips its overflow. An element with text of its own spills its box
- * when its content is more than a pixel wider than it and it doesn't clip or
- * scroll that content; inline elements are skipped, since they have no box
- * width of their own. Two reachable controls (links and buttons that are
- * visible, in the tab order, and not inside inert content) overlap when their
- * boxes share more than a pixel of area and neither holds the other. A grid of
- * cards (three or more visible children sharing one class) leaves uneven rows
- * when its rows hold different counts, unless the last row is a single card
- * centered in the grid at the others' width, as the Card Grids rule allows.
- * Passed to Playwright's evaluate, so it can't read anything from this file.
+ * an edge when it reaches more than a pixel beyond the viewport, unless it's
+ * decoration (inside content hidden from screen readers) that an ancestor
+ * clips, since clipping real content still hides it from the visitor. An
+ * element with text of its own spills its box when its content is more than a
+ * pixel wider than it and it doesn't clip or scroll that content; inline
+ * elements are skipped, since they have no box width of their own. Two
+ * reachable controls (links and buttons that are visible, in the tab order,
+ * and not inside inert content) overlap when their boxes share more than a
+ * pixel of area and neither holds the other. A grid of cards (three or more
+ * visible children sharing one class) leaves uneven rows when its rows hold
+ * different counts, unless the last row is a single card centered in the grid
+ * at the others' width, as the Card Grids rule allows. Passed to Playwright's
+ * evaluate, so it can't read anything from this file.
  *
  * @author z4nta0 <https://github.com/z4nta0>
  *
@@ -168,11 +170,12 @@ function layProFun () : string[] {
 
 
 
-		const cliAncBoo = cliAncFun( layCurEle );          // What: Clipped Ancestor Boolean. Why: A box an ancestor clips can sit past the edge without showing there. How: This asks cliAncFun whether any ancestor clips it.
-		const lefSpiBoo = recCurObj.left < -1;             // What: Left Spill Boolean. Why: A box past the left edge is cut off. How: This checks its left edge sits more than a pixel left of the viewport, allowing for rounding.
-		const rigSpiBoo = recCurObj.right > vieWidNum + 1; // What: Right Spill Boolean. Why: A box past the right edge is cut off or forces sideways scrolling. How: This checks its right edge sits more than a pixel past the viewport's width, allowing for rounding.
+		const cliAncBoo = cliAncFun( layCurEle );                        // What: Clipped Ancestor Boolean. Why: A box an ancestor clips can sit past the edge without showing there. How: This asks cliAncFun whether any ancestor clips it.
+		const decEleBoo = !!layCurEle.closest( '[aria-hidden="true"]' ); // What: Decorative Element Boolean. Why: Only decoration may be cut off at the edge, since clipped content is lost to the visitor all the same. How: This checks the element sits inside content hidden from screen readers, like the hero's background grid.
+		const lefSpiBoo = recCurObj.left < -1;                           // What: Left Spill Boolean. Why: A box past the left edge is cut off. How: This checks its left edge sits more than a pixel left of the viewport, allowing for rounding.
+		const rigSpiBoo = recCurObj.right > vieWidNum + 1;               // What: Right Spill Boolean. Why: A box past the right edge is cut off or forces sideways scrolling. How: This checks its right edge sits more than a pixel past the viewport's width, allowing for rounding.
 
-		const edgSpiBoo = ( rigSpiBoo || lefSpiBoo ) && !cliAncBoo; // What: Edge Spill Boolean. Why: A box past either edge spills unless a clipping ancestor hides the overflow. How: This combines the three.
+		const edgSpiBoo = ( rigSpiBoo || lefSpiBoo ) && !( decEleBoo && cliAncBoo ); // What: Edge Spill Boolean. Why: A box past either edge spills unless it's decoration a clipping ancestor hides. How: This combines the four.
 
 
 		if ( edgSpiBoo ) proLisArr.push( `${ desEleFun( layCurEle ) } spills past the ${ rigSpiBoo ? 'right' : 'left' } edge` ); // What: Edge Spill Check. Why: Content past the edge is cut off or forces sideways scrolling. How: This records an unclipped element that reaches more than a pixel beyond the viewport.
