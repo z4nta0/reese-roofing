@@ -99,7 +99,7 @@ design/
 ## Design notes
 
 - **Type pairing:** Fraunces (display serif, optical-size aware) paired with Inter Tight (refined sans). Italic Fraunces accents pull the design together.
-- **Palette:** Warm off-white paper (`#f5f2ec`), deep ink (`#1a1f24`), and a navy accent (`#1f4e7a`) drawn from the logo. Italic display accents and small details (numbered IDs, list bullets, pull quote marks) all use this brand navy so the design feels native to the logo.
+- **Palette:** Warm off-white paper (`#f5f2ec`), deep ink (`#1a1f24`), and a navy accent (`#1f4e7a`) drawn from the logo. Italic display accents and small details (numbered IDs, list bullets, pull quote marks) use this brand navy, lightened on the contact section's dark band so it stays readable, so the design feels native to the logo.
 - **Interaction:** Every hover, press, and focus visibly registers, subtly: buttons lift on hover and press in when held, text links dim while pressed, arrows nudge forward, keyboard focus draws a ring that eases in (navy on paper, light blue on the dark bands), and the contact button's sent label rises in. Reduced motion keeps the changes and drops the movement.
 - **Layout:** Editorial grid, generous negative space, hairline dividers, numbered section labels (02 to 04, after the hero). Hover states are intentional but never showy.
 - **Logo usage:**
@@ -114,7 +114,7 @@ If this design is ever reused for a real business, update the placeholders below
 
 - **Phone number:** `(785) 555-0199`. Search the repo for it and for its link form, `+17855550199` (the `tel:` links); both appear in the Nav (bar and drawer) and the Contact section
 - **Email:** `hello@reeseroofing.example`. Same; it appears in the Contact section's contact details and in the mailto link the form opens on submit (`subForFun` in `src/pages/home/contact.tsx`)
-- **Address and location:** placeholder Lawrence, Kansas 66044, in the Contact section, plus the city in the hero's label and intro, the About heading, the footer's licensing line, and the Contact section's service area list, plus the county in the hero's first stat and the About story. Search the repo for "Lawrence", "Kansas", and "Douglas"
+- **Address and location:** placeholder Lawrence, Kansas 66044, in the Contact section, plus the city in the hero's label and intro, the About heading, the footer's licensing line, and the Contact section's service area list, plus the county in the hero's first stat and the About story, and the state in an About principle's title. Search the repo for "Lawrence", "Kansas", and "Douglas"
 - **Form placeholders:** the sample name, property, email (`jane@company.example`), and phone (`(785) 555-0100`) shown in the contact form's empty fields, in `src/pages/home/contact.tsx`
 - **Footer:** the company's legal name, licensing line, and the demo notice in `src/ui/footer.tsx`
 - **Stats in Hero:** 17+ years, 400+ roofs, etc. Replace them with real numbers
