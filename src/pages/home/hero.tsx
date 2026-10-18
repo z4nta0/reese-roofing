@@ -116,6 +116,7 @@ function HerSecCom () : React.JSX.Element {
 
 					</defs>
 
+
 					<rect
 						fill='url(#herGriPat)'
 						height='800'
