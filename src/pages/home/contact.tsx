@@ -332,7 +332,7 @@ function ConSecCom () : React.JSX.Element {
 								className={ cssModObj.forFieLab }
 
 								htmlFor='conNamInp'
-							>{ /* What: Form Field Label Element. Why: The name field's The input needs a visible, clickable label. How: This points at conNamInp. */ }
+							>{ /* What: Form Field Label Element. Why: The name field's input needs a visible, clickable label. How: This points at conNamInp. */ }
 								Full name
 							</label>
 
@@ -360,7 +360,7 @@ function ConSecCom () : React.JSX.Element {
 								className={ cssModObj.forFieLab }
 
 								htmlFor='conComInp'
-							>{ /* What: Form Field Label Element. Why: The company field's The input needs a visible, clickable label. How: This points at conComInp. */ }
+							>{ /* What: Form Field Label Element. Why: The company field's input needs a visible, clickable label. How: This points at conComInp. */ }
 								Company / property
 							</label>
 
@@ -391,7 +391,7 @@ function ConSecCom () : React.JSX.Element {
 									className={ cssModObj.forFieLab }
 
 									htmlFor='conEmaInp'
-								>{ /* What: Form Field Label Element. Why: The email field's The input needs a visible, clickable label. How: This points at conEmaInp. */ }
+								>{ /* What: Form Field Label Element. Why: The email field's input needs a visible, clickable label. How: This points at conEmaInp. */ }
 									Email
 								</label>
 
@@ -419,7 +419,7 @@ function ConSecCom () : React.JSX.Element {
 									className={ cssModObj.forFieLab }
 
 									htmlFor='conPhoInp'
-								>{ /* What: Form Field Label Element. Why: The phone field's The input needs a visible, clickable label. How: This points at conPhoInp. */ }
+								>{ /* What: Form Field Label Element. Why: The phone field's input needs a visible, clickable label. How: This points at conPhoInp. */ }
 									Phone
 								</label>
 
@@ -450,7 +450,7 @@ function ConSecCom () : React.JSX.Element {
 								className={ cssModObj.forFieLab }
 
 								htmlFor='conSerSel'
-							>{ /* What: Form Field Label Element. Why: The service field's The dropdown needs a visible, clickable label. How: This points at conSerSel. */ }
+							>{ /* What: Form Field Label Element. Why: The service field's dropdown needs a visible, clickable label. How: This points at conSerSel. */ }
 								Service of interest
 							</label>
 
@@ -500,7 +500,7 @@ function ConSecCom () : React.JSX.Element {
 								className={ cssModObj.forFieLab }
 
 								htmlFor='conMesTex'
-							>{ /* What: Form Field Label Element. Why: The message field's The text area needs a visible, clickable label. How: This points at conMesTex. */ }
+							>{ /* What: Form Field Label Element. Why: The message field's text area needs a visible, clickable label. How: This points at conMesTex. */ }
 								Project details
 							</label>
 
