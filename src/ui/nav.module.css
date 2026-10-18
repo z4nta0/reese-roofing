@@ -6,13 +6,13 @@
  *
  * @summary
  * Styles for NavBarCom: the fixed top bar, which turns frosted once the page
- * scrolls, with the brand, the centered section links, the phone link and
- * estimate button, and at 880px wide and below the menu toggle, its drop-down
- * drawer, and the scrim that dims the page behind the drawer. The shared
- * container, button, and arrow styles the bar used to borrow from the global
- * stylesheet are copied onto its own classes here. The estimate button is a
- * version of the site's primary button with slightly narrower side padding to
- * suit the bar.
+ * scrolls, with the brand, the centered section links, and the phone link and
+ * estimate button, which give way at 880px wide and below to the menu toggle,
+ * its drop-down drawer, and the scrim that dims the page behind the drawer.
+ * The shared container, button, and arrow styles the bar used to borrow from
+ * the global stylesheet are copied onto its own classes here. The estimate
+ * button is a version of the site's primary button with slightly narrower side
+ * padding to suit the bar.
  *
  * @author z4nta0 <https://github.com/z4nta0>
  *
