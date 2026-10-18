@@ -38,7 +38,10 @@ import { test   } from '@playwright/test'; // What: Test. Why: Each route and ea
 
 // #region Constants
 
-const LIV_URL_STR = 'https://reese-roofing.netlify.app/'; // What: Live URL String. Why: The canonical and social tags must name the live address. How: This is the address they're compared with.
+const DES_MAX_NUM = 125;                                                                 // What: Description Maximum Number. Why: Mobile cards cut a summary off around 125 characters. How: Every description's length is checked against this.
+const DES_MIN_NUM = 120;                                                                 // What: Description Minimum Number. Why: Link preview checkers flag a summary under 120 characters as short. How: Every description's length is checked against this.
+const LIV_URL_STR = 'https://reese-roofing.netlify.app/';                                // What: Live URL String. Why: The canonical and social tags must name the live address. How: This is the address they're compared with.
+const RAW_TIT_STR = '<title>Reese Roofing | Portfolio Demo by techgeek.support</title>'; // What: Raw Title String. Why: Link checkers and many crawlers read the raw page without running its script. How: This is the home page's title tag as index.html must carry it.
 
 
 
@@ -128,6 +131,14 @@ for ( const rouRecObj of ROU_REC_ARR ) { // What: Route Test Loop. Why: Every ro
 		await expect( curPagObj.locator( 'meta[property="og:image"]' ) ).toHaveAttribute( 'content', `${ LIV_URL_STR }og-image.png` ); // What: Open Graph Image Assertion. Why: Link previews need an absolute image address. How: This checks it points at the live preview card.
 		await expect( curPagObj.locator( 'meta[name="twitter:card"]' ) ).toHaveAttribute( 'content', 'summary_large_image' );          // What: Twitter Card Assertion. Why: The preview card should show at its full size. How: This checks the large image layout is asked for.
 		await expect( curPagObj.getByRole( 'contentinfo' ) ).toContainText( 'Reese Roofing is a fictional company.' );                 // What: Footer Notice Assertion. Why: Visitors and AI agents reading the page itself should learn the company isn't real. How: This checks the footer's demo line.
+		await expect( curPagObj.locator( 'meta[name="description"]' ) ).toHaveCount( 1 );                                              // What: Single Description Assertion. Why: React 19 adds a rendered description beside index.html's rather than replacing it, which would leave two. How: This checks the route has exactly one.
+
+
+		const desTexStr = await curPagObj.locator( 'meta[name="description"]' ).getAttribute( 'content' ); // What: Description Text String. Why: The description's length is checked against the preview copy's bounds. How: This reads the tag's content.
+
+
+		expect( desTexStr?.length ).toBeGreaterThanOrEqual( DES_MIN_NUM ); // What: Description Minimum Assertion. Why: A short summary is flagged by link preview checkers. How: This checks it reaches DES_MIN_NUM characters.
+		expect( desTexStr?.length ).toBeLessThanOrEqual( DES_MAX_NUM );    // What: Description Maximum Assertion. Why: Mobile cards cut a long summary off. How: This checks it stays within DES_MAX_NUM characters.
 
 
 		const jsoScrArr = await curPagObj.locator( 'script[type="application/ld+json"]' ).allTextContents(); // What: JSON Script Array. Why: The structured data decides what search engines and agents think the page is. How: This reads every JSON-LD script's text.
@@ -141,6 +152,24 @@ for ( const rouRecObj of ROU_REC_ARR ) { // What: Route Test Loop. Why: Every ro
 
 
 }
+
+
+
+test( 'the raw page carries the home title and description', async ( { page : curPagObj } ) => { // What: Raw Head Test. Why: Link checkers and many crawlers read the HTML without running its script, so anything only React sets is invisible to them. How: This fetches the home page without a browser and checks its title and description.
+
+
+	const rawHtmStr = await ( await curPagObj.request.get( '/' ) ).text(); // What: Raw HTML String. Why: The page has to be read the way a script-free crawler reads it. How: This fetches the home page's HTML from the dev server without rendering it.
+
+	const rawDesStr = rawHtmStr.match( /<meta name='description'\s+content='([^']*)'/ )?.[ 1 ] ?? ''; // What: Raw Description String. Why: The description has to be in the raw page, not added later by a script. How: This reads the description tag's content from the HTML, or an empty string when it's missing.
+
+
+	expect( rawHtmStr ).toContain( RAW_TIT_STR );                     // What: Raw Title Assertion. Why: A crawler should see the home page's full title, not a bare site name. How: This checks the HTML holds the exact title tag.
+	expect( rawDesStr ).toMatch( /fictional/ );                       // What: Raw Description Assertion. Why: A crawler should see the summary that calls the company fictional. How: This checks the raw description says so.
+	expect( rawDesStr.length ).toBeGreaterThanOrEqual( DES_MIN_NUM ); // What: Raw Description Minimum Assertion. Why: The raw description is the one link previews show. How: This checks it reaches DES_MIN_NUM characters.
+	expect( rawDesStr.length ).toBeLessThanOrEqual( DES_MAX_NUM );    // What: Raw Description Maximum Assertion. Why: Mobile cards cut a long summary off. How: This checks it stays within DES_MAX_NUM characters.
+
+
+} );
 
 
 
@@ -184,12 +213,14 @@ test( 'the social preview tags are complete', async ( { page : curPagObj } ) => 
 	const socTagObj = Object.fromEntries( socTagArr ); // What: Social Tag Object. Why: Tags are easier to check by key. How: This turns the pairs into an object.
 
 
-	expect( Object.keys( socTagObj ) ).toEqual( expect.arrayContaining( SOC_KEY_ARR ) ); // What: Complete Tags Assertion. Why: A missing tag leaves part of the card blank. How: This checks every required key is present, allowing optional extras.
+	expect( Object.keys( socTagObj ) ).toEqual( expect.arrayContaining( SOC_KEY_ARR ) );       // What: Complete Tags Assertion. Why: A missing tag leaves part of the card blank. How: This checks every required key is present, allowing optional extras.
 	expect( [ socTagObj[ 'og:image' ], socTagObj[ 'og:url' ], socTagObj[ 'twitter:image' ] ] ).toEqual( [ `${ LIV_URL_STR }og-image.png`, LIV_URL_STR, `${ LIV_URL_STR }og-image.png` ] ); // What: Absolute URLs Assertion. Why: Scrapers can't resolve a relative address. How: This checks each URL tag names the live https address.
-	expect( socTagObj[ 'og:image:type' ] ).toBe( 'image/png' );                          // What: Image Type Assertion. Why: The tag has to match the file. How: This checks it names a PNG.
-	expect( socTagObj[ 'og:title' ].length ).toBeLessThanOrEqual( 60 );                  // What: Title Length Assertion. Why: Longer titles are cut off in most cards. How: This checks it stays at 60 characters or fewer.
-	expect( socTagObj[ 'og:description' ].length ).toBeGreaterThanOrEqual( 100 );        // What: Description Minimum Assertion. Why: A very short summary wastes the card's space. How: This checks it reaches 100 characters.
-	expect( socTagObj[ 'og:description' ].length ).toBeLessThanOrEqual( 125 );           // What: Description Maximum Assertion. Why: Mobile cards cut a summary off around 125 characters. How: This checks it stays at 125 characters or fewer.
+	expect( socTagObj[ 'og:image:type' ] ).toBe( 'image/png' );                                // What: Image Type Assertion. Why: The tag has to match the file. How: This checks it names a PNG.
+	expect( socTagObj[ 'og:title' ].length ).toBeLessThanOrEqual( 60 );                        // What: Title Length Assertion. Why: Longer titles are cut off in most cards. How: This checks it stays at 60 characters or fewer.
+	expect( socTagObj[ 'og:description' ].length ).toBeGreaterThanOrEqual( DES_MIN_NUM );      // What: Description Minimum Assertion. Why: Link preview checkers flag a summary under 120 characters as short. How: This checks it reaches DES_MIN_NUM characters.
+	expect( socTagObj[ 'og:description' ].length ).toBeLessThanOrEqual( DES_MAX_NUM );         // What: Description Maximum Assertion. Why: Mobile cards cut a summary off around 125 characters. How: This checks it stays within DES_MAX_NUM characters.
+	expect( socTagObj[ 'twitter:description' ].length ).toBeGreaterThanOrEqual( DES_MIN_NUM ); // What: Twitter Description Minimum Assertion. Why: X's card shows the same summary, held to the same bounds. How: This checks it reaches DES_MIN_NUM characters.
+	expect( socTagObj[ 'twitter:description' ].length ).toBeLessThanOrEqual( DES_MAX_NUM );    // What: Twitter Description Maximum Assertion. Why: X's card cuts a long summary off too. How: This checks it stays within DES_MAX_NUM characters.
 
 
 } );

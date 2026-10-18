@@ -18,8 +18,9 @@ isn't a real business, so it gets the demo treatment rather than local SEO:
   and disallows AI training and AI answer crawlers (GPTBot, ClaudeBot,
   PerplexityBot, and others). AI agents fetching the page for a person are
   left alone, since the page itself tells them it's a demo.
-- **Says what it is**: the title, description (kept to 125 characters or
-  fewer, which mobile cards show in full), Open Graph and Twitter tags, and
+- **Says what it is**: the title, description (between 120 and 125
+  characters: mobile cards show 125 in full, and preview checkers flag under
+  120 as short), Open Graph and Twitter tags, and
   `public/og-image.png` (1200x630) call it a portfolio demo by
   techgeek.support, the author meta names techgeek.support, and the footer
   says the company is fictional, linking to techgeek.support. The 404 page
@@ -46,7 +47,9 @@ isn't a real business, so it gets the demo treatment rather than local SEO:
   form-action is `'none'`, since the form only opens a mailto link. Checked
   with the built site served under the policy in all three engines, with no
   violations.
-- **Checked by** `npm run test:seo`. No off-site work (Business Profile,
+- **Checked by** `npm run test:seo`, which also reads the raw page without a
+  browser for the home title and description, and checks every route has one
+  description within the bounds. No off-site work (Business Profile,
   listings, reviews) applies.
 
 ## Directory structure
