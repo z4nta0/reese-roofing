@@ -113,7 +113,7 @@ function NotFouCom () : React.JSX.Element {
 						href='/#top'
 
 						onClick={ ( cliEveObj ) => secCliFun( cliEveObj, 'top' ) }
-					>{ /* What: Primary Button Base Anchor Element. Why: The page's main action is going back home. How: This navigates home to the hero's top without a hash, so the home page opens at its top, while a Ctrl, Cmd, or middle click opens it in a new tab. */ }
+					>{ /* What: Button Base Anchor Primary Element. Why: The page's main action is going back home. How: This navigates home to the hero's top without a hash, so the home page opens at its top, while a Ctrl, Cmd, or middle click opens it in a new tab. */ }
 						Return home <span className={ cssModObj.arrIcoSpa } aria-hidden='true'>→</span>
 					</a>
 
@@ -123,7 +123,7 @@ function NotFouCom () : React.JSX.Element {
 						href='/#contact'
 
 						onClick={ ( cliEveObj ) => secCliFun( cliEveObj, 'contact' ) }
-					>{ /* What: Ghost Button Base Anchor Element. Why: A visitor who came looking for a service can still request an estimate in one step. How: This is the estimate button, which navigates home to the contact section without a hash, while a Ctrl, Cmd, or middle click opens it in a new tab. */ }
+					>{ /* What: Button Base Anchor Ghost Element. Why: A visitor who came looking for a service can still request an estimate in one step. How: This is the estimate button, which navigates home to the contact section without a hash, while a Ctrl, Cmd, or middle click opens it in a new tab. */ }
 						Get an estimate
 					</a>
 

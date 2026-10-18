@@ -192,7 +192,7 @@ function HerSecCom () : React.JSX.Element {
 							href='/#contact'
 
 							onClick={ ( cliEveObj ) => secCliFun( cliEveObj, 'contact' ) }
-						>{ /* What: Primary Button Base Anchor Element. Why: The page's main action is requesting an estimate. How: This is the estimate button, which scrolls to the contact section without a hash, while a Ctrl, Cmd, or middle click opens it in a new tab. */ }
+						>{ /* What: Button Base Anchor Primary Element. Why: The page's main action is requesting an estimate. How: This is the estimate button, which scrolls to the contact section without a hash, while a Ctrl, Cmd, or middle click opens it in a new tab. */ }
 							Request an estimate
 							<span
 								className={ cssModObj.arrIcoSpa }
@@ -209,7 +209,7 @@ function HerSecCom () : React.JSX.Element {
 							href='/#services'
 
 							onClick={ ( cliEveObj ) => secCliFun( cliEveObj, 'services' ) }
-						>{ /* What: Ghost Button Base Anchor Element. Why: Visitors not ready for an estimate can browse first. How: This is the services button, which scrolls to the services section without a hash, while a Ctrl, Cmd, or middle click opens it in a new tab. */ }
+						>{ /* What: Button Base Anchor Ghost Element. Why: Visitors not ready for an estimate can browse first. How: This is the services button, which scrolls to the services section without a hash, while a Ctrl, Cmd, or middle click opens it in a new tab. */ }
 							Explore services
 						</a>
 

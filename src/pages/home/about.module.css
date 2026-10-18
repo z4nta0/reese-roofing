@@ -197,7 +197,7 @@
 
 
 }
-.aboStoPar--lead { /* What: Lead About Story Paragraph. Why: The founding idea opens the story larger, in display type. How: This sets it in the display font at a larger size in full ink. */
+.aboStoPar--lead { /* What: About Story Paragraph Lead. Why: The founding idea opens the story larger, in display type. How: This sets it in the display font at a larger size in full ink. */
 
 
 	color          : var( --tex-mai-col ); /* Text Main Color = #1a1f24 */

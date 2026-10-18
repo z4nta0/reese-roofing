@@ -152,7 +152,7 @@
 
 
 }
-.butBasAnc--primary { /* What: Primary Button Base Anchor. Why: Going home is the page's main action. How: This fills it with ink and paper-colored text. */
+.butBasAnc--primary { /* What: Button Base Anchor Primary. Why: Going home is the page's main action. How: This fills it with ink and paper-colored text. */
 
 
 	background : var( --bac-inv-col ); /* Background Inverse Color = #1a1f24 */
@@ -160,7 +160,7 @@
 
 
 }
-.butBasAnc--primary:hover { /* What: Hovered Primary Button Base Anchor. Why: The button should respond to the pointer. How: This turns it accent and lifts it a pixel. */
+.butBasAnc--primary:hover { /* What: Hovered Button Base Anchor Primary. Why: The button should respond to the pointer. How: This turns it accent and lifts it a pixel. */
 
 
 	background : var( --acc-mai-col ); /* Accent Main Color = #1f4e7a */
@@ -168,7 +168,7 @@
 
 
 }
-.butBasAnc--ghost { /* What: Ghost Button Base Anchor. Why: The estimate button is the page's secondary action. How: This outlines it with no fill. */
+.butBasAnc--ghost { /* What: Button Base Anchor Ghost. Why: The estimate button is the page's secondary action. How: This outlines it with no fill. */
 
 
 	border-color : var( --bor-str-col ); /* Border Strong Color = #1a1f24 @ 0.22 opacity */
@@ -176,7 +176,7 @@
 
 
 }
-.butBasAnc--ghost:hover { /* What: Hovered Ghost Button Base Anchor. Why: The button should respond to the pointer. How: This fills it with ink and turns its text paper-colored, and lifts it a pixel like the primary button. */
+.butBasAnc--ghost:hover { /* What: Hovered Button Base Anchor Ghost. Why: The button should respond to the pointer. How: This fills it with ink and turns its text paper-colored, and lifts it a pixel like the primary button. */
 
 
 	background   : var( --bac-inv-col ); /* Background Inverse Color = #1a1f24 */
