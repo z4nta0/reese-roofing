@@ -54,6 +54,8 @@ const SIT_URL_STR = 'https://reese.test';                               // What:
 
 
 
+// #region TYP_MAP_OBJ
+
 /**
  * TYP_MAP_OBJ = Type Map Object
  *
@@ -82,6 +84,8 @@ const TYP_MAP_OBJ : Record< string, string > = { // What: Type Map Object. Why: 
 
 
 };
+
+// #endregion TYP_MAP_OBJ
 
 // #endregion Constants
 
@@ -151,8 +155,7 @@ function sitHeaFun () : Record< string, string > {
  * @author z4nta0 <https://github.com/z4nta0>
  *
  * @param curPagObj - Current Page Object: The page to serve the build to.
- * @param outDirStr - Output Directory String: The folder the build was
- *                    written to.
+ * @param outDirStr - Output Directory String: {@link outDirStr}
  *
  * @returns A promise that settles once the route is in place, with no value.
  *
@@ -213,7 +216,6 @@ test.describe( 'the production build', () => { // What: Build Group. Why: The bu
 
 		outDirStr = `${ ROO_DIR_STR }tests/output/build-${ engNamStr }`; // What: Output Directory Assignment. Why: Each engine needs its own build folder. How: This names it after the engine under tests/output, which git ignores.
 
-
 		execFileSync( 'npx', [ 'vite', 'build', '--emptyOutDir', '--logLevel', 'warn', '--outDir', outDirStr ], { cwd : ROO_DIR_STR, stdio : 'inherit' } ); // What: Build Call. Why: The checks have to see what visitors download. How: This runs Vite's production build into the engine's folder, from the repo root.
 
 
@@ -221,7 +223,7 @@ test.describe( 'the production build', () => { // What: Build Group. Why: The bu
 
 
 
-	for ( const [ rouPatStr, vieWidNum, vieHeiNum, draOpeBoo ] of [ [ '/', 1440, 900, false ], [ '/missing', 1440, 900, false ], [ '/', 390, 844, true ] ] as const ) { // What: Page Loop. Why: The policy has to hold on every page and with the drawer open. How: Each row names a path, a viewport width and height, and whether to open the drawer.
+	for ( const [ rouPatStr, vieWidNum, vieHeiNum, draOpeBoo ] of [ [ '/', 1440, 900, false ], [ '/missing', 1440, 900, false ], [ '/', 390, 844, true ] ] as const ) { // What: Page Loop. Why: The policy has to hold on every page and with the drawer open. How: Each row names a path, a viewport width and height, and whether to open the drawer. // What: Type Assertion Note. Why: Each row has to keep its own types, a string, two numbers, and a boolean, not one widened union. How: The closing as const types each row as a fixed tuple.
 
 
 		test( `${ rouPatStr } at ${ vieWidNum.toLocaleString( 'en-US' ) }px${ draOpeBoo ? ' with the drawer open' : '' } runs under the security policy`, async ( { page : curPagObj } ) => { // What: Security Policy Test. Why: A style, script, or file the policy blocks would quietly break the live site, where the dev server never sends the policy. How: This serves the build with the real headers, opens the page, and checks nothing broke the policy.
