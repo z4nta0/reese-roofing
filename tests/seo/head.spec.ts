@@ -180,10 +180,10 @@ test( 'robots.txt and _headers keep the demo out of search and away from AI craw
 	const heaTexStr = await ( await curPagObj.request.get( '/_headers' ) ).text();   // What: Headers Text String. Why: Netlify reads its header rules from this file. How: This fetches it, which Vite serves as a plain file from public/.
 
 
-	expect( robTexStr ).toMatch( /^User-agent: \*\nAllow: \/$/m );                                 // What: Search Crawlers Assertion. Why: Search engines must reach the page to read its noindex. How: This checks the wildcard group allows the whole site, its rule ending at the bare slash.
-	expect( robTexStr ).toMatch( /^User-agent: GPTBot\n(?:User-agent: [^\n]*\n)*Disallow: \/$/m ); // What: AI Crawlers Assertion. Why: AI training crawlers shouldn't learn the fictional company. How: This checks a named AI crawler's group, read only through its run of user agents, disallows the whole site, its rule ending at the bare slash.
-	expect( robTexStr ).not.toMatch( /Sitemap:/i );                                                // What: No Sitemap Assertion. Why: A site kept out of search has nothing to list. How: This checks robots.txt names no sitemap.
-	expect( heaTexStr ).toMatch( /^\/\*\n\tX-Robots-Tag: noindex$/m );                             // What: Robots Header Assertion. Why: Every file, the preview image included, should carry noindex. How: This checks the site-wide header rule, its path the bare /* and its value exactly noindex.
+	expect( robTexStr ).toMatch( /^User-agent: \*\nAllow: \/$/m );                                                         // What: Search Crawlers Assertion. Why: Search engines must reach the page to read its noindex. How: This checks the wildcard group allows the whole site, its rule ending at the bare slash.
+	expect( robTexStr ).toMatch( /^User-agent: GPTBot\n(?:User-agent: [^\n]*\n)*Disallow: \/(?:\n\s*\n|\n?(?![\s\S]))/m ); // What: AI Crawlers Assertion. Why: AI training crawlers shouldn't learn the fictional company. How: This checks a named AI crawler's group, read only through its run of user agents, disallows the whole site, its rule ending at the bare slash with no rule after it, since a later Allow of the same path would win.
+	expect( robTexStr ).not.toMatch( /Sitemap:/i );                                                                        // What: No Sitemap Assertion. Why: A site kept out of search has nothing to list. How: This checks robots.txt names no sitemap.
+	expect( heaTexStr ).toMatch( /^\/\*\n\tX-Robots-Tag: noindex$/m );                                                     // What: Robots Header Assertion. Why: Every file, the preview image included, should carry noindex. How: This checks the site-wide header rule, its path the bare /* and its value exactly noindex.
 
 
 } );
@@ -195,9 +195,13 @@ test( '_headers hardens every response', async ( { page : curPagObj } ) => { // 
 
 	const heaTexStr = await ( await curPagObj.request.get( '/_headers' ) ).text();                                              // What: Headers Text String. Why: Netlify reads its header rules from this file, and the dev server doesn't apply them. How: This fetches the file itself.
 	const sitRulStr = [ ...heaTexStr.matchAll( /^\/\*\n((?:\t.*\n?)+)/gm ) ].map( ( matCurObj ) => matCurObj[ 1 ] ).join( '' ); // What: Site Rule String. Why: A header only reaches every response when it sits under a site-wide /* rule. How: This gathers the header lines of every /* block in the file.
+	const heaNamArr = sitRulStr.match( /^\t[^:]+/gm ) ?? [];                                                                    // What: Header Name Array. Why: Netlify joins a header repeated across /* blocks into one list, where a later value can win. How: This lists the name of every site-wide header line.
 
 
 	for ( const heaPatReg of SEC_HEA_ARR ) expect( sitRulStr ).toMatch( heaPatReg ); // What: Header Line Assertion Loop. Why: Each missing header is its own failure. How: This checks every pattern against the site-wide rules' header lines.
+
+
+	expect( heaNamArr ).toEqual( [ ...new Set( heaNamArr ) ] ); // What: Unique Header Assertion. Why: Each header should be set once, so no later line can weaken it. How: This checks no header name repeats.
 
 
 } );
