@@ -78,14 +78,15 @@
 .navBarHed { /* What: Navigation Bar Header. Why: The bar stays at the top of the screen over the page. How: This fixes it to the top edge, transparent until the page scrolls. */
 
 
-	background    : transparent;
-	left          : 0;
-	padding-block : var( --spa-ver-p01 ); /* Spacing Vertical Base Plus 1 ~= 19.304px */
-	position      : fixed;
-	right         : 0;
-	top           : 0;
-	transition    : backdrop-filter var( --dur-tra-p03 ) var( --mot-dec-eas ), background-color var( --dur-tra-p03 ) var( --mot-dec-eas ), border-bottom-color var( --dur-tra-p03 ) var( --mot-dec-eas ), padding-block var( --dur-tra-p03 ) var( --mot-dec-eas ); /* Duration Transition Base Plus 3 ~= 366.9ms, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ) */ /* What: Scroll Style Transition. Why: The bar should ease into its scrolled style. How: This animates the blur, background, divider color, and padding the scrolled modifier changes; padding is a layout property, but the bar's height really does shrink, which no transform can reproduce. */
-	z-index       : 2;                    /* What: Navigation Stack Level. Why: The bar has to stay above the hero's content, which sits at 1. How: This is the lowest level that clears it. */
+	background          : transparent;
+	border-bottom-color : transparent;          /* What: Divider Start Color. Why: The scrolled bar's hairline should fade in from nothing, not start fully dark. How: The bar carries no border until it scrolls, so this gives its border color a clear starting point for the transition. */
+	left                : 0;
+	padding-block       : var( --spa-ver-p01 ); /* Spacing Vertical Base Plus 1 ~= 19.304px */
+	position            : fixed;
+	right               : 0;
+	top                 : 0;
+	transition          : backdrop-filter var( --dur-tra-p03 ) var( --mot-dec-eas ), background-color var( --dur-tra-p03 ) var( --mot-dec-eas ), border-bottom-color var( --dur-tra-p03 ) var( --mot-dec-eas ), padding-block var( --dur-tra-p03 ) var( --mot-dec-eas ); /* Duration Transition Base Plus 3 ~= 366.9ms, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ) */ /* What: Scroll Style Transition. Why: The bar should ease into its scrolled style. How: This animates the blur, background, divider color, and padding the scrolled modifier changes; padding is a layout property, but the bar's height really does shrink, which no transform can reproduce. */
+	z-index             : 2;                    /* What: Navigation Stack Level. Why: The bar has to stay above the hero's content, which sits at 1. How: This is the lowest level that clears it. */
 
 
 }

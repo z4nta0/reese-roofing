@@ -24,15 +24,14 @@
 
 /* #region homConSec */
 
-.homConSec { /* What: Home Contact Section. Why: The page closes on a dark band with light text. How: This sets the ink background, the paper text color, the top rule, and the standard section padding. */
+.homConSec { /* What: Home Contact Section. Why: The page closes on a dark band with light text. How: This sets the ink background, the paper text color, and the standard section padding. */
 
 
 	--foc-rin-col : var( --acc-lig-col ); /* Accent Light Color, the accent lightened by 0.204 */ /* What: Focus Ring Color Override. Why: The navy ring would sink into this dark band. How: Every link and button inside draws its ring in the light accent instead. */
 
-	background    : var( --bac-inv-col );                            /* Background Inverse Color = #1a1f24 */
-	border-top    : var( --bor-wid-bas ) solid var( --bor-mai-col ); /* Border Width Base ~= 1.160px, Border Main Color = #1a1f24 @ 0.12 opacity */
-	color         : var( --bac-pag-col );                            /* Background Page Color = #f5f2ec */
-	padding-block : var( --sec-ver-pad );                            /* Section Vertical Padding, about 78.751px - 138.199px */
+	background    : var( --bac-inv-col ); /* Background Inverse Color = #1a1f24 */
+	color         : var( --bac-pag-col ); /* Background Page Color = #f5f2ec */
+	padding-block : var( --sec-ver-pad ); /* Section Vertical Padding, about 78.751px - 138.199px */
 	position      : relative;
 
 
