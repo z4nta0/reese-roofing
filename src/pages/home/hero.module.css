@@ -417,7 +417,7 @@
 
 /* #region butBasAnc */
 
-.butBasAnc { /* What: Button Base Anchor. Why: The hero's actions share the site's pill button shape. How: This draws a rounded pill whose height comes from its line height alone, with its label and arrow side by side, easing its colors and lift on hover. */
+.butBasAnc { /* What: Button Base Anchor. Why: The hero's actions share the site's pill button shape. How: This draws a rounded pill whose height comes from its line height alone, with its label and any arrow side by side, easing its colors and lift on hover. */
 
 
 	align-items    : center;

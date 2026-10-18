@@ -116,7 +116,7 @@ function AboSecCom () : React.JSX.Element {
 
 					<span className={ cssModObj.eyeLabSpa }>03 · About</span>{ /* What: Eyebrow Label Span Element. Why: Each section is numbered in order down the page. How: This is the section's numbered label, set in the site's eyebrow style. */ }
 
-					<h2 className={ cssModObj.aboTitHea }>{ /* What: About Title Heading Element. Why: The heading names the section. How: Its line breaks start each new line, so it reads as three lines wherever each one fits, with one word in italic. */ }
+					<h2 className={ cssModObj.aboTitHea }>{ /* What: About Title Heading Element. Why: The heading names the section. How: Its line breaks start each new line, so it reads as three lines wherever each one fits, with one word in accent italic. */ }
 						A Lawrence company<br />
 						with <em className={ cssModObj.titAccEmp }>roots</em> in<br />
 						the work.

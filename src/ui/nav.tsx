@@ -250,7 +250,7 @@ function NavBarCom () : React.JSX.Element {
 							alt=''
 						/>{ /* What: Navigation Mark Image Element. Why: The bar shows the simple logo mark beside the name. How: Its empty alt marks it decorative, since the link around it is hidden from screen readers in favor of the nav's Home link. */ }
 
-						<span className={ cssModObj.navNamSpa }>{ /* What: Navigation Name Span Element. Why: The company's name sits beside the mark. How: The second word takes a lighter weight. */ }
+						<span className={ cssModObj.navNamSpa }>{ /* What: Navigation Name Span Element. Why: The company's name sits beside the mark. How: The second word takes a lighter, italic, muted style. */ }
 							Reese <span className={ cssModObj.namLigSpa }>Roofing</span>
 						</span>
 

@@ -182,7 +182,7 @@ function ConSecCom () : React.JSX.Element {
 
 					<span className={ cssModObj.eyeLabSpa }>04 · Get in touch</span>{ /* What: Eyebrow Label Span Element. Why: Each section is numbered in order down the page. How: This is the section's numbered label, set in the site's eyebrow style. */ }
 
-					<h2 className={ cssModObj.conTitHea }>{ /* What: Contact Title Heading Element. Why: The heading invites the visitor in. How: Its line break sets the two-line shape, with one word in italic. */ }
+					<h2 className={ cssModObj.conTitHea }>{ /* What: Contact Title Heading Element. Why: The heading invites the visitor in. How: Its line break sets the two-line shape, with one word in accent italic. */ }
 						Let's talk about<br />
 						your <em className={ cssModObj.titAccEmp }>roof</em>.
 					</h2>
@@ -527,7 +527,7 @@ function ConSecCom () : React.JSX.Element {
 								className={ cssModObj.arrIcoSpa }
 
 								aria-hidden='true'
-							>{ /* What: Arrow Icon Span Element. Why: The arrow marks the button as moving the visitor onward. How: This sits right after the label, hidden from screen readers since it only decorates the label. */ }
+							>{ /* What: Arrow Icon Span Element. Why: The arrow marks the button as moving the visitor onward. How: This sits right after the label and nudges right when the button is hovered, hidden from screen readers since it only decorates the label. */ }
 								→
 							</span>
 						</button>

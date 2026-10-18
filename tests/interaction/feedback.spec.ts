@@ -26,10 +26,11 @@ import type { Page          } from '@playwright/test'; // What: Page. Why: Every
  * have a transition longer than zero, and transition its focus ring's outline,
  * and the first keyboard stop has to draw that ring at full width once it has
  * eased in. Every form field a visitor can reach has to look different once
- * focused, easing in. Under reduced motion every control keeps its hover and
- * press changes, and every field its focus change, but transitions nothing.
- * Real clicks are blocked during the checks, so pressing a link or the
- * drawer's rows never navigates or closes anything mid-check.
+ * focused and have a transition longer than zero. Under reduced motion every
+ * control keeps its hover and press changes, and every field its focus change,
+ * but transitions nothing. Real clicks are blocked during the checks, so
+ * pressing a link or the drawer's rows never navigates or closes anything
+ * mid-check.
  *
  * Sections:
  *  - Constants
@@ -321,8 +322,8 @@ async function feeProFun ( curPagObj : Page, redMotBoo : boolean ) : Promise< st
  * missing. Each field is read at rest, then focused and read again once its
  * transition has had time to finish, along with its transition durations, then
  * blurred. A field that looks the same focused is a problem, and so is one
- * whose change doesn't ease outside reduced motion, or still eases under it.
- * Fields aren't held to the hover and press checks, which the rule asks of
+ * with no transition at all outside reduced motion, or any transition under
+ * it. Fields aren't held to the hover and press checks, which the rule asks of
  * links, buttons, and cards. A field that's hidden, or inert behind the open
  * drawer, is skipped.
  *
@@ -413,7 +414,7 @@ for ( const staRecObj of STA_REC_ARR ) { // What: State Test Loop. Why: Every pa
 		await curPagObj.evaluate( cliBloFun ); // What: Click Block Call. Why: Pressing a control shouldn't navigate or close anything. How: This cancels every click from here on.
 
 
-		expect( await fieProFun( curPagObj, false ) ).toEqual( [] ); // What: No Field Problems Assertion. Why: Every field has to show it took focus, easing in. How: This compares the field problems with an empty list.
+		expect( await fieProFun( curPagObj, false ) ).toEqual( [] ); // What: No Field Problems Assertion. Why: Every field has to show it took focus and have a transition longer than zero. How: This compares the field problems with an empty list.
 		expect( await feeProFun( curPagObj, false ) ).toEqual( [] ); // What: No Feedback Problems Assertion. Why: The state passes only when every control responds. How: This compares the problems with an empty list, so a failure prints each one.
 
 
