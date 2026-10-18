@@ -47,7 +47,7 @@
 
 /* #region serHeaDiv */
 
-.serHeaDiv { /* What: Services Head Div. Why: The heading and lede open the section above the cards. How: This sets a two-column grid aligned to the bottom. */
+.serHeaDiv { /* What: Services Head Div. Why: The label, heading, and lede open the section above the cards. How: This sets a two-column grid aligned to the bottom. */
 
 
 	align-items           : end;
