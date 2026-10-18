@@ -95,7 +95,7 @@ function NavBarCom () : React.JSX.Element {
 	const [ scrPasBoo, setScrPasBoo ] = React.useState( false ); // What: Scroll Past Boolean And Setter. Why: The bar takes its scrolled style once the page moves past the top. How: This starts false and is set by the scroll listener below.
 
 	const heaBarRef = React.useRef< HTMLElement >( null );       // What: Header Bar Reference. Why: The open drawer makes everything beside the bar inert. How: This points at the bar, whose parent holds the page's other content.
-	const scrDivRef = React.useRef< HTMLDivElement >( null );    // What: Scrim Div Reference. Why: The scrim has to stay clickable while the rest of the page is inert. How: This points at the scrim, so it's left out.
+	const sciDivRef = React.useRef< HTMLDivElement >( null );    // What: Scrim Div Reference. Why: The scrim has to stay clickable while the rest of the page is inert. How: This points at the scrim, so it's left out.
 	const togButRef = React.useRef< HTMLButtonElement >( null ); // What: Toggle Button Reference. Why: Escape hands focus back to the button that opened the drawer, and a hidden toggle means the drawer no longer applies. How: This points at the menu toggle.
 
 
@@ -132,8 +132,8 @@ function NavBarCom () : React.JSX.Element {
 
 
 		const heaBarEle = heaBarRef.current!; // What: Header Bar Element. Why: The bar and its drawer stay usable. How: This reads the bar. // What: Non-Null Note. Why: TypeScript can't see the ref is attached. How: Effects run after the bar has mounted.
-		const scrDivEle = scrDivRef.current!; // What: Scrim Div Element. Why: The scrim stays clickable to close the drawer. How: This reads the scrim. // What: Non-Null Note. Why: TypeScript can't see the ref is attached. How: Effects run after the scrim has mounted.
-		const sibEleArr = Array.from( heaBarEle.parentElement!.children ).filter( ( sibCurEle ) => sibCurEle !== heaBarEle && sibCurEle !== scrDivEle ); // What: Sibling Element Array. Why: The page's main content and footer sit beside the bar. How: This lists every element sharing the bar's parent except the bar and its scrim. // What: Non-Null Note. Why: TypeScript can't see the bar has a parent. How: A mounted bar always renders inside its page's root element.
+		const sciDivEle = sciDivRef.current!; // What: Scrim Div Element. Why: The scrim stays clickable to close the drawer. How: This reads the scrim. // What: Non-Null Note. Why: TypeScript can't see the ref is attached. How: Effects run after the scrim has mounted.
+		const sibEleArr = Array.from( heaBarEle.parentElement!.children ).filter( ( sibCurEle ) => sibCurEle !== heaBarEle && sibCurEle !== sciDivEle ); // What: Sibling Element Array. Why: The page's main content and footer sit beside the bar. How: This lists every element sharing the bar's parent except the bar and its scrim. // What: Non-Null Note. Why: TypeScript can't see the bar has a parent. How: A mounted bar always renders inside its page's root element.
 		const togButEle = togButRef.current!; // What: Toggle Button Element. Why: Escape returns focus here, and its visibility says whether the drawer still applies. How: This reads the toggle. // What: Non-Null Note. Why: TypeScript can't see the ref is attached. How: Effects run after the toggle has mounted.
 
 
@@ -189,9 +189,9 @@ function NavBarCom () : React.JSX.Element {
 
 
 			<div
-				ref={ scrDivRef }
+				ref={ sciDivRef }
 
-				className={ cssModObj.navScrDiv }
+				className={ cssModObj.navSciDiv }
 
 				data-drawer-menu-open={ draOpeBoo || undefined } // What: Drawer Menu Open Attribute. Why: The scrim fades in only while the drawer is open. How: This is set only while draOpeBoo is true, and React drops it otherwise.
 

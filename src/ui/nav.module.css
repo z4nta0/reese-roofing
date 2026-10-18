@@ -20,7 +20,7 @@
 
 
 
-.navScrDiv { /* What: Navigation Scrim Div. Why: The open drawer should stand apart from a dimmed page, and the page should only dim on screens that have the drawer. How: This covers the viewport in the scrim color at the bar's stack level, hidden by default and shown below 880px, fading in while the drawer is open. */
+.navSciDiv { /* What: Navigation Scrim Div. Why: The open drawer should stand apart from a dimmed page, and the page should only dim on screens that have the drawer. How: This covers the viewport in the scrim color at the bar's stack level, hidden by default and shown below 880px, fading in while the drawer is open. */
 
 
 	background : oklch( from var( --scr-mai-col ) l c h / var( --cdn-pow-003-rec ) );                          /* Scrim Main Color = #1a1f24, Core-Design-Number to the Power of 3 Reciprocal ~= 0.430 */
@@ -34,7 +34,7 @@
 
 
 }
-.navScrDiv[data-drawer-menu-open] { /* What: Open Navigation Scrim Div. Why: The page dims while the drawer is open. How: This shows the scrim at once, then fades it in. */
+.navSciDiv[data-drawer-menu-open] { /* What: Open Navigation Scrim Div. Why: The page dims while the drawer is open. How: This shows the scrim at once, then fades it in. */
 
 
 	opacity    : 1;
@@ -46,7 +46,7 @@
 @container app ( max-width : 880px ) { /* What: Narrow Navigation Scrim Div. Why: Only screens with the drawer need the scrim. How: This applies below 880px wide. */
 
 
-	.navScrDiv { /* What: Shown Navigation Scrim Div. Why: The scrim has to exist where the drawer can open. How: This turns its display on, leaving it hidden until the drawer opens. */
+	.navSciDiv { /* What: Shown Navigation Scrim Div. Why: The scrim has to exist where the drawer can open. How: This turns its display on, leaving it hidden until the drawer opens. */
 
 
 		display : block;
@@ -59,8 +59,8 @@
 @media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Navigation Scrim Div. Why: Someone who asked for less motion shouldn't see the page fade. How: This applies only when the reduced-motion preference is set. */
 
 
-	.navScrDiv,
-	.navScrDiv[data-drawer-menu-open] { /* What: Motionless Navigation Scrim Div. Why: The dimming should simply switch on and off. How: This turns the transitions off in both states, matching the open state's own selector so it wins there too. */
+	.navSciDiv,
+	.navSciDiv[data-drawer-menu-open] { /* What: Motionless Navigation Scrim Div. Why: The dimming should simply switch on and off. How: This turns the transitions off in both states, matching the open state's own selector so it wins there too. */
 
 
 		transition : none;

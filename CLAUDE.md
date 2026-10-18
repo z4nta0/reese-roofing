@@ -84,6 +84,19 @@ so far the social preview card (see "## SEO").
   without one.
 - **Nav and Footer live in `ui/`**, since the 404 page will use them too.
 
+## Naming and formatting decisions
+Project-only decisions on top of the user-level naming and formatting rules.
+- **Scrim is `sci`** (decided 2026-10-17): the nav component already uses
+  `scr` for Scroll (`scrPasBoo`, `onScrWinFun`), so the drawer's scrim takes
+  `sci` instead (`navSciDiv`, `sciDivRef`, `sciDivEle`), keeping the two
+  apart within one component. The user-level color role `--scr-mai-col`
+  keeps its standard name, since the role names are the same in every
+  project.
+- **The About principle rows stay aligned** (decided 2026-10-07, confirmed
+  2026-10-17): `PRI_REC_ARR`'s one-line rows open with a prose-length
+  `bodStr`, but the rows' lengths are close enough that the fields after it
+  stay column-aligned rather than stopping before it.
+
 ## Cleanup plan
 Decided 2026-10-07, on the `code-cleanup` branch, after the directory
 reorganization, ESLint setup, config rebuild, and dependency upgrades.
