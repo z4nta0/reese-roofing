@@ -356,6 +356,29 @@ test( 'the logo links to the root address', async ( { page : curPagObj } ) => { 
 
 } );
 
+
+
+for ( const rouPatStr of [ '/', '/missing' ] ) { // What: Section Address Loop. Why: Section links render on the home page and the 404 page alike. How: This declares the address check once per route.
+
+
+	test( `every section link on ${ rouPatStr } names the home page's path`, async ( { page : curPagObj } ) => { // What: Section Address Test. Why: A plain click never reads a section link's address, so only a new tab or a copied link would show one written as a bare hash, which opens the 404 page again from there. How: This reads the address of every section link in the bar, its drawer, and the page's main content.
+
+
+		await opeRouFun( curPagObj, rouPatStr, DES_VIE_OBJ ); // What: Route Open Call. Why: The links are read where they render. How: This opens the route at desktop size, where the drawer's links are still in the page.
+
+
+		const hreLisArr = await curPagObj.locator( 'header a[href*="#"], main a[href*="#"]' ).evaluateAll( ( ancEleArr ) => ancEleArr.map( ( ancCurEle ) => ancCurEle.getAttribute( 'href' ) ?? '' ) ); // What: Href List Array. Why: Every section link carries a hash, while the brand and phone links don't. How: This reads the address of each link with a hash in the bar, its drawer, and the main content, leaving out the footer's back to top link, whose bare #top is meant for whichever page is showing.
+
+
+		expect( hreLisArr.length ).toBeGreaterThan( 0 );                                               // What: Links Found Assertion. Why: An empty list would pass the check below without reading anything. How: This checks section links were found.
+		expect( hreLisArr.filter( ( hreCurStr ) => !/^\/#[a-z]+$/.test( hreCurStr ) ) ).toEqual( [] ); // What: Path Address Assertion. Why: Each section link has to name the home page's path, so a new tab opened from any page lands on the section. How: This lists every address that isn't the root path and a section id, which should be none.
+
+
+	} );
+
+
+}
+
 // #endregion Navigation Checks
 
 

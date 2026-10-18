@@ -52,7 +52,7 @@ npm run typecheck  # TypeScript across src/, the configs, tests/, and design/
 ```bash
 npm test                    # every suite
 npm run test:accessibility  # axe-core plus scripted keyboard, naming, reflow, and motion checks
-npm run test:interaction    # hover, press, and focus feedback on every control and form field, plus hash-free section links and new tabs, the drawer, the form, and the 404 page
+npm run test:interaction    # hover, press, and focus feedback on every control and form field, plus hash-free section links, their /#section addresses, and new tabs, the drawer, the form, and the 404 page
 npm run test:rendering      # full-page screenshots of each page state against approved baselines
 npm run test:responsive     # both pages and the drawer from 320 to 1,920px: no sideways scroll, spill, overlap, or uneven card rows
 npm run test:seo            # head tags, structured data, the footer's demo notice and builder link, robots.txt and no sitemap, _headers (robots and security), and the preview image
