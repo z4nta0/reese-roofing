@@ -376,7 +376,7 @@
 
 /* #region priIteDiv */
 
-.priIteDiv { /* What: Principle Item Div. Why: Each principle needs a little room on its right before the next. How: This pads its right side. */
+.priIteDiv { /* What: Principle Item Div. Why: Each principle's text should stop a little short of its column's right edge, keeping clear of the principle beside it where they sit side by side above 540px wide. How: This pads its right side. */
 
 
 	padding-right : var( --spa-hor-bas ); /* Spacing Horizontal Base ~= 14.572px */

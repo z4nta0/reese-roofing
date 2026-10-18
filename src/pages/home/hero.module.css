@@ -7,13 +7,13 @@
  * @summary
  * Styles for HerSecCom: the full-height opening section over a faint, masked
  * grid, with the headline beside the ringed logo, the pitch and its two
- * buttons between hairlines, and the stats row four across, all stacking at
- * 960px wide and below, where the logo moves above the headline and the stats
- * go two across, each block rising into place in turn. The shared section,
- * container, eyebrow, display, lede, button, and arrow declarations the hero
- * used to borrow from the global stylesheet are copied onto its own classes
- * here. The section takes extra top padding to clear the fixed bar, and a
- * lighter bottom padding than the other sections.
+ * buttons between hairlines, and the stats four across, all stacking at 960px
+ * wide and below, where the logo moves above the headline and the stats go two
+ * across, each block rising into place in turn. The shared section, container,
+ * eyebrow, display, lede, button, and arrow declarations the hero used to
+ * borrow from the global stylesheet are copied onto its own classes here. The
+ * section takes extra top padding to clear the fixed bar, and a lighter bottom
+ * padding than the other sections.
  *
  * @author z4nta0 <https://github.com/z4nta0>
  *
@@ -98,7 +98,7 @@
 
 /* #region herTopDiv */
 
-.herTopDiv { /* What: Hero Top Div. Why: The headline and logo share the first row. How: This sets a two-column grid with the copy slightly wider. */
+.herTopDiv { /* What: Hero Top Div. Why: The headline and logo share the hero's top block. How: This sets a two-column grid with the copy slightly wider. */
 
 
 	align-items           : center;
@@ -344,7 +344,7 @@
 
 /* #region herBotDiv */
 
-.herBotDiv { /* What: Hero Bottom Div. Why: The pitch and the buttons share a row between hairlines, rising in after the top row. How: This sets a two-column grid with rules above and below and plays the entrance animation after a delay. */
+.herBotDiv { /* What: Hero Bottom Div. Why: The pitch and the buttons share the hero's bottom block between hairlines, rising in after the top block. How: This sets a two-column grid with rules above and below and plays the entrance animation after a delay. */
 
 
 	align-items           : end;
@@ -372,10 +372,10 @@
 
 
 }
-@media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Hero Bottom Div. Why: Someone who asked for less motion shouldn't see the row rise. How: This applies only when the reduced-motion preference is set. */
+@media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Hero Bottom Div. Why: Someone who asked for less motion shouldn't see the block rise. How: This applies only when the reduced-motion preference is set. */
 
 
-	.herBotDiv { /* What: Motionless Hero Bottom Div. Why: The row should simply be there. How: This turns the animation off. */
+	.herBotDiv { /* What: Motionless Hero Bottom Div. Why: The block should simply be there. How: This turns the animation off. */
 
 
 		animation : none;
@@ -526,7 +526,7 @@
 
 /* #region herStaDiv */
 
-.herStaDiv { /* What: Hero Stats Div. Why: The four numbers read as one row, rising in last. How: This sets a four-column grid and plays the entrance animation after the longest delay. */
+.herStaDiv { /* What: Hero Stats Div. Why: The four numbers read as one group, rising in last. How: This sets a four-column grid and plays the entrance animation after the longest delay. */
 
 
 	animation             : blockEnterFadeIn var( --dur-ani-p06 ) var( --mot-dec-eas ) var( --dur-ani-p04 ) both;           /* Duration Animation Base Plus 6 ~= 853.0ms, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ), Duration Animation Base Plus 4 ~= 486.1ms */

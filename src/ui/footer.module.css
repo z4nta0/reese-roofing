@@ -9,7 +9,7 @@
  * copyright, licensing, and demo lines in the middle, and the back-to-top link
  * on the right, stacking into one left-aligned column at 880px wide and below.
  * The shared container declarations the footer used to borrow from the global
- * stylesheet are copied onto its own row class here.
+ * stylesheet are copied onto its inner div's class here.
  *
  * @author z4nta0 <https://github.com/z4nta0>
  *
