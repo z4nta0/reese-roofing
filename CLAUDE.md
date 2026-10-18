@@ -48,8 +48,8 @@ isn't a real business, so it gets the demo treatment rather than local SEO:
   which a header checker found missing. Its CSP allows `data:` images, since
   Vite inlines the small logo mark SVG as a data URI and the select arrow is
   one; form-action is `'none'`, since the form only opens a mailto link.
-  Checked with the built site served under the policy in all three engines,
-  with no violations.
+  Checked by `npm run test:production`, which serves the built site under
+  the policy in all three engines.
 - **Checked by** `npm run test:seo`, which also reads the raw page without a
   browser for the home title and description, and checks every route has one
   description within the bounds. No off-site work (Business Profile,
@@ -167,6 +167,15 @@ the same helper, and the seo suite reads the head of each route instead.
   and whose estimate, section, and Home links reach their targets, all inside
   the router without a full page load, and whose back to top scrolls the 404
   page itself.
+- `npm run test:production`: builds the site once per engine into
+  `tests/output/build-<engine>/` and serves the build through Playwright's
+  request routing with every header the site-wide `_headers` blocks set and
+  the `_redirects` fallback, since the dev server applies neither. The home
+  page and the 404 page at desktop size, and the home page at phone size with
+  the drawer open, must each render with no Content-Security-Policy
+  violation, and the built `index.html` must ship compacted, as vite.config's
+  minifier promises: no comments, indentation, or blank lines, and its JSON-LD
+  valid on one line. Added 2026-10-18.
 - `npm run test:rendering`: compares a full-page screenshot of every state
   with its baseline in `tests/rendering/baselines/`, with zero tolerance,
   since each engine renders identically from run to run here and even a

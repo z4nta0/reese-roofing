@@ -20,12 +20,14 @@ import { fileURLToPath } from 'node:url';         // What: File URL To Path. Why
  * nothing about the others. Chromium runs as Chrome's full headless mode
  * rather than Playwright's lighter headless shell, which sometimes lost track
  * of a tab a click opened. The suites are accessibility, which the pre-commit
- * check runs, interaction, rendering, responsive, and seo. Playwright starts
- * the Vite dev server on port 5191 for the run and stops it afterwards, so a
- * dev server already running on the usual 5173 is never touched. Reports and
- * failure screenshots land in tests/output, which git ignores, while the
- * rendering suite's approved screenshots live in tests/rendering/baselines and
- * are committed.
+ * check runs, interaction, production, rendering, responsive, and seo.
+ * Playwright starts the Vite dev server on port 5191 for the run and stops it
+ * afterwards, so a dev server already running on the usual 5173 is never
+ * touched. The production suite builds the site itself and serves the build
+ * through request routing, so it never uses that server. Reports and failure
+ * screenshots land in tests/output, which git ignores, while the rendering
+ * suite's approved screenshots live in tests/rendering/baselines and are
+ * committed.
  *
  * Sections:
  *  - Constants
@@ -61,6 +63,7 @@ const SUI_NAM_ARR = [ // What: Suite Name Array. Why: Each suite lives in its ow
 
 	'accessibility', // What: Accessibility Suite. Why: The pre-commit accessibility scan runs from here. How: This names tests/accessibility.
 	'interaction',   // What: Interaction Suite. Why: Every control's feedback and the site's behavior are checked from here. How: This names tests/interaction.
+	'production',    // What: Production Suite. Why: The production build is checked under the live site's headers from here. How: This names tests/production.
 	'rendering',     // What: Rendering Suite. Why: Each page state is compared with its approved screenshot from here. How: This names tests/rendering.
 	'responsive',    // What: Responsive Suite. Why: Each page is measured across screen widths from here. How: This names tests/responsive.
 	'seo'            // What: SEO Suite. Why: The site's search and link preview setup is checked from here. How: This names tests/seo.

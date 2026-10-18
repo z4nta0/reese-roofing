@@ -12,6 +12,7 @@
 		"test": "playwright test --config tests/playwright.config.ts",
 		"test:accessibility": "playwright test --config tests/playwright.config.ts --project \"accessibility-*\"",
 		"test:interaction": "playwright test --config tests/playwright.config.ts --project \"interaction-*\"",
+		"test:production": "playwright test --config tests/playwright.config.ts --project \"production-*\"",
 		"test:rendering": "playwright test --config tests/playwright.config.ts --project \"rendering-*\"",
 		"test:responsive": "playwright test --config tests/playwright.config.ts --project \"responsive-*\"",
 		"test:seo": "playwright test --config tests/playwright.config.ts --project \"seo-*\"",

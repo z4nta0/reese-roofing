@@ -53,12 +53,13 @@ npm run typecheck  # TypeScript across src/, the configs, tests/, and design/
 npm test                    # every suite
 npm run test:accessibility  # axe-core plus scripted keyboard, naming, reflow, and motion checks
 npm run test:interaction    # hover, press, and focus feedback on every control and form field, plus hash-free section links, their /#section addresses, and new tabs, the drawer, the form, and the 404 page
+npm run test:production     # the production build served with Netlify's headers: no security policy violations, and a compacted page
 npm run test:rendering      # full-page screenshots of each page state against approved baselines
 npm run test:responsive     # both pages and the drawer from 320 to 1,920px: no sideways scroll, spill, overlap, or uneven card rows
 npm run test:seo            # head tags, structured data, the footer's demo notice and builder link, robots.txt and no sitemap, _headers (robots and security), _redirects, and the preview image
 ```
 
-Each suite runs in Chromium (as Chrome's full headless mode), Firefox, and WebKit against its own dev server on port 5191, so a dev server already running on 5173 is left alone. Reports land in `tests/output/` (git-ignored); `npx playwright show-report tests/output/report` opens the HTML report. The rendering suite's approved screenshots live in `tests/rendering/baselines/` and match to the pixel, so after a change meant to alter how a page looks, review the diff in the report, then run `npm run test:rendering -- --update-snapshots` and commit the new baselines with the change. The baselines were captured on Linux, and font rendering differs between systems, so on macOS or Windows refresh them locally before relying on the comparison. If a browser is missing, `npx playwright install chromium firefox webkit` installs all three.
+Each suite runs in Chromium (as Chrome's full headless mode), Firefox, and WebKit against its own dev server on port 5191 (the production suite serves its own build instead), so a dev server already running on 5173 is left alone. Reports land in `tests/output/` (git-ignored); `npx playwright show-report tests/output/report` opens the HTML report. The rendering suite's approved screenshots live in `tests/rendering/baselines/` and match to the pixel, so after a change meant to alter how a page looks, review the diff in the report, then run `npm run test:rendering -- --update-snapshots` and commit the new baselines with the change. The baselines were captured on Linux, and font rendering differs between systems, so on macOS or Windows refresh them locally before relying on the comparison. If a browser is missing, `npx playwright install chromium firefox webkit` installs all three.
 
 ## Build
 
@@ -85,6 +86,7 @@ public/                Files served at fixed addresses: favicons, og-image.png, 
 tests/
 ├── accessibility/     axe-core scan and scripted checks
 ├── interaction/       control feedback and site behavior checks
+├── production/        production build checks under the live site's headers
 ├── rendering/         screenshot comparisons and their baselines/
 ├── responsive/        layout checks across screen widths
 ├── seo/               head, structured data, crawler and Netlify file, and preview image checks
