@@ -130,7 +130,7 @@
 
 	--bor-wid-sma : calc( var( --ver-rhy-m12 ) * 1rem ); /* What: Border Width Small ~= 0.499px. Why: This is the scale's hairline step, which nothing on this site draws yet. How: This multiplies the m12 rhythm step by 1rem, which browsers snap to whole pixels. */
 	--bor-wid-bas : calc( var( --ver-rhy-m09 ) * 1rem ); /* What: Border Width Base ~= 1.160px. Why: This is the border width every border and divider on the site uses. How: This multiplies the m09 rhythm step by 1rem, which browsers snap to whole pixels. */
-	--bor-wid-lar : calc( var( --ver-rhy-m07 ) * 1rem ); /* What: Border Width Large ~= 2.035px. Why: This is the scale's step for heavier lines, which nothing on this site draws yet. How: This multiplies the m07 rhythm step by 1rem, which browsers snap to whole pixels. */
+	--bor-wid-lar : calc( var( --ver-rhy-m07 ) * 1rem ); /* What: Border Width Large ~= 2.035px. Why: This is the scale's step for heavier lines, which every focus ring draws. How: This multiplies the m07 rhythm step by 1rem, which browsers snap to whole pixels. */
 	--bor-wid-xla : calc( var( --ver-rhy-m05 ) * 1rem ); /* What: Border Width Extra Large ~= 3.572px. Why: This is the scale's heaviest step, which nothing on this site draws yet. How: This multiplies the m05 rhythm step by 1rem, which browsers snap to whole pixels. */
 
 	/* #endregion Border Width Tokens */
@@ -211,7 +211,7 @@
 	--mot-acc-eas : cubic-bezier( .4, 0, 1, 1 );      /* What: Motion Accelerate Easing. Why: Things leaving the screen should speed up as they go, which this site doesn't use yet. How: Transitions and animations read it as their timing function. */
 	--mot-bou-eas : cubic-bezier( .34, 1.56, .5, 1 ); /* What: Motion Bounce Easing. Why: The easing set includes a strong spring past the target for playful motion, which this site doesn't use yet. How: Transitions and animations read it as their timing function. */
 	--mot-dec-eas : cubic-bezier( .2, .7, .3, 1 );    /* What: Motion Decelerate Easing. Why: Things arriving should start fast and land softly. How: Transitions and animations read it as their timing function. */
-	--mot-ove-eas : cubic-bezier( .34, 1.2, .5, 1 );  /* What: Motion Overshoot Easing. Why: The easing set includes a gentle overshoot past the target, which this site doesn't use yet. How: Transitions and animations read it as their timing function. */
+	--mot-ove-eas : cubic-bezier( .34, 1.2, .5, 1 );  /* What: Motion Overshoot Easing. Why: The easing set includes a gentle overshoot past the target, which the submit button's sent label rises in with. How: Transitions and animations read it as their timing function. */
 	--mot-sta-eas : ease;                             /* What: Motion Standard Easing. Why: Most hovers, toggles, and fades need one ordinary, smooth curve. How: Transitions and animations read it as their timing function. */
 
 	/* #endregion Easing Tokens */
