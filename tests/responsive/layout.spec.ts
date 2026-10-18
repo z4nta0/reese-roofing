@@ -104,8 +104,8 @@ const LAY_CAS_ARR : LayCasTyp[] = [ // What: Layout Case Array. Why: Every page 
  * boxes share more than a pixel of area and neither holds the other. A grid of
  * cards (three or more visible children sharing one class) leaves uneven rows
  * when its rows hold different counts, unless the last row is a single card
- * centered in the grid, as the Card Grids rule allows. Passed to Playwright's
- * evaluate, so it can't read anything from this file.
+ * centered in the grid at the others' width, as the Card Grids rule allows.
+ * Passed to Playwright's evaluate, so it can't read anything from this file.
  *
  * @author z4nta0 <https://github.com/z4nta0>
  *
@@ -267,13 +267,19 @@ function layProFun () : string[] {
 
 
 
+		const firRecObj = carEleArr[ 0 ].getBoundingClientRect();                    // What: First Rect Object. Why: A lone last card has to keep the width the other cards share. How: This measures the first card.
 		const griRecObj = griCurEle.getBoundingClientRect();                         // What: Grid Rect Object. Why: A lone last card is judged against the grid's center. How: This measures the grid.
 		const lasRecObj = carEleArr[ carEleArr.length - 1 ].getBoundingClientRect(); // What: Last Rect Object. Why: The last card is the one that can sit alone. How: This measures it.
 		const rowCouArr = [ ...rowCouMap.values() ];                                 // What: Row Count Array. Why: The rows are compared by their card counts. How: This lists them top to bottom.
 
-		const cenOddBoo = rowCouArr[ rowCouArr.length - 1 ] === 1 && Math.abs( ( lasRecObj.left + lasRecObj.right ) / 2 - ( griRecObj.left + griRecObj.right ) / 2 ) <= 1; // What: Centered Odd Boolean. Why: The rules allow one leftover card sitting centered in its own row. How: This is true when the last row holds one card whose center is within a pixel of the grid's.
-		const lasShoBoo = rowCouArr[ rowCouArr.length - 1 ] !== rowCouArr[ 0 ];                                                                                            // What: Last Short Boolean. Why: A last row unlike the first leaves the grid uneven. How: This compares the last row's count with the first's.
-		const uneRowBoo = rowCouArr.slice( 0, -1 ).some( ( rowCouNum ) => rowCouNum !== rowCouArr[ 0 ] );                                                                  // What: Uneven Rows Boolean. Why: Every row above the last should match the first. How: This is true when any of them differs.
+		const cenLasBoo = Math.abs( ( lasRecObj.left + lasRecObj.right ) / 2 - ( griRecObj.left + griRecObj.right ) / 2 ) <= 1; // What: Centered Last Boolean. Why: A lone last card has to sit centered under the rows above it. How: This is true when its center is within a pixel of the grid's.
+		const lasShoBoo = rowCouArr[ rowCouArr.length - 1 ] !== rowCouArr[ 0 ];                                                 // What: Last Short Boolean. Why: A last row unlike the first leaves the grid uneven. How: This compares the last row's count with the first's.
+		const lonLasBoo = rowCouArr[ rowCouArr.length - 1 ] === 1;                                                              // What: Lone Last Boolean. Why: Only a single leftover card may sit in a row of its own. How: This is true when the last row holds one card.
+		const samWidBoo = Math.abs( lasRecObj.width - firRecObj.width ) <= 1;                                                   // What: Same Width Boolean. Why: The leftover card keeps the others' width, never stretched across its row. How: This is true when its width is within a pixel of the first card's.
+		const uneRowBoo = rowCouArr.slice( 0, -1 ).some( ( rowCouNum ) => rowCouNum !== rowCouArr[ 0 ] );                       // What: Uneven Rows Boolean. Why: Every row above the last should match the first. How: This is true when any of them differs.
+
+		const cenOddBoo = cenLasBoo && lonLasBoo && samWidBoo; // What: Centered Odd Boolean. Why: The rules allow one leftover card sitting centered in its own row at the others' width. How: This combines the three.
+
 
 		const shoRowBoo = uneRowBoo || ( lasShoBoo && !cenOddBoo ); // What: Short Row Boolean. Why: Uneven rows, or a short last row that isn't one centered card, break the card grid rule. How: This combines them.
 
