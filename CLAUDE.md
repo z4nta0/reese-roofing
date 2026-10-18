@@ -62,7 +62,7 @@ website with routes rather than a web app with tabs.
 ```
 src/
   main.tsx               entry point
-  app.tsx                React Router setup
+  app.tsx                React Router setup, styled by app.module.css
   vite-env.d.ts          Vite's client type declarations
   assets/                images and fonts used by 2 or more pages
   pages/

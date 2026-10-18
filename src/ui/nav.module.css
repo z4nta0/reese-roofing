@@ -84,7 +84,7 @@
 	position      : fixed;
 	right         : 0;
 	top           : 0;
-	transition    : backdrop-filter var( --dur-tra-p03 ) var( --mot-dec-eas ), background-color var( --dur-tra-p03 ) var( --mot-dec-eas ), border-bottom-color var( --dur-tra-p03 ) var( --mot-dec-eas ), padding-block var( --dur-tra-p03 ) var( --mot-dec-eas ); /* Duration Transition Base Plus 3 ~= 366.9ms, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ) */ /* What: Scroll Style Transition. Why: The bar should ease into its scrolled style. How: This animates each property the scrolled modifier changes; padding is a layout property, but the bar's height really does shrink, which no transform can reproduce. */
+	transition    : backdrop-filter var( --dur-tra-p03 ) var( --mot-dec-eas ), background-color var( --dur-tra-p03 ) var( --mot-dec-eas ), border-bottom-color var( --dur-tra-p03 ) var( --mot-dec-eas ), padding-block var( --dur-tra-p03 ) var( --mot-dec-eas ); /* Duration Transition Base Plus 3 ~= 366.9ms, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ) */ /* What: Scroll Style Transition. Why: The bar should ease into its scrolled style. How: This animates the blur, background, divider color, and padding the scrolled modifier changes; padding is a layout property, but the bar's height really does shrink, which no transform can reproduce. */
 	z-index       : 2;                    /* What: Navigation Stack Level. Why: The bar has to stay above the hero's content, which sits at 1. How: This is the lowest level that clears it. */
 
 
@@ -757,10 +757,10 @@
 
 
 }
-@media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Drawer Label Span. Why: Someone who asked for less motion shouldn't see it move. How: This applies only when the reduced-motion preference is set. */
+@media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Drawer Label Span. Why: Someone who asked for less motion shouldn't see the label fade. How: This applies only when the reduced-motion preference is set. */
 
 
-	.draLabSpa { /* What: Motionless Drawer Label Span. Why: The press and focus changes should appear at once. How: This turns the transition off. */
+	.draLabSpa { /* What: Motionless Drawer Label Span. Why: The hover and press changes should appear at once. How: This turns the transition off. */
 
 
 		transition : none;
@@ -869,10 +869,10 @@
 
 
 }
-@media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Drawer Phone Anchor. Why: Someone who asked for less motion shouldn't see it move. How: This applies only when the reduced-motion preference is set. */
+@media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Drawer Phone Anchor. Why: Someone who asked for less motion shouldn't see the color fade. How: This applies only when the reduced-motion preference is set. */
 
 
-	.draPhoAnc { /* What: Motionless Drawer Phone Anchor. Why: The press and focus changes should appear at once. How: This turns the transition off. */
+	.draPhoAnc { /* What: Motionless Drawer Phone Anchor. Why: The hover, press, and focus changes should appear at once. How: This turns the transition off. */
 
 
 		transition : none;

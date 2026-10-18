@@ -199,7 +199,7 @@ for ( const [ linLabStr, secIdeStr ] of [ [ 'Services', 'services' ], [ 'About',
 		await curPagObj.getByRole( 'banner' ).getByRole( 'link', { exact : true, name : linLabStr } ).click(); // What: Section Link Click Call. Why: This is the action under test. How: This clicks the bar's link by its label.
 
 
-		await expect.poll( async () => Math.abs( await secTopFun( curPagObj, secIdeStr ) ) ).toBeLessThan( 2 ); // What: Section Position Assertion. Why: The section should start at the top of the screen. How: This waits until its top edge sits within a pixel of the viewport's top.
+		await expect.poll( async () => Math.abs( await secTopFun( curPagObj, secIdeStr ) ) ).toBeLessThan( 2 ); // What: Section Position Assertion. Why: The section should start at the top of the screen. How: This waits until its top edge sits less than 2 pixels from the viewport's top.
 
 		await expect( curPagObj ).toHaveURL( /\/$/ ); // What: Clean Address Assertion. Why: The address bar should stay free of hashes. How: This checks the URL still ends at the root.
 
@@ -231,7 +231,7 @@ for ( const [ cliKinStr, cliOptObj ] of CLI_KIN_ARR ) { // What: Modified Click 
 
 		await expect( newTabObj.locator( '#about' ) ).toBeVisible(); // What: Section Render Wait. Why: The new tab loads the page from scratch, so the section has to exist before it's measured. How: This waits until the About section is on the page.
 
-		await expect.poll( async () => Math.abs( await secTopFun( newTabObj, 'about' ) ) ).toBeLessThan( 2 ); // What: New Tab Position Assertion. Why: The new tab should land on the section. How: This waits until the About section's top edge sits within a pixel of the viewport's top.
+		await expect.poll( async () => Math.abs( await secTopFun( newTabObj, 'about' ) ) ).toBeLessThan( 2 ); // What: New Tab Position Assertion. Why: The new tab should land on the section. How: This waits until the About section's top edge sits less than 2 pixels from the viewport's top.
 
 		await expect( newTabObj ).toHaveURL( /\/$/ ); // What: New Tab Address Assertion. Why: The new tab's hash should be cleared once used. How: This checks its URL ends at the root.
 
@@ -258,7 +258,7 @@ for ( const [ butLabStr, secIdeStr ] of [ [ 'Request an estimate', 'contact' ], 
 		await curPagObj.getByRole( 'main' ).getByRole( 'link', { name : butLabStr } ).click(); // What: Hero Button Click Call. Why: This is the action under test. How: This clicks the hero's button by its label.
 
 
-		await expect.poll( async () => Math.abs( await secTopFun( curPagObj, secIdeStr ) ) ).toBeLessThan( 2 ); // What: Section Position Assertion. Why: The section should start at the top of the screen. How: This waits until its top edge sits within a pixel of the viewport's top.
+		await expect.poll( async () => Math.abs( await secTopFun( curPagObj, secIdeStr ) ) ).toBeLessThan( 2 ); // What: Section Position Assertion. Why: The section should start at the top of the screen. How: This waits until its top edge sits less than 2 pixels from the viewport's top.
 
 		await expect( curPagObj ).toHaveURL( /\/$/ ); // What: Clean Address Assertion. Why: The address bar should stay free of hashes. How: This checks the URL still ends at the root.
 
@@ -278,7 +278,7 @@ test( 'the bar\'s estimate button scrolls to the contact section', async ( { pag
 	await curPagObj.getByRole( 'banner' ).getByRole( 'link', { name : 'Get an estimate' } ).click(); // What: Bar Estimate Click Call. Why: This is the action under test. How: This clicks the bar's estimate button.
 
 
-	await expect.poll( async () => Math.abs( await secTopFun( curPagObj, 'contact' ) ) ).toBeLessThan( 2 ); // What: Contact Position Assertion. Why: The visitor should land on the form. How: This waits until the section's top edge sits within a pixel of the viewport's top.
+	await expect.poll( async () => Math.abs( await secTopFun( curPagObj, 'contact' ) ) ).toBeLessThan( 2 ); // What: Contact Position Assertion. Why: The visitor should land on the form. How: This waits until the section's top edge sits less than 2 pixels from the viewport's top.
 
 	await expect( curPagObj ).toHaveURL( /\/$/ ); // What: Clean Address Assertion. Why: The address bar should stay free of hashes. How: This checks the URL still ends at the root.
 
@@ -414,7 +414,7 @@ for ( const [ linLabStr, secIdeStr ] of [ [ 'Home', 'top' ], [ 'Services', 'serv
 
 		await expect( curPagObj.getByRole( 'button', { name : 'Toggle menu' } ) ).toHaveAttribute( 'aria-expanded', 'false' ); // What: Drawer Closed Assertion. Why: The drawer should close once a section is picked. How: This checks the toggle reports it collapsed.
 
-		await expect.poll( async () => Math.abs( await secTopFun( curPagObj, secIdeStr ) ) ).toBeLessThan( 2 ); // What: Section Position Assertion. Why: The visitor should land on the section. How: This waits until its top edge sits within a pixel of the viewport's top.
+		await expect.poll( async () => Math.abs( await secTopFun( curPagObj, secIdeStr ) ) ).toBeLessThan( 2 ); // What: Section Position Assertion. Why: The visitor should land on the section. How: This waits until its top edge sits less than 2 pixels from the viewport's top.
 
 		await expect( curPagObj ).toHaveURL( /\/$/ ); // What: Clean Address Assertion. Why: The address bar should stay free of hashes. How: This checks the URL still ends at the root.
 
@@ -438,7 +438,7 @@ test( 'the drawer\'s estimate button closes the drawer and scrolls to the contac
 
 	await expect( curPagObj.getByRole( 'button', { name : 'Toggle menu' } ) ).toHaveAttribute( 'aria-expanded', 'false' ); // What: Drawer Closed Assertion. Why: The drawer should close once the button is used. How: This checks the toggle reports it collapsed.
 
-	await expect.poll( async () => Math.abs( await secTopFun( curPagObj, 'contact' ) ) ).toBeLessThan( 2 ); // What: Contact Position Assertion. Why: The visitor should land on the form. How: This waits until the section's top edge sits within a pixel of the viewport's top.
+	await expect.poll( async () => Math.abs( await secTopFun( curPagObj, 'contact' ) ) ).toBeLessThan( 2 ); // What: Contact Position Assertion. Why: The visitor should land on the form. How: This waits until the section's top edge sits less than 2 pixels from the viewport's top.
 
 	await expect( curPagObj ).toHaveURL( /\/$/ ); // What: Clean Address Assertion. Why: The address bar should stay free of hashes. How: This checks the URL still ends at the root.
 
@@ -456,6 +456,8 @@ test( 'widening the screen closes the drawer', async ( { page : curPagObj } ) =>
 
 	await curPagObj.setViewportSize( DES_VIE_OBJ ); // What: Widen Call. Why: This is the action under test. How: This resizes the viewport to desktop size.
 
+
+	await expect( curPagObj.locator( 'button[aria-label="Toggle menu"]' ) ).toHaveAttribute( 'aria-expanded', 'false' ); // What: Drawer Closed Assertion. Why: The drawer should close once the toggle is gone. How: This checks the hidden toggle reports the drawer collapsed, found by its label since a hidden button drops out of the accessibility tree.
 
 	await expect( curPagObj.locator( 'main' ) ).not.toHaveAttribute( 'inert' ); // What: Live Page Assertion. Why: The page has to stay usable once the toggle is gone. How: This checks the main content is no longer inert.
 
@@ -578,7 +580,7 @@ test( 'the 404 page leads to the contact section', async ( { page : curPagObj } 
 
 	await expect( curPagObj.locator( '#contact' ) ).toBeVisible(); // What: Contact Render Wait. Why: The address changes before the home page has rendered, so the section has to exist before it's measured. How: This waits until the contact section is on the page.
 
-	await expect.poll( async () => Math.abs( await secTopFun( curPagObj, 'contact' ) ) ).toBeLessThan( 2 ); // What: Contact Position Assertion. Why: The visitor should land on the form. How: This waits until the section's top edge sits within a pixel of the viewport's top.
+	await expect.poll( async () => Math.abs( await secTopFun( curPagObj, 'contact' ) ) ).toBeLessThan( 2 ); // What: Contact Position Assertion. Why: The visitor should land on the form. How: This waits until the section's top edge sits less than 2 pixels from the viewport's top.
 
 	await expect( curPagObj ).toHaveURL( /\/$/ ); // What: Clean Address Assertion. Why: The home page clears the hash once it has scrolled to the section. How: This checks the URL ends at the root.
 
@@ -600,7 +602,7 @@ for ( const [ linLabStr, secIdeStr ] of [ [ 'Services', 'services' ], [ 'About',
 
 		await expect( curPagObj.locator( `#${ secIdeStr }` ) ).toBeVisible(); // What: Section Render Wait. Why: The address changes before the home page has rendered, so the section has to exist before it's measured. How: This waits until the section is on the page.
 
-		await expect.poll( async () => Math.abs( await secTopFun( curPagObj, secIdeStr ) ) ).toBeLessThan( 2 ); // What: Section Position Assertion. Why: The visitor should land on the section. How: This waits until its top edge sits within a pixel of the viewport's top.
+		await expect.poll( async () => Math.abs( await secTopFun( curPagObj, secIdeStr ) ) ).toBeLessThan( 2 ); // What: Section Position Assertion. Why: The visitor should land on the section. How: This waits until its top edge sits less than 2 pixels from the viewport's top.
 
 		await expect( curPagObj ).toHaveURL( /\/$/ ); // What: Clean Address Assertion. Why: The home page clears the hash once it has scrolled to the section. How: This checks the URL ends at the root.
 

@@ -172,7 +172,7 @@ async function conLisFun ( curPagObj : Page ) : Promise< ElementHandle< Element 
  *
  * @example
  * ```ts
- * handle.evaluate(sigEleFun) // => 'rgb(...),rgba(...),none,1,...|...'
+ * handle.evaluate(sigEleFun) // => 'rgb(...),rgba(...),rgb(...),none,1|...'
  * ```
  *
 */
