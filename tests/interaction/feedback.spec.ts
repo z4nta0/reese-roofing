@@ -25,9 +25,11 @@ import type { Page          } from '@playwright/test'; // What: Page. Why: Every
  * while hovered than at rest, look different again while pressed, have a
  * transition longer than zero, and transition its focus ring's outline, and
  * the first keyboard stop has to draw that ring at full width once it has
- * eased in. Under reduced motion every control keeps its hover change but
- * transitions nothing. Real clicks are blocked during the checks, so pressing
- * a link or the drawer's rows never navigates or closes anything mid-check.
+ * eased in. Every form field a visitor can reach has to look different once
+ * focused, easing in. Under reduced motion every control keeps its hover
+ * change, and every field its focus change, but transitions nothing. Real
+ * clicks are blocked during the checks, so pressing a link or the drawer's
+ * rows never navigates or closes anything mid-check.
  *
  * Sections:
  *  - Constants
@@ -305,6 +307,95 @@ async function feeProFun ( curPagObj : Page, redMotBoo : boolean ) : Promise< st
 
 // #endregion feeProFun
 
+
+
+// #region fieProFun
+
+/**
+ * fieProFun = Field Problems Function
+ *
+ * @summary
+ * Probes every form field a visitor can reach for the feedback the rule asks
+ * of a field, a visible change when it takes focus, and returns what's
+ * missing. Each field is read at rest, then focused and read again once its
+ * transition has had time to finish, along with its transition durations,
+ * then blurred. A field that looks the same focused is a problem, and so is
+ * one whose change doesn't ease outside reduced motion, or still eases under
+ * it. Fields aren't held to the hover and press checks, which the rule asks
+ * of links, buttons, and cards. A field that's hidden, or inert behind the
+ * open drawer, is skipped.
+ *
+ * @author z4nta0 <https://github.com/z4nta0>
+ *
+ * @param curPagObj - Current Page Object: The page whose fields are probed.
+ * @param redMotBoo - Reduced Motion Boolean: Whether the page is emulating
+ *                    reduced motion, which decides whether a field should
+ *                    ease.
+ *
+ * @returns A promise that resolves with every problem found.
+ * @see {@link proLisArr}
+ *
+ * @example
+ * ```ts
+ * fieProFun(page, false) // => [ 'input "conNamInp" looks the same focused' ]
+ * ```
+ *
+*/
+
+async function fieProFun ( curPagObj : Page, redMotBoo : boolean ) : Promise< string[] > {
+
+
+	const proLisArr : string[] = []; // What: Problem List Array. Why: Every problem should be reported, not just the first. How: This collects them.
+
+
+
+	for ( const fieCurObj of await curPagObj.$$( 'input, select, textarea' ) ) { // What: Field Probe Loop. Why: Every field has to show it took focus. How: This reads each one at rest and focused.
+
+
+		const fieReaBoo = await fieCurObj.evaluate( ( fieCurEle ) => fieCurEle.getClientRects().length > 0 && !fieCurEle.closest( '[inert]' ) ); // What: Field Reachable Boolean. Why: A hidden or inert field can't take focus. How: This is true when the field is rendered outside inert content.
+
+
+		if ( !fieReaBoo ) continue; // What: Unreachable Field Guard. Why: Only fields a visitor can reach are judged. How: This skips the rest.
+
+
+
+		const fieDesStr = await fieCurObj.evaluate( ( fieCurEle ) => `${ fieCurEle.tagName.toLowerCase() } "${ fieCurEle.id }"` );                              // What: Field Description String. Why: A problem should name the field. How: This joins its tag and its id.
+		const resSigStr = await fieCurObj.evaluate( sigEleFun ) + await fieCurObj.evaluate( ( fieCurEle ) => getComputedStyle( fieCurEle ).borderBottomColor ); // What: Rest Signature String. Why: The focused look is compared with the field at rest. How: This reads its signature plus its underline color, which a field's focus changes.
+
+
+		await fieCurObj.focus(); // What: Field Focus Call. Why: The focused look is the one being checked. How: This moves focus onto the field.
+
+		await curPagObj.waitForTimeout( SET_WAI_NUM ); // What: Focus Settle Wait. Why: The focused look is read once its transition has finished. How: This pauses for the settle time.
+
+
+		const focSigStr = await fieCurObj.evaluate( sigEleFun ) + await fieCurObj.evaluate( ( fieCurEle ) => getComputedStyle( fieCurEle ).borderBottomColor ); // What: Focus Signature String. Why: The field should look different once it has focus. How: This reads the same signature while it's focused.
+		const traDurStr = await fieCurObj.evaluate( ( fieCurEle ) => getComputedStyle( fieCurEle ).transitionDuration );                                        // What: Transition Duration String. Why: The change should ease, or switch at once under reduced motion. How: This reads the field's transition durations.
+
+
+		await fieCurObj.evaluate( ( fieCurEle ) => ( fieCurEle as HTMLElement ).blur() ); // What: Field Blur Call. Why: The next field starts from a page with nothing focused. How: This takes focus off the field. // What: Type Assertion Note. Why: The handle types as a plain Element. How: Every element the selector matches is a form field, an HTMLElement.
+
+
+
+		if ( resSigStr === focSigStr ) proLisArr.push( `${ fieDesStr } looks the same focused` ); // What: Focus Change Check. Why: A focused field has to show it. How: This records one that doesn't change.
+
+
+
+		if ( redMotBoo && !/^0s(, 0s)*$/.test( traDurStr ) ) proLisArr.push( `${ fieDesStr } still transitions under reduced motion (${ traDurStr })` ); // What: Reduced Motion Check. Why: Asking for less motion should stop every transition. How: This records a field with any duration above zero.
+
+		else if ( !redMotBoo && /^0s(, 0s)*$/.test( traDurStr ) ) proLisArr.push( `${ fieDesStr } has no transition` ); // What: Field Ease Check. Why: A field's focus change should ease rather than snap. How: This records a field whose every transition duration is zero.
+
+
+	}
+
+
+
+	return proLisArr; // What: Problem List Return. Why: The feedback tests fail on any recorded problem. How: This hands back every field whose focus feedback fell short.
+
+
+}
+
+// #endregion fieProFun
+
 // #endregion Helpers
 
 
@@ -322,6 +413,7 @@ for ( const staRecObj of STA_REC_ARR ) { // What: State Test Loop. Why: Every pa
 		await curPagObj.evaluate( cliBloFun ); // What: Click Block Call. Why: Pressing a control shouldn't navigate or close anything. How: This cancels every click from here on.
 
 
+		expect( await fieProFun( curPagObj, false ) ).toEqual( [] ); // What: No Field Problems Assertion. Why: Every field has to show it took focus, easing in. How: This compares the field problems with an empty list.
 		expect( await feeProFun( curPagObj, false ) ).toEqual( [] ); // What: No Feedback Problems Assertion. Why: The state passes only when every control responds. How: This compares the problems with an empty list, so a failure prints each one.
 
 
@@ -356,6 +448,7 @@ for ( const staRecObj of STA_REC_ARR ) { // What: State Test Loop. Why: Every pa
 		await curPagObj.evaluate( cliBloFun ); // What: Click Block Call. Why: Pressing a control shouldn't navigate or close anything. How: This cancels every click from here on.
 
 
+		expect( await fieProFun( curPagObj, true ) ).toEqual( [] ); // What: No Reduced Motion Field Problems Assertion. Why: Every field has to show it took focus without easing. How: This compares the field problems with an empty list.
 		expect( await feeProFun( curPagObj, true ) ).toEqual( [] ); // What: No Reduced Motion Problems Assertion. Why: Every control has to respond without moving. How: This compares the problems with an empty list, so a failure prints each one.
 
 
