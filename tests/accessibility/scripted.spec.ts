@@ -629,8 +629,7 @@ test( 'sending the form plays no motion under reduced motion', async ( { page : 
 
 	await curPagObj.evaluate( () => { ( Reflect.get( window, 'motLisArr' ) as string[] ).length = 0; } ); // What: Motion List Clear Call. Why: Loading is the state check's job, so only motion from sending should count here. How: This empties the recorder's list. // What: Type Assertion Note. Why: Reflect.get types the global as unknown. How: motRecFun stores a string array there.
 
-	await curPagObj.locator( '#conNamInp' ).fill( 'Pat Doe' ); // What: Name Fill Call. Why: A real request carries a name. How: This types one into the name field.
-
+	await curPagObj.locator( '#conNamInp' ).fill( 'Pat Doe' );         // What: Name Fill Call. Why: A real request carries a name. How: This types one into the name field.
 	await curPagObj.locator( '#conEmaInp' ).fill( 'pat@example.com' ); // What: Email Fill Call. Why: A real request carries an email. How: This types one into the email field.
 
 	await curPagObj.getByRole( 'button', { name : 'Send request' } ).click(); // What: Send Click Call. Why: This is the action under test. How: This clicks the submit button.
