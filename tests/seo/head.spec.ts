@@ -57,7 +57,9 @@ const RAW_TIT_STR = '<title>Reese Roofing | Portfolio Demo by techgeek.dev</titl
  * @summary
  * Every route the head checks visit, each with the title it must show. Every
  * row shares one shape, so its fields carry no comments of their own:
+ *
  * - `patStr` (String): Path String, the route loaded from the dev server.
+ *
  * - `titStr` (String): Title String, the exact title the route must show.
  *
  * @author z4nta0 <https://github.com/z4nta0>

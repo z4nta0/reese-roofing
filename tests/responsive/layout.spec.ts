@@ -63,8 +63,11 @@ type LayCasTyp = { // What: Layout Case Type. Why: Each test measures one page i
  * Every case the layout test measures: the home page, the 404 page, and the
  * home page with the drawer open. Every row shares the {@link LayCasTyp}
  * shape, so its fields carry no comments of their own:
+ *
  * - `draBoo` (Boolean): Drawer Boolean, true when the case opens the drawer.
+ *
  * - `ideStr` (String): Identifier String, the case's name in test titles.
+ *
  * - `patStr` (String): Path String, the route loaded from the dev server.
  *
  * @author z4nta0 <https://github.com/z4nta0>
