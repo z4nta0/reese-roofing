@@ -23,7 +23,8 @@ import tseslint   from 'typescript-eslint';         // What: TypeScript ESLint. 
  * component reference a rename missed. ESLint's own no-undef is left off, as
  * typescript-eslint recommends, since TypeScript already reports every
  * undefined name and no-undef can't see TypeScript's type-only names. Every
- * .tsx file also gets the React Hooks plugin's recommended rules, minus the
+ * .tsx file, and every .ts file under src/ (where a custom hook with no JSX
+ * lives), also gets the React Hooks plugin's recommended rules, minus the
  * four React Compiler readiness rules, which only matter to a site built with
  * the React Compiler, which this one isn't. Generated output (dist/ and
  * tests/output/) is ignored. npm run lint runs it across the repo, and an
@@ -42,7 +43,7 @@ import tseslint   from 'typescript-eslint';         // What: TypeScript ESLint. 
 
 // #region Constants
 
-const ESL_CON_ARR = [ // What: ESLint Config Array. Why: ESLint reads its flat config as an array of objects, each scoped to the files it lists. How: This holds the build-output ignore, typescript-eslint's recommended configs and two rule overrides, the src/ undefined-component config, and the .tsx hooks config.
+const ESL_CON_ARR = [ // What: ESLint Config Array. Why: ESLint reads its flat config as an array of objects, each scoped to the files it lists. How: This holds the build-output ignore, typescript-eslint's recommended configs and two rule overrides, the src/ undefined-component config, and the hooks config.
 
 
 	{ ignores : [ 'dist/**', 'tests/output/**' ] }, // What: Ignores Object. Why: The build output and the test suites' reports are generated, not hand-written, so their lint results mean nothing. How: This global ignores entry skips both folders for every config below; one glob each, since braces break ESLint's matching here.
@@ -85,17 +86,17 @@ const ESL_CON_ARR = [ // What: ESLint Config Array. Why: ESLint reads its flat c
 
 	},
 
-	{ // What: JSX Config Object. Why: Hook calls in components follow rules of their own. How: This adds the React Hooks recommended rules for every .tsx file.
+	{ // What: JSX Config Object. Why: Hook calls in components and custom hooks follow rules of their own. How: This adds the React Hooks recommended rules for every .tsx file and the site's own .ts files.
 
 
-		files   : [ '**/*.tsx' ],                        // What: Files. Why: Hooks only appear in .tsx files. How: This matches every one of them.
+		files   : [ 'src/**/*.ts', '**/*.tsx' ],         // What: Files. Why: Components live in .tsx files, but a custom hook with no JSX lives in a .ts file (section-link.ts), and its calls need the same checks; the tests and configs stay out, since Playwright's test.use would read as React's use hook. How: This matches every .tsx file and the .ts files under src/.
 		plugins : { react, 'react-hooks' : reactHooks }, // What: Plugins. Why: The hooks rules come from the React Hooks plugin. How: This registers it beside the React plugin.
 
-		languageOptions : { // What: Language Options. Why: These files are TypeScript with JSX. How: This sets the TypeScript parser and turns on JSX parsing.
+		languageOptions : { // What: Language Options. Why: These files are TypeScript, the .tsx ones with JSX. How: This sets the TypeScript parser and turns on JSX parsing, which the parser applies only to .tsx files.
 
 
 			parser        : tseslint.parser,                   // What: Parser. Why: ESLint's default parser can't read TypeScript. How: This sets typescript-eslint's parser.
-			parserOptions : { ecmaFeatures : { jsx : true } }, // What: Parser Options. Why: These files contain JSX. How: This turns on JSX parsing.
+			parserOptions : { ecmaFeatures : { jsx : true } }  // What: Parser Options. Why: The .tsx files contain JSX. How: This turns on JSX parsing.
 
 
 		},
