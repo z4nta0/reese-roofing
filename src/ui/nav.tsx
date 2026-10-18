@@ -403,7 +403,7 @@ function NavBarCom () : React.JSX.Element {
 					>{ /* What: Drawer Contact Div Element. Why: The drawer ends with every way to reach the company, since the bar's phone link and estimate button are hidden at 880px wide and below. How: This stacks a label, the phone number, the hours, and the estimate button, drawn only in the drawer, which opens only at 880px wide and below. */ }
 
 
-						<span className={ cssModObj.eyeLabSpa }>Call us</span>{ /* What: Eyebrow Label Span Element. Why: A small label introduces the contact block like the sections' labels. How: This reads in tracked, muted capitals with a leading line. */ }
+						<span className={ cssModObj.eyeLabSpa }>Call us</span>{ /* What: Eyebrow Label Span Element. Why: A small label introduces the contact block like the sections' labels. How: This reads in tracked, muted capitals with a leading line, drawn only in the drawer, which opens only at 880px wide and below. */ }
 
 						<a
 							className={ cssModObj.draPhoAnc }

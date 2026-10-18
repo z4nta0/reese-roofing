@@ -82,9 +82,10 @@ const PRI_REC_ARR = [ // What: Principle Record Array. Why: The principles row i
  * Renders the about section: on the left, the numbered label, heading, and a
  * decorative logo seal; on the right, the company's story in three paragraphs
  * and a pull quote from the family, stacking at 960px wide and below, where
- * the seal is hidden. Below, the principles row numbers each row of
- * PRI_REC_ARR by its position, padded to two digits. The section carries the
- * about anchor the navigation links lead to.
+ * the seal is hidden. Below, the principles, four across, two at 960px wide
+ * and below, and one at 540px and below, number each row of PRI_REC_ARR by its
+ * position, padded to two digits. The section carries the about anchor the
+ * navigation links lead to.
  *
  * @author z4nta0 <https://github.com/z4nta0>
  *
@@ -184,7 +185,7 @@ function AboSecCom () : React.JSX.Element {
 							it's not the place to overspend. Our job is to find the line.
 						</p>
 
-						<footer className={ cssModObj.aboQuoFoo }>The Reese family</footer>{ /* What: About Quote Footer Element. Why: The quote names who said it. How: This sets it in tracked, muted capitals at body size, lined up with the quote, indented with it until 540px wide and below. */ }
+						<footer className={ cssModObj.aboQuoFoo }>The Reese family</footer>{ /* What: About Quote Footer Element. Why: The quote names who said it. How: This sets it in tracked, muted capitals at body size, lined up with the quote, indented with it above 540px wide and unindented with it at 540px and below. */ }
 
 
 					</blockquote>
@@ -197,7 +198,7 @@ function AboSecCom () : React.JSX.Element {
 
 
 
-			<div className={ cssModObj.pagConDiv }>{ /* What: Page Container Div Element. Why: The principles row should line up with the page's content width. How: This holds the row. */ }
+			<div className={ cssModObj.pagConDiv }>{ /* What: Page Container Div Element. Why: The principles should line up with the page's content width. How: This holds their grid. */ }
 
 
 				<div className={ cssModObj.aboPriDiv }>{ /* What: About Principles Div Element. Why: The company's four principles read best side by side. How: This lays out one principle per row of PRI_REC_ARR, four across, two across at 960px wide and below, and one at 540px and below. */ }

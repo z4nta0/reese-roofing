@@ -44,10 +44,11 @@ import { useSecCliFun } from '../../ui/section-link.ts'; // What: Use Section Cl
  * Renders the hero: a decorative grid drawn as a repeating SVG pattern behind
  * everything, the location label and headline beside the full logo, which
  * moves above them at 960px wide and below, the pitch paragraph with the
- * estimate and services buttons, and the stats row. The section carries the
- * page's top anchor, so the navigation bar's and drawer's Home links, the home
- * page footer's back-to-top link, and the 404 page's Return home button all
- * land here.
+ * estimate and services buttons, and the four stats, in one row above 960px
+ * wide and two to a row at 960px and below. The section carries the page's top
+ * anchor, so the navigation bar's and drawer's Home links, the home page
+ * footer's back-to-top link, and the 404 page's Return home button all land
+ * here.
  *
  * @author z4nta0 <https://github.com/z4nta0>
  *

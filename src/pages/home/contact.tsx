@@ -159,7 +159,7 @@ function ConSecCom () : React.JSX.Element {
 		window.location.href = `mailto:hello@reeseroofing.example?subject=${ sujEncStr }&body=${ bodEncStr }`; // What: Mailto Navigation Assignment. Why: The visitor's email app sends the request. How: This opens a new email to the company with the subject and body filled in.
 
 
-		setSenReqBoo( true ); // What: Sent Request Set Call. Why: The button should confirm the email is opening. How: This switches its label.
+		setSenReqBoo( true ); // What: Sent Request Set Call. Why: The button and the status region should confirm the email is opening. How: This switches the button's label and gives the status region its message.
 
 
 	};
