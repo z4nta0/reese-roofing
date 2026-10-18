@@ -25,8 +25,9 @@ import { test   } from '@playwright/test'; // What: Test. Why: Each route and ea
  * is served, and Netlify's _headers sends noindex with every file. It also
  * checks the social preview tags are complete and call it a demo, and the
  * image is the 1,200x630 card under 300 KB the tags promise, and that _headers
- * sends each of the security headers a header checker looks for, once, since
- * the dev server never applies them.
+ * sends each of the security headers a header checker looks for, once, and
+ * that _redirects sends every unknown path to the app, since the dev server
+ * never applies either file.
  *
  * Sections:
  *  - Constants
@@ -206,6 +207,19 @@ test( '_headers hardens every response', async ( { page : curPagObj } ) => { // 
 
 
 	expect( heaNamArr ).toEqual( [ ...new Set( heaNamArr ) ] ); // What: Unique Header Assertion. Why: Each header should be set once, so no later line can weaken it. How: This checks no header name repeats.
+
+
+} );
+
+
+
+test( '_redirects sends every unknown path to the app', async ( { page : curPagObj } ) => { // What: Redirects Test. Why: The dev server answers every unknown path with the page on its own, so only this file makes Netlify do the same, letting the router show the 404 page. How: This reads the file and checks its fallback rule.
+
+
+	const redTexStr = await ( await curPagObj.request.get( '/_redirects' ) ).text(); // What: Redirects Text String. Why: Netlify reads its rewrite rules from this file. How: This fetches it, which Vite serves as a plain file from public/.
+
+
+	expect( redTexStr ).toMatch( /^\/\*\s+\/index\.html\s+200$/m ); // What: Fallback Rule Assertion. Why: Every path without a file of its own has to load the app with a 200, not a redirect or the host's own 404. How: This checks the rule rewrites every path to index.html with a 200 status.
 
 
 } );

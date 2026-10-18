@@ -55,7 +55,7 @@ npm run test:accessibility  # axe-core plus scripted keyboard, naming, reflow, a
 npm run test:interaction    # hover, press, and focus feedback on every control and form field, plus hash-free section links, their /#section addresses, and new tabs, the drawer, the form, and the 404 page
 npm run test:rendering      # full-page screenshots of each page state against approved baselines
 npm run test:responsive     # both pages and the drawer from 320 to 1,920px: no sideways scroll, spill, overlap, or uneven card rows
-npm run test:seo            # head tags, structured data, the footer's demo notice and builder link, robots.txt and no sitemap, _headers (robots and security), and the preview image
+npm run test:seo            # head tags, structured data, the footer's demo notice and builder link, robots.txt and no sitemap, _headers (robots and security), _redirects, and the preview image
 ```
 
 Each suite runs in Chromium (as Chrome's full headless mode), Firefox, and WebKit against its own dev server on port 5191, so a dev server already running on 5173 is left alone. Reports land in `tests/output/` (git-ignored); `npx playwright show-report tests/output/report` opens the HTML report. The rendering suite's approved screenshots live in `tests/rendering/baselines/` and match to the pixel, so after a change meant to alter how a page looks, review the diff in the report, then run `npm run test:rendering -- --update-snapshots` and commit the new baselines with the change. The baselines were captured on Linux, and font rendering differs between systems, so on macOS or Windows refresh them locally before relying on the comparison. If a browser is missing, `npx playwright install chromium firefox webkit` installs all three.
