@@ -281,7 +281,7 @@ function layProFun () : string[] {
 		const cenOddBoo = cenLasBoo && lonLasBoo && samWidBoo; // What: Centered Odd Boolean. Why: The rules allow one leftover card sitting centered in its own row at the others' width. How: This combines the three.
 
 
-		const shoRowBoo = uneRowBoo || ( lasShoBoo && !cenOddBoo ); // What: Short Row Boolean. Why: Uneven rows, or a short last row that isn't one centered card, break the card grid rule. How: This combines them.
+		const shoRowBoo = uneRowBoo || ( lasShoBoo && !cenOddBoo ); // What: Short Row Boolean. Why: Uneven rows, or a short last row that isn't one centered card at the others' width, break the card grid rule. How: This combines them.
 
 
 		if ( shoRowBoo ) proLisArr.push( `${ desEleFun( griCurEle ) } leaves uneven rows (${ rowCouArr.join( ', ' ) })` ); // What: Card Row Check. Why: Every row of a card grid should hold the same number of cards. How: This records a grid with uneven rows, listing each row's count.

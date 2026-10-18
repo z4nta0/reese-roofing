@@ -40,11 +40,12 @@ import { useSecCliFun } from '../../ui/section-link.ts'; // What: Use Section Cl
  * HerSecCom = Hero Section Component
  *
  * @summary
- * Renders the hero: a decorative grid drawn as a repeating SVG pattern
- * behind everything, the location label and headline beside the full logo,
- * the pitch paragraph with the estimate and services buttons, and the stats
- * row. The section carries the page's top anchor, so the navigation bar's
- * Home link and the footer's back-to-top link both land here.
+ * Renders the hero: a decorative grid drawn as a repeating SVG pattern behind
+ * everything, the location label and headline beside the full logo, the pitch
+ * paragraph with the estimate and services buttons, and the stats row. The
+ * section carries the page's top anchor, so the navigation bar's Home link,
+ * the footer's back-to-top link, and the 404 page's Return home button all
+ * land here.
  *
  * @author z4nta0 <https://github.com/z4nta0>
  *
@@ -73,7 +74,7 @@ function HerSecCom () : React.JSX.Element {
 			id='top'
 
 			className={ cssModObj.homHerSec }
-		>{ /* What: Home Hero Section Element. Why: This opens the home page. How: Its top id is the anchor the home page's links back to the top target, kept as is since it appears in the page's URL. */ }
+		>{ /* What: Home Hero Section Element. Why: This opens the home page. How: Its top id is the anchor every link back to the home page's top targets, kept as is since it appears in the page's URL. */ }
 
 
 			<div

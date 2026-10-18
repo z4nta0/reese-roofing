@@ -126,7 +126,7 @@ function AboSecCom () : React.JSX.Element {
 						className={ cssModObj.aboSeaDiv }
 
 						aria-hidden='true'
-					>{ /* What: About Seal Div Element. Why: The full logo works as a seal beside the story. How: This frames it and hides it from screen readers, since it's decorative. */ }
+					>{ /* What: About Seal Div Element. Why: The full logo works as a seal beside the story. How: This holds it at a capped, slightly faded size and hides it from screen readers, since it's decorative. */ }
 
 
 						<img
@@ -175,7 +175,7 @@ function AboSecCom () : React.JSX.Element {
 
 						<span className={ cssModObj.quoMarSpa }>&ldquo;</span>{ /* What: Quote Mark Span Element. Why: An oversized opening quote mark sets the quote apart. How: This draws it as its own styled character. */ }
 
-						<p className={ cssModObj.aboQuoPar }>{ /* What: About Quote Paragraph Element. Why: This is the quote itself. How: Its text sits inside the blockquote's styling. */ }
+						<p className={ cssModObj.aboQuoPar }>{ /* What: About Quote Paragraph Element. Why: This is the quote itself. How: This sets it in large display italic, indented past the quote mark. */ }
 							The roof above your operation is not the place to cut corners, and
 							it&apos;s not the place to overspend. Our job is to find the line.
 						</p>

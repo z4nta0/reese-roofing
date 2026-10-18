@@ -155,7 +155,8 @@ the same helper, and the seo suite reads the head of each route instead.
   new tab), every way the drawer opens and closes, the contact form's sent
   label and mailto link (the mailto test is Chromium-only, through the
   DevTools Protocol), and the 404 page, whose Return home opens the home page
-  at its top and whose estimate, section, and Home links reach their targets.
+  at its top and whose estimate, section, and Home links reach their targets,
+  all inside the router without a full page load.
 - `npm run test:rendering`: compares a full-page screenshot of every state
   with its baseline in `tests/rendering/baselines/`, with zero tolerance,
   since each engine renders identically from run to run here and even a
@@ -168,9 +169,10 @@ the same helper, and the seo suite reads the head of each route instead.
   breakpoint included), failing on sideways scrolling, an unclipped element
   past either edge, text spilling its box, two reachable controls overlapping,
   or a card grid leaving uneven rows (the hero stats, the services, and the
-  principles), apart from the Card Grids rule's single centered card. It found
-  the bar's links running into the phone number just above the drawer
-  breakpoint, fixed by returning the links to the bar's flex row.
+  principles), apart from the Card Grids rule's single centered card, kept at
+  the others' width. It found the bar's links running into the phone number
+  just above the drawer breakpoint, fixed by returning the links to the bar's
+  flex row.
 - `npm run test:seo`: checks each route's title, description, robots,
   canonical, social tags, and structured data, the footer's demo line,
   `robots.txt`, `_headers` (its robots rule and every security header), and
