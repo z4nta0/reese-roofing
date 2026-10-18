@@ -19,10 +19,10 @@ import { useSecCliFun } from './section-link.ts'; // What: Use Section Click Fun
  *
  * @summary
  * The site's top navigation bar, shared by every page. It holds the brand
- * link, the section links, and the phone number and estimate button, which
- * give way at 880px wide and below to a menu toggle that opens a drawer
- * repeating the links. It switches to its scrolled style once the page moves
- * past the top.
+ * link, the section links, the phone number, and the estimate button. At 880px
+ * wide and below, the links, the phone number, and the button give way to a
+ * menu toggle that opens a drawer repeating all three. It switches to its
+ * scrolled style once the page moves past the top.
  *
  * Sections:
  *  - Constants
