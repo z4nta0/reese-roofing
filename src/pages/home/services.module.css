@@ -26,7 +26,6 @@
 	background    : var( --bac-pag-col );                            /* Background Page Color = #f5f2ec */
 	border-top    : var( --bor-wid-bas ) solid var( --bor-mai-col ); /* Border Width Base ~= 1.160px, Border Main Color = #1a1f24 @ 0.12 opacity */
 	padding-block : var( --sec-ver-pad );                            /* Section Vertical Padding, about 78.751px - 138.199px */
-	position      : relative;
 
 
 }
@@ -212,7 +211,6 @@
 	border-bottom : var( --bor-wid-bas ) solid var( --bor-str-col );                /* Border Width Base ~= 1.160px, Border Strong Color = #1a1f24 @ 0.22 opacity */
 	border-right  : var( --bor-wid-bas ) solid var( --bor-str-col );                /* Border Width Base ~= 1.160px, Border Strong Color = #1a1f24 @ 0.22 opacity */
 	padding       : var( --spa-ver-p04 ) var( --spa-hor-p03 ) var( --spa-ver-p04 ); /* Spacing Vertical Base Plus 4 ~= 44.876px, Spacing Horizontal Base Plus 3 ~= 33.876px */
-	position      : relative;
 	transition    : background-color var( --dur-tra-p02 ) var( --mot-sta-eas );     /* Duration Transition Base Plus 2 ~= 277.0ms, Motion Standard Easing = ease */
 
 

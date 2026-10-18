@@ -32,7 +32,6 @@
 	background    : var( --bac-inv-col ); /* Background Inverse Color = #1a1f24 */
 	color         : var( --bac-pag-col ); /* Background Page Color = #f5f2ec */
 	padding-block : var( --sec-ver-pad ); /* Section Vertical Padding, about 78.751px - 138.199px */
-	position      : relative;
 
 
 }
