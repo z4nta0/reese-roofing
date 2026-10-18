@@ -103,9 +103,8 @@
 .fooMarIma { /* What: Footer Mark Image. Why: The mark should fill its tile. How: This sizes it to the tile's full width, keeping its proportions. */
 
 
-	display : block;
-	height  : auto;
-	width   : 100%;
+	height : auto;
+	width  : 100%;
 
 
 }

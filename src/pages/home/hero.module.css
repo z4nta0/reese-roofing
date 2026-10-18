@@ -114,7 +114,6 @@
 	.herTopDiv { /* What: Stacked Hero Top Div. Why: The copy and logo read best stacked. How: This turns the grid into one column and shortens its bottom margin. */
 
 
-		gap                   : var( --spa-ver-p04 ); /* Spacing Vertical Base Plus 4 ~= 44.876px */
 		grid-template-columns : 1fr;
 		margin-bottom         : var( --spa-ver-p04 ); /* Spacing Vertical Base Plus 4 ~= 44.876px */
 
@@ -365,7 +364,6 @@
 	.herBotDiv { /* What: Stacked Hero Bottom Div. Why: The buttons read best under the pitch. How: This turns the grid into one column. */
 
 
-		gap                   : var( --spa-ver-p03 ); /* Spacing Vertical Base Plus 3 ~= 33.876px */
 		grid-template-columns : 1fr;
 
 
@@ -394,7 +392,6 @@
 	font-family : var( --fon-fam-mai );                                       /* Font Family Main = 'Inter Tight', -apple-system, BlinkMacSystemFont, sans-serif */
 	font-size   : clamp( var( --fon-siz-p01 ), 1.4vw, var( --fon-siz-p02 ) ); /* Font Size Base Plus 1 ~= 14.572px, Font Size Base Plus 2 ~= 19.304px */
 	line-height : var( --ver-rhy-p01 );                                       /* Vertical Rhythm Base Plus 1 ~= 1.755 */
-	margin      : 0;
 	max-width   : var( --tex-wid-bas );                                       /* Text Width Base Maximum ~= 29.207em */
 
 

@@ -461,7 +461,6 @@
 	.forRowDiv { /* What: Stacked Form Row Div. Why: The fields stack on a phone. How: This turns the row into one column. */
 
 
-		gap                   : var( --spa-ver-p02 ); /* Spacing Vertical Base Plus 2 ~= 25.572px */
 		grid-template-columns : 1fr;
 
 
@@ -541,7 +540,6 @@
 
 
 	animation : subLabSpaSwapFadeIn var( --dur-ani-p02 ) var( --mot-ove-eas ) both; /* Duration Animation Base Plus 2 ~= 277.0ms, Motion Overshoot Easing = cubic-bezier( .34, 1.2, .5, 1 ) */
-	display   : inline-block;                                                       /* What: Inline Block Display. Why: A transform has no effect on a plain inline box. How: This keeps the label a box its rise-in can move, though inside the inline-flex button it's already a flex item and computes to block. */
 
 
 }
