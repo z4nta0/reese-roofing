@@ -27,11 +27,12 @@ import type { Page          } from '@playwright/test'; // What: Page. Why: Every
  * outline properties, offset and width, and the first keyboard stop (or the
  * control a state's action left focused) has to draw that ring at full width
  * once it has eased in. Every form field a visitor can reach has to look
- * different once focused and have a transition longer than zero. Under
- * reduced motion every control keeps its hover and press changes, and every
- * field its focus change, but transitions nothing. Real clicks are blocked
- * during the checks, so pressing a link or the drawer's rows never navigates
- * or closes anything mid-check.
+ * different once focused and have a transition longer than zero. Under reduced
+ * motion every control keeps its hover and press changes, and every field its
+ * focus change, but nothing transitions, the parts inside a control and their
+ * pseudo-elements included. Real clicks are blocked during the checks, so
+ * pressing a link or the drawer's rows never navigates or closes anything mid-
+ * check.
  *
  * Sections:
  *  - Constants
@@ -273,9 +274,10 @@ async function feeProFun ( curPagObj : Page, redMotBoo : boolean ) : Promise< st
 		await curPagObj.waitForTimeout( SET_WAI_NUM ); // What: Press Settle Wait. Why: The pressed look is read once it has eased in. How: This pauses for the settle time.
 
 
+		const allDurStr = await conCurObj.evaluate( ( conCurEle ) => [ conCurEle, ...conCurEle.querySelectorAll( '*' ) ].flatMap( ( eleCurEle ) => [ null, '::before', '::after' ].map( ( pseCurStr ) => getComputedStyle( eleCurEle, pseCurStr ).transitionDuration ) ).join( ', ' ) ); // What: All Duration String. Why: A control often moves through its own parts, such as an arrow, a label, or an underline drawn by a pseudo-element, each with its own transition. How: This reads the transition durations of the control, every element inside it, and their before and after pseudo-elements.
 		const preSigStr = await conCurObj.evaluate( sigEleFun );                                                         // What: Press Signature String. Why: The pressed look is compared with hovered. How: This reads it.
 		const traLisStr = await conCurObj.evaluate( ( conCurEle ) => getComputedStyle( conCurEle ).transitionProperty ); // What: Transition List String. Why: The focus ring's ease depends on the control listing its outline. How: This reads the control's transitioned properties.
-		const traDurStr = await conCurObj.evaluate( ( conCurEle ) => getComputedStyle( conCurEle ).transitionDuration ); // What: Transition Duration String. Why: Reduced motion should leave nothing moving, while normal motion should ease every change. How: This reads the control's transition durations.
+		const traDurStr = await conCurObj.evaluate( ( conCurEle ) => getComputedStyle( conCurEle ).transitionDuration ); // What: Transition Duration String. Why: Normal motion should ease every change of the control itself. How: This reads the control's own transition durations.
 
 
 		await curPagObj.mouse.up(); // What: Mouse Up Call. Why: The press has to end before the next control. How: This releases the button, whose click the caller has blocked.
@@ -290,7 +292,7 @@ async function feeProFun ( curPagObj : Page, redMotBoo : boolean ) : Promise< st
 
 
 
-		if ( redMotBoo && !/^0s(, 0s)*$/.test( traDurStr ) ) proLisArr.push( `${ conDesStr } still transitions under reduced motion (${ traDurStr })` ); // What: Reduced Motion Check. Why: Asking for less motion should stop every transition. How: This records a control with any duration above zero.
+		if ( redMotBoo && !/^0s(, 0s)*$/.test( allDurStr ) ) proLisArr.push( `${ conDesStr } still transitions under reduced motion (${ allDurStr })` ); // What: Reduced Motion Check. Why: Asking for less motion should stop every transition. How: This records a control with any duration above zero on itself, an element inside it, or their pseudo-elements.
 
 		else if ( !redMotBoo && !( traLisStr.includes( 'outline-offset' ) && traLisStr.includes( 'outline-width' ) ) ) proLisArr.push( `${ conDesStr } doesn't transition its focus ring` ); // What: Focus Ease Check. Why: The focus ring should ease in rather than snap. How: This records a control whose transition list leaves out either outline property.
 
