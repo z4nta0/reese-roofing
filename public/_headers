@@ -5,7 +5,7 @@
 # accounts, or third-party code: every script, style, font, and image is
 # self-hosted, the contact form never posts anywhere (it hands the request to
 # the visitor's email app through a mailto link), and its one outside link,
-# to techgeek.support, only navigates away. That lets the
+# to techgeek.dev, only navigates away. That lets the
 # Content-Security-Policy be strict rather than needing broad allowances.
 #
 # default-src 'self' is the fallback every unlisted directive inherits, so
@@ -27,7 +27,7 @@
 # every subdomain, leaving out preload, which commits the domain to the
 # browsers' built-in HTTPS list and is slow to undo. Referrer-Policy is
 # strict-origin-when-cross-origin, as on the-bernie-bears and
-# tech-geek-support: techgeek.support sees that a visit came from this demo,
+# tech-geek-support: techgeek.dev sees that a visit came from this demo,
 # never a page's full address. Permissions-Policy turns off every powerful
 # browser feature the site never uses.
 #

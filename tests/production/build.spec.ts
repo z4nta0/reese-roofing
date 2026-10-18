@@ -276,12 +276,12 @@ test.describe( 'the production build', () => { // What: Build Group. Why: The bu
 		const jsoTexStr = pagTexStr.match( /<script type=['"]application\/ld\+json['"]>(.*?)<\/script>/s )?.[ 1 ] ?? ''; // What: JSON Text String. Why: The structured data is compacted onto one line, and has to stay valid. How: This reads the JSON-LD script's contents.
 
 
-		expect( pagTexStr ).not.toContain( '<!--' );                                                          // What: No Comment Assertion. Why: HTML comments are for the source. How: This checks none survived the build.
-		expect( pagTexStr ).not.toMatch( /^[ \t]/m );                                                         // What: No Indentation Assertion. Why: Indentation is for the source. How: This checks no line starts with a space or tab.
-		expect( pagTexStr ).not.toMatch( /\n\s*\n/ );                                                         // What: No Blank Line Assertion. Why: Blank lines are for the source. How: This checks no two line breaks sit with only whitespace between them.
-		expect( pagTexStr ).toContain( '<title>Reese Roofing | Portfolio Demo by techgeek.support</title>' ); // What: Title Kept Assertion. Why: Compacting must not lose the page's content. How: This checks the full title still ships.
-		expect( jsoTexStr ).not.toContain( '\n' );                                                            // What: One Line JSON Assertion. Why: The structured data's whitespace is for the source. How: This checks it ships on one line.
-		expect( () => JSON.parse( jsoTexStr ) ).not.toThrow();                                                // What: Valid JSON Assertion. Why: Compacting must not break the structured data. How: This checks it still parses.
+		expect( pagTexStr ).not.toContain( '<!--' );                                                      // What: No Comment Assertion. Why: HTML comments are for the source. How: This checks none survived the build.
+		expect( pagTexStr ).not.toMatch( /^[ \t]/m );                                                     // What: No Indentation Assertion. Why: Indentation is for the source. How: This checks no line starts with a space or tab.
+		expect( pagTexStr ).not.toMatch( /\n\s*\n/ );                                                     // What: No Blank Line Assertion. Why: Blank lines are for the source. How: This checks no two line breaks sit with only whitespace between them.
+		expect( pagTexStr ).toContain( '<title>Reese Roofing | Portfolio Demo by techgeek.dev</title>' ); // What: Title Kept Assertion. Why: Compacting must not lose the page's content. How: This checks the full title still ships.
+		expect( jsoTexStr ).not.toContain( '\n' );                                                        // What: One Line JSON Assertion. Why: The structured data's whitespace is for the source. How: This checks it ships on one line.
+		expect( () => JSON.parse( jsoTexStr ) ).not.toThrow();                                            // What: Valid JSON Assertion. Why: Compacting must not break the structured data. How: This checks it still parses.
 
 
 	} );

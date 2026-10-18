@@ -44,7 +44,7 @@ import { redMotFun } from '../utils/motion.ts'; // What: Reduce Motion Function.
  * Renders the site's footer: the logo mark and name, the copyright line with
  * the current year read from the visitor's clock on each render, so it never
  * needs a yearly edit, the licensing and location line, the line saying the
- * company is fictional and the site a portfolio demo by techgeek.support, and
+ * company is fictional and the site a portfolio demo by techgeek.dev, and
  * a link back to the top of the page, which scrolls up without leaving a hash
  * in the address, while a Ctrl, Cmd, or middle click opens it in a new tab.
  * It scrolls to whichever page's top anchor is showing, the hero's or the 404
@@ -129,7 +129,7 @@ function SitFooCom () : React.JSX.Element {
 
 					<span>Licensed & insured · Lawrence, KS</span>{ /* What: Footer Licensing Span Element. Why: Visitors look for proof a roofer is licensed and local. How: This states both on one line. */ }
 
-					<span className={ cssModObj.fooDemSpa }>Reese Roofing is a fictional company. This site is a portfolio demo by <a className={ cssModObj.fooDemAnc } href='https://techgeek.support/'>techgeek.support</a>.</span>{ /* What: Footer Demo Span Element. Why: The site is a portfolio piece, and no visitor or AI agent reading it should take Reese Roofing for a real roofer. How: This says so on every page, linking to the site's builder. */ }
+					<span className={ cssModObj.fooDemSpa }>Reese Roofing is a fictional company. This site is a portfolio demo by <a className={ cssModObj.fooDemAnc } href='https://techgeek.dev/'>techgeek.dev</a>.</span>{ /* What: Footer Demo Span Element. Why: The site is a portfolio piece, and no visitor or AI agent reading it should take Reese Roofing for a real roofer. How: This says so on every page, linking to the site's builder. */ }
 
 
 				</div>

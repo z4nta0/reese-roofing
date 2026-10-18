@@ -659,10 +659,10 @@ test( 'Return home leads to the top of the home page', async ( { page : curPagOb
 	await curPagObj.getByRole( 'link', { name : 'Return home' } ).click(); // What: Return Home Click Call. Why: This is the action under test. How: This clicks the button.
 
 
-	await expect( curPagObj ).toHaveTitle( 'Reese Roofing | Portfolio Demo by techgeek.support' ); // What: Home Title Assertion. Why: The 404 page's title should give way to the home page's. How: This checks the title changed back.
-	await expect.poll( () => curPagObj.evaluate( () => window.scrollY ) ).toBe( 0 );               // What: Top Position Assertion. Why: The home page should open at its top. How: This waits until the page sits at the top.
-	await expect( curPagObj ).toHaveURL( /\/$/ );                                                  // What: Home Address Assertion. Why: The visitor should land on the home page with no hash left. How: This checks the URL ends at the root.
-	expect( await curPagObj.evaluate( () => Reflect.get( window, 'samDocBoo' ) ) ).toBe( true );   // What: Router Navigation Assertion. Why: The home page should open inside the router, without a full page load. How: This checks the marker set before the click survived.
+	await expect( curPagObj ).toHaveTitle( 'Reese Roofing | Portfolio Demo by techgeek.dev' );   // What: Home Title Assertion. Why: The 404 page's title should give way to the home page's. How: This checks the title changed back.
+	await expect.poll( () => curPagObj.evaluate( () => window.scrollY ) ).toBe( 0 );             // What: Top Position Assertion. Why: The home page should open at its top. How: This waits until the page sits at the top.
+	await expect( curPagObj ).toHaveURL( /\/$/ );                                                // What: Home Address Assertion. Why: The visitor should land on the home page with no hash left. How: This checks the URL ends at the root.
+	expect( await curPagObj.evaluate( () => Reflect.get( window, 'samDocBoo' ) ) ).toBe( true ); // What: Router Navigation Assertion. Why: The home page should open inside the router, without a full page load. How: This checks the marker set before the click survived.
 
 
 } );
@@ -725,9 +725,9 @@ test( "the 404 page's Home link leads to the home page", async ( { page : curPag
 	await curPagObj.getByRole( 'banner' ).getByRole( 'link', { exact : true, name : 'Home' } ).click(); // What: Home Link Click Call. Why: This is the action under test. How: This clicks the bar's Home link.
 
 
-	await expect( curPagObj ).toHaveTitle( 'Reese Roofing | Portfolio Demo by techgeek.support' ); // What: Home Title Assertion. Why: The visitor should reach the home page, not stay on the 404 page. How: This checks the home page's title.
-	await expect( curPagObj ).toHaveURL( /\/$/ );                                                  // What: Clean Address Assertion. Why: The home page clears the hash once it has scrolled to the top. How: This checks the URL ends at the root.
-	expect( await curPagObj.evaluate( () => Reflect.get( window, 'samDocBoo' ) ) ).toBe( true );   // What: Router Navigation Assertion. Why: The home page should open inside the router, without a full page load. How: This checks the marker set before the click survived.
+	await expect( curPagObj ).toHaveTitle( 'Reese Roofing | Portfolio Demo by techgeek.dev' );   // What: Home Title Assertion. Why: The visitor should reach the home page, not stay on the 404 page. How: This checks the home page's title.
+	await expect( curPagObj ).toHaveURL( /\/$/ );                                                // What: Clean Address Assertion. Why: The home page clears the hash once it has scrolled to the top. How: This checks the URL ends at the root.
+	expect( await curPagObj.evaluate( () => Reflect.get( window, 'samDocBoo' ) ) ).toBe( true ); // What: Router Navigation Assertion. Why: The home page should open inside the router, without a full page load. How: This checks the marker set before the click survived.
 
 
 } );

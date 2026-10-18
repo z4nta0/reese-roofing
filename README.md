@@ -1,6 +1,6 @@
 # Reese Roofing (Portfolio Demo)
 
-**Reese Roofing is a fictional company, and this is not a real business's website.** It's a portfolio piece by [techgeek.support](https://techgeek.support/): one of two website mockups designed for a client, who chose the other one. This one is kept as a proof of work and linked from techgeek.support's portfolio.
+**Reese Roofing is a fictional company, and this is not a real business's website.** It's a portfolio piece by [techgeek.dev](https://techgeek.dev/): one of two website mockups designed for a client, who chose the other one. This one is kept as a proof of work and linked from techgeek.dev's portfolio.
 
 Live at [reese-roofing.netlify.app](https://reese-roofing.netlify.app/). Its phone number (a 555-01xx number), email (an `.example` domain), address, stats, and history are all placeholders, so nothing on it should be read as a real roofer's details.
 
@@ -9,12 +9,12 @@ Live at [reese-roofing.netlify.app](https://reese-roofing.netlify.app/). Its pho
 Since the company isn't real, the site is set up to stay out of search results and AI answers, and to say what it is wherever it's read:
 
 - **Kept out of search:** a `noindex` robots meta tag on every page and an `X-Robots-Tag: noindex` header on every file (`public/_headers`), with no sitemap. `public/robots.txt` lets search crawlers in so they can read the `noindex`, and disallows AI training and AI answer crawlers.
-- **Says it's a demo:** the page title, description, author tag (naming techgeek.support), Open Graph and Twitter card tags, and the 1200x630 preview card (`public/og-image.png`) all call it a portfolio demo by techgeek.support, so shared links preview honestly. A line in the footer says the company is fictional, linking to techgeek.support.
+- **Says it's a demo:** the page title, description, author tag (naming techgeek.dev), Open Graph and Twitter card tags, and the 1200x630 preview card (`public/og-image-2.png`) all call it a portfolio demo by techgeek.dev, so shared links preview honestly. A line in the footer says the company is fictional, linking to techgeek.dev.
 - **No business data:** the JSON-LD structured data describes a `WebSite` about a fictional company, with no `LocalBusiness` type, address, or phone.
 
 `npm run test:seo` checks all of this in Chromium, Firefox, and WebKit.
 
-The preview card is drawn from the site's own logo and fonts by `design/og-image/card.html` and captured by `npm run og-image`, which writes `public/og-image.png` and fails if it reaches WhatsApp's 300 KB limit. Everything on it sits inside the center square, since some apps crop previews to one. Apps cache previews for a long time, so a changed card should get a new filename, with the `og:image` and `twitter:image` tags updated to match.
+The preview card is drawn from the site's own logo and fonts by `design/og-image/card.html` and captured by `npm run og-image`, which writes `public/og-image-2.png` and fails if it reaches WhatsApp's 300 KB limit. Everything on it sits inside the center square, since some apps crop previews to one. Apps cache previews for a long time, so a changed card should get a new filename, with the `og:image` and `twitter:image` tags updated to match.
 
 ## Security headers
 
@@ -82,7 +82,7 @@ src/
 ├── app.tsx            React Router setup, with app.module.css for the root's container
 ├── main.tsx           Entry point
 └── vite-env.d.ts      Vite's client type declarations
-public/                Files served at fixed addresses: favicons, og-image.png, robots.txt, Netlify's _headers and _redirects
+public/                Files served at fixed addresses: favicons, og-image-2.png, robots.txt, Netlify's _headers and _redirects
 tests/
 ├── accessibility/     axe-core scan and scripted checks
 ├── interaction/       control feedback and site behavior checks
@@ -93,7 +93,7 @@ tests/
 ├── support/           the page states the suites visit
 └── playwright.config.ts
 design/
-└── og-image/          card.html and the script that captures it as public/og-image.png
+└── og-image/          card.html and the script that captures it as public/og-image-2.png
 ```
 
 ## Design notes

@@ -44,10 +44,10 @@ import { test   } from '@playwright/test'; // What: Test. Why: Each route and ea
 
 // #region Constants
 
-const DES_MAX_NUM = 125;                                                                 // What: Description Maximum Number. Why: Mobile cards cut a summary off around 125 characters. How: Every description's length is checked against this.
-const DES_MIN_NUM = 120;                                                                 // What: Description Minimum Number. Why: Link preview checkers flag a summary under 120 characters as short. How: Every description's length is checked against this.
-const LIV_URL_STR = 'https://reese-roofing.netlify.app/';                                // What: Live URL String. Why: The canonical and social tags must name the live address. How: This is the address they're compared with.
-const RAW_TIT_STR = '<title>Reese Roofing | Portfolio Demo by techgeek.support</title>'; // What: Raw Title String. Why: Link checkers and many crawlers read the raw page without running its script. How: This is the home page's title tag as index.html must carry it.
+const DES_MAX_NUM = 125;                                                             // What: Description Maximum Number. Why: Mobile cards cut a summary off around 125 characters. How: Every description's length is checked against this.
+const DES_MIN_NUM = 120;                                                             // What: Description Minimum Number. Why: Link preview checkers flag a summary under 120 characters as short. How: Every description's length is checked against this.
+const LIV_URL_STR = 'https://reese-roofing.netlify.app/';                            // What: Live URL String. Why: The canonical and social tags must name the live address. How: This is the address they're compared with.
+const RAW_TIT_STR = '<title>Reese Roofing | Portfolio Demo by techgeek.dev</title>'; // What: Raw Title String. Why: Link checkers and many crawlers read the raw page without running its script. How: This is the home page's title tag as index.html must carry it.
 
 
 
@@ -67,8 +67,8 @@ const RAW_TIT_STR = '<title>Reese Roofing | Portfolio Demo by techgeek.support</
 const ROU_REC_ARR = [ // What: Route Record Array. Why: Each route has its own title to check. How: Each row pairs a path with its expected title.
 
 
-	{ patStr : '/',        titStr : 'Reese Roofing | Portfolio Demo by techgeek.support' }, // What: Home Route Row. Why: The home page carries index.html's own title. How: This expects it unchanged.
-	{ patStr : '/missing', titStr : 'Page Not Found | Reese Roofing Portfolio Demo'      }  // What: Not Found Route Row. Why: The 404 page sets its own title. How: This expects the title the page renders.
+	{ patStr : '/',        titStr : 'Reese Roofing | Portfolio Demo by techgeek.dev' }, // What: Home Route Row. Why: The home page carries index.html's own title. How: This expects it unchanged.
+	{ patStr : '/missing', titStr : 'Page Not Found | Reese Roofing Portfolio Demo'  }  // What: Not Found Route Row. Why: The 404 page sets its own title. How: This expects the title the page renders.
 
 
 ];
@@ -128,17 +128,17 @@ for ( const rouRecObj of ROU_REC_ARR ) { // What: Route Test Loop. Why: Every ro
 		await curPagObj.goto( rouRecObj.patStr ); // What: Route Load Call. Why: The head is read as a browser builds it. How: This opens the route on the suite's dev server.
 
 
-		await expect( curPagObj ).toHaveTitle( rouRecObj.titStr ); // What: Title Assertion. Why: Each route names itself, saying it's a demo. How: This waits for the route's exact title.
-		await expect( curPagObj.locator( 'meta[name="robots"]' ) ).toHaveAttribute( 'content', /noindex/ );                                                             // What: Robots Assertion. Why: A fictional company must stay out of search results. How: This checks the robots meta asks for noindex.
-		await expect( curPagObj.locator( 'meta[name="author"]' ) ).toHaveAttribute( 'content', 'techgeek.support' );                                                    // What: Author Assertion. Why: The page should name its real builder rather than the fictional company. How: This checks the author meta names techgeek.support.
-		await expect( curPagObj.locator( 'meta[name="description"]' ) ).toHaveAttribute( 'content', /fictional/ );                                                      // What: Description Assertion. Why: Any summary of the page should say the company isn't real. How: This checks the description calls it fictional.
-		await expect( curPagObj.locator( 'link[rel="canonical"]' ) ).toHaveAttribute( 'href', LIV_URL_STR );                                                            // What: Canonical Assertion. Why: Every address the site answers at should point at the live one. How: This checks the canonical link names it.
-		await expect( curPagObj.locator( 'meta[property="og:url"]' ) ).toHaveAttribute( 'content', LIV_URL_STR );                                                       // What: Open Graph URL Assertion. Why: Shared links should count as one page. How: This checks the social URL names the live address.
-		await expect( curPagObj.locator( 'meta[property="og:image"]' ) ).toHaveAttribute( 'content', `${ LIV_URL_STR }og-image.png` );                                  // What: Open Graph Image Assertion. Why: Link previews need an absolute image address. How: This checks it points at the live preview card.
-		await expect( curPagObj.locator( 'meta[name="twitter:card"]' ) ).toHaveAttribute( 'content', 'summary_large_image' );                                           // What: Twitter Card Assertion. Why: The preview card should show at its full size. How: This checks the large image layout is asked for.
-		await expect( curPagObj.getByRole( 'contentinfo' ) ).toContainText( 'Reese Roofing is a fictional company.' );                                                  // What: Footer Notice Assertion. Why: Visitors and AI agents reading the page itself should learn the company isn't real. How: This checks the footer's demo line.
-		await expect( curPagObj.getByRole( 'contentinfo' ).getByRole( 'link', { name : 'techgeek.support' } ) ).toHaveAttribute( 'href', 'https://techgeek.support/' ); // What: Footer Builder Link Assertion. Why: The footer's notice has to lead to whoever built the demo. How: This checks its techgeek.support link points at the builder's site.
-		await expect( curPagObj.locator( 'meta[name="description"]' ) ).toHaveCount( 1 );                                                                               // What: Single Description Assertion. Why: React 19 adds a rendered description beside index.html's rather than replacing it, which would leave two. How: This checks the route has exactly one.
+		await expect( curPagObj ).toHaveTitle( rouRecObj.titStr );                                                                                              // What: Title Assertion. Why: Each route names itself, saying it's a demo. How: This waits for the route's exact title.
+		await expect( curPagObj.locator( 'meta[name="robots"]' ) ).toHaveAttribute( 'content', /noindex/ );                                                     // What: Robots Assertion. Why: A fictional company must stay out of search results. How: This checks the robots meta asks for noindex.
+		await expect( curPagObj.locator( 'meta[name="author"]' ) ).toHaveAttribute( 'content', 'techgeek.dev' );                                                // What: Author Assertion. Why: The page should name its real builder rather than the fictional company. How: This checks the author meta names techgeek.dev.
+		await expect( curPagObj.locator( 'meta[name="description"]' ) ).toHaveAttribute( 'content', /fictional/ );                                              // What: Description Assertion. Why: Any summary of the page should say the company isn't real. How: This checks the description calls it fictional.
+		await expect( curPagObj.locator( 'link[rel="canonical"]' ) ).toHaveAttribute( 'href', LIV_URL_STR );                                                    // What: Canonical Assertion. Why: Every address the site answers at should point at the live one. How: This checks the canonical link names it.
+		await expect( curPagObj.locator( 'meta[property="og:url"]' ) ).toHaveAttribute( 'content', LIV_URL_STR );                                               // What: Open Graph URL Assertion. Why: Shared links should count as one page. How: This checks the social URL names the live address.
+		await expect( curPagObj.locator( 'meta[property="og:image"]' ) ).toHaveAttribute( 'content', `${ LIV_URL_STR }og-image-2.png` );                        // What: Open Graph Image Assertion. Why: Link previews need an absolute image address. How: This checks it points at the live preview card.
+		await expect( curPagObj.locator( 'meta[name="twitter:card"]' ) ).toHaveAttribute( 'content', 'summary_large_image' );                                   // What: Twitter Card Assertion. Why: The preview card should show at its full size. How: This checks the large image layout is asked for.
+		await expect( curPagObj.getByRole( 'contentinfo' ) ).toContainText( 'Reese Roofing is a fictional company.' );                                          // What: Footer Notice Assertion. Why: Visitors and AI agents reading the page itself should learn the company isn't real. How: This checks the footer's demo line.
+		await expect( curPagObj.getByRole( 'contentinfo' ).getByRole( 'link', { name : 'techgeek.dev' } ) ).toHaveAttribute( 'href', 'https://techgeek.dev/' ); // What: Footer Builder Link Assertion. Why: The footer's notice has to lead to whoever built the demo. How: This checks its techgeek.dev link points at the builder's site.
+		await expect( curPagObj.locator( 'meta[name="description"]' ) ).toHaveCount( 1 );                                                                       // What: Single Description Assertion. Why: React 19 adds a rendered description beside index.html's rather than replacing it, which would leave two. How: This checks the route has exactly one.
 
 
 		const desTexStr = await curPagObj.locator( 'meta[name="description"]' ).getAttribute( 'content' ); // What: Description Text String. Why: The description's length is checked against the preview copy's bounds. How: This reads the tag's content.
@@ -266,7 +266,7 @@ test( 'the social preview tags are complete', async ( { page : curPagObj } ) => 
 
 
 	expect( SOC_KEY_ARR.filter( ( socKeyStr ) => !socTagObj[ socKeyStr ]?.trim() ) ).toEqual( [] ); // What: Complete Tags Assertion. Why: A missing or empty tag leaves part of the card blank. How: This lists every required tag that's missing or empty, which should be none, allowing optional extras.
-	expect( [ socTagObj[ 'og:image' ], socTagObj[ 'og:url' ], socTagObj[ 'twitter:image' ] ] ).toEqual( [ `${ LIV_URL_STR }og-image.png`, LIV_URL_STR, `${ LIV_URL_STR }og-image.png` ] ); // What: Absolute URLs Assertion. Why: Scrapers can't resolve a relative address. How: This checks each URL tag names the live https address.
+	expect( [ socTagObj[ 'og:image' ], socTagObj[ 'og:url' ], socTagObj[ 'twitter:image' ] ] ).toEqual( [ `${ LIV_URL_STR }og-image-2.png`, LIV_URL_STR, `${ LIV_URL_STR }og-image-2.png` ] ); // What: Absolute URLs Assertion. Why: Scrapers can't resolve a relative address. How: This checks each URL tag names the live https address.
 	expect( socTagObj[ 'og:image:type' ] ).toBe( 'image/png' );                                     // What: Image Type Assertion. Why: The tag has to match the file. How: This checks it names a PNG.
 	expect( socTagObj[ 'og:type' ] ).toBe( 'website' );                                             // What: Page Type Assertion. Why: The social preview rule calls every site a website, never an article. How: This checks the type tag says so.
 	expect( socTagObj[ 'og:description' ] ).toMatch( /fictional/ );                                 // What: Demo Description Assertion. Why: A shared card must never present the fictional company as real. How: This checks the summary says the company is fictional.
@@ -293,8 +293,8 @@ test( 'the social preview tags are complete', async ( { page : curPagObj } ) => 
 test( 'the social preview image is a 1,200x630 PNG under 300 KB', async ( { page : curPagObj } ) => { // What: Preview Image Test. Why: The social tags promise a 1,200x630 card. How: This fetches the image, checks its served type and byte count, and reads its size from the PNG header.
 
 
-	const resImaObj = await curPagObj.request.get( '/og-image.png' ); // What: Response Image Object. Why: The image has to exist where the tags point. How: This fetches it from the dev server.
-	const pngBufObj = await resImaObj.body();                         // What: PNG Buffer Object. Why: The image's size is written in its header. How: This reads the response bytes.
+	const resImaObj = await curPagObj.request.get( '/og-image-2.png' ); // What: Response Image Object. Why: The image has to exist where the tags point. How: This fetches it from the dev server.
+	const pngBufObj = await resImaObj.body();                           // What: PNG Buffer Object. Why: The image's size is written in its header. How: This reads the response bytes.
 
 
 	expect( resImaObj.headers()[ 'content-type' ] ).toBe( 'image/png' );                               // What: PNG Type Assertion. Why: The tags promise a PNG. How: This checks the served type.

@@ -3,11 +3,10 @@
 A marketing website for Reese Roofing (React, Vite, React Router, deployed on
 Netlify at https://reese-roofing.netlify.app/). **Reese Roofing is not a real
 business.** This was one of two mockups made for a client, who kept the other
-one; this one is a portfolio piece by techgeek.support, linked from
-https://techgeek.support. Nothing in the site, its docs, or its metadata may
+one; this one is a portfolio piece by techgeek.dev, linked from
+https://techgeek.dev. Nothing in the site, its docs, or its metadata may
 present the company as real (see "## SEO"). Every rule in the user-level
-CLAUDE.md applies here; this file records only what's specific to this
-project.
+CLAUDE.md applies here; this file records only what's specific to this project.
 
 ## SEO
 Decided 2026-10-08. Under the user-level "## SEO" rule this is a site that
@@ -18,27 +17,27 @@ isn't a real business, so it gets the demo treatment rather than local SEO:
   and disallows AI training and AI answer crawlers (GPTBot, ClaudeBot,
   PerplexityBot, and others). AI agents fetching the page for a person are
   left alone, since the page itself tells them it's a demo.
-- **Says what it is**: the title, description (between 120 and 125
-  characters: mobile cards show 125 in full, and preview checkers flag under
-  120 as short), Open Graph and Twitter tags, and `public/og-image.png`
-  (1200x630) call it a portfolio demo by techgeek.support, the author meta
-  names techgeek.support, and the footer says the company is fictional,
-  linking to techgeek.support. The 404 page renders its own `<title>`.
+- **Says what it is**: the title, description (between 120 and 125 characters:
+  mobile cards show 125 in full, and preview checkers flag under 120 as short),
+  Open Graph and Twitter tags, and `public/og-image-2.png` (1200x630) call it a
+  portfolio demo by techgeek.dev, the author meta names techgeek.dev, and the
+  footer says the company is fictional, linking to techgeek.dev. The 404 page
+  renders its own `<title>`.
 - **Social preview card**: per the user-level "## Social Previews" rule,
-  `design/og-image/card.html` (outside the served tree) is captured by `npm
-  run og-image` (`design/og-image/render.mts`, type checked through
-  `tsconfig.test.json`, since it drives a browser) into `public/og-image.png`,
-  with every element inside the center 630x630 square. The card imports the
-  site's `fonts.css` and `styles.css` and reads their tokens; only its
-  1200x630 size, its 40px lines, their 1.2 line height and weights, and the
-  title's -0.01em letter spacing stay literal, since the scale has no step
-  within 10% of them.
+  `design/og-image/card.html` (outside the served tree) is captured by `npm run
+  og-image` (`design/og-image/render.mts`, type checked through
+  `tsconfig.test.json`, since it drives a browser) into
+  `public/og-image-2.png`, with every element inside the center 630x630 square.
+  The card imports the site's `fonts.css` and `styles.css` and reads their
+  tokens; only its 1200x630 size, its 40px lines, their 1.2 line height and
+  weights, and the title's -0.01em letter spacing stay literal, since the scale
+  has no step within 10% of them.
 - **Canonical in `index.html`** (decided 2026-10-17): the site counts as a
   one-page site for the canonical rule, since its only other route is the
   `noindex` 404 page, so the canonical stays in `index.html` and the 404 page
   reports the home page's, which the SEO suite checks.
 - **Structured data**: one `WebSite` JSON-LD block about a fictional company,
-  created by techgeek.support. Never `LocalBusiness`, an address, or a phone.
+  created by techgeek.dev. Never `LocalBusiness`, an address, or a phone.
 - **Placeholders stay reserved**: the phone is a 555-01xx number and the
   email an `.example` domain, and so are the contact form's sample phone
   and email (added 2026-10-17, with a sample name and property).
@@ -198,10 +197,10 @@ the production suite opens its own pages on a build it serves itself.
   the links to the bar's flex row.
 - `npm run test:seo`: checks each route's title, description, robots,
   canonical, social tags, and structured data, that every phone and email it
-  shows is a reserved one, the footer's demo line and its techgeek.support
-  link, `robots.txt` and that no `sitemap.xml` is served, `_headers` (its
-  robots rule and every security header, each set once), `_redirects`' fallback
-  to the app, and the preview image's size.
+  shows is a reserved one, the footer's demo line and its techgeek.dev link,
+  `robots.txt` and that no `sitemap.xml` is served, `_headers` (its robots rule
+  and every security header, each set once), `_redirects`' fallback to the app,
+  and the preview image's size.
 - `npm test` runs every suite.
 
 Next (planned 2026-10-07):
