@@ -20,7 +20,7 @@
 
 
 
-.navSciDiv { /* What: Navigation Scrim Div. Why: The open drawer should stand apart from a dimmed page, and the page should only dim on screens that have the drawer. How: This covers the viewport in the scrim color at the bar's stack level, hidden by default and shown below 880px, fading in while the drawer is open. */
+.navSciDiv { /* What: Navigation Scrim Div. Why: The open drawer should stand apart from a dimmed page, and the page should only dim on screens that have the drawer. How: This covers the viewport in the scrim color at the bar's stack level, hidden by default and shown below 880px, fading in while the drawer is open and out, speeding up, as it closes. */
 
 
 	background : oklch( from var( --scr-mai-col ) l c h / var( --cdn-pow-003-rec ) );                          /* Scrim Main Color = #1a1f24, Core-Design-Number to the Power of 3 Reciprocal ~= 0.430 */
@@ -28,7 +28,7 @@
 	inset      : 0;
 	opacity    : 0;
 	position   : fixed;
-	transition : opacity var( --dur-tra-p03 ) var( --mot-dec-eas ), visibility 0s linear var( --dur-tra-p03 ); /* Duration Transition Base Plus 3 ~= 366.9ms, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ) */
+	transition : opacity var( --dur-tra-p03 ) var( --mot-acc-eas ), visibility 0s linear var( --dur-tra-p03 ); /* Duration Transition Base Plus 3 ~= 366.9ms, Motion Accelerate Easing = cubic-bezier( .4, 0, 1, 1 ) */
 	visibility : hidden;
 	z-index    : 2;                                                                                            /* What: Scrim Stack Level. Why: The scrim has to cover the hero's content, which sits at 1, while staying under the bar, also at 2. How: This matches the bar's level, and the scrim comes first in the markup, so the bar paints above it. */
 
@@ -630,7 +630,7 @@
 	max-height     : 0;
 	overflow       : hidden;
 	padding        : 0 var( --gut-sid-pad );                           /* Gutter Side Padding, about 19.304px - 44.876px */
-	transition     : border-bottom-width var( --dur-tra-p03 ) var( --mot-dec-eas ), max-height var( --dur-tra-p03 ) var( --mot-dec-eas ), padding-block var( --dur-tra-p03 ) var( --mot-dec-eas ), visibility 0s linear var( --dur-tra-p03 ); /* Duration Transition Base Plus 3 ~= 366.9ms, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ) */ /* What: Drawer Close Transition. Why: The drawer shrinks closed under the bar, then hides from screen readers and the keyboard once it's gone. How: This animates its height, padding, and divider width, layout properties chosen because the drawer's content has to be revealed rather than scaled, and delays hiding until the shrink ends. */
+	transition     : border-bottom-width var( --dur-tra-p03 ) var( --mot-acc-eas ), max-height var( --dur-tra-p03 ) var( --mot-acc-eas ), padding-block var( --dur-tra-p03 ) var( --mot-acc-eas ), visibility 0s linear var( --dur-tra-p03 ); /* Duration Transition Base Plus 3 ~= 366.9ms, Motion Accelerate Easing = cubic-bezier( .4, 0, 1, 1 ) */ /* What: Drawer Close Transition. Why: The drawer shrinks closed under the bar, speeding up as it leaves, then hides from screen readers and the keyboard once it's gone. How: This animates its height, padding, and divider width, layout properties chosen because the drawer's content has to be revealed rather than scaled, and delays hiding until the shrink ends. */
 	visibility     : hidden;
 
 
