@@ -28,9 +28,10 @@ import type { Page } from '@playwright/test'; // What: Page. Why: Every helper d
  * that are on screen, not covered by anything else, and visibly changed by
  * focus. Reflow: at 320px wide, WCAG's narrowest reflow width, nothing scrolls
  * sideways. Motion: with reduced motion requested, no animation or transition
- * longer than 1ms starts while the state opens, or is still held once it has.
- * The name and keyboard checks list every problem found, by element (the
- * positive tabindex check as a count), the motion check lists each one it
+ * longer than 1ms starts while the state opens, or is still held once it has,
+ * and the same holds while the drawer closes and while the sent form's label
+ * swaps in. The name and keyboard checks list every problem found, by element
+ * (the positive tabindex check as a count), the motion check lists each one it
  * finds, and the reflow check reports how far the page reaches past the
  * viewport.
  *
@@ -56,6 +57,104 @@ const TAB_MAX_NUM = 80;         // What: Tab Maximum Number. Why: A keyboard tra
 
 
 // #region Helpers
+
+// #region lonAniFun
+
+/**
+ * lonAniFun = Long Animations Function
+ *
+ * @summary
+ * Runs inside the page and lists every animation or transition the page
+ * still holds that lasts longer than 1ms, naming each by its CSS animation
+ * name or transitioned property, or as a script animation when it has
+ * neither. Passed to Playwright's evaluate, so it can't read anything from
+ * this file.
+ *
+ * @author z4nta0 <https://github.com/z4nta0>
+ *
+ * @param void - This function takes no parameters.
+ *
+ * @returns The names of the long animations the page still holds.
+ *
+ * @example
+ * ```ts
+ * page.evaluate(lonAniFun) // => [ 'max-height' ]
+ * ```
+ *
+*/
+
+function lonAniFun () : string[] {
+
+
+	return document.getAnimations().filter( ( aniCurObj ) => ( Number( aniCurObj.effect?.getTiming().duration ) || 0 ) > 1 ).map( ( aniCurObj ) => ( aniCurObj as CSSAnimation ).animationName || ( aniCurObj as CSSTransition ).transitionProperty || 'script animation' ); // What: Long Animations Return. Why: The check needs the name of each motion still running. How: This keeps the animations and transitions longer than 1ms and maps each to its name. // What: Type Assertion Note. Why: getAnimations returns plain Animation objects, which don't type their CSS names. How: Each one is read as a CSS animation, then a CSS transition, falling back to a generic label when neither name exists.
+
+
+}
+
+// #endregion lonAniFun
+
+
+
+// #region motRecFun
+
+/**
+ * motRecFun = Motion Recorder Function
+ *
+ * @summary
+ * Runs inside the page from the moment it loads, as an init script, and
+ * records every animation or transition that starts with a duration over 1ms
+ * on window.motLisArr, naming each by its element's tag and its event's kind.
+ * A transition an action sets off can finish before the check reads the page,
+ * and a finished one drops out of getAnimations, so the recorder listens for
+ * each motion as it starts instead. It listens in the capture phase, so
+ * nothing on the page can stop it hearing one, and reads a pseudo-element's
+ * own duration when the motion runs on one. Passed to Playwright's
+ * addInitScript, so it can't read anything from this file.
+ *
+ * @author z4nta0 <https://github.com/z4nta0>
+ *
+ * @param void - This function takes no parameters.
+ *
+ * @returns This function does not return anything.
+ *
+ * @example
+ * ```ts
+ * page.addInitScript(motRecFun) // => void
+ * ```
+ *
+*/
+
+function motRecFun () : void {
+
+
+
+
+	const motLisArr : string[] = []; // What: Motion List Array. Why: Each motion that starts has to be kept until the check reads it. How: This collects one name per motion.
+
+
+	Reflect.set( window, 'motLisArr', motLisArr ); // What: Motion List Global Set. Why: The check reads the list from outside the page. How: This puts the array on the window.
+
+
+	for ( const eveTypStr of [ 'animationstart', 'transitionrun' ] ) window.addEventListener( eveTypStr, ( motEveObj ) => { // What: Motion Event Loop. Why: Animations and transitions announce themselves with different events. How: This listens for each on the window in the capture phase, catching every element's events before they reach it.
+
+
+		const tarEleObj = motEveObj.target as Element;                                                                                       // What: Target Element Object. Why: The motion's duration is read from the element running it. How: This reads the event's target. // What: Type Assertion Note. Why: Event targets type as EventTarget. How: Both events only fire on elements.
+		const motStyObj = getComputedStyle( tarEleObj, ( motEveObj as AnimationEvent ).pseudoElement || null );                              // What: Motion Style Object. Why: The event doesn't carry the motion's duration. How: This reads the computed styles of the element, or of its pseudo-element when the motion runs on one. // What: Type Assertion Note. Why: The listener types its event as a plain Event. How: Both animation and transition events carry pseudoElement, read here through the animation event's type.
+		const durStrArr = ( motEveObj.type === 'transitionrun' ? motStyObj.transitionDuration : motStyObj.animationDuration ).split( ',' );  // What: Duration String Array. Why: An element can list several durations. How: This splits the duration that matches the event's kind.
+		const lonDurBoo = durStrArr.some( ( durCurStr ) => parseFloat( durCurStr ) * ( durCurStr.trim().endsWith( 'ms' ) ? 1 : 1000 ) > 1 ); // What: Long Duration Boolean. Why: Only motion longer than 1ms counts. How: This converts each duration to milliseconds and checks for one over 1ms.
+
+
+		if ( lonDurBoo ) motLisArr.push( `${ tarEleObj.tagName.toLowerCase() } ${ motEveObj.type }` ); // What: Long Motion Push. Why: Each long motion should be named in the failure. How: This records the element's tag and the event's kind.
+
+
+	}, true ); // What: Capture Phase Flag. Why: The recorder has to see each motion event before anything on the page can stop it. How: This registers the listener for the capture phase.
+
+
+}
+
+// #endregion motRecFun
+
+
 
 // #region namProFun
 
@@ -476,44 +575,79 @@ for ( const staRecObj of STA_REC_ARR ) { // What: State Test Loop. Why: Every ch
 
 		await curPagObj.emulateMedia( { reducedMotion : 'reduce' } ); // What: Reduced Motion Emulation. Why: The preference has to be set before the page loads. How: This makes the page match prefers-reduced-motion: reduce.
 
-		await curPagObj.addInitScript( () => { // What: Motion Start Recorder. Why: A transition the state's action sets off can finish before the page settles, and a finished one drops out of getAnimations. How: This records every animation or transition that starts with a duration over 1ms, from the moment the page loads.
-
-
-			const motLisArr : string[] = []; // What: Motion List Array. Why: Each motion that starts has to be kept until the check reads it. How: This collects one name per motion.
-
-
-			Reflect.set( window, 'motLisArr', motLisArr ); // What: Motion List Global Set. Why: The check reads the list from outside the page. How: This puts the array on the window.
-
-
-			for ( const eveTypStr of [ 'animationstart', 'transitionrun' ] ) window.addEventListener( eveTypStr, ( motEveObj ) => { // What: Motion Event Loop. Why: Animations and transitions announce themselves with different events. How: This listens for each on the window in the capture phase, catching every element's events before they reach it.
-
-
-				const tarEleObj = motEveObj.target as Element;                                                                                       // What: Target Element Object. Why: The motion's duration is read from the element running it. How: This reads the event's target. // What: Type Assertion Note. Why: Event targets type as EventTarget. How: Both events only fire on elements.
-				const motStyObj = getComputedStyle( tarEleObj, ( motEveObj as AnimationEvent ).pseudoElement || null );                              // What: Motion Style Object. Why: The event doesn't carry the motion's duration. How: This reads the computed styles of the element, or of its pseudo-element when the motion runs on one. // What: Type Assertion Note. Why: The listener types its event as a plain Event. How: Both animation and transition events carry pseudoElement, read here through the animation event's type.
-				const durStrArr = ( motEveObj.type === 'transitionrun' ? motStyObj.transitionDuration : motStyObj.animationDuration ).split( ',' );  // What: Duration String Array. Why: An element can list several durations. How: This splits the duration that matches the event's kind.
-				const lonDurBoo = durStrArr.some( ( durCurStr ) => parseFloat( durCurStr ) * ( durCurStr.trim().endsWith( 'ms' ) ? 1 : 1000 ) > 1 ); // What: Long Duration Boolean. Why: Only motion longer than 1ms counts. How: This converts each duration to milliseconds and checks for one over 1ms.
-
-
-				if ( lonDurBoo ) motLisArr.push( `${ tarEleObj.tagName.toLowerCase() } ${ motEveObj.type }` ); // What: Long Motion Push. Why: Each long motion should be named in the failure. How: This records the element's tag and the event's kind.
-
-
-			}, true ); // What: Capture Phase Flag. Why: The recorder has to see each motion event before anything on the page can stop it. How: This registers the listener for the capture phase.
-
-
-		} );
+		await curPagObj.addInitScript( motRecFun ); // What: Motion Recorder Install Call. Why: A transition the state's action sets off can finish before the page settles, and a finished one drops out of getAnimations. How: This runs motRecFun in the page before it loads, recording every motion over 1ms that starts.
 
 		await opeStaFun( curPagObj, staRecObj ); // What: State Open Call. Why: Entrance animations and the state's own action are the motion being checked. How: This loads the state and runs its action.
 
 		expect( await curPagObj.evaluate( () => Reflect.get( window, 'motLisArr' ) ) ).toEqual( [] ); // What: No Motion Started Assertion. Why: Nothing should have moved while the state opened, including transitions that already finished. How: This checks the recorder caught no motion longer than 1ms.
 
 
-		expect( await curPagObj.evaluate( () => document.getAnimations().filter( ( aniCurObj ) => ( Number( aniCurObj.effect?.getTiming().duration ) || 0 ) > 1 ).map( ( aniCurObj ) => ( aniCurObj as CSSAnimation ).animationName || ( aniCurObj as CSSTransition ).transitionProperty || 'script animation' ) ) ).toEqual( [] ); // What: No Motion Assertion. Why: The state passes only when no animation or transition it still holds lasts longer than 1ms. How: This lists every animation or transition the page still holds that lasts longer than 1ms, which should be none. // What: Type Assertion Note. Why: getAnimations returns plain Animation objects, which don't type their CSS names. How: Each one is read as a CSS animation, then a CSS transition, falling back to a generic label when neither name exists.
+		expect( await curPagObj.evaluate( lonAniFun ) ).toEqual( [] ); // What: No Motion Assertion. Why: The state passes only when no animation or transition it still holds lasts longer than 1ms. How: This lists every one through lonAniFun, which should find none.
 
 
 	} );
 
 
 }
+
+
+test( 'closing the drawer plays no motion under reduced motion', async ( { page : curPagObj } ) => { // What: Drawer Close Motion Test. Why: The state checks only see the drawer open, and closing runs its own transitions, which need their own reduced-motion rules. How: This opens the drawer under reduced motion, clears what the recorder heard, closes it, and checks nothing moved.
+
+
+	const draRecObj = STA_REC_ARR.find( ( staCurObj ) => staCurObj.ideStr === 'drawer-phone' )!; // What: Drawer Record Object. Why: The drawer opens the same way its state does. How: This finds the drawer state's row. // What: Non-Null Note. Why: find types its result as possibly undefined. How: STA_REC_ARR always lists the drawer-phone state.
+
+
+	await curPagObj.emulateMedia( { reducedMotion : 'reduce' } ); // What: Reduced Motion Emulation. Why: The preference has to be set before the page loads. How: This makes the page match prefers-reduced-motion: reduce.
+
+	await curPagObj.addInitScript( motRecFun ); // What: Motion Recorder Install Call. Why: The drawer's closing transitions can finish before the check reads the page. How: This runs motRecFun in the page before it loads.
+
+	await opeStaFun( curPagObj, draRecObj ); // What: Drawer State Open Call. Why: The drawer has to be open before it can close. How: This loads the home page at phone size and opens the drawer.
+
+	await curPagObj.evaluate( () => { ( Reflect.get( window, 'motLisArr' ) as string[] ).length = 0; } ); // What: Motion List Clear Call. Why: Opening is the state check's job, so only motion from closing should count here. How: This empties the recorder's list. // What: Type Assertion Note. Why: Reflect.get types the global as unknown. How: motRecFun stores a string array there.
+
+	await curPagObj.getByRole( 'button', { name : 'Toggle menu' } ).click(); // What: Toggle Click Call. Why: This is the action under test. How: This clicks the toggle to close the drawer.
+
+
+	await expect( curPagObj.getByRole( 'button', { name : 'Toggle menu' } ) ).toHaveAttribute( 'aria-expanded', 'false' ); // What: Drawer Closed Assertion. Why: The check only means something once the drawer has closed. How: This waits until the toggle reports it collapsed.
+
+	expect( await curPagObj.evaluate( () => Reflect.get( window, 'motLisArr' ) ) ).toEqual( [] ); // What: No Motion Started Assertion. Why: Nothing should have moved while the drawer closed, including transitions that already finished. How: This checks the recorder heard nothing.
+
+	expect( await curPagObj.evaluate( lonAniFun ) ).toEqual( [] ); // What: No Motion Assertion. Why: Nothing should still be moving once the drawer has closed. How: This lists every animation or transition longer than 1ms the page still holds, which should be none.
+
+
+} );
+
+
+
+test( 'sending the form plays no motion under reduced motion', async ( { page : curPagObj } ) => { // What: Sent Label Motion Test. Why: The sent label's rise only plays once the form is sent, which no state does. How: This opens the home page under reduced motion, clears what the recorder heard, sends the form, and checks nothing moved.
+
+
+	const homRecObj = STA_REC_ARR.find( ( staCurObj ) => staCurObj.ideStr === 'home-desktop' )!; // What: Home Record Object. Why: The form sits on the home page. How: This finds the home desktop state's row. // What: Non-Null Note. Why: find types its result as possibly undefined. How: STA_REC_ARR always lists the home-desktop state.
+
+
+	await curPagObj.emulateMedia( { reducedMotion : 'reduce' } ); // What: Reduced Motion Emulation. Why: The preference has to be set before the page loads. How: This makes the page match prefers-reduced-motion: reduce.
+
+	await curPagObj.addInitScript( motRecFun ); // What: Motion Recorder Install Call. Why: The sent label's rise can finish before the check reads the page. How: This runs motRecFun in the page before it loads.
+
+	await opeStaFun( curPagObj, homRecObj ); // What: Home State Open Call. Why: The form is sent from the home page. How: This loads it at desktop size.
+
+	await curPagObj.evaluate( () => { ( Reflect.get( window, 'motLisArr' ) as string[] ).length = 0; } ); // What: Motion List Clear Call. Why: Loading is the state check's job, so only motion from sending should count here. How: This empties the recorder's list. // What: Type Assertion Note. Why: Reflect.get types the global as unknown. How: motRecFun stores a string array there.
+
+	await curPagObj.locator( '#conNamInp' ).fill( 'Pat Doe' ); // What: Name Fill Call. Why: A real request carries a name. How: This types one into the name field.
+
+	await curPagObj.locator( '#conEmaInp' ).fill( 'pat@example.com' ); // What: Email Fill Call. Why: A real request carries an email. How: This types one into the email field.
+
+	await curPagObj.getByRole( 'button', { name : 'Send request' } ).click(); // What: Send Click Call. Why: This is the action under test. How: This clicks the submit button.
+
+
+	await expect( curPagObj.locator( 'form button[type="submit"]' ) ).toHaveText( /Opening your email/ ); // What: Sent Label Assertion. Why: The check only means something once the label has swapped. How: This waits until the button's text has changed.
+
+	expect( await curPagObj.evaluate( () => Reflect.get( window, 'motLisArr' ) ) ).toEqual( [] ); // What: No Motion Started Assertion. Why: Nothing should have moved while the label swapped, including an animation that already finished. How: This checks the recorder heard nothing.
+
+	expect( await curPagObj.evaluate( lonAniFun ) ).toEqual( [] ); // What: No Motion Assertion. Why: Nothing should still be moving once the label has swapped. How: This lists every animation or transition longer than 1ms the page still holds, which should be none.
+
+
+} );
 
 // #endregion Module Init
 
