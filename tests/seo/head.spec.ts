@@ -193,10 +193,11 @@ test( 'robots.txt and _headers keep the demo out of search', async ( { page : cu
 test( '_headers hardens every response', async ( { page : curPagObj } ) => { // What: Security Headers Test. Why: Every response should carry the security headers a checker looks for. How: This reads _headers from the dev server and checks each header line.
 
 
-	const heaTexStr = await ( await curPagObj.request.get( '/_headers' ) ).text(); // What: Headers Text String. Why: Netlify reads its header rules from this file, and the dev server doesn't apply them. How: This fetches the file itself.
+	const heaTexStr = await ( await curPagObj.request.get( '/_headers' ) ).text();                                              // What: Headers Text String. Why: Netlify reads its header rules from this file, and the dev server doesn't apply them. How: This fetches the file itself.
+	const sitRulStr = [ ...heaTexStr.matchAll( /^\/\*\n((?:\t.*\n?)+)/gm ) ].map( ( matCurObj ) => matCurObj[ 1 ] ).join( '' ); // What: Site Rule String. Why: A header only reaches every response when it sits under a site-wide /* rule. How: This gathers the header lines of every /* block in the file.
 
 
-	for ( const heaPatReg of SEC_HEA_ARR ) expect( heaTexStr ).toMatch( heaPatReg ); // What: Header Line Assertion Loop. Why: Each missing header is its own failure. How: This checks every pattern against the file.
+	for ( const heaPatReg of SEC_HEA_ARR ) expect( sitRulStr ).toMatch( heaPatReg ); // What: Header Line Assertion Loop. Why: Each missing header is its own failure. How: This checks every pattern against the site-wide rules' header lines.
 
 
 } );
