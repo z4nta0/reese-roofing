@@ -48,12 +48,12 @@ import { useSecCliFun } from '../../ui/section-link.ts'; // What: Use Section Cl
  * Both buttons go through secCliFun, which navigates home inside the site to a
  * section (the hero's top for the return button, the contact section for the
  * estimate button), where the home page scrolls to it and clears the hash,
- * while a Ctrl, Cmd, or middle click opens its address in a new tab. Since no
- * link moves within the site to another page without a section hash (the bar's
- * brand link loads the home page in full, at its top), the site needs no
- * scroll-to-top hook, the same exception hair-designs records. The main
- * element carries a top anchor of its own, so the footer's back-to-top link
- * works here too. app.tsx renders this page for every path no other route
+ * while a Ctrl, Cmd, or middle click opens the button's address in a new tab.
+ * Since no link moves within the site to another page without a section hash
+ * (the bar's brand link loads the home page in full, at its top), the site
+ * needs no scroll-to-top hook, the same exception hair-designs records. The
+ * main element carries a top anchor of its own, so the footer's back-to-top
+ * link works here too. app.tsx renders this page for every path no other route
  * claims.
  *
  * @author z4nta0 <https://github.com/z4nta0>

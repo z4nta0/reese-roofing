@@ -47,9 +47,9 @@ import { redMotFun } from '../utils/motion.ts'; // What: Reduce Motion Function.
  * company is fictional and the site a portfolio demo by techgeek.dev, linking
  * to that site, and a link back to the top of the page, which scrolls up
  * without leaving a hash in the address, while a Ctrl, Cmd, or middle click
- * opens it in a new tab. It scrolls to whichever page's top anchor is showing,
- * the hero's or the 404 page's, rather than through the section links' shared
- * handler, which always heads for the home page.
+ * opens it in a new tab. The link scrolls to whichever page's top anchor is
+ * showing, the hero's or the 404 page's, rather than through the section
+ * links' shared handler, which always heads for the home page.
  *
  * @author z4nta0 <https://github.com/z4nta0>
  *
@@ -93,7 +93,7 @@ function SitFooCom () : React.JSX.Element {
 		<footer className={ cssModObj.sitFooFoo }>{ /* What: Site Footer Footer Element. Why: This is the page's footer landmark. How: This holds the footer's inner content block, a row that stacks at 880px wide and below. */ }
 
 
-			<div className={ cssModObj.fooInnDiv }>{ /* What: Footer Inner Div Element. Why: The footer's contents should line up with the page's content width. How: This holds the brand, the meta lines, and the back-to-top link in one row, stacking them, left-aligned, at 880px wide and below. */ }
+			<div className={ cssModObj.fooInnDiv }>{ /* What: Footer Inner Div Element. Why: The footer's contents should line up with the page's content width. How: This holds the brand, the meta lines, and the back-to-top link in one row, stacking them at 880px wide and below into a column centered on the page, its items sharing a left edge. */ }
 
 
 				<div className={ cssModObj.fooBraDiv }>{ /* What: Footer Brand Div Element. Why: The footer repeats the company's mark and name. How: This sets them side by side. */ }
@@ -122,7 +122,7 @@ function SitFooCom () : React.JSX.Element {
 
 				</div>
 
-				<div className={ cssModObj.fooMetDiv }>{ /* What: Footer Meta Div Element. Why: The legal and location details sit together. How: This stacks the copyright, licensing, and demo lines, centered, or left-aligned at 880px wide and below. */ }
+				<div className={ cssModObj.fooMetDiv }>{ /* What: Footer Meta Div Element. Why: The copyright, licensing, and demo lines sit together. How: This stacks the copyright, licensing, and demo lines, centered, or left-aligned at 880px wide and below. */ }
 
 
 					<span>© { curYeaNum } Reese Roofing, LLC</span>{ /* What: Footer Copyright Span Element. Why: The footer states the company's copyright. How: This pairs the current year with the company's legal name. */ }

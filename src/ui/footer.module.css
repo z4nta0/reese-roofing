@@ -7,9 +7,10 @@
  * @summary
  * Styles for SitFooCom: the dark footer band with the brand on the left, the
  * copyright, licensing, and demo lines in the middle, and the back-to-top link
- * on the right, stacking into one left-aligned column at 880px wide and below.
- * The shared container declarations the footer used to borrow from the global
- * stylesheet are copied onto its inner div's class here.
+ * on the right, stacking at 880px wide and below into one column centered on
+ * the page, its items sharing a left edge. The shared container declarations
+ * the footer used to borrow from the global stylesheet are copied onto its
+ * inner div's class here.
  *
  * @author z4nta0 <https://github.com/z4nta0>
  *

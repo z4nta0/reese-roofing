@@ -187,7 +187,7 @@ function ConSecCom () : React.JSX.Element {
 
 					<span className={ cssModObj.eyeLabSpa }>04 · Get in touch</span>{ /* What: Eyebrow Label Span Element. Why: Each section is numbered in order down the page. How: This is the section's numbered label, set in the site's eyebrow style. */ }
 
-					<h2 className={ cssModObj.conTitHea }>{ /* What: Contact Title Heading Element. Why: The heading invites the visitor in. How: Its line break sets the two-line shape, with one word in light italic in the soft accent. */ }
+					<h2 className={ cssModObj.conTitHea }>{ /* What: Contact Title Heading Element. Why: The heading invites the visitor in. How: Its line break sets the two-line shape, with one word in the soft accent, light and italic. */ }
 						Let's talk about<br />
 						your <em className={ cssModObj.titAccEmp }>roof</em>.
 					</h2>
