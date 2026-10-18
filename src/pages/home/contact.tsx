@@ -63,7 +63,7 @@ const INI_FOR_OBJ : ConForTyp = { comStr : '', emaStr : '', mesStr : '', namStr 
  * updFieFun. Submitting builds an email from the fields and hands it to the
  * visitor's email app through a mailto link, then switches the submit
  * button's label to say the email is opening. The section carries the
- * contact anchor the navigation links and estimate buttons jump to.
+ * contact anchor the navigation links and estimate buttons lead to.
  *
  * @author z4nta0 <https://github.com/z4nta0>
  *
@@ -171,7 +171,7 @@ function ConSecCom () : React.JSX.Element {
 			id='contact'
 
 			className={ cssModObj.homConSec }
-		>{ /* What: Home Contact Section Element. Why: This is where visitors reach the company. How: Its contact id is the anchor the navigation links and estimate buttons jump to, kept as is since it appears in the page's URL. */ }
+		>{ /* What: Home Contact Section Element. Why: This is where visitors reach the company. How: Its contact id is the anchor the navigation links and estimate buttons lead to, kept as is since it appears in the page's URL. */ }
 
 
 			<div className={ cssModObj.conLayDiv }>{ /* What: Contact Layout Div Element. Why: The section's two columns should line up with the page's content width. How: This sets the intro and the form side by side. */ }

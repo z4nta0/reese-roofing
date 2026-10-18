@@ -165,10 +165,10 @@ function useSecLinFun () : ( secIdeStr : string ) => void {
  * Returns secCliFun, the click handler every section link shares. A Ctrl, Cmd,
  * Shift, Alt, or middle click is left to the browser, which handles the link's
  * own address its usual way (a new tab or window, or a download). Any other
- * click stops the browser's jump to the hash and hands the section's id to
- * visSecFun, which scrolls to it on the home page or navigates home to it from
- * any other page. It reports whether it handled the click, so a caller such as
- * the phone menu can close itself only then.
+ * click stops the browser's own navigation to the hash and hands the section's
+ * id to visSecFun, which scrolls to it on the home page or navigates home to
+ * it from any other page. It reports whether it handled the click, so a caller
+ * such as the phone menu can close itself only then.
  *
  * @author z4nta0 <https://github.com/z4nta0>
  *
@@ -191,14 +191,14 @@ function useSecCliFun () : ( cliEveObj : React.MouseEvent< HTMLAnchorElement >, 
 
 
 
-	return ( cliEveObj : React.MouseEvent< HTMLAnchorElement >, secIdeStr : string ) => { // What: Section Click Function. Why: Every section link handles a click the same way. How: This leaves a modified click to the browser and otherwise cancels the jump and visits the section.
+	return ( cliEveObj : React.MouseEvent< HTMLAnchorElement >, secIdeStr : string ) => { // What: Section Click Function. Why: Every section link handles a click the same way. How: This leaves a modified click to the browser and otherwise cancels the browser's own navigation and visits the section.
 
 
 		if ( modCliFun( cliEveObj ) ) return false; // What: Modified Click Guard. Why: A Ctrl, Cmd, Shift, or Alt click asks the browser to handle the link its own way, and a middle click never reaches this handler at all. How: This leaves the click alone and reports it unhandled.
 
 
 
-		cliEveObj.preventDefault(); // What: Default Navigation Cancel. Why: The browser would otherwise jump and leave the hash in the address. How: This stops the link's own navigation.
+		cliEveObj.preventDefault(); // What: Default Navigation Cancel. Why: The browser would otherwise follow the link itself, leaving the hash in the address, and from the 404 page would load the home page in full. How: This stops the link's own navigation.
 
 		visSecFun( secIdeStr ); // What: Section Visit Call. Why: The visitor should land on the section they chose. How: This scrolls to it, or navigates home to it from another page.
 

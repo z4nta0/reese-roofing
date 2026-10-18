@@ -44,8 +44,8 @@ import { useSecCliFun } from '../../ui/section-link.ts'; // What: Use Section Cl
  * everything, the location label and headline beside the full logo, the pitch
  * paragraph with the estimate and services buttons, and the stats row. The
  * section carries the page's top anchor, so the navigation bar's and
- * drawer's Home links, the footer's back-to-top link, and the 404 page's
- * Return home button all land here.
+ * drawer's Home links, the home page footer's back-to-top link, and the 404
+ * page's Return home button all land here.
  *
  * @author z4nta0 <https://github.com/z4nta0>
  *

@@ -71,14 +71,14 @@ function SitFooCom () : React.JSX.Element {
 
 
 
-	const topCliFun = ( cliEveObj : React.MouseEvent< HTMLAnchorElement > ) => { // What: Top Click Function. Why: Back to top should scroll up without leaving a hash in the address. How: This leaves a modified click to the browser and otherwise cancels the jump and scrolls the page's top anchor into view.
+	const topCliFun = ( cliEveObj : React.MouseEvent< HTMLAnchorElement > ) => { // What: Top Click Function. Why: Back to top should scroll up without leaving a hash in the address. How: This leaves a modified click to the browser and otherwise cancels the browser's own scroll and scrolls the page's top anchor into view.
 
 
 		if ( modCliFun( cliEveObj ) ) return; // What: Modified Click Guard. Why: A Ctrl, Cmd, Shift, or Alt click asks the browser to handle the link its own way, and a middle click never reaches this handler at all. How: This leaves the click alone.
 
 
 
-		cliEveObj.preventDefault(); // What: Default Navigation Cancel. Why: The browser would otherwise jump and leave the hash in the address. How: This stops the link's own navigation.
+		cliEveObj.preventDefault(); // What: Default Navigation Cancel. Why: The browser would otherwise scroll to the hash itself and leave it in the address. How: This stops the link's own navigation.
 
 		document.getElementById( 'top' )?.scrollIntoView( { behavior : redMotFun() ? 'auto' : 'smooth' } ); // What: Top Scroll Call. Why: The visitor should glide back up to the start of the page. How: This scrolls the page's top anchor into view, jumping instead of gliding under reduced motion.
 

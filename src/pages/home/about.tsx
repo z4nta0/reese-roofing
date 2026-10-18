@@ -80,7 +80,7 @@ const PRI_REC_ARR = [ // What: Principle Record Array. Why: The principles row i
  * decorative logo seal; on the right, the company's story in three
  * paragraphs and a pull quote from the family. Below, the principles row
  * numbers each row of PRI_REC_ARR by its position, padded to two digits. The
- * section carries the about anchor the navigation links jump to.
+ * section carries the about anchor the navigation links lead to.
  *
  * @author z4nta0 <https://github.com/z4nta0>
  *
@@ -105,7 +105,7 @@ function AboSecCom () : React.JSX.Element {
 			id='about'
 
 			className={ cssModObj.homAboSec }
-		>{ /* What: Home About Section Element. Why: This tells the company's story. How: Its about id is the anchor the navigation links jump to, kept as is since it appears in the page's URL. */ }
+		>{ /* What: Home About Section Element. Why: This tells the company's story. How: Its about id is the anchor the navigation links lead to, kept as is since it appears in the page's URL. */ }
 
 
 			<div className={ cssModObj.aboStoDiv }>{ /* What: About Story Div Element. Why: The story's two columns should line up with the page's content width. How: This sets the left and right columns side by side. */ }
