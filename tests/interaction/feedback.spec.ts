@@ -215,11 +215,11 @@ function sigEleFun ( eleCurEle : Element ) : string {
  * pointer away, read again while hovered, and again while the mouse button is
  * held on it, every look read once its transition has settled. A control that
  * looks the same at rest and hovered, or hovered and pressed, is a problem.
- * Normally its transition list must include the focus ring's outline-width, so
- * the ring eases in; under reduced motion every one of its transition
- * durations must be zero instead. Outside reduced motion, a control whose
- * every transition duration is zero is a problem too. The caller blocks real
- * clicks first, so releasing the mouse does nothing.
+ * Normally its transition list must include both of the focus ring's outline
+ * properties, offset and width, so the ring eases in; under reduced motion
+ * every one of its transition durations must be zero instead. Outside reduced
+ * motion, a control whose every transition duration is zero is a problem too.
+ * The caller blocks real clicks first, so releasing the mouse does nothing.
  *
  * @author z4nta0 <https://github.com/z4nta0>
  *
@@ -291,7 +291,7 @@ async function feeProFun ( curPagObj : Page, redMotBoo : boolean ) : Promise< st
 
 		if ( redMotBoo && !/^0s(, 0s)*$/.test( traDurStr ) ) proLisArr.push( `${ conDesStr } still transitions under reduced motion (${ traDurStr })` ); // What: Reduced Motion Check. Why: Asking for less motion should stop every transition. How: This records a control with any duration above zero.
 
-		else if ( !redMotBoo && !traLisStr.includes( 'outline-width' ) ) proLisArr.push( `${ conDesStr } doesn't transition its focus ring` ); // What: Focus Ease Check. Why: The focus ring should ease in rather than snap. How: This records a control whose transition list leaves out the outline.
+		else if ( !redMotBoo && !( traLisStr.includes( 'outline-offset' ) && traLisStr.includes( 'outline-width' ) ) ) proLisArr.push( `${ conDesStr } doesn't transition its focus ring` ); // What: Focus Ease Check. Why: The focus ring should ease in rather than snap. How: This records a control whose transition list leaves out either outline property.
 
 
 
