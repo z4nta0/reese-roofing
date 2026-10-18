@@ -126,7 +126,7 @@ function sitHeaFun () : Record< string, string > {
 
 
 
-	return heaRecObj;
+	return heaRecObj; // What: Header Record Return. Why: The serving helper sends these headers with every response. How: This hands back every site-wide header, keyed by name.
 
 
 }

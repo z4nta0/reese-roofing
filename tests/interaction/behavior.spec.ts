@@ -680,7 +680,7 @@ test( 'an unknown address shows the 404 page', async ( { page : curPagObj } ) =>
 
 
 
-test( 'Return home leads to the top of the home page', async ( { page : curPagObj } ) => { // What: Return Home Test. Why: The 404 page's main action has to work, and with no scroll-to-top hook, the home page has to open at its top even when the 404 page was scrolled. How: This scrolls a small 404 page down, clicks Return home, and checks the address, title, and scroll position.
+test( 'Return home leads to the top of the home page', async ( { page : curPagObj } ) => { // What: Return Home Test. Why: The 404 page's main action has to work, and with no scroll-to-top hook, the home page has to open at its top even when the 404 page was scrolled. How: This scrolls a small 404 page down, clicks Return home, and checks the address, title, and scroll position, and that the page never fully reloaded.
 
 
 	await opeRouFun( curPagObj, '/missing', SMA_VIE_OBJ ); // What: Not Found Open Call. Why: The 404 page only scrolls on the smallest phones. How: This opens it at 320 by 568.
@@ -707,7 +707,7 @@ test( 'Return home leads to the top of the home page', async ( { page : curPagOb
 
 
 
-test( 'the 404 page leads to the contact section', async ( { page : curPagObj } ) => { // What: Not Found Estimate Test. Why: The 404 page offers the site's main action too. How: This clicks Get an estimate and checks the visitor lands on the contact section.
+test( 'the 404 page leads to the contact section', async ( { page : curPagObj } ) => { // What: Not Found Estimate Test. Why: The 404 page offers the site's main action too. How: This clicks Get an estimate and checks the visitor lands on the contact section without the page fully reloading.
 
 
 	await opeRouFun( curPagObj, '/missing', DES_VIE_OBJ ); // What: Not Found Open Call. Why: This button lives on the 404 page. How: This opens it.
@@ -733,7 +733,7 @@ test( 'the 404 page leads to the contact section', async ( { page : curPagObj } 
 for ( const [ linLabStr, secIdeStr ] of [ [ 'Services', 'services' ], [ 'About', 'about' ], [ 'Contact', 'contact' ] ] ) { // What: Not Found Link Loop. Why: The bar's section links on the 404 page lead home to their sections. How: This declares one test per link, pairing its label with its section's id.
 
 
-	test( `the 404 page's ${ linLabStr } link leads to its section`, async ( { page : curPagObj } ) => { // What: Not Found Section Link Test. Why: A section link away from the home page has to navigate home and land on its section without a hash. How: This clicks the link on the 404 page and checks the section's position and the address.
+	test( `the 404 page's ${ linLabStr } link leads to its section`, async ( { page : curPagObj } ) => { // What: Not Found Section Link Test. Why: A section link away from the home page has to navigate home and land on its section without a hash. How: This clicks the link on the 404 page and checks the section's position, the address, and that the page never fully reloaded.
 
 
 		await opeRouFun( curPagObj, '/missing', DES_VIE_OBJ ); // What: Not Found Open Call. Why: The bar's links are under test away from the home page. How: This opens the 404 page at desktop size.
@@ -759,7 +759,7 @@ for ( const [ linLabStr, secIdeStr ] of [ [ 'Services', 'services' ], [ 'About',
 
 
 
-test( "the 404 page's Home link leads to the home page", async ( { page : curPagObj } ) => { // What: Not Found Home Link Test. Why: The 404 page has a top anchor of its own, which the nav's Home link mustn't settle for. How: This clicks Home on the 404 page and checks the home page's title and a clean address.
+test( "the 404 page's Home link leads to the home page", async ( { page : curPagObj } ) => { // What: Not Found Home Link Test. Why: The 404 page has a top anchor of its own, which the nav's Home link mustn't settle for. How: This clicks Home on the 404 page and checks the home page's title, a clean address, and that the page never fully reloaded.
 
 
 	await opeRouFun( curPagObj, '/missing', DES_VIE_OBJ ); // What: Not Found Open Call. Why: The bar's Home link is under test away from the home page. How: This opens the 404 page at desktop size.
