@@ -403,7 +403,7 @@
 	font-size      : var( --fon-siz-p02 ); /* Font Size Base Plus 2 ~= 19.304px */
 	font-weight    : 400;
 	letter-spacing : -0.01em;
-	line-height    : var( --ver-rhy-bas ); /* Vertical Rhythm Base ~= 1.325 */
+	line-height    : var( --ver-rhy-m01 ); /* Vertical Rhythm Base Minus 1 = 1 */
 	margin-bottom  : var( --spa-ver-bas ); /* Spacing Vertical Base ~= 14.572px */
 
 
