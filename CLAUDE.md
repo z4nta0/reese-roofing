@@ -34,6 +34,10 @@ isn't a real business, so it gets the demo treatment rather than local SEO:
   1200x630 size, its 40px lines, their 1.2 line height and weights, and the
   title's -0.01em letter spacing stay literal, since the scale has no step
   within 10% of them.
+- **Canonical in `index.html`** (decided 2026-10-17): the site counts as a
+  one-page site for the canonical rule, since its only other route is the
+  `noindex` 404 page, so the canonical stays in `index.html` and the 404 page
+  reports the home page's, which the SEO suite checks.
 - **Structured data**: one `WebSite` JSON-LD block about a fictional company,
   created by techgeek.support. Never `LocalBusiness`, an address, or a phone.
 - **Placeholders stay reserved**: the phone is a 555-01xx number and the

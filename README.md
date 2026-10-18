@@ -14,11 +14,11 @@ Since the company isn't real, the site is set up to stay out of search results a
 
 `npm run test:seo` checks all of this in Chromium, Firefox, and WebKit.
 
+The preview card is drawn from the site's own logo and fonts by `design/og-image/card.html` and captured by `npm run og-image`, which writes `public/og-image.png` and fails if it reaches WhatsApp's 300 KB limit. Everything on it sits inside the center square, since some apps crop previews to one. Apps cache previews for a long time, so a changed card should get a new filename, with the `og:image` and `twitter:image` tags updated to match.
+
 ## Security headers
 
 `public/_headers` also sends the hardening headers a header security checker looks for on every response: a strict Content-Security-Policy (the site loads only its own files, plus `data:` images for the inlined logos and the form's select arrow), HSTS, `nosniff`, a deny on framing, a Referrer-Policy that shows linked sites only this site's origin, and a Permissions-Policy that turns off every browser feature the site doesn't use. Netlify applies them, so they only show up on the live site; `npm run test:seo` checks the file sends each one.
-
-The preview card is drawn from the site's own logo and fonts by `design/og-image/card.html` and captured by `npm run og-image`, which writes `public/og-image.png` and fails if it reaches WhatsApp's 300 KB limit. Everything on it sits inside the center square, since some apps crop previews to one. Apps cache previews for a long time, so a changed card should get a new filename, with the `og:image` and `twitter:image` tags updated to match.
 
 ## Stack
 
