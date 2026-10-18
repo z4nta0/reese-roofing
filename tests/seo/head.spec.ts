@@ -161,7 +161,7 @@ for ( const rouRecObj of ROU_REC_ARR ) { // What: Route Test Loop. Why: Every ro
 
 
 
-	test( `${ rouRecObj.patStr } shows only reserved contact details`, async ( { page : curPagObj } ) => { // What: Reserved Contact Test. Why: A demo must never show a phone number or email address someone could really reach. How: This reads every phone and email the route links to, shows, or offers as a sample, and checks each is a reserved one.
+	test( `${ rouRecObj.patStr } shows only reserved contact details`, async ( { page : curPagObj } ) => { // What: Reserved Contact Test. Why: A demo must never show a phone number or email address someone could really reach. How: This reads every phone and email the route links to, shows, or offers as a sample, checks at least one phone was found, and checks each is a reserved one.
 
 
 		await curPagObj.goto( rouRecObj.patStr ); // What: Route Load Call. Why: The details are read as a visitor sees them. How: This opens the route on the suite's dev server.
@@ -220,7 +220,7 @@ test( 'robots.txt and _headers keep the demo out of search and away from AI craw
 
 
 
-test( '_headers hardens every response', async ( { page : curPagObj } ) => { // What: Security Headers Test. Why: Every response should carry the security headers a checker looks for. How: This reads _headers from the dev server and checks each header line.
+test( '_headers hardens every response', async ( { page : curPagObj } ) => { // What: Security Headers Test. Why: Every response should carry the security headers a checker looks for. How: This reads _headers from the dev server and checks each header line, and that no header is set twice.
 
 
 	const heaTexStr = await ( await curPagObj.request.get( '/_headers' ) ).text();                                              // What: Headers Text String. Why: Netlify reads its header rules from this file, and the dev server doesn't apply them. How: This fetches the file itself.
@@ -252,7 +252,7 @@ test( '_redirects sends every unknown path to the app', async ( { page : curPagO
 
 
 
-test( 'the social preview tags are complete', async ( { page : curPagObj } ) => { // What: Social Tags Test. Why: A link shared anywhere should show a full, honest card. How: This loads the home page and checks every social tag, its absolute URLs, the image's type and size, the copy's lengths, that every title, summary, and image description calls it a demo or the company fictional, and the theme color and icons beside the card.
+test( 'the social preview tags are complete', async ( { page : curPagObj } ) => { // What: Social Tags Test. Why: A link shared anywhere should show a full, honest card. How: This loads the home page and checks every social tag, its absolute URLs, the image's type and size, the page type, the copy's lengths, that every title, site name, summary, and image description calls it a demo or the company fictional, and the theme color and icons beside the card.
 
 
 	await curPagObj.goto( '/' ); // What: Home Load Call. Why: Link scrapers read the page every route shares. How: This opens the home page.

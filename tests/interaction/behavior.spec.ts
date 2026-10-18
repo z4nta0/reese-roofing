@@ -645,7 +645,7 @@ test( 'an unknown address shows the 404 page', async ( { page : curPagObj } ) =>
 
 
 
-test( 'Return home leads to the top of the home page', async ( { page : curPagObj } ) => { // What: Return Home Test. Why: The 404 page's main action has to work, and with no scroll-to-top hook, the home page has to open at its top even when the 404 page was scrolled. How: This scrolls a small 404 page down, clicks Return home, and checks the address, title, and scroll position, and that the page never fully reloaded.
+test( 'Return home leads to the top of the home page', async ( { page : curPagObj } ) => { // What: Return Home Test. Why: The 404 page's main action has to work, and with no scroll-to-top hook, the home page has to open at its top even when the 404 page was scrolled. How: This scrolls a small 404 page down, checks it really scrolled, clicks Return home, and checks the address, title, and scroll position, and that the page never fully reloaded.
 
 
 	await opeRouFun( curPagObj, '/missing', SMA_VIE_OBJ ); // What: Not Found Open Call. Why: The 404 page only scrolls on the smallest phones. How: This opens it at 320 by 568.
@@ -734,7 +734,7 @@ test( "the 404 page's Home link leads to the home page", async ( { page : curPag
 
 
 
-test( 'back to top scrolls the 404 page to its own top', async ( { page : curPagObj } ) => { // What: Not Found Back To Top Test. Why: The footer's link means the top of whichever page is showing, so on the 404 page it should scroll that page up rather than go home. How: This scrolls the 404 page down, clicks the link, and checks the page, its position, its address, and that no hashchange event fired.
+test( 'back to top scrolls the 404 page to its own top', async ( { page : curPagObj } ) => { // What: Not Found Back To Top Test. Why: The footer's link means the top of whichever page is showing, so on the 404 page it should scroll that page up rather than go home. How: This scrolls the 404 page down, checks it really scrolled, clicks the link, and checks the page, its position, its address, and that no hashchange event fired.
 
 
 	await opeRouFun( curPagObj, '/missing', SMA_VIE_OBJ ); // What: Not Found Open Call. Why: The 404 page only scrolls on the smallest phones. How: This opens it at 320 by 568.
