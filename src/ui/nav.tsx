@@ -82,19 +82,21 @@ const NAV_LIN_ARR = [ // What: Nav Link Array. Why: The bar and its drawer list 
  * Renders the site's top bar. It listens to the window's scroll position and
  * switches the bar to its scrolled style once the page is more than 24px down,
  * checking once on mount so a page reloaded mid-scroll starts in the right
- * style. At 880px wide and below a toggle button opens and closes a drawer
- * holding the same links, numbered like the sections they lead to, then a
- * contact block with the phone number, the hours, and the estimate button;
- * picking a link or the button closes it again. While the drawer is open the
- * bar takes a solid background, so the two read as one panel, and a scrim dims
- * the page below; clicking the scrim closes the drawer. The open drawer also
- * acts as a modal layer: the page's content beside the bar turns inert, so Tab
- * and screen readers stay in the bar and drawer, Escape closes it and returns
- * focus to the toggle, and widening the screen until the toggle disappears
- * closes it too. Every section link and estimate button goes through
- * secCliFun, scrolling to its section, or navigating home to it from another
- * page, without leaving a hash in the address, while a Ctrl, Cmd, or middle
- * click still opens it in a new tab.
+ * style. At 880px wide and below, the bar's links, phone number, and estimate
+ * button give way to a toggle button that opens and closes a drawer holding
+ * the same links, numbered like the sections they lead to, then a contact
+ * block with the phone number, the hours, and the estimate button; a plain
+ * click on a link or the button closes it again, while a Ctrl, Cmd, or middle
+ * click leaves it open. While the drawer is open the bar takes a solid
+ * background, so the two read as one panel, and a scrim dims the page below;
+ * clicking the scrim closes the drawer. The open drawer also acts as a modal
+ * layer: the page's content beside the bar turns inert, so Tab and screen
+ * readers stay in the bar and drawer, Escape closes it and returns focus to
+ * the toggle, and widening the screen until the toggle disappears closes it
+ * too. Every section link and estimate button goes through secCliFun,
+ * scrolling to its section, or navigating home to it from another page,
+ * without leaving a hash in the address, while a Ctrl, Cmd, or middle click
+ * still opens it in a new tab.
  *
  * @author z4nta0 <https://github.com/z4nta0>
  *
@@ -267,7 +269,7 @@ function NavBarCom () : React.JSX.Element {
 						className={ cssModObj.navLinNav }
 
 						aria-label='Primary'
-					>{ /* What: Navigation Links Nav Element. Why: The section links form the site's primary navigation landmark. How: This lists one link per row of NAV_LIN_ARR. */ }
+					>{ /* What: Navigation Links Nav Element. Why: The section links form the site's primary navigation landmark. How: This lists one link per row of NAV_LIN_ARR, and hides at 880px wide and below, where the drawer repeats the links. */ }
 
 
 						{ NAV_LIN_ARR.map( ( navLinObj ) => ( // What: Nav Link Map. Why: The bar lists every section link. How: This renders one anchor per row.
@@ -291,7 +293,7 @@ function NavBarCom () : React.JSX.Element {
 
 					</nav>
 
-					<div className={ cssModObj.navCtaDiv }>{ /* What: Navigation Call-To-Action Div Element. Why: The bar's two ways to reach the company sit together. How: This holds the phone link and the estimate button. */ }
+					<div className={ cssModObj.navCtaDiv }>{ /* What: Navigation Call-To-Action Div Element. Why: The bar's two ways to reach the company sit together. How: This holds the phone link and the estimate button, and hides at 880px wide and below, where the drawer's contact block repeats them. */ }
 
 
 						<a
@@ -300,7 +302,7 @@ function NavBarCom () : React.JSX.Element {
 							href='tel:+17855550199'
 
 							aria-label='Call (785) 555-0199'
-						>{ /* What: Navigation Phone Anchor Element. Why: Phone visitors should be able to call in one tap. How: This dials the company's number. */ }
+						>{ /* What: Navigation Phone Anchor Element. Why: Visitors should be able to call straight from the bar. How: This dials the company's number, and hides at 880px wide and below, where the drawer repeats it. */ }
 							(785) 555-0199
 						</a>
 

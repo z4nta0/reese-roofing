@@ -28,8 +28,8 @@ import { useNavigate } from 'react-router';       // What: Use Navigate. Why: A 
  * new window, and an Alt click downloads it. Adapted from hair-designs' own,
  * which decides by whether the section's element is on the page; here it
  * decides by the path instead, since the 404 page has a top anchor of its own,
- * and the bar's and drawer's Home links and its Return home button there have
- * to go home rather than scroll to it.
+ * and the bar's and drawer's Home links there, along with the 404 page's
+ * Return home button, have to go home rather than scroll to it.
  *
  * Sections:
  *  - Helpers
