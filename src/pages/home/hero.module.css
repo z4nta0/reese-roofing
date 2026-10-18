@@ -275,7 +275,7 @@
 
 	}
 
-	.herLogDiv::before { /* What: Narrow Hero Logo Div Ring. Why: The smaller stacked logo needs a tighter ring. How: This shrinks the ring's offset to the base step. */
+	.herLogDiv::before { /* What: Tighter Hero Logo Div Ring. Why: The smaller stacked logo needs a tighter ring. How: This shrinks the ring's offset to the base step. */
 
 
 		--her-rin-off : var( --spa-ver-bas ); /* Spacing Vertical Base ~= 14.572px */
@@ -576,7 +576,7 @@
 
 
 }
-.staIteDiv:first-child { /* What: First Stat Item Div. Why: The first stat anchors the row with a stronger rule. How: This draws its rule in full ink. */
+.staIteDiv:first-child { /* What: Stat Item Div First. Why: The first stat anchors the row with a stronger rule. How: This draws its rule in full ink. */
 
 
 	border-left : var( --bor-wid-bas ) solid var( --tex-mai-col ); /* Border Width Base ~= 1.160px, Text Main Color = #1a1f24 */
