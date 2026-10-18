@@ -656,6 +656,8 @@ test( 'Return home leads to the top of the home page', async ( { page : curPagOb
 
 	await curPagObj.evaluate( () => window.scrollTo( 0, document.documentElement.scrollHeight ) ); // What: Scroll Down Call. Why: A router push keeps the old scroll position unless something resets it. How: This scrolls the 404 page to its bottom.
 
+	expect( await curPagObj.evaluate( () => window.scrollY ) ).toBeGreaterThan( 0 ); // What: Scrolled Start Assertion. Why: The check proves nothing from a page that never left its top. How: This checks the scroll down really moved the 404 page, which only overflows on the smallest phones.
+
 	await curPagObj.evaluate( () => Reflect.set( window, 'samDocBoo', true ) ); // What: Same Document Marker Set. Why: A link that navigates inside the router keeps the same document, while a full page load starts a new one. How: This marks the current document, which a full load would wipe.
 
 	await curPagObj.getByRole( 'link', { name : 'Return home' } ).click(); // What: Return Home Click Call. Why: This is the action under test. How: This clicks the button.
@@ -753,6 +755,8 @@ test( 'back to top scrolls the 404 page to its own top', async ( { page : curPag
 	await opeRouFun( curPagObj, '/missing', SMA_VIE_OBJ ); // What: Not Found Open Call. Why: The 404 page only scrolls on the smallest phones. How: This opens it at 320 by 568.
 
 	await curPagObj.evaluate( () => window.scrollTo( 0, document.documentElement.scrollHeight ) ); // What: Scroll Down Call. Why: The link only proves anything from a scrolled page. How: This scrolls the 404 page to its bottom.
+
+	expect( await curPagObj.evaluate( () => window.scrollY ) ).toBeGreaterThan( 0 ); // What: Scrolled Start Assertion. Why: The check proves nothing from a page that never left its top. How: This checks the scroll down really moved the 404 page, which only overflows on the smallest phones.
 
 	await curPagObj.getByRole( 'link', { name : 'Back to top' } ).click(); // What: Back To Top Click Call. Why: This is the action under test. How: This clicks the footer's link.
 
