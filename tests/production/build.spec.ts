@@ -22,19 +22,19 @@ import type { Page } from '@playwright/test'; // What: Page. Why: The serving he
  * build.spec.ts = Build Spec
  *
  * @summary
- * Checks the production build, in whichever engine the project runs, where
- * the other suites only ever see the dev server. Each engine builds the site
- * into its own folder under tests/output, then serves those built files to
- * the browser through Playwright's request routing, sending every header
- * Netlify's _headers file sets for the whole site, the Content-Security-Policy
- * included, and answering any path without a file of its own with the page,
- * as _redirects does. The home page and the 404 page at desktop size, and the
+ * Checks the production build, in whichever engine the project runs, where the
+ * other suites only ever see the dev server. Each engine builds the site into
+ * its own folder under tests/output, then serves those built files to the
+ * browser through Playwright's request routing, sending every header Netlify's
+ * _headers file sets for the whole site, the Content-Security-Policy included,
+ * and answering any path without a file of its own with the page, as
+ * _redirects does. The home page and the 404 page at desktop size, and the
  * home page at phone size with the drawer open, must each render without a
  * single security policy violation, which catches a new inline style or
  * script, or a file from another origin, that the policy would block on the
  * live site. The built index.html must also arrive compacted, as vite.config's
  * page minifier promises: no HTML comments, no indentation, no blank lines,
- * and its JSON-LD valid and on one line.
+ * and its JSON-LD valid and on one line, with its full title still in place.
  *
  * Sections:
  *  - Constants

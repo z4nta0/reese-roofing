@@ -206,7 +206,7 @@ async function secTopFun ( curPagObj : Page, eleIdeStr : string ) : Promise< num
 for ( const [ linLabStr, secIdeStr ] of [ [ 'Services', 'services' ], [ 'About', 'about' ], [ 'Contact', 'contact' ] ] ) { // What: Section Link Loop. Why: Each of the bar's section links has its own target. How: This declares one test per link, pairing its label with its section's id.
 
 
-	test( `the ${ linLabStr } link scrolls to its section`, async ( { page : curPagObj } ) => { // What: Section Link Test. Why: A section link has to take the visitor to its section. How: This clicks the link and checks the section's position and the address.
+	test( `the ${ linLabStr } link scrolls to its section`, async ( { page : curPagObj } ) => { // What: Section Link Test. Why: A section link has to take the visitor to its section. How: This clicks the link and checks the section's position, the address, and that no hashchange event fired.
 
 
 		await opeRouFun( curPagObj, '/', DES_VIE_OBJ ); // What: Home Open Call. Why: The bar's own links show above 880px wide. How: This opens the home page at desktop size.
@@ -261,7 +261,7 @@ for ( const [ cliKinStr, cliOptObj ] of CLI_KIN_ARR ) { // What: Modified Click 
 for ( const [ butLabStr, secIdeStr ] of [ [ 'Request an estimate', 'contact' ], [ 'Explore services', 'services' ] ] ) { // What: Hero Button Loop. Why: Each of the hero's buttons leads to its own section. How: This declares one test per button, pairing its label with its section's id.
 
 
-	test( `the hero's ${ butLabStr } button scrolls to its section`, async ( { page : curPagObj } ) => { // What: Hero Button Test. Why: A section button has to take the visitor to its section without a hash. How: This clicks the button and checks the section's position and the address.
+	test( `the hero's ${ butLabStr } button scrolls to its section`, async ( { page : curPagObj } ) => { // What: Hero Button Test. Why: A section button has to take the visitor to its section without a hash. How: This clicks the button and checks the section's position, the address, and that no hashchange event fired.
 
 
 		await opeRouFun( curPagObj, '/', DES_VIE_OBJ ); // What: Home Open Call. Why: The hero opens the home page. How: This opens it at desktop size.
@@ -281,7 +281,7 @@ for ( const [ butLabStr, secIdeStr ] of [ [ 'Request an estimate', 'contact' ], 
 
 
 
-test( "the bar's estimate button scrolls to the contact section", async ( { page : curPagObj } ) => { // What: Bar Estimate Test. Why: The bar's main action has to reach the form without a hash. How: This clicks the bar's estimate button and checks the section's position and the address.
+test( "the bar's estimate button scrolls to the contact section", async ( { page : curPagObj } ) => { // What: Bar Estimate Test. Why: The bar's main action has to reach the form without a hash. How: This clicks the bar's estimate button and checks the section's position, the address, and that no hashchange event fired.
 
 
 	await opeRouFun( curPagObj, '/', DES_VIE_OBJ ); // What: Home Open Call. Why: The bar's estimate button shows above 880px wide. How: This opens the home page at desktop size.
@@ -377,7 +377,7 @@ test( 'the logo links to the root address', async ( { page : curPagObj } ) => { 
 for ( const rouPatStr of [ '/', '/missing' ] ) { // What: Section Address Loop. Why: Section links render on the home page and the 404 page alike. How: This declares the address check once per route.
 
 
-	test( `every section link on ${ rouPatStr } names the home page's path`, async ( { page : curPagObj } ) => { // What: Section Address Test. Why: A plain click never reads a section link's address, so only a new tab or a copied link would show one written as a bare hash, which opens the 404 page again from there. How: This reads the address of every section link in the bar, its drawer, and the page's main content.
+	test( `every section link on ${ rouPatStr } names the home page's path`, async ( { page : curPagObj } ) => { // What: Section Address Test. Why: A plain click never reads a section link's address, so only a new tab or a copied link would show one written as a bare hash, which opens the 404 page again from there. How: This reads the address of every section link in the bar, its drawer, and the page's main content, and checks some were found and every one names the home page's path.
 
 
 		await opeRouFun( curPagObj, rouPatStr, DES_VIE_OBJ ); // What: Route Open Call. Why: The links are read where they render. How: This opens the route at desktop size, where the drawer's links are still in the page.
@@ -401,7 +401,7 @@ for ( const rouPatStr of [ '/', '/missing' ] ) { // What: Section Address Loop. 
 
 // #region Drawer Checks
 
-test( 'the menu toggle opens and closes the drawer', async ( { page : curPagObj } ) => { // What: Toggle Test. Why: The menu button is the drawer's main control. How: This opens the drawer, checks the page behind it is inert, then closes it again.
+test( 'the menu toggle opens and closes the drawer', async ( { page : curPagObj } ) => { // What: Toggle Test. Why: The menu button is the drawer's main control. How: This opens the drawer, checks the page behind it is inert, then closes it again and checks the drawer closed and the page is live again.
 
 
 	await opeRouFun( curPagObj, '/', PHO_VIE_OBJ ); // What: Home Open Call. Why: The drawer exists at 880px wide and below. How: This opens the home page at phone size.
@@ -471,7 +471,7 @@ test( 'a tap on the dimmed page closes the drawer', async ( { page : curPagObj }
 for ( const [ linLabStr, secIdeStr ] of [ [ 'Home', 'top' ], [ 'Services', 'services' ], [ 'About', 'about' ], [ 'Contact', 'contact' ] ] ) { // What: Drawer Link Loop. Why: Each of the drawer's links leads to its own section. How: This declares one test per link, pairing its label with its section's id.
 
 
-	test( `the drawer's ${ linLabStr } link closes the drawer and scrolls to its section`, async ( { page : curPagObj } ) => { // What: Drawer Link Test. Why: Picking a section should both take the visitor there and get the drawer out of the way. How: This opens the drawer, picks the link, and checks the drawer, the section, and the address.
+	test( `the drawer's ${ linLabStr } link closes the drawer and scrolls to its section`, async ( { page : curPagObj } ) => { // What: Drawer Link Test. Why: Picking a section should both take the visitor there and get the drawer out of the way. How: This opens the drawer, picks the link, and checks the drawer, the section, the address, and that no hashchange event fired.
 
 
 		await opeRouFun( curPagObj, '/', PHO_VIE_OBJ ); // What: Home Open Call. Why: The drawer exists at 880px wide and below. How: This opens the home page at phone size.
@@ -499,7 +499,7 @@ for ( const [ linLabStr, secIdeStr ] of [ [ 'Home', 'top' ], [ 'Services', 'serv
 
 
 
-test( "the drawer's estimate button closes the drawer and scrolls to the contact section", async ( { page : curPagObj } ) => { // What: Drawer Estimate Test. Why: On a phone the drawer's estimate button is the main action, and it should both reach the form and get the drawer out of the way. How: This opens the drawer, clicks its estimate button, and checks the drawer, the section, and the address.
+test( "the drawer's estimate button closes the drawer and scrolls to the contact section", async ( { page : curPagObj } ) => { // What: Drawer Estimate Test. Why: On a phone the drawer's estimate button is the main action, and it should both reach the form and get the drawer out of the way. How: This opens the drawer, clicks its estimate button, and checks the drawer, the section, the address, and that no hashchange event fired.
 
 
 	await opeRouFun( curPagObj, '/', PHO_VIE_OBJ ); // What: Home Open Call. Why: The drawer exists at 880px wide and below. How: This opens the home page at phone size.
@@ -546,7 +546,7 @@ test( 'a Ctrl or Cmd click on a drawer link leaves the drawer open', async ( { p
 
 
 
-test( 'widening the screen closes the drawer', async ( { page : curPagObj } ) => { // What: Widen Test. Why: Past the breakpoint the toggle disappears, so an open drawer would leave the page inert with no way out. How: This opens the drawer, widens the viewport, and checks the drawer closed.
+test( 'widening the screen closes the drawer', async ( { page : curPagObj } ) => { // What: Widen Test. Why: Past the breakpoint the toggle disappears, so an open drawer would leave the page inert with no way out. How: This opens the drawer, widens the viewport, and checks the drawer closed and the page is no longer inert.
 
 
 	await opeRouFun( curPagObj, '/', PHO_VIE_OBJ ); // What: Home Open Call. Why: The drawer exists at 880px wide and below. How: This opens the home page at phone size.
@@ -669,7 +669,7 @@ test( 'Return home leads to the top of the home page', async ( { page : curPagOb
 
 
 
-test( 'the 404 page leads to the contact section', async ( { page : curPagObj } ) => { // What: Not Found Estimate Test. Why: The 404 page offers the site's main action too. How: This clicks Get an estimate and checks the visitor lands on the contact section without the page fully reloading.
+test( 'the 404 page leads to the contact section', async ( { page : curPagObj } ) => { // What: Not Found Estimate Test. Why: The 404 page offers the site's main action too. How: This clicks Get an estimate and checks the visitor lands on the contact section with a clean address, without the page fully reloading.
 
 
 	await opeRouFun( curPagObj, '/missing', DES_VIE_OBJ ); // What: Not Found Open Call. Why: This button lives on the 404 page. How: This opens it.
@@ -734,7 +734,7 @@ test( "the 404 page's Home link leads to the home page", async ( { page : curPag
 
 
 
-test( 'back to top scrolls the 404 page to its own top', async ( { page : curPagObj } ) => { // What: Not Found Back To Top Test. Why: The footer's link means the top of whichever page is showing, so on the 404 page it should scroll that page up rather than go home. How: This scrolls the 404 page down, clicks the link, and checks the page, its position, and its address.
+test( 'back to top scrolls the 404 page to its own top', async ( { page : curPagObj } ) => { // What: Not Found Back To Top Test. Why: The footer's link means the top of whichever page is showing, so on the 404 page it should scroll that page up rather than go home. How: This scrolls the 404 page down, clicks the link, and checks the page, its position, its address, and that no hashchange event fired.
 
 
 	await opeRouFun( curPagObj, '/missing', SMA_VIE_OBJ ); // What: Not Found Open Call. Why: The 404 page only scrolls on the smallest phones. How: This opens it at 320 by 568.
