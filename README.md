@@ -114,7 +114,7 @@ If this design is ever reused for a real business, update the placeholders below
 
 - **Phone number:** `(785) 555-0199`. Search the repo for it and for its link form, `+17855550199` (the `tel:` links); both appear in the Nav (bar and drawer) and the Contact section
 - **Email:** `hello@reeseroofing.example`. Same; it appears in the Contact section's contact details and in the mailto link the form opens on submit (`subForFun` in `src/pages/home/contact.tsx`)
-- **Address and location:** placeholder Lawrence, Kansas 66044, in the Contact section, plus the city in the hero's label and intro, the About heading, the footer's licensing line, and the Contact section's service area list, plus the county in the hero's first stat and the About story, and the state in an About principle's title. Search the repo for "Lawrence", "Kansas", and "Douglas"
+- **Address and location:** placeholder Lawrence, Kansas 66044, in the Contact section, plus the city and state in the hero's label and intro and the footer's licensing line (as KS), the city in the About heading and the Contact section's service area list, plus the county in the hero's first stat and the About story, and the state in an About principle's title. Search the repo for "Lawrence", "Kansas", and "Douglas"
 - **Form placeholders:** the sample name, property, email (`jane@company.example`), and phone (`(785) 555-0100`) shown in the contact form's empty fields, in `src/pages/home/contact.tsx`
 - **Footer:** the company's legal name, licensing line, and the demo notice in `src/ui/footer.tsx`
 - **Stats in Hero:** 17+ years, 400+ roofs, etc. Replace them with real numbers
