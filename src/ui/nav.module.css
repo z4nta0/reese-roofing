@@ -213,7 +213,7 @@
 
 /* #region navNamSpa */
 
-.navNamSpa { /* What: Navigation Name Span. Why: The company's first word reads as the stronger half. How: This sets it at medium weight, easing its hover color. */
+.navNamSpa { /* What: Navigation Name Span. Why: The company's name reads with its first word as the stronger half. How: This sets the whole name at medium weight, which the second word's own span lightens, easing its hover color. */
 
 
 	font-weight : 500;

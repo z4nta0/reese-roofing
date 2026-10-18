@@ -99,7 +99,7 @@ function SitFooCom () : React.JSX.Element {
 				<div className={ cssModObj.fooBraDiv }>{ /* What: Footer Brand Div Element. Why: The footer repeats the company's mark and name. How: This sets them side by side. */ }
 
 
-					<span className={ cssModObj.fooMarSpa }>{ /* What: Footer Mark Span Element. Why: The logo mark sits in its own sized box. How: This holds the mark's image. */ }
+					<span className={ cssModObj.fooMarSpa }>{ /* What: Footer Mark Span Element. Why: The dark logo mark needs a light tile to show against the dark footer. How: This is drawn as a small rounded paper square holding the mark's image. */ }
 
 
 						<img
@@ -115,7 +115,7 @@ function SitFooCom () : React.JSX.Element {
 
 					</span>
 
-					<span>{ /* What: Footer Name Span Element. Why: The company's name sits beside the mark. How: The second word takes its own style. */ }
+					<span>{ /* What: Footer Name Span Element. Why: The company's name sits beside the mark. How: The second word takes a lighter, italic, faded style. */ }
 						Reese <span className={ cssModObj.namLigSpa }>Roofing</span>
 					</span>
 

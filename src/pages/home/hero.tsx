@@ -17,10 +17,10 @@ import { useSecCliFun } from '../../ui/section-link.ts'; // What: Use Section Cl
  * hero.tsx = Hero Section
  *
  * @summary
- * The home page's opening section, and the target of every link back to the
- * home page's top. It pairs the headline with the full logo over a faint grid,
- * follows with the company's pitch and its two calls to action, and ends with
- * a row of four headline numbers.
+ * The home page's opening section, and the target of every link to the home
+ * page's top anchor. It pairs the headline with the full logo over a faint
+ * grid, follows with the company's pitch and its two calls to action, and ends
+ * with a row of four headline numbers.
  *
  * Sections:
  *  - Components
@@ -74,7 +74,7 @@ function HerSecCom () : React.JSX.Element {
 			id='top'
 
 			className={ cssModObj.homHerSec }
-		>{ /* What: Home Hero Section Element. Why: This opens the home page. How: Its top id is the anchor every link back to the home page's top targets, kept as is since it appears in the page's URL. */ }
+		>{ /* What: Home Hero Section Element. Why: This opens the home page. How: Its top id is the anchor every #top or /#top link targets (the bar's brand link opens / instead), kept as is since it appears in the page's URL. */ }
 
 
 			<div

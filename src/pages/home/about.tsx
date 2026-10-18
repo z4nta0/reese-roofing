@@ -180,7 +180,7 @@ function AboSecCom () : React.JSX.Element {
 							it&apos;s not the place to overspend. Our job is to find the line.
 						</p>
 
-						<footer className={ cssModObj.aboQuoFoo }>The Reese family</footer>{ /* What: About Quote Footer Element. Why: The quote names who said it. How: Its own uppercase, indented style sets it apart. */ }
+						<footer className={ cssModObj.aboQuoFoo }>The Reese family</footer>{ /* What: About Quote Footer Element. Why: The quote names who said it. How: This sets it in tracked, muted capitals at body size, indented to line up with the quote. */ }
 
 
 					</blockquote>
