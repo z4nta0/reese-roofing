@@ -157,9 +157,9 @@ function HerSecCom () : React.JSX.Element {
 						<img
 							className={ cssModObj.herLogIma }
 
-							height='515'
+							height='536' // What: Intrinsic Size Note. Why: The page shouldn't shift while the logo loads. How: This matches the SVG's 518 by 536 viewBox, which the stylesheet scales to the column.
 							src={ lofSvgUrl }
-							width='500'
+							width='518' // What: Intrinsic Size Note. Why: The page shouldn't shift while the logo loads. How: This matches the SVG's 518 by 536 viewBox, which the stylesheet scales to the column.
 
 							alt='Reese Roofing: Commercial & Residential'
 						/>{ /* What: Hero Logo Image Element. Why: The logo introduces the brand. How: Its alt text reads the logo's wording for screen readers. */ }

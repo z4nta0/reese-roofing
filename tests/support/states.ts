@@ -116,8 +116,12 @@ const STA_REC_ARR : StaRecTyp[] = [ // What: State Record Array. Why: Every chec
  *
  * @summary
  * Opens one state on a page and waits until it's settled: sizes the
- * viewport, loads the path, waits for the web fonts, runs the state's action
- * if it has one, then waits until no animation is still running, so a check
+ * viewport, loads the path, waits for the web fonts, loads every lazy image
+ * on screen (Firefox only fetches one once it's scrolled near, which a
+ * full-page screenshot never does) by switching it to eager loading, which
+ * leaves the scroll position and the keyboard's starting point alone, runs
+ * the state's action if it has one, then waits until no animation is still
+ * running, so a check
  * never measures a heading halfway through its entrance fade or a drawer
  * halfway open. The animation wait gives up after 5 seconds rather than
  * hanging on a looping animation.
@@ -145,6 +149,35 @@ async function opeStaFun ( curPagObj : Page, staRecObj : StaRecTyp ) : Promise< 
 	await curPagObj.goto( staRecObj.patStr ); // What: Page Load Call. Why: Each state starts from a fresh load of its route. How: This opens the path on the suite's dev server.
 
 	await curPagObj.evaluate( () => document.fonts.ready ); // What: Fonts Ready Wait. Why: Text measured before its web font loads would have the wrong size and wrapping. How: This waits until every font face has loaded.
+
+
+
+	await curPagObj.evaluate( async () => { // What: Lazy Images Load Call. Why: Firefox leaves a lazy image unfetched until it's scrolled near, so a full-page screenshot would show it blank. How: This switches each unloaded lazy image to eager loading and waits for it, rather than scrolling to it, which in Chromium would also move where the first Tab lands.
+
+
+		for ( const imaCurEle of document.querySelectorAll< HTMLImageElement >( 'img[loading="lazy"]' ) ) { // What: Lazy Image Loop. Why: Every lazy image on screen has to load before the state is measured. How: This visits each one in page order.
+
+
+			if ( imaCurEle.complete || !imaCurEle.getClientRects().length ) continue; // What: Loaded Or Hidden Guard. Why: A loaded image needs nothing, and a hidden one (the about seal on a phone) never loads, so waiting on it would hang. How: This skips an image that's already complete or isn't rendered.
+
+
+
+			imaCurEle.loading = 'eager'; // What: Eager Loading Switch. Why: The image has to load wherever it sits on the page. How: Switching a lazy image to eager makes the browser fetch it at once, with no visible change.
+
+			await new Promise( ( resProFun ) => { // What: Image Load Wait. Why: The image has to finish loading before the page moves on, and a failed one shouldn't hang the run. How: This waits for the image's load or error event, whichever fires first.
+
+
+				imaCurEle.addEventListener( 'error', resProFun, { once : true } ); // What: Error Listener Registration. Why: An image that fails to load still has to end the wait. How: This resolves the promise once on error.
+				imaCurEle.addEventListener( 'load', resProFun, { once : true } );  // What: Load Listener Registration. Why: The wait ends once the image has loaded. How: This resolves the promise once on load.
+
+
+			} );
+
+
+		}
+
+
+	} );
 
 
 

@@ -132,7 +132,10 @@ function AboSecCom () : React.JSX.Element {
 						<img
 							className={ cssModObj.aboSeaIma }
 
+							height='536' // What: Intrinsic Size Note. Why: The page shouldn't shift while the logo loads. How: This matches the SVG's 518 by 536 viewBox, which the stylesheet scales to the column.
+							loading='lazy' // What: Lazy Loading Attribute. Why: The image starts below the fold. How: This lets the browser fetch it only as it nears the screen.
 							src={ lofSvgUrl }
+							width='518' // What: Intrinsic Size Note. Why: The page shouldn't shift while the logo loads. How: This matches the SVG's 518 by 536 viewBox, which the stylesheet scales to the column.
 
 							alt=''
 						/>{ /* What: About Seal Image Element. Why: The seal shows the full logo. How: Its empty alt matches its container's hidden, decorative role. */ }
