@@ -5,7 +5,7 @@
 
 import { expect      } from '@playwright/test';     // What: Expect. Why: Each state passes only when every control responds. How: This asserts each problem list is empty.
 import { opeStaFun   } from '../support/states.ts'; // What: Open State Function. Why: Each check opens and settles its state first. How: This loads it and waits for it.
-import { STA_REC_ARR } from '../support/states.ts'; // What: State Record Array. Why: Every page state is checked. How: This lists them.
+import { STA_REC_ARR } from '../support/states.ts'; // What: State Record Array. Why: Every page state is checked. How: This lists them, and the brand link and motion tests find their starting rows in it.
 import { test        } from '@playwright/test';     // What: Test. Why: Each check of each state is its own test. How: This declares them.
 
 
@@ -475,17 +475,18 @@ for ( const staRecObj of STA_REC_ARR ) { // What: State Test Loop. Why: Every pa
 }
 
 
+
 for ( const redMotBoo of [ false, true ] ) { // What: Brand Motion Loop. Why: The brand link's feedback has to hold with and without reduced motion. How: This declares the brand check once for each preference.
 
 
 	test( `the brand link responds to hover and press${ redMotBoo ? ' under reduced motion' : '' }`, async ( { page : curPagObj } ) => { // What: Brand Feedback Test. Why: The brand link is hidden from screen readers and out of the Tab order, so the control checks never reach it, though a pointer still can. How: This hovers and presses the brand link on the home page and checks its look changes each time, easing normally and switching at once under reduced motion.
 
 
-		const homRecObj = STA_REC_ARR.find( ( staCurObj ) => staCurObj.ideStr === 'home-desktop' )!; // What: Home Record Object. Why: The brand link sits in the bar on every page, and the home page is its usual one. How: This finds the home desktop state's row. // What: Non-Null Note. Why: find types its result as possibly undefined. How: STA_REC_ARR always lists the home-desktop state.
-
-
 		if ( redMotBoo ) await curPagObj.emulateMedia( { reducedMotion : 'reduce' } ); // What: Reduced Motion Emulation. Why: The reduced-motion run needs the preference before the page loads. How: This makes the page match prefers-reduced-motion: reduce.
 
+
+
+		const homRecObj = STA_REC_ARR.find( ( staCurObj ) => staCurObj.ideStr === 'home-desktop' )!; // What: Home Record Object. Why: The brand link sits in the bar on every page, and the home page is its usual one. How: This finds the home desktop state's row. // What: Non-Null Note. Why: find types its result as possibly undefined. How: STA_REC_ARR always lists the home-desktop state.
 
 
 		await opeStaFun( curPagObj, homRecObj ); // What: Home State Open Call. Why: The brand link is probed with the page settled. How: This loads the home page at desktop size.
@@ -535,6 +536,7 @@ for ( const redMotBoo of [ false, true ] ) { // What: Brand Motion Loop. Why: Th
 
 
 }
+
 
 
 test( 'the drawer and its scrim animate open and closed', async ( { page : curPagObj } ) => { // What: Drawer Motion Test. Why: Opening and closing should slide and fade rather than snap, the very thing a browser can silently drop, as Firefox once did here. How: This opens and closes the drawer at phone size with motion on, checking each time that the drawer and its scrim are really transitioning.

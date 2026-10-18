@@ -165,13 +165,11 @@ for ( const rouRecObj of ROU_REC_ARR ) { // What: Route Test Loop. Why: Every ro
 
 
 		const conTexStr = await curPagObj.evaluate( () => [ ...[ ...document.querySelectorAll( 'a[href^="tel:"], a[href^="mailto:"]' ) ].map( ( ancCurEle ) => ancCurEle.getAttribute( 'href' ) ?? '' ), ...[ ...document.querySelectorAll( 'input, textarea' ) ].map( ( fieCurEle ) => fieCurEle.getAttribute( 'placeholder' ) ?? '' ), document.body.innerText ].join( '\n' ) ); // What: Contact Text String. Why: A phone or email can sit in a link's address, a field's sample, or the page's text. How: This joins every phone and email link's address, every field's placeholder, and the page's visible text.
-
-
 		const emaLisArr = conTexStr.match( /[\w.+-]+@[\w.-]+\.[a-z]+/gi ) ?? [];                    // What: Email List Array. Why: Every email address the route shows has to be checked. How: This finds each one in the joined text.
 		const phoLisArr = conTexStr.match( /\+1\d{10}|\(?\d{3}\)?[\s.-]?\d{3}[\s.-]\d{4}/g ) ?? []; // What: Phone List Array. Why: Every phone number the route shows has to be checked. How: This finds each one, written as a tel address or as a displayed number.
 
 
-		expect( phoLisArr.length ).toBeGreaterThan( 0 );                                                                   // What: Phones Found Assertion. Why: An empty list would pass the check below without reading anything. How: This checks the bar's phone number was found.
+		expect( phoLisArr.length ).toBeGreaterThan( 0 );                                                                   // What: Phones Found Assertion. Why: An empty list would pass the check below without reading anything. How: This checks at least one phone number was found.
 		expect( emaLisArr.filter( ( emaCurStr ) => !/\.example$/i.test( emaCurStr ) ) ).toEqual( [] );                     // What: Reserved Email Assertion. Why: The .example domain can never belong to anyone. How: This lists every address on another domain, which should be none.
 		expect( phoLisArr.filter( ( phoCurStr ) => !/55501\d\d$/.test( phoCurStr.replace( /\D/g, '' ) ) ) ).toEqual( [] ); // What: Reserved Phone Assertion. Why: The 555-0100 to 555-0199 range is set aside for fiction. How: This lists every number outside that range, which should be none.
 

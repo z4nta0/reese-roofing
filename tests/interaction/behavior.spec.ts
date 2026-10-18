@@ -354,22 +354,24 @@ test( 'the bar takes its scrolled style once the page moves', async ( { page : c
 	await opeRouFun( curPagObj, '/', DES_VIE_OBJ ); // What: Home Open Call. Why: The bar starts transparent at the top of the home page. How: This opens it at desktop size.
 
 
-	const barHedObj = curPagObj.getByRole( 'banner' ); // What: Bar Header Object. Why: The scrolled style sits on the bar itself. How: This finds the page's banner landmark.
+	const barHeaObj = curPagObj.getByRole( 'banner' ); // What: Bar Header Object. Why: The scrolled style sits on the bar itself. How: This finds the page's banner landmark.
 
 
-	await expect( barHedObj ).not.toHaveAttribute( 'data-page-scroll-past' ); // What: Top Attribute Assertion. Why: The bar should start without its scrolled style. How: This checks the attribute is absent at the top.
+	await expect( barHeaObj ).not.toHaveAttribute( 'data-page-scroll-past' ); // What: Top Attribute Assertion. Why: The bar should start without its scrolled style. How: This checks the attribute is absent at the top.
 
-	await expect( barHedObj ).toHaveCSS( 'background-color', 'rgba(0, 0, 0, 0)' ); // What: Top Background Assertion. Why: At the top the bar sits over the hero with no background of its own. How: This checks its background is transparent.
+	await expect( barHeaObj ).toHaveCSS( 'background-color', 'rgba(0, 0, 0, 0)' ); // What: Top Background Assertion. Why: At the top the bar sits over the hero with no background of its own. How: This checks its background is transparent.
 
 	await curPagObj.evaluate( () => window.scrollTo( 0, 400 ) ); // What: Scroll Down Call. Why: The scrolled style switches on past the top. How: This scrolls the page well past the 24px threshold.
 
-	await expect( barHedObj ).toHaveAttribute( 'data-page-scroll-past' ); // What: Scrolled Attribute Assertion. Why: The bar should mark itself scrolled. How: This waits until the attribute is set.
+	await expect( barHeaObj ).toHaveAttribute( 'data-page-scroll-past' ); // What: Scrolled Attribute Assertion. Why: The bar should mark itself scrolled. How: This waits until the attribute is set.
 
-	await expect( barHedObj ).not.toHaveCSS( 'background-color', 'rgba(0, 0, 0, 0)' ); // What: Scrolled Background Assertion. Why: The attribute only matters if the bar really draws its background. How: This checks the background is no longer transparent.
+	await expect( barHeaObj ).not.toHaveCSS( 'background-color', 'rgba(0, 0, 0, 0)' ); // What: Scrolled Background Assertion. Why: The attribute only matters if the bar really draws its background. How: This checks the background is no longer transparent.
 
 	await curPagObj.evaluate( () => window.scrollTo( 0, 0 ) ); // What: Scroll Up Call. Why: The style should leave again at the top. How: This scrolls back to the top.
 
-	await expect( barHedObj ).not.toHaveAttribute( 'data-page-scroll-past' ); // What: Returned Attribute Assertion. Why: Back at the top the bar should drop its scrolled style. How: This waits until the attribute is gone.
+	await expect( barHeaObj ).not.toHaveAttribute( 'data-page-scroll-past' ); // What: Returned Attribute Assertion. Why: Back at the top the bar should drop its scrolled style. How: This waits until the attribute is gone.
+
+	await expect( barHeaObj ).toHaveCSS( 'background-color', 'rgba(0, 0, 0, 0)' ); // What: Returned Background Assertion. Why: The bar should turn transparent again at the top. How: This checks its background is transparent once more.
 
 
 } );

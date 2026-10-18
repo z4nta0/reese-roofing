@@ -221,13 +221,13 @@ test.describe( 'the production build', () => { // What: Build Group. Why: The bu
 
 
 
-	for ( const [ rouPatStr, vieWidNum, draOpeBoo ] of [ [ '/', 1440, false ], [ '/missing', 1440, false ], [ '/', 390, true ] ] as const ) { // What: Page Loop. Why: The policy has to hold on every page and with the drawer open. How: Each row names a path, a viewport width, and whether to open the drawer.
+	for ( const [ rouPatStr, vieWidNum, vieHeiNum, draOpeBoo ] of [ [ '/', 1440, 900, false ], [ '/missing', 1440, 900, false ], [ '/', 390, 844, true ] ] as const ) { // What: Page Loop. Why: The policy has to hold on every page and with the drawer open. How: Each row names a path, a viewport width and height, and whether to open the drawer.
 
 
 		test( `${ rouPatStr } at ${ vieWidNum.toLocaleString( 'en-US' ) }px${ draOpeBoo ? ' with the drawer open' : '' } runs under the security policy`, async ( { page : curPagObj } ) => { // What: Security Policy Test. Why: A style, script, or file the policy blocks would quietly break the live site, where the dev server never sends the policy. How: This serves the build with the real headers, opens the page, and checks nothing broke the policy.
 
 
-			await curPagObj.setViewportSize( { height : vieWidNum > 400 ? 900 : 844, width : vieWidNum } ); // What: Viewport Size Call. Why: The page is checked at the size its row names. How: This sizes the viewport, using a phone's height for a phone's width.
+			await curPagObj.setViewportSize( { height : vieHeiNum, width : vieWidNum } ); // What: Viewport Size Call. Why: The page is checked at the size its row names. How: This sizes the viewport to the row's width and height.
 
 			await serBuiFun( curPagObj, outDirStr ); // What: Build Serve Call. Why: The page has to come from the build, with Netlify's headers. How: This routes every request under the site's address to the built files.
 

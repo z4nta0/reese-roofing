@@ -126,9 +126,9 @@ reorganization, ESLint setup, config rebuild, and dependency upgrades.
 5. **Full rule audit** (done 2026-10-07): repeated passes until clean.
 
 ## Test suites
-Added 2026-10-08. Playwright suites live in `tests/`, one project per suite
-and engine in `tests/playwright.config.ts`, which starts its own dev server on
-port 5191 (never the usual 5173) and stops it afterwards. Every suite runs in
+Added 2026-10-08. Playwright suites live in `tests/`, one project per suite and
+engine in `tests/playwright.config.ts`, which starts its own dev server on port
+5191 (never the usual 5173) and stops it afterwards. Every suite runs in
 Chromium, Firefox, and WebKit. Chromium runs as Chrome's full headless mode
 (`channel : 'chromium'`, decided 2026-10-17) rather than Playwright's default
 headless shell, which, with every engine busy, sometimes opened a Ctrl or
@@ -138,7 +138,8 @@ screenshots, and traces go to `tests/output/` (git-ignored); `npx playwright
 show-report tests/output/report` opens the HTML report. The states each suite
 visits (both pages at 390px and 1440px, plus the open drawer) are listed in
 `tests/support/states.ts`; the responsive suite opens its own widths through
-the same helper, and the seo suite reads the head of each route instead.
+the same helper, and the seo suite reads the head of each route instead, while
+the production suite opens its own pages on a build it serves itself.
 - `npm run test:accessibility`: the pre-commit accessibility scan. axe-core
   checks each state against WCAG 2.2 A and AA plus best practices
   (`axe.spec.ts`), and scripted checks (`scripted.spec.ts`) cover link and
@@ -206,7 +207,8 @@ Next (planned 2026-10-07):
 - **Reusable tests** (started 2026-10-08): a suite to rerun after large
   changes, checking that every page renders and behaves correctly in all
   three browser engines. Done 2026-10-08: the accessibility, interaction,
-  rendering, responsive, and seo suites.
+  rendering, responsive, and seo suites. The production suite followed on
+  2026-10-18.
 
 Applied original intent (kept by the user, 2026-10-07): the CSS module pass
 found styles that were written but never rendered, because a later global
