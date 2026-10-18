@@ -221,7 +221,7 @@ function NavBarCom () : React.JSX.Element {
 				aria-hidden='true'
 
 				onClick={ () => setDraOpeBoo( false ) }
-			/>{ /* What: Navigation Scrim Div Element. Why: The open drawer should stand apart from the dimmed page, and a tap anywhere on the page should close it. How: This covers the page under the bar, dimmed while the drawer is open, and closes the drawer when clicked; it's hidden from screen readers, which close the drawer with the toggle. */ }
+			/>{ /* What: Navigation Scrim Div Element. Why: The open drawer should stand apart from the dimmed page, and a tap anywhere on the page should close it. How: This covers the page under the bar at 880px wide and below, staying out of the page above that width, dimmed while the drawer is open, and closes the drawer when clicked; it's hidden from screen readers, which close the drawer with the toggle. */ }
 
 
 
@@ -283,7 +283,7 @@ function NavBarCom () : React.JSX.Element {
 								href={ `/#${ navLinObj.ideStr }` }
 
 								onClick={ ( cliEveObj ) => secCliFun( cliEveObj, navLinObj.ideStr ) }
-							>{ /* What: Navigation Link Anchor Element. Why: Each link takes the visitor to its section. How: Its address points at the home page's section, which a Ctrl, Cmd, or middle click opens in a new tab, while a plain click scrolls there, or navigates home to it from another page, without a hash. */ }
+							>{ /* What: Navigation Link Anchor Element. Why: Each link takes the visitor to its section. How: Its address points at the home page's section, which a Ctrl, Cmd, or middle click opens in a new tab, while a plain click scrolls there, or navigates home to it from another page, without a hash, and it hides with the links at 880px wide and below, where the drawer repeats it. */ }
 								{ navLinObj.labStr }
 							</a>
 
@@ -312,13 +312,13 @@ function NavBarCom () : React.JSX.Element {
 							href='/#contact'
 
 							onClick={ ( cliEveObj ) => secCliFun( cliEveObj, 'contact' ) }
-						>{ /* What: Navigation Estimate Anchor Element. Why: The bar's main action is requesting an estimate. How: Its address points at the home page's contact section, which a Ctrl, Cmd, or middle click opens in a new tab, while a plain click scrolls there, or navigates home to it from another page, without a hash. */ }
+						>{ /* What: Navigation Estimate Anchor Element. Why: The bar's main action is requesting an estimate. How: Its address points at the home page's contact section, which a Ctrl, Cmd, or middle click opens in a new tab, while a plain click scrolls there, or navigates home to it from another page, without a hash, and it hides with its row at 880px wide and below, where the drawer repeats it. */ }
 							Get an estimate
 							<span
 								className={ cssModObj.arrIcoSpa }
 
 								aria-hidden='true'
-							>{ /* What: Arrow Icon Span Element. Why: The arrow marks the bar's estimate button as moving the visitor onward. How: This sits right after the button's label and nudges right when it's hovered, hidden from screen readers since it only decorates the label. */ }
+							>{ /* What: Arrow Icon Span Element. Why: The arrow marks the bar's estimate button as moving the visitor onward. How: This sits right after the button's label and nudges right when it's hovered, hidden from screen readers since it only decorates the label, and hidden with the button at 880px wide and below. */ }
 								→
 							</span>
 						</a>
@@ -335,12 +335,12 @@ function NavBarCom () : React.JSX.Element {
 						aria-label='Toggle menu'
 
 						onClick={ () => setDraOpeBoo( ( preOpeBoo ) => !preOpeBoo ) }
-					>{ /* What: Navigation Toggle Button Element. Why: At 880px wide and below the links, the phone number, and the estimate button hide behind a menu button. How: This flips the drawer open or closed, and its aria-expanded both reports the state to screen readers and styles the open icon. */ }
+					>{ /* What: Navigation Toggle Button Element. Why: At 880px wide and below the links, the phone number, and the estimate button hide behind a menu button. How: This shows only at 880px wide and below, flips the drawer open or closed, and its aria-expanded both reports the state to screen readers and styles the open icon. */ }
 
 
-						<span className={ cssModObj.togLinSpa } />{ /* What: Toggle Line Span Element. Why: The button draws its icon from two lines, and this is the top one. How: Its stylesheet drops it to the middle and turns it 45 degrees while the drawer is open, forming one stroke of the cross. */ }
+						<span className={ cssModObj.togLinSpa } />{ /* What: Toggle Line Span Element. Why: The button draws its icon from two lines, and this is the top one. How: Its stylesheet drops it to the middle and turns it 45 degrees while the drawer is open, forming one stroke of the cross, and shows with the button only at 880px wide and below. */ }
 
-						<span className={ cssModObj.togLinSpa } />{ /* What: Toggle Line Span Element. Why: The button draws its icon from two lines, and this is the bottom one. How: Its stylesheet lifts it to the middle and turns it the other way while the drawer is open, forming the cross's other stroke. */ }
+						<span className={ cssModObj.togLinSpa } />{ /* What: Toggle Line Span Element. Why: The button draws its icon from two lines, and this is the bottom one. How: Its stylesheet lifts it to the middle and turns it the other way while the drawer is open, forming the cross's other stroke, and shows with the button only at 880px wide and below. */ }
 
 
 					</button>
@@ -369,24 +369,24 @@ function NavBarCom () : React.JSX.Element {
 							href={ `/#${ navLinObj.ideStr }` }
 
 							onClick={ ( cliEveObj ) => { if ( secCliFun( cliEveObj, navLinObj.ideStr ) ) setDraOpeBoo( false ); } } // What: Drawer Link Click Handler. Why: A chosen link should close the drawer on the way to its section, but a link opened in a new tab leaves the drawer as it was. How: This closes the drawer only when secCliFun handled the click.
-						>{ /* What: Drawer Link Anchor Element. Why: Each link takes the visitor to its section. How: Its address points at the home page's section, which a Ctrl, Cmd, or middle click opens in a new tab, while a plain click scrolls there, or navigates home to it from another page, without a hash, and closes the drawer behind it. */ }
+						>{ /* What: Drawer Link Anchor Element. Why: Each link takes the visitor to its section. How: Its address points at the home page's section, which a Ctrl, Cmd, or middle click opens in a new tab, while a plain click scrolls there, or navigates home to it from another page, without a hash, and closes the drawer behind it, drawn only in the drawer, which opens only at 880px wide and below. */ }
 
 
 							<span
 								className={ cssModObj.draNumSpa }
 
 								aria-hidden='true'
-							>{ /* What: Drawer Number Span Element. Why: The rows are numbered like the sections they lead to. How: This shows the row's position, padded to two digits, hidden from screen readers since the number is only visual and the row's label names it. */ }
+							>{ /* What: Drawer Number Span Element. Why: The rows are numbered like the sections they lead to. How: This shows the row's position, padded to two digits, hidden from screen readers since the number is only visual and the row's label names it, drawn only in the drawer, which opens only at 880px wide and below. */ }
 								{ String( linIndNum + 1 ).padStart( 2, '0' ) }{ /* What: Padded Row Number. Why: Each row shows its position as two digits, matching the sections' numbered labels. How: This adds 1 to the zero-based index and pads it with a leading zero. */ }
 							</span>
 
-							<span className={ cssModObj.draLabSpa }>{ navLinObj.labStr }</span>{ /* What: Drawer Label Span Element. Why: The section's name is the row's main text. How: This prints the row's label. */ }
+							<span className={ cssModObj.draLabSpa }>{ navLinObj.labStr }</span>{ /* What: Drawer Label Span Element. Why: The section's name is the row's main text. How: This prints the row's label, drawn only in the drawer, which opens only at 880px wide and below. */ }
 
 							<span
 								className={ cssModObj.arrIcoSpa }
 
 								aria-hidden='true'
-							>{ /* What: Arrow Icon Span Element. Why: The arrow marks the row as moving the visitor onward. How: This sits at the row's far end and slides when the row is hovered, pressed, or focused, hidden from screen readers since it only decorates the label. */ }
+							>{ /* What: Arrow Icon Span Element. Why: The arrow marks the row as moving the visitor onward. How: This sits at the row's far end and slides when the row is hovered, pressed, or focused, hidden from screen readers since it only decorates the label, drawn only in the drawer, which opens only at 880px wide and below. */ }
 								→
 							</span>
 
@@ -400,7 +400,7 @@ function NavBarCom () : React.JSX.Element {
 						className={ cssModObj.draConDiv }
 
 						style={ { '--dra-ite-ind' : NAV_LIN_ARR.length } as React.CSSProperties } // What: Drawer Item Index Style. Why: The contact block enters after the last link. How: This hands it the position after the links, which its stylesheet multiplies into an animation delay. // What: Type Assertion Note. Why: React's CSSProperties type has no entry for custom properties. How: The object holds one custom property and nothing else, so reading it as CSSProperties is safe.
-					>{ /* What: Drawer Contact Div Element. Why: The drawer ends with every way to reach the company, since the bar's phone link and estimate button are hidden at 880px wide and below. How: This stacks a label, the phone number, the hours, and the estimate button. */ }
+					>{ /* What: Drawer Contact Div Element. Why: The drawer ends with every way to reach the company, since the bar's phone link and estimate button are hidden at 880px wide and below. How: This stacks a label, the phone number, the hours, and the estimate button, drawn only in the drawer, which opens only at 880px wide and below. */ }
 
 
 						<span className={ cssModObj.eyeLabSpa }>Call us</span>{ /* What: Eyebrow Label Span Element. Why: A small label introduces the contact block like the sections' labels. How: This reads in tracked, muted capitals with a leading line. */ }
@@ -411,11 +411,11 @@ function NavBarCom () : React.JSX.Element {
 							href='tel:+17855550199'
 
 							aria-label='Call (785) 555-0199'
-						>{ /* What: Drawer Phone Anchor Element. Why: Phone visitors should be able to call in one tap. How: This dials the company's number. */ }
+						>{ /* What: Drawer Phone Anchor Element. Why: Phone visitors should be able to call in one tap. How: This dials the company's number, drawn only in the drawer, which opens only at 880px wide and below. */ }
 							(785) 555-0199
 						</a>
 
-						<p className={ cssModObj.draHouPar }>Mon–Fri, 7:00 AM – 5:00 PM · 24/7 emergency response</p>{ /* What: Drawer Hours Paragraph Element. Why: Visitors want to know when someone will answer. How: This repeats the contact section's hours in one paragraph, joined by a dot. */ }
+						<p className={ cssModObj.draHouPar }>Mon–Fri, 7:00 AM – 5:00 PM · 24/7 emergency response</p>{ /* What: Drawer Hours Paragraph Element. Why: Visitors want to know when someone will answer. How: This repeats the contact section's hours in one paragraph, joined by a dot, drawn only in the drawer, which opens only at 880px wide and below. */ }
 
 						<a
 							className={ cssModObj.draEstAnc }
@@ -423,13 +423,13 @@ function NavBarCom () : React.JSX.Element {
 							href='/#contact'
 
 							onClick={ ( cliEveObj ) => { if ( secCliFun( cliEveObj, 'contact' ) ) setDraOpeBoo( false ); } } // What: Drawer Estimate Click Handler. Why: The estimate button should close the drawer on the way to the form, but a button opened in a new tab leaves the drawer as it was. How: This closes the drawer only when secCliFun handled the click.
-						>{ /* What: Drawer Estimate Anchor Element. Why: Requesting an estimate is the site's main action, and the bar's button is hidden at 880px wide and below. How: This takes the visitor to the contact section as a full-width pill, without a hash, and closes the drawer behind it, while a Ctrl, Cmd, or middle click opens it in a new tab. */ }
+						>{ /* What: Drawer Estimate Anchor Element. Why: Requesting an estimate is the site's main action, and the bar's button is hidden at 880px wide and below. How: This takes the visitor to the contact section as a full-width pill, without a hash, and closes the drawer behind it, while a Ctrl, Cmd, or middle click opens it in a new tab, drawn only in the drawer, which opens only at 880px wide and below. */ }
 							Get an estimate
 							<span
 								className={ cssModObj.arrIcoSpa }
 
 								aria-hidden='true'
-							>{ /* What: Arrow Icon Span Element. Why: The arrow marks the drawer's estimate button as moving the visitor onward. How: This sits right after the button's label and nudges right when it's hovered, hidden from screen readers since it only decorates the label. */ }
+							>{ /* What: Arrow Icon Span Element. Why: The arrow marks the drawer's estimate button as moving the visitor onward. How: This sits right after the button's label and nudges right when it's hovered, hidden from screen readers since it only decorates the label, drawn only in the drawer, which opens only at 880px wide and below. */ }
 								→
 							</span>
 						</a>

@@ -155,7 +155,7 @@ function HerSecCom () : React.JSX.Element {
 					</div>
 
 
-					<div className={ cssModObj.herLogDiv }>{ /* What: Hero Logo Div Element. Why: The full logo is the hero's main visual. How: This frames it with its decorative ring. */ }
+					<div className={ cssModObj.herLogDiv }>{ /* What: Hero Logo Div Element. Why: The full logo is the hero's main visual. How: This frames it with its decorative ring, drawn closer to the logo at 960px wide and below. */ }
 
 
 						<img
@@ -185,7 +185,7 @@ function HerSecCom () : React.JSX.Element {
 						that hold up to Kansas wind, sun, and storm.
 					</p>
 
-					<div className={ cssModObj.herActDiv }>{ /* What: Hero Actions Div Element. Why: The hero's two next steps sit together. How: This holds the estimate and services buttons. */ }
+					<div className={ cssModObj.herActDiv }>{ /* What: Hero Actions Div Element. Why: The hero's two next steps sit together. How: This holds the estimate and services buttons side by side, wrapping onto two lines at about 400px wide and below. */ }
 
 
 						<a

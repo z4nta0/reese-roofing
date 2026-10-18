@@ -119,7 +119,7 @@
 
 /* #region nofActDiv */
 
-.nofActDiv { /* What: Not-Found Actions Div. Why: The page's two ways onward sit together. How: This sets the buttons side by side, centered, wrapping if needed. */
+.nofActDiv { /* What: Not-Found Actions Div. Why: The page's two ways onward sit together. How: This sets the buttons side by side, centered, wrapping onto two lines at about 345px wide and below. */
 
 
 	display         : flex;

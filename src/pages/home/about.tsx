@@ -142,7 +142,7 @@ function AboSecCom () : React.JSX.Element {
 							width='518' // What: Intrinsic Size Note. Why: The page shouldn't shift while the logo loads. How: This matches the SVG's 518 by 536 viewBox, which the stylesheet scales to the seal's capped width.
 
 							alt=''
-						/>{ /* What: About Seal Image Element. Why: The seal shows the full logo. How: Its empty alt matches its container's hidden, decorative role. */ }
+						/>{ /* What: About Seal Image Element. Why: The seal shows the full logo. How: Its empty alt matches its container's hidden, decorative role, and it hides with the seal at 960px wide and below. */ }
 
 
 					</div>
@@ -177,7 +177,7 @@ function AboSecCom () : React.JSX.Element {
 					<blockquote className={ cssModObj.aboQuoBlo }>{ /* What: About Quote Blockquote Element. Why: A line from the family puts the company's approach in its own words. How: This holds the quote mark, the quote, and its attribution. */ }
 
 
-						<span className={ cssModObj.quoMarSpa }>“</span>{ /* What: Quote Mark Span Element. Why: An oversized opening quote mark sets the quote apart. How: This draws it as its own styled character. */ }
+						<span className={ cssModObj.quoMarSpa }>“</span>{ /* What: Quote Mark Span Element. Why: An oversized opening quote mark sets the quote apart. How: This draws it as its own styled character beside the quote, or on its own line above it at 540px wide and below. */ }
 
 						<p className={ cssModObj.aboQuoPar }>{ /* What: About Quote Paragraph Element. Why: This is the quote itself. How: This sets it in large display italic, indented past the quote mark, or unindented under it at 540px wide and below. */ }
 							The roof above your operation is not the place to cut corners, and

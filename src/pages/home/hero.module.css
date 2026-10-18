@@ -402,7 +402,7 @@
 
 /* #region herActDiv */
 
-.herActDiv { /* What: Hero Actions Div. Why: The hero's two next steps sit together. How: This sets the buttons side by side, wrapping if needed. */
+.herActDiv { /* What: Hero Actions Div. Why: The hero's two next steps sit together. How: This sets the buttons side by side, wrapping onto two lines at about 400px wide and below. */
 
 
 	display   : flex;

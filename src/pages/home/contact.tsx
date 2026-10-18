@@ -293,7 +293,7 @@ function ConSecCom () : React.JSX.Element {
 
 
 
-					<div className={ cssModObj.conSigDiv }>{ /* What: Contact Signature Div Element. Why: The full logo signs off the company's details. How: This sets it on a paper-colored card. */ }
+					<div className={ cssModObj.conSigDiv }>{ /* What: Contact Signature Div Element. Why: The full logo signs off the company's details. How: This sets it on a paper-colored card at the column's left edge, or centered at 500px wide and below. */ }
 
 
 						<img
