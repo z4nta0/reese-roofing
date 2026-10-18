@@ -320,7 +320,7 @@ function NavBarCom () : React.JSX.Element {
 								className={ cssModObj.arrIcoSpa }
 
 								aria-hidden='true'
-							>{ /* What: Arrow Icon Span Element. Why: The arrow marks the bar's estimate button as moving the visitor onward. How: This sits right after the button's label and nudges right when it's hovered, hidden from screen readers since it only decorates the label, and hidden with the button at 880px wide and below. */ }
+							>{ /* What: Arrow Icon Span Element. Why: The arrow marks the bar's estimate button as moving the visitor onward. How: This sits right after the button's label and nudges right when the button is hovered, hidden from screen readers since it only decorates the label, and hidden with the button at 880px wide and below. */ }
 								→
 							</span>
 						</a>
@@ -431,7 +431,7 @@ function NavBarCom () : React.JSX.Element {
 								className={ cssModObj.arrIcoSpa }
 
 								aria-hidden='true'
-							>{ /* What: Arrow Icon Span Element. Why: The arrow marks the drawer's estimate button as moving the visitor onward. How: This sits right after the button's label and nudges right when it's hovered, hidden from screen readers since it only decorates the label, drawn only in the drawer, which opens only at 880px wide and below. */ }
+							>{ /* What: Arrow Icon Span Element. Why: The arrow marks the drawer's estimate button as moving the visitor onward. How: This sits right after the button's label and nudges right when the button is hovered, hidden from screen readers since it only decorates the label, drawn only in the drawer, which opens only at 880px wide and below. */ }
 								→
 							</span>
 						</a>

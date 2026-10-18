@@ -38,7 +38,7 @@ import React     from 'react';                // What: React. Why: The form trac
 
 // #region Types
 
-type ConForTyp = { comStr : string, emaStr : string, mesStr : string, namStr : string, phoStr : string, serStr : string }; // What: Contact Form Type. Why: The form's six fields are read and written together as one record. How: This types the initial values, the form's state, and the field key each input updates.
+type ConForTyp = { comStr : string, emaStr : string, mesStr : string, namStr : string, phoStr : string, serStr : string }; // What: Contact Form Type. Why: The form's six fields are read and written together as one record. How: This types the initial values, the form's state, and the field key each field updates.
 
 // #endregion Types
 
@@ -61,7 +61,7 @@ const INI_FOR_OBJ : ConForTyp = { comStr : '', emaStr : '', mesStr : '', namStr 
  *
  * @summary
  * Renders the contact section and owns its estimate form. Every field is
- * controlled by one record in state, each input updating its own key through
+ * controlled by one record in state, each field updating its own key through
  * updFieFun. Submitting builds an email from the fields and hands it to the
  * visitor's email app through a mailto link, then switches the submit button's
  * label to say the email is opening and announces the same to screen readers
@@ -85,7 +85,7 @@ function ConSecCom () : React.JSX.Element {
 
 
 	const [ forValObj, setForValObj ] = React.useState< ConForTyp >( INI_FOR_OBJ ); // What: Form Value Object And Setter. Why: Every field's current text lives in one record. How: This starts from INI_FOR_OBJ and is updated one key at a time by updFieFun.
-	const [ senReqBoo, setSenReqBoo ] = React.useState( false );                    // What: Sent Request Boolean And Setter. Why: The submit button and the status region should confirm the email is on its way. How: This flips true once the form is submitted.
+	const [ senReqBoo, setSenReqBoo ] = React.useState( false );                    // What: Sent Request Boolean And Setter. Why: The submit button and the status region should confirm the email is opening. How: This flips true once the form is submitted.
 
 
 	// #region updFieFun
