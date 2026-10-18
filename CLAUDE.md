@@ -219,7 +219,7 @@ rule overrode them. Each was applied as its own commit:
 - `6c97153`: the about story's bottom margin before the principles.
 - `a39b331`: the contact heading's soft accent italic word.
 - `281265f`: the paper contact submit button on the dark band.
-- `8a5f993`: the mobile drawer's open and close animation (made cross-browser
+- `8a5f993`: the drawer's open and close animation (made cross-browser
   in a later commit).
 
 Horizontal sizes (decided 2026-10-07): after comparing both options from the
