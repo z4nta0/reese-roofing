@@ -269,7 +269,7 @@ test.describe( 'the production build', () => { // What: Build Group. Why: The bu
 
 
 
-	test( 'the built page ships compacted', () => { // What: Compacted Page Test. Why: The page's comments and indentation are for its source, not for visitors to download, and vite.config's minifier only runs in a build. How: This reads the built index.html and checks the minifier's work.
+	test( 'the built page ships compacted', () => { // What: Compacted Page Test. Why: The page's comments and indentation are for its source, not for visitors to download, and vite.config's minifier only runs in a build. How: This reads the built index.html and checks it holds no HTML comments, indentation, or blank lines, still carries its full title, and ships its JSON-LD valid and on one line.
 
 
 		const pagTexStr = readFileSync( `${ outDirStr }/index.html`, 'utf8' );                                           // What: Page Text String. Why: The checks read the page as it ships. How: This reads the built index.html.

@@ -124,7 +124,7 @@ const SOC_KEY_ARR = [ // What: Social Key Array. Why: The social preview rule li
 for ( const rouRecObj of ROU_REC_ARR ) { // What: Route Test Loop. Why: Every route gets the same head checks. How: This declares one test per route.
 
 
-	test( `${ rouRecObj.patStr } has a demo-only head and footer`, async ( { page : curPagObj } ) => { // What: Head Test. Why: Every route has to describe itself honestly and stay out of search. How: This loads the route and checks its title, meta tags, structured data, and footer.
+	test( `${ rouRecObj.patStr } has a demo-only head and footer`, async ( { page : curPagObj } ) => { // What: Head Test. Why: Every route has to describe itself honestly and stay out of search. How: This loads the route and checks its title, meta tags, canonical link, structured data, and footer.
 
 
 		await curPagObj.goto( rouRecObj.patStr ); // What: Route Load Call. Why: The head is read as a browser builds it. How: This opens the route on the suite's dev server.
