@@ -296,7 +296,7 @@ function ConSecCom () : React.JSX.Element {
 							className={ cssModObj.conSigIma }
 
 							height='536' // What: Intrinsic Size Note. Why: The page shouldn't shift while the logo loads. How: This matches the SVG's 518 by 536 viewBox, which the stylesheet scales to the signature card's capped width.
-							loading='lazy' // What: Lazy Loading Attribute. Why: The image starts below the fold. How: This lets the browser fetch it only as it nears the screen.
+							loading='lazy' // What: Lazy Loading Attribute. Why: The image starts below the fold. How: This holds the image back until it nears the screen, though the hero has already fetched the same file, so it saves no download.
 							src={ lofSvgUrl }
 							width='518' // What: Intrinsic Size Note. Why: The page shouldn't shift while the logo loads. How: This matches the SVG's 518 by 536 viewBox, which the stylesheet scales to the signature card's capped width.
 
