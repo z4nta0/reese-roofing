@@ -27,12 +27,13 @@ import type { Page          } from '@playwright/test'; // What: Page. Why: Every
  * outline properties, offset and width, and the first keyboard stop (or the
  * control a state's action left focused) has to draw that ring at full width
  * once it has eased in. Every form field a visitor can reach has to look
- * different once focused and have a transition longer than zero. Under reduced
- * motion every control keeps its hover and press changes, and every field its
- * focus change, but nothing transitions, the parts inside a control and their
- * pseudo-elements included. Real clicks are blocked during the checks, so
- * pressing a link or the drawer's rows never navigates or closes anything
- * mid-check.
+ * different once focused and have a transition longer than zero. The brand
+ * link, which the Tab order skips, has to change on hover and again on press
+ * too. Under reduced motion every control keeps its hover and press changes,
+ * and every field its focus change, but nothing transitions, the parts inside
+ * a control and their pseudo-elements included. Real clicks are blocked during
+ * the checks, so pressing a link or the drawer's rows never navigates or
+ * closes anything mid-check.
  *
  * Sections:
  *  - Constants
@@ -464,6 +465,68 @@ for ( const staRecObj of STA_REC_ARR ) { // What: State Test Loop. Why: Every pa
 
 		expect( await fieProFun( curPagObj, true ) ).toEqual( [] ); // What: No Reduced Motion Field Problems Assertion. Why: Every field has to show it took focus without easing. How: This compares the field problems with an empty list.
 		expect( await feeProFun( curPagObj, true ) ).toEqual( [] ); // What: No Reduced Motion Problems Assertion. Why: Every control has to respond without moving. How: This compares the problems with an empty list, so a failure prints each one.
+
+
+	} );
+
+
+}
+
+
+for ( const redMotBoo of [ false, true ] ) { // What: Brand Motion Loop. Why: The brand link's feedback has to hold with and without reduced motion. How: This declares the brand check once for each preference.
+
+
+	test( `the brand link responds to hover and press${ redMotBoo ? ' under reduced motion' : '' }`, async ( { page : curPagObj } ) => { // What: Brand Feedback Test. Why: The brand link is hidden from screen readers and out of the Tab order, so the control checks never reach it, though a pointer still can. How: This hovers and presses the brand link on the home page and checks its look changes each time, easing normally and switching at once under reduced motion.
+
+
+		const homRecObj = STA_REC_ARR.find( ( staCurObj ) => staCurObj.ideStr === 'home-desktop' )!; // What: Home Record Object. Why: The brand link sits in the bar on every page, and the home page is its usual one. How: This finds the home desktop state's row. // What: Non-Null Note. Why: find types its result as possibly undefined. How: STA_REC_ARR always lists the home-desktop state.
+
+
+		if ( redMotBoo ) await curPagObj.emulateMedia( { reducedMotion : 'reduce' } ); // What: Reduced Motion Emulation. Why: The reduced-motion run needs the preference before the page loads. How: This makes the page match prefers-reduced-motion: reduce.
+
+
+
+		await opeStaFun( curPagObj, homRecObj ); // What: Home State Open Call. Why: The brand link is probed with the page settled. How: This loads the home page at desktop size.
+
+		await curPagObj.evaluate( cliBloFun ); // What: Click Block Call. Why: Pressing the brand link shouldn't load the home page mid-check. How: This cancels every click from here on.
+
+
+		const braAncObj = curPagObj.locator( 'header a[aria-hidden="true"]' ); // What: Brand Anchor Object. Why: The brand link is the one link the bar hides from screen readers. How: This finds it by that attribute.
+
+
+		await curPagObj.mouse.move( 700, 600 ); // What: Pointer Away Call. Why: The resting look is read with nothing hovered. How: This moves the pointer into the page, away from the bar.
+
+		await curPagObj.waitForTimeout( SET_WAI_NUM ); // What: Rest Settle Wait. Why: The resting look is read once any transition has finished. How: This pauses for the settle time.
+
+
+		const resSigStr = await braAncObj.evaluate( sigEleFun ); // What: Rest Signature String. Why: The hovered look is compared with this one. How: This reads the brand link's look at rest.
+
+
+		await braAncObj.hover(); // What: Hover Call. Why: This is the first action under test. How: This moves the pointer onto the brand link.
+
+		await curPagObj.waitForTimeout( SET_WAI_NUM ); // What: Hover Settle Wait. Why: The hovered look is read once it has eased in. How: This pauses for the settle time.
+
+
+		const hovSigStr = await braAncObj.evaluate( sigEleFun ); // What: Hover Signature String. Why: The pressed look is compared with this one. How: This reads the brand link's hovered look.
+
+
+		await curPagObj.mouse.down(); // What: Mouse Down Call. Why: A press shows while the button is held. How: This holds the mouse button down on the brand link.
+
+		await curPagObj.waitForTimeout( SET_WAI_NUM ); // What: Press Settle Wait. Why: The pressed look is read once it has eased in. How: This pauses for the settle time.
+
+
+		const allDurStr = await braAncObj.evaluate( ( braCurEle ) => [ braCurEle, ...braCurEle.querySelectorAll( '*' ) ].map( ( eleCurEle ) => getComputedStyle( eleCurEle ).transitionDuration ).join( ', ' ) ); // What: All Duration String. Why: The brand link changes through its mark and name as well as itself. How: This reads the transition durations of the link and every element inside it.
+		const preSigStr = await braAncObj.evaluate( sigEleFun ); // What: Press Signature String. Why: The pressed look is compared with the hovered one. How: This reads the brand link's pressed look.
+
+
+		await curPagObj.mouse.up(); // What: Mouse Up Call. Why: The press has to end. How: This releases the button, whose click is blocked.
+
+
+		expect( hovSigStr ).not.toBe( resSigStr ); // What: Hover Change Assertion. Why: A hovered link has to respond. How: This checks the hovered look differs from the resting one.
+
+		expect( preSigStr ).not.toBe( hovSigStr ); // What: Press Change Assertion. Why: A press has to register before anything happens. How: This checks the pressed look differs from the hovered one.
+
+		expect( /^0s(, 0s)*$/.test( allDurStr ) ).toBe( redMotBoo ); // What: Motion Assertion. Why: The changes should ease normally and switch at once under reduced motion. How: This checks every duration is zero exactly when reduced motion is on.
 
 
 	} );
