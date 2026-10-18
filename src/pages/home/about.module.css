@@ -8,9 +8,10 @@
  * Styles for AboSecCom: the two-column story, with the heading and a faded
  * logo seal held in place on the left while the paragraphs and pull quote
  * scroll past on the right, then the row of four numbered principles under a
- * rule, stacking on smaller screens. The shared section, container, eyebrow,
- * display, and emphasis declarations the section used to borrow from the
- * global stylesheet are copied onto its own classes here.
+ * rule. At 960px wide and below the story stacks with the seal hidden and the
+ * principles go two across, then one at 540px and below. The shared section,
+ * container, eyebrow, display, and emphasis declarations the section used to
+ * borrow from the global stylesheet are copied onto its own classes here.
  *
  * @author z4nta0 <https://github.com/z4nta0>
  *

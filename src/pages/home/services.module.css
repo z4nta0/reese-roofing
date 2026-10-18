@@ -5,12 +5,12 @@
  * services.module.css = Services Section Module
  *
  * @summary
- * Styles for SerSecCom: the section's two-column heading block, then the
- * grid of service cards sharing hairline borders, three across on wide
- * screens, two on tablets, and one on phones, each card tinting on hover. The
- * shared section, container, eyebrow, display, and lede declarations the
- * section used to borrow from the global stylesheet are copied onto its own
- * classes here.
+ * Styles for SerSecCom: the section's two-column heading block, stacking at
+ * 960px wide and below, then the grid of service cards sharing hairline
+ * borders, three across above 960px wide, two at 960px and below, and one at
+ * 640px and below, each card tinting on hover. The shared section, container,
+ * eyebrow, display, and lede declarations the section used to borrow from the
+ * global stylesheet are copied onto its own classes here.
  *
  * @author z4nta0 <https://github.com/z4nta0>
  *

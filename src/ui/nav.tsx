@@ -19,9 +19,9 @@ import { useSecCliFun } from './section-link.ts'; // What: Use Section Click Fun
  *
  * @summary
  * The site's top navigation bar, shared by every page. It holds the brand
- * link, the section links, the phone number and estimate button, and on small
- * screens a menu toggle that opens a drawer repeating the links. It switches
- * to its scrolled style once the page moves past the top.
+ * link, the section links, the phone number and estimate button, and at 880px
+ * wide and below a menu toggle that opens a drawer repeating the links. It
+ * switches to its scrolled style once the page moves past the top.
  *
  * Sections:
  *  - Constants
@@ -81,14 +81,14 @@ const NAV_LIN_ARR = [ // What: Nav Link Array. Why: The bar and its mobile drawe
  * Renders the site's top bar. It listens to the window's scroll position and
  * switches the bar to its scrolled style once the page is more than 24px down,
  * checking once on mount so a page reloaded mid-scroll starts in the right
- * style. On small screens a toggle button opens and closes a drawer holding
- * the same links, numbered like the sections they lead to, then a contact
- * block with the phone number, the hours, and the estimate button; picking a
- * link or the button closes it again. While the drawer is open the bar takes a
- * solid background, so the two read as one panel, and a scrim dims the page
- * below; clicking the scrim closes the drawer. The open drawer also acts as a
- * modal layer: the page's content beside the bar turns inert, so Tab and
- * screen readers stay in the bar and drawer, Escape closes it and returns
+ * style. At 880px wide and below a toggle button opens and closes a drawer
+ * holding the same links, numbered like the sections they lead to, then a
+ * contact block with the phone number, the hours, and the estimate button;
+ * picking a link or the button closes it again. While the drawer is open the
+ * bar takes a solid background, so the two read as one panel, and a scrim dims
+ * the page below; clicking the scrim closes the drawer. The open drawer also
+ * acts as a modal layer: the page's content beside the bar turns inert, so Tab
+ * and screen readers stay in the bar and drawer, Escape closes it and returns
  * focus to the toggle, and widening the screen until the toggle disappears
  * closes it too. Every section link and estimate button goes through
  * secCliFun, scrolling to its section, or navigating home to it from another
@@ -397,7 +397,7 @@ function NavBarCom () : React.JSX.Element {
 						className={ cssModObj.draConDiv }
 
 						style={ { '--dra-ite-ind' : NAV_LIN_ARR.length } as React.CSSProperties } // What: Drawer Item Index Style. Why: The contact block enters after the last link. How: This hands it the position after the links, which its stylesheet multiplies into an animation delay. // What: Type Assertion Note. Why: React's CSSProperties type has no entry for custom properties. How: The object holds one custom property and nothing else, so reading it as CSSProperties is safe.
-					>{ /* What: Drawer Contact Div Element. Why: The drawer ends with every way to reach the company, since the bar's phone link and estimate button are hidden on small screens. How: This stacks a label, the phone number, the hours, and the estimate button. */ }
+					>{ /* What: Drawer Contact Div Element. Why: The drawer ends with every way to reach the company, since the bar's phone link and estimate button are hidden at 880px wide and below. How: This stacks a label, the phone number, the hours, and the estimate button. */ }
 
 
 						<span className={ cssModObj.eyeLabSpa }>Call us</span>{ /* What: Eyebrow Label Span Element. Why: A small label introduces the contact block like the sections' labels. How: This reads in tracked, muted capitals with a leading line. */ }
@@ -420,7 +420,7 @@ function NavBarCom () : React.JSX.Element {
 							href='/#contact'
 
 							onClick={ ( cliEveObj ) => { if ( secCliFun( cliEveObj, 'contact' ) ) setDraOpeBoo( false ); } } // What: Drawer Estimate Click Handler. Why: The estimate button should close the drawer on the way to the form, but a button opened in a new tab leaves the drawer as it was. How: This closes the drawer only when secCliFun handled the click.
-						>{ /* What: Drawer Estimate Anchor Element. Why: Requesting an estimate is the site's main action, and the bar's button is hidden on small screens. How: This takes the visitor to the contact section as a full-width pill, without a hash, and closes the drawer behind it, while a Ctrl, Cmd, or middle click opens it in a new tab. */ }
+						>{ /* What: Drawer Estimate Anchor Element. Why: Requesting an estimate is the site's main action, and the bar's button is hidden at 880px wide and below. How: This takes the visitor to the contact section as a full-width pill, without a hash, and closes the drawer behind it, while a Ctrl, Cmd, or middle click opens it in a new tab. */ }
 							Get an estimate
 							<span
 								className={ cssModObj.arrIcoSpa }

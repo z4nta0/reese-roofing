@@ -7,12 +7,12 @@
  * @summary
  * Styles for NavBarCom: the fixed top bar, which turns frosted once the page
  * scrolls, with the brand, the centered section links, the phone link and
- * estimate button, and on small screens the menu toggle, its drop-down drawer,
- * and the scrim that dims the page behind the drawer. The shared container,
- * button, and arrow styles the bar used to borrow from the global stylesheet
- * are copied onto its own classes here. The estimate button is a version of
- * the site's primary button with slightly narrower side padding to suit the
- * bar.
+ * estimate button, and at 880px wide and below the menu toggle, its drop-down
+ * drawer, and the scrim that dims the page behind the drawer. The shared
+ * container, button, and arrow styles the bar used to borrow from the global
+ * stylesheet are copied onto its own classes here. The estimate button is a
+ * version of the site's primary button with slightly narrower side padding to
+ * suit the bar.
  *
  * @author z4nta0 <https://github.com/z4nta0>
  *
@@ -896,7 +896,7 @@
 
 /* #region draEstAnc */
 
-.draEstAnc { /* What: Drawer Estimate Anchor. Why: Requesting an estimate is the site's main action, and the bar's button is hidden on small screens. How: This draws the site's dark pill across the drawer's full width, its height set by its line height alone, centering its label and arrow, lifting and turning accent on hover. */
+.draEstAnc { /* What: Drawer Estimate Anchor. Why: Requesting an estimate is the site's main action, and the bar's button is hidden at 880px wide and below. How: This draws the site's dark pill across the drawer's full width, its height set by its line height alone, centering its label and arrow, lifting and turning accent on hover. */
 
 
 	align-items     : center;

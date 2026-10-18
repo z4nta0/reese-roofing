@@ -7,11 +7,13 @@
  * @summary
  * Styles for HerSecCom: the full-height opening section over a faint, masked
  * grid, with the headline beside the ringed logo, the pitch and its two
- * buttons between hairlines, and the stats row, each block rising into place
- * in turn. The shared section, container, eyebrow, display, lede, button, and
- * arrow declarations the hero used to borrow from the global stylesheet are
- * copied onto its own classes here. The section takes extra top padding to
- * clear the fixed bar, and a lighter bottom padding than the other sections.
+ * buttons between hairlines, and the stats row four across, all stacking at
+ * 960px wide and below, where the logo moves above the headline and the stats
+ * go two across, each block rising into place in turn. The shared section,
+ * container, eyebrow, display, lede, button, and arrow declarations the hero
+ * used to borrow from the global stylesheet are copied onto its own classes
+ * here. The section takes extra top padding to clear the fixed bar, and a
+ * lighter bottom padding than the other sections.
  *
  * @author z4nta0 <https://github.com/z4nta0>
  *

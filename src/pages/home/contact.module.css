@@ -7,7 +7,7 @@
  * @summary
  * Styles for ConSecCom: the dark closing section, with the label, heading,
  * lede, detail rows, and signature card on the left and the framed estimate
- * form on the right, stacking on smaller screens. The form's fields are
+ * form on the right, stacking at 960px wide and below. The form's fields are
  * underlined controls in light text, whose underlines turn the soft accent on
  * focus. The heading's italic word takes the soft accent, so it stays readable
  * on the dark band. The shared section, container, eyebrow, display, lede,
