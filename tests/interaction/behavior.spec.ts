@@ -298,7 +298,7 @@ test( "the bar's estimate button scrolls to the contact section", async ( { page
 
 
 
-test( 'the Home link returns to the top', async ( { page : curPagObj } ) => { // What: Home Link Test. Why: Home has to bring a scrolled visitor back to the start. How: This scrolls down, clicks Home, and checks the scroll position.
+test( 'the Home link returns to the top', async ( { page : curPagObj } ) => { // What: Home Link Test. Why: Home has to bring a scrolled visitor back to the start. How: This scrolls down, clicks Home, and checks the scroll position, the address, and that no hashchange event fired.
 
 
 	await opeRouFun( curPagObj, '/', DES_VIE_OBJ ); // What: Home Open Call. Why: The bar's Home link shows above 880px wide. How: This opens the home page at desktop size.
@@ -317,7 +317,7 @@ test( 'the Home link returns to the top', async ( { page : curPagObj } ) => { //
 
 
 
-test( 'back to top returns to the top', async ( { page : curPagObj } ) => { // What: Back To Top Test. Why: The footer's link has to bring the visitor back up. How: This clicks the link, which Playwright first scrolls into view at the bottom of the page, and checks the scroll position.
+test( 'back to top returns to the top', async ( { page : curPagObj } ) => { // What: Back To Top Test. Why: The footer's link has to bring the visitor back up. How: This clicks the link, which Playwright first scrolls into view at the bottom of the page, and checks the scroll position, the address, and that no hashchange event fired.
 
 
 	await opeRouFun( curPagObj, '/', DES_VIE_OBJ ); // What: Home Open Call. Why: Back to top sits at the bottom of the home page. How: This opens it at desktop size.
