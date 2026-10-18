@@ -73,8 +73,8 @@ const SMA_VIE_OBJ = { height : 568, width : 320  }; // What: Small Viewport Obje
  *
  * @param curPagObj - Current Page Object: The page to open the route on.
  * @param rouPatStr - Route Path String: The route to load.
- * @param vieSizObj - Viewport Size Object: {@link DES_VIE_OBJ} or
- *                    {@link PHO_VIE_OBJ}.
+ * @param vieSizObj - Viewport Size Object: {@link DES_VIE_OBJ},
+ *                    {@link PHO_VIE_OBJ}, or {@link SMA_VIE_OBJ}.
  *
  * @returns A promise that settles once the route is loaded and its fonts are
  *          ready, with no value.

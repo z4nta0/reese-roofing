@@ -182,7 +182,7 @@ function layProFun () : string[] {
 
 
 
-		return conReaBoo;
+		return conReaBoo; // What: Control Reachable Return. Why: The filter keeps only controls a visitor can see and reach. How: This keeps the control when all four checks pass.
 
 
 	} );

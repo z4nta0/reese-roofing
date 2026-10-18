@@ -158,8 +158,7 @@ for ( const rouRecObj of ROU_REC_ARR ) { // What: Route Test Loop. Why: Every ro
 test( 'the raw page carries the home title and description', async ( { page : curPagObj } ) => { // What: Raw Head Test. Why: Link checkers and many crawlers read the HTML without running its script, so anything only React sets is invisible to them. How: This fetches the home page without a browser and checks its title and description.
 
 
-	const rawHtmStr = await ( await curPagObj.request.get( '/' ) ).text(); // What: Raw HTML String. Why: The page has to be read the way a script-free crawler reads it. How: This fetches the home page's HTML from the dev server without rendering it.
-
+	const rawHtmStr = await ( await curPagObj.request.get( '/' ) ).text();                            // What: Raw HTML String. Why: The page has to be read the way a script-free crawler reads it. How: This fetches the home page's HTML from the dev server without rendering it.
 	const rawDesStr = rawHtmStr.match( /<meta name='description'\s+content='([^']*)'/ )?.[ 1 ] ?? ''; // What: Raw Description String. Why: The description has to be in the raw page, not added later by a script. How: This reads the description tag's content from the HTML, or an empty string when it's missing.
 
 

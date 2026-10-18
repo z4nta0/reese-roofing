@@ -115,14 +115,13 @@ const STA_REC_ARR : StaRecTyp[] = [ // What: State Record Array. Why: Every chec
  * opeStaFun = Open State Function
  *
  * @summary
- * Opens one state on a page and waits until it's settled: sizes the
- * viewport, loads the path, waits for the web fonts, loads every lazy image
- * on screen (Firefox only fetches one once it's scrolled near, which a
- * full-page screenshot never does) by switching it to eager loading, which
- * leaves the scroll position and the keyboard's starting point alone, runs
- * the state's action if it has one, then waits until no animation is still
- * running, so a check
- * never measures a heading halfway through its entrance fade or a drawer
+ * Opens one state on a page and waits until it's settled: sizes the viewport,
+ * loads the path, waits for the web fonts, loads every lazy image on screen
+ * (Firefox only fetches one once it's scrolled near, which a full-page
+ * screenshot never does) by switching it to eager loading, which leaves the
+ * scroll position and the keyboard's starting point alone, runs the state's
+ * action if it has one, then waits until no animation is still running, so a
+ * check never measures a heading halfway through its entrance fade or a drawer
  * halfway open. The animation wait gives up after 5 seconds rather than
  * hanging on a looping animation.
  *
