@@ -171,9 +171,9 @@ the same helper, and the seo suite reads the head of each route instead.
   edge (unless it's decoration an ancestor clips, like the hero's grid), text
   spilling its box, two reachable controls overlapping, or a card grid leaving
   uneven rows (the hero stats, the services, and the principles), apart from
-  the Card Grids rule's single centered card, kept at the others' width. It found the bar's links running into the phone number
-  just above the drawer breakpoint, fixed by returning the links to the bar's
-  flex row.
+  the Card Grids rule's single centered card, kept at the others' width. It
+  found the bar's links running into the phone number just above the drawer
+  breakpoint, fixed by returning the links to the bar's flex row.
 - `npm run test:seo`: checks each route's title, description, robots,
   canonical, social tags, and structured data, the footer's demo line,
   `robots.txt`, `_headers` (its robots rule and every security header), and

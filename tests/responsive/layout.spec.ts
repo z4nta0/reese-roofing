@@ -178,7 +178,7 @@ function layProFun () : string[] {
 		const edgSpiBoo = ( rigSpiBoo || lefSpiBoo ) && !( decEleBoo && cliAncBoo ); // What: Edge Spill Boolean. Why: A box past either edge spills unless it's decoration a clipping ancestor hides. How: This combines the four.
 
 
-		if ( edgSpiBoo ) proLisArr.push( `${ desEleFun( layCurEle ) } spills past the ${ rigSpiBoo ? 'right' : 'left' } edge` ); // What: Edge Spill Check. Why: Content past the edge is cut off or forces sideways scrolling. How: This records an unclipped element that reaches more than a pixel beyond the viewport.
+		if ( edgSpiBoo ) proLisArr.push( `${ desEleFun( layCurEle ) } spills past the ${ rigSpiBoo ? 'right' : 'left' } edge` ); // What: Edge Spill Check. Why: Content past the edge is cut off or forces sideways scrolling. How: This records any element that reaches more than a pixel beyond the viewport, unless it's decoration a clipping ancestor hides.
 
 
 

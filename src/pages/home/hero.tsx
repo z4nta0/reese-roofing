@@ -74,7 +74,7 @@ function HerSecCom () : React.JSX.Element {
 			id='top'
 
 			className={ cssModObj.homHerSec }
-		>{ /* What: Home Hero Section Element. Why: This opens the home page. How: Its top id is the anchor every #top or /#top link targets (the bar's brand link opens / instead), kept as is since it appears in the page's URL. */ }
+		>{ /* What: Home Hero Section Element. Why: This opens the home page. How: Its top id is the anchor every /#top link and the home page's own #top link target (the bar's brand link opens / instead), kept as is since it appears in the page's URL. */ }
 
 
 			<div
