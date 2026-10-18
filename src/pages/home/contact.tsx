@@ -38,7 +38,7 @@ import React     from 'react';                // What: React. Why: The form trac
 
 // #region Types
 
-type ConForTyp = { comStr : string, emaStr : string, mesStr : string, namStr : string, phoStr : string, serStr : string }; // What: Contact Form Type. Why: The form's six fields are read and written together as one record. How: This types the initial values, the form's state, and the field key each field updates.
+type ConForTyp = { comStr : string, emaStr : string, mesStr : string, namStr : string, phoStr : string, serStr : string }; // What: Contact Form Type. Why: The form's six fields are read and written together as one record. How: This types the initial values, the form's state, and the key each field updates.
 
 // #endregion Types
 
