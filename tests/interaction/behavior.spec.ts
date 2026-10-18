@@ -399,24 +399,30 @@ test( 'a tap on the dimmed page closes the drawer', async ( { page : curPagObj }
 
 
 
-test( 'a drawer link closes the drawer and scrolls to its section', async ( { page : curPagObj } ) => { // What: Drawer Link Test. Why: Picking a section should both take the visitor there and get the drawer out of the way. How: This opens the drawer, picks About, and checks the drawer and the section.
+for ( const [ linLabStr, secIdeStr ] of [ [ 'Home', 'top' ], [ 'Services', 'services' ], [ 'About', 'about' ], [ 'Contact', 'contact' ] ] ) { // What: Drawer Link Loop. Why: Each of the drawer's links leads to its own section. How: This declares one test per link, pairing its label with its section's id.
 
 
-	await opeRouFun( curPagObj, '/', PHO_VIE_OBJ ); // What: Home Open Call. Why: The drawer exists on small screens. How: This opens the home page at phone size.
-
-	await opeDraFun( curPagObj ); // What: Drawer Open Call. Why: The drawer's links show only while it's open. How: This opens it.
-
-	await curPagObj.getByRole( 'link', { name : 'About' } ).click(); // What: Drawer Link Click Call. Why: This is the action under test. How: This clicks About, the only About link visible at phone size, since the bar's own links are hidden there.
+	test( `the drawer's ${ linLabStr } link closes the drawer and scrolls to its section`, async ( { page : curPagObj } ) => { // What: Drawer Link Test. Why: Picking a section should both take the visitor there and get the drawer out of the way. How: This opens the drawer, picks the link, and checks the drawer, the section, and the address.
 
 
-	await expect( curPagObj.getByRole( 'button', { name : 'Toggle menu' } ) ).toHaveAttribute( 'aria-expanded', 'false' ); // What: Drawer Closed Assertion. Why: The drawer should close once a section is picked. How: This checks the button reports it collapsed.
+		await opeRouFun( curPagObj, '/', PHO_VIE_OBJ ); // What: Home Open Call. Why: The drawer exists on small screens. How: This opens the home page at phone size.
 
-	await expect.poll( async () => Math.abs( await secTopFun( curPagObj, 'about' ) ) ).toBeLessThan( 2 ); // What: Section Position Assertion. Why: The visitor should land on the section. How: This waits until its top edge sits within a pixel of the viewport's top.
+		await opeDraFun( curPagObj ); // What: Drawer Open Call. Why: The drawer's links show only while it's open. How: This opens it.
 
-	await expect( curPagObj ).toHaveURL( /\/$/ ); // What: Clean Address Assertion. Why: The address bar should stay free of hashes. How: This checks the URL still ends at the root.
+		await curPagObj.getByRole( 'banner' ).getByRole( 'link', { exact : true, name : linLabStr } ).click(); // What: Drawer Link Click Call. Why: This is the action under test. How: This clicks the link by its label, the only one visible at phone size, since the bar's own links are hidden there.
 
 
-} );
+		await expect( curPagObj.getByRole( 'button', { name : 'Toggle menu' } ) ).toHaveAttribute( 'aria-expanded', 'false' ); // What: Drawer Closed Assertion. Why: The drawer should close once a section is picked. How: This checks the toggle reports it collapsed.
+
+		await expect.poll( async () => Math.abs( await secTopFun( curPagObj, secIdeStr ) ) ).toBeLessThan( 2 ); // What: Section Position Assertion. Why: The visitor should land on the section. How: This waits until its top edge sits within a pixel of the viewport's top.
+
+		await expect( curPagObj ).toHaveURL( /\/$/ ); // What: Clean Address Assertion. Why: The address bar should stay free of hashes. How: This checks the URL still ends at the root.
+
+
+	} );
+
+
+}
 
 
 
@@ -578,6 +584,31 @@ test( 'the 404 page leads to the contact section', async ( { page : curPagObj } 
 
 
 } );
+
+
+
+for ( const [ linLabStr, secIdeStr ] of [ [ 'Services', 'services' ], [ 'About', 'about' ], [ 'Contact', 'contact' ] ] ) { // What: Not Found Link Loop. Why: The bar's section links on the 404 page lead home to their sections. How: This declares one test per link, pairing its label with its section's id.
+
+
+	test( `the 404 page's ${ linLabStr } link leads to its section`, async ( { page : curPagObj } ) => { // What: Not Found Section Link Test. Why: A section link away from the home page has to navigate home and land on its section without a hash. How: This clicks the link on the 404 page and checks the section's position and the address.
+
+
+		await opeRouFun( curPagObj, '/missing', DES_VIE_OBJ ); // What: Not Found Open Call. Why: The bar's links are under test away from the home page. How: This opens the 404 page at desktop size.
+
+		await curPagObj.getByRole( 'banner' ).getByRole( 'link', { exact : true, name : linLabStr } ).click(); // What: Section Link Click Call. Why: This is the action under test. How: This clicks the bar's link by its label.
+
+
+		await expect( curPagObj.locator( `#${ secIdeStr }` ) ).toBeVisible(); // What: Section Render Wait. Why: The address changes before the home page has rendered, so the section has to exist before it's measured. How: This waits until the section is on the page.
+
+		await expect.poll( async () => Math.abs( await secTopFun( curPagObj, secIdeStr ) ) ).toBeLessThan( 2 ); // What: Section Position Assertion. Why: The visitor should land on the section. How: This waits until its top edge sits within a pixel of the viewport's top.
+
+		await expect( curPagObj ).toHaveURL( /\/$/ ); // What: Clean Address Assertion. Why: The home page clears the hash once it has scrolled to the section. How: This checks the URL ends at the root.
+
+
+	} );
+
+
+}
 
 
 
