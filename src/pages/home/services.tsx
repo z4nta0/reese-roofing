@@ -63,10 +63,11 @@ const SER_REC_ARR : SerRecTyp[] = [ // What: Service Record Array. Why: The sect
 	{ // What: Single-Ply Membrane Service. Why: Most flat commercial roofs are single-ply membranes. How: This is the first card.
 
 
-		desStr : 'Energy-efficient TPO, EPDM, and PVC roofing engineered for flat and low-slope commercial buildings.',
 		detArr : [ 'TPO installation', 'EPDM rubber roofing', 'PVC membrane systems' ],
 		ideStr : '01',
-		titStr : 'Single-ply membrane systems'
+		titStr : 'Single-ply membrane systems',
+
+		desStr : 'Energy-efficient TPO, EPDM, and PVC roofing engineered for flat and low-slope commercial buildings.'
 
 
 	},
@@ -74,10 +75,11 @@ const SER_REC_ARR : SerRecTyp[] = [ // What: Service Record Array. Why: The sect
 	{ // What: Metal Roofing Service. Why: Metal roofs are the company's long-life option. How: This is the second card.
 
 
-		desStr : 'Standing-seam and architectural metal roofs that perform for decades, installed new or retrofitted over existing systems.',
 		detArr : [ 'Standing seam', 'Through-fastened panels', 'Metal-over-metal retrofits' ],
 		ideStr : '02',
-		titStr : 'Metal roofing & retrofits'
+		titStr : 'Metal roofing & retrofits',
+
+		desStr : 'Standing-seam and architectural metal roofs that perform for decades, installed new or retrofitted over existing systems.'
 
 
 	},
@@ -85,10 +87,11 @@ const SER_REC_ARR : SerRecTyp[] = [ // What: Service Record Array. Why: The sect
 	{ // What: Built-Up Roofing Service. Why: Built-up and bitumen roofs suit buildings that need layered waterproofing. How: This is the third card.
 
 
-		desStr : 'Multi-ply BUR and modified bitumen assemblies for proven, redundant waterproofing on flat commercial roofs.',
 		detArr : [ 'Hot-applied BUR', 'SBS & APP modified bitumen', 'Cold-applied systems' ],
 		ideStr : '03',
-		titStr : 'Built-up & modified bitumen'
+		titStr : 'Built-up & modified bitumen',
+
+		desStr : 'Multi-ply BUR and modified bitumen assemblies for proven, redundant waterproofing on flat commercial roofs.'
 
 
 	},
@@ -96,10 +99,11 @@ const SER_REC_ARR : SerRecTyp[] = [ // What: Service Record Array. Why: The sect
 	{ // What: Repair And Restoration Service. Why: Many roofs need repair rather than replacement. How: This is the fourth card.
 
 
-		desStr : 'Targeted repairs and full restoration coatings that extend the service life of your existing roof without a full tear-off.',
 		detArr : [ 'Leak diagnostics', 'Silicone & acrylic coatings', 'Flashing & seam repair' ],
 		ideStr : '04',
-		titStr : 'Repair & restoration'
+		titStr : 'Repair & restoration',
+
+		desStr : 'Targeted repairs and full restoration coatings that extend the service life of your existing roof without a full tear-off.'
 
 
 	},
@@ -107,10 +111,11 @@ const SER_REC_ARR : SerRecTyp[] = [ // What: Service Record Array. Why: The sect
 	{ // What: Preventative Maintenance Service. Why: Regular upkeep heads off bigger repairs. How: This is the fifth card.
 
 
-		desStr : 'Scheduled inspection and upkeep programs that catch small issues before they become claims, downtime, or tear-offs.',
 		detArr : [ 'Bi-annual inspections', 'Drain & gutter clearing', 'Documentation for warranties' ],
 		ideStr : '05',
-		titStr : 'Preventative maintenance'
+		titStr : 'Preventative maintenance',
+
+		desStr : 'Scheduled inspection and upkeep programs that catch small issues before they become claims, downtime, or tear-offs.'
 
 
 	},
@@ -118,10 +123,11 @@ const SER_REC_ARR : SerRecTyp[] = [ // What: Service Record Array. Why: The sect
 	{ // What: Storm And Emergency Service. Why: Kansas storms bring urgent damage. How: This is the sixth card.
 
 
-		desStr : 'Rapid hail and wind damage assessments with direct insurance coordination, plus emergency tarping when you need it now.',
 		detArr : [ 'Storm damage inspections', 'Insurance documentation', '24/7 emergency tarping' ],
 		ideStr : '06',
-		titStr : 'Storm & emergency response'
+		titStr : 'Storm & emergency response',
+
+		desStr : 'Rapid hail and wind damage assessments with direct insurance coordination, plus emergency tarping when you need it now.'
 
 
 	}
