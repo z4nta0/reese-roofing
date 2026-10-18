@@ -425,7 +425,7 @@ test( 'the menu toggle opens and closes the drawer', async ( { page : curPagObj 
 
 
 
-test( 'Escape closes the drawer and returns focus to the toggle', async ( { page : curPagObj } ) => { // What: Escape Test. Why: Escape is the expected way out of a layer over the page. How: This opens the drawer, focuses one of its links, presses Escape, and checks the drawer and focus.
+test( 'Escape closes the drawer and returns focus to the toggle', async ( { page : curPagObj } ) => { // What: Escape Test. Why: Escape is the expected way out of a layer over the page. How: This opens the drawer, focuses one of its links and checks it holds focus, presses Escape, and checks the drawer closed and focus moved to the toggle.
 
 
 	await opeRouFun( curPagObj, '/', PHO_VIE_OBJ ); // What: Home Open Call. Why: The drawer exists at 880px wide and below. How: This opens the home page at phone size.
@@ -519,7 +519,7 @@ test( "the drawer's estimate button closes the drawer and scrolls to the contact
 
 
 
-test( 'a Ctrl or Cmd click on a drawer link leaves the drawer open', async ( { page : curPagObj } ) => { // What: Drawer New Tab Test. Why: A drawer link opened in a new tab hasn't taken the visitor anywhere, so the drawer should stay as it was. How: This makes the click from the open drawer, then checks the new tab opened and the drawer, scroll, and address stayed put.
+test( 'a Ctrl or Cmd click on a drawer link leaves the drawer open', async ( { page : curPagObj } ) => { // What: Drawer New Tab Test. Why: A drawer link opened in a new tab hasn't taken the visitor anywhere, so the drawer should stay as it was. How: This makes the click from the open drawer, then checks the new tab shows the section and the drawer, scroll, and address stayed put.
 
 
 	await opeRouFun( curPagObj, '/', PHO_VIE_OBJ ); // What: Home Open Call. Why: The drawer exists at 880px wide and below. How: This opens the home page at phone size.
