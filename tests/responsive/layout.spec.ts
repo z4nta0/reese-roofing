@@ -23,9 +23,10 @@ import { test      } from '@playwright/test';     // What: Test. Why: Each page 
  * a visitor can reach overlapping each other, or a grid of cards leaving
  * uneven rows. The widths run from 320px, WCAG's narrowest reflow width, to
  * 1,920px, and include a pixel either side of each of the site's breakpoints,
- * where a layout switches and is most likely to crowd. Pages open under
- * reduced motion, which changes nothing about the layout but skips the wait
- * for entrance animations.
+ * where a layout switches and is most likely to crowd. The drawer is measured
+ * only at the widths up to 880px, where it exists. Pages open under reduced
+ * motion, which changes nothing about the layout but skips the wait for
+ * entrance animations.
  *
  * Sections:
  *  - Constants

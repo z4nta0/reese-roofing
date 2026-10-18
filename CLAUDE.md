@@ -136,7 +136,7 @@ middle click's new tab without Playwright ever reporting it, failing about 1
 run in 10; the full mode reported it in all 240 runs tried. Results,
 screenshots, and traces go to `tests/output/` (git-ignored); `npx playwright
 show-report tests/output/report` opens the HTML report. The states each suite
-visits (both pages at 390px and 1440px, plus the open drawer) are listed in
+visits (both pages at 390px and 1,440px, plus the open drawer) are listed in
 `tests/support/states.ts`; the responsive suite opens its own widths through
 the same helper, and the seo suite reads the head of each route instead, while
 the production suite opens its own pages on a build it serves itself.
@@ -184,15 +184,16 @@ the production suite opens its own pages on a build it serves itself.
   After an intended visual change, refresh with `npm run test:rendering --
   --update-snapshots` and commit the baselines with it. Baselines are
   captured on Linux.
-- `npm run test:responsive`: measures the home page, the 404 page, and the
-  open drawer at 19 widths from 320 to 1,920px (a pixel either side of each
-  breakpoint included), failing on sideways scrolling, an element past either
-  edge (unless it's decoration an ancestor clips, like the hero's grid), text
-  spilling its box, two reachable controls overlapping, or a card grid leaving
-  uneven rows (the hero stats, the services, and the principles), apart from
-  the Card Grids rule's single centered card, kept at the others' width. It
-  found the bar's links running into the phone number just above the drawer
-  breakpoint, fixed by returning the links to the bar's flex row.
+- `npm run test:responsive`: measures the home page and the 404 page at 19
+  widths from 320 to 1,920px (a pixel either side of each breakpoint included),
+  and the open drawer at those up to 880px, where it exists, failing on
+  sideways scrolling, an element past either edge (unless it's decoration an
+  ancestor clips, like the hero's grid), text spilling its box, two reachable
+  controls overlapping, or a card grid leaving uneven rows (the hero stats, the
+  services, and the principles), apart from the Card Grids rule's single
+  centered card, kept at the others' width. It found the bar's links running
+  into the phone number just above the drawer breakpoint, fixed by returning
+  the links to the bar's flex row.
 - `npm run test:seo`: checks each route's title, description, robots,
   canonical, social tags, and structured data, that every phone and email it
   shows is a reserved one, the footer's demo line and its techgeek.support

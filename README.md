@@ -55,7 +55,7 @@ npm run test:accessibility  # axe-core plus scripted keyboard, naming, reflow, a
 npm run test:interaction    # hover, press, and focus feedback on every control and form field, the drawer's and sent label's real motion, plus hash-free section links, their /#section addresses, and new tabs, the bar's scrolled style, the drawer, the form, and the 404 page
 npm run test:production     # the production build served with Netlify's headers: no security policy violations, and a compacted page
 npm run test:rendering      # full-page screenshots of each page state against approved baselines
-npm run test:responsive     # both pages and the drawer from 320 to 1,920px: no sideways scroll, spill, overlap, or uneven card rows
+npm run test:responsive     # both pages from 320 to 1,920px, and the drawer up to 880px: no sideways scroll, spill, overlap, or uneven card rows
 npm run test:seo            # head tags, structured data, reserved phone and email details, the footer's demo notice and builder link, robots.txt and no sitemap, _headers (robots and security), _redirects, and the preview image
 ```
 
@@ -103,7 +103,7 @@ design/
 - **Interaction:** Every hover, press, and focus visibly registers, subtly: buttons lift on hover and press in when held, text links dim while pressed, arrows nudge forward, keyboard focus draws a ring that eases in (navy on paper, light blue on the dark bands), and the contact button's sent label rises in. Reduced motion keeps the changes and drops the movement.
 - **Layout:** Editorial grid, generous negative space, hairline dividers, numbered section labels (02 to 04, after the hero). Hover states are intentional but never showy.
 - **Logo usage:**
-  - The **full logo** (`src/pages/home/logo-full.svg`) anchors the hero as the primary visual, doubles as a "seal" in the About section's sticky left column on wide screens, and appears on a paper-colored signature card in the Contact section. It's a two-color SVG (navy mark + grey subtext).
+  - The **full logo** (`src/pages/home/logo-full.svg`) anchors the hero as the primary visual, doubles as a "seal" in the About section's sticky left column above 960px wide, and appears on a paper-colored signature card in the Contact section. It's a two-color SVG (navy mark + grey subtext).
   - The **simple mark** (`src/assets/logo-mark.svg`) is used in the nav bar and the footer.
   - The **favicon** uses an SVG (`/public/favicon.svg`), a centered, padded version of the simple mark, with raster `.ico` and PNG fallbacks (16/32/192/512) plus a 180×180 Apple touch icon on a paper-colored background.
   - All logos are vector SVG: crisp at any size, with tiny payloads. The brand navy `#1f4e7a` is set as a `fill` attribute in the mark and the favicon, but the full logo also writes it as `rgb(31, 78, 122)` in two paths' `style` attributes, and its grey as both `#6b7079` and `rgb(107, 112, 121)`, so a different color treatment has to change both forms.
