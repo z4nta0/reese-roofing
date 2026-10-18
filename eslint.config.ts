@@ -95,8 +95,8 @@ const ESL_CON_ARR = [ // What: ESLint Config Array. Why: ESLint reads its flat c
 		languageOptions : { // What: Language Options. Why: These files are TypeScript, the .tsx ones with JSX. How: This sets the TypeScript parser, which reads JSX from the .tsx extension.
 
 
-			parser        : tseslint.parser,                   // What: Parser. Why: ESLint's default parser can't read TypeScript. How: This sets typescript-eslint's parser.
-			parserOptions : { ecmaFeatures : { jsx : true } }  // What: Parser Options. Why: ease-my-life's config sets it, and this one starts from that config. How: This sets the JSX flag, which typescript-eslint ignores for .ts and .tsx files, since TypeScript reads JSX from the .tsx extension itself.
+			parser        : tseslint.parser,                  // What: Parser. Why: ESLint's default parser can't read TypeScript. How: This sets typescript-eslint's parser.
+			parserOptions : { ecmaFeatures : { jsx : true } } // What: Parser Options. Why: ease-my-life's config sets it, and this one starts from that config. How: This sets the JSX flag, which typescript-eslint ignores for .ts and .tsx files, since TypeScript reads JSX from the .tsx extension itself.
 
 
 		},

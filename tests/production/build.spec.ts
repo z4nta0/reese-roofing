@@ -50,7 +50,7 @@ import type { Page } from '@playwright/test'; // What: Page. Why: The serving he
 // #region Constants
 
 const ROO_DIR_STR = fileURLToPath( new URL( '../..', import.meta.url ) ); // What: Root Directory String. Why: Vite builds from the repo root, where vite.config.ts lives. How: This resolves the folder two levels above this spec.
-const SIT_URL_STR = 'https://reese.test';                               // What: Site URL String. Why: The built files are served under an address no real server answers, so every request reaches the routing helper. How: This is the origin each page opens on.
+const SIT_URL_STR = 'https://reese.test';                                 // What: Site URL String. Why: The built files are served under an address no real server answers, so every request reaches the routing helper. How: This is the origin each page opens on.
 
 
 
