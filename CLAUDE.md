@@ -175,13 +175,13 @@ its own pages on a build it serves itself.
   page itself.
 - `npm run test:production`: builds the site once per engine into
   `tests/output/build-<engine>/` and serves the build through Playwright's
-  request routing with every header the site-wide `_headers` blocks set and
-  the `_redirects` fallback, since the dev server applies neither. The home
-  page and the 404 page at desktop size, and the home page at phone size with
-  the drawer open, must each render with no Content-Security-Policy
-  violation, and the built `index.html` must ship compacted, as vite.config's
-  minifier promises: no comments, indentation, or blank lines, and its JSON-LD
-  valid on one line. Added 2026-10-18.
+  request routing with every header the site-wide `_headers` blocks set and the
+  `_redirects` fallback, since the dev server applies neither. The home page
+  and the 404 page at desktop size, and the home page at phone size with the
+  drawer open, must each render with no Content-Security-Policy violation, and
+  the built `index.html` must ship compacted, as vite.config's minifier
+  promises: no comments, indentation, or blank lines, its JSON-LD valid on one
+  line, and its full title still in place. Added 2026-10-18.
 - `npm run test:rendering`: compares a full-page screenshot of every state
   with its baseline in `tests/rendering/baselines/`, with zero tolerance,
   since each engine renders identically from run to run here and even a
