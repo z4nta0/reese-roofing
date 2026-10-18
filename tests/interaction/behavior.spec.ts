@@ -25,16 +25,17 @@ import type { Page    } from '@playwright/test'; // What: Page. Why: Every helpe
  * middle click on a section link opens the section in a new tab instead, a
  * Ctrl or Cmd click on a drawer link leaving an open drawer as it was; every
  * section link on the home page and the 404 page names the home page's path;
- * the logo links to the root address; the mobile drawer opens and closes every
- * way it can (the toggle, Escape, a tap on the dimmed page, a drawer link, and
- * a wider screen) and makes the page behind it inert while open; the contact
- * form swaps its button label when sent and builds a mailto link carrying the
- * request; and the 404 page answers an unknown address and leads back home and
- * to the contact section, its nav links included, while its back to top link
- * scrolls the 404 page itself. Pages open under reduced motion, so scrolling
- * jumps straight to its target and each position can be read at once; how
- * things move is the feedback spec's job. Reading the mailto link needs
- * Chromium's DevTools Protocol, so that one test runs in Chromium only.
+ * the logo links to the root address; the bar takes its scrolled style once
+ * the page moves and drops it at the top; the mobile drawer opens and closes
+ * every way it can (the toggle, Escape, a tap on the dimmed page, a drawer
+ * link, and a wider screen) and makes the page behind it inert while open; the
+ * contact form swaps its button label when sent and builds a mailto link
+ * carrying the request; and the 404 page answers an unknown address and leads
+ * back home and to the contact section, its nav links included, while its back
+ * to top link scrolls the 404 page itself. Pages open under reduced motion, so
+ * scrolling jumps straight to its target and each position can be read at
+ * once; how things move is the feedback spec's job. Reading the mailto link
+ * needs Chromium's DevTools Protocol, so that one test runs in Chromium only.
  *
  * Sections:
  *  - Constants
@@ -341,6 +342,34 @@ test( 'back to top returns to the top', async ( { page : curPagObj } ) => { // W
 	await expect( curPagObj ).toHaveURL( /\/$/ ); // What: Clean Address Assertion. Why: The address bar should stay free of hashes. How: This checks the URL still ends at the root.
 
 	expect( await curPagObj.evaluate( () => Reflect.get( window, 'hasChaNum' ) ) ).toBe( 0 ); // What: No Hash Jump Assertion. Why: A plain jump would have put a hash in the address before the home page cleared it. How: This checks the page never fired a hashchange event.
+
+
+} );
+
+
+
+test( 'the bar takes its scrolled style once the page moves', async ( { page : curPagObj } ) => { // What: Scrolled Bar Test. Why: Once the page moves, the bar needs its frosted background to stay readable over the content. How: This scrolls the home page down and back up, checking the bar's attribute and background each time.
+
+
+	await opeRouFun( curPagObj, '/', DES_VIE_OBJ ); // What: Home Open Call. Why: The bar starts transparent at the top of the home page. How: This opens it at desktop size.
+
+
+	const barHedObj = curPagObj.getByRole( 'banner' ); // What: Bar Header Object. Why: The scrolled style sits on the bar itself. How: This finds the page's banner landmark.
+
+
+	await expect( barHedObj ).not.toHaveAttribute( 'data-page-scroll-past' ); // What: Top Attribute Assertion. Why: The bar should start without its scrolled style. How: This checks the attribute is absent at the top.
+
+	await expect( barHedObj ).toHaveCSS( 'background-color', 'rgba(0, 0, 0, 0)' ); // What: Top Background Assertion. Why: At the top the bar sits over the hero with no background of its own. How: This checks its background is transparent.
+
+	await curPagObj.evaluate( () => window.scrollTo( 0, 400 ) ); // What: Scroll Down Call. Why: The scrolled style switches on past the top. How: This scrolls the page well past the 24px threshold.
+
+	await expect( barHedObj ).toHaveAttribute( 'data-page-scroll-past' ); // What: Scrolled Attribute Assertion. Why: The bar should mark itself scrolled. How: This waits until the attribute is set.
+
+	await expect( barHedObj ).not.toHaveCSS( 'background-color', 'rgba(0, 0, 0, 0)' ); // What: Scrolled Background Assertion. Why: The attribute only matters if the bar really draws its background. How: This checks the background is no longer transparent.
+
+	await curPagObj.evaluate( () => window.scrollTo( 0, 0 ) ); // What: Scroll Up Call. Why: The style should leave again at the top. How: This scrolls back to the top.
+
+	await expect( barHedObj ).not.toHaveAttribute( 'data-page-scroll-past' ); // What: Returned Attribute Assertion. Why: Back at the top the bar should drop its scrolled style. How: This waits until the attribute is gone.
 
 
 } );

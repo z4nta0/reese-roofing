@@ -90,7 +90,7 @@
 
 
 }
-.navBarHed--scrolled { /* What: Scrolled Navigation Bar Header. Why: Once the page moves, the bar needs a background to stay readable over content. How: This frosts it, tightens its padding, and adds a hairline below. */
+.navBarHed[data-page-scroll-past] { /* What: Scrolled Navigation Bar Header. Why: Once the page moves, the bar needs a background to stay readable over content. How: This frosts it, tightens its padding, and adds a hairline below. */
 
 
 	-webkit-backdrop-filter : saturate( 180% ) blur( calc( var( --ver-rhy-bas ) * 1rem ) ); /* Vertical Rhythm Base ~= 14.572px */

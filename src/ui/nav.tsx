@@ -225,9 +225,10 @@ function NavBarCom () : React.JSX.Element {
 			<header
 				ref={ heaBarRef }
 
-				className={` ${ cssModObj.navBarHed }   ${ scrPasBoo ? cssModObj.navBarHedScrolled : '' } `}
+				className={ cssModObj.navBarHed }
 
 				data-drawer-menu-open={ draOpeBoo || undefined } // What: Drawer Menu Open Attribute. Why: The bar takes a solid background while the drawer is open, so the two read as one panel. How: This is set only while draOpeBoo is true, and React drops it otherwise.
+				data-page-scroll-past={ scrPasBoo || undefined } // What: Page Scroll Past Attribute. Why: The bar takes its scrolled style once the page moves past the top, and state is an attribute rather than a class. How: This is set only while scrPasBoo is true, and React drops it otherwise.
 			>{ /* What: Navigation Bar Header Element. Why: This is the site's top bar landmark. How: This takes its scrolled style once scrPasBoo is true. */ }
 
 
