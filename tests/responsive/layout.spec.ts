@@ -123,7 +123,7 @@ function layProFun () : string[] {
 
 
 
-		return false;
+		return false; // What: Unclipped Return. Why: No ancestor clips the element. How: This reports it unclipped once the loop finds none.
 
 
 	};
@@ -211,7 +211,7 @@ function layProFun () : string[] {
 
 
 
-	return proLisArr;
+	return proLisArr; // What: Problem List Return. Why: The layout test fails on any recorded problem. How: This hands back every problem found at this width.
 
 
 }

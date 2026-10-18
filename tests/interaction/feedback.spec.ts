@@ -192,7 +192,7 @@ async function conLisFun ( curPagObj : Page ) : Promise< ElementHandle< Element 
 
 
 
-	return conHanArr;
+	return conHanArr; // What: Control Handle Return. Why: The probes run on the controls a visitor can reach. How: This hands back their handles.
 
 
 }
@@ -298,7 +298,7 @@ async function feeProFun ( curPagObj : Page, redMotBoo : boolean ) : Promise< st
 
 
 
-	return proLisArr;
+	return proLisArr; // What: Problem List Return. Why: The feedback tests fail on any recorded problem. How: This hands back every control whose feedback fell short.
 
 
 }

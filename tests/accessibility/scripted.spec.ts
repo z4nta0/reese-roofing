@@ -103,7 +103,7 @@ async function namProFun ( curPagObj : Page ) : Promise< string[] > {
 
 
 
-	return proLisArr;
+	return proLisArr; // What: Problem List Return. Why: The names test fails on any recorded problem. How: This hands back every badly named control found.
 
 
 }
@@ -403,7 +403,7 @@ async function keyProFun ( curPagObj : Page, engNamStr : string ) : Promise< str
 
 
 
-	return proLisArr;
+	return proLisArr; // What: Problem List Return. Why: The keyboard test fails on any recorded problem. How: This hands back every problem the walk found.
 
 
 }
