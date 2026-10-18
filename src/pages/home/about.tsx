@@ -114,7 +114,7 @@ function AboSecCom () : React.JSX.Element {
 			<div className={ cssModObj.aboStoDiv }>{ /* What: About Story Div Element. Why: The story's two columns should line up with the page's content width. How: This sets the left and right columns side by side, stacking them at 960px wide and below. */ }
 
 
-				<div className={ cssModObj.aboLefDiv }>{ /* What: About Left Div Element. Why: The heading and seal anchor the story. How: This stacks the label, heading, and seal. */ }
+				<div className={ cssModObj.aboLefDiv }>{ /* What: About Left Div Element. Why: The heading and seal anchor the story. How: This stacks the label, heading, and seal, staying in view as the story beside it scrolls, while at 960px wide and below the seal is hidden and the column scrolls away with the page. */ }
 
 
 					<span className={ cssModObj.eyeLabSpa }>03 · About</span>{ /* What: Eyebrow Label Span Element. Why: Each section is numbered in order down the page. How: This is the section's numbered label, set in the site's eyebrow style. */ }
