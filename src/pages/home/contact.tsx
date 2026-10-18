@@ -339,12 +339,13 @@ function ConSecCom () : React.JSX.Element {
 								className={ cssModObj.forFieInp }
 
 								autoComplete='name'
+								placeholder='Jane Smith'
 								required
 								type='text'
 								value={ forValObj.namStr }
 
 								onChange={ updFieFun( 'namStr' ) }
-							/>{ /* What: Contact Name Input Element. Why: This takes the visitor's name. How: Its value lives in forValObj.namStr, and the browser can fill it in. */ }
+							/>{ /* What: Contact Name Input Element. Why: This takes the visitor's name. How: Its value lives in forValObj.namStr, and the browser can fill it in, with a sample name as its placeholder. */ }
 
 
 						</div>
@@ -366,11 +367,12 @@ function ConSecCom () : React.JSX.Element {
 								className={ cssModObj.forFieInp }
 
 								autoComplete='organization'
+								placeholder='Smith Property Management'
 								type='text'
 								value={ forValObj.comStr }
 
 								onChange={ updFieFun( 'comStr' ) }
-							/>{ /* What: Contact Company Input Element. Why: This takes the business or property name. How: Its value lives in forValObj.comStr, and the browser can fill it in. */ }
+							/>{ /* What: Contact Company Input Element. Why: This takes the business or property name. How: Its value lives in forValObj.comStr, and the browser can fill it in, with a sample property name as its placeholder. */ }
 
 
 						</div>
@@ -396,12 +398,13 @@ function ConSecCom () : React.JSX.Element {
 									className={ cssModObj.forFieInp }
 
 									autoComplete='email'
+									placeholder='jane@company.example'
 									required
 									type='email'
 									value={ forValObj.emaStr }
 
 									onChange={ updFieFun( 'emaStr' ) }
-								/>{ /* What: Contact Email Input Element. Why: This takes the visitor's email address. How: Its value lives in forValObj.emaStr, with an email keyboard on phones. */ }
+								/>{ /* What: Contact Email Input Element. Why: This takes the visitor's email address. How: Its value lives in forValObj.emaStr, with an email keyboard on phones and a sample address on the reserved example domain as its placeholder. */ }
 
 
 							</div>
@@ -423,11 +426,12 @@ function ConSecCom () : React.JSX.Element {
 									className={ cssModObj.forFieInp }
 
 									autoComplete='tel'
+									placeholder='(785) 555-0100'
 									type='tel'
 									value={ forValObj.phoStr }
 
 									onChange={ updFieFun( 'phoStr' ) }
-								/>{ /* What: Contact Phone Input Element. Why: This takes the visitor's phone number. How: Its value lives in forValObj.phoStr, with a number pad on phones. */ }
+								/>{ /* What: Contact Phone Input Element. Why: This takes the visitor's phone number. How: Its value lives in forValObj.phoStr, with a number pad on phones and a reserved 555-01xx sample number as its placeholder. */ }
 
 
 							</div>
