@@ -53,7 +53,8 @@ import { useSecCliFun } from '../../ui/section-link.ts'; // What: Use Section Cl
  * brand link loads the home page in full, at its top), the site needs no
  * scroll-to-top hook, the same exception hair-designs records. The main
  * element carries a top anchor of its own, so the footer's back-to-top link
- * works here too. app.tsx renders it for every path no other route claims.
+ * works here too. app.tsx renders this page for every path no other route
+ * claims.
  *
  * @author z4nta0 <https://github.com/z4nta0>
  *

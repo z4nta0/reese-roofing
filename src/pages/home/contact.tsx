@@ -130,7 +130,8 @@ function ConSecCom () : React.JSX.Element {
 	 * visitor's name (or a generic inquiry label when it's blank) and a body
 	 * listing every field, and sends the browser to a mailto link carrying
 	 * both, which opens the visitor's email app. It then marks the request
-	 * sent, so the button's label changes and the status region announces it.
+	 * sent, so the button's label changes and the status region announces that
+	 * the email app is opening.
 	 *
 	 * @author z4nta0 <https://github.com/z4nta0>
 	 *

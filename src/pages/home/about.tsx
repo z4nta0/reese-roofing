@@ -161,7 +161,7 @@ function AboSecCom () : React.JSX.Element {
 						people who care whether it holds up.
 					</p>
 
-					<p className={ cssModObj.aboStoPar }>{ /* What: About Story Paragraph Element. Why: The company's track record backs up its claims. How: This is the story's history paragraph, which lists the kinds of buildings it has worked on and where its work comes from. */ }
+					<p className={ cssModObj.aboStoPar }>{ /* What: About Story Paragraph Element. Why: The company's track record backs up its claims. How: This is the story's history paragraph, which lists the kinds of buildings the company has worked on and where its work comes from. */ }
 						We've worked on warehouses, churches, retail centers, office buildings, and
 						municipal facilities across Douglas County and the surrounding counties for
 						more than a decade and a half. Most of our work comes from referrals, from
