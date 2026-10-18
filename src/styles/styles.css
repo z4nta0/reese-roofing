@@ -8,13 +8,13 @@
  * The site's one global stylesheet, holding only what can't belong to a single
  * component: the design tokens every module reads, and the reset and base
  * element styles every page relies on. The tokens start from the core design
- * numbers, the plastic ratio and its powers, and every duration is a step
- * drawn from them, as is every fixed font size, vertical length, and
- * transparency with a step within 10%, while a clamped fluid size runs between
- * two, with 1rem set to an 11px base. Colors are named by role. Every
- * component's own styles are in its CSS module, and each transition and
- * animation turns itself off for reduced motion there; only the page's smooth
- * scrolling and the focus ring's ease are handled here.
+ * numbers, the plastic ratio and its powers, and every duration, fixed font
+ * size, vertical length, and transparency with a step within 10% is a step
+ * drawn from them, while a clamped fluid size runs between two steps, with
+ * 1rem set to an 11px base. Colors are named by role. Every component's own
+ * styles are in its CSS module, and each transition and animation turns itself
+ * off for reduced motion there; only the page's smooth scrolling and the focus
+ * ring's ease are handled here.
  *
  * Sections:
  *  - Tokens
