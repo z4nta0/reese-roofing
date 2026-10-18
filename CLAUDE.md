@@ -95,6 +95,10 @@ Project-only decisions on top of the user-level naming and formatting rules.
   apart within one component. The user-level color role `--scr-mai-col`
   keeps its standard name, since the role names are the same in every
   project.
+- **Subject is `suj`** (decided 2026-10-18): the contact form's submit
+  handler already uses `sub` for Submit (`subForFun`, `subEveObj`), so the
+  email's subject takes `suj` instead (`sujEncStr`), keeping the two apart
+  within one function.
 - **The About principle rows stay aligned** (decided 2026-10-07, confirmed
   2026-10-17): `PRI_REC_ARR`'s one-line rows open with a prose-length
   `bodStr`, but the rows' lengths are close enough that the fields after it

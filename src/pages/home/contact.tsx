@@ -150,10 +150,10 @@ function ConSecCom () : React.JSX.Element {
 
 
 		const bodEncStr = encodeURIComponent( `Name: ${ forValObj.namStr }\nCompany: ${ forValObj.comStr }\nEmail: ${ forValObj.emaStr }\nPhone: ${ forValObj.phoStr }\nService: ${ forValObj.serStr }\n\nMessage:\n${ forValObj.mesStr }` ); // What: Body Encoded String. Why: The email should list every field so nothing is lost. How: This writes one labeled line per field, then the message, encoded for a URL.
-		const subEncStr = encodeURIComponent( `Estimate request: ${ forValObj.namStr || 'Reese Roofing inquiry' }` ); // What: Subject Encoded String. Why: The company should see who's asking at a glance. How: This names the visitor, falling back to a generic label when the name is blank, encoded for a URL.
+		const sujEncStr = encodeURIComponent( `Estimate request: ${ forValObj.namStr || 'Reese Roofing inquiry' }` ); // What: Subject Encoded String. Why: The company should see who's asking at a glance. How: This names the visitor, falling back to a generic label when the name is blank, encoded for a URL.
 
 
-		window.location.href = `mailto:hello@reeseroofing.example?subject=${ subEncStr }&body=${ bodEncStr }`; // What: Mailto Navigation Assignment. Why: The visitor's email app sends the request. How: This opens a new email to the company with the subject and body filled in.
+		window.location.href = `mailto:hello@reeseroofing.example?subject=${ sujEncStr }&body=${ bodEncStr }`; // What: Mailto Navigation Assignment. Why: The visitor's email app sends the request. How: This opens a new email to the company with the subject and body filled in.
 
 
 		setSenReqBoo( true ); // What: Sent Request Set Call. Why: The button should confirm the email is opening. How: This switches its label.
