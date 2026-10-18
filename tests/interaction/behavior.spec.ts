@@ -22,18 +22,19 @@ import type { Page    } from '@playwright/test'; // What: Page. Why: Every helpe
  * runs. The nav's section links, the Home link, the hero's buttons, the
  * estimate buttons in the bar and the drawer, and back to top land on their
  * targets without ever putting a hash in the address, while a Ctrl, Cmd, or
- * middle click on a section link opens the section in a new tab instead; every
- * section link on the home page and the 404 page names the home page's path;
- * the logo links to the root address; the mobile drawer opens and closes every
- * way it can (the toggle, Escape, a tap on the dimmed page, a drawer link, and
- * a wider screen) and makes the page behind it inert while open; the contact
- * form swaps its button label when sent and builds a mailto link carrying the
- * request; and the 404 page answers an unknown address and leads back home and
- * to the contact section, its nav links included. Pages open under reduced
- * motion, so scrolling jumps straight to its target and each position can be
- * read at once; how things move is the feedback spec's job. Reading the mailto
- * link needs Chromium's DevTools Protocol, so that one test runs in Chromium
- * only.
+ * middle click on a section link opens the section in a new tab instead,
+ * leaving an open drawer as it was; every section link on the home page and
+ * the 404 page names the home page's path; the logo links to the root address;
+ * the mobile drawer opens and closes every way it can (the toggle, Escape, a
+ * tap on the dimmed page, a drawer link, and a wider screen) and makes the
+ * page behind it inert while open; the contact form swaps its button label
+ * when sent and builds a mailto link carrying the request; and the 404 page
+ * answers an unknown address and leads back home and to the contact section,
+ * its nav links included, while its back to top link scrolls the 404 page
+ * itself. Pages open under reduced motion, so scrolling jumps straight to its
+ * target and each position can be read at once; how things move is the
+ * feedback spec's job. Reading the mailto link needs Chromium's DevTools
+ * Protocol, so that one test runs in Chromium only.
  *
  * Sections:
  *  - Constants
@@ -514,6 +515,36 @@ test( "the drawer's estimate button closes the drawer and scrolls to the contact
 
 
 
+test( 'a Ctrl or Cmd click on a drawer link leaves the drawer open', async ( { page : curPagObj } ) => { // What: Drawer New Tab Test. Why: A drawer link opened in a new tab hasn't taken the visitor anywhere, so the drawer should stay as it was. How: This makes the click from the open drawer, then checks the new tab opened and the drawer, scroll, and address stayed put.
+
+
+	await opeRouFun( curPagObj, '/', PHO_VIE_OBJ ); // What: Home Open Call. Why: The drawer exists on small screens. How: This opens the home page at phone size.
+
+	await opeDraFun( curPagObj ); // What: Drawer Open Call. Why: The drawer's links show only while it's open. How: This opens it.
+
+
+	const newTabPro = curPagObj.context().waitForEvent( 'page' ); // What: New Tab Promise. Why: The click opens its page in a new tab. How: This waits for the browser context to report a new page, set up before the click so it can't be missed.
+
+
+	await curPagObj.getByRole( 'banner' ).getByRole( 'link', { exact : true, name : 'About' } ).click( { modifiers : [ 'ControlOrMeta' ] } ); // What: Modified Click Call. Why: This is the action under test, and only a Ctrl or Cmd click reaches the drawer's handler, since a middle click arrives as auxclick. How: This clicks the drawer's About link with Ctrl, or Cmd on a Mac.
+
+
+	const newTabObj = await newTabPro; // What: New Tab Object. Why: The section should open in the new tab. How: This is the page the click opened.
+
+
+	await expect( newTabObj.locator( '#about' ) ).toBeVisible(); // What: New Tab Section Assertion. Why: The click should still have opened the section. How: This waits until the About section is on the new tab's page.
+
+	await expect( curPagObj.getByRole( 'button', { name : 'Toggle menu' } ) ).toHaveAttribute( 'aria-expanded', 'true' ); // What: Drawer Open Assertion. Why: A click the browser handled shouldn't close the drawer. How: This checks the toggle still reports it open.
+
+	expect( await curPagObj.evaluate( () => window.scrollY ) ).toBe( 0 ); // What: Original Scroll Assertion. Why: The page clicked from should stay where it was. How: This checks it's still at the top.
+
+	await expect( curPagObj ).toHaveURL( /\/$/ ); // What: Original Address Assertion. Why: The page clicked from shouldn't navigate. How: This checks its URL still ends at the root.
+
+
+} );
+
+
+
 test( 'widening the screen closes the drawer', async ( { page : curPagObj } ) => { // What: Widen Test. Why: Past the breakpoint the toggle disappears, so an open drawer would leave the page inert with no way out. How: This opens the drawer, widens the viewport, and checks the drawer closed.
 
 
@@ -710,6 +741,29 @@ test( "the 404 page's Home link leads to the home page", async ( { page : curPag
 	await expect( curPagObj ).toHaveURL( /\/$/ ); // What: Clean Address Assertion. Why: The home page clears the hash once it has scrolled to the top. How: This checks the URL ends at the root.
 
 	expect( await curPagObj.evaluate( () => Reflect.get( window, 'samDocBoo' ) ) ).toBe( true ); // What: Router Navigation Assertion. Why: The home page should open inside the router, without a full page load. How: This checks the marker set before the click survived.
+
+
+} );
+
+
+
+test( 'back to top scrolls the 404 page to its own top', async ( { page : curPagObj } ) => { // What: Not Found Back To Top Test. Why: The footer's link means the top of whichever page is showing, so on the 404 page it should scroll that page up rather than go home. How: This scrolls the 404 page down, clicks the link, and checks the page, its position, and its address.
+
+
+	await opeRouFun( curPagObj, '/missing', SMA_VIE_OBJ ); // What: Not Found Open Call. Why: The 404 page only scrolls on the smallest phones. How: This opens it at 320 by 568.
+
+	await curPagObj.evaluate( () => window.scrollTo( 0, document.documentElement.scrollHeight ) ); // What: Scroll Down Call. Why: The link only proves anything from a scrolled page. How: This scrolls the 404 page to its bottom.
+
+	await curPagObj.getByRole( 'link', { name : 'Back to top' } ).click(); // What: Back To Top Click Call. Why: This is the action under test. How: This clicks the footer's link.
+
+
+	await expect.poll( () => curPagObj.evaluate( () => window.scrollY ) ).toBe( 0 ); // What: Top Position Assertion. Why: The visitor should end up back at the 404 page's top. How: This waits until the page has scrolled all the way up.
+
+	await expect( curPagObj ).toHaveTitle( 'Page Not Found | Reese Roofing Portfolio Demo' ); // What: Same Page Assertion. Why: The link shouldn't leave the 404 page. How: This checks the 404 page's title is still showing.
+
+	await expect( curPagObj ).toHaveURL( /\/missing$/ ); // What: Same Address Assertion. Why: The address should stay the 404 page's own, with no hash. How: This checks the URL still ends at the missing path.
+
+	expect( await curPagObj.evaluate( () => Reflect.get( window, 'hasChaNum' ) ) ).toBe( 0 ); // What: No Hash Jump Assertion. Why: A plain jump would have put a hash in the address. How: This checks the page never fired a hashchange event.
 
 
 } );
