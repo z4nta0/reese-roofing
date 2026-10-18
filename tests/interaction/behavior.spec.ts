@@ -21,10 +21,10 @@ import type { Page    } from '@playwright/test'; // What: Page. Why: Every helpe
  * Checks what the site's controls actually do, in whichever engine the project
  * runs. The nav's section links, the Home link, the hero's buttons, the
  * estimate buttons in the bar and the drawer, and back to top land on their
- * targets without leaving a hash in the address, while a Ctrl, Cmd, or middle
- * click on a section link opens the section in a new tab instead; the logo
- * links to the root address; the mobile drawer opens and closes every way it
- * can (the toggle, Escape, a tap on the dimmed page, a drawer link, and a
+ * targets without ever putting a hash in the address, while a Ctrl, Cmd, or
+ * middle click on a section link opens the section in a new tab instead; the
+ * logo links to the root address; the mobile drawer opens and closes every way
+ * it can (the toggle, Escape, a tap on the dimmed page, a drawer link, and a
  * wider screen) and makes the page behind it inert while open; the contact
  * form swaps its button label when sent and builds a mailto link carrying the
  * request; and the 404 page answers an unknown address and leads back home and
@@ -433,6 +433,10 @@ for ( const [ linLabStr, secIdeStr ] of [ [ 'Home', 'top' ], [ 'Services', 'serv
 
 		await opeRouFun( curPagObj, '/', PHO_VIE_OBJ ); // What: Home Open Call. Why: The drawer exists on small screens. How: This opens the home page at phone size.
 
+		if ( secIdeStr === 'top' ) await curPagObj.evaluate( () => window.scrollTo( 0, document.documentElement.scrollHeight ) ); // What: Home Row Scroll Call. Why: The page opens at its top, where the Home row's target already sits, so that row would pass without scrolling. How: This sends the page to its bottom first, for the Home row only.
+
+
+
 		await opeDraFun( curPagObj ); // What: Drawer Open Call. Why: The drawer's links show only while it's open. How: This opens it.
 
 		await curPagObj.getByRole( 'banner' ).getByRole( 'link', { exact : true, name : linLabStr } ).click(); // What: Drawer Link Click Call. Why: This is the action under test. How: This clicks the link by its label, the only one visible at phone size, since the bar's own links are hidden there.
@@ -588,6 +592,8 @@ test( 'Return home leads to the top of the home page', async ( { page : curPagOb
 
 	await curPagObj.evaluate( () => window.scrollTo( 0, document.documentElement.scrollHeight ) ); // What: Scroll Down Call. Why: A router push keeps the old scroll position unless something resets it. How: This scrolls the 404 page to its bottom.
 
+	await curPagObj.evaluate( () => Reflect.set( window, 'samDocBoo', true ) ); // What: Same Document Marker Set. Why: A link that navigates inside the router keeps the same document, while a full page load starts a new one. How: This marks the current document, which a full load would wipe.
+
 	await curPagObj.getByRole( 'link', { name : 'Return home' } ).click(); // What: Return Home Click Call. Why: This is the action under test. How: This clicks the button.
 
 
@@ -596,6 +602,8 @@ test( 'Return home leads to the top of the home page', async ( { page : curPagOb
 	await expect.poll( () => curPagObj.evaluate( () => window.scrollY ) ).toBe( 0 ); // What: Top Position Assertion. Why: The home page should open at its top. How: This waits until the page sits at the top.
 
 	await expect( curPagObj ).toHaveURL( /\/$/ ); // What: Home Address Assertion. Why: The visitor should land on the home page with no hash left. How: This checks the URL ends at the root.
+
+	expect( await curPagObj.evaluate( () => Reflect.get( window, 'samDocBoo' ) ) ).toBe( true ); // What: Router Navigation Assertion. Why: The home page should open inside the router, without a full page load. How: This checks the marker set before the click survived.
 
 
 } );
@@ -607,6 +615,8 @@ test( 'the 404 page leads to the contact section', async ( { page : curPagObj } 
 
 	await opeRouFun( curPagObj, '/missing', DES_VIE_OBJ ); // What: Not Found Open Call. Why: This button lives on the 404 page. How: This opens it.
 
+	await curPagObj.evaluate( () => Reflect.set( window, 'samDocBoo', true ) ); // What: Same Document Marker Set. Why: A link that navigates inside the router keeps the same document, while a full page load starts a new one. How: This marks the current document, which a full load would wipe.
+
 	await curPagObj.getByRole( 'main' ).getByRole( 'link', { name : 'Get an estimate' } ).click(); // What: Estimate Click Call. Why: This is the action under test. How: This clicks the page's own estimate button rather than the bar's.
 
 
@@ -616,7 +626,7 @@ test( 'the 404 page leads to the contact section', async ( { page : curPagObj } 
 
 	await expect( curPagObj ).toHaveURL( /\/$/ ); // What: Clean Address Assertion. Why: The home page clears the hash once it has scrolled to the section. How: This checks the URL ends at the root.
 
-	expect( await curPagObj.evaluate( () => Reflect.get( window, 'hasChaNum' ) ) ).toBe( 0 ); // What: No Hash Jump Assertion. Why: A plain jump would have put a hash in the address before the home page cleared it. How: This checks the page never fired a hashchange event.
+	expect( await curPagObj.evaluate( () => Reflect.get( window, 'samDocBoo' ) ) ).toBe( true ); // What: Router Navigation Assertion. Why: The home page should open inside the router, without a full page load. How: This checks the marker set before the click survived.
 
 
 } );
@@ -631,6 +641,8 @@ for ( const [ linLabStr, secIdeStr ] of [ [ 'Services', 'services' ], [ 'About',
 
 		await opeRouFun( curPagObj, '/missing', DES_VIE_OBJ ); // What: Not Found Open Call. Why: The bar's links are under test away from the home page. How: This opens the 404 page at desktop size.
 
+		await curPagObj.evaluate( () => Reflect.set( window, 'samDocBoo', true ) ); // What: Same Document Marker Set. Why: A link that navigates inside the router keeps the same document, while a full page load starts a new one. How: This marks the current document, which a full load would wipe.
+
 		await curPagObj.getByRole( 'banner' ).getByRole( 'link', { exact : true, name : linLabStr } ).click(); // What: Section Link Click Call. Why: This is the action under test. How: This clicks the bar's link by its label.
 
 
@@ -640,7 +652,7 @@ for ( const [ linLabStr, secIdeStr ] of [ [ 'Services', 'services' ], [ 'About',
 
 		await expect( curPagObj ).toHaveURL( /\/$/ ); // What: Clean Address Assertion. Why: The home page clears the hash once it has scrolled to the section. How: This checks the URL ends at the root.
 
-		expect( await curPagObj.evaluate( () => Reflect.get( window, 'hasChaNum' ) ) ).toBe( 0 ); // What: No Hash Jump Assertion. Why: A plain jump would have put a hash in the address before the home page cleared it. How: This checks the page never fired a hashchange event.
+		expect( await curPagObj.evaluate( () => Reflect.get( window, 'samDocBoo' ) ) ).toBe( true ); // What: Router Navigation Assertion. Why: The home page should open inside the router, without a full page load. How: This checks the marker set before the click survived.
 
 
 	} );
@@ -655,6 +667,8 @@ test( "the 404 page's Home link leads to the home page", async ( { page : curPag
 
 	await opeRouFun( curPagObj, '/missing', DES_VIE_OBJ ); // What: Not Found Open Call. Why: The bar's Home link is under test away from the home page. How: This opens the 404 page at desktop size.
 
+	await curPagObj.evaluate( () => Reflect.set( window, 'samDocBoo', true ) ); // What: Same Document Marker Set. Why: A link that navigates inside the router keeps the same document, while a full page load starts a new one. How: This marks the current document, which a full load would wipe.
+
 	await curPagObj.getByRole( 'banner' ).getByRole( 'link', { exact : true, name : 'Home' } ).click(); // What: Home Link Click Call. Why: This is the action under test. How: This clicks the bar's Home link.
 
 
@@ -662,7 +676,7 @@ test( "the 404 page's Home link leads to the home page", async ( { page : curPag
 
 	await expect( curPagObj ).toHaveURL( /\/$/ ); // What: Clean Address Assertion. Why: The home page clears the hash once it has scrolled to the top. How: This checks the URL ends at the root.
 
-	expect( await curPagObj.evaluate( () => Reflect.get( window, 'hasChaNum' ) ) ).toBe( 0 ); // What: No Hash Jump Assertion. Why: A plain jump would have put a hash in the address before the home page cleared it. How: This checks the page never fired a hashchange event.
+	expect( await curPagObj.evaluate( () => Reflect.get( window, 'samDocBoo' ) ) ).toBe( true ); // What: Router Navigation Assertion. Why: The home page should open inside the router, without a full page load. How: This checks the marker set before the click survived.
 
 
 } );
