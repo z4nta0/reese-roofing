@@ -153,13 +153,13 @@ the same helper, and the seo suite reads the head of each route instead.
   site's behavior: the section, Home, hero, estimate, back to top, and logo
   links (landing on their targets without ever putting a hash in the address,
   each section link's address naming the home page's path, and a Ctrl, Cmd,
-  or middle click opening a section in a new tab, an open drawer staying
-  open), every way the drawer opens and closes, the contact form's sent label
-  and mailto link (the mailto test is Chromium-only, through the DevTools
-  Protocol), and the 404 page, whose Return home opens the home page at its
-  top and whose estimate, section, and Home links reach their targets, all
-  inside the router without a full page load, and whose back to top scrolls
-  the 404 page itself.
+  or middle click opening a section in a new tab, and a Ctrl or Cmd click on
+  a drawer link leaving the drawer open), every way the drawer opens and
+  closes, the contact form's sent label and mailto link (the mailto test is
+  Chromium-only, through the DevTools Protocol), and the 404 page, whose
+  Return home opens the home page at its top and whose estimate, section, and
+  Home links reach their targets, all inside the router without a full page
+  load, and whose back to top scrolls the 404 page itself.
 - `npm run test:rendering`: compares a full-page screenshot of every state
   with its baseline in `tests/rendering/baselines/`, with zero tolerance,
   since each engine renders identically from run to run here and even a

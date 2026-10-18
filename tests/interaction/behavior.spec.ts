@@ -22,19 +22,19 @@ import type { Page    } from '@playwright/test'; // What: Page. Why: Every helpe
  * runs. The nav's section links, the Home link, the hero's buttons, the
  * estimate buttons in the bar and the drawer, and back to top land on their
  * targets without ever putting a hash in the address, while a Ctrl, Cmd, or
- * middle click on a section link opens the section in a new tab instead,
- * leaving an open drawer as it was; every section link on the home page and
- * the 404 page names the home page's path; the logo links to the root address;
- * the mobile drawer opens and closes every way it can (the toggle, Escape, a
- * tap on the dimmed page, a drawer link, and a wider screen) and makes the
- * page behind it inert while open; the contact form swaps its button label
- * when sent and builds a mailto link carrying the request; and the 404 page
- * answers an unknown address and leads back home and to the contact section,
- * its nav links included, while its back to top link scrolls the 404 page
- * itself. Pages open under reduced motion, so scrolling jumps straight to its
- * target and each position can be read at once; how things move is the
- * feedback spec's job. Reading the mailto link needs Chromium's DevTools
- * Protocol, so that one test runs in Chromium only.
+ * middle click on a section link opens the section in a new tab instead, a
+ * Ctrl or Cmd click on a drawer link leaving an open drawer as it was; every
+ * section link on the home page and the 404 page names the home page's path;
+ * the logo links to the root address; the mobile drawer opens and closes every
+ * way it can (the toggle, Escape, a tap on the dimmed page, a drawer link, and
+ * a wider screen) and makes the page behind it inert while open; the contact
+ * form swaps its button label when sent and builds a mailto link carrying the
+ * request; and the 404 page answers an unknown address and leads back home and
+ * to the contact section, its nav links included, while its back to top link
+ * scrolls the 404 page itself. Pages open under reduced motion, so scrolling
+ * jumps straight to its target and each position can be read at once; how
+ * things move is the feedback spec's job. Reading the mailto link needs
+ * Chromium's DevTools Protocol, so that one test runs in Chromium only.
  *
  * Sections:
  *  - Constants
@@ -53,7 +53,7 @@ const CLI_KIN_ARR : Array< [ string, Parameters< Locator[ 'click' ] >[ 0 ] ] > =
 
 const DES_VIE_OBJ = { height : 900, width : 1440 }; // What: Desktop Viewport Object. Why: The bar's own links show only on wide screens. How: This is the desktop size the navigation checks use.
 const PHO_VIE_OBJ = { height : 844, width : 390  }; // What: Phone Viewport Object. Why: The drawer exists only on small screens. How: This is the phone size the drawer checks use.
-const SMA_VIE_OBJ = { height : 568, width : 320  }; // What: Small Viewport Object. Why: The 404 page only scrolls on the smallest phones. How: This is the 320 by 568 size the Return home check opens it at.
+const SMA_VIE_OBJ = { height : 568, width : 320  }; // What: Small Viewport Object. Why: The 404 page only scrolls on the smallest phones. How: This is the 320 by 568 size the Return home and back to top checks open it at.
 
 // #endregion Constants
 

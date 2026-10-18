@@ -127,8 +127,6 @@ function lonAniFun () : string[] {
 function motRecFun () : void {
 
 
-
-
 	const motLisArr : string[] = []; // What: Motion List Array. Why: Each motion that starts has to be kept until the check reads it. How: This collects one name per motion.
 
 
@@ -589,6 +587,7 @@ for ( const staRecObj of STA_REC_ARR ) { // What: State Test Loop. Why: Every ch
 
 
 }
+
 
 
 test( 'closing the drawer plays no motion under reduced motion', async ( { page : curPagObj } ) => { // What: Drawer Close Motion Test. Why: The state checks only see the drawer open, and closing runs its own transitions, which need their own reduced-motion rules. How: This opens the drawer under reduced motion, clears what the recorder heard, closes it, and checks nothing moved.
