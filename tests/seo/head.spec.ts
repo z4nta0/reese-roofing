@@ -20,12 +20,13 @@ import { test   } from '@playwright/test'; // What: Test. Why: Each route and ea
  * search and never passes as a real business: each route carries a noindex
  * robots meta and says it's a demo, the structured data describes a demo
  * website rather than a local business, the footer says the company is
- * fictional, robots.txt lets search crawlers read the noindex while the named
- * AI crawlers' group disallows the site, and Netlify's _headers sends noindex
- * with every file. It also checks the social preview tags are complete and
- * call it a demo, and the image is the 1,200x630 card under 300 KB the tags
- * promise, and that _headers sends each of the security headers a header
- * checker looks for, once, since the dev server never applies them.
+ * fictional and links to its builder, robots.txt lets search crawlers read the
+ * noindex while the named AI crawlers' group disallows the site and no sitemap
+ * is served, and Netlify's _headers sends noindex with every file. It also
+ * checks the social preview tags are complete and call it a demo, and the
+ * image is the 1,200x630 card under 300 KB the tags promise, and that _headers
+ * sends each of the security headers a header checker looks for, once, since
+ * the dev server never applies them.
  *
  * Sections:
  *  - Constants
@@ -123,16 +124,17 @@ for ( const rouRecObj of ROU_REC_ARR ) { // What: Route Test Loop. Why: Every ro
 		await curPagObj.goto( rouRecObj.patStr ); // What: Route Load Call. Why: The head is read as a browser builds it. How: This opens the route on the suite's dev server.
 
 
-		await expect( curPagObj ).toHaveTitle( rouRecObj.titStr );                                                                     // What: Title Assertion. Why: Each route names itself, saying it's a demo. How: This waits for the route's exact title.
-		await expect( curPagObj.locator( 'meta[name="robots"]' ) ).toHaveAttribute( 'content', /noindex/ );                            // What: Robots Assertion. Why: A fictional company must stay out of search results. How: This checks the robots meta asks for noindex.
-		await expect( curPagObj.locator( 'meta[name="author"]' ) ).toHaveAttribute( 'content', 'techgeek.support' );                   // What: Author Assertion. Why: The page should name its real builder rather than the fictional company. How: This checks the author meta names techgeek.support.
-		await expect( curPagObj.locator( 'meta[name="description"]' ) ).toHaveAttribute( 'content', /fictional/ );                     // What: Description Assertion. Why: Any summary of the page should say the company isn't real. How: This checks the description calls it fictional.
-		await expect( curPagObj.locator( 'link[rel="canonical"]' ) ).toHaveAttribute( 'href', LIV_URL_STR );                           // What: Canonical Assertion. Why: Every address the site answers at should point at the live one. How: This checks the canonical link names it.
-		await expect( curPagObj.locator( 'meta[property="og:url"]' ) ).toHaveAttribute( 'content', LIV_URL_STR );                      // What: Open Graph URL Assertion. Why: Shared links should count as one page. How: This checks the social URL names the live address.
-		await expect( curPagObj.locator( 'meta[property="og:image"]' ) ).toHaveAttribute( 'content', `${ LIV_URL_STR }og-image.png` ); // What: Open Graph Image Assertion. Why: Link previews need an absolute image address. How: This checks it points at the live preview card.
-		await expect( curPagObj.locator( 'meta[name="twitter:card"]' ) ).toHaveAttribute( 'content', 'summary_large_image' );          // What: Twitter Card Assertion. Why: The preview card should show at its full size. How: This checks the large image layout is asked for.
-		await expect( curPagObj.getByRole( 'contentinfo' ) ).toContainText( 'Reese Roofing is a fictional company.' );                 // What: Footer Notice Assertion. Why: Visitors and AI agents reading the page itself should learn the company isn't real. How: This checks the footer's demo line.
-		await expect( curPagObj.locator( 'meta[name="description"]' ) ).toHaveCount( 1 );                                              // What: Single Description Assertion. Why: React 19 adds a rendered description beside index.html's rather than replacing it, which would leave two. How: This checks the route has exactly one.
+		await expect( curPagObj ).toHaveTitle( rouRecObj.titStr ); // What: Title Assertion. Why: Each route names itself, saying it's a demo. How: This waits for the route's exact title.
+		await expect( curPagObj.locator( 'meta[name="robots"]' ) ).toHaveAttribute( 'content', /noindex/ );                                                             // What: Robots Assertion. Why: A fictional company must stay out of search results. How: This checks the robots meta asks for noindex.
+		await expect( curPagObj.locator( 'meta[name="author"]' ) ).toHaveAttribute( 'content', 'techgeek.support' );                                                    // What: Author Assertion. Why: The page should name its real builder rather than the fictional company. How: This checks the author meta names techgeek.support.
+		await expect( curPagObj.locator( 'meta[name="description"]' ) ).toHaveAttribute( 'content', /fictional/ );                                                      // What: Description Assertion. Why: Any summary of the page should say the company isn't real. How: This checks the description calls it fictional.
+		await expect( curPagObj.locator( 'link[rel="canonical"]' ) ).toHaveAttribute( 'href', LIV_URL_STR );                                                            // What: Canonical Assertion. Why: Every address the site answers at should point at the live one. How: This checks the canonical link names it.
+		await expect( curPagObj.locator( 'meta[property="og:url"]' ) ).toHaveAttribute( 'content', LIV_URL_STR );                                                       // What: Open Graph URL Assertion. Why: Shared links should count as one page. How: This checks the social URL names the live address.
+		await expect( curPagObj.locator( 'meta[property="og:image"]' ) ).toHaveAttribute( 'content', `${ LIV_URL_STR }og-image.png` );                                  // What: Open Graph Image Assertion. Why: Link previews need an absolute image address. How: This checks it points at the live preview card.
+		await expect( curPagObj.locator( 'meta[name="twitter:card"]' ) ).toHaveAttribute( 'content', 'summary_large_image' );                                           // What: Twitter Card Assertion. Why: The preview card should show at its full size. How: This checks the large image layout is asked for.
+		await expect( curPagObj.getByRole( 'contentinfo' ) ).toContainText( 'Reese Roofing is a fictional company.' );                                                  // What: Footer Notice Assertion. Why: Visitors and AI agents reading the page itself should learn the company isn't real. How: This checks the footer's demo line.
+		await expect( curPagObj.getByRole( 'contentinfo' ).getByRole( 'link', { name : 'techgeek.support' } ) ).toHaveAttribute( 'href', 'https://techgeek.support/' ); // What: Footer Builder Link Assertion. Why: The footer's notice has to lead to whoever built the demo. How: This checks its techgeek.support link points at the builder's site.
+		await expect( curPagObj.locator( 'meta[name="description"]' ) ).toHaveCount( 1 );                                                                               // What: Single Description Assertion. Why: React 19 adds a rendered description beside index.html's rather than replacing it, which would leave two. How: This checks the route has exactly one.
 
 
 		const desTexStr = await curPagObj.locator( 'meta[name="description"]' ).getAttribute( 'content' ); // What: Description Text String. Why: The description's length is checked against the preview copy's bounds. How: This reads the tag's content.
@@ -173,16 +175,18 @@ test( 'the raw page carries the home title and description', async ( { page : cu
 
 
 
-test( 'robots.txt and _headers keep the demo out of search and away from AI crawlers', async ( { page : curPagObj } ) => { // What: Crawler Files Test. Why: The page's own noindex only works when crawlers can read it, and AI crawlers should stay away. How: This reads both files from the dev server and checks their rules.
+test( 'robots.txt and _headers keep the demo out of search and away from AI crawlers', async ( { page : curPagObj } ) => { // What: Crawler Files Test. Why: The page's own noindex only works when crawlers can read it, and AI crawlers should stay away. How: This reads both files from the dev server and checks their rules, and that no sitemap.xml is served.
 
 
-	const robTexStr = await ( await curPagObj.request.get( '/robots.txt' ) ).text(); // What: Robots Text String. Why: Crawlers read robots.txt before the page. How: This fetches it.
-	const heaTexStr = await ( await curPagObj.request.get( '/_headers' ) ).text();   // What: Headers Text String. Why: Netlify reads its header rules from this file. How: This fetches it, which Vite serves as a plain file from public/.
+	const robTexStr = await ( await curPagObj.request.get( '/robots.txt' ) ).text();                 // What: Robots Text String. Why: Crawlers read robots.txt before the page. How: This fetches it.
+	const heaTexStr = await ( await curPagObj.request.get( '/_headers' ) ).text();                   // What: Headers Text String. Why: Netlify reads its header rules from this file. How: This fetches it, which Vite serves as a plain file from public/.
+	const smpTypStr = ( await curPagObj.request.get( '/sitemap.xml' ) ).headers()[ 'content-type' ]; // What: Sitemap Type String. Why: A sitemap file in public/ would be served as XML, while a missing one falls back to the page's HTML. How: This reads the type the server answers /sitemap.xml with.
 
 
 	expect( robTexStr ).toMatch( /^User-agent: \*\nAllow: \/$/m );                                                         // What: Search Crawlers Assertion. Why: Search engines must reach the page to read its noindex. How: This checks the wildcard group allows the whole site, its rule ending at the bare slash.
 	expect( robTexStr ).toMatch( /^User-agent: GPTBot\n(?:User-agent: [^\n]*\n)*Disallow: \/(?:\n\s*\n|\n?(?![\s\S]))/m ); // What: AI Crawlers Assertion. Why: AI training crawlers shouldn't learn the fictional company. How: This checks a named AI crawler's group, read only through its run of user agents, disallows the whole site, its rule ending at the bare slash with no rule after it, since a later Allow of the same path would win.
 	expect( robTexStr ).not.toMatch( /Sitemap:/i );                                                                        // What: No Sitemap Assertion. Why: A site kept out of search has nothing to list. How: This checks robots.txt names no sitemap.
+	expect( smpTypStr ).not.toMatch( /xml/ );                                                                              // What: No Sitemap File Assertion. Why: A site kept out of search shouldn't serve a sitemap at all. How: This checks /sitemap.xml isn't answered with an XML file.
 	expect( heaTexStr ).toMatch( /^\/\*\n\tX-Robots-Tag: noindex$/m );                                                     // What: Robots Header Assertion. Why: Every file, the preview image included, should carry noindex. How: This checks the site-wide header rule, its path the bare /* and its value exactly noindex.
 
 
