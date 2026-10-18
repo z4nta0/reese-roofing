@@ -304,7 +304,7 @@
 
 	filter    : drop-shadow( 0 calc( var( --ver-rhy-m01 ) * 1rem ) calc( var( --ver-rhy-p03 ) * 1rem ) oklch( from var( --acc-mai-col ) l c h / 0.12 ) ); /* Vertical Rhythm Base Minus 1 = 11px, Vertical Rhythm Base Plus 3 ~= 33.876px, Accent Main Color = #1f4e7a @ 0.12 opacity */
 	height    : auto;
-	max-width : max( calc( var( --ver-rhy-p08 ) * 1rem ), var( --hor-rhy-022 ) );                                                                         /* Vertical Rhythm Base Plus 8 ~= 138.199px, Horizontal Rhythm 22 ~= 470.635px @ 1,920px width */
+	max-width : max( calc( var( --ver-rhy-p08 ) * 1rem ), var( --hor-rhy-022 ) ); /* Vertical Rhythm Base Plus 8 ~= 138.199px, Horizontal Rhythm 22 ~= 470.635px @ 1,920px width */
 	width     : 100%;
 
 
