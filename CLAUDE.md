@@ -145,10 +145,12 @@ the production suite opens its own pages on a build it serves itself.
   (`axe.spec.ts`), and scripted checks (`scripted.spec.ts`) cover link and
   button names, a Tab walk (order, traps, focus on screen, uncovered, and
   visible), reflow at 320px, and motion under reduced motion, while each state
-  opens, the drawer closes, and the sent form's label swaps in. The keyboard
-  walk runs under reduced motion so smooth scrolling and focus transitions have
-  finished when a stop is measured. axe's "needs review" results are printed
-  and attached to the report rather than failing the run.
+  opens, the drawer closes, and the sent form's label swaps in, plus the sent
+  form's announcement to screen readers through a status region that's in the
+  page from the start. The keyboard walk runs under reduced motion so smooth
+  scrolling and focus transitions have finished when a stop is measured. axe's
+  "needs review" results are printed and attached to the report rather than
+  failing the run.
 - `npm run test:interaction`: checks the interaction feedback rule on every
   state (every reachable link and button changes on hover and on press, has a
   transition longer than zero, and transitions its focus ring, every form field

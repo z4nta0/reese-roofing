@@ -30,7 +30,9 @@ import type { Page } from '@playwright/test'; // What: Page. Why: Every helper d
  * sideways. Motion: with reduced motion requested, no animation or transition
  * longer than 1ms starts while the state opens, or is still held once it has,
  * and the same holds while the drawer closes and while the sent form's label
- * swaps in. The name and keyboard checks list every problem found, by element
+ * swaps in. Announcement: sending the form fills a status region that sat in
+ * the page, empty, from the start, so screen readers are told the email is
+ * opening. The name and keyboard checks list every problem found, by element
  * (the positive tabindex check as a count), the motion check lists each one it
  * finds, and the reflow check reports how far the page reaches past the
  * viewport.
@@ -638,6 +640,31 @@ test( 'sending the form plays no motion under reduced motion', async ( { page : 
 	await expect( curPagObj.locator( 'form button[type="submit"]' ) ).toHaveText( /Opening your email/ ); // What: Sent Label Assertion. Why: The check only means something once the label has swapped. How: This waits until the button's text has changed.
 	expect( await curPagObj.evaluate( () => Reflect.get( window, 'motLisArr' ) ) ).toEqual( [] );         // What: No Motion Started Assertion. Why: Nothing should have moved while the label swapped, including an animation that already finished. How: This checks the recorder heard nothing.
 	expect( await curPagObj.evaluate( lonAniFun ) ).toEqual( [] );                                        // What: No Motion Assertion. Why: Nothing should still be moving once the label has swapped. How: This lists every animation or transition longer than 1ms the page still holds, which should be none.
+
+
+} );
+
+
+
+test( 'sending the form announces it to screen readers', async ( { page : curPagObj } ) => { // What: Sent Announcement Test. Why: A screen reader isn't told when the focused button's label changes, so the sent request needs a live region of its own. How: This opens the home page, checks the status region is already in the page and empty, sends the form, and checks the region now holds the message.
+
+
+	const homRecObj = STA_REC_ARR.find( ( staCurObj ) => staCurObj.ideStr === 'home-desktop' )!; // What: Home Record Object. Why: The form sits on the home page. How: This finds the home desktop state's row. // What: Non-Null Note. Why: find types its result as possibly undefined. How: STA_REC_ARR always lists the home-desktop state.
+	const staRegObj = curPagObj.locator( '#contact form [role="status"]' );                      // What: Status Region Object. Why: The announcement lives in the form's live region. How: This finds the status role inside the contact form.
+
+
+	await opeStaFun( curPagObj, homRecObj ); // What: Home State Open Call. Why: The form is sent from the home page. How: This loads it at desktop size.
+
+	await expect( staRegObj ).toHaveCount( 1 ); // What: Region Present Assertion. Why: A live region added at the moment it speaks is often missed, so it has to be there before the form is sent. How: This checks the form holds exactly one status region on load.
+	await expect( staRegObj ).toHaveText( '' ); // What: Region Empty Assertion. Why: The region's change is what gets announced, so it must start silent. How: This checks it holds no text before the form is sent.
+
+	await curPagObj.locator( '#conNamInp' ).fill( 'Pat Doe' );         // What: Name Fill Call. Why: A real request carries a name. How: This types one into the name field.
+	await curPagObj.locator( '#conEmaInp' ).fill( 'pat@example.com' ); // What: Email Fill Call. Why: A real request carries an email. How: This types one into the email field.
+
+	await curPagObj.getByRole( 'button', { name : 'Send request' } ).click(); // What: Send Click Call. Why: This is the action under test. How: This clicks the submit button.
+
+
+	await expect( staRegObj ).toHaveText( /email app is opening/ ); // What: Region Message Assertion. Why: Screen readers should hear that the email is opening. How: This waits for the region to hold the sent message.
 
 
 } );

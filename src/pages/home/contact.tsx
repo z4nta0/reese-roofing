@@ -21,7 +21,8 @@ import React     from 'react';                // What: React. Why: The form trac
  * estimate request form, side by side above 960px wide, with the form below
  * the details at 960px and below. The site has no backend, so submitting the
  * form opens the visitor's own email app with a message built from the fields,
- * addressed to the company.
+ * addressed to the company, and a hidden status region tells screen readers
+ * it's opening.
  *
  * Sections:
  *  - Types
@@ -62,9 +63,10 @@ const INI_FOR_OBJ : ConForTyp = { comStr : '', emaStr : '', mesStr : '', namStr 
  * Renders the contact section and owns its estimate form. Every field is
  * controlled by one record in state, each input updating its own key through
  * updFieFun. Submitting builds an email from the fields and hands it to the
- * visitor's email app through a mailto link, then switches the submit
- * button's label to say the email is opening. The section carries the
- * contact anchor the navigation links and estimate buttons lead to.
+ * visitor's email app through a mailto link, then switches the submit button's
+ * label to say the email is opening and announces the same to screen readers
+ * through a hidden status region. The section carries the contact anchor the
+ * navigation links and estimate buttons lead to.
  *
  * @author z4nta0 <https://github.com/z4nta0>
  *
@@ -83,7 +85,7 @@ function ConSecCom () : React.JSX.Element {
 
 
 	const [ forValObj, setForValObj ] = React.useState< ConForTyp >( INI_FOR_OBJ ); // What: Form Value Object And Setter. Why: Every field's current text lives in one record. How: This starts from INI_FOR_OBJ and is updated one key at a time by updFieFun.
-	const [ senReqBoo, setSenReqBoo ] = React.useState( false );                    // What: Sent Request Boolean And Setter. Why: The submit button should confirm the email is on its way. How: This flips true once the form is submitted.
+	const [ senReqBoo, setSenReqBoo ] = React.useState( false );                    // What: Sent Request Boolean And Setter. Why: The submit button and the status region should confirm the email is on its way. How: This flips true once the form is submitted.
 
 
 	// #region updFieFun
@@ -128,7 +130,7 @@ function ConSecCom () : React.JSX.Element {
 	 * visitor's name (or a generic inquiry label when it's blank) and a body
 	 * listing every field, and sends the browser to a mailto link carrying
 	 * both, which opens the visitor's email app. It then marks the request
-	 * sent so the button's label changes.
+	 * sent, so the button's label changes and the status region announces it.
 	 *
 	 * @author z4nta0 <https://github.com/z4nta0>
 	 *
@@ -533,6 +535,14 @@ function ConSecCom () : React.JSX.Element {
 								→
 							</span>
 						</button>
+
+						<p
+							className={ cssModObj.forStaPar }
+
+							role='status'
+						>{ /* What: Form Status Paragraph Element. Why: A screen reader isn't told when a focused button's label changes, so the sent request needs an announcement of its own. How: This live region is in the page from the start, hidden from sight, and gains its message once senReqBoo turns true, which screen readers announce without moving focus. */ }
+							{ senReqBoo && 'Your email app is opening with the request filled in.' }{ /* What: Form Status Message Text. Why: The announcement should say what happens next. How: This renders only once the form is sent, so the region starts empty and its change is what gets announced. */ }
+						</p>
 
 						<p className={ cssModObj.forFinPar }>{ /* What: Form Fine Paragraph Element. Why: Visitors should know they'll be contacted. How: This states it under the button. */ }
 							By submitting, you agree to be contacted by Reese Roofing regarding your inquiry.

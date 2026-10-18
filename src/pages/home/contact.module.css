@@ -610,6 +610,20 @@
 /* #endregion forSubBut */
 
 
+.forStaPar { /* What: Form Status Paragraph. Why: The sent announcement is for screen readers, since the button's own label already shows the change on screen. How: This applies the visually hidden technique, shrinking it to a clipped pixel taken out of the layout, where screen readers still read it, so its 1px sizes and -1px margin stay literal. */
+
+
+	clip-path   : inset( 50% );
+	height      : 1px;
+	margin      : -1px;
+	overflow    : hidden;
+	position    : absolute;
+	white-space : nowrap;
+	width       : 1px;
+
+
+}
+
 .forFinPar { /* What: Form Fine Paragraph. Why: The consent note should read as a quiet footnote to the form. How: This sets it small and faded, capped at the small text measure. */
 
 

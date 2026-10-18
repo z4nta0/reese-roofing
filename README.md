@@ -51,7 +51,7 @@ npm run typecheck  # TypeScript across src/, the configs, tests/, and design/
 
 ```bash
 npm test                    # every suite
-npm run test:accessibility  # axe-core plus scripted keyboard, naming, reflow, and motion checks
+npm run test:accessibility  # axe-core plus scripted keyboard, naming, reflow, motion, and sent form announcement checks
 npm run test:interaction    # hover, press, and focus feedback on every control and form field, the drawer's and sent label's real motion, plus hash-free section links, their /#section addresses, and new tabs, the bar's scrolled style, the drawer, the form, and the 404 page
 npm run test:production     # the production build served with Netlify's headers: no security policy violations, and a compacted page
 npm run test:rendering      # full-page screenshots of each page state against approved baselines
