@@ -204,7 +204,7 @@ test( '_headers hardens every response', async ( { page : curPagObj } ) => { // 
 
 
 
-test( 'the social preview tags are complete', async ( { page : curPagObj } ) => { // What: Social Tags Test. Why: A link shared anywhere should show a full, honest card. How: This loads the home page and checks every social tag, its absolute URLs, the copy's lengths, and the theme color and icons beside the card.
+test( 'the social preview tags are complete', async ( { page : curPagObj } ) => { // What: Social Tags Test. Why: A link shared anywhere should show a full, honest card. How: This loads the home page and checks every social tag, its absolute URLs, the image's type and size, the copy's lengths, and the theme color and icons beside the card.
 
 
 	await curPagObj.goto( '/' ); // What: Home Load Call. Why: Link scrapers read the page every route shares. How: This opens the home page.
@@ -222,7 +222,10 @@ test( 'the social preview tags are complete', async ( { page : curPagObj } ) => 
 	expect( Object.keys( socTagObj ) ).toEqual( expect.arrayContaining( SOC_KEY_ARR ) );       // What: Complete Tags Assertion. Why: A missing tag leaves part of the card blank. How: This checks every required key is present, allowing optional extras.
 	expect( [ socTagObj[ 'og:image' ], socTagObj[ 'og:url' ], socTagObj[ 'twitter:image' ] ] ).toEqual( [ `${ LIV_URL_STR }og-image.png`, LIV_URL_STR, `${ LIV_URL_STR }og-image.png` ] ); // What: Absolute URLs Assertion. Why: Scrapers can't resolve a relative address. How: This checks each URL tag names the live https address.
 	expect( socTagObj[ 'og:image:type' ] ).toBe( 'image/png' );                                // What: Image Type Assertion. Why: The tag has to match the file. How: This checks it names a PNG.
+	expect( socTagObj[ 'og:image:height' ] ).toBe( '630' );                                    // What: Image Height Assertion. Why: The tag has to promise the card's real height. How: This checks it says 630, the height the image test reads from the file.
+	expect( socTagObj[ 'og:image:width' ] ).toBe( '1200' );                                    // What: Image Width Assertion. Why: The tag has to promise the card's real width. How: This checks it says 1,200, the width the image test reads from the file.
 	expect( socTagObj[ 'og:title' ].length ).toBeLessThanOrEqual( 60 );                        // What: Title Length Assertion. Why: Longer titles are cut off in most cards. How: This checks it stays at 60 characters or fewer.
+	expect( socTagObj[ 'twitter:title' ].length ).toBeLessThanOrEqual( 60 );                   // What: Twitter Title Length Assertion. Why: X's card cuts a long title off too. How: This checks it stays at 60 characters or fewer.
 	expect( socTagObj[ 'og:description' ].length ).toBeGreaterThanOrEqual( DES_MIN_NUM );      // What: Description Minimum Assertion. Why: Link preview checkers flag a summary under 120 characters as short. How: This checks it reaches DES_MIN_NUM characters.
 	expect( socTagObj[ 'og:description' ].length ).toBeLessThanOrEqual( DES_MAX_NUM );         // What: Description Maximum Assertion. Why: Mobile cards cut a summary off around 125 characters. How: This checks it stays within DES_MAX_NUM characters.
 	expect( socTagObj[ 'twitter:description' ].length ).toBeGreaterThanOrEqual( DES_MIN_NUM ); // What: Twitter Description Minimum Assertion. Why: X's card shows the same summary, held to the same bounds. How: This checks it reaches DES_MIN_NUM characters.
