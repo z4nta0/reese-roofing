@@ -34,10 +34,10 @@ import './styles/styles.css'; // What: Styles Stylesheet Import. Why: This is th
 createRoot( document.getElementById( 'appMouDiv' )! ).render( // What: Root Render Call. Why: This is the site's only mount, rendering the whole app into index.html's mount element. How: This creates a React root on appMouDiv and renders AppRooCom inside StrictMode and the router. // What: Non-Null Note. Why: getElementById's return type allows null. How: index.html always ships the appMouDiv element, so the lookup can't come back empty.
 
 
-	<StrictMode>{ /* What: Strict Mode. Why: Development builds should flag unsafe patterns early. How: This double-invokes renders and effects in development only, and does nothing in production. */ }
+	<StrictMode>{ /* What: App Strict Mode. Why: Development builds should flag unsafe patterns early. How: This double-invokes renders and effects in development only, and does nothing in production. */ }
 
 
-		<BrowserRouter>{ /* What: Browser Router. Why: The site's routes read the real URL path. How: This provides history-based routing to every Route inside AppRooCom. */ }
+		<BrowserRouter>{ /* What: App Browser Router. Why: The site's routes read the real URL path. How: This provides history-based routing to every Route inside AppRooCom. */ }
 
 
 			<AppRooCom />{ /* What: App Root Component. Why: This is the whole site. How: This renders the routes AppRooCom defines. */ }

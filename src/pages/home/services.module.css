@@ -309,7 +309,7 @@
 
 /* #region carDetUno */
 
-.carDetUno { /* What: Card Detail Unordered. Why: The card's details sit below a hairline. How: This drops the default bullets and draws the rule above. */
+.carDetUno { /* What: Card Detail Unordered List. Why: The card's details sit below a hairline. How: This drops the default bullets and draws the rule above. */
 
 
 	border-top  : var( --bor-wid-bas ) solid var( --bor-mai-col ); /* Border Width Base ~= 1.160px, Border Main Color = #1a1f24 @ 0.12 opacity */

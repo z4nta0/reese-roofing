@@ -105,16 +105,16 @@ function AboSecCom () : React.JSX.Element {
 			id='about'
 
 			className={ cssModObj.homAboSec }
-		>{ /* What: About Section Element. Why: This tells the company's story. How: Its about id is the anchor the navigation links jump to, kept as is since it appears in the page's URL. */ }
+		>{ /* What: Home About Section Element. Why: This tells the company's story. How: Its about id is the anchor the navigation links jump to, kept as is since it appears in the page's URL. */ }
 
 
-			<div className={ cssModObj.aboStoDiv }>{ /* What: About Container Div Element. Why: The story's two columns should line up with the page's content width. How: This sets the left and right columns side by side. */ }
+			<div className={ cssModObj.aboStoDiv }>{ /* What: About Story Div Element. Why: The story's two columns should line up with the page's content width. How: This sets the left and right columns side by side. */ }
 
 
 				<div className={ cssModObj.aboLefDiv }>{ /* What: About Left Div Element. Why: The heading and seal anchor the story. How: This stacks the label, heading, and seal. */ }
 
 
-					<span className={ cssModObj.eyeLabSpa }>03 · About</span>{ /* What: Section Label Span Element. Why: Each section is numbered in order down the page. How: This uses the site's eyebrow style. */ }
+					<span className={ cssModObj.eyeLabSpa }>03 · About</span>{ /* What: Eyebrow Label Span Element. Why: Each section is numbered in order down the page. How: This is the section's numbered label, set in the site's eyebrow style. */ }
 
 					<h2 className={ cssModObj.aboTitHea }>{ /* What: About Title Heading Element. Why: The heading names the section. How: Its line breaks set the three-line shape, with one word in italic. */ }
 						A Lawrence company<br />
@@ -147,13 +147,13 @@ function AboSecCom () : React.JSX.Element {
 				<div>{ /* What: About Right Div Element. Why: The story itself sits beside the heading. How: This stacks the paragraphs and the quote. */ }
 
 
-					<p className={` ${ cssModObj.aboStoPar }   ${ cssModObj.aboStoParLead } `}>{ /* What: Lead Paragraph Element. Why: The first paragraph states the founding idea. How: Its lead modifier sets it larger than the rest. */ }
+					<p className={` ${ cssModObj.aboStoPar }   ${ cssModObj.aboStoParLead } `}>{ /* What: Lead About Story Paragraph Element. Why: The first paragraph states the founding idea. How: This is the story's first paragraph, whose lead modifier sets it larger than the rest. */ }
 						Reese Roofing was founded on a simple idea: commercial roofing should be a
 						straightforward business. A clear scope, a fair price, a roof installed by
 						people who care whether it holds up.
 					</p>
 
-					<p className={ cssModObj.aboStoPar }>{ /* What: History Paragraph Element. Why: The company's track record backs up its claims. How: This lists the kinds of buildings it has worked on and where its work comes from. */ }
+					<p className={ cssModObj.aboStoPar }>{ /* What: About Story Paragraph Element. Why: The company's track record backs up its claims. How: This is the story's history paragraph, which lists the kinds of buildings it has worked on and where its work comes from. */ }
 						We've worked on warehouses, churches, retail centers, office buildings, and
 						municipal facilities across Douglas County and the surrounding counties for
 						more than a decade and a half. Most of our work comes from referrals, from
@@ -161,7 +161,7 @@ function AboSecCom () : React.JSX.Element {
 						we said we would and stood behind the work after the crew packed up.
 					</p>
 
-					<p className={ cssModObj.aboStoPar }>{ /* What: Credentials Paragraph Element. Why: Visitors check that a roofer is licensed and insured. How: This states both, then names trust as what matters most. */ }
+					<p className={ cssModObj.aboStoPar }>{ /* What: About Story Paragraph Element. Why: Visitors check that a roofer is licensed and insured. How: This is the story's credentials paragraph, which states both, then names trust as what matters most. */ }
 						We're licensed, fully insured, and manufacturer-certified on the systems we
 						install. But the most important credential we carry is the trust of the
 						businesses we've roofed in this town.
@@ -172,12 +172,12 @@ function AboSecCom () : React.JSX.Element {
 
 						<span className={ cssModObj.quoMarSpa }>&ldquo;</span>{ /* What: Quote Mark Span Element. Why: An oversized opening quote mark sets the quote apart. How: This draws it as its own styled character. */ }
 
-						<p className={ cssModObj.aboQuoPar }>{ /* What: Quote Paragraph Element. Why: This is the quote itself. How: Its text sits inside the blockquote's styling. */ }
+						<p className={ cssModObj.aboQuoPar }>{ /* What: About Quote Paragraph Element. Why: This is the quote itself. How: Its text sits inside the blockquote's styling. */ }
 							The roof above your operation is not the place to cut corners, and
 							it&apos;s not the place to overspend. Our job is to find the line.
 						</p>
 
-						<footer className={ cssModObj.aboQuoFoo }>The Reese family</footer>{ /* What: Quote Attribution Footer Element. Why: The quote names who said it. How: Its own uppercase, indented style sets it apart. */ }
+						<footer className={ cssModObj.aboQuoFoo }>The Reese family</footer>{ /* What: About Quote Footer Element. Why: The quote names who said it. How: Its own uppercase, indented style sets it apart. */ }
 
 
 					</blockquote>
@@ -190,7 +190,7 @@ function AboSecCom () : React.JSX.Element {
 
 
 
-			<div className={ cssModObj.pagConDiv }>{ /* What: Principles Container Div Element. Why: The principles row should line up with the page's content width. How: This holds the row. */ }
+			<div className={ cssModObj.pagConDiv }>{ /* What: Page Container Div Element. Why: The principles row should line up with the page's content width. How: This holds the row. */ }
 
 
 				<div className={ cssModObj.aboPriDiv }>{ /* What: About Principles Div Element. Why: The company's four principles read best side by side. How: This lays out one principle per row of PRI_REC_ARR. */ }
@@ -203,7 +203,7 @@ function AboSecCom () : React.JSX.Element {
 							key={ priRecObj.titStr }
 
 							className={ cssModObj.priIteDiv }
-						>{ /* What: Principle Div Element. Why: Each principle is a self-contained block. How: This holds its number, title, and body. */ }
+						>{ /* What: Principle Item Div Element. Why: Each principle is a self-contained block. How: This holds its number, title, and body. */ }
 
 
 							<span className={ cssModObj.priNumSpa }>{ String( priIndNum + 1 ).padStart( 2, '0' ) }</span>{ /* What: Principle Number Span Element. Why: The principles are numbered in order. How: This turns the row's zero-based position into a two-digit number starting at 01. */ }

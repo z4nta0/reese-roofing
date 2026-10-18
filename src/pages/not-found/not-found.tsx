@@ -95,7 +95,7 @@ function NotFouCom () : React.JSX.Element {
 			>{ /* What: Not-Found Content Main Element. Why: The page's one message is its main content. How: This centers a single column in the space between the bar and the footer, and its id, kept as top since it's a navigation target, is where the footer's back-to-top link lands. */ }
 
 
-				<span className={ cssModObj.eyeLabSpa }>Error 404</span>{ /* What: Error Label Span Element. Why: A small label names the error before the heading. How: This uses the site's eyebrow style. */ }
+				<span className={ cssModObj.eyeLabSpa }>Error 404</span>{ /* What: Eyebrow Label Span Element. Why: A small label names the error before the heading. How: This is the page's error label, set in the site's eyebrow style. */ }
 
 				<h1 className={ cssModObj.nofTitHea }>{ /* What: Not-Found Title Heading Element. Why: The page's heading states the problem plainly. How: This sets it in the display style, sized to the viewport between two bounds by its module class. */ }
 					Page not <em className={ cssModObj.titAccEmp }>found</em>.
@@ -122,7 +122,7 @@ function NotFouCom () : React.JSX.Element {
 						href='/#contact'
 
 						onClick={ ( cliEveObj ) => secCliFun( cliEveObj, 'contact' ) }
-					>{ /* What: Estimate Button Anchor Element. Why: A visitor who came looking for a service can still request an estimate in one step. How: This navigates home to the contact section without a hash, while a Ctrl, Cmd, or middle click opens it in a new tab. */ }
+					>{ /* What: Ghost Button Base Anchor Element. Why: A visitor who came looking for a service can still request an estimate in one step. How: This is the estimate button, which navigates home to the contact section without a hash, while a Ctrl, Cmd, or middle click opens it in a new tab. */ }
 						Get an estimate
 					</a>
 

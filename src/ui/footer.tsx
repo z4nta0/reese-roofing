@@ -125,9 +125,9 @@ function SitFooCom () : React.JSX.Element {
 				<div className={ cssModObj.fooMetDiv }>{ /* What: Footer Meta Div Element. Why: The legal and location details sit together. How: This stacks the copyright, licensing, and demo lines. */ }
 
 
-					<span>© { curYeaNum } Reese Roofing, LLC</span>{ /* What: Copyright Span Element. Why: The footer states the company's copyright. How: This pairs the current year with the company's legal name. */ }
+					<span>© { curYeaNum } Reese Roofing, LLC</span>{ /* What: Footer Copyright Span Element. Why: The footer states the company's copyright. How: This pairs the current year with the company's legal name. */ }
 
-					<span>Licensed & insured · Lawrence, KS</span>{ /* What: Licensing Span Element. Why: Visitors look for proof a roofer is licensed and local. How: This states both on one line. */ }
+					<span>Licensed & insured · Lawrence, KS</span>{ /* What: Footer Licensing Span Element. Why: Visitors look for proof a roofer is licensed and local. How: This states both on one line. */ }
 
 					<span className={ cssModObj.fooDemSpa }>Reese Roofing is a fictional company. This site is a portfolio demo by <a className={ cssModObj.fooDemAnc } href='https://techgeek.support/'>techgeek.support</a>.</span>{ /* What: Footer Demo Span Element. Why: The site is a portfolio piece, and no visitor or AI agent reading it should take Reese Roofing for a real roofer. How: This says so on every page, linking to the site's builder. */ }
 

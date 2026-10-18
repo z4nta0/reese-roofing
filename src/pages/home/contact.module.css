@@ -145,7 +145,7 @@
 
 /* #region conDetDes */
 
-.conDetDes { /* What: Contact Details Description. Why: The detail rows sit under a faint rule. How: This draws the rule above the first row. */
+.conDetDes { /* What: Contact Details Description List. Why: The detail rows sit under a faint rule. How: This draws the rule above the first row. */
 
 
 	border-top : var( --bor-wid-bas ) solid oklch( from var( --bac-pag-col ) l c h / var( --cdn-pow-007-rec ) ); /* Border Width Base ~= 1.160px, Background Page Color = #f5f2ec, Core-Design-Number to the Power of 7 Reciprocal ~= 0.140 */

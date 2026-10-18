@@ -73,7 +73,7 @@ function HerSecCom () : React.JSX.Element {
 			id='top'
 
 			className={ cssModObj.homHerSec }
-		>{ /* What: Hero Section Element. Why: This opens the home page. How: Its top id is the anchor every back-to-top link targets, kept as is since it appears in the page's URL. */ }
+		>{ /* What: Home Hero Section Element. Why: This opens the home page. How: Its top id is the anchor every back-to-top link targets, kept as is since it appears in the page's URL. */ }
 
 
 			<div
@@ -139,7 +139,7 @@ function HerSecCom () : React.JSX.Element {
 					<div className={ cssModObj.herCopDiv }>{ /* What: Hero Copy Div Element. Why: The location label sits directly above the headline. How: This stacks the two. */ }
 
 
-						<span className={ cssModObj.eyeLabSpa }>Lawrence, Kansas · Est. 2008</span>{ /* What: Location Label Span Element. Why: Visitors should see where the company works and how long it's been there. How: This uses the site's eyebrow style. */ }
+						<span className={ cssModObj.eyeLabSpa }>Lawrence, Kansas · Est. 2008</span>{ /* What: Eyebrow Label Span Element. Why: Visitors should see where the company works and how long it's been there. How: This is the hero's location label, set in the site's eyebrow style. */ }
 
 						<h1 className={ cssModObj.herTitHea }>{ /* What: Hero Title Heading Element. Why: The headline is the page's main heading. How: Its line breaks set the three-line shape, with one word in italic. */ }
 							Commercial roofing,<br />
@@ -190,7 +190,7 @@ function HerSecCom () : React.JSX.Element {
 							href='/#contact'
 
 							onClick={ ( cliEveObj ) => secCliFun( cliEveObj, 'contact' ) }
-						>{ /* What: Estimate Button Anchor Element. Why: The page's main action is requesting an estimate. How: This scrolls to the contact section without a hash, while a Ctrl, Cmd, or middle click opens it in a new tab. */ }
+						>{ /* What: Primary Button Base Anchor Element. Why: The page's main action is requesting an estimate. How: This is the estimate button, which scrolls to the contact section without a hash, while a Ctrl, Cmd, or middle click opens it in a new tab. */ }
 							Request an estimate
 							<span
 								className={ cssModObj.arrIcoSpa }
@@ -207,7 +207,7 @@ function HerSecCom () : React.JSX.Element {
 							href='/#services'
 
 							onClick={ ( cliEveObj ) => secCliFun( cliEveObj, 'services' ) }
-						>{ /* What: Services Button Anchor Element. Why: Visitors not ready for an estimate can browse first. How: This scrolls to the services section without a hash, while a Ctrl, Cmd, or middle click opens it in a new tab. */ }
+						>{ /* What: Ghost Button Base Anchor Element. Why: Visitors not ready for an estimate can browse first. How: This is the services button, which scrolls to the services section without a hash, while a Ctrl, Cmd, or middle click opens it in a new tab. */ }
 							Explore services
 						</a>
 
@@ -222,7 +222,7 @@ function HerSecCom () : React.JSX.Element {
 				<div className={ cssModObj.herStaDiv }>{ /* What: Hero Stats Div Element. Why: A few numbers make the company's track record concrete. How: This lays out four stats in a row. */ }
 
 
-					<div className={ cssModObj.staIteDiv }>{ /* What: Years Stat Div Element. Why: Longevity is a reason to trust a roofer. How: This pairs the number with its label. */ }
+					<div className={ cssModObj.staIteDiv }>{ /* What: Stat Item Div Element. Why: Longevity is a reason to trust a roofer. How: This is the years stat, pairing the number with its label. */ }
 
 
 						<div className={ cssModObj.staNumDiv }>17+</div>{ /* What: Stat Number Div Element. Why: The number leads each stat. How: This sets it in the display style. */ }
@@ -233,7 +233,7 @@ function HerSecCom () : React.JSX.Element {
 					</div>
 
 
-					<div className={ cssModObj.staIteDiv }>{ /* What: Roofs Stat Div Element. Why: Volume of finished work shows experience. How: This pairs the number with its label. */ }
+					<div className={ cssModObj.staIteDiv }>{ /* What: Stat Item Div Element. Why: Volume of finished work shows experience. How: This is the roofs stat, pairing the number with its label. */ }
 
 
 						<div className={ cssModObj.staNumDiv }>400<span className={ cssModObj.staSufSpa }>+</span></div>{ /* What: Stat Number Div Element. Why: The number leads each stat. How: Its plus sign takes a separate style. */ }
@@ -244,7 +244,7 @@ function HerSecCom () : React.JSX.Element {
 					</div>
 
 
-					<div className={ cssModObj.staIteDiv }>{ /* What: Emergency Stat Div Element. Why: Storm damage can't wait for business hours. How: This pairs the number with its label. */ }
+					<div className={ cssModObj.staIteDiv }>{ /* What: Stat Item Div Element. Why: Storm damage can't wait for business hours. How: This is the emergency stat, pairing the number with its label. */ }
 
 
 						<div className={ cssModObj.staNumDiv }>24<span className={ cssModObj.staSufSpa }>/7</span></div>{ /* What: Stat Number Div Element. Why: The number leads each stat. How: Its suffix takes a separate style. */ }
@@ -255,7 +255,7 @@ function HerSecCom () : React.JSX.Element {
 					</div>
 
 
-					<div className={ cssModObj.staIteDiv }>{ /* What: Rating Stat Div Element. Why: Accreditation and insurance are the usual checks before hiring. How: This pairs the rating with its label. */ }
+					<div className={ cssModObj.staIteDiv }>{ /* What: Stat Item Div Element. Why: Accreditation and insurance are the usual checks before hiring. How: This is the rating stat, pairing the rating with its label. */ }
 
 
 						<div className={ cssModObj.staNumDiv }>A<span className={ cssModObj.staPluSpa }>+</span></div>{ /* What: Stat Number Div Element. Why: The rating leads this stat. How: Its plus sign takes its own class. */ }
