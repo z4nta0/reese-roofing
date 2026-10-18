@@ -226,9 +226,9 @@ function HerSecCom () : React.JSX.Element {
 					<div className={ cssModObj.staIteDiv }>{ /* What: Stat Item Div Element. Why: Longevity is a reason to trust a roofer. How: This is the years stat, pairing the number with its label. */ }
 
 
-						<div className={ cssModObj.staNumDiv }>17+</div>{ /* What: Stat Number Div Element. Why: The number leads each stat. How: This sets it in the display style. */ }
+						<div className={ cssModObj.staNumDiv }>17+</div>{ /* What: Stat Number Div Element. Why: The number leads each stat. How: This is the years stat's number, set in the display style. */ }
 
-						<div className={ cssModObj.staLabDiv }>Years serving Douglas County</div>{ /* What: Stat Label Div Element. Why: Each number needs to say what it counts. How: This sits below the number. */ }
+						<div className={ cssModObj.staLabDiv }>Years serving Douglas County</div>{ /* What: Stat Label Div Element. Why: Each number needs to say what it counts. How: This is the years stat's label, below its number. */ }
 
 
 					</div>
@@ -237,9 +237,9 @@ function HerSecCom () : React.JSX.Element {
 					<div className={ cssModObj.staIteDiv }>{ /* What: Stat Item Div Element. Why: Volume of finished work shows experience. How: This is the roofs stat, pairing the number with its label. */ }
 
 
-						<div className={ cssModObj.staNumDiv }>400<span className={ cssModObj.staSufSpa }>+</span></div>{ /* What: Stat Number Div Element. Why: The number leads each stat. How: Its plus sign takes a separate style. */ }
+						<div className={ cssModObj.staNumDiv }>400<span className={ cssModObj.staSufSpa }>+</span></div>{ /* What: Stat Number Div Element. Why: The number leads each stat. How: This is the roofs stat's number, whose plus sign takes a separate style. */ }
 
-						<div className={ cssModObj.staLabDiv }>Commercial roofs completed</div>{ /* What: Stat Label Div Element. Why: Each number needs to say what it counts. How: This sits below the number. */ }
+						<div className={ cssModObj.staLabDiv }>Commercial roofs completed</div>{ /* What: Stat Label Div Element. Why: Each number needs to say what it counts. How: This is the roofs stat's label, below its number. */ }
 
 
 					</div>
@@ -248,9 +248,9 @@ function HerSecCom () : React.JSX.Element {
 					<div className={ cssModObj.staIteDiv }>{ /* What: Stat Item Div Element. Why: Storm damage can't wait for business hours. How: This is the emergency stat, pairing the number with its label. */ }
 
 
-						<div className={ cssModObj.staNumDiv }>24<span className={ cssModObj.staSufSpa }>/7</span></div>{ /* What: Stat Number Div Element. Why: The number leads each stat. How: Its suffix takes a separate style. */ }
+						<div className={ cssModObj.staNumDiv }>24<span className={ cssModObj.staSufSpa }>/7</span></div>{ /* What: Stat Number Div Element. Why: The number leads each stat. How: This is the emergency stat's number, whose suffix takes a separate style. */ }
 
-						<div className={ cssModObj.staLabDiv }>Emergency response available</div>{ /* What: Stat Label Div Element. Why: Each number needs to say what it counts. How: This sits below the number. */ }
+						<div className={ cssModObj.staLabDiv }>Emergency response available</div>{ /* What: Stat Label Div Element. Why: Each number needs to say what it counts. How: This is the emergency stat's label, below its number. */ }
 
 
 					</div>
@@ -259,9 +259,9 @@ function HerSecCom () : React.JSX.Element {
 					<div className={ cssModObj.staIteDiv }>{ /* What: Stat Item Div Element. Why: Accreditation and insurance are the usual checks before hiring. How: This is the rating stat, pairing the rating with its label. */ }
 
 
-						<div className={ cssModObj.staNumDiv }>A<span className={ cssModObj.staPluSpa }>+</span></div>{ /* What: Stat Number Div Element. Why: The rating leads this stat. How: Its plus sign takes its own class. */ }
+						<div className={ cssModObj.staNumDiv }>A<span className={ cssModObj.staPluSpa }>+</span></div>{ /* What: Stat Number Div Element. Why: The number leads each stat. How: This is the rating stat's number, whose plus sign takes its own class. */ }
 
-						<div className={ cssModObj.staLabDiv }>BBB accredited & fully insured</div>{ /* What: Stat Label Div Element. Why: Each number needs to say what it counts. How: This sits below the number. */ }
+						<div className={ cssModObj.staLabDiv }>BBB accredited & fully insured</div>{ /* What: Stat Label Div Element. Why: Each number needs to say what it counts. How: This is the rating stat's label, below its number. */ }
 
 
 					</div>
