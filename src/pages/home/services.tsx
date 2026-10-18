@@ -188,7 +188,7 @@ function SerSecCom () : React.JSX.Element {
 
 					<span className={ cssModObj.eyeLabSpa }>02 · What we do</span>{ /* What: Eyebrow Label Span Element. Why: Each section is numbered in order down the page. How: This is the section's numbered label, set in the site's eyebrow style. */ }
 
-					<h2 className={ cssModObj.serTitHea }>{ /* What: Services Title Heading Element. Why: The heading names the section. How: Its line break starts the second line, so it reads as two lines wherever each one fits, with one word in light accent italic. */ }
+					<h2 className={ cssModObj.serTitHea }>{ /* What: Services Title Heading Element. Why: The heading names the section. How: Its line break starts the second line, so it reads as two lines, and as three below about 353px wide and from 961px to about 1,220px, where the first line wraps after of, with one word in light accent italic. */ }
 						A full range of commercial<br />
 						roofing <em className={ cssModObj.titAccEmp }>specialties</em>.
 					</h2>
