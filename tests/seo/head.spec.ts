@@ -45,6 +45,30 @@ const RAW_TIT_STR = '<title>Reese Roofing | Portfolio Demo by techgeek.support</
 
 
 
+/**
+ * ROU_REC_ARR = Route Record Array
+ *
+ * @summary
+ * Every route the head checks visit, each with the title it must show. Every
+ * row shares one shape, so its fields carry no comments of their own:
+ * - `patStr` (String): Path String, the route loaded from the dev server.
+ * - `titStr` (String): Title String, the exact title the route must show.
+ *
+ * @author z4nta0 <https://github.com/z4nta0>
+ *
+*/
+
+const ROU_REC_ARR = [ // What: Route Record Array. Why: Each route has its own title to check. How: Each row pairs a path with its expected title.
+
+
+	{ patStr : '/',        titStr : 'Reese Roofing | Portfolio Demo by techgeek.support' }, // What: Home Route Row. Why: The home page carries index.html's own title. How: This expects it unchanged.
+	{ patStr : '/missing', titStr : 'Page Not Found | Reese Roofing Portfolio Demo'      }  // What: Not Found Route Row. Why: The 404 page sets its own title. How: This expects the title the page renders.
+
+
+];
+
+
+
 const SEC_HEA_ARR = [ // What: Security Header Array. Why: A header security checker fails the site when any of these is missing. How: Each entry is one header line the site-wide rule must send, matched from its name up to the value that matters.
 
 
@@ -79,30 +103,6 @@ const SOC_KEY_ARR = [ // What: Social Key Array. Why: The social preview rule li
 	'twitter:image',       // What: Twitter Image Key. Why: Every card needs the image on X. How: This names the tag.
 	'twitter:image:alt',   // What: Twitter Image Alt Key. Why: Every card needs the image's description on X. How: This names the tag.
 	'twitter:title'        // What: Twitter Title Key. Why: Every card needs the card's title on X. How: This names the tag.
-
-
-];
-
-
-
-/**
- * ROU_REC_ARR = Route Record Array
- *
- * @summary
- * Every route the head checks visit, each with the title it must show. Every
- * row shares one shape, so its fields carry no comments of their own:
- * - `patStr` (String): Path String, the route loaded from the dev server.
- * - `titStr` (String): Title String, the exact title the route must show.
- *
- * @author z4nta0 <https://github.com/z4nta0>
- *
-*/
-
-const ROU_REC_ARR = [ // What: Route Record Array. Why: Each route has its own title to check. How: Each row pairs a path with its expected title.
-
-
-	{ patStr : '/',        titStr : 'Reese Roofing | Portfolio Demo by techgeek.support' }, // What: Home Route Row. Why: The home page carries index.html's own title. How: This expects it unchanged.
-	{ patStr : '/missing', titStr : 'Page Not Found | Reese Roofing Portfolio Demo'      }  // What: Not Found Route Row. Why: The 404 page sets its own title. How: This expects the title the page renders.
 
 
 ];

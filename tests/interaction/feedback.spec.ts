@@ -50,57 +50,6 @@ const SET_WAI_NUM = 400; // What: Settle Wait Number. Why: Each look is read onc
 
 // #region Helpers
 
-// #region sigEleFun
-
-/**
- * sigEleFun = Signature Element Function
- *
- * @summary
- * Runs inside the page and describes how a control looks right now, as one
- * string of the styles feedback usually changes (color, background, border
- * color, transform, and opacity) for the control and every element inside
- * it, so a change to its arrow or its label counts as the control's own.
- * Passed to Playwright's evaluate, so it can't read anything from this file.
- *
- * @author z4nta0 <https://github.com/z4nta0>
- *
- * @param eleCurEle - Element Current Element: The control to describe.
- *
- * @returns The control's look, as one string to compare.
- *
- * @example
- * ```ts
- * handle.evaluate(sigEleFun) // => 'rgb(...),rgba(...),none,1,...|...'
- * ```
- *
-*/
-
-function sigEleFun ( eleCurEle : Element ) : string {
-
-
-	const sigStyFun = ( sigCurEle : Element ) => { // What: Signature Style Function. Why: Each element's look is read the same way. How: This joins one element's feedback styles into one string.
-
-
-		const styCurObj = getComputedStyle( sigCurEle ); // What: Style Current Object. Why: The element's styles are read as they're drawn now. How: This reads its computed styles.
-
-
-
-		return [ styCurObj.color, styCurObj.backgroundColor, styCurObj.borderColor, styCurObj.transform, styCurObj.opacity ].join( ',' ); // What: Element Signature Return. Why: One element's look compares as one string. How: This joins its feedback styles.
-
-
-	};
-
-
-
-	return [ eleCurEle, ...eleCurEle.querySelectorAll( '*' ) ].map( sigStyFun ).join( '|' ); // What: Signature Return. Why: Two looks compare as one string. How: This joins the signatures of the control and everything inside it.
-
-
-}
-
-// #endregion sigEleFun
-
-
-
 // #region cliBloFun
 
 /**
@@ -198,6 +147,57 @@ async function conLisFun ( curPagObj : Page ) : Promise< ElementHandle< Element 
 }
 
 // #endregion conLisFun
+
+
+
+// #region sigEleFun
+
+/**
+ * sigEleFun = Signature Element Function
+ *
+ * @summary
+ * Runs inside the page and describes how a control looks right now, as one
+ * string of the styles feedback usually changes (color, background, border
+ * color, transform, and opacity) for the control and every element inside
+ * it, so a change to its arrow or its label counts as the control's own.
+ * Passed to Playwright's evaluate, so it can't read anything from this file.
+ *
+ * @author z4nta0 <https://github.com/z4nta0>
+ *
+ * @param eleCurEle - Element Current Element: The control to describe.
+ *
+ * @returns The control's look, as one string to compare.
+ *
+ * @example
+ * ```ts
+ * handle.evaluate(sigEleFun) // => 'rgb(...),rgba(...),none,1,...|...'
+ * ```
+ *
+*/
+
+function sigEleFun ( eleCurEle : Element ) : string {
+
+
+	const sigStyFun = ( sigCurEle : Element ) => { // What: Signature Style Function. Why: Each element's look is read the same way. How: This joins one element's feedback styles into one string.
+
+
+		const styCurObj = getComputedStyle( sigCurEle ); // What: Style Current Object. Why: The element's styles are read as they're drawn now. How: This reads its computed styles.
+
+
+
+		return [ styCurObj.color, styCurObj.backgroundColor, styCurObj.borderColor, styCurObj.transform, styCurObj.opacity ].join( ',' ); // What: Element Signature Return. Why: One element's look compares as one string. How: This joins its feedback styles.
+
+
+	};
+
+
+
+	return [ eleCurEle, ...eleCurEle.querySelectorAll( '*' ) ].map( sigStyFun ).join( '|' ); // What: Signature Return. Why: Two looks compare as one string. How: This joins the signatures of the control and everything inside it.
+
+
+}
+
+// #endregion sigEleFun
 
 
 

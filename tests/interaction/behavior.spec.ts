@@ -58,6 +58,47 @@ const SMA_VIE_OBJ = { height : 568, width : 320  }; // What: Small Viewport Obje
 
 // #region Helpers
 
+// #region opeDraFun
+
+/**
+ * opeDraFun = Open Drawer Function
+ *
+ * @summary
+ * Opens the mobile drawer through its toggle and waits until the toggle
+ * reports it open, so a drawer check always starts from the drawer showing.
+ * The caller has to be on a phone-sized viewport, where the toggle exists.
+ *
+ * @author z4nta0 <https://github.com/z4nta0>
+ *
+ * @param curPagObj - Current Page Object: The page whose drawer to open.
+ *
+ * @returns A promise that settles once the drawer reports itself open, with no
+ *          value.
+ *
+ * @example
+ * ```ts
+ * opeDraFun(page) // => Promise<void>
+ * ```
+ *
+*/
+
+async function opeDraFun ( curPagObj : Page ) : Promise< void > {
+
+
+	const togButObj = curPagObj.getByRole( 'button', { name : 'Toggle menu' } ); // What: Toggle Button Object. Why: The drawer opens from its menu button. How: This finds the button by its name.
+
+
+	await togButObj.click(); // What: Toggle Click Call. Why: The drawer opens from a tap on the button. How: This clicks it.
+
+	await expect( togButObj ).toHaveAttribute( 'aria-expanded', 'true' ); // What: Drawer Open Wait. Why: A check should start with the drawer open. How: This waits until the button reports it expanded.
+
+
+}
+
+// #endregion opeDraFun
+
+
+
 // #region opeRouFun
 
 /**
@@ -138,47 +179,6 @@ async function secTopFun ( curPagObj : Page, eleIdeStr : string ) : Promise< num
 }
 
 // #endregion secTopFun
-
-
-
-// #region opeDraFun
-
-/**
- * opeDraFun = Open Drawer Function
- *
- * @summary
- * Opens the mobile drawer through its toggle and waits until the toggle
- * reports it open, so a drawer check always starts from the drawer showing.
- * The caller has to be on a phone-sized viewport, where the toggle exists.
- *
- * @author z4nta0 <https://github.com/z4nta0>
- *
- * @param curPagObj - Current Page Object: The page whose drawer to open.
- *
- * @returns A promise that settles once the drawer reports itself open, with no
- *          value.
- *
- * @example
- * ```ts
- * opeDraFun(page) // => Promise<void>
- * ```
- *
-*/
-
-async function opeDraFun ( curPagObj : Page ) : Promise< void > {
-
-
-	const togButObj = curPagObj.getByRole( 'button', { name : 'Toggle menu' } ); // What: Toggle Button Object. Why: The drawer opens from its menu button. How: This finds the button by its name.
-
-
-	await togButObj.click(); // What: Toggle Click Call. Why: The drawer opens from a tap on the button. How: This clicks it.
-
-	await expect( togButObj ).toHaveAttribute( 'aria-expanded', 'true' ); // What: Drawer Open Wait. Why: A check should start with the drawer open. How: This waits until the button reports it expanded.
-
-
-}
-
-// #endregion opeDraFun
 
 // #endregion Helpers
 
