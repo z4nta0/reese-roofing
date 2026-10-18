@@ -646,7 +646,7 @@ test( 'sending the form plays no motion under reduced motion', async ( { page : 
 
 
 
-test( 'sending the form announces it to screen readers', async ( { page : curPagObj } ) => { // What: Sent Announcement Test. Why: A screen reader isn't told when the focused button's label changes, so the sent request needs a live region of its own. How: This opens the home page, checks the status region is already in the page and empty, sends the form, and checks the region now holds the message.
+test( 'sending the form announces the email app opening to screen readers', async ( { page : curPagObj } ) => { // What: Sent Announcement Test. Why: A screen reader isn't told when the focused button's label changes, so the sent request needs a live region of its own. How: This opens the home page, checks the status region is already in the page and empty, sends the form, and checks the region now holds the message.
 
 
 	const homRecObj = STA_REC_ARR.find( ( staCurObj ) => staCurObj.ideStr === 'home-desktop' )!; // What: Home Record Object. Why: The form sits on the home page. How: This finds the home desktop state's row. // What: Non-Null Note. Why: find types its result as possibly undefined. How: STA_REC_ARR always lists the home-desktop state.
