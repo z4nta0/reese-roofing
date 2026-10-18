@@ -157,7 +157,7 @@
 
 /* #region fooDemSpa */
 
-.fooDemSpa { /* What: Footer Demo Span. Why: The demo notice is the longest meta line and shouldn't stretch the footer's middle column. How: This caps it at the small text measure, so it wraps onto a second line. */
+.fooDemSpa { /* What: Footer Demo Span. Why: The demo notice is the longest meta line and shouldn't stretch the footer's middle column, or its stacked column at 880px wide and below. How: This caps it at the small text measure, so it wraps onto a second line. */
 
 
 	max-width : var( --tex-wid-sma ); /* Text Width Small Maximum ~= 22.047em */

@@ -7,7 +7,8 @@
  * @summary
  * Styles for ConSecCom: the dark closing section, with the label, heading,
  * lede, detail rows, and signature card on the left and the framed estimate
- * form on the right, stacking at 960px wide and below. The form's fields are
+ * form on the right, stacking at 960px wide and below, where the signature
+ * card centers in the column at 500px and below. The form's fields are
  * underlined controls in light text, whose underlines turn the soft accent on
  * focus. The heading's italic word takes the soft accent, so it stays readable
  * on the dark band. The shared section, container, eyebrow, display, lede,
@@ -180,7 +181,7 @@
 
 }
 
-.rowLabTer { /* What: Row Label Term. Why: Each row's label reads as a small tracked caption. How: This sets it in faded uppercase, nudged down to line up with the value. */
+.rowLabTer { /* What: Row Label Term. Why: Each row's label reads as a small tracked caption. How: This sets it in faded uppercase, nudged down to line up with the value beside it above 540px wide, where the row has a label column. */
 
 
 	color          : oklch( from var( --bac-pag-col ) l c h / 0.5 ); /* Background Page Color = #f5f2ec @ 0.5 opacity */

@@ -201,7 +201,7 @@
 
 /* #region herTitHea */
 
-.herTitHea { /* What: Hero Title Heading. Why: The headline is the page's largest type. How: This sets it in the display font at its largest optical size, scaling with the viewport between two font size steps, with no width cap, its line breaks starting each new line, though a long first line still wraps in the two-column layout and on the narrowest phones. */
+.herTitHea { /* What: Hero Title Heading. Why: The headline is the page's largest type. How: This sets it in the display font at its largest optical size, scaling with the viewport between two font size steps, with no width cap, its line breaks starting each new line, though a long first line still wraps above 960px wide and at about 368px wide and below. */
 
 
 	color                   : var( --tex-mai-col );                                       /* Text Main Color = #1a1f24 */
@@ -576,7 +576,7 @@
 
 
 }
-.staIteDiv:first-child { /* What: Stat Item Div First. Why: The first stat anchors the row with a stronger rule. How: This draws its rule in full ink. */
+.staIteDiv:first-child { /* What: Stat Item Div First. Why: The first stat anchors the stats with a stronger rule, leading the first of their two rows at 960px wide and below. How: This draws its rule in full ink. */
 
 
 	border-left : var( --bor-wid-bas ) solid var( --tex-mai-col ); /* Border Width Base ~= 1.160px, Text Main Color = #1a1f24 */
