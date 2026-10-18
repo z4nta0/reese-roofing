@@ -220,7 +220,7 @@ function useSecCliFun () : ( cliEveObj : React.MouseEvent< HTMLAnchorElement >, 
 
 // #region Exports
 
-export { modCliFun, useSecCliFun, useSecLinFun }; // What: Named Exports. Why: The bar, the hero, and the 404 page reach sections through these, and the footer's back to top link shares the modified-click check. How: This exports the modified-click check, the shared click handler, and useSecLinFun.
+export { modCliFun, useSecCliFun }; // What: Named Exports. Why: The bar, the hero, and the 404 page reach sections through these, and the footer's back to top link shares the modified-click check. How: This exports the modified-click check and the shared click handler, while useSecLinFun stays private to the handler that calls it.
 
 // #endregion Exports
 
