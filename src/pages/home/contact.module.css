@@ -40,7 +40,7 @@
 
 /* #region conLayDiv */
 
-.conLayDiv { /* What: Contact Layout Div. Why: The details and the form share a row at the page's content width. How: This centers a two-column grid aligned to the top, with the page's side gutter. */
+.conLayDiv { /* What: Contact Layout Div. Why: The details and the form are laid out together at the page's content width. How: This centers a two-column grid aligned to the top, with the page's side gutter. */
 
 
 	align-items           : start;
@@ -447,7 +447,7 @@
 
 /* #region forRowDiv */
 
-.forRowDiv { /* What: Form Row Div. Why: Email and phone are short enough to share a row. How: This sets two equal columns. */
+.forRowDiv { /* What: Form Row Div. Why: Email and phone are short enough to sit side by side where there's room. How: This sets two equal columns. */
 
 
 	display               : grid;
