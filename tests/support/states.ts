@@ -65,12 +65,13 @@ type StaRecTyp = { // What: State Record Type. Why: Every check reads the same d
  * the two widths only that one shows the bar's menu toggle. The 404 page is
  * reached through an address the site doesn't have, the way a visitor would
  * land on it. Every row shares the {@link StaRecTyp} shape, so its fields
- * carry no comments of their own: - `actFun` (Function): Action Function, run
- * after the page loads to open   something on it, such as the drawer. Only the
- * drawer row has one. - `heiNum` (Number): Height Number, the viewport height
- * in CSS pixels. - `ideStr` (String): Identifier String, the state's name in
- * test titles. - `patStr` (String): Path String, the route loaded from the dev
- * server. - `widNum` (Number): Width Number, the viewport width in CSS pixels.
+ * carry no comments of their own:
+ * - `actFun` (Function): Action Function, run after the page loads to open
+ *   something on it, such as the drawer. Only the drawer row has one.
+ * - `heiNum` (Number): Height Number, the viewport height in CSS pixels.
+ * - `ideStr` (String): Identifier String, the state's name in test titles.
+ * - `patStr` (String): Path String, the route loaded from the dev server.
+ * - `widNum` (Number): Width Number, the viewport width in CSS pixels.
  *
  * @author z4nta0 <https://github.com/z4nta0>
  *
@@ -157,7 +158,7 @@ async function opeStaFun ( curPagObj : Page, staRecObj : StaRecTyp ) : Promise< 
 		for ( const imaCurEle of document.querySelectorAll< HTMLImageElement >( 'img[loading="lazy"]' ) ) { // What: Lazy Image Loop. Why: Every rendered lazy image on the page has to load before the state is measured. How: This visits each one in page order.
 
 
-			if ( imaCurEle.complete || !imaCurEle.getClientRects().length ) continue; // What: Loaded Or Hidden Guard. Why: A loaded image needs nothing, and a hidden one (the about seal on a phone) never loads, so waiting on it would hang. How: This skips an image that's already complete or isn't rendered.
+			if ( imaCurEle.complete || !imaCurEle.getClientRects().length ) continue; // What: Loaded Or Hidden Guard. Why: A loaded image needs nothing, and a hidden one (the about seal, hidden at 960px wide and below) never loads, so waiting on it would hang. How: This skips an image that's already complete or isn't rendered.
 
 
 

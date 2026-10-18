@@ -52,7 +52,7 @@ import type { Page    } from '@playwright/test'; // What: Page. Why: Every helpe
 
 const CLI_KIN_ARR : Array< [ string, Parameters< Locator[ 'click' ] >[ 0 ] ] > = [ [ 'Ctrl or Cmd', { modifiers : [ 'ControlOrMeta' ] } ], [ 'middle', { button : 'middle' } ] ]; // What: Click Kind Array. Why: Both ways of asking for a new tab have to keep working now that plain clicks scroll in place. How: Each row pairs a click kind's name with the click options that make it, ControlOrMeta pressing Cmd on a Mac and Ctrl elsewhere.
 
-const DES_VIE_OBJ = { height : 900, width : 1440 }; // What: Desktop Viewport Object. Why: The bar's own links show only on wide screens. How: This is the desktop size the navigation checks use.
+const DES_VIE_OBJ = { height : 900, width : 1440 }; // What: Desktop Viewport Object. Why: The bar's own links show only above 880px wide. How: This is the desktop size the navigation checks use.
 const PHO_VIE_OBJ = { height : 844, width : 390  }; // What: Phone Viewport Object. Why: The drawer exists only at 880px wide and below. How: This is the phone size the drawer checks use.
 const SMA_VIE_OBJ = { height : 568, width : 320  }; // What: Small Viewport Object. Why: The 404 page only scrolls on the smallest phones. How: This is the 320 by 568 size the Return home and back to top checks open it at.
 
@@ -209,7 +209,7 @@ for ( const [ linLabStr, secIdeStr ] of [ [ 'Services', 'services' ], [ 'About',
 	test( `the ${ linLabStr } link scrolls to its section`, async ( { page : curPagObj } ) => { // What: Section Link Test. Why: A section link has to take the visitor to its section. How: This clicks the link and checks the section's position and the address.
 
 
-		await opeRouFun( curPagObj, '/', DES_VIE_OBJ ); // What: Home Open Call. Why: The bar's own links show on wide screens. How: This opens the home page at desktop size.
+		await opeRouFun( curPagObj, '/', DES_VIE_OBJ ); // What: Home Open Call. Why: The bar's own links show above 880px wide. How: This opens the home page at desktop size.
 
 		await curPagObj.getByRole( 'banner' ).getByRole( 'link', { exact : true, name : linLabStr } ).click(); // What: Section Link Click Call. Why: This is the action under test. How: This clicks the bar's link by its label.
 
@@ -234,7 +234,7 @@ for ( const [ cliKinStr, cliOptObj ] of CLI_KIN_ARR ) { // What: Modified Click 
 	test( `a ${ cliKinStr } click opens a section in a new tab`, async ( { page : curPagObj } ) => { // What: New Tab Test. Why: A visitor opening a section in a new tab should land on it there, and the page they clicked from should stay put. How: This makes the click, then checks the new tab's section and address and the old page's scroll and address.
 
 
-		await opeRouFun( curPagObj, '/', DES_VIE_OBJ ); // What: Home Open Call. Why: The bar's own links show on wide screens. How: This opens the home page at desktop size.
+		await opeRouFun( curPagObj, '/', DES_VIE_OBJ ); // What: Home Open Call. Why: The bar's own links show above 880px wide. How: This opens the home page at desktop size.
 
 
 		const newTabPro = curPagObj.context().waitForEvent( 'page' ); // What: New Tab Promise. Why: The click opens its page in a new tab. How: This waits for the browser context to report a new page, set up before the click so it can't be missed.
@@ -292,7 +292,7 @@ for ( const [ butLabStr, secIdeStr ] of [ [ 'Request an estimate', 'contact' ], 
 test( "the bar's estimate button scrolls to the contact section", async ( { page : curPagObj } ) => { // What: Bar Estimate Test. Why: The bar's main action has to reach the form without a hash. How: This clicks the bar's estimate button and checks the section's position and the address.
 
 
-	await opeRouFun( curPagObj, '/', DES_VIE_OBJ ); // What: Home Open Call. Why: The bar's estimate button shows on wide screens. How: This opens the home page at desktop size.
+	await opeRouFun( curPagObj, '/', DES_VIE_OBJ ); // What: Home Open Call. Why: The bar's estimate button shows above 880px wide. How: This opens the home page at desktop size.
 
 	await curPagObj.getByRole( 'banner' ).getByRole( 'link', { name : 'Get an estimate' } ).click(); // What: Bar Estimate Click Call. Why: This is the action under test. How: This clicks the bar's estimate button.
 
@@ -311,7 +311,7 @@ test( "the bar's estimate button scrolls to the contact section", async ( { page
 test( 'the Home link returns to the top', async ( { page : curPagObj } ) => { // What: Home Link Test. Why: Home has to bring a scrolled visitor back to the start. How: This scrolls down, clicks Home, and checks the scroll position.
 
 
-	await opeRouFun( curPagObj, '/', DES_VIE_OBJ ); // What: Home Open Call. Why: The bar's Home link shows on wide screens. How: This opens the home page at desktop size.
+	await opeRouFun( curPagObj, '/', DES_VIE_OBJ ); // What: Home Open Call. Why: The bar's Home link shows above 880px wide. How: This opens the home page at desktop size.
 
 	await curPagObj.evaluate( () => window.scrollTo( 0, 2000 ) ); // What: Scroll Down Call. Why: Home only matters away from the top. How: This scrolls the page down.
 
