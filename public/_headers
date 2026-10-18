@@ -13,15 +13,15 @@
 # directives listed either need a different value than 'self' (form-action,
 # frame-src, img-src, object-src), are never covered by default-src at all
 # (base-uri, frame-ancestors), or just state the default for clarity
-# (script-src, style-src). img-src adds data: for the logos, small enough that
-# Vite inlines them into the bundle as data URIs, and for the contact form's
-# select arrow, a small SVG written into the stylesheet. Without it every
-# engine blocks all three images. form-action is 'none', since the form's
-# script always stops the browser's own submit and opens the email instead.
-# style-src needs no 'unsafe-inline': the build ships no inline styles, and
-# React sets its few dynamic styles through the DOM, which the policy doesn't
-# restrict. The structured data script is a data block that never runs, so
-# script-src doesn't need to allow it either.
+# (script-src, style-src). img-src adds data: for the logo mark, small enough
+# that Vite inlines it into the bundle as a data URI, and for the contact
+# form's select arrow, a small SVG written into the stylesheet. Without it
+# every engine blocks the bar's and footer's marks and the arrow. form-action
+# is 'none', since the form's script always stops the browser's own submit and
+# opens the email instead. style-src needs no 'unsafe-inline': the build ships
+# no inline styles, and React sets its few dynamic styles through the DOM,
+# which the policy doesn't restrict. The structured data script is a data block
+# that never runs, so script-src doesn't need to allow it either.
 #
 # Strict-Transport-Security keeps browsers on HTTPS for two years across
 # every subdomain, leaving out preload, which commits the domain to the

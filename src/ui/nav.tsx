@@ -4,7 +4,7 @@
 // #region Imports
 
 import cssModObj from './nav.module.css';        // What: CSS Module Object. Why: The bar's layout, scrolled state, and mobile drawer are styled in its own module. How: Each element reads its hashed class name from this object.
-import lomSvgUrl from '../assets/logo-mark.svg'; // What: Logo-Mark SVG URL. Why: The bar's brand link shows the simple logo mark. How: Vite resolves the import to the file's fingerprinted URL, used as the image's src.
+import lomSvgUrl from '../assets/logo-mark.svg'; // What: Logo-Mark SVG URL. Why: The bar's brand link shows the simple logo mark. How: Vite resolves the import to a URL for the image's src, inlining this small file into the bundle as a data URI in the build.
 import React     from 'react';                   // What: React. Why: The bar tracks its scroll and drawer state with React's hooks. How: This is read for its hooks (React.useState, React.useEffect, and React.useRef) and its types.
 
 
@@ -294,7 +294,7 @@ function NavBarCom () : React.JSX.Element {
 								className={ cssModObj.arrIcoSpa }
 
 								aria-hidden='true'
-							>{ /* What: Arrow Icon Span Element. Why: The arrow marks the button as moving the visitor onward. How: This sits right after the label, hidden from screen readers since it only decorates the label. */ }
+							>{ /* What: Arrow Icon Span Element. Why: The arrow marks the bar's estimate button as moving the visitor onward. How: This sits right after the button's label and nudges right when it's hovered, hidden from screen readers since it only decorates the label. */ }
 								→
 							</span>
 						</a>
@@ -314,9 +314,9 @@ function NavBarCom () : React.JSX.Element {
 					>{ /* What: Navigation Toggle Button Element. Why: Small screens hide the links behind a menu button. How: This flips the drawer open or closed, and its aria-expanded both reports the state to screen readers and styles the open icon. */ }
 
 
-						<span className={ cssModObj.togLinSpa } />{ /* What: Toggle Line Span Element. Why: The button draws its icon from two lines. How: Its stylesheet turns the pair into a cross while the drawer is open. */ }
+						<span className={ cssModObj.togLinSpa } />{ /* What: Toggle Line Span Element. Why: The button draws its icon from two lines, and this is the top one. How: Its stylesheet drops it to the middle and turns it 45 degrees while the drawer is open, forming one stroke of the cross. */ }
 
-						<span className={ cssModObj.togLinSpa } />{ /* What: Toggle Line Span Element. Why: The button draws its icon from two lines. How: Its stylesheet turns the pair into a cross while the drawer is open. */ }
+						<span className={ cssModObj.togLinSpa } />{ /* What: Toggle Line Span Element. Why: The button draws its icon from two lines, and this is the bottom one. How: Its stylesheet lifts it to the middle and turns it the other way while the drawer is open, forming the cross's other stroke. */ }
 
 
 					</button>
@@ -405,7 +405,7 @@ function NavBarCom () : React.JSX.Element {
 								className={ cssModObj.arrIcoSpa }
 
 								aria-hidden='true'
-							>{ /* What: Arrow Icon Span Element. Why: The arrow marks the button as moving the visitor onward. How: This sits right after the label, hidden from screen readers since it only decorates the label. */ }
+							>{ /* What: Arrow Icon Span Element. Why: The arrow marks the drawer's estimate button as moving the visitor onward. How: This sits right after the button's label and nudges right when it's hovered, hidden from screen readers since it only decorates the label. */ }
 								→
 							</span>
 						</a>

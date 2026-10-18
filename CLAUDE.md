@@ -47,10 +47,10 @@ isn't a real business, so it gets the demo treatment rather than local SEO:
   same hardening block as the sibling sites (a strict Content-Security-Policy,
   HSTS, nosniff, a framing deny, and the referrer and permissions policies),
   which a header checker found missing. Its CSP allows `data:` images, since
-  Vite inlines the small logo SVGs as data URIs and the select arrow is one;
-  form-action is `'none'`, since the form only opens a mailto link. Checked
-  with the built site served under the policy in all three engines, with no
-  violations.
+  Vite inlines the small logo mark SVG as a data URI and the select arrow is
+  one; form-action is `'none'`, since the form only opens a mailto link.
+  Checked with the built site served under the policy in all three engines,
+  with no violations.
 - **Checked by** `npm run test:seo`, which also reads the raw page without a
   browser for the home title and description, and checks every route has one
   description within the bounds. No off-site work (Business Profile,

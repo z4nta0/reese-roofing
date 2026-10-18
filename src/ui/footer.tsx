@@ -4,7 +4,7 @@
 // #region Imports
 
 import cssModObj from './footer.module.css';     // What: CSS Module Object. Why: The footer's layout and type are styled in its own module. How: Each element reads its hashed class name from this object.
-import lomSvgUrl from '../assets/logo-mark.svg'; // What: Logo-Mark SVG URL. Why: The footer's brand shows the simple logo mark. How: Vite resolves the import to the file's fingerprinted URL, used as the image's src.
+import lomSvgUrl from '../assets/logo-mark.svg'; // What: Logo-Mark SVG URL. Why: The footer's brand shows the simple logo mark. How: Vite resolves the import to a URL for the image's src, inlining this small file into the bundle as a data URI in the build.
 
 
 import { modCliFun } from './section-link.ts';  // What: Modified Click Function. Why: A Ctrl, Cmd, or middle click on back to top should still open the page in a new tab. How: The link's handler steps aside when this reports a modified click.
@@ -105,7 +105,7 @@ function SitFooCom () : React.JSX.Element {
 						<img
 							className={ cssModObj.fooMarIma }
 
-							height='26'
+							height='25'
 							src={ lomSvgUrl }
 							width='28'
 
