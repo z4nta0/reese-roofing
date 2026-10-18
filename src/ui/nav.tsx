@@ -208,7 +208,7 @@ function NavBarCom () : React.JSX.Element {
 	return (
 
 
-		<>{ /* What: Navigation Fragment Element. Why: The scrim and the bar render as siblings, the scrim first so the bar, at the same stack level, paints above it. How: This groups them without adding a wrapper element. */ }
+		<>{ /* What: Navigation Fragment. Why: The scrim and the bar render as siblings, the scrim first so the bar, at the same stack level, paints above it. How: This groups them without adding a wrapper element. */ }
 
 
 			<div
