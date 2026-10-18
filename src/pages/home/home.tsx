@@ -83,7 +83,7 @@ function HomPagCom () : React.JSX.Element {
 
 
 
-		document.fonts.ready.then( () => { // What: Fonts Ready Callback. Why: The jump should land where the section sits once the fonts have reflowed the page above it. How: This waits for the fonts, then scrolls and clears the hash.
+		void document.fonts.ready.then( () => { // What: Fonts Ready Callback. Why: The jump should land where the section sits once the fonts have reflowed the page above it. How: This waits for the fonts, then scrolls and clears the hash; void marks the returned promise as deliberately unawaited.
 
 
 			document.getElementById( hasValStr.slice( 1 ) )?.scrollIntoView( { behavior : 'instant' } ); // What: Arrival Scroll Call. Why: The visitor should land on the section, as a normal link arrival would. How: This jumps to the element the hash names, instantly rather than smoothly, as an arrival rather than a movement.
