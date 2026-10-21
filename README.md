@@ -72,7 +72,7 @@ npm run preview
 
 ```
 src/
-├── assets/            Images and fonts shared by 2+ pages (logo-mark.svg, fonts/)
+├── assets/            Images and fonts shared by 2+ pages (images/, fonts/)
 ├── pages/
 │   ├── home/          Home page and its sections (Hero, Services, About, Contact), each with its own .module.css, plus logo-full.svg
 │   └── not-found/     404 page and its .module.css
@@ -104,7 +104,7 @@ design/
 - **Layout:** Editorial grid, generous negative space, hairline dividers, numbered section labels (02 to 04, after the hero). Hover states are intentional but never showy.
 - **Logo usage:**
   - The **full logo** (`src/pages/home/logo-full.svg`) anchors the hero as the primary visual, doubles as a "seal" in the About section's sticky left column above 960px wide, and appears on a paper-colored signature card in the Contact section. It's a two-color SVG (navy mark + grey subtext).
-  - The **simple mark** (`src/assets/logo-mark.svg`) is used in the nav bar and the footer.
+  - The **simple mark** (`src/assets/images/logo-mark.svg`) is used in the nav bar and the footer.
   - The **favicon** uses an SVG (`/public/favicon.svg`), a centered, padded version of the simple mark, with raster `.ico` and PNG fallbacks (16/32/192/512) plus a 180×180 Apple touch icon on a paper-colored background.
   - All logos are vector SVG: crisp at any size, with tiny payloads. The brand navy `#1f4e7a` is set as a `fill` attribute in the mark and the favicon, but the full logo also writes it as `rgb(31, 78, 122)` in two paths' `style` attributes, and its grey as both `#6b7079` and `rgb(107, 112, 121)`, so a different color treatment has to change both forms.
 

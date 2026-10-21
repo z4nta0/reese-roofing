@@ -3,9 +3,9 @@
 
 // #region Imports
 
-import cssModObj from './nav.module.css';        // What: CSS Module Object. Why: The bar's layout, scrolled state, and drawer are styled in its own module. How: Each element reads its hashed class name from this object.
-import lomSvgUrl from '../assets/logo-mark.svg'; // What: Logo-Mark SVG URL. Why: The bar's brand link shows the simple logo mark. How: Vite resolves the import to a URL for the image's src, inlining this small file into the bundle as a data URI in the build.
-import React     from 'react';                   // What: React. Why: The bar tracks its scroll and drawer state with React's hooks. How: This is read for its hooks, React.useState, React.useEffect, and React.useRef.
+import cssModObj from './nav.module.css';               // What: CSS Module Object. Why: The bar's layout, scrolled state, and drawer are styled in its own module. How: Each element reads its hashed class name from this object.
+import lomSvgUrl from '../assets/images/logo-mark.svg'; // What: Logo-Mark SVG URL. Why: The bar's brand link shows the simple logo mark. How: Vite resolves the import to a URL for the image's src, inlining this small file into the bundle as a data URI in the build.
+import React     from 'react';                          // What: React. Why: The bar tracks its scroll and drawer state with React's hooks. How: This is read for its hooks, React.useState, React.useEffect, and React.useRef.
 
 
 import { useSecCliFun } from './section-link.ts'; // What: Use Section Click Function. Why: Every section link in the bar and drawer reaches its section the same way, leaving no hash in the address. How: This returns secCliFun, the shared click handler.
