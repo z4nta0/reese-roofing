@@ -614,8 +614,10 @@ test( 'the drawer and its scrim animate open and closed', async ( { page : curPa
 	await opeStaFun( curPagObj, phoRecObj ); // What: Phone State Open Call. Why: The drawer is toggled with the page settled. How: This loads the home page at phone size, with motion on.
 
 
-	const sciDivObj = curPagObj.locator( 'header' ).locator( 'xpath=preceding-sibling::div[1]' );                                                     // What: Scrim Div Object. Why: The scrim fades behind the drawer. How: This finds the element rendered just before the bar.
-	const togButObj = curPagObj.getByRole( 'button', { name : 'Toggle menu' } );                                                                      // What: Toggle Button Object. Why: The drawer opens and closes from its menu button. How: This finds the button by its name.
+	const sciDivObj = curPagObj.locator( 'header' ).locator( 'xpath=preceding-sibling::div[1]' ); // What: Scrim Div Object. Why: The scrim fades behind the drawer. How: This finds the element rendered just before the bar.
+	const togButObj = curPagObj.getByRole( 'button', { name : 'Toggle menu' } );                  // What: Toggle Button Object. Why: The drawer opens and closes from its menu button. How: This finds the button by its name.
+
+
 	const traLisFun = ( eleCurEle : Element ) => eleCurEle.getAnimations().map( ( aniCurObj ) => ( aniCurObj as CSSTransition ).transitionProperty ); // What: Transition List Function. Why: A transition that really runs shows up among the element's animations. How: This lists the property each running transition animates. // What: Type Assertion Note. Why: getAnimations returns plain Animation objects, which don't type a transition's property. How: Each one is read as a CSS transition.
 
 
