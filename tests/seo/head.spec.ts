@@ -90,8 +90,6 @@ const SEC_HEA_ARR = [ // What: Security Header Array. Why: A header security che
 
 ];
 
-
-
 const SOC_KEY_ARR = [ // What: Social Key Array. Why: The social preview rule lists every Open Graph and Twitter tag a complete card needs. How: Each entry names one tag the page must carry, while the theme color and icons are checked by their own selectors.
 
 
