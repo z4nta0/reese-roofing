@@ -54,7 +54,7 @@ const ENG_NAM_ARR = [ // What: Engine Name Array. Why: Every suite runs in all t
 
 
 const ROO_DIR_STR = fileURLToPath( new URL( '..', import.meta.url ) ); // What: Root Directory String. Why: The dev server must run from the repo root, where vite.config.ts lives. How: This resolves the folder above tests/.
-const SER_URL_STR = 'http://localhost:5191';                           // What: Server URL String. Why: Every suite opens the site from the same dev server. How: This is the address Playwright waits on and every page's baseURL.
+const SER_URL_STR = 'http://localhost:5191';                           // What: Server URL String. Why: Every suite but production opens the site from the same dev server. How: This is the address Playwright waits on and every page's baseURL.
 
 
 
@@ -112,7 +112,7 @@ const PLA_CON_OBJ = defineConfig({ // What: Playwright Config Object. Why: Playw
 	use : { // What: Use. Why: Every suite shares the same page setup. How: This sets the base URL, locale, and failure artifacts.
 
 
-		baseURL    : SER_URL_STR,        // What: Base URL. Why: Specs navigate with short paths. How: This points every page.goto at the dev server.
+		baseURL    : SER_URL_STR,        // What: Base URL. Why: Specs navigate with short paths. How: This points every short path a page or request opens at the dev server.
 		locale     : 'en-US',            // What: Locale. Why: The site is written in US English. How: This runs every page in it.
 		screenshot : 'only-on-failure',  // What: Screenshot. Why: A failing check is easier to diagnose from what was on screen. How: This saves a screenshot only when a test fails.
 		trace      : 'retain-on-failure' // What: Trace. Why: A failure can be stepped through afterwards. How: This keeps the Playwright trace only for failing tests.

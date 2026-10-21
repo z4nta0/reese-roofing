@@ -90,7 +90,7 @@ const STA_REC_ARR : StaRecTyp[] = [ // What: State Record Array. Why: Every chec
 	{ heiNum : 900, ideStr : 'not-found-desktop', patStr : '/missing', widNum : 1440 }, // What: Not Found Desktop State. Why: A mistyped address should be as usable as any page. How: This loads an unknown path at 1,440px.
 	{ heiNum : 844, ideStr : 'not-found-phone',   patStr : '/missing', widNum : 390  }, // What: Not Found Phone State. Why: The 404 page has its own phone layout. How: This loads an unknown path at 390px.
 
-	{ // What: Drawer Phone State. Why: The open drawer holds the phone's only copy of the links, contact details, and estimate button. How: This loads the home page at 390px and opens the menu through its toggle button.
+	{ // What: Drawer Phone State. Why: At phone width the open drawer is the only place the bar's links, phone number, and estimate button show. How: This loads the home page at 390px and opens the menu through its toggle button.
 
 
 		heiNum : 844,
