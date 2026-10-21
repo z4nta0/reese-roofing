@@ -93,6 +93,8 @@ async function scaStaFun ( curPagObj : Page ) : Promise< AxeResTyp > {
 
 // #endregion scaStaFun
 
+
+
 // #region sumResFun
 
 /**

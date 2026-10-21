@@ -409,6 +409,8 @@ function stoInfFun () : StoInfTyp | null {
 
 // #endregion stoInfFun
 
+
+
 // #region keyProFun
 
 /**
