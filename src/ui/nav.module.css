@@ -94,11 +94,11 @@
 .navBarHed[data-page-scroll-past] { /* What: Scrolled Navigation Bar Header. Why: Once the page moves, the bar needs a background to stay readable over content. How: This frosts it, tightens its padding, and adds a hairline below. */
 
 
-	-webkit-backdrop-filter : saturate( 180% ) blur( calc( var( --ver-rhy-bas ) * 1rem ) ); /* Vertical Rhythm Base ~= 14.572px */
-	backdrop-filter         : saturate( 180% ) blur( calc( var( --ver-rhy-bas ) * 1rem ) ); /* Vertical Rhythm Base ~= 14.572px */
-	background              : oklch( from var( --bac-pag-col ) l c h / 0.85 );              /* Background Page Color = #f5f2ec @ 0.85 opacity */
-	border-bottom           : var( --bor-wid-bas ) solid var( --bor-mai-col );              /* Border Width Base ~= 1.160px, Border Main Color = #1a1f24 @ 0.12 opacity */
-	padding-block           : var( --spa-ver-m01 );                                         /* Spacing Vertical Base Minus 1 = 11px */
+	-webkit-backdrop-filter : saturate( var( --cdn-pow-002 ) ) blur( calc( var( --ver-rhy-bas ) * 1rem ) ); /* Core-Design-Number to the Power of 2 ~= 1.755, Vertical Rhythm Base ~= 14.572px */
+	backdrop-filter         : saturate( var( --cdn-pow-002 ) ) blur( calc( var( --ver-rhy-bas ) * 1rem ) ); /* Core-Design-Number to the Power of 2 ~= 1.755, Vertical Rhythm Base ~= 14.572px */
+	background              : oklch( from var( --bac-pag-col ) l c h / 0.85 );                              /* Background Page Color = #f5f2ec @ 0.85 opacity */
+	border-bottom           : var( --bor-wid-bas ) solid var( --bor-mai-col );                              /* Border Width Base ~= 1.160px, Border Main Color = #1a1f24 @ 0.12 opacity */
+	padding-block           : var( --spa-ver-m01 );                                                         /* Spacing Vertical Base Minus 1 = 11px */
 
 
 }
