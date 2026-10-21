@@ -600,6 +600,7 @@ test( 'sending the form opens a mailto link carrying the request', async ( { bro
 	test.skip( engNamStr !== 'chromium', "Reading a mailto navigation needs Chromium's DevTools Protocol." ); // What: Chromium Only Skip. Why: Only Chromium reports a mailto navigation to the test, through its DevTools Protocol. How: This skips the test in the other engines.
 
 
+
 	await opeRouFun( curPagObj, '/', DES_VIE_OBJ ); // What: Home Open Call. Why: The form sits at the bottom of the home page. How: This opens it at desktop size.
 
 
@@ -610,9 +611,7 @@ test( 'sending the form opens a mailto link carrying the request', async ( { bro
 
 	await cdpSesObj.send( 'Page.enable' ); // What: Page Domain Enable Call. Why: Navigation events only arrive once the page domain is on. How: This turns it on.
 
-
 	cdpSesObj.on( 'Page.frameRequestedNavigation', ( navEveObj ) => navUrlArr.push( navEveObj.url ) ); // What: Navigation Listener. Why: The mailto URL is the request itself. How: This records each URL the page asks to navigate to.
-
 
 	await curPagObj.locator( '#conNamInp' ).fill( 'Pat Doe' );         // What: Name Fill Call. Why: The subject should carry the name. How: This types one into the name field.
 	await curPagObj.locator( '#conEmaInp' ).fill( 'pat@example.com' ); // What: Email Fill Call. Why: The body should carry the email. How: This types one into the email field.
