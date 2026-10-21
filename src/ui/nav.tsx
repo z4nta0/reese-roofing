@@ -175,7 +175,6 @@ function NavBarCom () : React.JSX.Element {
 
 		};
 
-
 		const onResWinFun = () => { if ( !togButEle.getClientRects().length ) setDraOpeBoo( false ); }; // What: On Resize Window Function. Why: A screen widened past the drawer's breakpoint hides the toggle, which would leave the page inert with no way to close it. How: This closes the drawer once the toggle no longer renders.
 
 
