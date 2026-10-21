@@ -252,7 +252,10 @@ split:
 - **Buttons**: height comes from line height alone, the p04 rhythm step times
   `1rem` (about 44.9px), with no top or bottom padding, and side padding
   clamped between two spacing steps. The user chose it over Ease My Life's
-  33.9px, which read too short here.
+  33.9px, which read too short here. A full-width button with centered content
+  (the drawer's estimate button, `.draEstAnc`) keeps a fixed side padding step
+  instead (decided 2026-10-21), since its padding only bounds how far the
+  content can reach.
 
 Design system choices (decided 2026-10-07):
 - **Base and body size**: 1rem is the 11px base, and body text is Base Plus 1
