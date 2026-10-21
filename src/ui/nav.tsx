@@ -40,7 +40,7 @@ import { useSecCliFun } from './section-link.ts'; // What: Use Section Click Fun
 // #region NAV_LIN_ARR
 
 /**
- * NAV_LIN_ARR = Nav Link Array
+ * NAV_LIN_ARR = Navigation Link Array
  *
  * @summary
  * The section links the bar and its drawer both list, in the order the bar
@@ -56,7 +56,7 @@ import { useSecCliFun } from './section-link.ts'; // What: Use Section Click Fun
  *
 */
 
-const NAV_LIN_ARR = [ // What: Nav Link Array. Why: The bar and its drawer list the same section links. How: Each row pairs a home page section's id, which its link's address names with the root path so a Ctrl, Cmd, or middle click opens it from any page, with its label, and both lists map over it, the drawer numbering the rows in order to match the sections' own numbered labels.
+const NAV_LIN_ARR = [ // What: Navigation Link Array. Why: The bar and its drawer list the same section links. How: Each row pairs a home page section's id, which its link's address names with the root path so a Ctrl, Cmd, or middle click opens it from any page, with its label, and both lists map over it, the drawer numbering the rows in order to match the sections' own numbered labels.
 
 
 	{ ideStr : 'top',      labStr : 'Home'     }, // What: Home Link Row. Why: Not every visitor knows the logo leads home, so the bar spells it out. How: This names the hero's top anchor.
@@ -274,7 +274,7 @@ function NavBarCom () : React.JSX.Element {
 					>{ /* What: Navigation Links Nav Element. Why: The section links form the site's primary navigation landmark. How: This lists a link for each row of NAV_LIN_ARR, and hides at 880px wide and below, where the drawer repeats the links. */ }
 
 
-						{ NAV_LIN_ARR.map( ( navLinObj ) => ( // What: Nav Link Map. Why: The bar lists every section link. How: This renders an anchor for each row of NAV_LIN_ARR.
+						{ NAV_LIN_ARR.map( ( navLinObj ) => ( // What: Navigation Link Map. Why: The bar lists every section link. How: This renders an anchor for each row of NAV_LIN_ARR.
 
 
 							<a
