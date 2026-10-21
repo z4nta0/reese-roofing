@@ -72,7 +72,7 @@ import type { Plugin } from 'vite'; // What: Plugin. Why: The page minifier is a
 const minHtmFun = () : Plugin => ({ // What: Minify HTML Function. Why: index.html ships as written unless something minifies it. How: This returns a build-only Vite plugin that does.
 
 
-	apply : 'build',               // What: Apply. Why: The dev server should serve the page as written. How: This runs the plugin only during npm run build.
+	apply : 'build',               // What: Apply. Why: The dev server should serve the page as written. How: This runs the plugin only during a production build.
 	name  : 'minify-shipped-page', // What: Name. Why: Vite reports a plugin's warnings and errors under its name. How: This names the plugin.
 
 	transformIndexHtml : { // What: Transform Index HTML Hook. Why: Vite processes index.html but doesn't minify it. How: This compacts the page after Vite's own changes.
