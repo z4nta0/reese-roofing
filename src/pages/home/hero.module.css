@@ -274,7 +274,6 @@
 
 
 	}
-
 	.herLogDiv::before { /* What: Tighter Hero Logo Div Ring. Why: The smaller stacked logo needs a tighter ring. How: This shrinks the ring's offset to the base step. */
 
 
