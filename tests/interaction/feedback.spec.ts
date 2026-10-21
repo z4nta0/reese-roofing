@@ -3,9 +3,9 @@
 
 // #region Imports
 
-import { expect      } from '@playwright/test';     // What: Expect. Why: Each check passes only when the page responds as it should. How: This asserts each problem list is empty, and checks the focus ring's width, the brand link's looks and durations, and the drawer's, scrim's, and sent label's motion.
+import { expect      } from '@playwright/test';     // What: Expect. Why: Each check passes only when the page responds as it should. How: This asserts each problem list is empty, and checks the focus ring's width, the brand link's and service cards' looks and durations, and the drawer's, scrim's, and sent label's motion.
 import { opeStaFun   } from '../support/states.ts'; // What: Open State Function. Why: Each check opens and settles its state first. How: This loads it and waits for it.
-import { STA_REC_ARR } from '../support/states.ts'; // What: State Record Array. Why: Every page state is checked. How: This lists them, and the brand link and motion tests find their starting rows in it.
+import { STA_REC_ARR } from '../support/states.ts'; // What: State Record Array. Why: Every page state is checked. How: This lists them, and the brand link, service card, and motion tests find their starting rows in it.
 import { test        } from '@playwright/test';     // What: Test. Why: Each check of each state is its own test. How: This declares them.
 
 
@@ -30,13 +30,15 @@ import type { Page          } from '@playwright/test'; // What: Page. Why: Every
  * different once focused and have a transition longer than zero. The brand
  * link, which the Tab order skips, has to change on hover and again on press
  * too, with a transition longer than zero on itself or something inside it,
- * and none under reduced motion. With motion on, the drawer and its scrim have
- * to really transition as the drawer opens and closes, and the sent label has
- * to rise in. Under reduced motion every control in the Tab order keeps its
- * hover and press changes, and every field its focus change, but nothing
- * transitions, the parts inside a control and their pseudo-elements included.
- * Real clicks are blocked while controls are probed, so pressing a link or the
- * drawer's rows never navigates or closes anything mid-check.
+ * and none under reduced motion, and every service card has to change on
+ * hover, easing in, and at once under reduced motion. With motion on, the
+ * drawer and its scrim have to really transition as the drawer opens and
+ * closes, and the sent label has to rise in. Under reduced motion every
+ * control in the Tab order keeps its hover and press changes, and every field
+ * its focus change, but nothing transitions, the parts inside a control and
+ * their pseudo-elements included. Real clicks are blocked while controls are
+ * probed, so pressing a link or the drawer's rows never navigates or closes
+ * anything mid-check.
  *
  * Sections:
  *  - Constants
@@ -529,6 +531,71 @@ for ( const redMotBoo of [ false, true ] ) { // What: Brand Motion Loop. Why: Th
 		expect( hovSigStr ).not.toBe( resSigStr );                   // What: Hover Change Assertion. Why: A hovered link has to respond. How: This checks the hovered look differs from the resting one.
 		expect( preSigStr ).not.toBe( hovSigStr );                   // What: Press Change Assertion. Why: A press has to register before anything happens. How: This checks the pressed look differs from the hovered one.
 		expect( /^0s(, 0s)*$/.test( allDurStr ) ).toBe( redMotBoo ); // What: Motion Assertion. Why: The changes should ease normally and switch at once under reduced motion. How: This checks every duration is zero exactly when reduced motion is on.
+
+
+	} );
+
+
+}
+
+
+
+for ( const redMotBoo of [ false, true ] ) { // What: Card Motion Loop. Why: The service cards' hover tint has to hold with and without reduced motion. How: This declares the card check once for each preference.
+
+
+	test( `every service card responds to hover${ redMotBoo ? ' under reduced motion' : '' }`, async ( { page : curPagObj } ) => { // What: Card Feedback Test. Why: Hovering a card is an interaction, but the cards are neither links nor buttons, so the control checks never reach them. How: This hovers each service card on the home page and checks its look changes, easing normally and switching at once under reduced motion.
+
+
+		if ( redMotBoo ) await curPagObj.emulateMedia( { reducedMotion : 'reduce' } ); // What: Reduced Motion Emulation. Why: The reduced-motion run needs the preference before the page loads. How: This makes the page match prefers-reduced-motion: reduce.
+
+
+
+		const homRecObj = STA_REC_ARR.find( ( staCurObj ) => staCurObj.ideStr === 'home-desktop' )!; // What: Home Record Object. Why: The service cards sit on the home page. How: This finds the home desktop state's row. // What: Non-Null Note. Why: find types its result as possibly undefined. How: STA_REC_ARR always lists the home-desktop state.
+
+
+		await opeStaFun( curPagObj, homRecObj ); // What: Home State Open Call. Why: The cards are probed with the page settled. How: This loads the home page at desktop size.
+
+
+		const proLisArr : string[] = []; // What: Problem List Array. Why: Every card that fails is reported together. How: Each check adds a line naming the card and what went wrong.
+
+
+		for ( const carCurObj of await curPagObj.locator( '#services article' ).all() ) { // What: Card Probe Loop. Why: Every service card has to respond. How: This hovers each card in turn.
+
+
+			const carTitStr = await carCurObj.locator( 'h3' ).innerText(); // What: Card Title String. Why: A failure has to say which card. How: This reads the card's heading.
+
+
+			await carCurObj.scrollIntoViewIfNeeded(); // What: Card Scroll Call. Why: The card has to be on screen before the pointer leaves it. How: This scrolls the card into view.
+
+			await curPagObj.mouse.move( 0, 0 ); // What: Pointer Away Call. Why: The resting look is read with nothing hovered. How: This moves the pointer to the page's corner, off every card.
+
+			await curPagObj.waitForTimeout( SET_WAI_NUM ); // What: Rest Settle Wait. Why: Any earlier hover has to finish fading. How: This pauses for the settle time.
+
+
+			const resSigStr = await carCurObj.evaluate( sigEleFun ); // What: Rest Signature String. Why: The hovered look is compared with this one. How: This reads the card's look at rest.
+
+
+			await carCurObj.hover(); // What: Hover Call. Why: This is the action under test. How: This moves the pointer onto the card.
+
+			await curPagObj.waitForTimeout( SET_WAI_NUM ); // What: Hover Settle Wait. Why: The hovered look is read once it has eased in. How: This pauses for the settle time.
+
+
+			const hovSigStr = await carCurObj.evaluate( sigEleFun );                                                         // What: Hover Signature String. Why: The hovered look is compared with the resting one. How: This reads the card's hovered look.
+			const traDurStr = await carCurObj.evaluate( ( carCurEle ) => getComputedStyle( carCurEle ).transitionDuration ); // What: Transition Duration String. Why: The tint has to ease in, and switch at once under reduced motion. How: This reads the card's transition durations.
+
+
+			if ( hovSigStr === resSigStr ) proLisArr.push( `${ carTitStr } doesn't change on hover` ); // What: Hover Change Check. Why: A hovered card has to respond. How: This reports a card whose hovered look matches its resting one.
+
+
+
+			if ( /^0s(, 0s)*$/.test( traDurStr ) !== redMotBoo ) proLisArr.push( `${ carTitStr } ${ redMotBoo ? 'still transitions under reduced motion' : 'has no transition' } (${ traDurStr })` ); // What: Motion Check. Why: The tint should ease normally and switch at once under reduced motion. How: This reports a card whose durations are zero when they shouldn't be, or not zero when they should.
+
+
+		}
+
+
+
+		expect( proLisArr ).toEqual( [] ); // What: No Card Problems Assertion. Why: The test passes only when every card responds. How: This compares the problems with an empty list, so a failure prints each one.
 
 
 	} );
