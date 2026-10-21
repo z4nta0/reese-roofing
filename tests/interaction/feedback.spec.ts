@@ -540,7 +540,7 @@ for ( const redMotBoo of [ false, true ] ) { // What: Brand Motion Loop. Why: Th
 
 
 
-for ( const redMotBoo of [ false, true ] ) { // What: Card Motion Loop. Why: The service cards' hover tint has to hold with and without reduced motion. How: This declares the card check once for each preference.
+for ( const redMotBoo of [ false, true ] ) { // What: Card Motion Loop. Why: The service cards' hover tint and lift have to hold with and without reduced motion. How: This declares the card check once for each preference.
 
 
 	test( `every service card responds to hover${ redMotBoo ? ' under reduced motion' : '' }`, async ( { page : curPagObj } ) => { // What: Card Feedback Test. Why: Hovering a card is an interaction, but the cards are neither links nor buttons, so the control checks never reach them. How: This hovers each service card on the home page and checks its look changes, easing normally and switching at once under reduced motion.
