@@ -150,6 +150,7 @@ for ( const rouRecObj of ROU_REC_ARR ) { // What: Route Test Loop. Why: Every ro
 		expect( desTexStr?.length ).toBeLessThanOrEqual( DES_MAX_NUM );    // What: Description Maximum Assertion. Why: Mobile cards cut a long summary off. How: This checks it stays within DES_MAX_NUM characters.
 
 
+
 		const jsoScrArr = await curPagObj.locator( 'script[type="application/ld+json"]' ).allTextContents(); // What: JSON Script Array. Why: The structured data decides what search engines and agents think the page is. How: This reads every JSON-LD script's text.
 
 
@@ -261,6 +262,7 @@ test( 'the social preview tags are complete', async ( { page : curPagObj } ) => 
 	await expect( curPagObj.locator( 'link[rel="apple-touch-icon"]' ) ).toHaveCount( 1 ); // What: Touch Icon Assertion. Why: Some apps show the site's icon beside its card. How: This checks the page links its apple-touch-icon.
 	await expect( curPagObj.locator( 'link[rel="icon"]' ).first() ).toBeAttached();       // What: Favicon Assertion. Why: Some apps show the favicon beside the card. How: This checks the page links at least one favicon.
 	await expect( curPagObj.locator( 'meta[name="theme-color"]' ) ).toHaveCount( 1 );     // What: Theme Color Assertion. Why: Discord colors its embed's edge from this tag. How: This checks the page carries it.
+
 
 
 	const socTagArr = await curPagObj.locator( 'meta[property^="og:"], meta[name^="twitter:"]' ).evaluateAll( ( tagEleArr ) => tagEleArr.map( ( tagCurEle ) => [ tagCurEle.getAttribute( 'property' ) || tagCurEle.getAttribute( 'name' ) || '', tagCurEle.getAttribute( 'content' ) || '' ] ) ); // What: Social Tag Array. Why: Every social tag is checked by its key and value. How: This reads each Open Graph and Twitter tag as a key and content pair.

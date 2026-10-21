@@ -155,8 +155,6 @@ async function opeStaFun ( curPagObj : Page, staRecObj : StaRecTyp ) : Promise< 
 
 	await curPagObj.evaluate( () => document.fonts.ready ); // What: Fonts Ready Wait. Why: Text measured before its web font loads would have the wrong size and wrapping. How: This waits until every font face has loaded.
 
-
-
 	await curPagObj.evaluate( async () => { // What: Lazy Images Load Call. Why: Firefox leaves a lazy image unfetched until it's scrolled near, so a full-page screenshot would show it blank. How: This switches each unloaded lazy image to eager loading and waits for it, rather than scrolling to it, which in Chromium would also move where the first Tab lands.
 
 
@@ -168,6 +166,7 @@ async function opeStaFun ( curPagObj : Page, staRecObj : StaRecTyp ) : Promise< 
 
 
 			imaCurEle.loading = 'eager'; // What: Eager Loading Switch. Why: The image has to load wherever it sits on the page. How: Switching a lazy image to eager makes the browser fetch it at once, with no visible change.
+
 
 			await new Promise( ( resProFun ) => { // What: Image Load Wait. Why: The image has to finish loading before the page moves on, and a failed one shouldn't hang the run. How: This waits for the image's load or error event, whichever fires first.
 
