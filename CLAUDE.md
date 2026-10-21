@@ -139,7 +139,7 @@ screenshots, and traces go to `tests/output/` (git-ignored); `npx playwright
 show-report tests/output/report` opens the HTML report. The states each suite
 visits (both pages at 390px and 1,440px, plus the open drawer) are listed in
 `tests/support/states.ts`; the responsive suite opens its own widths through
-the same helper, the behavior spec opens its own pages and sizes, and the seo
+the same helper, the behavior spec opens its own pages and sizes, and the SEO
 suite reads the head of each route instead, while the production suite opens
 its own pages on a build it serves itself.
 - `npm run test:accessibility`: the pre-commit accessibility scan. axe-core
@@ -213,7 +213,7 @@ Next (planned 2026-10-07):
 - **Reusable tests** (started 2026-10-08): a suite to rerun after large
   changes, checking that every page renders and behaves correctly in all
   three browser engines. Done 2026-10-08: the accessibility, interaction,
-  rendering, responsive, and seo suites. The production suite followed on
+  rendering, responsive, and SEO suites. The production suite followed on
   2026-10-18.
 
 Applied original intent (kept by the user, 2026-10-07): the CSS module pass
