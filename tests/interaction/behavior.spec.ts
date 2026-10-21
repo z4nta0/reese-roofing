@@ -94,6 +94,7 @@ async function opeDraFun ( curPagObj : Page ) : Promise< void > {
 
 	await togButObj.click(); // What: Toggle Click Call. Why: The drawer opens from a tap on the button. How: This clicks it.
 
+
 	await expect( togButObj ).toHaveAttribute( 'aria-expanded', 'true' ); // What: Drawer Open Wait. Why: A check should start with the drawer open. How: This waits until the button reports it expanded.
 
 
@@ -346,12 +347,16 @@ test( 'the bar takes its scrolled style once the page moves and drops it back at
 	await expect( barHeaObj ).not.toHaveAttribute( 'data-page-scroll-past' );      // What: Top Attribute Assertion. Why: The bar should start without its scrolled style. How: This checks the attribute is absent at the top.
 	await expect( barHeaObj ).toHaveCSS( 'background-color', 'rgba(0, 0, 0, 0)' ); // What: Top Background Assertion. Why: At the top the bar sits over the hero with no background of its own. How: This checks its background is transparent.
 
+
 	await curPagObj.evaluate( () => window.scrollTo( 0, 400 ) ); // What: Scroll Down Call. Why: The scrolled style switches on past the top. How: This scrolls the page well past the 24px threshold.
+
 
 	await expect( barHeaObj ).toHaveAttribute( 'data-page-scroll-past' );              // What: Scrolled Attribute Assertion. Why: The bar should mark itself scrolled. How: This waits until the attribute is set.
 	await expect( barHeaObj ).not.toHaveCSS( 'background-color', 'rgba(0, 0, 0, 0)' ); // What: Scrolled Background Assertion. Why: The attribute only matters if the bar really draws its background. How: This checks the background is no longer transparent.
 
+
 	await curPagObj.evaluate( () => window.scrollTo( 0, 0 ) ); // What: Scroll Up Call. Why: The style should leave again at the top. How: This scrolls back to the top.
+
 
 	await expect( barHeaObj ).not.toHaveAttribute( 'data-page-scroll-past' );      // What: Returned Attribute Assertion. Why: Back at the top the bar should drop its scrolled style. How: This waits until the attribute is gone.
 	await expect( barHeaObj ).toHaveCSS( 'background-color', 'rgba(0, 0, 0, 0)' ); // What: Returned Background Assertion. Why: The bar should turn transparent again at the top. How: This checks its background is transparent once more.
@@ -438,7 +443,9 @@ test( 'Escape closes the drawer and returns focus to the toggle', async ( { page
 
 	await draLinObj.focus(); // What: Drawer Link Focus Call. Why: Focus has to start inside the drawer, so the check below can see Escape move it. How: This focuses the link.
 
+
 	await expect( draLinObj ).toBeFocused(); // What: Drawer Link Focus Assertion. Why: The test only proves something if focus really left the toggle. How: This checks the link holds focus.
+
 
 	await curPagObj.keyboard.press( 'Escape' ); // What: Escape Press Call. Why: This is the action under test. How: This presses Escape.
 
@@ -652,7 +659,9 @@ test( 'Return home leads to the top of the home page', async ( { page : curPagOb
 
 	await curPagObj.evaluate( () => window.scrollTo( 0, document.documentElement.scrollHeight ) ); // What: Scroll Down Call. Why: A router push keeps the old scroll position unless something resets it. How: This scrolls the 404 page to its bottom.
 
+
 	expect( await curPagObj.evaluate( () => window.scrollY ) ).toBeGreaterThan( 0 ); // What: Scrolled Start Assertion. Why: The check proves nothing from a page that never left its top. How: This checks the scroll down really moved the 404 page, which only overflows on the smallest phones.
+
 
 	await curPagObj.evaluate( () => Reflect.set( window, 'samDocBoo', true ) ); // What: Same Document Marker Set. Why: A link that navigates inside the router keeps the same document, while a full page load starts a new one. How: This marks the current document, which a full load would wipe.
 
@@ -741,7 +750,9 @@ test( 'back to top scrolls the 404 page to its own top', async ( { page : curPag
 
 	await curPagObj.evaluate( () => window.scrollTo( 0, document.documentElement.scrollHeight ) ); // What: Scroll Down Call. Why: The link only proves anything from a scrolled page. How: This scrolls the 404 page to its bottom.
 
+
 	expect( await curPagObj.evaluate( () => window.scrollY ) ).toBeGreaterThan( 0 ); // What: Scrolled Start Assertion. Why: The check proves nothing from a page that never left its top. How: This checks the scroll down really moved the 404 page, which only overflows on the smallest phones.
+
 
 	await curPagObj.getByRole( 'link', { name : 'Back to top' } ).click(); // What: Back To Top Click Call. Why: This is the action under test. How: This clicks the footer's link.
 

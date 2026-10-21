@@ -655,8 +655,10 @@ test( 'sending the form announces the email app opening to screen readers', asyn
 
 	await opeStaFun( curPagObj, homRecObj ); // What: Home State Open Call. Why: The form is sent from the home page. How: This loads it at desktop size.
 
+
 	await expect( staRegObj ).toHaveCount( 1 ); // What: Region Present Assertion. Why: A live region added at the moment it speaks is often missed, so it has to be there before the form is sent. How: This checks the form holds exactly one status region on load.
 	await expect( staRegObj ).toHaveText( '' ); // What: Region Empty Assertion. Why: The region's change is what gets announced, so it must start silent. How: This checks it holds no text before the form is sent.
+
 
 	await curPagObj.locator( '#conNamInp' ).fill( 'Pat Doe' );         // What: Name Fill Call. Why: A real request carries a name. How: This types one into the name field.
 	await curPagObj.locator( '#conEmaInp' ).fill( 'pat@example.com' ); // What: Email Fill Call. Why: A real request carries an email. How: This types one into the email field.

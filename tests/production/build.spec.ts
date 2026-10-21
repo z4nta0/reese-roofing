@@ -248,6 +248,7 @@ test.describe( 'the production build', () => { // What: Build Group. Why: The bu
 
 			await curPagObj.goto( `${ SIT_URL_STR }${ rouPatStr }` ); // What: Page Load Call. Why: The page is checked as a visitor first loads it. How: This opens the path on the site's address.
 
+
 			await expect( curPagObj.getByRole( 'heading', { level : 1 } ) ).toBeVisible(); // What: Render Wait. Why: A page the policy stopped from rendering would also show no violations if nothing ran. How: This waits until the page's heading is on screen.
 
 
