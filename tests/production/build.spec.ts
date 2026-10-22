@@ -216,11 +216,11 @@ test.describe( 'the production build', () => { // What: Build Group. Why: The bu
 
 		outDirStr = `${ ROO_DIR_STR }tests/output/build-${ engNamStr }`; // What: Output Directory Assignment. Why: Each engine needs its own build folder. How: This names it after the engine under tests/output, which git ignores.
 
+
 		execFileSync( 'npx', [ 'vite', 'build', '--emptyOutDir', '--logLevel', 'warn', '--outDir', outDirStr ], { cwd : ROO_DIR_STR, stdio : 'inherit' } ); // What: Build Call. Why: The checks have to see what visitors download. How: This runs Vite's production build into the engine's folder, from the repo root.
 
 
 	} );
-
 
 
 	for ( const [ rouPatStr, vieWidNum, vieHeiNum, draOpeBoo ] of [ [ '/', 1440, 900, false ], [ '/missing', 1440, 900, false ], [ '/', 390, 844, true ] ] as const ) { // What: Page Loop. Why: The policy has to hold on every page and with the drawer open. How: Each row names a path, a viewport width and height, and whether to open the drawer. // What: Type Assertion Note. Why: Each row has to keep its own types, a string, two numbers, and a boolean, not one widened union. How: The closing as const types each row as a fixed tuple.
@@ -247,6 +247,7 @@ test.describe( 'the production build', () => { // What: Build Group. Why: The bu
 			} );
 
 			await curPagObj.goto( `${ SIT_URL_STR }${ rouPatStr }` ); // What: Page Load Call. Why: The page is checked as a visitor first loads it. How: This opens the path on the site's address.
+
 
 			await expect( curPagObj.getByRole( 'heading', { level : 1 } ) ).toBeVisible(); // What: Render Wait. Why: A page the policy stopped from rendering would also show no violations if nothing ran. How: This waits until the page's heading is on screen.
 

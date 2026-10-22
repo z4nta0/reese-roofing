@@ -41,8 +41,7 @@ import { test      } from '@playwright/test';     // What: Test. Why: Each page 
 
 // #region Constants
 
-const DRA_MAX_NUM = 880;                                                                                                   // What: Drawer Maximum Number. Why: The drawer exists only up to the site's 880px breakpoint. How: The drawer case is measured only at widths up to this.
-const WID_LIS_ARR = [ 320, 360, 390, 414, 500, 501, 540, 541, 640, 641, 768, 880, 881, 960, 961, 1024, 1280, 1440, 1920 ]; // What: Width List Array. Why: Layouts crowd at the narrowest widths and switch at the breakpoints. How: This lists common screen widths plus each breakpoint and the pixel past it.
+const DRA_MAX_NUM = 880; // What: Drawer Maximum Number. Why: The drawer exists only up to the site's 880px breakpoint. How: The drawer case is measured only at widths up to this.
 
 
 
@@ -87,6 +86,10 @@ const LAY_CAS_ARR : LayCasTyp[] = [ // What: Layout Case Array. Why: Every page 
 ];
 
 // #endregion LAY_CAS_ARR
+
+
+
+const WID_LIS_ARR = [ 320, 360, 390, 414, 500, 501, 540, 541, 640, 641, 768, 880, 881, 960, 961, 1024, 1280, 1440, 1920 ]; // What: Width List Array. Why: Layouts crowd at the narrowest widths and switch at the breakpoints. How: This lists common screen widths plus each breakpoint and the pixel past it.
 
 // #endregion Constants
 
@@ -142,6 +145,7 @@ function layProFun () : string[] {
 
 
 	const desEleFun = ( desCurEle : Element ) => `${ desCurEle.tagName.toLowerCase() }${ desCurEle.classList.length ? '.' + ( desCurEle.classList[ 0 ].split( '_' )[ 1 ] || desCurEle.classList[ 0 ] ) : '' }`; // What: Describe Element Function. Why: A problem should name the element in terms of the source. How: This joins the tag with the readable part of its hashed module class.
+
 
 
 	const cliAncFun = ( cliCurEle : Element ) => { // What: Clipped Ancestor Function. Why: An element an ancestor clips can reach past the edge without showing there. How: This reports whether any ancestor hides, clips, or scrolls its overflow.
@@ -322,7 +326,7 @@ for ( const layCasObj of LAY_CAS_ARR ) { // What: Case Loop. Why: Every page and
 	for ( const widCurNum of WID_LIS_ARR.filter( ( widFilNum ) => !layCasObj.draBoo || widFilNum <= DRA_MAX_NUM ) ) { // What: Width Loop. Why: Each case is measured at every width it exists at. How: This declares one test per width, skipping drawer widths past the breakpoint.
 
 
-		test( `${ layCasObj.ideStr } holds its layout at ${ widCurNum.toLocaleString( 'en-US' ) }px`, async ( { page : curPagObj } ) => { // What: Layout Test. Why: The layout should hold together at every width. How: This opens the case at the width and lists its layout problems.
+		test( `${ layCasObj.ideStr } holds its layout at ${ widCurNum.toLocaleString( 'en-US' ) }px`, async ( { page : curPagObj } ) => { // What: Layout Test. Why: The layout should hold together at every width. How: This opens the case at the width, lists its layout problems, and checks there are none.
 
 
 			await curPagObj.emulateMedia( { reducedMotion : 'reduce' } ); // What: Reduced Motion Emulation. Why: Entrance animations don't change the layout, so waiting on them only slows the run. How: This makes the page match prefers-reduced-motion, which turns them off.

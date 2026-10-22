@@ -90,7 +90,7 @@ const STA_REC_ARR : StaRecTyp[] = [ // What: State Record Array. Why: Every chec
 	{ heiNum : 900, ideStr : 'not-found-desktop', patStr : '/missing', widNum : 1440 }, // What: Not Found Desktop State. Why: A mistyped address should be as usable as any page. How: This loads an unknown path at 1,440px.
 	{ heiNum : 844, ideStr : 'not-found-phone',   patStr : '/missing', widNum : 390  }, // What: Not Found Phone State. Why: The 404 page has its own phone layout. How: This loads an unknown path at 390px.
 
-	{ // What: Drawer Phone State. Why: The open drawer holds the phone's only copy of the links, contact details, and estimate button. How: This loads the home page at 390px and opens the menu through its toggle button.
+	{ // What: Drawer Phone State. Why: At phone width the open drawer is the only place the bar's links, phone number, and estimate button show. How: This loads the home page at 390px and opens the menu through its toggle button.
 
 
 		heiNum : 844,
@@ -155,8 +155,6 @@ async function opeStaFun ( curPagObj : Page, staRecObj : StaRecTyp ) : Promise< 
 
 	await curPagObj.evaluate( () => document.fonts.ready ); // What: Fonts Ready Wait. Why: Text measured before its web font loads would have the wrong size and wrapping. How: This waits until every font face has loaded.
 
-
-
 	await curPagObj.evaluate( async () => { // What: Lazy Images Load Call. Why: Firefox leaves a lazy image unfetched until it's scrolled near, so a full-page screenshot would show it blank. How: This switches each unloaded lazy image to eager loading and waits for it, rather than scrolling to it, which in Chromium would also move where the first Tab lands.
 
 
@@ -168,6 +166,7 @@ async function opeStaFun ( curPagObj : Page, staRecObj : StaRecTyp ) : Promise< 
 
 
 			imaCurEle.loading = 'eager'; // What: Eager Loading Switch. Why: The image has to load wherever it sits on the page. How: Switching a lazy image to eager makes the browser fetch it at once, with no visible change.
+
 
 			await new Promise( ( resProFun ) => { // What: Image Load Wait. Why: The image has to finish loading before the page moves on, and a failed one shouldn't hang the run. How: This waits for the image's load or error event, whichever fires first.
 

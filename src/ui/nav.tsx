@@ -3,9 +3,9 @@
 
 // #region Imports
 
-import cssModObj from './nav.module.css';        // What: CSS Module Object. Why: The bar's layout, scrolled state, and drawer are styled in its own module. How: Each element reads its hashed class name from this object.
-import lomSvgUrl from '../assets/logo-mark.svg'; // What: Logo-Mark SVG URL. Why: The bar's brand link shows the simple logo mark. How: Vite resolves the import to a URL for the image's src, inlining this small file into the bundle as a data URI in the build.
-import React     from 'react';                   // What: React. Why: The bar tracks its scroll and drawer state with React's hooks. How: This is read for its hooks, React.useState, React.useEffect, and React.useRef.
+import cssModObj from './nav.module.css';               // What: CSS Module Object. Why: The bar's layout, scrolled state, and drawer are styled in its own module. How: Each element reads its hashed class name from this object.
+import lomSvgUrl from '../assets/images/logo-mark.svg'; // What: Logo-Mark SVG URL. Why: The bar's brand link shows the simple logo mark. How: Vite resolves the import to a URL for the image's src, inlining this small file into the bundle as a data URI in the build.
+import React     from 'react';                          // What: React. Why: The bar tracks its scroll and drawer state with React's hooks. How: This is read for its hooks, React.useState, React.useEffect, and React.useRef.
 
 
 import { useSecCliFun } from './section-link.ts'; // What: Use Section Click Function. Why: Every section link in the bar and drawer reaches its section the same way, leaving no hash in the address. How: This returns secCliFun, the shared click handler.
@@ -40,7 +40,7 @@ import { useSecCliFun } from './section-link.ts'; // What: Use Section Click Fun
 // #region NAV_LIN_ARR
 
 /**
- * NAV_LIN_ARR = Nav Link Array
+ * NAV_LIN_ARR = Navigation Link Array
  *
  * @summary
  * The section links the bar and its drawer both list, in the order the bar
@@ -56,7 +56,7 @@ import { useSecCliFun } from './section-link.ts'; // What: Use Section Click Fun
  *
 */
 
-const NAV_LIN_ARR = [ // What: Nav Link Array. Why: The bar and its drawer list the same section links. How: Each row pairs a home page section's id, which its link's address names with the root path so a Ctrl, Cmd, or middle click opens it from any page, with its label, and both lists map over it, the drawer numbering the rows in order to match the sections' own numbered labels.
+const NAV_LIN_ARR = [ // What: Navigation Link Array. Why: The bar and its drawer list the same section links. How: Each row pairs a home page section's id, which its link's address names with the root path so a Ctrl, Cmd, or middle click opens it from any page, with its label, and both lists map over it, the drawer numbering the rows in order to match the sections' own numbered labels.
 
 
 	{ ideStr : 'top',      labStr : 'Home'     }, // What: Home Link Row. Why: Not every visitor knows the logo leads home, so the bar spells it out. How: This names the hero's top anchor.
@@ -137,7 +137,6 @@ function NavBarCom () : React.JSX.Element {
 
 		onScrWinFun(); // What: Initial Scroll Check Call. Why: A page reloaded mid-scroll should start in the scrolled style without waiting for the next scroll. How: This runs the check once on mount.
 
-
 		window.addEventListener( 'scroll', onScrWinFun, { passive : true } ); // What: Scroll Listener Registration. Why: The check has to rerun as the page scrolls. How: This registers it as a passive listener, since it never cancels scrolling.
 
 
@@ -175,6 +174,7 @@ function NavBarCom () : React.JSX.Element {
 
 
 		};
+
 
 
 		const onResWinFun = () => { if ( !togButEle.getClientRects().length ) setDraOpeBoo( false ); }; // What: On Resize Window Function. Why: A screen widened past the drawer's breakpoint hides the toggle, which would leave the page inert with no way to close it. How: This closes the drawer once the toggle no longer renders.
@@ -274,7 +274,7 @@ function NavBarCom () : React.JSX.Element {
 					>{ /* What: Navigation Links Nav Element. Why: The section links form the site's primary navigation landmark. How: This lists a link for each row of NAV_LIN_ARR, and hides at 880px wide and below, where the drawer repeats the links. */ }
 
 
-						{ NAV_LIN_ARR.map( ( navLinObj ) => ( // What: Nav Link Map. Why: The bar lists every section link. How: This renders an anchor for each row of NAV_LIN_ARR.
+						{ NAV_LIN_ARR.map( ( navLinObj ) => ( // What: Navigation Link Map. Why: The bar lists every section link. How: This renders an anchor for each row of NAV_LIN_ARR.
 
 
 							<a

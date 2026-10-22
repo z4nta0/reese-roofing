@@ -20,7 +20,7 @@ import { fileURLToPath } from 'node:url';         // What: File URL To Path. Why
  * nothing about the others. Chromium runs as Chrome's full headless mode
  * rather than Playwright's lighter headless shell, which sometimes lost track
  * of a tab a click opened. The suites are accessibility, which the pre-commit
- * check runs, interaction, production, rendering, responsive, and seo.
+ * check runs, interaction, production, rendering, responsive, and SEO.
  * Playwright starts the Vite dev server on port 5191 for the run and stops it
  * afterwards, so a dev server already running on the usual 5173 is never
  * touched. The production suite builds the site itself and serves the build
@@ -41,11 +41,6 @@ import { fileURLToPath } from 'node:url';         // What: File URL To Path. Why
 
 // #region Constants
 
-const ROO_DIR_STR = fileURLToPath( new URL( '..', import.meta.url ) ); // What: Root Directory String. Why: The dev server must run from the repo root, where vite.config.ts lives. How: This resolves the folder above tests/.
-const SER_URL_STR = 'http://localhost:5191';                           // What: Server URL String. Why: Every suite opens the site from the same dev server. How: This is the address Playwright waits on and every page's baseURL.
-
-
-
 const ENG_NAM_ARR = [ // What: Engine Name Array. Why: Every suite runs in all three engines. How: Each entry is a Playwright browser name, crossed with each suite into one project apiece. // What: Type Assertion Note. Why: Each name has to type as one of Playwright's browser names, not a plain string. How: The closing as const keeps each entry's literal type for the projects' browserName.
 
 
@@ -56,7 +51,8 @@ const ENG_NAM_ARR = [ // What: Engine Name Array. Why: Every suite runs in all t
 
 ] as const;
 
-
+const ROO_DIR_STR = fileURLToPath( new URL( '..', import.meta.url ) ); // What: Root Directory String. Why: The dev server must run from the repo root, where vite.config.ts lives. How: This resolves the folder above tests/.
+const SER_URL_STR = 'http://localhost:5191';                           // What: Server URL String. Why: Every suite but production opens the site from the same dev server. How: This is the address Playwright waits on and every page's baseURL.
 
 const SUI_NAM_ARR = [ // What: Suite Name Array. Why: Each suite lives in its own folder and runs as its own projects. How: Each entry names a folder under tests/, crossed with each engine into one project apiece.
 
@@ -70,8 +66,6 @@ const SUI_NAM_ARR = [ // What: Suite Name Array. Why: Each suite lives in its ow
 
 
 ];
-
-
 
 const PLA_CON_OBJ = defineConfig({ // What: Playwright Config Object. Why: Playwright reads its whole setup from this file's default export. How: This holds the shared page settings, one project per suite and engine, the reporters, and the dev server.
 
@@ -112,7 +106,7 @@ const PLA_CON_OBJ = defineConfig({ // What: Playwright Config Object. Why: Playw
 	use : { // What: Use. Why: Every suite shares the same page setup. How: This sets the base URL, locale, and failure artifacts.
 
 
-		baseURL    : SER_URL_STR,        // What: Base URL. Why: Specs navigate with short paths. How: This points every page.goto at the dev server.
+		baseURL    : SER_URL_STR,        // What: Base URL. Why: Specs navigate with short paths. How: This points every short path a page or request opens at the dev server.
 		locale     : 'en-US',            // What: Locale. Why: The site is written in US English. How: This runs every page in it.
 		screenshot : 'only-on-failure',  // What: Screenshot. Why: A failing check is easier to diagnose from what was on screen. How: This saves a screenshot only when a test fails.
 		trace      : 'retain-on-failure' // What: Trace. Why: A failure can be stepped through afterwards. How: This keeps the Playwright trace only for failing tests.

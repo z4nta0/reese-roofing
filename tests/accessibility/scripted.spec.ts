@@ -542,7 +542,7 @@ for ( const staRecObj of STA_REC_ARR ) { // What: State Test Loop. Why: Every ch
 
 
 
-	test( `${ staRecObj.ideStr } walks cleanly with the keyboard`, async ( { browserName : engNamStr, page : curPagObj } ) => { // What: Keyboard Test. Why: Everything has to be usable without a mouse. How: This opens the state under reduced motion, counts any element with a positive tabindex, and walks it with Tab.
+	test( `${ staRecObj.ideStr } walks cleanly with the keyboard`, async ( { browserName : engNamStr, page : curPagObj } ) => { // What: Keyboard Test. Why: Everything has to be usable without a mouse. How: This opens the state under reduced motion, counts any element with a positive tabindex, walks it with Tab, and checks neither finds a problem.
 
 
 		await curPagObj.emulateMedia( { reducedMotion : 'reduce' } ); // What: Reduced Motion Emulation. Why: A smooth scroll or a focus transition still running would be measured halfway. How: This makes the page match prefers-reduced-motion, which turns both off.
@@ -570,7 +570,7 @@ for ( const staRecObj of STA_REC_ARR ) { // What: State Test Loop. Why: Every ch
 
 
 
-	test( `${ staRecObj.ideStr } plays no motion under reduced motion`, async ( { page : curPagObj } ) => { // What: Reduced Motion Test. Why: Visitors who ask for less motion shouldn't see the page animate. How: This requests reduced motion, records any animation or transition over 1ms that starts while the state opens, and lists any the page still holds once it has.
+	test( `${ staRecObj.ideStr } plays no motion under reduced motion`, async ( { page : curPagObj } ) => { // What: Reduced Motion Test. Why: Visitors who ask for less motion shouldn't see the page animate. How: This requests reduced motion, records any animation or transition over 1ms that starts while the state opens, lists any the page still holds once it has, and checks both lists are empty.
 
 
 		await curPagObj.emulateMedia( { reducedMotion : 'reduce' } ); // What: Reduced Motion Emulation. Why: The preference has to be set before the page loads. How: This makes the page match prefers-reduced-motion: reduce.
@@ -655,8 +655,10 @@ test( 'sending the form announces the email app opening to screen readers', asyn
 
 	await opeStaFun( curPagObj, homRecObj ); // What: Home State Open Call. Why: The form is sent from the home page. How: This loads it at desktop size.
 
+
 	await expect( staRegObj ).toHaveCount( 1 ); // What: Region Present Assertion. Why: A live region added at the moment it speaks is often missed, so it has to be there before the form is sent. How: This checks the form holds exactly one status region on load.
 	await expect( staRegObj ).toHaveText( '' ); // What: Region Empty Assertion. Why: The region's change is what gets announced, so it must start silent. How: This checks it holds no text before the form is sent.
+
 
 	await curPagObj.locator( '#conNamInp' ).fill( 'Pat Doe' );         // What: Name Fill Call. Why: A real request carries a name. How: This types one into the name field.
 	await curPagObj.locator( '#conEmaInp' ).fill( 'pat@example.com' ); // What: Email Fill Call. Why: A real request carries an email. How: This types one into the email field.

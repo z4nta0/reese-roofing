@@ -7,10 +7,10 @@
  * @summary
  * Styles for SerSecCom: the section's two-column heading block, stacking at
  * 960px wide and below, then the grid of service cards sharing hairline
- * borders, each tinting on hover, three across above 960px wide, two at 960px
- * and below, and one at 640px and below. The shared section, container,
- * eyebrow, display, and lede declarations the section used to borrow from the
- * global stylesheet are copied onto its own classes here.
+ * borders, each tinting and lifting on hover, three across above 960px wide,
+ * two at 960px and below, and one at 640px and below. The shared section,
+ * container, eyebrow, display, and lede declarations the section used to
+ * borrow from the global stylesheet are copied onto its own classes here.
  *
  * @author z4nta0 <https://github.com/z4nta0>
  *
@@ -204,28 +204,29 @@
 
 /* #region serCarArt */
 
-.serCarArt { /* What: Service Card Article. Why: Each card draws its own right and bottom edges, completing the shared grid lines, and tints on hover. How: This sets those edges, the card's padding, and a background that fades on hover. */
+.serCarArt { /* What: Service Card Article. Why: Each card draws its own right and bottom edges, completing the shared grid lines, and tints and lifts on hover. How: This sets those edges, the card's padding, and a background and position that ease on hover. */
 
 
-	background    : var( --bac-pag-col );                                           /* Background Page Color = #f5f2ec */
-	border-bottom : var( --bor-wid-bas ) solid var( --bor-str-col );                /* Border Width Base ~= 1.160px, Border Strong Color = #1a1f24 @ 0.22 opacity */
-	border-right  : var( --bor-wid-bas ) solid var( --bor-str-col );                /* Border Width Base ~= 1.160px, Border Strong Color = #1a1f24 @ 0.22 opacity */
-	padding       : var( --spa-ver-p04 ) var( --spa-hor-p03 ) var( --spa-ver-p04 ); /* Spacing Vertical Base Plus 4 ~= 44.876px, Spacing Horizontal Base Plus 3 ~= 33.876px */
-	transition    : background-color var( --dur-tra-p02 ) var( --mot-sta-eas );     /* Duration Transition Base Plus 2 ~= 277.0ms, Motion Standard Easing = ease */
+	background    : var( --bac-pag-col );                                                                                            /* Background Page Color = #f5f2ec */
+	border-bottom : var( --bor-wid-bas ) solid var( --bor-str-col );                                                                 /* Border Width Base ~= 1.160px, Border Strong Color = #1a1f24 @ 0.22 opacity */
+	border-right  : var( --bor-wid-bas ) solid var( --bor-str-col );                                                                 /* Border Width Base ~= 1.160px, Border Strong Color = #1a1f24 @ 0.22 opacity */
+	padding       : var( --spa-ver-p04 ) var( --spa-hor-p03 ) var( --spa-ver-p04 );                                                  /* Spacing Vertical Base Plus 4 ~= 44.876px, Spacing Horizontal Base Plus 3 ~= 33.876px */
+	transition    : background-color var( --dur-tra-p02 ) var( --mot-sta-eas ), transform var( --dur-tra-p02 ) var( --mot-dec-eas ); /* Duration Transition Base Plus 2 ~= 277.0ms, Motion Standard Easing = ease, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ) */
 
 
 }
-.serCarArt:hover { /* What: Hovered Service Card Article. Why: The hovered card should stand out from its neighbors. How: This tints it with the surface color, a slightly darker paper. */
+.serCarArt:hover { /* What: Hovered Service Card Article. Why: The hovered card should stand out from its neighbors. How: This tints it with the surface color, a slightly darker paper, and lifts it 1px. */
 
 
 	background : var( --bac-sur-col ); /* Background Surface Color = #ebe7df */
+	transform  : translateY( -1px );
 
 
 }
-@media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Service Card Article. Why: Someone who asked for less motion shouldn't see the tint fade. How: This applies only when the reduced-motion preference is set. */
+@media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Service Card Article. Why: Someone who asked for less motion shouldn't see the tint fade or the card slide. How: This applies only when the reduced-motion preference is set. */
 
 
-	.serCarArt { /* What: Motionless Service Card Article. Why: The hover tint should appear at once. How: This turns the transition off. */
+	.serCarArt { /* What: Motionless Service Card Article. Why: The hover tint and lift should appear at once. How: This turns the transition off. */
 
 
 		transition : none;
